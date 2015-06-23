@@ -39,7 +39,7 @@ else{
 		$sec=$SiteSections->get($_GET['section']);
 	}
 	else
-	$cid = $Content->getIdByPath(configGet("AskUrl")); // Код запрашиваемой страницы
+    $cid = $Content->getIdByPath(configGet("AskUrl")); // Код запрашиваемой страницы
 
     if ($_GET['section']>0)
     $sec=$SiteSections->get($_GET['section']);
@@ -47,11 +47,25 @@ else{
 	$askcontent = $Content->getOne($cid);
 	$user = $SiteVisitor->getOne(sessionGet('visitorID')); // Данные пользователя
 	$group = $VisitorType->getOne($user['type']); // Данные группы
+
+
+	if ($user['login']=='admin') {$delepmentmode = 'development';  $mode = 'development';}
+
+
 	$accessgranted = $VisitorType->isAccessGranted($group['id'],$cid);
-	if ((!$accessgranted) || ($cid==0 && !$sec['id']>0) || ($askcontent['redirect']==1))
-	$redirect = '/manage'.$Content->getPath($SiteVisitor->getRedirectContent($user['id'],$cid));
+	$accessgranted_settings=array_key_exists($cid,$group['new_settings']);
+
+
+
+
+	if ((!$accessgranted && !$accessgranted_settings) || ($cid==0 && !$sec['id']>0) || ($askcontent['redirect']==1))
+	{
+		$redirect='/manage/control/contents/';
+	}
+
 }
 if (($_SERVER['PHP_SELF']=='/manage/index.php') && ($redirect=='/manage/')) $redirect = '';
+if (($_SERVER['PHP_SELF']=='/manage/control/contents/index.php' && !$_GET['section']>0) && ($redirect=='/manage/control/contents/')) $redirect = '';
 
 if (preg_match('|\/templates\/|',$_SERVER['PHP_SELF'])) $redirect = '';
 if (preg_match('|\/load\/|',$_SERVER['PHP_SELF'])) $redirect = '';

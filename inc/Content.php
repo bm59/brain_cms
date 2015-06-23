@@ -35,7 +35,14 @@ class Content extends VirtualClass
 	}
 	function getIdByPath($path){
 		$path = explode('/',preg_replace('|\/$|','',preg_replace('|^\/|','',trim($path))));
-		$retval = 0;
+
+		if ($path['2']!='')
+		$section=msr(msq("SELECT * FROM `site_site_sections` WHERE `path`='".$path['2']."'"));
+		else
+		$section=msr(msq("SELECT * FROM `site_site_sections` WHERE `path`='".$path['1']."'"));
+		$retval=$section['id'];
+
+/*		$retval = 0;
 		if (is_array($path)){
 			foreach ($path as $p){
 				$childs = $this->Settings['structure'][$retval]['childs'];
@@ -44,7 +51,7 @@ class Content extends VirtualClass
 					if ($c['path']==$p) $retval = $k;
 				}
 			}
-		}
+		}*/
 		return $retval;
 	}
 	function getParent($id){

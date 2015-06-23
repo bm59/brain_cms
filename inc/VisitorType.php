@@ -123,12 +123,15 @@ class VisitorType extends VirtualClass
 			foreach ($accessstr as $v)
 			{				$set_val=explode('=',$v);
 
-				if ($set_val['1']!='' && $set_val['0']>0)
+/*				if ($set_val['1']!='' && $set_val['0']>0)
 				{					$set_val_actions=explode(',',$set_val['1']);
 					foreach ($set_val_actions as $set_val_actions_item)
 					$new_settings[]='action_'.$set_val['0'].'_'.$set_val_actions_item;
 
 				}
+				elseif */
+				if ($set_val['0']>0)
+				$new_settings[$set_val['0']]=clear_array_empty(explode(',',$set_val['1']));
 
 			}
 			/*==foreach ($accessstr as $v) if (floor($v)>0) $access[] = floor($v);*/
@@ -157,12 +160,10 @@ class VisitorType extends VirtualClass
         global $SiteSections,$new_settings;
         if ($level=='')  $level=0;
         $sec_list=$SiteSections->getList($id,0,-1);
-        print '---';
-        print_r($new_settings);
+/*        print '---';
+        print_r($new_settings);*/
 
 
-
-        /*if ($level>0) print '<li>';*/
         $i=0;
         print '<UL id="'.$id.'">';
         foreach ($sec_list as $sl)
@@ -175,7 +176,7 @@ class VisitorType extends VirtualClass
 
         	print '<li id="li_'.$sl['id'].'">';
 
-        	print '<label><input id="section_'.$sl['id'].'" name="section_'.$sl['id'].'" type="checkbox"'.$check.' '.(($_POST['section_'.$sl['id']]=='on' ? ' checked="checked"':'')).'/>'.$sl['name'].'</label>';
+        	print '<label><input id="section_'.$sl['id'].'" name="section_'.$sl['id'].'" type="checkbox"'.$check.' '.(($_POST['section_'.$sl['id']]=='on' || array_key_exists($sl['id'],$new_settings)) ? ' checked="checked"':'').'/>'.$sl['name'].'</label>';
 
 
         	/*Получаем настройки доступных действий*/
@@ -185,12 +186,12 @@ class VisitorType extends VirtualClass
 	            $section_settings=$section_settings['settings']['enable_actions'];
 	        	if ($section_settings!='')
 	        	{	        		$actions=explode(',',$section_settings);
-	        		$action_comments=array('view'=>'просмотр', 'add'=>'добавление', 'edit'=>'редактирование', 'delete'=>'удаление');
+	        		$action_comments=array('view'=>'просмотр', 'add'=>'добавление', 'edit'=>'редактирование', 'delete'=>'удаление', 'onoff'=>'вкл\откл');
 	        		?>
 	        			<div class="actions">
 	        			<?
 	        			foreach ($actions as $act)
-	        			{	        				?><div><label><input type="checkbox" id="action_<?=$sl['id'].'_'.$act?>" name="action_<?=$sl['id'].'_'.$act?>" <?=(($_POST['action_'.$sl['id'].'_'.$act]=='on' || in_array('action_'.$sl['id'].'_'.$act,$new_settings)) ? ' checked="checked"':'')?>><?=$action_comments[$act]?></label></div><?
+	        			{	        				?><div><label><input type="checkbox" id="action_<?=$sl['id'].'_'.$act?>" name="action_<?=$sl['id'].'_'.$act?>" <?=(($_POST['action_'.$sl['id'].'_'.$act]=='on' || in_array($act,$new_settings[$sl['id']])) ? ' checked="checked"':'')?>><?=$action_comments[$act]?></label></div><?
 	        			}
 	        			?>
 	        			</div>

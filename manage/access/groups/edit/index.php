@@ -1,6 +1,15 @@
 <?
 include $_SERVER['DOCUMENT_ROOT']."/inc/include.php";
 
+if (!$activeccid>0)
+$activeccid=$Content->getIdByPath(configGet("AskUrl"));
+
+if (!in_array('edit',$group['new_settings'][$activeccid]) && $mode!='development' && $_GET['edit']>0)
+header("Location: /manage/control/contents/");
+if (!in_array('add',$group['new_settings'][$activeccid]) && $mode!='development' && $_GET['edit']=='')
+header("Location: /manage/control/contents/");
+
+
 $data = array('name'=>'','access'=>array(),'settings'=>array());
 $errors = array();
 $editid = $VisitorType->checkTypePresence($_GET['edit']);
@@ -39,23 +48,20 @@ if (isset($_POST['addeditgroup'])){
 
 			}
 
-			print_r($access_settings);
-			/*$access = floor(substr($k,7));
-			if ($v=='on') $data['access'][] = $access;*/
 		}
 	}
 
 
 	if ($editid>0) $errors = $VisitorType->edit($editid,$data['name'],$access_settings);
 	else $errors = $VisitorType->add($data['name'],$access_settings);
-	/*if (count($errors)==0) header("Location: ../");*/
+	if (count($errors)==0) header("Location: ../");
 }
 $settings = ($editid>0)?array('title'=>'Редактирование группы пользователей','button'=>'Сохранить'):array('title'=>'Добавление группы пользователей','button'=>'Создать группу');
 ?>
 <? include $_SERVER['DOCUMENT_ROOT']."/inc/content/meta.php"; ?>
 <script type="text/javascript">
 	jQuery(function()
-	{		//check_access();
+	{		check_access();
 
 		jQuery(document).on("click", "input[type='checkbox']",  function()
 		{			if (jQuery(this).prop("checked")==true)
@@ -103,7 +109,7 @@ $settings = ($editid>0)?array('title'=>'Редактирование группы пользователей','bu
 						});
 
 						//alert('Всего '+count_all+'; отмечено '+count_check);
-						if (count_all==count_check && count_check>0)
+						if (count_check>0)
 						jQuery('#'+parent_ul).find('input:first').prop("checked", "checked");
                         else
                         jQuery('#'+parent_ul).find('input:first').prop("checked", "");

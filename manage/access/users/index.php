@@ -32,15 +32,23 @@ include $_SERVER['DOCUMENT_ROOT']."/inc/content/meta.php";
 				$usertype = $VisitorType->getOne($user['type']);
 				$lasttime = '&mdash;';
 				if (preg_match("|^[0-9]+$|",$user['settings']['lasttime'])) if ($time = @date("d.m.Y H:i",$user['settings']['lasttime'])) $lasttime = $time;
+
+				$href=array('<a href="'.$_SERVER['REDIRECT_URL'].'profile/?user='.$user['id'].'">','</a>');
+
+				if (!in_array('edit',$group['new_settings'][$activeccid]) && $mode!='development')
+				$href=array();
+
 				?>
 				<tr id="item_<?=$user['id']?>">
 					<td class="avatar"><div><a href="edit/?edit=<?=$user['id']?>"><img src="<?=($user['picture']['path'])?$user['picture']['path']:'/pics/i/empty_user.gif'?>" width="60" height="60" alt="<?=$user['secondname'].' '.$user['firstname'].' '.$user['parentname']?>" /></a></div></td>
-					<td class="t_left"><a href="<?=$_SERVER['REDIRECT_URL'].'profile/?user='.$user['id']?>"><?=$user['secondname'].' '.$user['firstname'].' '.$user['parentname']?></a><?=$help?></td>
+					<td class="t_left">
+					<?=$href[0].$user['secondname'].' '.$user['firstname'].' '.$user['parentname'].$href[1]?>
+					<?=$help?></td>
 					<td class="t_left"><?=$lasttime?></td>
 					<td class="t_left"><?=$usertype['name']?></td>
 					<td class="t_32width">
 						<?
-						if (isset($user['settings']['noswitch'])){
+						if ((isset($user['settings']['noswitch']) || !in_array('onoff',$group['new_settings'][$activeccid])) && $mode!='development'){
 							?>
 							<a class="button txtstyle disabled">
 								<span class="bl"></span>
@@ -64,7 +72,7 @@ include $_SERVER['DOCUMENT_ROOT']."/inc/content/meta.php";
 					</td>
 					<td class="t_32width">
 						<?
-						if (isset($user['settings']['undeletable'])){
+						if ((isset($group['settings']['undeletable']) || !in_array('delete',$group['new_settings'][$activeccid])) && $mode!='development'){
 							?>
 							<span class="button txtstyle disabled">
 								<span class="bl"></span>
@@ -93,6 +101,9 @@ include $_SERVER['DOCUMENT_ROOT']."/inc/content/meta.php";
 		</table>
 		<?
 		}
+
+		if (in_array('add',$group['new_settings'][$activeccid]) || $mode=='development')
+		{
 		?>
 		<span class="clear"></span>
 		<div class="place">
@@ -102,6 +113,7 @@ include $_SERVER['DOCUMENT_ROOT']."/inc/content/meta.php";
 				<span class="br"></span>
 			</a>
 		</div>
+		<?}?>
 		<span class="clear"></span>
 	</div>
 	<?/*include $_SERVER['DOCUMENT_ROOT']."/inc/footer.php";*/?>

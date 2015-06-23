@@ -24,13 +24,16 @@ include $_SERVER['DOCUMENT_ROOT']."/inc/content/meta.php";
 			foreach ($groupslist as $groupid){
 				$group = $VisitorType->getOne($groupid);
 				$href = (isset($group['settings']['noedit']))?array('',''):array('<a href="edit/?edit='.$group['id'].'">','</a>');
+
+				if (!in_array('edit',$group['new_settings'][$activeccid]) && $mode!='development')
+				$href=array();
 				?>
 				<tr id="item_<?=$group['id']?>">
 					<td class="t_left"><?=$href[0]?><?=$group['name']?><?=$href[1]?><?=$help?></td>
 					<td class="t_left"><?=$group['userscount']?></td>
 					<td class="t_32width">
 						<?
-						if (isset($group['settings']['undeletable'])){
+						if ((isset($group['settings']['undeletable']) || !in_array('delete',$group['new_settings'][$activeccid])) && $mode!='development'){
 							?>
 							<span class="button txtstyle disabled">
 								<span class="bl"></span>
@@ -59,6 +62,9 @@ include $_SERVER['DOCUMENT_ROOT']."/inc/content/meta.php";
 		</table>
 		<?
 		}
+
+		if (in_array('add',$group['new_settings'][$activeccid]) || $mode=='development')
+		{
 		?>
 		<span class="clear"></span>
 		<div class="place">
@@ -68,6 +74,7 @@ include $_SERVER['DOCUMENT_ROOT']."/inc/content/meta.php";
 				<span class="br"></span>
 			</a>
 		</div>
+		<?}?>
 		<span class="clear"></span>
 	</div>
 	<?/*include $_SERVER['DOCUMENT_ROOT']."/inc/footer.php";*/?>

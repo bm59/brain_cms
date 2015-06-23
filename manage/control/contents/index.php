@@ -3,7 +3,7 @@
 ini_set('display_errors',1);*/
 include $_SERVER['DOCUMENT_ROOT']."/inc/include.php";
 
-if ($user['login']=='admin') $delepmentmode = 'development';
+
 
 $contentStep = 1;
 $section = $SiteSections->get(floor($_GET['section']),-1); $section['id'] = floor($section['id']);

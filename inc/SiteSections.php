@@ -273,7 +273,10 @@ class SiteSections extends VirtualClass
                 foreach ($list as $section){
                 		$cid = $Content->getIdByPath($this->getPath($section['id']));
                 		$accessgranted = $VisitorType->isAccessGranted($group['id'],$cid);
-                		if (($accessgranted || $section['parent']==-1) && ($aut_mode!='alladmin' || $section['path']!='groups'))
+
+                		$accessgranted_settings=array_key_exists($section['id'],$group['new_settings']);
+
+                		if (($accessgranted || $accessgranted_settings || $section['parent']==-1))
                 		{
 
 		                        $counter++;
@@ -315,7 +318,7 @@ class SiteSections extends VirtualClass
 		                                <td class="t_left t_nowrap"><?=$pattern?></td>
 		                                <td class="t_32width">
 		                                <?
-		                                if ((isset($section['settings']['noeditsettings'])) && ($mode!='development')){
+		                                if (isset($section['settings']['noeditsettings']) || $mode!='development'){
 		                                        ?>
 		                                        <span class="button txtstyle disabled">
 		                                                <span class="bl"></span>

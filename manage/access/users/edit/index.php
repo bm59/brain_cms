@@ -1,5 +1,16 @@
 <?
 include $_SERVER['DOCUMENT_ROOT']."/inc/include.php";
+
+if (!$activeccid>0)
+$activeccid=$Content->getIdByPath(configGet("AskUrl"));
+
+if (!in_array('edit',$group['new_settings'][$activeccid]) && $mode!='development' && $_GET['user']>0)
+header("Location: /manage/control/contents/");
+
+
+if (!in_array('add',$group['new_settings'][$activeccid]) && $mode!='development' && $_GET['user']=='')
+header("Location: /manage/control/contents/");
+
 $data = array('settings'=>array(),'picture'=>array(),'type'=>$VisitorType->getSetting('guestsId'));
 $errors = array();
 $editid = $SiteVisitor->checkUserPresence($_GET['edit']);

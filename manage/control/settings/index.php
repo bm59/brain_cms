@@ -80,7 +80,7 @@ function Gotopage(link)
 					</td><td style="width: 32px;">
 					<label>&nbsp;</label>
 					<?
-					if (isset($set['settings']['undeletable'])){
+					if ((isset($set['settings']['undeletable']) || !in_array('delete',$group['new_settings'][$activeccid])) && $mode!='development'){
 						?>
 						<span class="button txtstyle disabled">
 							<span class="bl"></span>
@@ -106,6 +106,9 @@ function Gotopage(link)
 				<span class="clear"></span>
 				<?
 			}
+
+			if (in_array('edit',$group['new_settings'][$activeccid]) || $mode=='development')
+			{
 			?>
 			<div class="place">
 				<span class="button big" style="float: right;">
@@ -115,6 +118,7 @@ function Gotopage(link)
 					<input type="submit" name="setupdate" value="" />
 				</span>
 			</div>
+			<?}?>
 		</form>
 		<?
 		}
@@ -130,8 +134,13 @@ function Gotopage(link)
 			print '
 			</ul>';
 		}
+
+		if (in_array('add',$group['new_settings'][$activeccid]) || $mode=='development')
+		{
 		?>
+		<div class="hr"></div>
 		<form name="setadd" action="<?=$_SERVER['REQUEST_URI']?>" method="POST">
+		<H1>Добавить настройку</H1>
 			<div class="place">
 				<table style="width: 100%; table-layout: fixed;"><tr><td>
 				<label>Описание</label>
@@ -178,6 +187,7 @@ function Gotopage(link)
 				</span>
 			</div>
 		</form>
+		<?}?>
 		<span class="clear"></span>
 	</div>
 	<?/*include $_SERVER['DOCUMENT_ROOT']."/inc/footer.php";*/?>
