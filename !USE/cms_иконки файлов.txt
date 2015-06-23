@@ -1,0 +1,3 @@
+pics\file\*
+\filemanager\
+default.css

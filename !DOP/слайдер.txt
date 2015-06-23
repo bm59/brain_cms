@@ -1,0 +1,44 @@
+<link rel="stylesheet" type="text/css" href="/css/jcarousel.basic.css" media="all" />
+<script src="/js/jquery.jcarousel.js" language="JavaScript" type="text/javascript"></script>
+<script src="/js/jcarousel_basic.js" language="JavaScript" type="text/javascript"></script>
+
+
+<div class="slider" style="width: 1040px; padding-left: 10px;">
+	<div class="container_slider">
+
+        <div class="wrapper">
+            <div class="jcarousel-wrapper">
+                <div class="jcarousel">
+                    <ul>
+                        <?
+                        $sliders=msq("SELECT * FROM `site_site_pimagelistext_imagelistext_7` WHERE `show`=1 ORDER BY `precedence` ASC");
+                        while ($sl=msr($sliders))
+                        {
+                        	$lnk=array();
+                        	if ($sl['url']!='') $lnk=array('<a href="'.$sl['url'].'">', '</a>');
+
+                        	$image=$Storage->getFile($sl['image']);
+                        	?>
+                        	 <li>
+                        	 	<img src="<?=$image['path']?>">
+                        	 	<div class="descr">
+                        	 		<div class="main"><?=$lnk[0].$sl['name'].$lnk[1]?></div>
+                        	 		<?=$sl['descr']?>
+                        		</div>
+                        	 </li>
+                        	<?
+                        }
+                        ?>
+                    </ul>
+                </div>
+
+                	<a href="#" class="jcarousel-control-prev"></a>
+                    <a href="#" class="jcarousel-control-next"></a>
+
+                    <p class="jcarousel-pagination"></p>
+            </div>
+        </div>
+
+
+	</div>
+</div>

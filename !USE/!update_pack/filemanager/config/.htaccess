@@ -1,0 +1,4 @@
+DefaultLanguage ru
+AddDefaultCharset windows-1251
+php_value default_charset "cp1251"
+Deny from all

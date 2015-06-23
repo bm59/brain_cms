@@ -1,0 +1,4 @@
+/css/manage.css
+/control/contents/index.php
+/inc/content/header.php
+/inc/SiteSections.php

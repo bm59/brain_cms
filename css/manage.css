@@ -1,0 +1,371 @@
+* {margin: 0px; padding: 0px;}
+HTML {height: 100%;}
+BODY {height: auto !important; height: 100%; min-height: 100%; position: relative; margin: 0px; padding: 0px; background-color: #FFF; font-family: Arial, sams-serif; font-size: 12px; line-height: 18px; color: #000;}
+BODY#tinymce {padding: 10px}
+IMG {display: block;}
+A IMG {border: none;}
+
+A {color:#000;}
+A:hover {color: #cc0000;}
+
+H1 {margin: 10px 0px; font-size: 20px; line-height: 24px; font-weight: lighter; color: #000;}
+H2 {margin: 10px 0px; font-size: 14px; line-height: 24px; font-weight: lighter; color: #000;}
+H3 {margin: 10px 0px; font-size: 12px; line-height: 18px; font-weight: lighter; color: #000;}
+
+P {padding: 10px 0px;}
+
+UL {list-style: none;margin:0;padding:0;}
+UL, OL {margin: 10px 0px 10px 0px;}
+UL LI {padding-left: 20px; background: url(/pics/i/ul.gif) 0px 9px no-repeat; position: relative;}
+OL LI {margin: 10px 0px 0px 20px; background-image: none; padding: 0px;}
+OL UL LI {background: url(/pics/i/ul.gif) 0px 10px no-repeat; padding-left: 20px; margin-left: 0px;}
+OL UL, OL OL, UL UL, UL OL {margin: 0px 0px 0px 40px;}
+
+.up_down {width: 30px; float: left;}
+.up_down a {margin: 0;}
+.up_down .up
+{
+		   margin-top: 15px;
+		   width: 16px;
+           height: 10px;
+           display: block;
+           background: url(/pics/up_down.png) no-repeat;
+           background-position: 0px 0px;
+}
+.up_down .up#disable{background-position: 0px -20px;}
+.up_down .down#disable{background-position: 0px -30px;}
+.up_down .down
+{
+ 		   width: 16px;
+           height: 10px;
+           display: block;
+           margin-top: 25px;
+           background: url(/pics/up_down.png) no-repeat;
+           background-position: 0px -10px;
+}
+
+
+.img_prev {padding: 5px; border: 1px solid #CCC; max-height: 100px; max-width: 100px;}
+
+
+.select_header {padding-left: 5px; font-weight: bold;color:#999999; cursor: pointer;}
+.select_li {padding-left: 10px;}
+
+.ms-drop LI LABEL {padding-left: 10px !important;}
+.ms-drop LI.group LABEL {padding-left: 0 !important;}
+.ms-drop .ms-select-all LABEL {padding: 0 !important;}
+
+
+.active {border: 1px solid #cc0000;}
+
+BODY#login {background: url(/pics/loginbg.gif)}
+#zbody {width: 86%; margin: auto; min-width: 950px; cursor: default;}
+
+INPUT {border: none; background: transparent url(/pics/i/blank.gif);}
+
+FORM LABEL {position: relative; overflow: hidden; display: block; margin: 0px 6px 0px 4px;}
+
+.png {_behavior:url(/css/iepngfix.htc);}
+
+
+#margin {width: 92%; margin: auto;}
+
+/*Шапка*/
+.header{margin-top:20px;}
+.logo{float:left; width:450px;}
+.descr{margin-left:450px;padding-top:35px}
+
+/*кнопочки*/
+.button {position: relative; float: left; height: 32px; overflow: hidden; text-decoration: none; cursor: pointer; background-color: #FFCCCC;}
+.button .bl {display: block; float: left; background: url(/pics/inputs/btn-bl.gif) left top no-repeat; width: 15px; height: 32px;}
+.button .bc {display: block; float: left; background: url(/pics/inputs/btn-bc.gif) left top repeat-x; height: 32px; padding: 7px 0px; font-size: 11px; line-height: 18px; color: #5F5F5F;}
+.button .br {display: block; float: left; background: url(/pics/inputs/btn-br.gif) right top no-repeat; width: 15px; height: 32px;}
+.button .img {position: absolute; left: 0px; top: 0px; width: 32px; height: 32px; z-index: 4;}
+.button INPUT {position: absolute; left: 0px; top: 0px; z-index: 5; height: 32px; width: 100%; cursor: pointer;}
+.button:hover {background-color: #0CA2B8;}
+.button:hover .bl {background-position: left -32px;}
+.button:hover .bc {background-position: left -32px; color: #FFF;}
+.button:hover .br {background-position: left -32px;}
+
+.button.disabled {cursor: default;}
+.button.disabled:hover {background-color: #FFCCCC;}
+.button.disabled:hover .bl {background-position: left 0px;}
+.button.disabled:hover .bc {background-position: left 0px; color: #5F5F5F;}
+.button.disabled:hover .br {background-position: left 0px;}
+.button.disabled INPUT {cursor: default;}
+
+.button.big {height: 40px !important; overflow: hidden !important; cursor: pointer;}
+.button.big .bl {background-image: url(/pics/inputs/big-bl.gif); height: 40px;}
+.button.big .bc {background-image: url(/pics/inputs/big-bc.gif); height: 40px; padding: 9px 8px; font-size: 13px; line-height: 22px; color: #000;}
+.button.big .br {background-image: url(/pics/inputs/big-br.gif); height: 40px;}
+.button.big INPUT {height: 40px;}
+.button.big:hover .bl {background-position: left -40px;}
+.button.big:hover .bc {background-position: left -40px; color: #FFF}
+.button.big:hover .br {background-position: left -40px;}
+.button.delete {width: 32px; height: 32px;}
+.button.delete .bc {width: 2px;}
+.button.delete INPUT {width: 100%; height: 32px; background: url(/pics/editor/delete.gif) center center no-repeat;}
+.button.txtstyle {background-color: #C00 !important; position: relative; z-index: 1;}
+.button.txtstyle .bc {width: 2px;}
+.button.txtstyle INPUT {width: 32px; height: 32px; background-position: center center; background-repeat: no-repeat;}
+.button.txtstyle .icon {display: block; position: absolute; left: 0px; top: 0px;  z-index: 5; width: 32px; height: 32px; background-position: center center; background-repeat: no-repeat;}
+.button.info {cursor:help;}
+.button.info:hover .bl {background-position: left 0px;}
+.button.info:hover .bc {background-position: left 0px;}
+.button.info:hover .br {background-position: left 0px;}
+
+.button.vt {margin-top: 20px;}
+.button.disabled .bc {color: #5F5F5F;}
+.button.disabled:hover .bl {background-position: left 0px;}
+.button.disabled:hover .bc {background-position: left 0px; color: #5F5F5F;}
+.button.disabled:hover .br {background-position: left 0px;}
+/*поля ввода*/
+.input {position: relative; float: left; position: relative; height: 55px; text-decoration: none; background: url(/pics/inputs/inp-bc.gif) left top repeat-x; background-color: #FFCCCC; width: 100%;}
+.input .bl {position: absolute; left: 0px; top: 0px; z-index: 2; display: block; background: url(/pics/inputs/inp-bl.gif) left top no-repeat; width: 7px; height: 55px;}
+.input .br {position: absolute; right: 0px; top: 0px; display: block; background: url(/pics/inputs/inp-br.gif) right top no-repeat; width: 7px; height: 55px;}
+.input .bc {display: block; margin: 0px 18px;}
+.input INPUT {position: relative; top: 5px; font-size: 13px; color: #000; padding: 14px 0px; background-color: transparent; height: 17px; width: 100%;}
+* HTML .input INPUT {top: 3px;}
+.input .bc DIV, .suggestSelect {position: relative; top: 5px; padding: 14px 0px; font-size: 13px; background: transparent url(/pics/i/select.gif) right center no-repeat; height: 17px; width: 100%; color: #000; white-space: nowrap; overflow: hidden; cursor: pointer;}
+/*текстовое поле*/
+.ta {position: relative; float: left; position: relative; height: 315px; overflow: hidden; text-decoration: none; background: url(/pics/inputs/ta-bc.gif) left top repeat-x; background-color: #FFCCCC; width: 100%;}
+.ta .bl {position: absolute; left: 0px; top: 0px; z-index: 2; display: block; background: url(/pics/inputs/ta-bl.gif) left top no-repeat; width: 7px; height: 315px;}
+.ta .br {position: absolute; right: 0px; top: 0px; display: block; background: url(/pics/inputs/ta-br.gif) right top no-repeat; width: 7px; height: 315px;}
+.ta .bc {display: block; margin: 0px 18px;}
+.ta DIV {position: relative; top: 5px; height: 285px; width: 100%; padding: 10px 0px;}
+.ta TEXTAREA {position: absolute; left: 0px; width: 100%; margin: 0px; font-size: 13px; line-height: 18px; background-color: transparent; height: 285px; width: 100%;}
+.ta.medium {height: 100px; background-image: url(/pics/inputs/small-bc.gif);}
+.ta.medium .bl {background-image: url(/pics/inputs/small-bl.gif); width: 7px; height: 100px;}
+.ta.medium .br {background-image: url(/pics/inputs/small-br.gif); width: 7px; height: 100px;}
+.ta.medium DIV {height: 70px;}
+.ta.medium TEXTAREA {height: 70px; border: none;}
+.ta_big {padding: 10px 28px 20px 5px}
+.ta_big TEXTAREA {height: 150px; border: 1px solid #CCCCCC;}
+
+.forms LABEL {position: relative; overflow: hidden; display: block; margin: 0px 6px 0px 4px;}
+.forms FORM {margin-top: 0px; width: 100%;}
+FORM LABEL {position: relative; overflow: hidden; display: block; margin: 0px 6px 0px 4px;}
+.items {position: absolute; top: -4px; z-index: 10; background-color: #FFF; border: 1px solid #BFBFBF; height: auto; margin-top: -1px; overflow: auto; width: 100%;}
+.items A, .items SPAN {color: #000; cursor: pointer; display: block; padding: 3px 5px; white-space: nowrap; overflow: hidden; text-decoration: none;}
+.items SPAN {cursor: default;}
+.items .sub {padding-left: 25px;}
+.items A:hover {background-color: #FFCCCC;}
+.items SPAN:hover {background-color: #FFCCCC;}
+.items LABEL {position: relative; padding-left: 20px;}
+.items LABEL INPUT {position: absolute; left: -3px; top: -2px;}
+HTML:root .items LABEL INPUT {left: 0px; top: 2px;}
+HTML:first-child .items LABEL INPUT {left: 0px; top: 1px;}
+* HTML .items LABEL INPUT {left: -24px;}
+/*редактор*/
+.editor {position: relative; height: 32px;}
+/*выбор файла*/
+.fileselect {position: absolute; right: 0px; height: 32px; overflow: hidden; margin-left: -450px;}
+.big .fileselect {height: 40px;}
+.fileselect INPUT {height: 50px; padding: 5px; position: relative; float: right; -moz-opacity: 0; filter: alpha(opacity: 0); opacity: 0; font-size: 199px;}
+/*разное*/
+.important {position: relative; top: 3px; font-size: 18px; line-height: 10px; font-weight: bold; color: #0CA2B8;}
+.forms .showsave {margin-top: 0px !important; z-index: 1;}
+.impfields {margin-bottom: 0px !important;}
+
+.tags_items {margin:20px 0px 0px !important;}
+.tags_items A {border-bottom:1px dashed #0CA2B8; text-decoration:none; cursor:pointer;}
+
+/*выбор логотипа*/
+.selectlogo {position: relative; float: left; padding: 3px 40px 3px 25px; height: 29px; margin: 25px 25px 0px 0px !important; border: 1px solid #D8D8D8; width: 171px;}
+.selectlogo INPUT.box {position: absolute; top: 12px; left: 5px;}
+.selectlogo .txtstyle {position: absolute; top: 2px; right: 2px; width: 32px; height: 32px;}
+
+
+/*форма авторизации*/
+#loginform {position: absolute; left: 50%; top: 50%; width: 465px; height: 411px; margin-left: -232px; margin-top: -205px; overflow: hidden;}
+#loginform .bg {width: 465px; height: 411px; position: absolute; left: 0px; top: 0px; z-index: 4; background: url(/pics/loginform.png) left top no-repeat;}
+#loginform FORM {position: relative; z-index: 5; font-size: 13px; width: 455px; height: 401px; left: 4px; top: 4px; background-color: #FFF; border: 1px solid #D8D8D8;}
+#loginform .logo {text-align: center; margin: 50px 0 30px 0;}
+#loginform .logo IMG {display: inline;}
+#loginform P {font-size: 20px; line-height: 24px; color: #000; margin: 30px 50px;}
+#loginform .button .bc {color: #000;}
+#loginform .button:hover .bc {color: #FFF !important;}
+#loginform .formmargin {margin: -20px 46px 0px 46px;}
+
+/*шапка*/
+#header {height: 100px; font-size: 13px; line-height: 18px; margin: 10px 25px 0 25px; padding-top: 50px;}
+#header .logor {margin: 0px 40px; float: left; margin-top: -40px;}
+#header .adcounter {border-style: solid; border-color: #D8D8D8; border-width: 0px 1px; float: left; height: 70px; overflow: hidden; margin: 15px 0px; padding: 0px 30px; text-align: center;}
+#header .adcounter P {margin-top: 3px;}
+#header .adcounter SPAN {display: block; font-size: 50px; color: #000; line-height: 50px;}
+#header .profile {float:right; margin-right: 60px}
+#header .avatar {float: left; height: 78px; width: 78px; margin: 0 15px 11px 30px; background: url(/pics/i/autor.gif) left top no-repeat;}
+#header .avatar IMG {margin: 4px 0px 0px 4px; border: 1px solid #C6C6C6; padding: 4px;}
+#header .autor {float: left; height: 70px;}
+#header .autor DIV {position: relative; left: -3px; top: 6px;}
+#header .button .bc {color: #000;}
+#header .button:hover .bc {color: #FFF;}
+
+
+/*разметка*/
+#content {margin: 0px 60px;}
+
+/**/
+.pub.user {margin-left: 100px;}
+.pub.user .info {left: -100px; width: 90px;}
+.pub.user .userinfo {position: relative; margin: 30px 0px;}
+.pub.user .userinfo SPAN {position: relative; display: block; padding-left: 170px; _height: 1%;}
+.pub.user .userinfo STRONG {position: absolute; left: 0px;}
+
+.place {position: relative; margin-top: 20px; float: left; width: 100%;}
+.place .forbutton {display: block; height: 55px;}
+.place .forbutton .button {top: 50%; margin-top: -16px;}
+.place .forbutton .button.big {top: 50%; margin-top: -20px;}
+.place .forbutton LABEL {display: block; position: relative; padding-left: 20px;}
+.place .forbutton LABEL INPUT {position: absolute; left: 0px; top: 4px;}
+.place .progress {position: relative; top: 50%; margin-top: -9px; display: block; height: 18px; padding-left: 25px; background: url(/pics/i/wait.gif) left center no-repeat; color: #0CA2B8;}
+.place .false {position: relative; top: 50%; margin-top: -9px; display: block; height: 18px; color: #0C0;}
+.place .true {position: relative; top: 50%; margin-top: -9px; display: block; height: 18px; color: #C00;}
+.place .forselect {position: relative; height: 1px; clear: both; margin: 0px 6px 0px 4px;}
+.place .placeinfo {position: relative; clear: both; margin: 0px 6px 0px 4px;}
+.place .bannerplace {position: relative; clear: both; margin: 10px 6px 0px 4px;}
+.place .bannerplace.head {height: 100px; width: 450px; overflow: hidden;}
+.place .avatar {float: left; height: 78px; width: 78px; background: url(/pics/i/autor.gif) left top no-repeat; _border:1px solid #FFF;}
+.place .avatar DIV.loading {height: 78px; width: 78px; background: url(/pics/i/loading.gif) center center no-repeat;}
+.place .avatar IMG {margin: 4px 0px 0px 4px; border: 1px solid #C6C6C6; padding: 4px;}
+.place .avatar.loading IMG {margin: 4px 0px 0px 4px; border: 1px solid #D8D8D8; padding: 4px;}
+.place .plusinfo {margin: 0px 4px;}
+.place .informer {margin: 4px;}
+.place .forckecks {display: block;}
+.place .forckecks LABEL {display: block; position: relative; padding-left: 20px;}
+.place .forckecks LABEL INPUT {position: absolute; left: 0px; top: 3px;}
+.place .foraccess SPAN {display: block; margin: 5px 4px;}
+.place .foraccess SPAN.sub {margin-left: 26px;}
+.place .foraccess SPAN.subsub {margin-left: 48px;}
+HTML:first-child .place .forckecks LABEL INPUT {left: 0px; top: 1px;}
+*+HTML .place .forckecks LABEL INPUT {left: -3px; top: -2px;}
+*HTML .place .forckecks LABEL INPUT {position: absolute; left: -24px; top: -2px;}
+
+.contentdesc {margin: 0px 4px; line-height: 14px !important;}
+.contenttxt {margin: 0px 4px;}
+.contentimg {border: 1px solid #D8D8D8; margin: 4px; padding: 4px;}
+
+/*пользователи, синхронизация, статистика*/
+.stat TH {background-color: #F5F5F5 !important; font-size: 14px; padding: 15px !important;}
+.stat TD {text-align: center;}
+.stat TH A {text-decoration: none;}
+.stat TD.edit {width: 32px;}
+.stat TD.avatar {width: 78px; padding: 5px;}
+.stat TD.avatar DIV {height: 78px; width: 78px; background: url(/pics/i/autor.gif) left top no-repeat; border: 1px solid #FFF;}
+.stat TD.avatar IMG {margin: 4px 0px 0px 4px; /*_margin-left: 0px;*/ border: 1px solid #C6C6C6; padding: 4px;}
+.pub {position: relative; margin: 10px 140px 10px 150px; _height: 1%}
+.pub.big {min-height: 140px; _height: 140px;}
+.pub .first {font-size: 20px; line-height: 24px;}
+.pub .date {position: absolute; left: -120px; width: 100px; _top: 0px;}
+.pub .info {position: absolute; left: -150px; width: 120px; _top: 30px; font-size: 13px; line-height: 18px;}
+.pub .avatar {position: relative; left: -4px; height: 78px; width: 78px; background: url(/pics/i/autor.gif) left top no-repeat; margin: 5px 0px;}
+.pub .avatar IMG {position: relative; left: 4px; top: 4px; border: 1px solid #C6C6C6; padding: 4px;}
+.back {margin: 20px 0px 0px 147px;}
+
+.stat.tusers TH {border-right: none !important; border-left: none !important; text-align: left;}
+.stat.tusers TD {border-right: none !important; border-left: none !important; text-align: left;}
+
+.stat .t_left {text-align: left;}
+.stat .t_center {text-align: center !important;}
+.stat .t_nowrap {white-space: nowrap;}
+.stat .t_minwidth {width: 1%;}
+.stat .t_32width {width: 32px;}
+.stat .t_110width {width: 110px;}
+.stat .t_32width .button {margin: auto;}
+.stat .t_32width_big {width: 64px;}
+.posid {border: 1px solid #C6C6C6; width: 32px; font-size: 13px; color: #5F5F5F; padding: 2px 5px; background-color: transparent; height: 17px; text-align: right}
+.posid.vc {margin-top: 20px;}
+*+HTML .stat .t_32width {width: 38px;}
+*+HTML .stat .t_32width_big {width: 76px;}
+*HTML .stat .t_32width {width: 34px;}
+*HTML .stat .t_32width_big {width: 68px;}
+.stat .t_minwidth IMG {display: inline !important;}
+/*сортировка*/
+.sort {margin-left: 5px;}
+.sort IMG {display: inline;}
+
+/*пейджинг*/
+#paging {position: relative; z-index: 1; margin: 0px 140px 0px 147px;}
+#paging.nopad {margin: 0px;}
+#paging SPAN.button {background-color: #0CA2B8; cursor: default;}
+#paging SPAN.button .bl {background-position: left -32px;}
+#paging SPAN.button .bc {background-position: left -32px; color: #FFF;}
+#paging SPAN.button .br {background-position: left -32px;}
+#paging .addnews {float: right; margin-right: 50px;}
+#paging.nopad .addnews {margin-right: 0px;}
+
+#footer {height: 100px;}
+
+.clear {display: block; height: 1px; clear: both; overflow: hidden;}
+.clear125 {display: block; height: 125px; clear: both; overflow: hidden;}
+.png {filter:expression(fixPNG(this));}
+.help {margin-left: 5px; cursor: help;}
+.help IMG {position: relative; top: 2px; display: inline !important;}
+#hiddenform DIV {width: 500px; margin-top: 10px; overflow: auto;}
+#hiddenform DIV P {margin: 10px 0px;}
+.linkback {padding-left: 20px; background: url(/pics/i/back.gif) left center no-repeat;}
+.margin-t-20 {margin-top: -20px !important;}
+H1 .link {border-bottom: 1px dashed #000; cursor: pointer;}
+.hidden {display: none;}
+.bigfont {color: #000; font-size: 20px; line-height: 24px; padding: 13px 0px; display: block;}
+A.dashed {text-decoration: none; border-bottom: 1px dashed #0CA2B8;}
+.withcheck {padding-left: 20px; background: url(/pics/editor/submit.gif) left center no-repeat;}
+.table-description TD {padding: 2px 5px 2px;}
+
+/*бэкофис, список разделов*/
+
+.listing H4 {font-size: 12px; line-height: 18px; font-weight: lighter; color: #000; clear: both;}
+.listing H4 STRONG {position: relative; float: left; display: block; width: 45px; color: #000; font-weight: normal;}
+.listing IMG {position: absolute; top: -2px; right: 5px; cursor: pointer; padding: 1px; border: 2px solid #FFF}
+.listing .anchor IMG {position: absolute; top: -2px; right: 5px; cursor: pointer; padding: 1px; border: 2px solid #F5F5F5}
+.listing  IMG.active {border-color: #cc0000;}
+.listing IMG.active_prec {border-color: #0000cc;}
+.listing IMG.active_prec_above {border-color: #C500CC;}
+.listing IMG.dropactive {border-color: #5F5F5F;}
+.listing STRONG IMG.drophover {border-color: #00cc00;}
+.listing SMALL {margin-left: 10px; font-size: 10px; color: #5F5F5F;}
+.list2 {margin-left: 25px;}
+.list2 STRONG {width: 55px !important;}
+.list3 {margin-left: 60px;}
+.list3 STRONG {width: 65px !important;}
+.list4 {margin-left: 100px;}
+.list4 STRONG {width: 70px !important;}
+.setdesc {position: absolute; right: 0px;}
+.anchor {position: relative; padding-left: 30px;;}
+*HTML .anchor {width: 100%;}
+.anchor IMG {position: absolute; left: 0px; top: 0px; padding: 1px;}
+.anchor IMG.active {border: 2px solid #5F5F5F;}
+
+
+.table-content {width: 100%; border-left: 2px solid #FFF !important; border-right: 2px solid #FFF !important; font-size: 12px; line-height: 18px; border-collapse: collapse;}
+.table-content CAPTION {text-align: left; color: #000; padding-bottom: 5px; font-size: 11px; line-height: 15px;}
+.table-content TH {color: #135498; padding: 8px; border: 1px solid #D8D8D8; background-color: #efefef;}
+.table-content TD {padding: 8px; border: 1px solid #D8D8D8;}
+.table-content TD.th {color: #0CA2B8; background-color: #EAFBFF; font-weight: bold; text-align: left;}
+.table-content P {margin: 0px !important;}
+.table-content H1 {margin: 0px !important;}
+.table-content.stat TH {color: #000;}
+
+
+.hr {border-top: 1px solid #D8D8D8; height: 1px; margin: 30px 0; clear: both;}
+.headerhr {border-top: 1px solid #D8D8D8; height: 1px; margin: 15px 60px 30px 60px; clear: both;}
+.hr hr {display:none;}
+* html .hr {overflow: hidden;}
+
+
+#toTop {
+ position:fixed;
+ z-index:9999;
+ bottom:10px;
+ right:30px;
+ background: url('/pics/up.png') no-repeat;
+ width: 50px;
+ height: 31px;
+ border: none;
+ padding: 5px;
+ cursor: pointer;
+ color: transparent;
+ text-decoration: none;
+ opacity: 0.3;
+}
+#toTop:hover {opacity: 1;}

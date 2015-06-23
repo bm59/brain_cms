@@ -1,0 +1,54 @@
+* {margin: 0px; padding: 0px;}
+HTML {height: 100%;}
+BODY
+{	font-family: Arial, sams-serif; font-size: 12px; line-height: 18px;
+	height: auto !important; height: 100%; min-height: 100%; position: relative; margin: 0px; padding: 0px; background-color: #FFF;  color: #000;
+}
+BODY#tinymce {padding: 10px}
+IMG {display: block;}
+A IMG {border: none;}
+A {color:#000;}
+A:hover {color: #000;}
+
+H1 {margin: 10px 0px; font-size: 20px; line-height: 24px; font-weight: lighter; color: #32639A;}
+H2 {margin: 10px 0px; font-size: 14px; line-height: 24px; font-weight: lighter; color: #32639A;}
+H3 {margin: 10px 0px; font-size: 12px; line-height: 18px; font-weight: lighter; color: #32639A;}
+
+P {padding: 10px 0px;}
+
+TABLE TH {vertical-align: top;}
+TABLE TD {vertical-align: top;}
+
+UL {list-style: none;margin:0;padding:0;}
+UL, OL {margin: 10px 0px 10px 0px;}
+UL LI {padding-left: 20px; background: url(/pics/i/ul.gif) 0px 9px no-repeat; position: relative;}
+OL LI {margin: 10px 0px 0px 20px; background-image: none; padding: 0px;}
+OL UL LI {background: url(/pics/i/ul.gif) 0px 10px no-repeat; padding-left: 20px; margin-left: 0px;}
+OL UL, OL OL, UL UL, UL OL {margin: 0px 0px 0px 40px;}
+
+
+.table-content {width: 100%; border-left: 2px solid #FFF !important; border-right: 2px solid #FFF !important; font-size: 12px; line-height: 18px; border-collapse: collapse;}
+.table-content CAPTION {text-align: left; color: #000; padding-bottom: 5px; font-size: 11px; line-height: 15px; font-family: 'PFHandbookPro-Regular', Helvetica, arial, sans-serif !important;}
+.table-content TH {color: #333333; padding: 8px; border: 1px solid #D8D8D8; background-color: #efefef;}
+.table-content TD {padding: 8px; border: 1px solid #D8D8D8;}
+.table-content TD.th {color: #0CA2B8; background-color: #EAFBFF; font-weight: bold; text-align: left;}
+.table-content P {margin: 0px !important;}
+.table-content H1 {margin: 0px !important;}
+.table-content.stat TH {color: #000;}
+td, th
+{	font-family: Arial, sams-serif !important;
+	font-size: 12px !important;
+	line-height: 18px !important;
+}
+
+a[title*="file"]				    	{background: url('/pics/file/file.png') no-repeat; line-height: 20px; padding: 4px 0 8px 35px; display: block;}
+a[title*="file"][href$=".doc"|]   		{background: url('/pics/file/doc.png') no-repeat; line-height: 20px; padding: 4px 0 8px 35px; display: block;}
+a[title*="file"][href$=".docx"]  		{background: url('/pics/file/doc.png') no-repeat; line-height: 20px; padding: 4px 0 8px 35px; display: block;}
+a[title*="file"][href$=".xls"]   		{background: url('/pics/file/xls.png') no-repeat; line-height: 20px; padding: 4px 0 8px 35px; display: block;}
+a[title*="file"][href$=".xlsx"]   		{background: url('/pics/file/xls.png') no-repeat; line-height: 20px; padding: 4px 0 8px 35px; display: block;}
+a[title*="file"][href$=".ppt"]   		{background: url('/pics/file/ppt.png') no-repeat; line-height: 20px; padding: 4px 0 8px 35px; display: block;}
+a[title*="file"][href$=".pptx"]   		{background: url('/pics/file/ppt.png') no-repeat; line-height: 20px; padding: 4px 0 8px 35px; display: block;}
+a[title*="file"][href$=".pdf"]   		{background: url('/pics/file/pdf.png') no-repeat; line-height: 20px; padding: 4px 0 8px 35px; display: block;}
+a[title*="archives"][href$=".rar"]   	{background: url('/pics/file/archive.png') no-repeat; line-height: 20px; padding: 4px 0 8px 35px; display: block;}
+a[title*="archives"][href$=".zip"]   	{background: url('/pics/file/archive.png') no-repeat; line-height: 20px; padding: 4px 0 8px 35px; display: block;}
+a[title*="archives"][href$=".7z"]   	{background: url('/pics/file/archive.png') no-repeat; line-height: 20px; padding: 4px 0 8px 35px; display: block;}

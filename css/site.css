@@ -1,0 +1,117 @@
+* {margin: 0px; padding: 0px;}
+HTML {height: 100%;}
+BODY
+{
+	font-family: Tahoma, sans-serif !important;
+	font-size: 12px;
+	line-height: 18px;
+	margin: 0;
+	padding: 0;
+	text-align: left;
+	height: auto !important;
+	height: 100%;
+	min-height: 100%;
+	position: relative;
+    background-color: #FFF;
+}
+
+A, A:visited, A:hover {color:#000; outline: none;}
+A:hover {color:#990000;}
+A IMG {border: none;}
+H1 {font-size: 22px; color: #000; padding: 10px 0; line-height: 22px;}
+H2 {font-size: 18px; color: #000; padding: 10px 0; line-height: 18px;}
+H3 {font-size: 16px; color: #000; padding: 10px 0; line-height: 16px;}
+P {padding: 10px 0px;}
+TABLE TH {vertical-align: top;}
+TABLE TD {vertical-align: top;}
+.clear {clear: both; height: 0px; overflow: hidden;}
+
+.hr {border-top: 1px solid #D8D8D8; height: 1px; margin: 30px 0; clear: both;}
+.hr hr {display:none;}
+* html .hr {overflow: hidden;}
+
+.container {
+	width: 1000px; margin: 0px auto 30px; position: relative; padding: 10px 20px;
+	background-color: #FFF;
+-webkit-box-shadow: 0px 0px 5px 0px rgba(50, 50, 50, 0.5);
+-moz-box-shadow:    0px 0px 5px 0px rgba(50, 50, 50, 0.5);
+box-shadow:         0px 0px 5px 0px rgba(50, 50, 50, 0.5);
+}
+
+
+.mininav {padding: 11px 0 0 0; height: 30px; color: #666666; line-height: 15px;}
+.mininav a {display: block; float: left; color: #666666}
+.mininav a:hover {text-decoration: underline;}
+.mininav IMG {display: block; float: left; padding: 2px 8px 0; margin-top: -5px;}
+.mininav DIV {float: left; padding-top: 1px;}
+
+input[type="text"],input[type="password"],textarea {
+    border: 2px solid rgba(220, 220, 220, 1);
+    box-shadow: 1px 1px 3px 1px rgba(200, 200, 200, 0.2) inset;
+    color: #2980b9;
+    font-size: 14px;
+    outline: medium none;
+    padding: 5px;
+    transition: all 100ms cubic-bezier(0.42, 0, 0.58, 1) 0s;
+    width: 100%;
+    margin: 5px 0;
+}
+input[type="text"]:focus,input[type="password"]:focus,textarea:focus {
+    background-color: rgba(255, 255, 255, 0.5);
+    border: 2px solid rgba(52, 152, 219, 1);
+    box-shadow: 0 0 0 0 rgba(52, 152, 219, 1);
+    transition: all 100ms cubic-bezier(0.42, 0, 0.58, 1) 0s;
+}
+.mybtn {
+background: none repeat scroll 0 0 #990000;
+color: #FFFFFE;
+cursor: pointer;
+font-size: 18px;
+height: 45px;
+text-align: center;
+text-decoration: none;
+width: 150px;
+border:1px solid #999999;
+}
+
+.table-content {width: 100%; border-left: 2px solid #FFF !important; border-right: 2px solid #FFF !important; font-size: 12px; line-height: 18px; border-collapse: collapse;}
+.table-content CAPTION {text-align: left; color: #000; padding-bottom: 5px; font-size: 11px; line-height: 15px; font-family: 'PFHandbookPro-Regular', Helvetica, arial, sans-serif !important;}
+.table-content TH {text-align: center; font-size: 14px; color: #333333; padding: 15px 10px; background-color: #666666; color: #FFFFFF; border: 1px solid #D8D8D8; border-top: none;}
+.table-content TD {padding: 10px; border-bottom: 1px solid #D8D8D8;border: 1px solid #D8D8D8;}
+.table-content TD.th {color: #0CA2B8; background-color: #EAFBFF; font-weight: bold; }
+.table-content P {margin: 0px !important;}
+.table-content H1 {margin: 0px !important;}
+.table-content.stat TH {color: #000;}
+.table-content td
+{
+	font-size: 14px;
+	line-height: 17px;
+	text-align: center;
+}
+
+.table-content TH.first {border-top-left-radius: 10px;}
+.table-content TH.last  {border-top-right-radius: 10px; padding-right: 10px;}
+
+.even {background:#f7f7f7;}
+.odd {}
+
+
+.container UL {list-style: none;margin:0;padding:10px 20px 20px 20px;}
+.container UL, OL {margin: 0px;}
+.container UL LI {position: relative; padding: 2px 0;}
+.container OL LI {margin: 10px 0px 0px 20px; background-image: none; padding: 0px;}
+.container UL LI {background: url(/pics/ul.gif) 0px 10px no-repeat; padding-left: 20px; margin-left: 0px;}
+.container OL UL, OL OL, UL UL, UL OL {margin: 0px 0px 0px 40px;}
+.container LI a.active {text-decoration: none; font-weight: bold;}
+
+a[title*="file"]				    {background: url('/pics/file/file.png') no-repeat; line-height: 20px; padding: 4px 0 8px 35px; display: block;}
+a[title*="file"][href$=".doc"|]   	{background: url('/pics/file/doc.png') no-repeat; line-height: 20px; padding: 4px 0 8px 35px; display: block;}
+a[title*="file"][href$=".docx"]  	{background: url('/pics/file/doc.png') no-repeat; line-height: 20px; padding: 4px 0 8px 35px; display: block;}
+a[title*="file"][href$=".xls"]   	{background: url('/pics/file/xls.png') no-repeat; line-height: 20px; padding: 4px 0 8px 35px; display: block;}
+a[title*="file"][href$=".xlsx"]   	{background: url('/pics/file/xls.png') no-repeat; line-height: 20px; padding: 4px 0 8px 35px; display: block;}
+a[title*="file"][href$=".ppt"]   	{background: url('/pics/file/ppt.png') no-repeat; line-height: 20px; padding: 4px 0 8px 35px; display: block;}
+a[title*="file"][href$=".pptx"]   	{background: url('/pics/file/ppt.png') no-repeat; line-height: 20px; padding: 4px 0 8px 35px; display: block;}
+a[title*="file"][href$=".pdf"]   	{background: url('/pics/file/pdf.png') no-repeat; line-height: 20px; padding: 4px 0 8px 35px; display: block;}
+a[title*="file"][href$=".rar"]   	{background: url('/pics/file/archive.png') no-repeat; line-height: 20px; padding: 4px 0 8px 35px; display: block;}
+a[title*="file"][href$=".zip"]   	{background: url('/pics/file/archive.png') no-repeat; line-height: 20px; padding: 4px 0 8px 35px; display: block;}
+a[title*="file"][href$=".7z"]   	{background: url('/pics/file/archive.png') no-repeat; line-height: 20px; padding: 4px 0 8px 35px; display: block;}

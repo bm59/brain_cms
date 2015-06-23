@@ -1,0 +1,14 @@
+<script type="text/javascript" src="/js/highslide.js"></script>
+<link rel="stylesheet" type="text/css" href="/css/highslide.css" />
+<script type="text/javascript">
+  hs.graphicsDir = '/pics/graphics/';
+  hs.outlineType = 'rounded-black';
+</script>
+
+
+
+
+
+<a href="<?=$big_image['path']?>" class="highslide" onclick="return hs.expand(this)">
+	<img src="<?=$image['path']?>" alt=""/>
+</a>

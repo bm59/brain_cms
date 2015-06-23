@@ -1,0 +1,51 @@
+<a onclick="return bookmark(this);" href="javascript:void(0);">добавить в закладки</a>
+
+
+
+
+
+
+<script>
+function getBrowserInfo() {
+ var t="",v = "";
+ if (window.opera) t = 'Opera';
+ else if (document.all) {
+  t = 'IE';
+  var nv = navigator.appVersion;
+  var s = nv.indexOf('MSIE')+5;
+  v = nv.substring(s,s+1);
+ }
+ else if (navigator.appName) t = 'Netscape';
+ return { type:t, version:v };
+}
+
+function bookmark(a){    var url = 'http://'+window.location.hostname;
+    var title = '<?=html_entity_decode($SiteSections->getTitle($ss['id']))?>';
+    var b = getBrowserInfo();
+	  try {
+	    // Internet Explorer
+	    window.external.AddFavorite(url, title);
+	  }
+	  catch (e) {
+	    try {
+	      // Mozilla
+	      window.sidebar.addPanel(title, url, "");
+	    }
+	    catch (e) {
+	      // Opera и Firefox 23+
+	      if (typeof(opera)=="object" || window.sidebar) {
+	        a.rel="sidebar";
+	        a.title=title;
+	        a.url=url;
+	        a.href=url;
+	        return true;
+	      }
+	      else {
+	        // Unknown
+	        alert('Нажмите Ctrl-D чтобы добавить страницу в закладки');
+	      }
+	    }
+	  }
+	  return false;
+}
+</script>
