@@ -52,7 +52,7 @@ class VisitorType extends VirtualClass
 		}
 		return $retval;
 	}
-	function add($name = '',$access = array()){ /* Добавление новой группы */
+	function add($name = '',$access=''){ /* Добавление новой группы */
 		$errors = array();
 		$name = trim($name);
 		if ($name=='') $errors['name'] = 'Не указано название группы';
@@ -60,13 +60,11 @@ class VisitorType extends VirtualClass
 		if (count($errors)==0){
 			$name = addslashes($name);
 			$accessstr = '';
-			foreach ($access as $v) $accessstr.= '|'.floor($v);
-			if ($accessstr) $accessstr.= '|';
-			msq("INSERT INTO `".$this->getSetting('table')."` (`name`,`access`) VALUES ('".$name."','".$accessstr."')");
+			msq("INSERT INTO `".$this->getSetting('table')."` (`name`,`access`) VALUES ('".$name."','".$access."')");
 		}
 		return $errors;
 	}
-	function edit($id,$name = '',$access = array()){ /* Редактирование группы */
+	function edit($id,$name = '',$access = ''){ /* Редактирование группы */
 		$id = floor($id);
 		$data = $this->getOne($id);
 		if (count($data)==0) $errors['id'] = 'Редактируемой группы не существует';
@@ -78,10 +76,7 @@ class VisitorType extends VirtualClass
 		if (!$this->isUniqueName($name,$id)) $errors['name'] = 'Группа с таким названием уже существует';
 		if (count($errors)==0){
 			$name = addslashes($name);
-			$accessstr = '';
-			foreach ($access as $v) $accessstr.= '|'.floor($v);
-			if ($accessstr) $accessstr.= '|';
-			msq("UPDATE `".$this->getSetting('table')."` SET `name`='$name', `access`='$accessstr' WHERE `id`='$id'");
+			msq("UPDATE `".$this->getSetting('table')."` SET `name`='$name', `access`='$access' WHERE `id`='$id'");
 		}
 		return $errors;
 	}
@@ -125,9 +120,20 @@ class VisitorType extends VirtualClass
 		if (count($r)>0){
 			$access = array();
 			$accessstr = explode('|',$r['access']);
-			foreach ($accessstr as $v) if (floor($v)>0) $access[] = floor($v);
+			foreach ($accessstr as $v)
+			{				$set_val=explode('=',$v);
+
+				if ($set_val['1']!='' && $set_val['0']>0)
+				{					$set_val_actions=explode(',',$set_val['1']);
+					foreach ($set_val_actions as $set_val_actions_item)
+					$new_settings[]='action_'.$set_val['0'].'_'.$set_val_actions_item;
+
+				}
+
+			}
+			/*==foreach ($accessstr as $v) if (floor($v)>0) $access[] = floor($v);*/
 			$settings = $this->explode($r['settings']);
-			$retval = array('id'=>$r['id'],'name'=>$r['name'],'access'=>$access,'settings'=>$settings);
+			$retval = array('id'=>$r['id'],'name'=>$r['name'],'access'=>$access,'settings'=>$settings, 'new_settings'=>$new_settings);
 		}
 		$count = msr(msq("SELECT COUNT(id) AS cnt FROM `".$SiteVisitor->getSetting('table')."` WHERE `type`='".$id."'"));
 		$retval['userscount'] = floor($count['cnt']);
@@ -148,53 +154,64 @@ class VisitorType extends VirtualClass
 		return $retval;
 	}
 	function drawAccessCallback($id = 0,$level = -1,$checked = array()){ /* Построение html (разделы для доступа) для форм редактирования и добавления группы */
-        global $SiteSections;
+        global $SiteSections,$new_settings;
         if ($level=='')  $level=0;
         $sec_list=$SiteSections->getList($id,0,-1);
+        print '---';
+        print_r($new_settings);
+
+
 
         /*if ($level>0) print '<li>';*/
+        $i=0;
+        print '<UL id="'.$id.'">';
         foreach ($sec_list as $sl)
         {
-        	$child_count=count($SiteSections->getList($sl['id'],0,-1));
-        	if ($child_count>0) print '<li><ul>';
-        	print '<label><input id="'.$sl['id'].'" type="checkbox"'.$check.' name="access_'.$sl['id'].'" />'.$sl['name'].$level.'</label>';
 
-            if ($child_count>0)
+
+
+
+        	$child_count=count($SiteSections->getList($sl['id'],0,-1));
+
+        	print '<li id="li_'.$sl['id'].'">';
+
+        	print '<label><input id="section_'.$sl['id'].'" name="section_'.$sl['id'].'" type="checkbox"'.$check.' '.(($_POST['section_'.$sl['id']]=='on' ? ' checked="checked"':'')).'/>'.$sl['name'].'</label>';
+
+
+        	/*Получаем настройки доступных действий*/
+        	if ($id>0)
+        	{
+	            $section_settings=$SiteSections->get($sl['id']);
+	            $section_settings=$section_settings['settings']['enable_actions'];
+	        	if ($section_settings!='')
+	        	{	        		$actions=explode(',',$section_settings);
+	        		$action_comments=array('view'=>'просмотр', 'add'=>'добавление', 'edit'=>'редактирование', 'delete'=>'удаление');
+	        		?>
+	        			<div class="actions">
+	        			<?
+	        			foreach ($actions as $act)
+	        			{	        				?><div><label><input type="checkbox" id="action_<?=$sl['id'].'_'.$act?>" name="action_<?=$sl['id'].'_'.$act?>" <?=(($_POST['action_'.$sl['id'].'_'.$act]=='on' || in_array('action_'.$sl['id'].'_'.$act,$new_settings)) ? ' checked="checked"':'')?>><?=$action_comments[$act]?></label></div><?
+	        			}
+	        			?>
+	        			</div>
+	        		<?
+	        	}
+        	}
+
+
+
+           if ($child_count>0)
             {           		$this->drawAccessCallback($sl['id'],$level+1,$checked);
             }
 
-            if ($child_count>0) print '</ul></li>';
+			print '</li>';
+
+            $i++;
 
         }
-        /*if ($level>0) print '</li>';*/
 
+        print '</UL>';
 
-
-
-/*		global $Content;
-		$id = floor($id);
-		if (!is_array($checked)) $checked = array();
-		if ($one = $Content->getOne($id)){
-			if ($id>0){
-				$addaccess = $chid = '';
-				if (is_array($one['childs'])){
-					$addaccess = '|';
-					foreach ($one['childs'] as $v) $addaccess.= floor($v).'|';
-					if ($addaccess!='|'){
-						$chid = $addaccess;
-						$addaccess = 'onclick="setGroupIncludesCheck(this);"';
-					}
-					else $addaccess = '';
-				}
-				$class = ($level<=0)?'':(($level==1)?' class="sub"':' class="subsub"');
-				$check = (in_array($id,$checked))?' checked="checked"':'';
-				print '
-				<span'.$class.'><label><input id="'.$chid.'" type="checkbox"'.$check.' name="access_'.$id.'" '.$addaccess.' />'.$one['name'].'</label></span>';
-			}
-			if (is_array($one['childs'])){
-				foreach ($one['childs'] as $v) $this->drawAccessCallback($v,$level+1,$checked);
-			}
-		}*/
 	}
 }
 ?>

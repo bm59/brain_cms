@@ -1,9 +1,14 @@
 <?
 include $_SERVER['DOCUMENT_ROOT']."/inc/include.php";
+
 $data = array('name'=>'','access'=>array(),'settings'=>array());
 $errors = array();
 $editid = $VisitorType->checkTypePresence($_GET['edit']);
-if ($editid>0) $data = $VisitorType->getOne($editid);
+if ($editid>0)
+{	$data = $VisitorType->getOne($editid);
+	$new_settings=$data['new_settings'];
+	print_r($new_settings);
+}
 if (isset($data['settings']['noedit'])){
 	$data = array('name'=>'','access'=>array(),'settings'=>array());
 	$editid = 0;
@@ -12,19 +17,112 @@ if (isset($_POST['addeditgroup'])){
 	$editid = floor($_POST['addeditgroup']);
 	if (!isset($data['settings']['norename'])) $data['name'] = htmlspecialchars(trim($_POST['name']));
 	$data['access'] = array();
+
+	$access_settings='';
 	foreach ($_POST as $k=>$v){
-		if (preg_match("|^access_([0-9]{1,3})$|",$k)){
-			$access = floor(substr($k,7));
-			if ($v=='on') $data['access'][] = $access;
+		if (preg_match('|^section\_[0-9]+$|',$k)){
+
+			$section_id=preg_replace('|^section\_([0-9]+)$|','\\1',$k);
+
+			if ($section_id>0)
+			{
+				$action_text='';
+				foreach ($_POST as $k=>$v)
+				if (preg_match('|^action\_'.$section_id.'\_[a-z]+$|',$k))
+				{
+	            	$action=preg_replace('|^action\_'.$section_id.'\_([a-z]+)$|','\\1',$k);
+	            	if ($action!='') $action_text.=(($action_text!='') ? ',':'').$action;
+
+				}
+
+				$access_settings.=(($access_settings=='') ? '|':'').$section_id.'='.$action_text.'|';
+
+			}
+
+			print_r($access_settings);
+			/*$access = floor(substr($k,7));
+			if ($v=='on') $data['access'][] = $access;*/
 		}
 	}
-	if ($editid>0) $errors = $VisitorType->edit($editid,$data['name'],$data['access']);
-	else $errors = $VisitorType->add($data['name'],$data['access']);
-	if (count($errors)==0) header("Location: ../");
+
+
+	if ($editid>0) $errors = $VisitorType->edit($editid,$data['name'],$access_settings);
+	else $errors = $VisitorType->add($data['name'],$access_settings);
+	/*if (count($errors)==0) header("Location: ../");*/
 }
 $settings = ($editid>0)?array('title'=>'Редактирование группы пользователей','button'=>'Сохранить'):array('title'=>'Добавление группы пользователей','button'=>'Создать группу');
 ?>
 <? include $_SERVER['DOCUMENT_ROOT']."/inc/content/meta.php"; ?>
+<script type="text/javascript">
+	jQuery(function()
+	{		//check_access();
+
+		jQuery(document).on("click", "input[type='checkbox']",  function()
+		{			if (jQuery(this).prop("checked")==true)
+			jQuery(this).parent().parent().find('input').prop("checked", "checked");
+			else
+			jQuery(this).parent().parent().find('input').prop("checked", "");
+
+			check_access();
+			check_access();
+		});
+
+		jQuery(document).on("click", ".actions input[type='checkbox']",  function()
+		{
+				var count_all=0;
+				var count_check=0;
+				jQuery(this).parent().parent().parent().find("input").each(function()
+				{	               if (jQuery(this).prop("checked")==true)
+                   count_check++;
+
+                   count_all++;
+				});
+
+				if (count_check>0)
+				jQuery(this).parents('LI').find('input:first').prop("checked", "checked");
+				else jQuery(this).parents('LI').find('input:first').prop("checked", "");
+
+		});
+
+
+		function check_access ()
+		{
+					//alert(jQuery(elem).attr('id'));
+					jQuery('.foraccess LI').has('UL').each(function()
+					{
+						var count_all=0;
+						var count_check=0;
+						var parent_ul=jQuery(this).attr('id');
+						jQuery('#'+parent_ul+' LI').each(function()
+						{                          //alert(jQuery(this).find('input').prop("checked"));
+                          if (jQuery(this).find('input').prop("checked")==true)
+                          count_check++;
+
+                          count_all++;
+
+						});
+
+						//alert('Всего '+count_all+'; отмечено '+count_check);
+						if (count_all==count_check && count_check>0)
+						jQuery('#'+parent_ul).find('input:first').prop("checked", "checked");
+                        else
+                        jQuery('#'+parent_ul).find('input:first').prop("checked", "");
+
+					});
+
+		}	});
+</script>
+<style>
+.foraccess > UL > LI > LABEL {font-size: 18px; background-color: #CCC; padding: 15px}
+.foraccess > UL > LI {width: 100%; border-bottom: none;}
+.foraccess UL UL {margin: 10px 0 0 10px;}
+.foraccess LI {background: none; padding: 10px 0; border-bottom: 1px solid #CCC;}
+.foraccess LABEL INPUT {position: relative !important; margin: 3px;}
+
+.foraccess .actions {float: right; position: absolute; top: 18px;}
+.foraccess UL UL .actions {float: right; position: absolute; top: 4px; right: 10px;}
+.foraccess .actions DIV {float: left;}
+</style>
 
 <div id="zbody">
 	<? include $_SERVER['DOCUMENT_ROOT']."/inc/content/header.php"; ?>
