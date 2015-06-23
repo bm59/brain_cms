@@ -16,7 +16,6 @@ $editid = $VisitorType->checkTypePresence($_GET['edit']);
 if ($editid>0)
 {	$data = $VisitorType->getOne($editid);
 	$new_settings=$data['new_settings'];
-	print_r($new_settings);
 }
 if (isset($data['settings']['noedit'])){
 	$data = array('name'=>'','access'=>array(),'settings'=>array());

@@ -5,7 +5,7 @@
 		configSet("DBUser","root");
 		configSet("DBPassword","1asdf");
 		configSet("DBHost","localhost");
-		configSet("DBBase","newcms");
+		configSet("DBBase","brain_cms");
 	}
 	else
 	{

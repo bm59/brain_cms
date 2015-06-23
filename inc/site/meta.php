@@ -25,6 +25,15 @@
 <script src="/js/jquery.js" language="JavaScript" type="text/javascript"></script>
 <script src="/js/lightbox.js" language="JavaScript" type="text/javascript"></script>
 
+<!--[if lt IE 9]>
+<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
+<script src="http://phpbbex.com/oldies/oldies.js" charset="utf-8"></script>
+<![endif]-->
+<!--[if lte IE 7]>
+<link href="/assets/ie6-7-5e39e02326eb9f4d81ffc04963e59794.css" media="screen" rel="stylesheet" type="text/css" />
+<![endif]-->
+
 </head>
 
 <body>
