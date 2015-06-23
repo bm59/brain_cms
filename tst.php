@@ -5,5 +5,4 @@ if (in_array('22',$array)) print 'ok';
 
 print 'home work';
 print 'home work branch';
-print 'home work branch new';
 ?>
