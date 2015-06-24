@@ -6,8 +6,8 @@
 	$SiteSettings = new SiteSettings;
 	$SiteSettings->init();
 ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
 <meta http-equiv="content-type" content="text/html;charset=cp1251"/>
 <meta http-equiv="content-language" content="ru" />
@@ -22,8 +22,8 @@
 <link rel="stylesheet" type="text/css" href="/css/site.css" media="all" />
 <link rel="stylesheet" type="text/css" href="/css/lightbox.css" media="all" />
 
-<script src="/js/jquery.js" language="JavaScript" type="text/javascript"></script>
-<script src="/js/lightbox.js" language="JavaScript" type="text/javascript"></script>
+<script src="/js/jquery.js"	type="text/javascript"></script>
+<script src="/js/lightbox.js" type="text/javascript"></script>
 
 <!--[if lt IE 9]>
 <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
