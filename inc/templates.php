@@ -19,7 +19,7 @@ $sitekey=($settings->getOne($settings->getIdByName('sitekey')));
 	</head>
 <body id="error404">
 <div id="content" >
-<div class="errlogo"><img src="/pics/logo.jpg" alt="<?=ConfigGet('pr_name_rus')?>"  /></div>
+<div class="errlogo"><img src="/pics/logo.jpg" alt=""  /></div>
 
 	<div class="errtxt">
 		<h1>Страница не найдена!</h1>

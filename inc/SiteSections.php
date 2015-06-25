@@ -169,7 +169,7 @@ class SiteSections extends VirtualClass
                         }
                 }
                 if ($Section['id']!=6)
-                $defaulttitle.= ' - '.ConfigGet('pr_doptit'.$dop_ver);
+                $defaulttitle.= ' - '.ConfigGet('pr_doptit');
                 return $defaulttitle;
         }
         function getDescription($id, $dop_ver=''){
@@ -243,7 +243,7 @@ class SiteSections extends VirtualClass
         }
         function echoSectionList($parent,$num,$public,$isservice,$mode, $printnoparent=false){                global $SiteVisitor,$VisitorType,$Content, $aut_mode;
 
-                $user = $SiteVisitor->getOne(sessionGet('visitorID'));
+                $user = $SiteVisitor->getOne($_SESSION['visitorID']);
                 $group = $VisitorType->getOne($user['type']);
  /*       		if ($printnoparent)
         		{
@@ -311,6 +311,13 @@ class SiteSections extends VirtualClass
 
 		                        if (stripos($this->getPath($section['id']), '/access/')!== false && str_replace('/access/', '',$this->getPath($section['id']))!='')
 		                        $editcode = '<a name="'.$section['id'].'"></a>'.'<a href="/manage'.$this->getPath($section['id']).'">'.$section['name'].'</a>';
+
+		                        if (stripos($this->getPath($section['id']), '/log/')!== false && str_replace('/log/', '',$this->getPath($section['id']))!='')
+		                        {
+
+		                        	$ss = $this->get($this->getIdByPath('/control/log/'));
+		                        	$editcode = '<a name="'.$section['id'].'"></a>'.'<a href="/manage/control/contents/?section='.$ss['id'].'">'.$section['name'].'</a>';
+		                        }
 
 		                        ?>
 		                        <tr>

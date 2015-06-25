@@ -621,4 +621,22 @@ function get_insert_sql($data, $table)
 	    $thumbimg = $save_func($thumbimg,$src);
 
     }
+    function setting($name)
+	{
+		global $SiteSettings;
+		$set=$SiteSettings->getOne($SiteSettings->getIdByName($name));
+		return $set['value'];
+	}
+	function WriteLog($item_id, $descr, $comment, $user_id='', $changes='')
+	{
+ 		global $user;
+        if (setting('log_enable'))
+   		{
+ 			if ($user_id>0) $user['id']=$user_id;
+ 			$user_name=$user['login'];
+
+
+ 			msq("INSERT INTO `".ConfigGet('pr_name')."_log` (`date`,`item_id`,`descr`,`comment`, `user_id`, `changes`, `user_name`, `ip`) VALUES ( NOW(), $item_id, '".$descr."', '".$comment."',  '".$user['id']."', '".$changes."', '".$user_name."', '".$_SERVER['REMOTE_ADDR']."')");
+	    }
+	}
 ?>

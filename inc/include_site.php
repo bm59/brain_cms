@@ -10,20 +10,21 @@ include_once($_SERVER['DOCUMENT_ROOT']."/inc/templates.php");
 
 include_once($_SERVER['DOCUMENT_ROOT']."/inc/VirtualClass.php");
 include_once($_SERVER['DOCUMENT_ROOT']."/inc/MySqlConnect.php");
-/*include_once($_SERVER['DOCUMENT_ROOT']."/manage/classes/Settings.php");*/
 include_once($_SERVER['DOCUMENT_ROOT']."/inc/Content.php");
 include_once($_SERVER['DOCUMENT_ROOT']."/inc/Storage.php");
-include_once($_SERVER['DOCUMENT_ROOT']."/inc/VisitorType.php");
-include_once($_SERVER['DOCUMENT_ROOT']."/inc/SiteVisitor.php");
+/*include_once($_SERVER['DOCUMENT_ROOT']."/inc/VisitorType.php");
+include_once($_SERVER['DOCUMENT_ROOT']."/inc/SiteVisitor.php");*/
 
 include_once($_SERVER['DOCUMENT_ROOT']."/inc/DataType.php");
 include_once($_SERVER['DOCUMENT_ROOT']."/inc/DataSet.php");
 include_once($_SERVER['DOCUMENT_ROOT']."/inc/patterns/VirtualPattern.php");
 include_once($_SERVER['DOCUMENT_ROOT']."/inc/cclasses/VirtualContent.php");
-
 include_once($_SERVER['DOCUMENT_ROOT']."/inc/SiteSettings.php");
 include_once($_SERVER['DOCUMENT_ROOT']."/inc/SiteSections.php");
 
-include_once($_SERVER['DOCUMENT_ROOT']."/inc/init.php");
-/*include_once($_SERVER['DOCUMENT_ROOT']."/inc/auth.php");*/
+include_once($_SERVER['DOCUMENT_ROOT']."/inc/init_site.php");
+
+
+
+configSet("pr_doptit", setting('pr_doptit'));
 ?>

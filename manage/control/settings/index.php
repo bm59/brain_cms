@@ -7,10 +7,14 @@ $adderrors = $updateerrors = $data = array();
 if (isset($_POST['setadd'])){
 	foreach ($_POST as $k=>$v) $data[$k] = trim($v);
 	$adderrors = $iface->add($data['name'],$data['description'],$data['value'],array('type'=>$data['type']));
-	if (count($adderrors)==0) $data = array();
+	if (count($adderrors)==0)
+	{		$data = array();
+		WriteLog(0, 'добавление настройки', $_POST['name'].'|'.$_POST['description']);
+	}
 }
 if (isset($_GET['setdel'])){
 	 $iface->delete($_GET['setdel']);
+	 WriteLog($_GET['setdel'], 'удаление настройки');
 }
 $list = $iface->getList();
 if (isset($_POST['setupdate'])){
@@ -18,6 +22,7 @@ if (isset($_POST['setupdate'])){
 		$set = $iface->getOne($setid);
 		if (isset($_POST[$set['name'].'_value'])) $err = $iface->update($set['id'],$_POST[$set['name'].'_value']);
 		if ($err!='') $updateerrors[] = $err;
+		if ($err=='' && $set['value']!=$_POST[$set['name'].'_value']) WriteLog($set['id'], 'редактирование настройки', $set['name'].'|'.$set['value'].'|'.$_POST[$set['name'].'_value']);
 	}
 }
 ?>
@@ -61,7 +66,21 @@ function Gotopage(link)
 					<table style="width: 100%;"><tr><td>
 					<label><?=stripslashes(htmlspecialchars($set['description']))?> <small class="setdesc"><?=stripslashes(htmlspecialchars($set['name']))?></small></label>
 					<?
-					if ($set['settings']['type']!='text')
+					if ($set['settings']['type']=='int')
+					{
+					?>
+
+                        <?
+                        $values = array('0'=>'Нет', '1'=>'Да');
+                        print getSelectSinonim($set['name'].'_value',$values,$set['value']);
+					}
+                    elseif ($set['settings']['type']=='text')
+                    {
+                    ?>
+						<div class="ta_big"><textarea style="width: 100%; padding: 10px;" name="<?=htmlspecialchars($set['name'])?>_value"><?=stripslashes(htmlspecialchars($set['value']))?></textarea></div>
+                    <?
+                    }
+					else
 					{
 					?>
 					<span class="input">
@@ -71,11 +90,6 @@ function Gotopage(link)
 					</span>
 					<?
 					}
-                    else
-                    {                    ?>
-						<div class="ta_big"><textarea style="width: 100%; padding: 10px;" name="<?=htmlspecialchars($set['name'])?>_value"><?=stripslashes(htmlspecialchars($set['value']))?></textarea></div>
-                    <?
-                    }
 					?>
 					</td><td style="width: 32px;">
 					<label>&nbsp;</label>

@@ -27,4 +27,6 @@ include_once($_SERVER['DOCUMENT_ROOT']."/inc/SiteSections.php");
 include_once($_SERVER['DOCUMENT_ROOT']."/inc/init.php");
 include_once($_SERVER['DOCUMENT_ROOT']."/inc/auth.php");
 
+configSet("pr_doptit", setting('pr_doptit'));
+
 ?>

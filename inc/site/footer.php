@@ -36,10 +36,6 @@
 	</div>
 </div>
 
-<?
- $counters=$SiteSettings->getOne($SiteSettings->getIdByName('counters'));
- print $counters['value'];
-?>
-
+<?print setting('counters');?>
 </body>
 </html>

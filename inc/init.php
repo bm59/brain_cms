@@ -9,6 +9,9 @@ $VisitorType->init();
 $SiteVisitor = new SiteVisitor;
 $SiteVisitor->init();
 
+$SiteSettings = new SiteSettings;
+$SiteSettings->init();
+
 $CDDataType = new DataType;
 $CDDataType->init();
 $CDDataSet = new DataSet;

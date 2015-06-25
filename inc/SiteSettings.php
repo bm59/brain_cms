@@ -14,7 +14,9 @@ class SiteSettings extends VirtualClass
 		$this->Settings['types'] = array(
 			'integer'=>'Целое число',
 			'email'=>'Адрес электронной почты',
-			'string'=>'Строка'
+			'string'=>'Строка',
+			'text'=>'Текст',
+			'int'=>'Да/Нет'
 		);
 	}
 	function check($value,$settings = array()){ // Проверка на допустимое значение в зависимости от типа

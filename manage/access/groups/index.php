@@ -1,5 +1,12 @@
 <?
 include $_SERVER['DOCUMENT_ROOT']."/inc/include.php";
+
+if ($_GET['delete']>0)
+if (in_array('delete',$group['new_settings'][$activeccid]) || $mode=='development')
+{	$VisitorType->delete($_GET['delete']);
+	WriteLog($_GET['delete'], 'удаление группы');
+	header("Location: ".configGet("AskUrl"));
+}
 include $_SERVER['DOCUMENT_ROOT']."/inc/content/meta.php";
 ?>
 	<div id="zbody">
@@ -45,7 +52,7 @@ include $_SERVER['DOCUMENT_ROOT']."/inc/content/meta.php";
 						}
 						else{
 							?>
-							<a href="Удаление" class="button txtstyle" onclick="if (confirm('Вы уверены, что хотите удалить эту группу?')) bkAjaxDeleteItem('usergroups',<?=$group['id']?>,'item_<?=$group['id']?>'); return false;">
+							<a href="./?delete=<?=$group['id']?>" class="button txtstyle" onclick="if (!confirm('Вы уверены, что хотите удалить эту группу?')) return false;">
 								<span class="bl"></span>
 								<span class="bc"></span>
 								<span class="br"></span>

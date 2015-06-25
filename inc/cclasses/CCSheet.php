@@ -60,7 +60,6 @@ class CCSheet extends VirtualContent
 			}
 
 			msq("UPDATE `".$this->getSetting('table')."` SET ".$update." WHERE `section_id`='".$this->getSetting('section')."'");
-            $SiteVisitor->SaveLog($this->getSetting('section'), 'Изменена страница', '');
 		}
 		$this->setSetting('dataface',$dataset);
 		return $errors;

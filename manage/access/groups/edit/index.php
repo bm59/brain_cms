@@ -51,8 +51,16 @@ if (isset($_POST['addeditgroup'])){
 	}
 
 
-	if ($editid>0) $errors = $VisitorType->edit($editid,$data['name'],$access_settings);
-	else $errors = $VisitorType->add($data['name'],$access_settings);
+	if ($editid>0)
+	{		$errors = $VisitorType->edit($editid,$data['name'],$access_settings);
+		WriteLog($editid, 'редактирование группы', $data['name']);
+	}
+	else
+	{		$errors = $VisitorType->add($data['name'],$access_settings);
+		WriteLog(0, 'добавление группы', $data['name']);
+	}
+
+
 	if (count($errors)==0) header("Location: ../");
 }
 $settings = ($editid>0)?array('title'=>'Редактирование группы пользователей','button'=>'Сохранить'):array('title'=>'Добавление группы пользователей','button'=>'Создать группу');

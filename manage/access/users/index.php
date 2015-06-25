@@ -1,8 +1,23 @@
 <?
 include $_SERVER['DOCUMENT_ROOT']."/inc/include.php";
 $order = floor($_GET['order']);
-if (floor($_GET['switch_on'])>0) $SiteVisitor->switchOnOff($_GET['switch_on'],'on');
-if (floor($_GET['switch_off'])>0) $SiteVisitor->switchOnOff($_GET['switch_off'],'off');
+if (floor($_GET['switch_on'])>0)
+{	$SiteVisitor->switchOnOff($_GET['switch_on'],'on');
+	WriteLog($_GET['switch_on'], 'включение пользовател€' );
+}
+if (floor($_GET['switch_off'])>0)
+{	$SiteVisitor->switchOnOff($_GET['switch_off'],'off');
+	WriteLog($_GET['switch_off'], 'отключение пользовател€');
+}
+
+if ($_GET['delete']>0)
+if (in_array('delete',$group['new_settings'][$activeccid]) || $mode=='development')
+{
+	$SiteVisitor->delete($_GET['delete']);
+	WriteLog($_GET['delete'], 'удаление пользовател€');
+
+	header("Location: ".configGet("AskUrl"));
+}
 include $_SERVER['DOCUMENT_ROOT']."/inc/content/meta.php";
 ?>
 <div id="zbody">
@@ -84,7 +99,7 @@ include $_SERVER['DOCUMENT_ROOT']."/inc/content/meta.php";
 						}
 						else{
 							?>
-							<a href="”даление" class="button txtstyle" onclick="if (confirm('¬ы уверены, что хотите удалить этого пользовател€?')) bkAjaxDeleteItem('users',<?=$user['id']?>,'item_<?=$user['id']?>'); return false;">
+							<a href="./?delete=<?=$user['id']?>" class="button txtstyle" onclick="if (confirm('¬ы уверены, что хотите удалить этого пользовател€?')) bkAjaxDeleteItem('users',<?=$user['id']?>,'item_<?=$user['id']?>'); return false;">
 								<span class="bl"></span>
 								<span class="bc"></span>
 								<span class="br"></span>

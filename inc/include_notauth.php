@@ -1,6 +1,7 @@
 <?
 /* Подключение всех необходимых модулей */
 include_once($_SERVER['DOCUMENT_ROOT']."/inc/configuration.php");
+include_once($_SERVER['DOCUMENT_ROOT']."/inc/functions.php");
 
 include_once($_SERVER['DOCUMENT_ROOT']."/config/site.php");
 include_once($_SERVER['DOCUMENT_ROOT']."/config/mysql.php");
@@ -25,5 +26,6 @@ include_once($_SERVER['DOCUMENT_ROOT']."/inc/SiteSettings.php");
 include_once($_SERVER['DOCUMENT_ROOT']."/inc/SiteSections.php");
 
 include_once($_SERVER['DOCUMENT_ROOT']."/inc/init.php");
+
 
 ?>

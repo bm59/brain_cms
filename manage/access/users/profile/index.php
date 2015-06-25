@@ -7,18 +7,18 @@ $activeccid=$Content->getIdByPath(configGet("AskUrl"));
 if (!in_array('edit',$group['new_settings'][$activeccid]) && $mode!='development' && $_GET['user']>0)
 header("Location: /manage/control/contents/");
 
-$requestUserId = sessionGet('visitorID');
-$user = $SiteVisitor->getOne(sessionGet('visitorID'));
+$requestUserId = $_SESSION['visitorID'];
+$user = $SiteVisitor->getOne($_SESSION['visitorID']);
 $group = $VisitorType->getOne($user['type']);
 $requestUserId = floor($_GET['user']); /* ѕоставить седующие условие вместо этой строки, чтобы непривилигированные пользователи не могли заходить на страницу чужого профил€
 	if ((in_array('610',$group['access'])) || (isset($group['settings']['superaccess']))) $requestUserId = floor($_GET['user']);
 */
-if (!$SiteVisitor->checkUserPresence($requestUserId)) $requestUserId = sessionGet('visitorID');
+if (!$SiteVisitor->checkUserPresence($requestUserId)) $requestUserId = $_SESSION['visitorID'];
 configSet('profileID',$requestUserId);
 $requestUser = $SiteVisitor->getOne($requestUserId);
 $requestUserGroup = $VisitorType->getOne($requestUser['type']);
 $errors = array();
-if (isset($_POST['profilepswd'])) $errors = $SiteVisitor->changePassword(sessionGet('visitorID'),trim($_POST['oldpswd']),trim($_POST['newpswd']));
+if (isset($_POST['profilepswd'])) $errors = $SiteVisitor->changePassword($_SESSION['visitorID'],trim($_POST['oldpswd']),trim($_POST['newpswd']));
 ?>
 	<?include $_SERVER['DOCUMENT_ROOT']."/inc/content/meta.php";?>
 <div id="zbody">
@@ -55,7 +55,7 @@ if (isset($_POST['profilepswd'])) $errors = $SiteVisitor->changePassword(session
 			?>
 		</div>
 		<?
-		if (sessionGet('visitorID')==configGet('profileID')){
+		if ($_SESSION['visitorID']==configGet('profileID')){
 			if ((!in_array('611',$group['access'])) && (!isset($group['settings']['superaccess']))){
 				?>
 				<div class="hr"><hr /></div>

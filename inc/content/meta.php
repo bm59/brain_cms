@@ -26,7 +26,6 @@ $SiteSections->init();
 <script src="/js/ajaxupload.3.5.js" language="JavaScript" type="text/javascript"></script>
 <script src="/js/jquery.multiple.select.js" language="JavaScript" type="text/javascript"></script>
 <script src="/js/jquery.tablednd.js" language="JavaScript" type="text/javascript"></script>
-
 <script type="text/javascript">
 	jQuery(function(){jQuery.fn.scrollToTop=function(){jQuery(this).hide().removeAttr("href");if(jQuery(window).scrollTop()!="0"){jQuery(this).fadeIn("slow")}var scrollDiv=jQuery(this);jQuery(window).scroll(function(){if(jQuery(window).scrollTop()=="0"){jQuery(scrollDiv).fadeOut("slow")}else{jQuery(scrollDiv).fadeIn("slow")}});jQuery(this).click(function(){jQuery("html, body").animate({scrollTop:0},"fast")})}});
 	jQuery(function() {jQuery("#toTop").scrollToTop();});

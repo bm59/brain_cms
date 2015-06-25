@@ -2,9 +2,9 @@
 <div id="header">
         <a href="/manage/"><!--//<img src="/pics/logo.jpg" class="logor" />//--></a>
         <?
-        $user = $SiteVisitor->getOne(sessionGet('visitorID'));
+        $user = $SiteVisitor->getOne($_SESSION['visitorID']);
         $group = $VisitorType->getOne($user['type']);
-        $href = (floor(configGet('profileID'))==sessionGet('visitorID'))?array():array('<a href="/manage/access/users/profile/">','</a>');
+        $href = (floor(configGet('profileID'))==$_SESSION['visitorID'])?array():array('<a href="/manage/access/users/profile/">','</a>');
         ?>
         <div class="profile">
 	        <div class="avatar"><?=$href[0]?><img src="<?=($user['picture']['path'])?$user['picture']['path']:'/pics/i/empty_user.gif'?>" width="60" height="60" alt="" /><?=$href[1]?></div>
@@ -12,7 +12,7 @@
 	                Здравствуйте,<br /><?=$user['secondname'].' '.$user['firstname'].' '.$user['parentname']?>
 	                <div>
 	                        <?
-	                        if (floor(configGet('profileID'))!=sessionGet('visitorID')){
+	                        if (floor(configGet('profileID'))!=$_SESSION['visitorID']){
 	                        ?>
 	                        <a href="/manage/access/users/profile/" class="button">
 	                                <span class="bl"></span>

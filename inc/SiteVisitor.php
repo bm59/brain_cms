@@ -18,19 +18,11 @@ class SiteVisitor extends VirtualClass
 			"picture"=>"BIGINT(20)",
 			"settings"=>"TEXT"
 		));
-		$this->Settings['logs'] = mstable(ConfigGet('pr_name'),'logs','',array(
-                        "date"=>"DATETIME",
-                        "sectionname"=>"VARCHAR(255)",
-                        "comment"=>"VARCHAR(255)",
-                        "user_id"=>"VARCHAR(255)",
-                        "section_id"=>"VARCHAR(255)",
-                        "href"=>"VARCHAR(255)"
 
-        ));
 		$this->Settings['iconsstorage'] = $Storage->getStorage(0,array('path'=>'/users/icons/','name'=>'Иконки для пользователей бэк-офиса','imgw'=>60,'imgwtype'=>1,'imgh'=>60,'imghtype'=>1,'exts'=>array('jpg','gif','jpeg'),'images'=>1));
 	}
 	function isAuth(){
-		$user = $this->getOne(sessionGet('visitorID'));
+		$user = $this->getOne($_SESSION['visitorID']);
 		if (isset($user['settings']['engage'])) return true;
 		return false;
 	}
@@ -45,26 +37,26 @@ class SiteVisitor extends VirtualClass
       msq("DELETE FROM `".$this->getSetting('logs')."` WHERE datediff( now( ) , `date` ) >".$keep_logs['value']);
 
 	  $section=$SiteSections->get($sec_id);
-      msq("INSERT INTO `".$this->getSetting('logs')."` (`date`,`sectionname`,`comment`,`user_id`,`href`, `section_id`) VALUES (NOW(), '".$section['name']."', '".$comment."', '".sessionGet('visitorID')."', '".$SiteSections->getPath($sec_id).$dophref."', '".$sec_id."' )");
+      msq("INSERT INTO `".$this->getSetting('logs')."` (`date`,`sectionname`,`comment`,`user_id`,`href`, `section_id`) VALUES (NOW(), '".$section['name']."', '".$comment."', '".$_SESSION['visitorID']."', '".$SiteSections->getPath($sec_id).$dophref."', '".$sec_id."' )");
 	  return false;
 	}
 	function auth($id){
 		$user = $this->getOne($id);
 		if (floor($user['id'])>0){
 			if (isset($user['settings']['engage'])){
-				if (sessionGet('visitorID')!=$user['id']){
+				if ($_SESSION['visitorID']!=$user['id']){
 					$time = mktime(date("H"),date("i"),date("s"),date("m"),date("d"),date("Y"));
 					$settings = $user['settings'];
 					$settings['lasttime'] = $time;
 					msq("UPDATE `".$this->getSetting('table')."` SET `settings`='".$this->implode($settings)."' WHERE `id`='".$user['id']."'");
 				}
-				sessionSet('visitorID',$user['id']);
+				$_SESSION['visitorID']=$user['id'];
 				return $user;
 			}
 		}
 		return false;
 	}
-	function unAuth(){ sessionSet('visitorID',-1); }
+	function unAuth(){ $_SESSION['visitorID']=-1; }
 	function getIdByLoginAndPswd($login,$pswd,$md5pswd = ''){
 		$retval = 0;
 		$login = upper(trim($login));
@@ -154,6 +146,7 @@ class SiteVisitor extends VirtualClass
 		if (count($errors)==0){
 			$Storage->deleteFile($data['picture']['id']);
 			msq("DELETE FROM `".$this->getSetting('table')."` WHERE `id`='$id'");
+			print "DELETE FROM `".$this->getSetting('table')."` WHERE `id`='$id'";
 		}
 		return $errors;
 	}

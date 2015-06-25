@@ -26,6 +26,8 @@ if ($editsection['id']>0){
                                         $contentStep = 1;
                                 }
                         }
+
+                        WriteLog($editsection['id'], 'редактирование свойств раздела', $editsection['name']);
                 }
         }
 }
@@ -48,6 +50,7 @@ $deletesection = $SiteSections->get(floor($_GET['delete']),-1); $deletesection['
                         {
                        		    if ((!isset($drop['settings']['undrop'])) || ($delepmentmode=='development')){
                                         $SiteSections->setPrecedenceAbove($drop['id'],floor($_GET['destination']));
+                                        WriteLog($drop['id'], 'перенос раздела: разместить над', $drop['id'].'|'.$_GET['destination']);
                                 }
                         }
                         elseif (isset($_GET['change_prec']))
@@ -56,19 +59,32 @@ $deletesection = $SiteSections->get(floor($_GET['delete']),-1); $deletesection['
                        		    if ((!isset($drop['settings']['undrop'])) || ($delepmentmode=='development')){
                                         $SiteSections->setPrecedence($drop['id'],$destination['precedence']);
                                         $SiteSections->setPrecedence($destination['id'],$drop['precedence']);
+                                        WriteLog($drop['id'], 'перенос раздела: поменять местами', $drop['id'].'|'.$destination['id']);
                                 }
                         }
                 		elseif ($drop['id']>0){
                                 if ((!isset($drop['settings']['undrop'])) || ($delepmentmode=='development')){
-                                        if ($before['id']>0) $SiteSections->setPrecedenceBefore($drop['id'],$before['id']);
+                                        if ($before['id']>0)
+                                        {                                        	$SiteSections->setPrecedenceBefore($drop['id'],$before['id']);
+                                        	WriteLog($drop['id'], 'перенос раздела: setPrecedenceBefore', $drop['id'].'|'.$destination['id']);
+                                        }
                                         elseif ($destination['id']>0){
                                                 if ((!isset($destination['settings']['nodestination'])) || ($delepmentmode=='development')){
                                                         $SiteSections->setParent($drop['id'],$destination['id']);
+                                                        WriteLog($drop['id'], 'перенос раздела: добавть к', $drop['id'].'|'.$destination['id']);
                                                 }
                                         }
                                         elseif (isset($_GET['destination'])){
-                                                if ((floor($_GET['destination'])==0) && ($drop['parent']!=0)) $SiteSections->setParent($drop['id'],0);
-                                                elseif ((floor($_GET['destination'])==-1) && ($drop['parent']!=-1)) $SiteSections->setParent($drop['id'],-1);
+                                                if ((floor($_GET['destination'])==0) && ($drop['parent']!=0))
+                                                {
+                                                	$SiteSections->setParent($drop['id'],0);
+                                                	WriteLog($drop['id'], 'перенос раздела: в корень', $drop['id'].'|'.$destination['id']);
+                                                }
+                                                elseif ((floor($_GET['destination'])==-1) && ($drop['parent']!=-1))
+                                                {                                                	$SiteSections->setParent($drop['id'],-1);
+                                                	WriteLog($drop['id'], 'перенос раздела: в неопубликованное', $drop['id'].'|-1');
+                                                }
+
                                         }
                                 }
                         }
@@ -93,12 +109,19 @@ $deletesection = $SiteSections->get(floor($_GET['delete']),-1); $deletesection['
                         }
                         $adddata['settings'] = $addsets;
                         $adderrors = $SiteSections->add($adddata);
-                        if (count($adderrors)==0) $adddata = array();
+                        if (count($adderrors)==0)
+                        {                        	WriteLog(0, 'добавление раздела', $adddata['name']);
+                        	$adddata = array();
+                        }
                 }
 
                 /* Удаление */
                 if ($deletesection['id']>0){
-                        if ((!isset($section['settings']['undeletable'])) || ($delepmentmode=='development')) $SiteSections->delete($deletesection['id']);
+                        if ((!isset($section['settings']['undeletable'])) || ($delepmentmode=='development'))
+                        {                        	 $SiteSections->delete($deletesection['id']);
+                             WriteLog($deletesection['id'], 'удаление раздела', $deletesection['name']);
+                        }
+
                 }
 
                 ?>
@@ -375,5 +398,10 @@ $deletesection = $SiteSections->get(floor($_GET['delete']),-1); $deletesection['
         <?/*include $_SERVER['DOCUMENT_ROOT']."/inc/footer.php";*/?>
 </div>
 <a href="#" id="toTop"></a>
+
+<?
+if ($delepmentmode=='development' && mysql_error()!='')
+print  mysql_error();
+?>
 </body>
 </html>

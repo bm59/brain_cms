@@ -30,8 +30,14 @@ if (isset($_POST['addedituser'])){
 	$data['pswd'] = trim($_POST['pswd']);
 	if (!isset($data['settings']['notypechange'])) $data['type'] = floor($_POST['type']);
 	$data['email'] = trim($_POST['email']);
-	if ($editid>0) $errors = $SiteVisitor->edit($editid,$data);
-	else $errors = $SiteVisitor->add($data);
+	if ($editid>0)
+	{		$errors = $SiteVisitor->edit($editid,$data);
+		WriteLog($editid, 'редактирование пользователя');
+	}
+	else
+	{		$errors = $SiteVisitor->add($data);
+		WriteLog(0, 'добавление пользователя', $data['login']);
+	}
 	if (count($errors)==0) header("Location: ../\n");
 }
 $settings = ($editid>0)?array('title'=>'Редактирование пользователя','button'=>'Сохранить изменения','pswd'=>' (если Вы не хотите менять пароль — оставьте поле пустым)'):array('title'=>'Добавление пользователя','button'=>'Создать пользователя','pswd'=>' (не менее 4-х символов)');

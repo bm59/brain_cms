@@ -177,7 +177,6 @@ class CCPhotoalbum extends VirtualContent
 				$update.= (($update!='')?',':'').$tface->getUpdateSQL();
 				$dataset['types'][$k]['face'] = $tface;
 			}
-			$SiteVisitor->SaveLog($this->getSetting('section'), $comment, '?photo='.$element['id']);
 
 			msq("UPDATE `".$this->getSetting('table')."` SET ".$update." WHERE `id`='".$element['id']."'");
 		}
