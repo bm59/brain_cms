@@ -3,7 +3,7 @@
         <script type="text/javascript">
 		function add_image ()
 		{
-			var cur_count=jquery('#image_table tr').length;
+			var cur_count=$('#image_table tr').length;
 			var tmp_id=9999999-cur_count;
 
             var cell_template='<tr id="tr_'+tmp_id+'">\n'+
@@ -32,7 +32,7 @@
 							'</span>\n'+
                            	'</td>\n'+
                               	'<td style="width:4%; padding-top: 15px;">\n'+
-                               				'<a onclick="if (confirm(\'Удалить строку\')) jquery(this).parents(\'TR\').remove(); return false;" class="button txtstyle" href="#">\n'+
+                               				'<a onclick="if (confirm(\'Удалить строку\')) $(this).parents(\'TR\').remove(); return false;" class="button txtstyle" href="#">\n'+
                                                   '<span class="bl"></span>\n'+
                                                   '<span class="bc"></span>\n'+
                                                   '<span class="br"></span>\n'+
@@ -42,24 +42,24 @@
                               '</tr>';
 
                                   //if (cur_count>0)
-                                  //jQuery('.contact_table tr').eq(0).before(cell_template);
+                                  //$('.contact_table tr').eq(0).before(cell_template);
                                   //else
-                              	jQuery('#image_table').append(cell_template);
+                              	$('#image_table').append(cell_template);
 
-						        jquery('#image_table').tableDnD({
+						        $('#image_table').tableDnD({
 							        onDrop: function(table, row) {
 							        },
 							        dragHandle: ".dragHandle"
 							    });
 
-							  	jquery("#image_table tr").hover(function() {
-							          jquery(this.cells[0]).addClass('showDragHandle');
+							  	$("#image_table tr").hover(function() {
+							          $(this.cells[0]).addClass('showDragHandle');
 							    }, function() {
-							          jquery(this.cells[0]).removeClass('showDragHandle');
+							          $(this.cells[0]).removeClass('showDragHandle');
 							    });
 
 
-  								         	var btnUploadPhoto=jquery('#upl_button_photo_'+tmp_id);
+  								         	var btnUploadPhoto=$('#upl_button_photo_'+tmp_id);
 								            new AjaxUpload(btnUploadPhoto, {
 								            action: '/inc/datatypes/dop/image_upload_ajax.php',
 								            name: 'upl_file',
@@ -71,20 +71,20 @@
 								                    alert('Допустимые форматы: jpg, png');
 								                    return false;
 								                }
-								                jquery(btnUploadPhoto).children('IMG').attr('src', '/pics/loading.gif');
+								                $(btnUploadPhoto).children('IMG').attr('src', '/pics/loading.gif');
 								            },
 								            onComplete: function(file, response){
 								              var arr_resp = response.split("#%#");
 								                if(arr_resp[0]==="true"){
 
-								                 jquery(btnUploadPhoto).parent().html(arr_resp[1]);
-													jquery("#image_table").tableDnD({
+								                 $(btnUploadPhoto).parent().html(arr_resp[1]);
+													$("#image_table").tableDnD({
 													    onDragClass: "myDragClass",
 													    onDrop: function(table, row) {},onDragStart: function(table, row) {}
 													});
 								                }
 								                else{
-								                    jquery('#loading_photo').fadeOut(0);
+								                    $('#loading_photo').fadeOut(0);
 								                    alert(response);
 								                }
 								            }
@@ -93,18 +93,18 @@
 		}
 
 
- jquery(document).ready(function() {
+ $(document).ready(function() {
 
-	 jquery('#image_table').tableDnD({
+	 $('#image_table').tableDnD({
 	        onDrop: function(table, row) {
 	        },
 	        dragHandle: ".dragHandle"
 	    });
 
-	  jquery("#image_table tr").hover(function() {
-	          jquery(this.cells[0]).addClass('showDragHandle');
+	  $("#image_table tr").hover(function() {
+	          $(this.cells[0]).addClass('showDragHandle');
 	    }, function() {
-	          jquery(this.cells[0]).removeClass('showDragHandle');
+	          $(this.cells[0]).removeClass('showDragHandle');
 	    });
 });
 
@@ -172,7 +172,7 @@
 													</span>
 	                                			</td>
 	                                			<td style="width:4%;padding-top: 15px;">
-                                     				<a onclick="if (confirm('Удалить строку')) jquery(this).parents('TR').remove(); return false;" class="button txtstyle" href="#">
+                                     				<a onclick="if (confirm('Удалить строку')) $(this).parents('TR').remove(); return false;" class="button txtstyle" href="#">
                                                         <span class="bl"></span>
                                                         <span class="bc"></span>
                                                         <span class="br"></span>

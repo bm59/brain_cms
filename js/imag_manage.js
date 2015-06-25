@@ -1,6 +1,6 @@
 function accept_order(ordernum, action)
 {
-	jQuery.get("/ajax.php", { action: action, ordernum: ordernum},
+	$.get("/ajax.php", { action: action, ordernum: ordernum},
 	function(data)
 	{
 		if (data==0)

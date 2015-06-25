@@ -20,54 +20,64 @@ class CDImage extends VirtualType
 			$f = floor($image['id']);
 			$this->setSetting('value',$f);
 			?>
-			<script>
-				function showHideDeletingButton<?=htmlspecialchars($this->getSetting('name'))?>(mode){
-					var span = $('<?=htmlspecialchars($this->getSetting('name'))?>uploadimagedeletebutton');
-					span.style.display = (mode>0)?'':'none';
-				}
-				function on<?=htmlspecialchars($this->getSetting('name'))?>StartLoading(){
-					var img = $('<?=htmlspecialchars($this->getSetting('name'))?>imagecontent');
-					img.innerHTML = '<div class="contenttxt"><br>Идет загрузка...</div>';
-				}
-				function on<?=htmlspecialchars($this->getSetting('name'))?>FinishDeleting(){
-					var file = $('uploadfilehidden<?=htmlspecialchars($this->getSetting('name'))?>');
-					var img = $('<?=htmlspecialchars($this->getSetting('name'))?>imagecontent');
-					img.innerHTML = '';
-					file.value = 0;
-					showHideDeletingButton<?=htmlspecialchars($this->getSetting('name'))?>(0);
-				}
-				function on<?=htmlspecialchars($this->getSetting('name'))?>FinishLoading(uploadimage,uploadimageid,uploadimagewidth,uploadimageheight){
-					var file = $('uploadfilehidden<?=htmlspecialchars($this->getSetting('name'))?>');
-					var img = $('<?=htmlspecialchars($this->getSetting('name'))?>imagecontent');
-					img.innerHTML = '';
-					if (uploadimageid>0){
-						file.value = uploadimageid;
-						if (parseInt(uploadimagewidth,10)<=600 && parseInt(uploadimageheight,10)<=200){
-							img.innerHTML = '<img class="contentimg" src="'+uploadimage+'" />';
-							if (uploadimage.replace(/[^.]*\./,"")=='swf'){
-								var imgHTMLCode = '<object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,65,0" width="'+uploadimagewidth+'" height="'+uploadimageheight+'">';
-								imgHTMLCode+= '<param name="allowScriptAccess" value="sameDomain">';
-								imgHTMLCode+= '<param name="movie" value="'+uploadimage+'">';
-								imgHTMLCode+= '<param name="quality" value="high">';
-								imgHTMLCode+= '<param name="salign" value="lt">';
-								imgHTMLCode+= '<param name="wmode" value="transparent">';
-								imgHTMLCode+= '<param name="menu" value="false">';
-								imgHTMLCode+= '<param name="scale" value="noborder">';
-								imgHTMLCode+= '<embed src="'+uploadimage+'" width="'+uploadimagewidth+'" height="'+uploadimageheight+'" quality="high" scale="noborder" salign="lt" wmode="transperent" allowScriptAccess="sameDomain" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" menu="false"></embed>';
-								imgHTMLCode+= '</object>';
-								img.innerHTML = imgHTMLCode;
-							}
-						}
-						else{
-							//img.innerHTML = '<div class="contenttxt"><a href="'+uploadimage+'">Ссылка на файл</a></div>';
-							img.innerHTML = '<img class="contentimg" src="'+uploadimage+'" style="width: 170px"/><div class="contenttxt"><a href="'+uploadimage+'" target="_blank" style="width: 170px;" target="_blank">Ссылка на файл</a></div>';
+   			<script>
+        $(function(){
+        var btnUpload=$('#upl_button');
+        var status=$('.contentdesc');
+        var upload_me=new AjaxUpload(btnUpload, {
+            action: '/uploader_image.php',
+            responseType: 'json',
+            name: 'upl_file',
+            data: {},
+            onSubmit: function(file, ext){
+                $('#loading').attr('src', '/pics/loading.gif').fadeIn(0);
+                this.setData({sid : '<?=session_id()?>', theme: '<?=trim($this->getSetting('theme'))?>', rubric: '<?=trim($this->getSetting('rubric'))?>', stid: '<?=$st['id']?>', uid: <?=floor($this->getSetting('uid'))?>,old_id : $('#uploadfilehidden<?=htmlspecialchars($this->getSetting('name'))?>').val()});
+            },
+            onComplete: function(file, response){
+                status.html('');
+                $('#file').html('');
+                if(response.result==="ok"){
+                    $('#loading').fadeOut(0);
+                    $('#delete_container').fadeIn(0);
+                    status.html('<img src="'+response.path+'" class="contentimg">');
+                    $('#uploadfilehidden<?=htmlspecialchars($this->getSetting('name'))?>').val(response.id);
+                }else{
+                    $('#loading').fadeOut(0);
+                    if (response.error!='') alert(response.error);
 
-						}
-						showHideDeletingButton<?=htmlspecialchars($this->getSetting('name'))?>(1);
-					}
-				}
+
+                }
+            }
+        });
+
+
+    });
+            function delete_file ()
+        {
+       		if (!confirm('Вы уверены, что хотите удалить этот файл?')) return false;
+
+			    $.ajax({
+			        url: "/uploader_image.php",
+			        type: "post",
+			        data: {action: 'delete',old_id : $('#uploadfilehidden<?=htmlspecialchars($this->getSetting('name'))?>').val()},
+			        success: function(result){
+			            var arr_resp = result.split("#%#");
+			            if(arr_resp[0]==="true")
+			            {
+                         	$('#delete_container').fadeOut(0);
+                         	 $('.contentdesc').html('');
+			            }
+			            else
+			            {
+			            	alert(result);
+			            }
+			        }
+			    });
+			    return false;
+        }
+
+
 			</script>
-			<iframe id="fileuploadframe" name="fileuploadframe" width="1px" height="1px" src="" style="display:none;"></iframe>
 
 			<div class="place" <?=($divstyle!='')?$divstyle:''?>>
 				<label><?=htmlspecialchars($this->getSetting('description'))?><?=((isset($settings['important']))?' <span class="important">*</span>':'')?></label>
@@ -75,19 +85,30 @@ class CDImage extends VirtualType
 			if ($this->getSetting('name')=='image' && $_GET['section']==7) 	print '<div style="padding: 0 5px; color: #ff0000">Рекомендуемый размер:  1040x450 пикселей</div>';
 			?>
 				<input type="hidden" id="uploadfilehidden<?=htmlspecialchars($this->getSetting('name'))?>" name="<?=htmlspecialchars($this->getSetting('name'))?>" value="<?=$this->getSetting('value')?>">
+
 				<span class="button">
 					<span class="bl"></span>
 					<span class="bc">Загрузить изображение</span>
 					<span class="br"></span>
 					<div class="fileselect">
-												<input type="file" name="<?=htmlspecialchars($this->getSetting('name'))?>2" onchange="uploadFileAjax(this,'<?=htmlspecialchars($this->getSetting('editformid'))?>','fileuploadframe','uploadfilehidden<?=htmlspecialchars($this->getSetting('name'))?>',<?=$st['id']?>,'<?=trim($this->getSetting('theme'))?>','<?=trim($this->getSetting('rubric'))?>',<?=floor($this->getSetting('uid'))?>,'on<?=htmlspecialchars($this->getSetting('name'))?>StartLoading();','on<?=htmlspecialchars($this->getSetting('name'))?>FinishLoading(uploadimage,uploadimageid,uploadimagewidth,uploadimageheight);','onready');"/>
+						<input type="file" name="<?=htmlspecialchars($this->getSetting('name'))?>" id="upl_button"/>
 					</div>
 				</span>
+				<span class="button txtstyle" id="delete_container" style="display: none;">
+					<span class="bl"></span>
+					<span class="bc"></span>
+					<span class="br"></span>
+					<input type="button" title="Удалить изображение" style="background-image: url(/pics/editor/delete.gif)" id="delete_button" onclick="delete_file(); return false">
+				</span>
+               <span class="clear"></span>
+				<div id="upl_error"></div>
+			    <div id="upl_status"></div>
+
 				<span id="<?=htmlspecialchars($this->getSetting('name'))?>uploadimagedeletebutton" class="button txtstyle" <?=(floor($this->getSetting('value'))<1)?'style="display:none;"':''?>>
 					<span class="bl"></span>
 					<span class="bc"></span>
 					<span class="br"></span>
-					<input type="button" onclick="uploadFileAjax(this,'<?=htmlspecialchars($this->getSetting('editformid'))?>','fileuploadframe','uploadfilehidden<?=htmlspecialchars($this->getSetting('name'))?>',<?=$st['id']?>,'<?=trim($this->getSetting('theme'))?>','<?=trim($this->getSetting('rubric'))?>',<?=floor($this->getSetting('uid'))?>,'on<?=htmlspecialchars($this->getSetting('name'))?>StartLoading();','on<?=htmlspecialchars($this->getSetting('name'))?>FinishDeleting();','anytime');return false;" style="background-image: url(/pics/editor/delete.gif)" title="Удалить изображение" />
+					<input type="button"  />
 				</span>
 				<span class="clear"></span>
 				<?
@@ -120,8 +141,10 @@ class CDImage extends VirtualType
 					print $img_descr.' Если размеры загружаемого изображения больше - его размеры будут автоматически изменены</small>';
 				}
 				?>
-				<div class="contentdesc"><small><?=$desc?></small></div>
+				<div class="contentdesc"></div>
+				<div><small><?=$desc?></small></div>
 				<div id="<?=htmlspecialchars($this->getSetting('name'))?>imagecontent">
+				<img id="loading" src="/pics/loading.gif" height="28" style="display: none;" />
 				<?
 				if (floor($image['id'])>0){
 					$wh = @getimagesize($image['fullpath']);

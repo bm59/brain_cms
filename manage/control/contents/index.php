@@ -401,7 +401,7 @@ $deletesection = $SiteSections->get(floor($_GET['delete']),-1); $deletesection['
 
 <?
 if ($delepmentmode=='development' && mysql_error()!='')
-print  mysql_error();
+print  '<span class="clear"></span><br/>'.mysql_error();
 ?>
 </body>
 </html>

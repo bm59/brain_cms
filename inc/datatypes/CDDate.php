@@ -12,9 +12,9 @@ class CDDate extends VirtualType
 		$this->setSetting('value', msdfromdb($this->getSetting('value')));
 		?>
 							<script type="text/javascript">
-							jquery(function(){
+							$(function(){
 
-								jquery.datepicker.regional['ru'] =
+								$.datepicker.regional['ru'] =
 								{
 									closeText: 'Закрыть',
 									prevText: '&#x3c;Пред',
@@ -32,14 +32,14 @@ class CDDate extends VirtualType
 									isRTL: false
 								};
 
-								jquery.datepicker.setDefaults(jquery.extend(jquery.datepicker.regional["ru"]));
+								$.datepicker.setDefaults($.extend($.datepicker.regional["ru"]));
 
-									jquery("#<?=htmlspecialchars($this->getSetting('name'))?>").datepicker({
+									$("#<?=htmlspecialchars($this->getSetting('name'))?>").datepicker({
 									showOn: "both",
 									buttonImage: "/pics/editor/calendar.gif",
 									buttonImageOnly: true
 								});
-                                <?if ($this->getSetting('value')==''){?>jquery("#<?=htmlspecialchars($this->getSetting('name'))?>").datepicker( "setDate" , "0");<?}?>
+                                <?if ($this->getSetting('value')==''){?>$("#<?=htmlspecialchars($this->getSetting('name'))?>").datepicker( "setDate" , "0");<?}?>
 							});
 							</script>
         <?

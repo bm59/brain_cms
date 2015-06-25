@@ -379,8 +379,8 @@ class CCBanners extends VirtualContent
 			                			</tr>
 			                		</table>
 <script>
-jquery(function() {
-	jquery.datepicker.regional['ru'] =
+$(function() {
+	$.datepicker.regional['ru'] =
 	{
 		closeText: 'Закрыть',
 		prevText: '&#x3c;Пред',
@@ -398,9 +398,9 @@ jquery(function() {
 		isRTL: false
 	};
 
-	jquery.datepicker.setDefaults(jquery.extend(jquery.datepicker.regional["ru"]));
+	$.datepicker.setDefaults($.extend($.datepicker.regional["ru"]));
 
-	jquery( "#from" ).datepicker({
+	$( "#from" ).datepicker({
 		defaultDate: "+1w",
 		changeMonth: true,
 		numberOfMonths: 3,
@@ -408,10 +408,10 @@ jquery(function() {
 		buttonImage: "/pics/editor/calendar.gif",
 		buttonImageOnly: true,
 		onClose: function( selectedDate ) {
-		jquery( "#to" ).datepicker( "option", "minDate", selectedDate );
+		$( "#to" ).datepicker( "option", "minDate", selectedDate );
 	}
 	});
-	jquery( "#to" ).datepicker({
+	$( "#to" ).datepicker({
 		defaultDate: "+1w",
 		changeMonth: true,
 		numberOfMonths: 3,
@@ -419,7 +419,7 @@ jquery(function() {
 		buttonImage: "/pics/editor/calendar.gif",
 		buttonImageOnly: true,
 		onClose: function( selectedDate ) {
-		jquery( "#from" ).datepicker( "option", "maxDate", selectedDate );
+		$( "#from" ).datepicker( "option", "maxDate", selectedDate );
 	}
 	});
 });

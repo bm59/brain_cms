@@ -37,10 +37,10 @@ class CDFile extends VirtualType
  	}
 			</style>
 			<script>
-        jquery(function(){
-        var btnUpload=jquery('#upl_button');
-        var status=jquery('#upl_status');
-        var error=jquery('#upl_error');
+        $(function(){
+        var btnUpload=$('#upl_button');
+        var status=$('#upl_status');
+        var error=$('#upl_error');
         var old_file='';
         var upload_me=new AjaxUpload(btnUpload, {
             action: '/uploader.php',
@@ -54,23 +54,23 @@ class CDFile extends VirtualType
                     return false;
                 }
                 <?}?>
-                jquery('#file').fadeOut(0);
-                jquery('#loading').attr('src', '/pics/loading.gif').fadeIn(0);
+                $('#file').fadeOut(0);
+                $('#loading').attr('src', '/pics/loading.gif').fadeIn(0);
             },
             onComplete: function(file, response){
                 status.html('');
                 error.html('');
-                jquery('#file').html('');
+                $('#file').html('');
                 if(response.result==="ok"){
-                    jquery('#loading').fadeOut(0);
-                    /*jquery('#file').attr('src', '<?=$st['path']?>' + arr_resp[1]).fadeIn(0);*/
+                    $('#loading').fadeOut(0);
+                    /*$('#file').attr('src', '<?=$st['path']?>' + arr_resp[1]).fadeIn(0);*/
                     old_file=response.full_path;
                     upload_me.setData({'old_file': old_file, 'storage_path': '<?=$st['path']?>', sid : '<?=session_id()?>'});
                     status.html('<nobr><a href="'+response.full_path+'" target="_blank">'+response.file+'</a> ('+response.filesize+')</nobr>');
-                    jquery("#<?=$this->getSetting('name')?>").val(response.full_path);
+                    $("#<?=$this->getSetting('name')?>").val(response.full_path);
                 }else{
                     status.html(response.error);
-                    jquery('#loading').fadeOut(0);
+                    $('#loading').fadeOut(0);
 
                 }
             }

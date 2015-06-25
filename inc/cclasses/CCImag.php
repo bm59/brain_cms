@@ -366,6 +366,9 @@ class CCImag extends VirtualContent
                                 }
 
          print '</div>';        }
+        function delete(){
+                return true;
+        }
 
 }
 ?>

@@ -15,7 +15,7 @@
 		function add_size ()
 		{
 
-			var cur_count=jquery('#size_table tr').length;
+			var cur_count=$('#size_table tr').length;
 			var tmp_id=9999999-cur_count;
 
                               	var cell_template='<tr>\n'+
@@ -45,7 +45,7 @@
 							'</span>\n'+
                            	'</td>\n'+
                               	'<td style="width:4%; padding-top: 15px;">\n'+
-                               				'<a onclick="if (confirm(\'Удалить строку\')) jquery(this).parents(\'TR\').remove(); return false;" class="button txtstyle" href="#">\n'+
+                               				'<a onclick="if (confirm(\'Удалить строку\')) $(this).parents(\'TR\').remove(); return false;" class="button txtstyle" href="#">\n'+
                                                   '<span class="bl"></span>\n'+
                                                   '<span class="bc"></span>\n'+
                                                   '<span class="br"></span>\n'+
@@ -53,36 +53,36 @@
                                                   '</a>\n'+
                            	'</td>\n'+
                               '</tr>';
-                            jQuery('#size_table').append(cell_template);
+                            $('#size_table').append(cell_template);
 
-							 jquery('#size_table').tableDnD({
+							 $('#size_table').tableDnD({
 							        onDrop: function(table, row) {
 							        },
 							        dragHandle: ".dragHandle"
 							    });
 
 
-							  jquery("#size_table tr").hover(function() {
-							          jquery(this.cells[0]).addClass('showDragHandle');
+							  $("#size_table tr").hover(function() {
+							          $(this.cells[0]).addClass('showDragHandle');
 							    }, function() {
-							          jquery(this.cells[0]).removeClass('showDragHandle');
+							          $(this.cells[0]).removeClass('showDragHandle');
 							    });
 
 		}
 
 
- jquery(document).ready(function() {
+ $(document).ready(function() {
 
- jquery('#size_table').tableDnD({
+ $('#size_table').tableDnD({
         onDrop: function(table, row) {
         },
         dragHandle: ".dragHandle"
     });
 
-  jquery("#size_table tr").hover(function() {
-          jquery(this.cells[0]).addClass('showDragHandle');
+  $("#size_table tr").hover(function() {
+          $(this.cells[0]).addClass('showDragHandle');
     }, function() {
-          jquery(this.cells[0]).removeClass('showDragHandle');
+          $(this.cells[0]).removeClass('showDragHandle');
     });
 });
 </script>
@@ -151,7 +151,7 @@
 													</span>
 	                                			</td>
 	                                			<td style="width:4%;padding-top: 15px;">
-                                     				<a onclick="if (confirm('Удалить строку')) jquery(this).parents('TR').remove(); return false;" class="button txtstyle" href="#">
+                                     				<a onclick="if (confirm('Удалить строку')) $(this).parents('TR').remove(); return false;" class="button txtstyle" href="#">
                                                         <span class="bl"></span>
                                                         <span class="bc"></span>
                                                         <span class="br"></span>

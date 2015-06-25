@@ -245,26 +245,26 @@ class CCGoods extends VirtualContent
                         }
                         ?>
                              <script>
-			jquery(document).ready(function(){
+			$(document).ready(function(){
 
 function strpos (haystack, needle, offset) {
   var i = (haystack+'').indexOf(needle, (offset || 0));
   return i === -1 ? false : i;
 }
-				jquery("#cat_id_items_container a").click( function()
+				$("#cat_id_items_container a").click( function()
 				{
 
-						var parent_id=jquery("#cat_id_value_item").val();
+						var parent_id=$("#cat_id_value_item").val();
 
-						jquery('.cat_ids').each(function()
+						$('.cat_ids').each(function()
 						{
-                        	var child_id=jquery(this).attr('id');
+                        	var child_id=$(this).attr('id');
                         	if (child_id.indexOf(parent_id+'_')>=0)
-                        	jquery(this).parent().parent().show();
+                        	$(this).parent().parent().show();
                         	else
                         	{
-                        		jquery(this).parent().parent().hide();
-                        		jquery(this).removeAttr("checked");
+                        		$(this).parent().parent().hide();
+                        		$(this).removeAttr("checked");
                         	}
 
 						});

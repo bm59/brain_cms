@@ -67,48 +67,48 @@ $settings = ($editid>0)?array('title'=>'Редактирование группы пользователей','bu
 ?>
 <? include $_SERVER['DOCUMENT_ROOT']."/inc/site_admin/meta.php"; ?>
 <script type="text/javascript">
-	jQuery(function()
+	$(function()
 	{		check_access();
 
-		jQuery(document).on("click", "input[type='checkbox']",  function()
-		{			if (jQuery(this).prop("checked")==true)
-			jQuery(this).parent().parent().find('input').prop("checked", "checked");
+		$(document).on("click", "input[type='checkbox']",  function()
+		{			if ($(this).prop("checked")==true)
+			$(this).parent().parent().find('input').prop("checked", "checked");
 			else
-			jQuery(this).parent().parent().find('input').prop("checked", "");
+			$(this).parent().parent().find('input').prop("checked", "");
 
 			check_access();
 			check_access();
 		});
 
-		jQuery(document).on("click", ".actions input[type='checkbox']",  function()
+		$(document).on("click", ".actions input[type='checkbox']",  function()
 		{
 				var count_all=0;
 				var count_check=0;
-				jQuery(this).parent().parent().parent().find("input").each(function()
-				{	               if (jQuery(this).prop("checked")==true)
+				$(this).parent().parent().parent().find("input").each(function()
+				{	               if ($(this).prop("checked")==true)
                    count_check++;
 
                    count_all++;
 				});
 
 				if (count_check>0)
-				jQuery(this).parents('LI').find('input:first').prop("checked", "checked");
-				else jQuery(this).parents('LI').find('input:first').prop("checked", "");
+				$(this).parents('LI').find('input:first').prop("checked", "checked");
+				else $(this).parents('LI').find('input:first').prop("checked", "");
 
 		});
 
 
 		function check_access ()
 		{
-					//alert(jQuery(elem).attr('id'));
-					jQuery('.foraccess LI').has('UL').each(function()
+					//alert($(elem).attr('id'));
+					$('.foraccess LI').has('UL').each(function()
 					{
 						var count_all=0;
 						var count_check=0;
-						var parent_ul=jQuery(this).attr('id');
-						jQuery('#'+parent_ul+' LI').each(function()
-						{                          //alert(jQuery(this).find('input').prop("checked"));
-                          if (jQuery(this).find('input').prop("checked")==true)
+						var parent_ul=$(this).attr('id');
+						$('#'+parent_ul+' LI').each(function()
+						{                          //alert($(this).find('input').prop("checked"));
+                          if ($(this).find('input').prop("checked")==true)
                           count_check++;
 
                           count_all++;
@@ -117,9 +117,9 @@ $settings = ($editid>0)?array('title'=>'Редактирование группы пользователей','bu
 
 						//alert('Всего '+count_all+'; отмечено '+count_check);
 						if (count_check>0)
-						jQuery('#'+parent_ul).find('input:first').prop("checked", "checked");
+						$('#'+parent_ul).find('input:first').prop("checked", "checked");
                         else
-                        jQuery('#'+parent_ul).find('input:first').prop("checked", "");
+                        $('#'+parent_ul).find('input:first').prop("checked", "");
 
 					});
 

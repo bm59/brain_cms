@@ -213,11 +213,11 @@ class CCOrder extends VirtualContent
 
                 ?>
                <script>
-                       	jQuery(function()
+                       	$(function()
                        	{
-                        	jQuery('#toggle_search').click(function(){jQuery('#searchform').slideToggle(500); });
+                        	$('#toggle_search').click(function(){$('#searchform').slideToggle(500); });
 
-                        		jquery.datepicker.regional['ru'] =
+                        		$.datepicker.regional['ru'] =
 								{
 									closeText: 'Закрыть',
 									prevText: '&#x3c;Пред',
@@ -235,9 +235,9 @@ class CCOrder extends VirtualContent
 									isRTL: false
 								};
 
-								jquery.datepicker.setDefaults(jquery.extend(jquery.datepicker.regional["ru"]));
+								$.datepicker.setDefaults($.extend($.datepicker.regional["ru"]));
 
-								jquery( "#from" ).datepicker({
+								$( "#from" ).datepicker({
 									defaultDate: "+1w",
 									changeMonth: true,
 									numberOfMonths: 3,
@@ -245,10 +245,10 @@ class CCOrder extends VirtualContent
 									buttonImage: "/pics/editor/calendar.gif",
 									buttonImageOnly: true,
 									onClose: function( selectedDate ) {
-									jquery( "#to" ).datepicker( "option", "minDate", selectedDate );
+									$( "#to" ).datepicker( "option", "minDate", selectedDate );
 								}
 								});
-								jquery( "#to" ).datepicker({
+								$( "#to" ).datepicker({
 									defaultDate: "+1w",
 									changeMonth: true,
 									numberOfMonths: 3,
@@ -256,7 +256,7 @@ class CCOrder extends VirtualContent
 									buttonImage: "/pics/editor/calendar.gif",
 									buttonImageOnly: true,
 									onClose: function( selectedDate ) {
-									jquery( "#from" ).datepicker( "option", "maxDate", selectedDate );
+									$( "#from" ).datepicker( "option", "maxDate", selectedDate );
 								}
 								});
                        	});
