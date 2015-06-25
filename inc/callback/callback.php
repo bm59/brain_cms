@@ -1,7 +1,7 @@
 <?
 
 if ($_GET['action']=='callback')
-{    include_once($_SERVER['DOCUMENT_ROOT']."/inc/include_site.php");
+{    include_once($_SERVER['DOCUMENT_ROOT']."/inc/site/include.php");
 
     $SiteSettings = new SiteSettings;
 	$SiteSettings->init();

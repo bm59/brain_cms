@@ -1,5 +1,5 @@
 <?
-include_once($_SERVER['DOCUMENT_ROOT']."/inc/include_site.php");
+include_once($_SERVER['DOCUMENT_ROOT']."/inc/site/include.php");
 
 if ($_GET['section']>0 && $_GET['banner_id']>0)
 {	$banner=msr(msq("SELECT * FROM `site_site_pbanners_banners_".$_GET['section']."` WHERE id=".$_GET['banner_id']));

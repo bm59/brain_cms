@@ -1,5 +1,5 @@
 <?
-include $_SERVER['DOCUMENT_ROOT']."/inc/include.php";
+include $_SERVER['DOCUMENT_ROOT']."/inc/site_admin/include.php";
 
 if (!$activeccid>0)
 $activeccid=$Content->getIdByPath(configGet("AskUrl"));
@@ -20,9 +20,9 @@ $requestUserGroup = $VisitorType->getOne($requestUser['type']);
 $errors = array();
 if (isset($_POST['profilepswd'])) $errors = $SiteVisitor->changePassword($_SESSION['visitorID'],trim($_POST['oldpswd']),trim($_POST['newpswd']));
 ?>
-	<?include $_SERVER['DOCUMENT_ROOT']."/inc/content/meta.php";?>
+	<?include $_SERVER['DOCUMENT_ROOT']."/inc/site_admin/meta.php";?>
 <div id="zbody">
-<?include $_SERVER['DOCUMENT_ROOT']."/inc/content/header.php";?>
+<?include $_SERVER['DOCUMENT_ROOT']."/inc/site_admin/header.php";?>
 	<div id="content" class="forms">
 		<?
 		if ((in_array('610',$group['access'])) || (isset($group['settings']['superaccess']))){

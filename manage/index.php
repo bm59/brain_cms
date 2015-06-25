@@ -1,6 +1,6 @@
 <?
-include $_SERVER['DOCUMENT_ROOT']."/inc/include.php";
-include $_SERVER['DOCUMENT_ROOT']."/inc/content/meta.php";?>
+include $_SERVER['DOCUMENT_ROOT']."/inc/site_admin/include.php";
+include $_SERVER['DOCUMENT_ROOT']."/inc/site_admin/meta.php";?>
 
 <body id="login">
 	<div id="loginform">

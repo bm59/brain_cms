@@ -1,7 +1,7 @@
 <?
 /*error_reporting(E_ALL);
 ini_set('display_errors',1);*/
-include $_SERVER['DOCUMENT_ROOT']."/inc/include.php";
+include $_SERVER['DOCUMENT_ROOT']."/inc/site_admin/include.php";
 
 
 
@@ -33,9 +33,9 @@ if ($editsection['id']>0){
 }
 $deletesection = $SiteSections->get(floor($_GET['delete']),-1); $deletesection['id'] = floor($deletesection['id']);
 ?>
-<?include $_SERVER['DOCUMENT_ROOT']."/inc/content/meta.php";?>
+<?include $_SERVER['DOCUMENT_ROOT']."/inc/site_admin/meta.php";?>
 <div id="zbody">
-        <?include $_SERVER['DOCUMENT_ROOT']."/inc/content/header.php";?>
+        <?include $_SERVER['DOCUMENT_ROOT']."/inc/site_admin/header.php";?>
         <?
         if ($contentStep==1){
 

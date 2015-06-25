@@ -1,5 +1,5 @@
 <?
-include $_SERVER['DOCUMENT_ROOT']."/inc/include.php";
+include $_SERVER['DOCUMENT_ROOT']."/inc/site_admin/include.php";
 $order = floor($_GET['order']);
 if (floor($_GET['switch_on'])>0)
 {	$SiteVisitor->switchOnOff($_GET['switch_on'],'on');
@@ -18,10 +18,10 @@ if (in_array('delete',$group['new_settings'][$activeccid]) || $mode=='developmen
 
 	header("Location: ".configGet("AskUrl"));
 }
-include $_SERVER['DOCUMENT_ROOT']."/inc/content/meta.php";
+include $_SERVER['DOCUMENT_ROOT']."/inc/site_admin/meta.php";
 ?>
 <div id="zbody">
-	<?include $_SERVER['DOCUMENT_ROOT']."/inc/content/header.php";?>
+	<?include $_SERVER['DOCUMENT_ROOT']."/inc/site_admin/header.php";?>
 	<div id="content">
 		<?
 		$userslist = $SiteVisitor->getList(0,$order);

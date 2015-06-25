@@ -1,5 +1,5 @@
 <?
-include $_SERVER['DOCUMENT_ROOT']."/inc/include.php";
+include $_SERVER['DOCUMENT_ROOT']."/inc/site_admin/include.php";
 
 if (!$activeccid>0)
 $activeccid=$Content->getIdByPath(configGet("AskUrl"));
@@ -41,9 +41,9 @@ if (isset($_POST['addedituser'])){
 	if (count($errors)==0) header("Location: ../\n");
 }
 $settings = ($editid>0)?array('title'=>'Редактирование пользователя','button'=>'Сохранить изменения','pswd'=>' (если Вы не хотите менять пароль — оставьте поле пустым)'):array('title'=>'Добавление пользователя','button'=>'Создать пользователя','pswd'=>' (не менее 4-х символов)');
-include $_SERVER['DOCUMENT_ROOT']."/inc/content/meta.php";?>
+include $_SERVER['DOCUMENT_ROOT']."/inc/site_admin/meta.php";?>
 <div id="zbody">
-	<?include $_SERVER['DOCUMENT_ROOT']."/inc/content/header.php";?>
+	<?include $_SERVER['DOCUMENT_ROOT']."/inc/site_admin/header.php";?>
 	<div id="content" class="forms">
 		<h1><a href="../">Пользователи</a> &rarr; <?=$settings['title']?></h1>
 		<?

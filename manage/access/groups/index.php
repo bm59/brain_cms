@@ -1,5 +1,5 @@
 <?
-include $_SERVER['DOCUMENT_ROOT']."/inc/include.php";
+include $_SERVER['DOCUMENT_ROOT']."/inc/site_admin/include.php";
 
 if ($_GET['delete']>0)
 if (in_array('delete',$group['new_settings'][$activeccid]) || $mode=='development')
@@ -7,10 +7,10 @@ if (in_array('delete',$group['new_settings'][$activeccid]) || $mode=='developmen
 	WriteLog($_GET['delete'], 'удаление группы');
 	header("Location: ".configGet("AskUrl"));
 }
-include $_SERVER['DOCUMENT_ROOT']."/inc/content/meta.php";
+include $_SERVER['DOCUMENT_ROOT']."/inc/site_admin/meta.php";
 ?>
 	<div id="zbody">
-	<?include $_SERVER['DOCUMENT_ROOT']."/inc/content/header.php";?>
+	<?include $_SERVER['DOCUMENT_ROOT']."/inc/site_admin/header.php";?>
 	<div id="content">
 		<?
 		$groupslist = $VisitorType->getList();

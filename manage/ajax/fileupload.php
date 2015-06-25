@@ -1,5 +1,5 @@
 <?
-include $_SERVER['DOCUMENT_ROOT']."/inc/include.php";
+include $_SERVER['DOCUMENT_ROOT']."/inc/site_admin/include.php";
 $onfinish = trim(strstr($_SERVER['REQUEST_URI'],'&onfinish='));
 $onfinish = substr($onfinish,10);
 $onfinish = preg_split('|\&[a-zA-Z_0-9]+\=|',$onfinish);

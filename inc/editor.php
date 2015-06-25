@@ -1,4 +1,4 @@
-<?include_once($_SERVER['DOCUMENT_ROOT']."/inc/include_site.php");?>
+<?include_once($_SERVER['DOCUMENT_ROOT']."/inc/site/include.php");?>
 <?
 		 /*Подтверждение заказа*/
 		 if ($_GET['action']=='get_files' && $_GET['folder']!='')

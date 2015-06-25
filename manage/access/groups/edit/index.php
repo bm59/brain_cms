@@ -1,5 +1,5 @@
 <?
-include $_SERVER['DOCUMENT_ROOT']."/inc/include.php";
+include $_SERVER['DOCUMENT_ROOT']."/inc/site_admin/include.php";
 
 if (!$activeccid>0)
 $activeccid=$Content->getIdByPath(configGet("AskUrl"));
@@ -65,7 +65,7 @@ if (isset($_POST['addeditgroup'])){
 }
 $settings = ($editid>0)?array('title'=>'Редактирование группы пользователей','button'=>'Сохранить'):array('title'=>'Добавление группы пользователей','button'=>'Создать группу');
 ?>
-<? include $_SERVER['DOCUMENT_ROOT']."/inc/content/meta.php"; ?>
+<? include $_SERVER['DOCUMENT_ROOT']."/inc/site_admin/meta.php"; ?>
 <script type="text/javascript">
 	jQuery(function()
 	{		check_access();
@@ -138,7 +138,7 @@ $settings = ($editid>0)?array('title'=>'Редактирование группы пользователей','bu
 </style>
 
 <div id="zbody">
-	<? include $_SERVER['DOCUMENT_ROOT']."/inc/content/header.php"; ?>
+	<? include $_SERVER['DOCUMENT_ROOT']."/inc/site_admin/header.php"; ?>
 	<div id="content" class="forms">
 		<h1><a href="../">Группы пользователей</a> &rarr; <?=$settings['title']?></h1>
 		<?

@@ -1,5 +1,5 @@
 <?
-include $_SERVER['DOCUMENT_ROOT']."/inc/include.php";
+include $_SERVER['DOCUMENT_ROOT']."/inc/site_admin/include.php";
 /*print_r($_SERVER);*/
 $iface = new SiteSettings;
 $iface->init();
@@ -30,7 +30,7 @@ if (isset($_POST['setupdate'])){
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html>
 <head>
-	<?include $_SERVER['DOCUMENT_ROOT']."/inc/content/meta.php";?>
+	<?include $_SERVER['DOCUMENT_ROOT']."/inc/site_admin/meta.php";?>
 	<title>Настройки сайта</title>
 </head>
 <body>
@@ -42,7 +42,7 @@ function Gotopage(link)
 }
 </script>
 <div id="zbody">
-	<?include $_SERVER['DOCUMENT_ROOT']."/inc/content/header.php";;?>
+	<?include $_SERVER['DOCUMENT_ROOT']."/inc/site_admin/header.php";;?>
 	<div id="content" class="forms">
 		<h1>Настройки сайта</h1>
 		<?
