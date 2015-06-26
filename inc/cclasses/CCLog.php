@@ -413,6 +413,7 @@ class CCLog extends VirtualContent
                                                         <th class="t_minwidth">user name</th>
                                                         <th>действие</th>
                                                         <th>комментарий</th>
+                                                        <th>ip</th>
                                                 </tr>
                                         <?
                                         foreach ($list as $pub){
@@ -441,6 +442,7 @@ class CCLog extends VirtualContent
                                                         		?>
                                                          </td>
                                                           <td class="t_left"><?=htmlspecialchars($pub['comment'])?></td>
+                                                          <td class="t_center"><?=htmlspecialchars($pub['ip'])?></td>
                                                 </tr>
                                                 <?
                                         }
