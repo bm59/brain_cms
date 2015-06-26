@@ -82,61 +82,25 @@ $settings = ($editid>0)?array('title'=>'Редактирование группы пользователей','bu
 
 		$(document).on("click", ".actions input[type='checkbox']",  function()
 		{
-				var count_all=0;
-				var count_check=0;
-				$(this).parent().parent().parent().find("input").each(function()
-				{	               if ($(this).prop("checked")==true)
-                   count_check++;
-
-                   count_all++;
-				});
-
-				if (count_check>0)
+				if ($(this).parent().parent().parent().find("input:checked").length>0)
 				$(this).parents('LI').find('input:first').prop("checked", "checked");
 				else $(this).parents('LI').find('input:first').prop("checked", "");
-
 		});
 
 
 		function check_access ()
-		{
-					//alert($(elem).attr('id'));
+		{
 					$('.foraccess LI').has('UL').each(function()
 					{
-						var count_all=0;
-						var count_check=0;
-						var parent_ul=$(this).attr('id');
-						$('#'+parent_ul+' LI').each(function()
-						{                          //alert($(this).find('input').prop("checked"));
-                          if ($(this).find('input').prop("checked")==true)
-                          count_check++;
-
-                          count_all++;
-
-						});
-
-						//alert('Всего '+count_all+'; отмечено '+count_check);
-						if (count_check>0)
-						$('#'+parent_ul).find('input:first').prop("checked", "checked");
+						if ($(this).find(' LI > label > input:checked ').length>0)
+						$(this).find('input:first').prop("checked", "checked");
                         else
-                        $('#'+parent_ul).find('input:first').prop("checked", "");
+                        $(this).find('input:first').prop("checked", "");
 
 					});
 
 		}	});
 </script>
-<style>
-.foraccess > UL > LI > LABEL {font-size: 18px; background-color: #CCC; padding: 15px}
-.foraccess > UL > LI {width: 100%; border-bottom: none;}
-.foraccess UL UL {margin: 10px 0 0 10px;}
-.foraccess LI {background: none; padding: 10px 0; border-bottom: 1px solid #CCC;}
-.foraccess LABEL INPUT {position: relative !important; margin: 3px;}
-
-.foraccess .actions {float: right; position: absolute; top: 18px;}
-.foraccess UL UL .actions {float: right; position: absolute; top: 4px; right: 10px;}
-.foraccess .actions DIV {float: left;}
-</style>
-
 <div id="zbody">
 	<? include $_SERVER['DOCUMENT_ROOT']."/inc/site_admin/header.php"; ?>
 	<div id="content" class="forms">
