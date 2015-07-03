@@ -6,7 +6,7 @@ include $_SERVER['DOCUMENT_ROOT']."/inc/site_admin/meta.php";?>
 	<div id="loginform">
 		<div class="bg png"></div>
 		<form name="enter" action="/manage/" method="POST" class="forms">
-			<span class="logo"><img src="/pics/logo.jpg" alt=""  /><br/></span>
+			<span class="logo"><!--//<img src="/pics/logo.jpg" alt=""  />//--> <br/></span>
 			<!--//<div><p>Для входа в панель управления<br />вам необходимо авторизироваться</p></div>//-->
 			<div class="formmargin">
 				<div class="place" style="float: left; width: 49%;">

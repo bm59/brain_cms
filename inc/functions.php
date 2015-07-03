@@ -411,6 +411,13 @@ function getIface($path)
 	return $Iface;
 
 }
+function get_text($path)
+{
+    $Iface=getIface($path);
+    $sheet = $Iface->get();
+	return $sheet['text'];
+
+}
 function get_filesize($file)
 {
     // טהול פאיכ

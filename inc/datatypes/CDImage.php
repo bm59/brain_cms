@@ -82,7 +82,7 @@ class CDImage extends VirtualType
 			<div class="place" <?=($divstyle!='')?$divstyle:''?>>
 				<label><?=htmlspecialchars($this->getSetting('description'))?><?=((isset($settings['important']))?' <span class="important">*</span>':'')?></label>
 			<?
-			if ($this->getSetting('name')=='image' && $_GET['section']==7) 	print '<div style="padding: 0 5px; color: #ff0000">Рекомендуемый размер:  1040x450 пикселей</div>';
+			/*if ($this->getSetting('name')=='image' && $_GET['section']==7) 	print '<div style="padding: 0 5px; color: #ff0000">Рекомендуемый размер:  1040x450 пикселей</div>';*/
 			?>
 				<input type="hidden" id="uploadfilehidden<?=htmlspecialchars($this->getSetting('name'))?>" name="<?=htmlspecialchars($this->getSetting('name'))?>" value="<?=$this->getSetting('value')?>">
 
@@ -94,7 +94,7 @@ class CDImage extends VirtualType
 						<input type="file" name="<?=htmlspecialchars($this->getSetting('name'))?>" id="upl_button"/>
 					</div>
 				</span>
-				<span class="button txtstyle" id="delete_container" style="display: none;">
+				<span class="button txtstyle" id="delete_container" <?=(floor($this->getSetting('value'))<1)?'style="display:none;"':''?>>
 					<span class="bl"></span>
 					<span class="bc"></span>
 					<span class="br"></span>
@@ -104,12 +104,6 @@ class CDImage extends VirtualType
 				<div id="upl_error"></div>
 			    <div id="upl_status"></div>
 
-				<span id="<?=htmlspecialchars($this->getSetting('name'))?>uploadimagedeletebutton" class="button txtstyle" <?=(floor($this->getSetting('value'))<1)?'style="display:none;"':''?>>
-					<span class="bl"></span>
-					<span class="bc"></span>
-					<span class="br"></span>
-					<input type="button"  />
-				</span>
 				<span class="clear"></span>
 				<?
 					$desc = '';
@@ -141,10 +135,10 @@ class CDImage extends VirtualType
 					print $img_descr.' Если размеры загружаемого изображения больше - его размеры будут автоматически изменены</small>';
 				}
 				?>
-				<div class="contentdesc"></div>
+
 				<div><small><?=$desc?></small></div>
 				<div id="<?=htmlspecialchars($this->getSetting('name'))?>imagecontent">
-				<img id="loading" src="/pics/loading.gif" height="28" style="display: none;" />
+				<div class="contentdesc">
 				<?
 				if (floor($image['id'])>0){
 					$wh = @getimagesize($image['fullpath']);
@@ -177,6 +171,7 @@ class CDImage extends VirtualType
 						<div class="contenttxt"><a href="'.$image['path'].'">Ссылка на файл</a></div>';*/
 				}
 				?>
+				</div>
 				</div>
 			</div>
 		<?

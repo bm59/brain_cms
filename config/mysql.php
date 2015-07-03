@@ -9,9 +9,9 @@
 	}
 	else
 	{
-	configSet("DBUser","bm59_zuk");
-	configSet("DBPassword","zukzuk");
+	configSet("DBUser","bm59_cms");
+	configSet("DBPassword","cmscms");
 	configSet("DBHost","localhost");
-	configSet("DBBase","bm59_zuk");
+	configSet("DBBase","bm59_cms");
 	}
 ?>
