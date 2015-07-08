@@ -98,6 +98,8 @@ if(!isset($_SESSION['sort_by'])) $_SESSION['sort_by']='';
 if(isset($_GET["sort_by"])) $sort_by=$_SESSION['sort_by']=fix_filename($_GET["sort_by"],$transliteration);
 else $sort_by=$_SESSION['sort_by'];
 
+if ($sort_by=='') $sort_by='date';
+
 if(!isset($_SESSION['descending'])) $_SESSION['descending']=false;
 if(isset($_GET["descending"])) $descending=$_SESSION['descending']=fix_filename($_GET["descending"],$transliteration)==="true";
 else $descending=$_SESSION['descending'];
