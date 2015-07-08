@@ -35,6 +35,7 @@ while($cycle && $i<$max_cycles){
 
 if (!empty($_FILES)) {
     $info=pathinfo($_FILES['file']['name']);
+    $info['extension']=mb_strtolower($info['extension']);
     if(in_array(fix_strtolower($info['extension']), $ext)){
 	$tempFile = $_FILES['file']['tmp_name'];
 
@@ -50,7 +51,8 @@ if (!empty($_FILES)) {
 
 	$_FILES['file']['name'] = $file_prefix.'.'.$info['extension'];
 
-	if(file_exists($file_prefix.$_FILES['file']['name'])){
+
+	if(file_exists($targetPath.$_FILES['file']['name'])){
 	    $i = 1;
 	    $info=pathinfo($_FILES['file']['name']);
 	    while(file_exists($targetPath.$info['filename']."_".$i.".".$info['extension'])) {

@@ -243,7 +243,7 @@ $get_params = http_build_query(array(
 	   });
 	    }
 	</script>
-	<script type="text/javascript" src="js/include.min.js"></script>
+	<script type="text/javascript" src="js/include.js"></script>
     </head>
     <body>
 	<input type="hidden" id="popup" value="<?php echo $popup; ?>" />
@@ -331,7 +331,13 @@ elseif($_GET['type']==0 && $_GET['field_id']=='') $apply = 'apply_none';
 elseif($_GET['type']==3) $apply = 'apply_video';
 else $apply = 'apply';
 
-$files = scandir($current_path.$subfolder.$subdir);
+
+//$files = scandir($current_path.$subfolder.$subdir);
+$files = array();
+foreach (scandir($current_path.$subfolder.$subdir) as $file) $files[$file] = filemtime("$dir/$file");
+asort($files);
+$files = array_keys($files);
+
 $n_files=count($files);
 
 //php sorting

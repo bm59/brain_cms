@@ -1,6 +1,6 @@
 <?php
 session_start();
-mb_internal_encoding('UTF-8');
+mb_internal_encoding('cp1251');
 //------------------------------------------------------------------------------
 // DON'T COPY THIS VARIABLES IN FOLDERS config.php FILES
 //------------------------------------------------------------------------------
@@ -31,7 +31,7 @@ $thumbs_base_path = '../storage/thumbs/'; // relative path from filemanager fold
 
 $MaxSizeUpload=100; //Mb
 
-$default_language="en_EN"; //default language file name
+$default_language="ru_RU"; //default language file name
 $icon_theme="ico"; //ico or ico_dark you can cusatomize just putting a folder inside filemanager/img
 $show_folder_size=true; //Show or not show folder size in list view feature in filemanager (is possible, if there is a large folder, to greatly increase the calculations)
 $show_sorting_bar=true; //Show or not show sorting feature in filemanager
@@ -65,7 +65,7 @@ $image_resizing_height=0;
 // YOU CAN ALSO PASS THIS PARAMETERS USING SESSION VAR => $_SESSION["VIEW"]=
 //
 //******************
-$default_view=0;
+$default_view=1;
 
 //set if the filename is truncated when overflow first row
 $ellipsis_title_after_first_row=true;
@@ -100,7 +100,7 @@ $aviary_active=true;
 $aviary_key="dvh8qudbp6yx2bnp";
 $aviary_secret="m6xaym5q42rpw433";
 $aviary_version=3;
-$aviary_language='en';
+$aviary_language='ru';
 
 
 //The filter and sorter are managed through both javascript and php scripts because if you have a lot of
