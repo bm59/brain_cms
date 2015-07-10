@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ru" lang="ru"><head>
+<!--<base href="" /><!-- -->
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<script language="JavaScript" src="wz_jsgraphics.js"></script>
+<style>
+#canvas{
+	position:relative;
+	height:225px;
+	width:300px;
+	background-image:url(mendi.jpg);
+	border:1px solid #bbb;
+}
+</style>
+<script>
+var imgwidth = 300;
+var imgheight = 225;
+var jg = 0 ;
+var dotarray = [];
+var dotarrayxy = {x:[],y:[]};
+var mode = 'add';
+var select = -1;
+var startDrag = false;
+var coords = 0;
+function getBrowser() {
+  var ua = navigator.userAgent.toLowerCase();
+  if (ua.indexOf("msie") != -1 && ua.indexOf("opera") == -1 && ua.indexOf("webtv") == -1) {
+    return "msie";
+  }
+  if (ua.indexOf("opera") != -1) {
+    return "opera";
+  }
+  if (ua.indexOf("chrome") != -1) {
+    return "chrome";
+  }
+  if (ua.indexOf("gecko") != -1) {
+    return "gecko";
+  }
+  if (ua.indexOf("safari") != -1) {
+    return "safari";
+  }
+  if (ua.indexOf("konqueror") != -1) {
+    return "konqueror";
+  }
+  return "unknown";
+};
+function outcoords(){
+	var tmp = coords.value;
+	if(tmp=='')
+	return 0;
+	else
+	{		dotarray = [];
+		dotarrayxy = {x:[],y:[]};
+		tmp = tmp.split(',');
+		for(var i=0;i<tmp.length;i=i+2){
+			dotarray.push({'x':(tmp[i]-4),'y':(tmp[i+1]-4)});
+			dotarrayxy.x.push(parseInt(tmp[i]));
+			dotarrayxy.y.push(parseInt(tmp[i+1]));
+		}
+		select = dotarray.length-1;
+		drawdots();
+	}
+};
+function incoords(){
+	var tmp ='';
+	for(var i in dotarray){
+		tmp+=(tmp!=''?',':'')+(dotarray[i].x+4)+','+(dotarray[i].y+4);
+	}
+	coords.value = tmp;
+};
+function delDot(){
+	if(select>=0){
+		var tmp = [];
+		var tmpxy = {x:[],y:[]};
+		for(var i in dotarray){
+			if(i==select)continue;
+			tmp.push({'x':dotarray[i].x,'y':dotarray[i].y});
+			tmpxy.x.push(dotarrayxy.x[i]);
+			tmpxy.y.push(dotarrayxy.y[i]);
+		}
+		dotarray = tmp;
+		dotarrayxy = tmpxy;
+		select--;
+		drawdots();
+		incoords();
+	}
+};
+function clearjg(){
+	jg.clear();
+	dotarray = [];
+	dotarrayxy = {x:[],y:[]};
+	mode = 'add';
+	select = -1;
+	document.getElementById('addDot').checked = true;
+	incoords();
+};
+function drawdots(fill){
+	jg.clear();
+	var k = -2;
+	jg.setColor("#eee");
+	opacity = 'opacity:0.9;';
+	if(!fill)jg.fillPolygon(dotarrayxy.x,dotarrayxy.y);
+	opacity = '';
+	for(var i in dotarray){
+		if(k>=0){
+			jg.setColor("#fa00c8");
+			jg.drawLine(dotarray[k].x+4, dotarray[k].y+4, dotarray[i].x+4, dotarray[i].y+4);
+		}
+		jg.setColor((i!=select)?"red":'blue');
+		jg.fillRect( dotarray[i].x, dotarray[i].y, 8, 8);
+		k = i;
+	}
+	jg.paint();
+};
+var imgurl = 'images/mendi.jpg';
+var onloaded = false;
+window.onload = function(){
+	var canvas = document.getElementById('canvas');
+	coords = document.getElementById('coords');
+	var img = new Image();
+	img.load = img.onload = function(){
+		if(onloaded)return 0;
+		onloaded = true;
+		canvas.style.backgroundImage="url('"+imgurl+"')";
+		imgwidth  = img.width;
+		imgheight  = img.height;
+		canvas.style.width = imgwidth+'px';
+		canvas.style.height = imgheight+'px';
+		var offset = getOffset(canvas);
+		jg = new jsGraphics("canvas");
+		outcoords();
+		window.onmouseup = function(e)
+		{
+			startDrag = false;
+			drawdots();
+			incoords();
+		};
+		canvas.onmousedown = function(e){
+			var x = e.pageX-offset.left;
+			var y = e.pageY-offset.top;
+			var drop = false;
+			for(var i in dotarray){
+				if(Math.abs(dotarray[i].x-x+4)<8 && Math.abs(dotarray[i].y-y+4)<8){
+					select = i;
+					drop = true;
+					break;
+				}
+			}
+			if(drop){
+				startDrag = true;
+				drawdots();
+			}else{
+				dotarray.push({'x':x-4,'y':y-4});
+				dotarrayxy.x.push(x);
+				dotarrayxy.y.push(y);
+				select = dotarray.length-1;
+				incoords();
+				drawdots();
+			}
+		};
+		window.onmousemove = function(e){
+			var x = e.pageX-offset.left;
+			var y = e.pageY-offset.top;
+			if(x<0)x = 0;
+			if(y<0)y = 0;
+			if(x>imgwidth)x=imgwidth;
+			if(y>imgheight)y=imgheight;
+			if(startDrag && select>=0){
+				dotarray[select]={'x':x-4,'y':y-4};
+				dotarrayxy.x[select] = x;
+				dotarrayxy.y[select] =y;
+				drawdots(true);
+			}
+		};
+	}
+	img.src = imgurl;
+	var obj = document.getElementById('image_file');
+	obj.addEventListener("change", function(event) {
+		var files = obj.files,
+			len = files.length;
+		if(len) {
+			var URL = window.URL || window.webkitURL,
+				imageUrl,
+				image;
+			if ( URL ) {
+				imageUrl = URL.createObjectURL(files[0]);
+				image = document.createElement("img");
+				image.onload = function() {
+					URL.revokeObjectURL(imageUrl);
+				};
+				if(getBrowser()=='gecko'||getBrowser()=='chrome'){
+					onloaded = false;
+					img.src= imgurl = imageUrl;
+				}
+				//("Файл: " + files[i].name+" Тип: " + files[i].type+" Размер: " + file_size(files[i].size));
+			}
+		}
+
+	}, false);
+}
+var last  = 0;
+function addInput(){
+	var elm = document.getElementById('coords');
+	var inp = document.createElement('input');
+	inp.style.width = '90%';
+	inp.value = elm.value;
+	var boxer = document.getElementById('boxer');
+	if(last&&boxer.insertBefore)
+		boxer.insertBefore(inp,last);
+	else
+		boxer.appendChild(inp);
+	last = inp;
+}
+
+</script>
+</head>
+<body>
+<div id="main">
+	<table width="100%">
+<tbody><tr>
+<td align="left">
+<form method="post" action="upload.php" enctype="multipart/form-data">
+<label for="image_file">Выбрать свой файл</label><input id="image_file" name="image_file" type="file">
+</form>
+<div id="canvas"></div>
+</td>
+<td width="40%">
+<input id="clear" value="Очистить" onclick="if(confirm('Вы уверены что хотите очистить экран?')){clearjg()}" type="button"><br>
+<input id="delDot" value="Удалить синюю точку" onclick="delDot()" type="button"><br>
+</td>
+</tr>
+<tr>
+	<td id="boxer" align="left">
+		<input style="width:90%;" value="" id="coords" type="text" onkeyup="outcoords()">
+		<input onclick="addInput()" value="+" type="button">
+	</td>
+	<td></td>
+</tr>
+</tbody></table>
+
+
+
+</div>
+
+
+</body></html>
