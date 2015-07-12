@@ -138,7 +138,7 @@ class CCOrder extends VirtualContent
                 $list=$this->GetOrderGoods($pub['id']);
                 ?>
                 <div id="content" class="forms">
-                        <h1><a href="./">Список <?=($this->getSetting('isservice')>0)?'сервисов':'разделов'?></a> &rarr; <a href="./?section=<?=$section['id']?>"><?=$section['name']?></a> &rarr; <?=($pub['id']>0)?'Просмотр заказа':'Добавление'?></h1>
+                        <?include_once($_SERVER['DOCUMENT_ROOT']."/inc/site_admin/nav.php");?>
                         <strong>Заказ № <?=$pub['id']?> от <?=$MySqlConnect->dateFromDBDot($pub['date'])?>, <?=$MySqlConnect->TimeFromDB($pub['date'])?></strong>
 
 	               		<div><?=$pub['client_address']?></div>
@@ -262,24 +262,20 @@ class CCOrder extends VirtualContent
                        	});
                 </script>
                 <div id="content" class="forms">
-                        <h1><a href="./">Список <?=($this->getSetting('isservice')>0)?'сервисов':'разделов'?></a> &rarr; <?=$section['name']?></h1>
+                        <?include_once($_SERVER['DOCUMENT_ROOT']."/inc/site_admin/nav.php");?>
 
                         <form id="searchform" name="searchform" action="./?section=<?=$section['id']?>" method="POST">
                                 			<div class="place" style="z-index: 10; width: 150px; ">
 												<label>Номер заказа</label>
 												<span class="input">
-													<span class="bl"></span>
-													<span class="bc"><input type="text" name="search_id" maxlength="20" value="<?=($search_id>0) ? $search_id : ''; ?>"/></span>
-													<span class="br"></span>
+													<input type="text" name="search_id" maxlength="20" value="<?=($search_id>0) ? $search_id : ''; ?>"/>
 												</span>
 											</div>
 
 											<div class="place" style="z-index: 10; width: 150px; ">
 												<label>Телефон или часть</label>
 												<span class="input">
-													<span class="bl"></span>
-													<span class="bc"><input type="text" name="search_phone" maxlength="20" value="<?=$search_phone;?>"/></span>
-													<span class="br"></span>
+													<input type="text" name="search_phone" maxlength="20" value="<?=$search_phone;?>"/>
 												</span>
 											</div>
 											<div class="place" style="z-index: 10; width: 165px;">
@@ -295,11 +291,8 @@ class CCOrder extends VirtualContent
                                 <div class="place" style="width: auto; margin-right: 20px;">
                                         <label>&nbsp;</label>
                                         <span class="forbutton">
-                                                <span class="button">
-                                                        <span class="bl"></span>
-                                                        <span class="bc">Найти</span>
-                                                        <span class="br"></span>
-                                                        <input type="submit" value=""/>
+                                                <span>
+                                                	<input class="button" type="submit" value="Найти"/>
                                                 </span>
                                         </span>
                                 </div>
@@ -316,11 +309,7 @@ class CCOrder extends VirtualContent
                                 <p>Отсутствуют записи, удовлетворяющие заданным условиям</p>
                                 <span class="clear"></span>
                                 <div class="place">
-                                        <a href="./?section=<?=$section['id']?>&pub=new" class="button big" style="float: right;">
-                                                <span class="bl"></span>
-                                                <span class="bc">Добавить</span>
-                                                <span class="br"></span>
-                                        </span>
+                                        <a href="./?section=<?=$section['id']?>&pub=new" class="button big" style="float: right;">Добавить</a>
                                 </div>
                                 <?
                         }
@@ -385,10 +374,7 @@ class CCOrder extends VirtualContent
                                                         </td>
                                                         <td class="t_32width">
                                                                 <a href="./?section=<?=$section['id']?>&delete=<?=$pub['id']?>" class="button txtstyle" onclick="if (!confirm('Вы действительно хотите удалить заказ? Все данные по этому заказу будут утеряны')) return false;">
-                                                                        <span class="bl"></span>
-                                                                        <span class="bc"></span>
-                                                                        <span class="br"></span>
-                                                                        <input type="button" style="background-image: url(/pics/editor/delete.gif)" title="Удалить заказ"/>
+                                                                	<input type="button" style="background-image: url(/pics/editor/delete.gif)" title="Удалить заказ"/>
                                                                 </a>
                                                         </td>
                                                 </tr>
@@ -405,11 +391,7 @@ class CCOrder extends VirtualContent
 
                                         ?>
                                         <div class="place">
-                                                <a href="./?section=<?=$section['id']?>&pub=new" class="button big" style="float: right;">
-                                                        <span class="bl"></span>
-                                                        <span class="bc">Добавить</span>
-                                                        <span class="br"></span>
-                                                </a>
+                                                <a href="./?section=<?=$section['id']?>&pub=new" class="button big" style="float: right;">Добавить</a>
                                         </div>
                                         <span class="clear"></span>
                                 </form>
@@ -435,11 +417,7 @@ class CCOrder extends VirtualContent
                                                         $inner = ($i<$this->getSetting('pagescount'))?'<strong>&hellip;</strong>':$i;
                                                 }
                                                 if ($inner!='') print '
-                                                '.$block[0].'
-                                                        <span class="bl"></span>
-                                                        <span class="bc">'.$inner.'</span>
-                                                        <span class="br"></span>
-                                                '.$block[1];
+                                                '.$block[0].$inner.$block[1];
                                         }
                                         ?>
                                 </div>

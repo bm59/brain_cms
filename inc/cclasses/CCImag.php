@@ -320,9 +320,6 @@ class CCImag extends VirtualContent
                                                        <td><?=$pub['contacts']?></td>
 <!--//						                               <td class="t_32width">
 															<a href="./?section=<?=$section['id']?>&rubric=<?=$rubric['id']?>&delete=<?=$pub['id']?>" class="button txtstyle" onclick="if (!confirm('Удалить элемент')) return false;">
-																<span class="bl"></span>
-																<span class="bc"></span>
-																<span class="br"></span>
 																<input type="button" style="background-image: url(/pics/editor/delete.gif)" title="Удалить элемент" />
 															</a>
 														</td>//-->
@@ -354,11 +351,7 @@ class CCImag extends VirtualContent
                                                         $inner = ($i<$this->getSetting('pagescount'))?'<strong>&hellip;</strong>':$i;
                                                 }
                                                 if ($inner!='') print '
-                                                '.$block[0].'
-                                                        <span class="bl"></span>
-                                                        <span class="bc">'.$inner.'</span>
-                                                        <span class="br"></span>
-                                                '.$block[1];
+                                                '.$block[0].$inner.$block[1];
                                         }
                                         ?>
                                 </div>

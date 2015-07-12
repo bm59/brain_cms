@@ -47,7 +47,7 @@ class CDDate extends VirtualType
         ?>
 		<div class="place" id="<?=htmlspecialchars($this->getSetting('name'))?>_calendar" <?=($divstyle!='')?$divstyle:'style="z-index: 11; width: 158px;"'?>>
 			<label><?=htmlspecialchars($this->getSetting('description'))?><?=((isset($settings['important']))?' <span class="important">*</span>':'')?></label>
-			<div style="margin-top: 3px;"><input  id="<?=htmlspecialchars($this->getSetting('name'))?>" name="<?=htmlspecialchars($this->getSetting('name'))?>" type="text" style="padding: 14px; border: 1px solid #D8D8D8; background-color:none; margin: 0 2px; float: left;" value="<?=htmlspecialchars($this->getSetting('value'))?>"/></div>
+			<div><input  id="<?=htmlspecialchars($this->getSetting('name'))?>" name="<?=htmlspecialchars($this->getSetting('name'))?>" type="text" style="width: 100px; float: left;" value="<?=htmlspecialchars($this->getSetting('value'))?>"/></div>
 		</div>
 
 		<span class="clear"></span>

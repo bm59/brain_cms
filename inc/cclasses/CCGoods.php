@@ -229,7 +229,7 @@ class CCGoods extends VirtualContent
                 $pub = $this->getPub($_GET['pub']); $pub['id'] = floor($pub['id']);
                 ?>
                 <div id="content" class="forms">
-                        <h1><a href="./">Список <?=($this->getSetting('isservice')>0)?'сервисов':'разделов'?></a> &rarr; <a href="./?section=<?=$section['id']?>"><?=$section['name']?></a> &rarr; <?=($pub['id']>0)?'Редактирование':'Добавление'?></h1>
+                        <?include_once($_SERVER['DOCUMENT_ROOT']."/inc/site_admin/nav.php");?>
                         <?
                         $saveerrors = $this->getSetting('saveerrors');
                         if (!is_array($saveerrors)) $saveerrors = array();
@@ -351,11 +351,8 @@ function strpos (haystack, needle, offset) {
                         include_once($_SERVER['DOCUMENT_ROOT']."/inc/datatypes/dop/image_add.php");
                         ?>
                         <div class="place">
-                                <span class="button big" style="float: right;">
-                                        <span class="bl"></span>
-                                        <span class="bc"><?=($pub['id']>0)?'Сохранить изменения':'Добавить'?></span>
-                                        <span class="br"></span>
-                                        <input type="submit" name="editform" value=""/>
+                                <span style="float: right;">
+                                	<input class="button big" type="submit" name="editform" value="<?=($pub['id']>0)?'Сохранить изменения':'Добавить'?>"/>
                                 </span>
                         </div>
                         <span class="clear"></span>
@@ -418,18 +415,14 @@ function strpos (haystack, needle, offset) {
 			<div class="place" style="z-index: 10; width: 10%;margin-right: 1%">
 				<label>Номер</label>
 				<span class="input">
-					<span class="bl"></span>
-					<span class="bc"><input type="text" name="search_num" maxlength="20" value="<?=$this->search_num?>"/></span>
-					<span class="br"></span>
+					<input type="text" name="search_num" maxlength="20" value="<?=$this->search_num?>"/>
 				</span>
 			</div>
 
 			<div class="place" style="z-index: 10; width: 20%;margin-right: 1%">
 				<label>Наименование или часть</label>
 				<span class="input">
-					<span class="bl"></span>
-					<span class="bc"><input type="text" name="search_name" maxlength="20" value="<?=$this->search_name?>"/></span>
-					<span class="br"></span>
+					<input type="text" name="search_name" maxlength="20" value="<?=$this->search_name?>"/>
 				</span>
 			</div>
 
@@ -450,11 +443,8 @@ function strpos (haystack, needle, offset) {
             <div class="place" style="width: 8%;margin-left: 2%;">
 				<label>&nbsp;</label>
 				<span class="forbutton">
-					<span class="button">
-						<span class="bl"></span>
-						<span class="bc">Найти</span>
-						<span class="br"></span>
-						<input type="submit" value="" >
+					<span>
+						<input class="button" type="submit" value="Найти" >
 					</span>
 				</span>
 			</div>
@@ -469,11 +459,7 @@ function strpos (haystack, needle, offset) {
                                 <p>Отсутствуют записи, удовлетворяющие заданным условиям</p>
                                 <span class="clear"></span>
                                         <div class="place">
-                                                <a href="./?section=<?=$section['id']?>&pub=new" class="button big" style="float: right;">
-                                                        <span class="bl"></span>
-                                                        <span class="bc">Добавить</span>
-                                                        <span class="br"></span>
-                                                </a>
+                                        	<a href="./?section=<?=$section['id']?>&pub=new" class="button big" style="float: right;">Добавить</a>
                                         </div>
                                 <?
                         }
@@ -515,9 +501,6 @@ function strpos (haystack, needle, offset) {
                                                         </td>
                                                         <td class="t_32width">
                                                                 <a href="./?section=<?=$section['id']?>&delete=<?=$pub['id']?>" class="button txtstyle" onclick="if (!confirm('Удалить запись')) return false;">
-                                                                        <span class="bl"></span>
-                                                                        <span class="bc"></span>
-                                                                        <span class="br"></span>
                                                                         <input type="button" style="background-image: url(/pics/editor/delete.gif)" title="Удалить запись"/>
                                                                 </a>
                                                         </td>
@@ -528,17 +511,10 @@ function strpos (haystack, needle, offset) {
                                         </table>
                                         <span class="clear"></span>
                                         <div class="place">
-                                                <span class="button big">
-                                                        <span class="bl"></span>
-                                                        <span class="bc">Сохранить изменения</span>
-                                                        <span class="br"></span>
-                                                        <input type="submit" name="showsave" value="" />
+                                                <span>
+	                                            	<input class="button big" type="submit" name="showsave" value="Сохранить изменения" />
                                                 </span>
-                                                <a href="./?section=<?=$section['id']?>&pub=new" class="button big" style="float: right;">
-                                                        <span class="bl"></span>
-                                                        <span class="bc">Добавить</span>
-                                                        <span class="br"></span>
-                                                </a>
+                                                <a href="./?section=<?=$section['id']?>&pub=new" class="button big" style="float: right;">Добавить</a>
                                         </div>
                                         <span class="clear"></span>
                                 </form>
@@ -564,11 +540,7 @@ function strpos (haystack, needle, offset) {
                                                         $inner = ($i<$this->getSetting('pagescount'))?'<strong>&hellip;</strong>':$i;
                                                 }
                                                 if ($inner!='') print '
-                                                '.$block[0].'
-                                                        <span class="bl"></span>
-                                                        <span class="bc">'.$inner.'</span>
-                                                        <span class="br"></span>
-                                                '.$block[1];
+                                                '.$block[0].$inner.$block[1];
                                         }
                                         ?>
                                 </div>

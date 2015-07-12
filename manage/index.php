@@ -4,44 +4,36 @@ include $_SERVER['DOCUMENT_ROOT']."/inc/site_admin/meta.php";?>
 
 <body id="login">
 	<div id="loginform">
-		<div class="bg png"></div>
 		<form name="enter" action="/manage/" method="POST" class="forms">
-			<span class="logo"><!--//<img src="/pics/logo.jpg" alt=""  />//--> <br/></span>
+
+			<a href="/manage/"><img src="/pics/logo_cms.png"></a>
+			<br/></span>
 			<!--//<div><p>Для входа в панель управления<br />вам необходимо авторизироваться</p></div>//-->
 			<div class="formmargin">
 				<div class="place" style="float: left; width: 49%;">
 					<label>Логин</label>
-					<span class="input">
-						<span class="bl"></span>
-						<span class="bc"><input name="login" value="" autocomplete="off"/></span>
-						<span class="br"></span>
-					</span>
+					<input name="login" value="<?=$_POST['login']?>" autocomplete="off" type="text"/>
 				</div>
 				<div class="place" style="float: right; width: 49%;">
 					<label>Пароль</label>
-					<span class="input">
-						<span class="bl"></span>
-						<span class="bc"><input name="password" class="inp-pass" type="password" value="" /></span>
-						<span class="br"></span>
-					</span>
+					<input name="password" class="inp-pass" type="password" value="" /></span>
 				</div>
 				<span class="clear"></span>
 				<div class="place">
-					<span class="forckecks" style="float: left;">
-						<label><input name="saveme" type="checkbox" />Запомнить меня</label>
-					</span>
-					<span class="button big" style="float: right;">
-						<span class="bl"></span>
-						<span class="bc">Войти</span>
-						<span class="br"></span>
-						<input type="submit" name="enter" value="" />
-					</span>
+					<div class="styled">
+						<input type="checkbox" name="saveme" id="checkbox" class="checkbox">
+						<label for="checkbox">запомнить</label>
+					</div>
+
+					<div style="float: right; padding-right: -2px;">
+						<input type="submit" style="float: right;" value="Вход" class="button big" name="enter">
+					</div>
 				</div>
 			</div>
 		</form>
 	</div>
 </body>
-<script>
+<!--//<script>
 	addEvent(window.addEventListener || window.attachEvent ? window : document.addEventListener ? document : null, "load", function(){ if (form = document.forms['enter']) form.login.focus(); });
-</script>
+</script>//-->
 </html>

@@ -17,6 +17,7 @@ if (isset($_GET['setdel'])){
 	 WriteLog($_GET['setdel'], 'удаление настройки');
 }
 $list = $iface->getList();
+
 if (isset($_POST['setupdate'])){
 	foreach ($list as $setid){
 		$set = $iface->getOne($setid);
@@ -44,7 +45,7 @@ function Gotopage(link)
 <div id="zbody">
 	<?include $_SERVER['DOCUMENT_ROOT']."/inc/site_admin/header.php";;?>
 	<div id="content" class="forms">
-		<h1>Настройки сайта</h1>
+		<?include_once($_SERVER['DOCUMENT_ROOT']."/inc/site_admin/nav.php");?>
 		<?
 		if (count($updateerrors)>0){
 			print '
@@ -68,9 +69,6 @@ function Gotopage(link)
 					<?
 					if ($set['settings']['type']=='int')
 					{
-					?>
-
-                        <?
                         $values = array('0'=>'Нет', '1'=>'Да');
                         print getSelectSinonim($set['name'].'_value',$values,$set['value']);
 					}
@@ -84,9 +82,7 @@ function Gotopage(link)
 					{
 					?>
 					<span class="input">
-						<span class="bl"></span>
-						<span class="bc"><input name="<?=htmlspecialchars($set['name'])?>_value" value="<?=stripslashes(htmlspecialchars($set['value']))?>"/></span>
-						<span class="br"></span>
+						<input name="<?=htmlspecialchars($set['name'])?>_value" value="<?=stripslashes(htmlspecialchars($set['value']))?>"/>
 					</span>
 					<?
 					}
@@ -97,9 +93,6 @@ function Gotopage(link)
 					if ((isset($set['settings']['undeletable']) || !in_array('delete',$group['new_settings'][$activeccid])) && $mode!='development'){
 						?>
 						<span class="button txtstyle disabled">
-							<span class="bl"></span>
-							<span class="bc"></span>
-							<span class="br"></span>
 							<input type="button" style="background-image: url(/pics/editor/delete-disabled.gif)" title="Невозможно удалить" onclick="return false;" />
 						</span>
 						<?
@@ -107,9 +100,6 @@ function Gotopage(link)
 					else{
 						?>
 						<a class="button txtstyle" href="#" onclick="if (confirm('Вы уверены, что хотите удалить эту настройку?')) Gotopage('<?=$_SERVER['PHP_SELF'].'?setdel='.$set['id']?>'); return false;" >
-							<span class="bl"></span>
-							<span class="bc"></span>
-							<span class="br"></span>
 							<input type="button" style="background-image: url(/pics/editor/delete.gif)" title="Удалить настройку" />
 						</a>
 						<?
@@ -125,11 +115,8 @@ function Gotopage(link)
 			{
 			?>
 			<div class="place">
-				<span class="button big" style="float: right;">
-					<span class="bl"></span>
-					<span class="bc">Сохранить</span>
-					<span class="br"></span>
-					<input type="submit" name="setupdate" value="" />
+				<span style="float: right;">
+					<input class="button big" type="submit" name="setupdate" value="Сохранить" />
 				</span>
 			</div>
 			<?}?>
@@ -154,14 +141,12 @@ function Gotopage(link)
 		?>
 		<div class="hr"></div>
 		<form name="setadd" action="<?=$_SERVER['REQUEST_URI']?>" method="POST">
-		<H1>Добавить настройку</H1>
+		<?include_once($_SERVER['DOCUMENT_ROOT']."/inc/site_admin/nav.php");?>
 			<div class="place">
 				<table style="width: 100%; table-layout: fixed;"><tr><td>
 				<label>Описание</label>
 				<span class="input">
-					<span class="bl"></span>
-					<span class="bc"><input name="description" maxlength="250" value="<?=htmlspecialchars($data['description'])?>" /></span>
-					<span class="br"></span>
+					<input name="description" maxlength="250" value="<?=htmlspecialchars($data['description'])?>" />
 				</span>
 				</td></tr></table>
 			</div>
@@ -171,16 +156,12 @@ function Gotopage(link)
 				<tr><td>
 				<label>Название</label>
 				<span class="input">
-					<span class="bl"></span>
-					<span class="bc"><input name="name" maxlength="20" value="<?=htmlspecialchars($data['name'])?>" /></span>
-					<span class="br"></span>
+					<input name="name" maxlength="20" value="<?=htmlspecialchars($data['name'])?>" />
 				</span>
 				</td><td>
 				<label>Значение</label>
 				<span class="input">
-					<span class="bl"></span>
-					<span class="bc"><input name="value" value="<?=stripslashes(htmlspecialchars($data['value']))?>" /></span>
-					<span class="br"></span>
+					<input name="value" value="<?=stripslashes(htmlspecialchars($data['value']))?>" />
 				</span>
 				</td><td>
 				<label>Тип</label>
@@ -193,11 +174,8 @@ function Gotopage(link)
 			</div>
 			<span class="clear"></span>
 			<div class="place">
-				<span class="button big" style="float: right;">
-					<span class="bl"></span>
-					<span class="bc">Добавить</span>
-					<span class="br"></span>
-					<input type="submit" name="setadd" value="" />
+				<span style="float: right;">
+					<input class="button big" type="submit" name="setadd" value="Добавить" />
 				</span>
 			</div>
 		</form>

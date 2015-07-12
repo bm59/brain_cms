@@ -200,7 +200,7 @@ class CCLog extends VirtualContent
                 $pub = $this->getPub($_GET['pub']); $pub['id'] = floor($pub['id']);
                 ?>
                 <div id="content" class="forms">
-                        <h1><a href="./">Список <?=($this->getSetting('isservice')>0)?'сервисов':'разделов'?></a> &rarr; <a href="./?section=<?=$section['id']?>"><?=$section['name']?></a> &rarr; <?=($pub['id']>0)?'Редактирование':'Добавление'?></h1>
+                        <?include_once($_SERVER['DOCUMENT_ROOT']."/inc/site_admin/nav.php");?>
                         <?
                         $saveerrors = $this->getSetting('saveerrors');
                         if (!is_array($saveerrors)) $saveerrors = array();
@@ -225,14 +225,6 @@ class CCLog extends VirtualContent
                                         $tface->drawEditor($stylearray[$tface->getSetting('name')],((in_array($tface->getSetting('name'),$nospans))?false:true));
                                 }
                         ?>
-                        <div class="place">
-                                <span class="button big" style="float: right;">
-                                        <span class="bl"></span>
-                                        <span class="bc"><?=($pub['id']>0)?'Сохранить изменения':'Добавить'?></span>
-                                        <span class="br"></span>
-                                        <input type="submit" name="editform" value=""/>
-                                </span>
-                        </div>
                         <span class="clear"></span>
                         </form>
                 </div>
@@ -303,73 +295,58 @@ class CCLog extends VirtualContent
                 </script>
                 <div id="content" class="forms">
                         <?include_once($_SERVER['DOCUMENT_ROOT']."/inc/admin/total_tab.php")?>
-                        <h1><a href="./">Список <?=($this->getSetting('isservice')>0)?'сервисов':'разделов'?></a> &rarr; <?=$section['name']?></h1>
+                        <?include_once($_SERVER['DOCUMENT_ROOT']."/inc/site_admin/nav.php");?>
                         <form id="searchform" name="searchform" action="./?section=<?=$section['id']?>" method="POST">
 							<div class="place" style="z-index: 10; width: 10%;">
 								<label>id записи</label>
 								<span class="input">
-								<span class="bl"></span>
-								<span class="bc"><input type="text" name="search_item_id" maxlength="100" value="<?=$this->search_item_id?>"/></span>
-								<span class="br"></span>
+									<input type="text" name="search_item_id" maxlength="100" value="<?=$this->search_item_id?>"/>
 								</span>
 							</div>
 							<div class="place" style="z-index: 10; width: 10%;">
 								<label>user id</label>
 								<span class="input">
-								<span class="bl"></span>
-								<span class="bc"><input type="text" name="search_user_id" maxlength="100" value="<?=$this->search_user_id?>"/></span>
-								<span class="br"></span>
+									<input type="text" name="search_user_id" maxlength="100" value="<?=$this->search_user_id?>"/>
 								</span>
 							</div>
 							<div class="place" style="z-index: 10; width: 10%;">
 								<label>user name</label>
 								<span class="input">
-								<span class="bl"></span>
-								<span class="bc"><input type="text" name="search_user_name" maxlength="100" value="<?=$this->search_user_name?>"/></span>
-								<span class="br"></span>
+									<input type="text" name="search_user_name" maxlength="100" value="<?=$this->search_user_name?>"/>
 								</span>
 							</div>
 							<div class="place" style="z-index: 10; width: 10%;">
 								<label>действие</label>
 								<span class="input">
-								<span class="bl"></span>
-								<span class="bc"><input type="text" name="search_descr" maxlength="100" value="<?=$this->search_descr?>"/></span>
-								<span class="br"></span>
+									<input type="text" name="search_descr" maxlength="100" value="<?=$this->search_descr?>"/>
 								</span>
 							</div>
 							<div class="place" style="z-index: 10; width: 10%;">
 								<label>комментарий</label>
 								<span class="input">
-								<span class="bl"></span>
-								<span class="bc"><input type="text" name="search_comment" maxlength="100" value="<?=$this->search_comment?>"/></span>
-								<span class="br"></span>
+									<input type="text" name="search_comment" maxlength="100" value="<?=$this->search_comment?>"/>
 								</span>
 							</div>
 							<div class="place" style="z-index: 10; width: 10%;">
 								<label>Изменения</label>
 								<span class="input">
-								<span class="bl"></span>
-								<span class="bc"><input type="text" name="search_changes" maxlength="100" value="<?=$this->search_changes?>"/></span>
-								<span class="br"></span>
+									<input type="text" name="search_changes" maxlength="100" value="<?=$this->search_changes?>"/>
 								</span>
 							</div>
 							<div class="place" style="z-index: 10; width: 165px;">
 								<label>Дата с</label>
-								<div style="margin-top: 3px;"><input id="from" name="search_date_from" type="text" style="width: 80px; padding: 14px; border: 1px solid #D8D8D8; background-color:none; margin: 0 2px; float: left;" value="<?=htmlspecialchars($this->search_date_from)?>"/></div>
+								<div><input id="from" name="search_date_from" type="text" style="width: 100px; float: left;" value="<?=htmlspecialchars($this->search_date_from)?>"/></div>
 							</div>
 
 							<div class="place" style="z-index: 10; width: 165px; margin-right: 2%;">
 								<label>Дата по</label>
-								<div style="margin-top: 3px;"><input id="to" name="search_date_to" type="text" style="width: 80px; padding: 14px; border: 1px solid #D8D8D8; background-color:none; margin: 0 2px; float: left;" value="<?=htmlspecialchars($this->search_date_to)?>"/></div>
+								<div><input id="to" name="search_date_to" type="text" style="width: 100px; float: left;" value="<?=htmlspecialchars($this->search_date_to)?>"/></div>
 							</div>
 							<div class="place" style="width: 8%">
 								<label>&nbsp;</label>
 								<span class="forbutton">
-								<span class="button">
-								<span class="bl"></span>
-								<span class="bc">Найти</span>
-								<span class="br"></span>
-								<input type="submit" value="" >
+								<span>
+									<input class="button" type="submit" value="Найти" >
 								</span>
 								</span>
 							</div>
@@ -386,13 +363,6 @@ class CCLog extends VirtualContent
                                 ?>
                                 <p>Отсутствуют публикации, удовлетворяющие заданным условиям</p>
                                 <span class="clear"></span>
-                                <div class="place">
-                                        <a href="./?section=<?=$section['id']?>&pub=new" class="button big" style="float: right;">
-                                                <span class="bl"></span>
-                                                <span class="bc">Добавить</span>
-                                                <span class="br"></span>
-                                        </span>
-                                </div>
                                 <?
                         }
                         else{
@@ -449,26 +419,12 @@ class CCLog extends VirtualContent
                                         ?>
                                         </table>
                                         <span class="clear"></span>
-                                        <div class="place">
-                                                <span class="button big">
-                                                        <span class="bl"></span>
-                                                        <span class="bc">Сохранить изменения</span>
-                                                        <span class="br"></span>
-                                                        <input type="submit" name="showsave" value="" />
-                                                </span>
-                                                <a href="./?section=<?=$section['id']?>&pub=new" class="button big" style="float: right;">
-                                                        <span class="bl"></span>
-                                                        <span class="bc">Добавить</span>
-                                                        <span class="br"></span>
-                                                </a>
-                                        </div>
-                                        <span class="clear"></span>
                                 </form>
                                 <span class="clear"></span>
                                 <?
                                 if ($this->getSetting('pagescount')>1){
                                 ?>
-                                <div class="hr"><hr /></div>
+                                <div class="hr"></div>
                                 <div id="paging" class="nopad">
                                         <?
                                         $href = '?section='.$section['id'].$this->urlstr;
@@ -486,11 +442,7 @@ class CCLog extends VirtualContent
                                                         $inner = ($i<$this->getSetting('pagescount'))?'<strong>&hellip;</strong>':$i;
                                                 }
                                                 if ($inner!='') print '
-                                                '.$block[0].'
-                                                        <span class="bl"></span>
-                                                        <span class="bc">'.$inner.'</span>
-                                                        <span class="br"></span>
-                                                '.$block[1];
+                                                '.$block[0].$inner.$block[1];
                                         }
                                         ?>
                                 </div>

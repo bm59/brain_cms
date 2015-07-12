@@ -20,17 +20,12 @@ $requestUserGroup = $VisitorType->getOne($requestUser['type']);
 $errors = array();
 if (isset($_POST['profilepswd'])) $errors = $SiteVisitor->changePassword($_SESSION['visitorID'],trim($_POST['oldpswd']),trim($_POST['newpswd']));
 ?>
-	<?include $_SERVER['DOCUMENT_ROOT']."/inc/site_admin/meta.php";?>
-<div id="zbody">
+<?include $_SERVER['DOCUMENT_ROOT']."/inc/site_admin/meta.php";?>
 <?include $_SERVER['DOCUMENT_ROOT']."/inc/site_admin/header.php";?>
 	<div id="content" class="forms">
-		<?
-		if ((in_array('610',$group['access'])) || (isset($group['settings']['superaccess']))){
-		?>
-		<h1>Профиль пользователя</h1>
-		<?
-		}
-		?>
+       	<div class="hr"></div>
+  		<h1><a href="/manage/">Панель управления</a> &rarr; Доступ &rarr; <a href="/manage/access/users/">Пользователи</a> &rarr; Профиль</h1>
+        <br/>
 		<div class="pub user">
 			<div class="info">
 				<div class="avatar" style="margin: -4px 0px;"><img src="<?=($requestUser['picture']['path'])?$requestUser['picture']['path']:'/pics/i/empty_user.gif'?>" width="60" height="60" alt="" /></div>
@@ -45,11 +40,7 @@ if (isset($_POST['profilepswd'])) $errors = $SiteVisitor->changePassword($_SESSI
 			<?
 			if ((in_array('410',$group['access'])) || (isset($group['settings']['superaccess']))){
 				?>
-				<a href="/manage/access/users/edit/?edit=<?=$requestUser['id']?>" class="button">
-					<span class="bl"></span>
-					<span class="bc">Редактировать</span>
-					<span class="br"></span>
-				</a>
+				<a href="/manage/access/users/edit/?edit=<?=$requestUser['id']?>" class="button">Редактировать</a>
 				<?
 			}
 			?>
@@ -78,27 +69,20 @@ if (isset($_POST['profilepswd'])) $errors = $SiteVisitor->changePassword($_SESSI
 					<div class="place" style="width: 200px; margin-right: 2%;">
 						<label>Старый пароль</label>
 						<span class="input">
-							<span class="bl"></span>
-							<span class="bc"><input type="password" name="oldpswd" maxlength="30" value=""/></span>
-							<span class="br"></span>
+							<input type="password" name="oldpswd" maxlength="30" value=""/>
 						</span>
 					</div>
 					<div class="place" style="width: 200px; margin-right: 2%;">
 						<label>Новый пароль</label>
 						<span class="input">
-							<span class="bl"></span>
-							<span class="bc"><input type="password" name="newpswd" maxlength="30" value=""/></span>
-							<span class="br"></span>
+							<input type="password" name="newpswd" maxlength="30" value=""/>
 						</span>
 					</div>
 					<div class="place" style="width: 200px;">
 						<label>&nbsp;</label>
 						<span class="forbutton">
-							<span class="button big">
-								<span class="bl"></span>
-								<span class="bc">Сохранить</span>
-								<span class="br"></span>
-								<input type="submit" name="profilepswd" value=""/>
+							<span>
+								<input class="button big" type="submit" name="profilepswd" value="Сохранить"/>
 							</span>
 						</span>
 					</div>
@@ -113,14 +97,9 @@ if (isset($_POST['profilepswd'])) $errors = $SiteVisitor->changePassword($_SESSI
 		if ((in_array('610',$group['access'])) || (isset($group['settings']['superaccess']))){
 		?>
 		<div class="hr"><hr /></div>
-		<div id="paging" class="nopad">
-			<a href="/manage/access/users/">Перейти к списку пользователей</a>
-		</div>
+		<a href="/manage/access/users/" class="button">Перейти к списку пользователей</a>
 		<?
 		}
 		?>
 	</div>
-	<?/*include $_SERVER['DOCUMENT_ROOT']."/inc/footer.php";*/?>
-</div>
-</body>
-</html>
+<?include $_SERVER['DOCUMENT_ROOT']."/inc/site_admin/footer.php";?>

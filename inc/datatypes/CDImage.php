@@ -13,7 +13,6 @@ class CDImage extends VirtualType
 		$st = $Storage->getStorage(floor($this->getSetting($this->getSetting('name').'storage')));
 		if (!floor($st['id'])>0)
 		$st = $Storage->getStorage(floor($this->getSetting('imagestorage')));
-
 		$f = 0;
 		if (floor($st['id'])>0){
 			$image = $Storage->getFile($this->getSetting('value'));
@@ -22,9 +21,9 @@ class CDImage extends VirtualType
 			?>
    			<script>
         $(function(){
-        var btnUpload=$('#upl_button');
-        var status=$('.contentdesc');
-        var upload_me=new AjaxUpload(btnUpload, {
+        var btnUpload<?='_'.$this->getSetting('name')?>=$('#upl_button<?='_'.$this->getSetting('name')?>');
+        var status=$('.contentdesc<?='_'.$this->getSetting('name')?>');
+        var upload_me=new AjaxUpload(btnUpload<?='_'.$this->getSetting('name')?>, {
             action: '/uploader_image.php',
             responseType: 'json',
             name: 'upl_file',
@@ -37,9 +36,9 @@ class CDImage extends VirtualType
                 status.html('');
                 $('#file').html('');
                 if(response.result==="ok"){
-                    $('#loading').fadeOut(0);
-                    $('#delete_container').fadeIn(0);
-                    status.html('<img src="'+response.path+'" class="contentimg">');
+                    $('#loading<?='_'.$this->getSetting('name')?>').fadeOut(0);
+                    $('#delete_container<?='_'.$this->getSetting('name')?>').fadeIn(0);
+                    status.html('<img style="width: 170px" class="contentimg" src="'+response.path+'" class="contentimg">');
                     $('#uploadfilehidden<?=htmlspecialchars($this->getSetting('name'))?>').val(response.id);
                 }else{
                     $('#loading').fadeOut(0);
@@ -52,7 +51,7 @@ class CDImage extends VirtualType
 
 
     });
-            function delete_file ()
+    	function delete_file<?='_'.$this->getSetting('name')?> ()
         {
        		if (!confirm('Вы уверены, что хотите удалить этот файл?')) return false;
 
@@ -64,8 +63,8 @@ class CDImage extends VirtualType
 			            var arr_resp = result.split("#%#");
 			            if(arr_resp[0]==="true")
 			            {
-                         	$('#delete_container').fadeOut(0);
-                         	 $('.contentdesc').html('');
+                         	 $('#delete_container<?='_'.$this->getSetting('name')?>').fadeOut(0);
+                         	 $('.contentdesc<?='_'.$this->getSetting('name')?>').html('');
 			            }
 			            else
 			            {
@@ -85,24 +84,18 @@ class CDImage extends VirtualType
 			/*if ($this->getSetting('name')=='image' && $_GET['section']==7) 	print '<div style="padding: 0 5px; color: #ff0000">Рекомендуемый размер:  1040x450 пикселей</div>';*/
 			?>
 				<input type="hidden" id="uploadfilehidden<?=htmlspecialchars($this->getSetting('name'))?>" name="<?=htmlspecialchars($this->getSetting('name'))?>" value="<?=$this->getSetting('value')?>">
+                <div class="place forimage">
+				<span id="upl_button<?='_'.$this->getSetting('name')?>" class="button">
+					Загрузить изображение
+				</span>
 
-				<span class="button">
-					<span class="bl"></span>
-					<span class="bc">Загрузить изображение</span>
-					<span class="br"></span>
-					<div class="fileselect">
-						<input type="file" name="<?=htmlspecialchars($this->getSetting('name'))?>" id="upl_button"/>
-					</div>
+				<span class="button txtstyle" id="delete_container<?='_'.$this->getSetting('name')?>" <?=(floor($this->getSetting('value'))<1)?'style="display:none;"':''?>>
+					<input type="button" title="Удалить изображение" style="background-image: url(/pics/editor/delete.gif)" id="delete_button<?='_'.$this->getSetting('name')?>" onclick="delete_file<?='_'.$this->getSetting('name')?>(); return false">
 				</span>
-				<span class="button txtstyle" id="delete_container" <?=(floor($this->getSetting('value'))<1)?'style="display:none;"':''?>>
-					<span class="bl"></span>
-					<span class="bc"></span>
-					<span class="br"></span>
-					<input type="button" title="Удалить изображение" style="background-image: url(/pics/editor/delete.gif)" id="delete_button" onclick="delete_file(); return false">
-				</span>
+				</div>
                <span class="clear"></span>
-				<div id="upl_error"></div>
-			    <div id="upl_status"></div>
+				<div id="upl_error<?='_'.$this->getSetting('name')?>"></div>
+			    <div id="upl_status<?='_'.$this->getSetting('name')?>"></div>
 
 				<span class="clear"></span>
 				<?
@@ -138,7 +131,7 @@ class CDImage extends VirtualType
 
 				<div><small><?=$desc?></small></div>
 				<div id="<?=htmlspecialchars($this->getSetting('name'))?>imagecontent">
-				<div class="contentdesc">
+				<div class="contentdesc<?='_'.$this->getSetting('name')?>">
 				<?
 				if (floor($image['id'])>0){
 					$wh = @getimagesize($image['fullpath']);

@@ -209,7 +209,7 @@ class CCPhotoalbum extends VirtualContent
 		$rubriclist = $this->getRubricList();
 		?>
 		<div id="content" class="forms">
-			<h1><a href="./">Список <?=($this->getSetting('isservice')>0)?'сервисов':'разделов'?></a> &rarr; <a href="./?section=<?=$section['id']?>"><?=$section['name']?></a> &rarr; <?=($element['id']>0)?'Редактирование':'Добавление'?></h1>
+			<?include_once($_SERVER['DOCUMENT_ROOT']."/inc/site_admin/nav.php");?>
 			<?
 			$saveerrors = $this->getSetting('saveerrors');
 			if (!is_array($saveerrors)) $saveerrors = array();
@@ -249,11 +249,8 @@ class CCPhotoalbum extends VirtualContent
 				}
 				?>
 				<div class="place">
-					<span class="button big" style="float: right;">
-						<span class="bl"></span>
-						<span class="bc">Сохранить</span>
-						<span class="br"></span>
-						<input type="submit" name="editform" value=""/>
+					<span style="float: right;">
+						<input class="button big" type="submit" name="editform" value="Сохранить"/>
 					</span>
 				</div>
 				<span class="clear"></span>
@@ -274,46 +271,7 @@ class CCPhotoalbum extends VirtualContent
 		$rubriclist = $this->getRubricList();
 		?>
 		<div id="content" class="forms">
-			<h1><a href="./">Список <?=($this->getSetting('isservice')>0)?'сервисов':'разделов'?></a> &rarr; <?=$section['name']?></h1>
-<!--//			<form id="searchform" name="searchform" action="./?section=<?=$section['id'].(($searchrubric['id']>0)?'&searchrubric='.$searchrubric['id']:'')?>" method="POST">
-				<div class="place" id="searchfrom_calendar" style="z-index: 10; width: 158px; margin-right: 2%;">
-					<script>
-						CalendarInit('searchfrom','Начальная дата','<?=$searchfrom?>');
-					</script>
-				</div>
-				<div class="place" id="searchto_calendar" style="z-index: 10; width: 158px; margin-right: 2%;">
-					<script>
-						CalendarInit('searchto','Конечная дата','<?=$searchto?>');
-					</script>
-				</div>
-				<div class="place" style="width: auto; margin-right: 20px;">
-					<label>&nbsp;</label>
-					<span class="forbutton">
-						<span class="button">
-							<span class="bl"></span>
-							<span class="bc">Показать вопросы за выбранный период</span>
-							<span class="br"></span>
-							<input type="submit" value=""/>
-						</span>
-					</span>
-				</div>
-				<?
-				if (($searchfrom.$searchto!='') || ($searchrubric['id']>0)){
-				?>
-				<div class="place" style="width: auto;">
-					<label>&nbsp;</label>
-					<span class="forbutton">
-						<a href="./?section=<?=$section['id']?>" class="button">
-							<span class="bl"></span>
-							<span class="bc">Показать все вопросы</span>
-							<span class="br"></span>
-						</a>
-					</span>
-				</div>
-				<?
-				}
-				?>
-			</form>//-->
+			<?include_once($_SERVER['DOCUMENT_ROOT']."/inc/site_admin/nav.php");?>
 			<span class="clear"></span>
 			<?
 			if (count($rubriclist)>0){
@@ -330,22 +288,15 @@ class CCPhotoalbum extends VirtualContent
 					<div class="place" style="width: auto; margin-right: 20px;">
 						<label>&nbsp;</label>
 						<span class="forbutton">
-							<span class="button">
-								<span class="bl"></span>
-								<span class="bc">Показать фото из выбранного фотоальбома</span>
-								<span class="br"></span>
-								<input type="submit" value=""/>
+							<span>
+								<input class="button" type="submit" value="Показать фото из выбранного фотоальбома"/>
 							</span>
 						</span>
 					</div>
 					<div class="place" style="width: auto;">
 						<label>&nbsp;</label>
 						<span class="forbutton">
-							<a href="./?section=<?=$section['id']?>&function=1" class="button" style="display: block;">
-								<span class="bl"></span>
-								<span class="bc">Управление фотоальбомами</span>
-								<span class="br"></span>
-							</a>
+							<a href="./?section=<?=$section['id']?>&function=1" class="button" style="display: block;">Управление фотоальбомами</a>
 						</span>
 					</div>
 					<span class="clear"></span>
@@ -357,11 +308,7 @@ class CCPhotoalbum extends VirtualContent
 			<div class="place" style="width: auto;">
 				<label>&nbsp;</label>
 				<span class="forbutton">
-					<a href="./?section=<?=$section['id']?>&function=1" class="button" style="display: block;">
-						<span class="bl"></span>
-						<span class="bc">Управление фотоальбомами</span>
-						<span class="br"></span>
-					</a>
+					<a href="./?section=<?=$section['id']?>&function=1" class="button" style="display: block;">Управление фотоальбомами</a>
 				</span>
 			</div>
 			<span class="clear"></span>
@@ -376,11 +323,7 @@ class CCPhotoalbum extends VirtualContent
 				<p>Отсутствуют записи, удовлетворяющие заданным условиям</p>
 				<span class="clear"></span>
 				<div class="place">
-					<a href="./?section=<?=$section['id']?>&element=new" class="button big" style="float: right;">
-						<span class="bl"></span>
-						<span class="bc">Добавить</span>
-						<span class="br"></span>
-					</span>
+					<a href="./?section=<?=$section['id']?>&element=new" class="button big" style="float: right;">Добавить</a>
 				</div>
 				<?
 			}
@@ -410,9 +353,6 @@ class CCPhotoalbum extends VirtualContent
 							<td class="t_left"><?=$el['comment']?></td>
 							<td class="t_32width">
 								<a href="./?section=<?=$section['id']?>&delete=<?=$el['id']?>" class="button txtstyle" onclick="if (!confirm('Удалить вопрос')) return false;">
-									<span class="bl"></span>
-									<span class="bc"></span>
-									<span class="br"></span>
 									<span class="icon" style="background-image: url(/pics/editor/delete.gif)" title="Удалить вопрос" />
 								</a>
 							</td>
@@ -423,11 +363,7 @@ class CCPhotoalbum extends VirtualContent
 				</table>
 				<span class="clear"></span>
 				<div class="place">
-					<a href="./?section=<?=$section['id']?>&element=new" class="button big" style="float: right;">
-						<span class="bl"></span>
-						<span class="bc">Добавить</span>
-						<span class="br"></span>
-					</a>
+					<a href="./?section=<?=$section['id']?>&element=new" class="button big" style="float: right;">Добавить</a>
 				</div>
 				<span class="clear"></span>
 				<?
@@ -454,11 +390,7 @@ class CCPhotoalbum extends VirtualContent
 								$inner = ($i<$this->getSetting('pagescount'))?'<strong>&hellip;</strong>':$i;
 							}
 							if ($inner!='') print '
-							'.$block[0].'
-								<span class="bl"></span>
-								<span class="bc">'.$inner.'</span>
-								<span class="br"></span>
-							'.$block[1];
+							'.$block[0].$inner.$block[1];
 						}
 						?>
 					</div>
@@ -500,7 +432,7 @@ class CCPhotoalbum extends VirtualContent
 		$element = $this->getSetting('data');
 		?>
 		<div id="content" class="forms">
-			<h1><a href="./">Список <?=($this->getSetting('isservice')>0)?'сервисов':'разделов'?></a> &rarr; <a href="./?section=<?=$section['id']?>"><?=$section['name']?></a> &rarr; <a href="./?section=<?=$section['id']?>&function=1">Фотоальбомы</a> &rarr; <?=($element['id']>0)?'Редактирование':'Добавление'?></h1>
+			<?include_once($_SERVER['DOCUMENT_ROOT']."/inc/site_admin/nav.php");?>
 			<?
 			$saveerrors = $this->getSetting('saveerrors');
 			if (!is_array($saveerrors)) $saveerrors = array();
@@ -526,18 +458,13 @@ class CCPhotoalbum extends VirtualContent
 				<div class="place">
 					<label>Название фотоальбома</label>
 					<span class="input">
-						<span class="bl"></span>
-						<span class="bc"><input type="text" name="name" value="<?=$element['name']?>" maxlength="250"></span>
-						<span class="br"></span>
+						<input type="text" name="name" value="<?=$element['name']?>" maxlength="250">
 					</span>
 				</div>
 				<span class="clear"></span>
 				<div class="place">
-					<span class="button big" style="float: right;">
-						<span class="bl"></span>
-						<span class="bc"><?=($element['id']>0)?'Сохранить':'Добавить'?></span>
-						<span class="br"></span>
-						<input type="submit" name="editform" value=""/>
+					<span style="float: right;">
+						<input class="button big" type="submit" name="editform" value="<?=($element['id']>0)?'Сохранить':'Добавить'?>"/>
 					</span>
 				</div>
 				<span class="clear"></span>
@@ -550,7 +477,7 @@ class CCPhotoalbum extends VirtualContent
 		$section = $SiteSections->get($this->getSetting('section'));
 		?>
 		<div id="content" class="forms">
-			<h1><a href="./">Список <?=($this->getSetting('isservice')>0)?'сервисов':'разделов'?></a> &rarr; <a href="./?section=<?=$section['id']?>"><?=$section['name']?></a> &rarr; Список</h1>
+			<
 			<?
 			$list = $this->getRubricList();
 			if (count($list)==0){
@@ -558,11 +485,7 @@ class CCPhotoalbum extends VirtualContent
 				<p>Элементы отсутствуют</p>
 				<span class="clear"></span>
 				<div class="place">
-					<a href="./?section=<?=$section['id']?>&function=1&element=new" class="button big" style="float: right;">
-						<span class="bl"></span>
-						<span class="bc">Добавить</span>
-						<span class="br"></span>
-					</span>
+					<a href="./?section=<?=$section['id']?>&function=1&element=new" class="button big" style="float: right;">Добавить</a>
 				</div>
 				<?
 			}
@@ -585,9 +508,6 @@ class CCPhotoalbum extends VirtualContent
 							<td class="t_32width">
 							<?if ($el['id']>0) {?>
 								<a href="./?section=<?=$section['id']?>&function=1&delete=<?=$el['id']?>" class="button txtstyle" onclick="if (!confirm('Удалить фотоальбом? Все фотографии перейдут в раздел «Без фотоальбома».')) return false;">
-									<span class="bl"></span>
-									<span class="bc"></span>
-									<span class="br"></span>
 									<span class="icon" style="background-image: url(/pics/editor/delete.gif)" title="Удалить рубрику" />
 								</a>
 								<?}?>
@@ -599,11 +519,7 @@ class CCPhotoalbum extends VirtualContent
 				</table>
 				<span class="clear"></span>
 				<div class="place">
-					<a href="./?section=<?=$section['id']?>&function=1&element=new" class="button big" style="float: right;">
-						<span class="bl"></span>
-						<span class="bc">Добавить</span>
-						<span class="br"></span>
-					</a>
+					<a href="./?section=<?=$section['id']?>&function=1&element=new" class="button big" style="float: right;">Добавить</a>
 				</div>
 				<span class="clear"></span>
 				<?

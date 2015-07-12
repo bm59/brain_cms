@@ -34,7 +34,6 @@ if ($editsection['id']>0){
 $deletesection = $SiteSections->get(floor($_GET['delete']),-1); $deletesection['id'] = floor($deletesection['id']);
 ?>
 <?include $_SERVER['DOCUMENT_ROOT']."/inc/site_admin/meta.php";?>
-<div id="zbody">
         <?include $_SERVER['DOCUMENT_ROOT']."/inc/site_admin/header.php";?>
         <?
         if ($contentStep==1){
@@ -126,8 +125,8 @@ $deletesection = $SiteSections->get(floor($_GET['delete']),-1); $deletesection['
 
                 ?>
                 <div id="content" class="listing">
-                        <h1>Разделы сайта</h1>
-                        <table class="table-content stat tusers">
+                        <?include_once($_SERVER['DOCUMENT_ROOT']."/inc/site_admin/nav.php");?>
+                        <table class="table-content stat tusers" cellspacing='0'>
                                 <?
                                 $anchorcode = 'Название';
                                 if ($delepmentmode=='development'){
@@ -181,16 +180,12 @@ $deletesection = $SiteSections->get(floor($_GET['delete']),-1); $deletesection['
                                         <tr><td>
                                         <label>Название раздела</label>
                                         <span class="input">
-                                                <span class="bl"></span>
-                                                <span class="bc"><input name="name" maxlength="100" value="<?=htmlspecialchars($adddata['name'])?>" /></span>
-                                                <span class="br"></span>
+                                             <input name="name" maxlength="100" value="<?=htmlspecialchars($adddata['name'])?>" />
                                         </span>
                                         </td><td>
                                         <label>Путь</label>
                                         <span class="input">
-                                                <span class="bl"></span>
-                                                <span class="bc"><input name="path" maxlength="50" value="<?=htmlspecialchars($adddata['path'])?>" /></span>
-                                                <span class="br"></span>
+                                           	<input name="path" maxlength="50" value="<?=htmlspecialchars($adddata['path'])?>" />
                                         </span>
                                         </td><td>
                                         <label>Тип раздела</label>
@@ -212,42 +207,40 @@ $deletesection = $SiteSections->get(floor($_GET['delete']),-1); $deletesection['
                                         <tr><td>
                                         <label>Заголовок (title)</label>
                                         <span class="input">
-                                                <span class="bl"></span>
-                                                <span class="bc"><input name="title" maxlength="500" value="<?=htmlspecialchars($adddata['title'])?>" /></span>
-                                                <span class="br"></span>
+											<input name="title" maxlength="500" value="<?=htmlspecialchars($adddata['title'])?>" />
                                         </span>
                                         </td><td>
                                         <label>Описание (description)</label>
                                         <span class="input">
-                                                <span class="bl"></span>
-                                                <span class="bc"><input name="description" maxlength="500" value="<?=htmlspecialchars($adddata['description'])?>" /></span>
-                                                <span class="br"></span>
+                                        	<input name="description" maxlength="500" value="<?=htmlspecialchars($adddata['description'])?>" />
                                         </span>
                                         </td><td>
                                         <label>Ключевые слова (keyword)</label>
                                         <span class="input">
-                                                <span class="bl"></span>
-                                                <span class="bc"><input name="keywords" maxlength="500" value="<?=htmlspecialchars($adddata['keywords'])?>" /></span>
-                                                <span class="br"></span>
+                                        	<input name="keywords" maxlength="500" value="<?=htmlspecialchars($adddata['keywords'])?>" />
                                         </span>
                                         </td></tr></table>
                                <table style="width: 100%; table-layout: fixed;">
                                         <tr><td>
                                         <label>Теги, разделитель - "|"</label>
                                         <span class="input">
-                                                <span class="bl"></span>
-                                                <span class="bc"><input name="tags" maxlength="100" value="<?=htmlspecialchars($adddata['tags'])?>" /></span>
-                                                <span class="br"></span>
+                                        	<input name="tags" maxlength="100" value="<?=htmlspecialchars($adddata['tags'])?>" />
                                         </span>
                                         </td></td>
                                         </table>
                                 </div>
                                <span class="clear"></span>
                                 <div class="place">
-                                   <table>
+                                   <table style="width: 100%">
                                        <tr>
                                         <td>
-                                <span><label><input type="checkbox" CHECKED name="visible">&nbsp;Отображать на сайте</label></span>
+						                    <div class="styled">
+												<input type="checkbox" name="visible" id="checkbox" class="checkbox">
+												<label for="checkbox">Отображать на сайте</label>
+											</div>
+                                        </td>
+                                        <td>
+                                   			<input class="button big" type="submit" name="sectionadd" value="Добавить"  style="float: right;margin-right: 12px"/>
                                         </td>
                                        </tr>
                                    </table>
@@ -255,12 +248,7 @@ $deletesection = $SiteSections->get(floor($_GET['delete']),-1); $deletesection['
 
                                 <span class="clear"></span>
                                 <div class="place">
-                                        <span class="button big" style="float: right;">
-                                                <span class="bl"></span>
-                                                <span class="bc">Добавить</span>
-                                                <span class="br"></span>
-                                                <input type="submit" name="sectionadd" value="" />
-                                        </span>
+
                                 </div>
                         </form>
                         <?
@@ -272,7 +260,7 @@ $deletesection = $SiteSections->get(floor($_GET['delete']),-1); $deletesection['
         if ($contentStep==2){
                 ?>
                 <div id="content" class="listing">
-                        <h1><a href="./">Список разделов</a> &rarr; Редактирование раздела</h1>
+                        <?include_once($_SERVER['DOCUMENT_ROOT']."/inc/site_admin/nav.php");?>
                         <?
                         if (count($editerrors)>0){
                                 print '
@@ -290,9 +278,7 @@ $deletesection = $SiteSections->get(floor($_GET['delete']),-1); $deletesection['
                                         <tr><td>
                                         <label>Название раздела</label>
                                         <span class="input">
-                                                <span class="bl"></span>
-                                                <span class="bc"><input name="name" maxlength="100" value="<?=htmlspecialchars($editdata['name'])?>" /></span>
-                                                <span class="br"></span>
+                                        	<input name="name" maxlength="100" value="<?=htmlspecialchars($editdata['name'])?>" />
                                         </span>
                                         </td>
                                         <?
@@ -301,9 +287,7 @@ $deletesection = $SiteSections->get(floor($_GET['delete']),-1); $deletesection['
                                         <td>
                                         <label>Путь</label>
                                         <span class="input">
-                                                <span class="bl"></span>
-                                                <span class="bc"><input name="path" maxlength="50" value="<?=htmlspecialchars($editdata['path'])?>" /></span>
-                                                <span class="br"></span>
+                                        	<input name="path" maxlength="50" value="<?=htmlspecialchars($editdata['path'])?>" />
                                         </span>
                                         </td>
                                         <?
@@ -317,32 +301,24 @@ $deletesection = $SiteSections->get(floor($_GET['delete']),-1); $deletesection['
                                         <tr><td>
                                         <label>Заголовок (title)</label>
                                         <span class="input">
-                                                <span class="bl"></span>
-                                                <span class="bc"><input name="title" maxlength="500" value="<?=html_entity_decode(htmlspecialchars($editdata['title']))?>" /></span>
-                                                <span class="br"></span>
+                                        	<input name="title" maxlength="500" value="<?=html_entity_decode(htmlspecialchars($editdata['title']))?>" />
                                         </span>
                                         </td><td>
                                         <label>Описание (description)</label>
                                         <span class="input">
-                                                <span class="bl"></span>
-                                                <span class="bc"><input name="description" maxlength="500" value="<?=html_entity_decode(htmlspecialchars($editdata['description']))?>" /></span>
-                                                <span class="br"></span>
+                                        	<input name="description" maxlength="500" value="<?=html_entity_decode(htmlspecialchars($editdata['description']))?>" />
                                         </span>
                                         </td><td>
                                         <label>Ключевые слова (keyword)</label>
                                         <span class="input">
-                                                <span class="bl"></span>
-                                                <span class="bc"><input name="keywords" maxlength="500" value="<?=htmlspecialchars($editdata['keywords'])?>" /></span>
-                                                <span class="br"></span>
+                                       		<input name="keywords" maxlength="500" value="<?=htmlspecialchars($editdata['keywords'])?>" />
                                         </span>
                                         </td></tr></table>
                                    <table style="width: 100%; table-layout: fixed;">
                                         <tr><td>
                                         <label>Теги, разделитель - "|"</label>
                                         <span class="input">
-                                                <span class="bl"></span>
-                                                <span class="bc"><input name="tags" maxlength="100" value="<?=htmlspecialchars($editdata['tags'])?>" /></span>
-                                                <span class="br"></span>
+                                        	<input name="tags" maxlength="100" value="<?=htmlspecialchars($editdata['tags'])?>" />
                                         </span>
                                         </td></td>
                                         </table>
@@ -368,7 +344,10 @@ $deletesection = $SiteSections->get(floor($_GET['delete']),-1); $deletesection['
 
                       ?>
 
-                                       <span><label><input type="checkbox" <?=$checked?> name="visible">&nbsp;Отображать на сайте</label></span>
+                                       		<div class="styled">
+												<input type="checkbox" name="visible" id="checkbox" class="checkbox" <?=(($visible) ? 'checked="checked"' :'')?>>
+												<label for="checkbox">Отображать на сайте</label>
+											</div>
                                         </td>
                                        </tr>
                                    </table>
@@ -378,11 +357,8 @@ $deletesection = $SiteSections->get(floor($_GET['delete']),-1); $deletesection['
                 ?>
                                 <span class="clear"></span>
                                 <div class="place">
-                                        <span class="button big" style="float: right;">
-                                                <span class="bl"></span>
-                                                <span class="bc">Сохранить изменения</span>
-                                                <span class="br"></span>
-                                                <input type="submit" name="sectionedit" value="" />
+                                        <span  style="float: right;">
+                                        	<input class="button big" type="submit" name="sectionedit" value="Сохранить изменения" />
                                         </span>
                                 </div>
                         </form>
@@ -395,13 +371,5 @@ $deletesection = $SiteSections->get(floor($_GET['delete']),-1); $deletesection['
                 $SectionPattern->start();
         }
         ?>
-        <?/*include $_SERVER['DOCUMENT_ROOT']."/inc/footer.php";*/?>
-</div>
-<a href="#" id="toTop"></a>
+        <?include $_SERVER['DOCUMENT_ROOT']."/inc/site_admin/footer.php";?>
 
-<?
-if ($delepmentmode=='development' && mysql_error()!='')
-print  '<span class="clear"></span><br/>'.mysql_error();
-?>
-</body>
-</html>

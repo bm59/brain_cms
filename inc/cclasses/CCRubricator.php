@@ -177,7 +177,7 @@ class CCRubricator extends VirtualContent
                 $pub = $this->getPub($_GET['pub']); $pub['id'] = floor($pub['id']);
                 ?>
                 <div id="content" class="forms">
-                        <h1><a href="./">Список <?=($this->getSetting('isservice')>0)?'сервисов':'разделов'?></a> &rarr; <a href="./?section=<?=$section['id']?>"><?=$section['name']?></a> &rarr; <?=($pub['id']>0)?'Редактирование':'Добавление'?></h1>
+                        <?include_once($_SERVER['DOCUMENT_ROOT']."/inc/site_admin/nav.php");?>
                         <?
                         $saveerrors = $this->getSetting('saveerrors');
                         if (!is_array($saveerrors)) $saveerrors = array();
@@ -217,11 +217,8 @@ class CCRubricator extends VirtualContent
                                 }
                         ?>
                         <div class="place">
-                                <span class="button big" style="float: right;">
-                                        <span class="bl"></span>
-                                        <span class="bc"><?=($pub['id']>0)?'Сохранить изменения':'Добавить'?></span>
-                                        <span class="br"></span>
-                                        <input type="submit" name="editform" value=""/>
+                                <span style="float: right;">
+                                	<input class="button big" type="submit" name="editform" value="<?=($pub['id']>0)?'Сохранить изменения':'Добавить'?>"/>
                                 </span>
                         </div>
                         <span class="clear"></span>
@@ -272,25 +269,20 @@ class CCRubricator extends VirtualContent
                 <script>
                 </script>
                 <div id="content" class="forms">
-                        <h1><a href="./">Список <?=($this->getSetting('isservice')>0)?'сервисов':'разделов'?></a> &rarr; <?=$section['name']?></h1>
+                        <?include_once($_SERVER['DOCUMENT_ROOT']."/inc/site_admin/nav.php");?>
                         <form id="searchform" name="searchform" action="./?section=<?=$section['id']?>" method="POST">
 							<div class="place" style="z-index: 10; width: 90%; margin-right: 2%;">
 								<label>Наименование</label>
 								<span class="input">
-								<span class="bl"></span>
-								<span class="bc"><input type="text" name="search_text" maxlength="100" value="<?=$this->search_text?>"/></span>
-								<span class="br"></span>
+									<input type="text" name="search_text" maxlength="100" value="<?=$this->search_text?>"/>
 								</span>
 							</div>
 							<div class="place" style="width: 8%">
 								<label>&nbsp;</label>
 								<span class="forbutton">
-								<span class="button">
-								<span class="bl"></span>
-								<span class="bc">Найти</span>
-								<span class="br"></span>
-								<input type="submit" value="" >
-								</span>
+									<span>
+										<input class="button" type="submit" value="Найти" >
+									</span>
 								</span>
 							</div>
                                 <span class="clear"></span>
@@ -307,11 +299,7 @@ class CCRubricator extends VirtualContent
                                 <p>Отсутствуют публикации, удовлетворяющие заданным условиям</p>
                                 <span class="clear"></span>
                                 <div class="place">
-                                        <a href="./?section=<?=$section['id']?>&pub=new" class="button big" style="float: right;">
-                                                <span class="bl"></span>
-                                                <span class="bc">Добавить</span>
-                                                <span class="br"></span>
-                                        </span>
+                                	<a href="./?section=<?=$section['id']?>&pub=new" class="button big" style="float: right;">Добавить</a>
                                 </div>
                                 <?
                         }
@@ -357,10 +345,7 @@ class CCRubricator extends VirtualContent
 					                                                        </td>
 					                                                        <td class="t_32width">
 									                                            <a href="./?section=<?=$section['id']?>&delete=<?=$child_pub['id']?>" class="button txtstyle" onclick="if (!confirm('Удалить публикацию')) return false;">
-				                                                                        <span class="bl"></span>
-				                                                                        <span class="bc"></span>
-				                                                                        <span class="br"></span>
-				                                                                        <input type="button" style="background-image: url(/pics/editor/delete.gif)" title="Удалить публикацию"/>
+				                                                                	<input type="button" style="background-image: url(/pics/editor/delete.gif)" title="Удалить публикацию"/>
 				                                                                </a>
 					                                                        </td>
 					                                                </tr>
@@ -377,16 +362,10 @@ class CCRubricator extends VirtualContent
                                                         <td class="t_32width">
                                                         <a href="./?section=<?=$section['id']?>&add_child=<?=$pub['id']?>&pub=new">add</a>
 		                                        <span class="button txtstyle">
-		                                                <span class="bl"></span>
-		                                                <span class="bc"></span>
-		                                                <span class="br"></span>
-		                                                <input type="button" style="background-image: url(/pics/editor/plus.gif)" title="Добавить подрубрику" onclick="window.location.href = './?section=<?=$section['id']?>&add_child=<?=$pub['id']?>&pub=new';" />
+		                                        	<input type="button" style="background-image: url(/pics/editor/plus.gif)" title="Добавить подрубрику" onclick="window.location.href = './?section=<?=$section['id']?>&add_child=<?=$pub['id']?>&pub=new';" />
 		                                        </span>
-		                                       <span class="button txtstyle disabled">
-		                                                <span class="bl"></span>
-		                                                <span class="bc"></span>
-		                                                <span class="br"></span>
-		                                                <input type="button" style="background-image: url(/pics/editor/delete-disabled.gif)" title="Невозможно удалить" onclick="return false;" />
+		                                        <span class="button txtstyle disabled">
+		                                        	<input type="button" style="background-image: url(/pics/editor/delete-disabled.gif)" title="Невозможно удалить" onclick="return false;" />
 		                                        </span>
                                                         </td>
                                                 </tr>
@@ -396,17 +375,10 @@ class CCRubricator extends VirtualContent
                                         </table>
                                         <span class="clear"></span>
                                         <div class="place">
-                                                <span class="button big">
-                                                        <span class="bl"></span>
-                                                        <span class="bc">Сохранить изменения</span>
-                                                        <span class="br"></span>
-                                                        <input type="submit" name="showsave" value="" />
+                                                <span>
+                                                	<input class="button big" type="submit" name="showsave" value="Сохранить изменения" />
                                                 </span>
-                                                <a href="./?section=<?=$section['id']?>&pub=new" class="button big" style="float: right;">
-                                                        <span class="bl"></span>
-                                                        <span class="bc">Добавить</span>
-                                                        <span class="br"></span>
-                                                </a>
+                                                <a href="./?section=<?=$section['id']?>&pub=new" class="button big" style="float: right;">Добавить</a>
                                         </div>
                                         <span class="clear"></span>
                                 </form>
@@ -432,11 +404,7 @@ class CCRubricator extends VirtualContent
                                                         $inner = ($i<$this->getSetting('pagescount'))?'<strong>&hellip;</strong>':$i;
                                                 }
                                                 if ($inner!='') print '
-                                                '.$block[0].'
-                                                        <span class="bl"></span>
-                                                        <span class="bc">'.$inner.'</span>
-                                                        <span class="br"></span>
-                                                '.$block[1];
+                                                '.$block[0].$inner.$block[1];
                                         }
                                         ?>
                                 </div>

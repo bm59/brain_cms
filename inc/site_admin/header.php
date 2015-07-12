@@ -1,37 +1,28 @@
 
 <div id="header">
-        <a href="/manage/"><!--//<img src="/pics/logo.jpg" class="logor" />//--></a>
+        <a href="/manage/"><img src="/pics/logo_cms.png" class="logor" /></a>
         <?
         $user = $SiteVisitor->getOne($_SESSION['visitorID']);
         $group = $VisitorType->getOne($user['type']);
         $href = (floor(configGet('profileID'))==$_SESSION['visitorID'])?array():array('<a href="/manage/access/users/profile/">','</a>');
         ?>
         <div class="profile">
-	        <div class="avatar"><?=$href[0]?><img src="<?=($user['picture']['path'])?$user['picture']['path']:'/pics/i/empty_user.gif'?>" width="60" height="60" alt="" /><?=$href[1]?></div>
 	        <div class="autor">
-	                Здравствуйте,<br /><?=$user['secondname'].' '.$user['firstname'].' '.$user['parentname']?>
+	                Пользователь: <?=$user['secondname'].' '.$user['firstname'].' '.$user['parentname']?>
 	                <div>
 	                        <?
 	                        if (floor(configGet('profileID'))!=$_SESSION['visitorID']){
 	                        ?>
-	                        <a href="/manage/access/users/profile/" class="button">
-	                                <span class="bl"></span>
-	                                <span class="bc">Профиль</span>
-	                                <span class="br"></span>
-	                        </a>
+	                        <a href="/manage/access/users/profile/" class="button"><img src="/pics/editor/profile.png">Профиль</a>
 	                        <?
 	                        }
 	                        ?>
-	                        <a href="/manage/?userexit=exit" class="button">
-	                                <span class="bl"></span>
-	                                <span class="bc">Выйти из системы</span>
-	                                <span class="br"></span>
-	                        </a>
+	                        <a href="/manage/?userexit=exit" class="button"><img src="/pics/editor/exit.png">Выйти из системы</a>
 	                </div>
 	        </div>
         </div>
 </div>
- <div class="clear"></div><div class="headerhr"></div>
+ <div class="clear"></div>
 
  <script>
  	var ctrlMode = false;

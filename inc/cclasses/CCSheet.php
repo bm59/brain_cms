@@ -69,7 +69,7 @@ class CCSheet extends VirtualContent
 		$section = $SiteSections->get($this->getSetting('section'));
 		?>
 		<div id="content" class="forms">
-			<h1><a href="./">Список <?=($this->getSetting('isservice')>0)?'сервисов':'разделов'?></a> &rarr; <?=$section['name']?></h1>
+			<?include_once($_SERVER['DOCUMENT_ROOT']."/inc/site_admin/nav.php");?>
 			<?
 			$saveerrors = $this->getSetting('saveerrors');
 			if (!is_array($saveerrors)) $saveerrors = array();
@@ -95,11 +95,8 @@ class CCSheet extends VirtualContent
 				}
 			?>
 			<div class="place">
-				<span class="button big" style="float: right;">
-					<span class="bl"></span>
-					<span class="bc">Сохранить</span>
-					<span class="br"></span>
-					<input type="submit" name="editform" value=""/>
+				<span style="float: right;">
+					<input class="button big" type="submit" name="editform" value="Сохранить"/>
 				</span>
 			</div>
 			<span class="clear"></span>

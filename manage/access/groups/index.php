@@ -9,9 +9,9 @@ if (in_array('delete',$group['new_settings'][$activeccid]) || $mode=='developmen
 }
 include $_SERVER['DOCUMENT_ROOT']."/inc/site_admin/meta.php";
 ?>
-	<div id="zbody">
 	<?include $_SERVER['DOCUMENT_ROOT']."/inc/site_admin/header.php";?>
 	<div id="content">
+		<?include_once($_SERVER['DOCUMENT_ROOT']."/inc/site_admin/nav.php");?>
 		<?
 		$groupslist = $VisitorType->getList();
 		if (count($groupslist)<1){
@@ -24,7 +24,7 @@ include $_SERVER['DOCUMENT_ROOT']."/inc/site_admin/meta.php";
 		<table class="table-content stat tusers">
 			<tr>
 				<th class="t_nowrap">Название</th>
-				<th class="t_nowrap">Количество пользователей</th>
+				<th class="t_nowrap t_center">Количество пользователей</th>
 				<th class="t_32width"></th>
 			</tr>
 			<?
@@ -37,15 +37,12 @@ include $_SERVER['DOCUMENT_ROOT']."/inc/site_admin/meta.php";
 				?>
 				<tr id="item_<?=$group['id']?>">
 					<td class="t_left"><?=$href[0]?><?=$group['name']?><?=$href[1]?><?=$help?></td>
-					<td class="t_left"><?=$group['userscount']?></td>
+					<td class="t_center"><?=$group['userscount']?></td>
 					<td class="t_32width">
 						<?
 						if ((isset($group['settings']['undeletable']) || !in_array('delete',$group['new_settings'][$activeccid])) && $mode!='development'){
 							?>
 							<span class="button txtstyle disabled">
-								<span class="bl"></span>
-								<span class="bc"></span>
-								<span class="br"></span>
 								<input type="button" style="background-image: url(/pics/editor/delete-disabled.gif)" title="Невозможно удалить" />
 							</span>
 							<?
@@ -53,9 +50,6 @@ include $_SERVER['DOCUMENT_ROOT']."/inc/site_admin/meta.php";
 						else{
 							?>
 							<a href="./?delete=<?=$group['id']?>" class="button txtstyle" onclick="if (!confirm('Вы уверены, что хотите удалить эту группу?')) return false;">
-								<span class="bl"></span>
-								<span class="bc"></span>
-								<span class="br"></span>
 								<input type="button" style="background-image: url(/pics/editor/delete.gif)" title="Удалить" />
 							</a>
 							<?
@@ -75,16 +69,9 @@ include $_SERVER['DOCUMENT_ROOT']."/inc/site_admin/meta.php";
 		?>
 		<span class="clear"></span>
 		<div class="place">
-			<a href="edit/" class="button big">
-				<span class="bl"></span>
-				<span class="bc">Новая группа</span>
-				<span class="br"></span>
-			</a>
+			<a href="edit/" class="button big">Новая группа</a>
 		</div>
 		<?}?>
 		<span class="clear"></span>
 	</div>
-	<?/*include $_SERVER['DOCUMENT_ROOT']."/inc/footer.php";*/?>
-</div>
-</body>
-</html>
+<?include $_SERVER['DOCUMENT_ROOT']."/inc/site_admin/footer.php";?>

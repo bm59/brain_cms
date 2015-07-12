@@ -104,7 +104,9 @@ $settings = ($editid>0)?array('title'=>'Редактирование группы пользователей','bu
 <div id="zbody">
 	<? include $_SERVER['DOCUMENT_ROOT']."/inc/site_admin/header.php"; ?>
 	<div id="content" class="forms">
-		<h1><a href="../">Группы пользователей</a> &rarr; <?=$settings['title']?></h1>
+        <div class="hr"></div>
+  		<h1><a href="/manage/">Панель управления</a> &rarr; Доступ &rarr; <a href="/manage/access/groups/">Группы</a> &rarr; Редактирование</h1>
+        <br/>
 		<?
 		if (count($errors)>0){
 			print '
@@ -121,9 +123,7 @@ $settings = ($editid>0)?array('title'=>'Редактирование группы пользователей','bu
 			<div class="place" style="width: 300px;">
 				<label>Название</label>
 				<span class="input">
-					<span class="bl"></span>
-					<span class="bc"><input name="name" maxlength="25" <?=(isset($data['settings']['norename']))?'disabled="disabled"':''?> value="<?=$data['name']?>" /></span>
-					<span class="br"></span>
+					<input name="name" maxlength="25" <?=(isset($data['settings']['norename']))?'disabled="disabled"':''?> value="<?=$data['name']?>" />
 				</span>
 			</div>
 			<span class="clear"></span>
@@ -137,22 +137,15 @@ $settings = ($editid>0)?array('title'=>'Редактирование группы пользователей','bu
 			</div>
 			<span class="clear"></span>
 			<div class="place">
-				<span class="button big" style="float: right;">
-					<span class="bl"></span>
-					<span class="bc"><?=$settings['button']?></span>
-					<span class="br"></span>
-					<input type="submit" name="editgroup" value=""/>
+				<span style="float: right;">
+					<input class="button big" type="submit" name="editgroup" value="<?=$settings['button']?>"/>
 				</span>
 			</div>
 			<span class="clear"></span>
 		</form>
 		<div class="hr"><hr /></div>
 		<div id="paging" class="nopad">
-			<a href="./" class="button">
-				<span class="bl"></span>
-				<span class="bc">Перейти к списку групп</span>
-				<span class="br"></span>
-			</a>
+			<a href="/manage/access/groups/" class="button">Перейти к списку групп</a>
 		</div>
 		<span class="clear"></span>
 	</div>

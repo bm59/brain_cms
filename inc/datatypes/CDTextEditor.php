@@ -9,6 +9,7 @@ class CDTextEditor extends VirtualType
 		$settings = $this->getSetting('settings');
 		?>
 		<div class="place">
+		<span class="input">
 			<label><?=htmlspecialchars($this->getSetting('description'))?><?=((isset($settings['important']))?' <span class="important">*</span>':'')?></label>
 		<?
 		$css = ($this->getSetting('css')!='')?$this->getSetting('css'):'contentsite.css?1';
@@ -118,6 +119,7 @@ class CDTextEditor extends VirtualType
 		}
 		?>
 			<div><textarea class="tiny" id="<?=htmlspecialchars($this->getSetting('name'))?>" name="<?=htmlspecialchars($this->getSetting('name'))?>" class="<?=$class?>"><?=htmlspecialchars($this->getSetting('value'))?></textarea></div>
+		</span>
 		</div>
 		<input type="hidden" name="<?=htmlspecialchars($this->getSetting('name'))?>_htmlview" id="<?=htmlspecialchars($this->getSetting('name'))?>_htmlview" value="">
 		<span class="clear"></span>

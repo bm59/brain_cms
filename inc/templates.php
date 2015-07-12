@@ -33,7 +33,7 @@ $sitekey=($settings->getOne($settings->getIdByName('sitekey')));
         <?
         die();
 }
-function getSelectSinonim($name,$values = array(),$selected = '|nokey|',$always = false){ // Возвращает код для вставки «заменителя SELECT»
+/*function getSelectSinonim($name,$values = array(),$selected = '|nokey|',$always = false){ // Возвращает код для вставки «заменителя SELECT»
         if (count($values)==0) return '';
         //if ((count($values)==1) && (!$always)) foreach ($values as $k=>$v) return '<input type="hidden" name="'.$name.'" value="'.$k.'">';
         $firstval = '|nodata|';
@@ -64,9 +64,7 @@ return strtolower($content);
         $retval = '
                 <input type="hidden" id="'.$name.'_value_item" name="'.$name.'" value="'.$firstval.'">
                 <span class="input">
-                        <span class="bl"></span>
-                        <span class="bc"><input autocomplete="off" type="text" id="'.$name.'_show_item" class="suggestSelect" onClick="selectSinonimSelect(\''.$name.'\')" onMouseOut="selectSinonimHide(\''.$name.'\')" value="'.$firstshowval.'" /></span>
-                        <span class="br"></span>
+                        <input autocomplete="off" type="text" id="'.$name.'_show_item" class="suggestSelect" onClick="selectSinonimSelect(\''.$name.'\')" onMouseOut="selectSinonimHide(\''.$name.'\')" value="'.$firstshowval.'" />
                 </span>
                 <div class="forselect">
                         <div id="'.$name.'_items_container" class="items" onMouseOut="selectSinonimHide(\''.$name.'\')" onMouseOver="selectSinonimShow(\''.$name.'\')" style="display: none;">';
@@ -78,6 +76,30 @@ return strtolower($content);
                         </div>
                 </div>';
         return $retval;
+}*/
+function getSelectSinonim($name,$values = array(),$selected = '|nokey|',$always = false)
+{
+
+		if (count($values)==0) return '';
+        /*if (count($values)==1) foreach ($values as $k=>$v) return '<input type="hidden" name="'.$name.'" value="'.$k.'">';*/
+        $firstval = '|nodata|';
+        $firstshowval = '';
+        foreach ($values as $k=>$v){
+            if ($firstval==='|nodata|'){ $firstval = $k; $firstshowval = $v; }
+            if ($k==$selected){ $firstval = $k; $firstshowval = $v; }
+        }
+        if ($firstval=='|nodata|') $firstval = '';
+        if ($width!='') $stylewidth='width:'.$width;
+        $retval ='<div class="input"><select name="'.$name.'" style="'.$stylewidth.'">';
+        foreach ($values as $k=>$v){
+            $title = ($titles[$k]!='')?' title="'.stripslashes($titles[$k]).'"':'';
+            $retval.= '
+            <option value="'.$k.'" '.(($k==$selected) ? 'selected="selected"':'').'>'.$v.'</option>';
+        }
+        $retval.= '
+               </select></div>';
+
+		return $retval;
 }
 function getSelectSinonimSimple($name,$values = array(),$selected = '|nokey|',$titles = array(),$width = ''){ // Возвращает код для вставки «заменителя SELECT»
 		if (count($values)==0) return '';
@@ -90,14 +112,14 @@ function getSelectSinonimSimple($name,$values = array(),$selected = '|nokey|',$t
         }
         if ($firstval=='|nodata|') $firstval = '';
         if ($width!='') $stylewidth='width:'.$width;
-        $retval ='<select name="'.$name.'" style="'.$stylewidth.'">';
+        $retval ='<div class="input"><select name="'.$name.'" style="'.$stylewidth.'">';
         foreach ($values as $k=>$v){
             $title = ($titles[$k]!='')?' title="'.stripslashes($titles[$k]).'"':'';
             $retval.= '
-            <option value="'.$k.'">'.$v.'</option>';
+            <option value="'.$k.'" '.(($k==$selected) ? 'selected="selected"':'').'>'.$v.'</option>';
         }
         $retval.= '
-               </select>';
+               </select></div>';
 
 		return $retval;
 }
@@ -131,9 +153,7 @@ return strtolower($content);
         $retval = '
                 <input type="hidden" id="'.$name.'_value_item" name="'.$name.'" value="'.$firstval.'">
                 <span class="input">
-                        <span class="bl"></span>
-                        <span class="bc"><input autocomplete="off" type="text" id="'.$name.'_show_item" class="suggestSelect" onClick="selectSinonimSelect(\''.$name.'\')" onMouseOut="selectSinonimHide(\''.$name.'\')" value="'.$firstshowval.'" /></span>
-                        <span class="br"></span>
+                	<input autocomplete="off" type="text" id="'.$name.'_show_item" class="suggestSelect" onClick="selectSinonimSelect(\''.$name.'\')" onMouseOut="selectSinonimHide(\''.$name.'\')" value="'.$firstshowval.'" />
                 </span>
                 <div class="forselect">
                         <div id="'.$name.'_items_container" class="items" onMouseOut="selectSinonimHide(\''.$name.'\')" onMouseOver="selectSinonimShow(\''.$name.'\')" style="display: none;">';

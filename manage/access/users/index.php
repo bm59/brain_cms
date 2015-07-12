@@ -20,9 +20,10 @@ if (in_array('delete',$group['new_settings'][$activeccid]) || $mode=='developmen
 }
 include $_SERVER['DOCUMENT_ROOT']."/inc/site_admin/meta.php";
 ?>
-<div id="zbody">
+
 	<?include $_SERVER['DOCUMENT_ROOT']."/inc/site_admin/header.php";?>
 	<div id="content">
+	<?include_once($_SERVER['DOCUMENT_ROOT']."/inc/site_admin/nav.php");?>
 		<?
 		$userslist = $SiteVisitor->getList(0,$order);
 		if (count($userslist)<1){
@@ -34,7 +35,6 @@ include $_SERVER['DOCUMENT_ROOT']."/inc/site_admin/meta.php";
 		?>
 		<table class="table-content stat tusers">
 			<tr>
-				<th class="avatar"></th>
 				<th class="t_nowrap">Пользователь<a href="<?=configGet("AskUrl").'?order=1'?>" title="Сортировать по убыванию" class="sort"><img src="/pics/i/down.gif" width="5" height="10" /></a><a href="<?=configGet("AskUrl")?>" title="Сортировать по возрастанию" class="sort"><img src="/pics/i/up.gif" width="5" height="10" /></a></th>
 				<th class="t_nowrap">Последний вход</th>
 				<th class="t_nowrap">Группа<a href="<?=configGet("AskUrl").'?order=3'?>" title="Сортировать по убыванию" class="sort"><img src="/pics/i/down.gif" width="5" height="10" /></a><a href="<?=configGet("AskUrl").'?order=2'?>" title="Сортировать по возрастанию" class="sort"><img src="/pics/i/up.gif" width="5" height="10" /></a></th>
@@ -55,7 +55,6 @@ include $_SERVER['DOCUMENT_ROOT']."/inc/site_admin/meta.php";
 
 				?>
 				<tr id="item_<?=$user['id']?>">
-					<td class="avatar"><div><a href="edit/?edit=<?=$user['id']?>"><img src="<?=($user['picture']['path'])?$user['picture']['path']:'/pics/i/empty_user.gif'?>" width="60" height="60" alt="<?=$user['secondname'].' '.$user['firstname'].' '.$user['parentname']?>" /></a></div></td>
 					<td class="t_left">
 					<?=$href[0].$user['secondname'].' '.$user['firstname'].' '.$user['parentname'].$href[1]?>
 					<?=$help?></td>
@@ -66,9 +65,6 @@ include $_SERVER['DOCUMENT_ROOT']."/inc/site_admin/meta.php";
 						if ((isset($user['settings']['noswitch']) || !in_array('onoff',$group['new_settings'][$activeccid])) && $mode!='development'){
 							?>
 							<a class="button txtstyle disabled">
-								<span class="bl"></span>
-								<span class="bc"></span>
-								<span class="br"></span>
 								<span class="icon" style="background-image: url(/pics/editor/status-disabled.gif)" title="Нельзя выключить" />
 							</a>
 							<?
@@ -76,9 +72,6 @@ include $_SERVER['DOCUMENT_ROOT']."/inc/site_admin/meta.php";
 						else{
 							?>
 							<a href="<?=configGet("AskUrl").'?switch_'.((isset($user['settings']['engage']))?'off':'on').'='.$user['id']?>" class="button txtstyle">
-								<span class="bl"></span>
-								<span class="bc"></span>
-								<span class="br"></span>
 								<span class="icon" style="background-image: url(/pics/editor/<?=(isset($user['settings']['engage']))?'on':'off'?>.gif)" title="Включен" />
 							</a>
 							<?
@@ -90,9 +83,6 @@ include $_SERVER['DOCUMENT_ROOT']."/inc/site_admin/meta.php";
 						if ((isset($group['settings']['undeletable']) || !in_array('delete',$group['new_settings'][$activeccid])) && $mode!='development'){
 							?>
 							<span class="button txtstyle disabled">
-								<span class="bl"></span>
-								<span class="bc"></span>
-								<span class="br"></span>
 								<input type="button" style="background-image: url(/pics/editor/delete-disabled.gif)" title="Невозможно удалить" />
 							</span>
 							<?
@@ -100,9 +90,6 @@ include $_SERVER['DOCUMENT_ROOT']."/inc/site_admin/meta.php";
 						else{
 							?>
 							<a href="./?delete=<?=$user['id']?>" class="button txtstyle" onclick="if (confirm('Вы уверены, что хотите удалить этого пользователя?')) bkAjaxDeleteItem('users',<?=$user['id']?>,'item_<?=$user['id']?>'); return false;">
-								<span class="bl"></span>
-								<span class="bc"></span>
-								<span class="br"></span>
 								<input type="button" style="background-image: url(/pics/editor/delete.gif)" title="Удалить пользователя" />
 							</a>
 							<?
@@ -122,16 +109,9 @@ include $_SERVER['DOCUMENT_ROOT']."/inc/site_admin/meta.php";
 		?>
 		<span class="clear"></span>
 		<div class="place">
-			<a href="edit/" class="button big">
-				<span class="bl"></span>
-				<span class="bc">Новый пользователь</span>
-				<span class="br"></span>
-			</a>
+			<a href="edit/" class="button big" style="float: right;">Новый пользователь</a>
 		</div>
 		<?}?>
 		<span class="clear"></span>
 	</div>
-	<?/*include $_SERVER['DOCUMENT_ROOT']."/inc/footer.php";*/?>
-</div>
-</body>
-</html>
+<?include $_SERVER['DOCUMENT_ROOT']."/inc/site_admin/footer.php";?>

@@ -328,20 +328,14 @@ class SiteSections extends VirtualClass
 		                                if (isset($section['settings']['noeditsettings']) || $mode!='development'){
 		                                        ?>
 		                                        <span class="button txtstyle disabled">
-		                                                <span class="bl"></span>
-		                                                <span class="bc"></span>
-		                                                <span class="br"></span>
-		                                                <input type="button" style="background-image: url(/pics/editor/prefs-disabled.gif)" title="Настройки недоступны" onclick="return false;" />
+		                                        	<input type="button" style="background-image: url(/pics/editor/prefs-disabled.gif)" title="Настройки недоступны" onclick="return false;" />
 		                                        </span>
 		                                        <?
 		                                }
 		                                else{
 		                                        ?>
 		                                        <span class="button txtstyle">
-		                                                <span class="bl"></span>
-		                                                <span class="bc"></span>
-		                                                <span class="br"></span>
-		                                                <input type="button" style="background-image: url(/pics/editor/prefs.gif)" title="Настройки" onclick="window.location.href = './?edit=<?=$section['id']?>'" />
+		                                        	<input type="button" style="background-image: url(/pics/editor/prefs.gif)" title="Настройки" onclick="window.location.href = './?edit=<?=$section['id']?>'" />
 		                                        </span>
 		                                        <?
 		                                }
@@ -352,20 +346,14 @@ class SiteSections extends VirtualClass
 		                                if ((isset($section['settings']['undeletable'])) && ($mode!='development')){
 		                                        ?>
 		                                        <span class="button txtstyle disabled">
-		                                                <span class="bl"></span>
-		                                                <span class="bc"></span>
-		                                                <span class="br"></span>
-		                                                <input type="button" style="background-image: url(/pics/editor/delete-disabled.gif)" title="Невозможно удалить" onclick="return false;" />
+		                                        	<input type="button" style="background-image: url(/pics/editor/delete-disabled.gif)" title="Невозможно удалить" onclick="return false;" />
 		                                        </span>
 		                                        <?
 		                                }
 		                                else{
 		                                        ?>
 		                                        <span class="button txtstyle">
-		                                                <span class="bl"></span>
-		                                                <span class="bc"></span>
-		                                                <span class="br"></span>
-		                                                <input type="button" style="background-image: url(/pics/editor/delete.gif)" title="Удалить" onclick="if (confirm('Вы действительно хотите удалить этот раздел?')) window.location.href = './?delete=<?=$section['id']?>';" />
+		                                        	<input type="button" style="background-image: url(/pics/editor/delete.gif)" title="Удалить" onclick="if (confirm('Вы действительно хотите удалить этот раздел?')) window.location.href = './?delete=<?=$section['id']?>';" />
 		                                        </span>
 		                                <?
 		                                }

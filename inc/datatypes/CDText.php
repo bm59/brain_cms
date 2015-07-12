@@ -25,9 +25,7 @@ class CDText extends VirtualType
 		<div class="place" <?=($divstyle!='')?$divstyle:''?>>
 			<label><?=htmlspecialchars($this->getSetting('description'))?><?=((isset($settings['important']))?' <span class="important">*</span>':'')?></label>
 			<span class="input">
-				<span class="bl"></span>
-				<span class="bc"><input type="text" <?=$selection?> <?if ($this->getSetting('name')=='filelink') print "id=".htmlspecialchars($this->getSetting('name')) ?> name="<?=htmlspecialchars($this->getSetting('name'))?>"  maxlength="<?=$this->getSetting('maxlength')?>" value="<?=stripslashes(htmlspecialchars($this->getSetting('value')))?>" /></span>
-				<span class="br"></span>
+				<input type="text" <?=$selection?> <?if ($this->getSetting('name')=='filelink') print "id=".htmlspecialchars($this->getSetting('name')) ?> name="<?=htmlspecialchars($this->getSetting('name'))?>"  maxlength="<?=$this->getSetting('maxlength')?>" value="<?=stripslashes(htmlspecialchars($this->getSetting('value')))?>" />
 			</span>
 		</div>
 		<?

@@ -44,7 +44,7 @@ class VirtualPattern
 						$ttype = 'BIGINT(20)';
 					break;
 					case 'CDFile':
-						$ttype = 'BIGINT(20)';
+						$ttype = 'VARCHAR(255)';
 					break;
 					case 'CDFloat':
 						$ttype = 'FLOAT';

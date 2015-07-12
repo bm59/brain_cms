@@ -26,7 +26,7 @@ class PVideo extends VirtualPattern
 					(
 						array('name'=>'name', 'type'=>'CDText', 'description'=>'Íàèìåíîâàíèå', 'settings'=>array()),
                         array('name'=>'image', 'type'=>'CDImage', 'description'=>'Èçîáğàæåíèå', 'settings'=>array('important'=>1)),
-                        array('name'=>'code', 'type'=>'CDTextEditor', 'description'=>'Êîä âèäåîğîëèêà', 'settings'=>array('texttype'=>'full','important'=>1)),
+                        array('name'=>'code', 'type'=>'CDTextEditor', 'description'=>'Êîä âèäåîğîëèêà', 'settings'=>array('important'=>1)),
                         array('name'=>'descr', 'type'=>'CDTextEditor', 'description'=>'Îïèñàíèå âèäåîğîëèêà', 'settings'=>array('texttype'=>'full')),
                         array('name'=>'url', 'type'=>'CDText', 'description'=>'Ññûëêà', 'settings'=>array()),
                         array('name'=>'dopinfo', 'type'=>'CDText', 'description'=>'Äîïîëíèòåëüíàÿ èíôîğìàöèÿ', 'settings'=>array())

@@ -16,6 +16,7 @@ $SiteSections->init();
 <link rel="stylesheet" href="/css/manage.css" type="text/css" media="screen" />
 <link rel="stylesheet" href="/js/jquery-ui-1.10.4.custom/css/blitzer/jquery-ui-1.10.4.custom.css" type="text/css" media="screen" />
 <link rel="stylesheet" type="text/css" href="/css/multiple-select.css" media="all" />
+<link rel="stylesheet" type="text/css" href="/css/checkbox.css" media="all" />
 <!--//<link rel="stylesheet" type="text/css" href="/css/tablednd.css" media="all" />//-->
 
 <script src="/js/manage.js" type="text/javascript"></script>
@@ -34,72 +35,5 @@ $SiteSections->init();
 <title>ѕанель управлени€ <?=' - '.ConfigGet('pr_doptit')?></title>
 </head>
 <body>
- <div id="zbody">
-<div id="margin">
-<?
-if (configGet("AskUrl")!='/'){
+<div id="zbody">
 
-        if (!$_GET['section']>0 && !$_GET['edit']>0)
-        $activeccid = $SiteSections->getIdByPath(ereg_replace('/manage/', '', configGet("AskUrl")));
-        else
-        {
-        	$s_id=(($_GET['section']>0) ? $_GET['section'] : $_GET['edit']);
-        	$activeccid=$s_id;
-        }
-
-        $plist = $SiteSections->getParentsList($activeccid);
-        print '<div class="smallnav"><a href="/manage/">ѕанель управлени€</a>';
-        foreach ($plist as $p){
-                if ($p!=$activeccid){
-                        $pobj = $SiteSections->get($p);
-                        $href = !preg_match('|^'.$SiteSections->getPath($pobj['id']).'$|',configGet("AskUrl"));
-                        $sctn = $SiteSections->get($pobj['id']); $sctn['id'] = floor($sctn['id']);
-                        if ($sctn['id']>0){
-                                $ptrn = new $sctn['pattern'];
-                                $ifface = $ptrn->init(array('section'=>$sctn['id']));
-                                if ($ptrn->getSetting('name')=='PFolder'){
-                                        if ($sctn['path']=='control' || $sctn['path']=='access')
-                                        $href = false;
-                                }
-                        }
-
-                        if (!$s_id>0)
-                        print ($href)?' Ч <a href="'.$SiteSections->getPath($pobj['id']).'">'.$pobj['name'].'</a>':' Ч '.$pobj['name'];
-                        else
-                        {
-                         	if ($ptrn->getSetting('name')=='PFolder')
-                         	print ($href)?' Ч <a href="/manage/control/contents/?edit='.$sctn['id'].'">'.$pobj['name'].'</a>':' Ч '.$pobj['name'];
-                         	else
-                         	print ($href)?' Ч <a href="/manage/control/contents/?section='.$sctn['id'].'">'.$pobj['name'].'</a>':' Ч '.$pobj['name'];
-                        }
-                }
-        }
-        $pobj = $SiteSections->get($activeccid);
-        $href = !preg_match('|^'.$SiteSections->getPath($pobj['id']).'$|',configGet("AskUrl"));
-        $sctn = $SiteSections->get($pobj['id']); $sctn['id'] = floor($sctn['id']);
-        if ($sctn['id']>0){
-                $ptrn = new $sctn['pattern'];
-                $ifface = $ptrn->init(array('section'=>$sctn['id']));
-                switch($ptrn->getSetting('name')){
-
-                        case 'PFolder':
-                                print ' Ч '.$pobj['name'];
-                                break;
-                        case 'PPublication':
-                                print ($pub['id']>0)?' Ч <a href="'.$SiteSections->getPath($pobj['id']).'">'.$pobj['name'].'</a>':' Ч '.$pobj['name'];
-                                break;
-                        case 'PList':
-                                print ($pub['id']>0)?' Ч <a href="'.$SiteSections->getPath($pobj['id']).'">'.$pobj['name'].'</a>':' Ч '.$pobj['name'];
-                                break;
-                        case 'PSheet1':
-                                print ($pub['id']>0)?' Ч <a href="'.$SiteSections->getPath($pobj['id']).'">'.$pobj['name'].'</a>':' Ч '.$pobj['name'];
-                                break;
-                        default:
-                                print ($href)?' Ч <a href="'.$SiteSections->getPath($pobj['id']).'">'.$pobj['name'].'</a>':' Ч '.$pobj['name'];
-                                break;
-                }
-        }
-        print '</div>';
-}
-?>
-</div></div>
