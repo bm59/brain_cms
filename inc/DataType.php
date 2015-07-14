@@ -35,7 +35,7 @@ class DataType extends VirtualClass
 		include_once($dir."CDFloat.php");
 		include_once($dir."CDFloatInfo.php");
 		include_once($dir."CDInteger.php");
-
+        include_once($dir."CDGallery.php");
 	}
 
 	function add($values){

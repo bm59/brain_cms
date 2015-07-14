@@ -69,7 +69,7 @@ include $_SERVER['DOCUMENT_ROOT']."/inc/site_admin/meta.php";
 		?>
 		<span class="clear"></span>
 		<div class="place">
-			<a href="edit/" class="button big">Новая группа</a>
+			<a href="edit/" class="button big" style="float: right">Новая группа</a>
 		</div>
 		<?}?>
 		<span class="clear"></span>

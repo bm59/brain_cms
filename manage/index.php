@@ -5,8 +5,14 @@ include $_SERVER['DOCUMENT_ROOT']."/inc/site_admin/meta.php";?>
 <body id="login">
 	<div id="loginform">
 		<form name="enter" action="/manage/" method="POST" class="forms">
+            <?
+            if (setting('admin_logo')>0)
+            $image=$Storage->getfile(setting('admin_logo'));
+            if ($image['path']!='')
+            {            ?><a href="/manage/"><img src="<?=$image['path']?>" height="150px;"></a><?
+            }
+            else{?><a href="/manage/"><img src="/pics/logo_cms.png"></a><?}?>
 
-			<a href="/manage/"><img src="/pics/logo_cms.png"></a>
 			<br/></span>
 			<!--//<div><p>Для входа в панель управления<br />вам необходимо авторизироваться</p></div>//-->
 			<div class="formmargin">

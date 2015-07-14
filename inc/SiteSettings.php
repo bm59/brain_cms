@@ -16,7 +16,8 @@ class SiteSettings extends VirtualClass
 			'email'=>'Адрес электронной почты',
 			'string'=>'Строка',
 			'text'=>'Текст',
-			'int'=>'Да/Нет'
+			'int'=>'Да/Нет',
+			'image'=>'Картинка'
 		);
 	}
 	function check($value,$settings = array()){ // Проверка на допустимое значение в зависимости от типа
@@ -42,14 +43,14 @@ class SiteSettings extends VirtualClass
 		}
 		return $retval;
 	}
-	function update($id,$value){ // Редактирование настройки
+	function update($id,$value, $prec=0){ // Редактирование настройки
 		$error = '';
 		$set = $this->getOne($id);
 		$value = $this->check($value,$set['settings']);
 		if ($value['error']!='') $error = $set['description'].': '.lower($value['error']);
 		if ($error==''){
 			$set['value'] = $value['value'];
-			msq("UPDATE `".$this->getSetting('table')."` SET `value`='".addslashes($value['value'])."' WHERE `id`='".floor($set['id'])."'");
+			msq("UPDATE `".$this->getSetting('table')."` SET `value`='".addslashes($value['value'])."' ".(($prec>0) ? ',`precedence`='.$prec:'')." WHERE `id`='".floor($set['id'])."'");
 			$this->setCacheValue('setting_'.floor($set['id']),$set);
 		}
 		return $error;
@@ -93,7 +94,7 @@ class SiteSettings extends VirtualClass
 	}
 	function getList(){ // Получения списка ID настроек
 		$retval = array();
-		$q = msq("SELECT * FROM `".$this->getSetting('table')."`");
+		$q = msq("SELECT * FROM `".$this->getSetting('table')."` ORDER BY `precedence`");
 		while ($r = msr($q)){ $retval[] = $r['id']; $one = $this->getOne($r['id'],$r); }
 		return $retval;
 	}

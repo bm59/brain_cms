@@ -1,9 +1,10 @@
 * {margin: 0px; padding: 0px;}
 HTML {height: 100%;}
-BODY {height: 100%; min-height: 100%; position: relative; margin: 0px; padding: 0px; background-color: #FFF; font-family: Arial, sams-serif; font-size: 12px; line-height: 18px; color: #000;}
+BODY {background-color: #FCFCFC; height: 100%; min-height: 100%; position: relative; margin: 0px; padding: 0px; font-family: Arial, sams-serif; font-size: 12px; line-height: 18px; color: #000;}
 BODY#tinymce {padding: 10px}
 #zbody {
 	min-height: 100%;
+	background-color: #FFFFFF;
 	padding-bottom: 30px;
 	width: 1200px; margin: auto; min-width: 950px; cursor: default;	border-left: 1px solid #cccccc;
 	border-right: 1px solid #cccccc;
@@ -73,6 +74,9 @@ UL LI {padding-left: 20px; background: url(/pics/i/ul.gif) 0px 9px no-repeat; po
 OL LI {margin: 10px 0px 0px 20px; background-image: none; padding: 0px;}
 OL UL LI {background: url(/pics/i/ul.gif) 0px 10px no-repeat; padding-left: 20px; margin-left: 0px;}
 OL UL, OL OL, UL UL, UL OL {margin: 0px 0px 0px 40px;}
+
+.settings_image {border: 2px solid rgba(220, 220, 220, 1);
+    box-shadow: 1px 1px 3px 1px rgba(200, 200, 200, 0.2) inset; padding: 5px 5px 5px 10px; margin-right: 10px;}
 
 .foraccess > UL > LI > LABEL {font-size: 18px; background-color: #CCC; padding: 15px}
 .foraccess > UL > LI {width: 100%; border-bottom: none;}
@@ -202,10 +206,10 @@ FORM LABEL {position: relative; overflow: hidden; display: block; margin: 0px 6p
 .ta.medium .br {background-image: url(/pics/inputs/small-br.gif); width: 7px; height: 100px;}
 .ta.medium DIV {height: 70px;}
 .ta.medium TEXTAREA {height: 70px; border: none;}
-.ta_big {padding: 10px 10px 20px 5px}
+.ta_big {padding: 10px 10px 20px 0px}
 .ta_big TEXTAREA {height: 150px;}
 
-.forms LABEL {position: relative; overflow: hidden; display: block; margin: 0px 6px 0px 0px;}
+.forms LABEL {position: relative; overflow: hidden; display: block; margin: 0px 12px 0px 0px;}
 .forms FORM {margin-top: 0px; width: 100%;}
 FORM LABEL {position: relative; overflow: hidden; display: block; margin: 0px 6px 0px 4px;}
 .items {position: absolute; top: -12px; z-index: 10; background-color: #FFF;     border: 2px solid rgba(52, 152, 219, 1);
@@ -259,7 +263,7 @@ HTML:first-child .items LABEL INPUT {left: 0px; top: 1px;}
 
 /*шапка*/
 #header {height: 100px; font-size: 13px; line-height: 18px; margin: 0px;}
-#header .logor {margin: 35px 0 0 50px; float: left; width: 220px; height: 51px}
+#header .logor {margin: 35px 0 0 50px; float: left; width: 220px;}
 #header .adcounter {border-style: solid; border-color: #D8D8D8; border-width: 0px 1px; float: left; height: 70px; overflow: hidden; margin: 15px 0px; padding: 0px 30px; text-align: center;}
 #header .adcounter P {margin-top: 3px;}
 #header .adcounter SPAN {display: block; font-size: 50px; color: #000; line-height: 50px;}
@@ -315,7 +319,12 @@ HTML:first-child .place .forckecks LABEL INPUT {left: 0px; top: 1px;}
 
 .contentdesc {margin: 0px; line-height: 14px !important;}
 .contenttxt {margin: 0px;}
-.contentimg {border: 1px solid #D8D8D8; margin: 4px; padding: 4px;}
+.contentimg {border: 1px solid #D8D8D8; margin: 4px; padding: 4px; float:left;}
+
+.gallery_container {height: 170px; float: left; position: relative; padding-bottom: 20px;}
+.gallery_container INPUT {background-image: url("/pics/editor/delete.gif"); position: absolute; right: 15px; top: 15px;}
+
+#sortable LI {background: none; padding: 0; }
 
 /*пользователи, синхронизация, статистика*/
 /*.stat TH {background-color: #F5F5F5 !important; font-size: 14px; padding: 15px !important;}

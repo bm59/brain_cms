@@ -225,6 +225,7 @@ class CCImageList extends VirtualContent
                 $searchnumgood = isset($_POST['searchnumgood']) ? $_POST['searchnumgood']: (isset($_GET['searchnumgood']) ? $_GET['searchnumgood'] : '');
                 $searchtextgood = isset($_POST['searchtextgood']) ? $_POST['searchtextgood']: (isset($_GET['searchtextgood']) ? $_GET['searchtextgood'] : '');
                 ?>
+    	<div id="content" class="forms">
                 <?include_once($_SERVER['DOCUMENT_ROOT']."/inc/site_admin/nav.php");?>
         <form name="searchform" action="" method="POST">
 			<input type="hidden" name="searchaction" value="1">
@@ -347,6 +348,7 @@ class CCImageList extends VirtualContent
                         }
                         ?>
                 </div>
+         </div>
                 <?
         }
 		function deletePub($id,$updateprec = true){

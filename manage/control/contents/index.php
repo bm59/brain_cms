@@ -147,8 +147,7 @@ $deletesection = $SiteSections->get(floor($_GET['delete']),-1); $deletesection['
                         {
                         $unpubliclist = $SiteSections->getList(-1,-1,0);
                         ?>
-                        <h1>Ќеопубликованное</h1>
-                        <p>ѕосле добавлени€ раздел попадает в Ђнеопубликованноеї, в этом случае он не отображаетс€ на сайте, но можно редактировать его содержимое.<br>„тобы опубликовать раздел, его необходимо перенести в один из публикуемых разделов. —делать это можно, перетащив €корь непубликуемого раздела на €корь родительского.</p>
+                        <div class="hr"></div>
                         <table class="table-content stat tusers">
                                 <?
                                 $anchorcode = '<div class="anchor"><strong><img id="-1" class="anchordrop" src="/pics/editor/anchor.gif" width="18" height="18" /></strong>–аздел</div>';

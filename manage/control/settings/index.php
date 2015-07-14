@@ -16,33 +16,25 @@ if (isset($_GET['setdel'])){
 	 $iface->delete($_GET['setdel']);
 	 WriteLog($_GET['setdel'], 'удаление настройки');
 }
-$list = $iface->getList();
 
-if (isset($_POST['setupdate'])){
-	foreach ($list as $setid){
-		$set = $iface->getOne($setid);
-		if (isset($_POST[$set['name'].'_value'])) $err = $iface->update($set['id'],$_POST[$set['name'].'_value']);
-		if ($err!='') $updateerrors[] = $err;
-		if ($err=='' && $set['value']!=$_POST[$set['name'].'_value']) WriteLog($set['id'], 'редактирование настройки', $set['name'].'|'.$set['value'].'|'.$_POST[$set['name'].'_value']);
+$list = $iface->getList();
+if (isset($_POST['setupdate'])){	$i=0;
+	foreach ($_POST as $k=>$v){
+
+		$set = $iface->getOne($iface->getIdByName(str_replace('_value','',$k)));
+		if ($set['id']>0)
+		{
+			$i++;
+			if (isset($_POST[$set['name'].'_value'])) $err = $iface->update($set['id'],$_POST[$set['name'].'_value'],$i);
+			if ($err!='') $updateerrors[] = $err;
+			if ($err=='' && $set['value']!=$_POST[$set['name'].'_value']) WriteLog($set['id'], 'редактирование настройки', $set['name'].'|'.$set['value'].'|'.$_POST[$set['name'].'_value']);
+	    }
 	}
 }
+$list = $iface->getList();
 ?>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
-<html>
-<head>
-	<?include $_SERVER['DOCUMENT_ROOT']."/inc/site_admin/meta.php";?>
-	<title>Настройки сайта</title>
-</head>
-<body>
-<script type="text/javascript">
-function Gotopage(link)
-{
-
- document.location=link
-}
-</script>
-<div id="zbody">
+<?include $_SERVER['DOCUMENT_ROOT']."/inc/site_admin/meta.php";?>
 	<?include $_SERVER['DOCUMENT_ROOT']."/inc/site_admin/header.php";;?>
 	<div id="content" class="forms">
 		<?include_once($_SERVER['DOCUMENT_ROOT']."/inc/site_admin/nav.php");?>
@@ -58,11 +50,19 @@ function Gotopage(link)
 		}
 		if (count($list)>0){
 		?>
+  <script>
+  $(function() {
+    $( "#sortable" ).sortable();
+    //$( "#sortable" ).disableSelection();
+  });
+  </script>
 		<form name="setupdate" action="<?=$_SERVER['REQUEST_URI']?>" method="POST">
+		<UL id="sortable">
 			<?
 			foreach ($list as $setid){
 				$set = $iface->getOne($setid);
 				?>
+				<LI>
 				<div class="place" id="item_<?=$set['id']?>">
 					<table style="width: 100%;"><tr><td>
 					<label><?=stripslashes(htmlspecialchars($set['description']))?> <small class="setdesc"><?=stripslashes(htmlspecialchars($set['name']))?></small></label>
@@ -76,6 +76,88 @@ function Gotopage(link)
                     {
                     ?>
 						<div class="ta_big"><textarea style="width: 100%; padding: 10px;" name="<?=htmlspecialchars($set['name'])?>_value"><?=stripslashes(htmlspecialchars($set['value']))?></textarea></div>
+                    <?
+                    }
+                     elseif ($set['settings']['type']=='image')
+                    {
+                    ?>
+        <script>
+        $(function(){
+        var btnUpload<?='_'.$set['name']?>=$('#upl_button<?='_'.$set['name']?>');
+        var status=$('.contentdesc<?='_'.$set['name']?>');
+        var upload_me=new AjaxUpload(btnUpload<?='_'.$set['name']?>, {
+            action: '/uploader_image.php',
+            responseType: 'json',
+            name: 'upl_file',
+            data: {},
+            onSubmit: function(file, ext){
+                this.setData({sid : '<?=session_id()?>', theme: '0', rubric: '0', stid: '2', uid: <?=floor($iface->getSetting('uid'))?>});
+            },
+            onComplete: function(file, response){
+                status.html('');
+                $('#file').html('');
+                if(response.result==="ok"){
+                    $('#delete_container<?='_'.$set['name']?>').fadeIn(0);
+                    status.html('<a  href="'+response.path+'" target="_blank">ссылка на изображение</a>');
+                    $('#uploadfilehidden<?=htmlspecialchars($set['name'])?>').val(response.id);
+                }else{
+                    $('#loading').fadeOut(0);
+                    if (response.error!='') alert(response.error);
+
+
+                }
+            }
+        });
+
+
+    });
+    	function delete_file<?='_'.$set['name']?> ()
+        {
+       		if (!confirm('Вы уверены, что хотите удалить этот файл?')) return false;
+
+			    $.ajax({
+			        url: "/uploader_image.php",
+			        type: "post",
+			        data: {action: 'delete',old_id : $('#uploadfilehidden<?=htmlspecialchars($set['name'])?>').val()},
+			        success: function(result){
+			            var arr_resp = result.split("#%#");
+			            if(arr_resp[0]==="true")
+			            {
+                         	 $('#delete_container<?='_'.$set['name']?>').fadeOut(0);
+                         	 $('.contentdesc<?='_'.$set['name']?>').html('');
+			            }
+			            else
+			            {
+			            	alert(result);
+			            }
+			        }
+			    });
+			    return false;
+        }
+
+
+			</script>
+                    <div class="settings_image">
+					<div class="place forimage">
+					<span class="button" id="upl_button<?='_'.$set['name']?>" style="display:block; float: left;">
+						Загрузить изображение
+					</span>
+					<?
+					$image='';
+					if ($set['value']>0)
+					{						$image=$Storage->getFile($set['value']);
+					}
+					?>
+
+                    <input type="hidden" id="uploadfilehidden<?=$set['name']?>" name="<?=$set['name']?>_value" value="<?=stripslashes(htmlspecialchars($set['value']))?>">
+
+					<span style="display:<?=$image['path']!='' ? 'block':'none'?>; float: left;padding: 12px 0 0 0 " id="delete_container<?='_'.$set['name']?>" class="button txtstyle">
+						<input type="button" onclick="delete_file<?='_'.$set['name']?>(); return false" id="delete_button_image" style="background-image: url(/pics/editor/delete.gif)" title="Удалить изображение">
+					</span>
+					<div class="contentdesc<?='_'.$set['name']?>" style="float: left; padding: 10px 0 0 20px;"><?=$image['path']!='' ? '<a  href="'.$image['path'].'" target="_blank">ссылка на изображение</a>':''?></div>
+					</div>
+					<div class="clear"></div>
+					</div>
                     <?
                     }
 					else
@@ -108,6 +190,7 @@ function Gotopage(link)
 					</td></tr></table>
 				</div>
 				<span class="clear"></span>
+				</LI>
 				<?
 			}
 
@@ -120,6 +203,7 @@ function Gotopage(link)
 				</span>
 			</div>
 			<?}?>
+		</UL>
 		</form>
 		<?
 		}
@@ -182,7 +266,4 @@ function Gotopage(link)
 		<?}?>
 		<span class="clear"></span>
 	</div>
-	<?/*include $_SERVER['DOCUMENT_ROOT']."/inc/footer.php";*/?>
-</div>
-</body>
-</html>
+<?include $_SERVER['DOCUMENT_ROOT']."/inc/site_admin/footer.php";?>
