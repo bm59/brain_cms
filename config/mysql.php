@@ -9,9 +9,9 @@
 	}
 	else
 	{
-	configSet("DBUser","bm59_cms");
-	configSet("DBPassword","cmscms");
+	configSet("DBUser","bm59_braincms");
+	configSet("DBPassword","braincms");
 	configSet("DBHost","localhost");
-	configSet("DBBase","bm59_cms");
+	configSet("DBBase","bm59_braincms");
 	}
 ?>
