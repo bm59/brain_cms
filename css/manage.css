@@ -41,6 +41,8 @@ P {padding: 10px 0px;}
     transition: all 100ms cubic-bezier(0.42, 0, 0.58, 1) 0s;
     outline:none;
 }
+.ui-spinner input[type="text"] {margin: 0; border: none;}
+.ui-spinner input[type="text"]:focus {border: none; margin: 0; }
 input[disabled="disabled"]  {background-color: #E1E1E1;}
 .button {
   color: #FFFFFF;

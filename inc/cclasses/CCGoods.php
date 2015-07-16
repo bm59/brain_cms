@@ -401,7 +401,8 @@ function strpos (haystack, needle, offset) {
 					$this->updatePrecedence();
 				}
 			?>
-
+        <div id="content" class="forms">
+        <?include_once($_SERVER['DOCUMENT_ROOT']."/inc/site_admin/nav.php");?>
         <form name="searchform" action="" method="POST">
 			<input type="hidden" name="searchaction" value="1">
            <div class="place" style="z-index: 11; width: 25%;margin-right: 1%">
@@ -548,6 +549,7 @@ function strpos (haystack, needle, offset) {
                                 }
                         }
                         ?>
+                </div>
                 </div>
                 <?
         }
