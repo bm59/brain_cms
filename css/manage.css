@@ -13,14 +13,17 @@ BODY#tinymce {padding: 10px}
 	-moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.45);}
 IMG {display: block;}
 A IMG {border: none;}
-
 A {color:#000;}
 
-H1 {margin: 10px 0px; font-size: 20px; line-height: 24px; font-weight: lighter; color: #000;}
-H2 {margin: 10px 0px; font-size: 14px; line-height: 24px; font-weight: lighter; color: #000;}
-H3 {margin: 10px 0px; font-size: 12px; line-height: 18px; font-weight: lighter; color: #000;}
-
 P {padding: 10px 0px;}
+
+H1 {margin: 10px 0px; font-size: 20px; line-height: 24px; font-weight: lighter; color: #000;}
+H2 {margin: 10px 0px; font-size: 18px; line-height: 24px; font-weight: lighter; color: #000;}
+H3 {margin: 10px 0px; font-size: 16px; line-height: 18px; font-weight: lighter; color: #000;}
+
+
+
+/*Кнопки, инпуты*/
 .input {display: block; margin-right: 10px;}
 .input input, input[type="text"],input[type="password"],textarea,select,.hasDatepicker {
     border: 2px solid rgba(220, 220, 220, 1);
@@ -58,9 +61,15 @@ input[disabled="disabled"]  {background-color: #E1E1E1;}
   margin: 5px;
 }
 
+
+
 .button:hover {background: #9622ef;}
 .button.hover {background: #9622ef;}
 .button IMG {display: inline; padding-right: 6px; margin-top: -2px; vertical-align:middle}
+
+.button.disabled {background: #999999; box-shadow: 0 -2px #333333 inset; cursor: default;}
+.button.disabled:hover {background: #999999;}
+
 
 .button.big {padding: 10px 30px; font-size: 16px;}
 .button.txtstyle {background: none; border-radius:0;box-shadow: none; margin: 0; padding: 0; }
@@ -68,8 +77,11 @@ input[disabled="disabled"]  {background-color: #E1E1E1;}
 .button.txtstyle.disabled INPUT{cursor: default;}
 .ui-datepicker-trigger {height: 44px; padding-top: 10px;}
 
+INPUT {border: none; background: transparent url(/pics/i/blank.gif);}
+FORM LABEL {position: relative; overflow: hidden; display: block; margin: 0px 6px 0px 4px;}
 
 
+/*Список*/
 UL {list-style: none;margin:0;padding:0;}
 UL, OL {margin: 10px 0px 10px 0px;}
 UL LI {padding-left: 20px; background: url(/pics/i/ul.gif) 0px 9px no-repeat; position: relative;}
@@ -80,14 +92,28 @@ OL UL, OL OL, UL UL, UL OL {margin: 0px 0px 0px 40px;}
 .settings_image {border: 2px solid rgba(220, 220, 220, 1);
     box-shadow: 1px 1px 3px 1px rgba(200, 200, 200, 0.2) inset; padding: 5px 5px 5px 10px; margin-right: 10px;}
 
-.foraccess > UL > LI > LABEL {font-size: 18px; background-color: #CCC; padding: 15px}
-.foraccess > UL > LI {width: 100%; border-bottom: none;}
-.foraccess UL UL {margin: 10px 0 0 10px;}
-.foraccess LI {background: none; padding: 10px 0; border-bottom: 1px solid #CCC;}
+.foraccess > UL > LI > LABEL {	padding: 15px 0;
+	border-top:1px solid #fafafa;
+	border-bottom:1px solid #e0e0e0;
+	background: #ededed;
+	background: -webkit-gradient(linear, left top, left bottom, from(#ededed), to(#ebebeb));
+	background: -moz-linear-gradient(top,  #ededed,  #ebebeb);
+	}
+.foraccess {width:100%; color:#666;font-size:12px;text-shadow: 1px 1px 0px #fff;background:#eaebec;	margin:0 auto;	border:#ccc 1px solid;
+	-moz-border-radius:3px;
+	-webkit-border-radius:3px;
+	border-radius:3px;
+	-moz-box-shadow: 0 1px 2px #d1d1d1;
+	-webkit-box-shadow: 0 1px 2px #d1d1d1;
+	box-shadow: 0 1px 2px #d1d1d1;
+	}
+.foraccess > UL > LI > UL > LI {padding:18px;border-top: 1px solid #ffffff;border-bottom:1px solid #e0e0e0;border-left: 1px solid #e0e0e0;	background: #fafafa;background: -webkit-gradient(linear, left top, left bottom, from(#fbfbfb), to(#fafafa));background: -moz-linear-gradient(top,  #fbfbfb,  #fafafa);}
+.foraccess UL {margin: 0;}
+.foraccess LI {background: none; padding: 0; border-bottom: 1px solid #CCC;}
 .foraccess LABEL INPUT {position: relative !important; margin: 3px;}
 
 .foraccess .actions {float: right; position: absolute; top: 18px;}
-.foraccess UL UL .actions {float: right; position: absolute; top: 4px; right: 10px;}
+.foraccess UL UL .actions {float: right; position: absolute; top: 13px; right: 10px;}
 .foraccess .actions DIV {float: left;}
 
 .up_down {width: 30px; float: left;}
@@ -129,9 +155,7 @@ OL UL, OL OL, UL UL, UL OL {margin: 0px 0px 0px 40px;}
 
 
 
-INPUT {border: none; background: transparent url(/pics/i/blank.gif);}
 
-FORM LABEL {position: relative; overflow: hidden; display: block; margin: 0px 6px 0px 4px;}
 
 .png {_behavior:url(/css/iepngfix.htc);}
 
@@ -458,13 +482,15 @@ A.dashed {text-decoration: none; border-bottom: 1px dashed #0CA2B8;}
 .table-content th:first-child{text-align: left;padding-left:20px;}
 /*.table-content tr:first-child th:first-child{	-moz-border-radius-topleft:3px;	-webkit-border-top-left-radius:3px;	border-top-left-radius:3px;}
 .table-content tr:first-child th:last-child{	-moz-border-radius-topright:3px;-webkit-border-top-right-radius:3px;border-top-right-radius:3px;}*/
-.table-content tr{text-align: center;padding-left:20px;}.table-content tr td:first-child{	text-align: left;padding-left:20px;border-left: 0;}
+.table-content tr{text-align: center; padding-left:20px;}
+.table-content tr td:first-child{	text-align: left;padding-left:20px;border-left: 0;}
 .table-content tr td {padding:18px;border-top: 1px solid #ffffff;border-bottom:1px solid #e0e0e0;border-left: 1px solid #e0e0e0;	background: #fafafa;background: -webkit-gradient(linear, left top, left bottom, from(#fbfbfb), to(#fafafa));background: -moz-linear-gradient(top,  #fbfbfb,  #fafafa);}
 .table-content tr.even td{background: #f6f6f6;	background: -webkit-gradient(linear, left top, left bottom, from(#f8f8f8), to(#f6f6f6));background: -moz-linear-gradient(top,  #f8f8f8,  #f6f6f6);}
 .table-content tr:last-child td{	border-bottom:0;}
 .table-content tr:last-child td:first-child{-moz-border-radius-bottomleft:3px;-webkit-border-bottom-left-radius:3px;border-bottom-left-radius:3px;}
 .table-content tr:last-child td:last-child{-moz-border-radius-bottomright:3px;-webkit-border-bottom-right-radius:3px;border-bottom-right-radius:3px;}
 .table-content tr:hover td{background: #f2f2f2;background: -webkit-gradient(linear, left top, left bottom, from(#f2f2f2), to(#f0f0f0));background: -moz-linear-gradient(top,  #f2f2f2,  #f0f0f0);}
+
 
 
 .hr {border-top: 1px solid #D8D8D8; height: 1px; margin: 30px 0; clear: both;}

@@ -30,6 +30,12 @@ $SiteSections->init();
 <script type="text/javascript">
 	jQuery(function(){jQuery.fn.scrollToTop=function(){jQuery(this).hide().removeAttr("href");if(jQuery(window).scrollTop()!="0"){jQuery(this).fadeIn("slow")}var scrollDiv=jQuery(this);jQuery(window).scroll(function(){if(jQuery(window).scrollTop()=="0"){jQuery(scrollDiv).fadeOut("slow")}else{jQuery(scrollDiv).fadeIn("slow")}});jQuery(this).click(function(){jQuery("html, body").animate({scrollTop:0},"fast")})}});
 	jQuery(function() {jQuery("#toTop").scrollToTop();});
+ 	$(document).ready(function(){
+		 $( ".button.disabled" ).click(function()
+		 {		 	/*alert('Кнопка недоступна');*/
+		 	return false;
+		 });
+	});
 </script>
 
 <title>Панель управления <?=' - '.ConfigGet('pr_doptit')?></title>

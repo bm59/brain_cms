@@ -243,6 +243,11 @@ class CCTest extends VirtualContent
                                 	<input class="button big" type="submit" name="editform" value="<?=($pub['id']>0)?'Сохранить изменения':'Добавить'?>"/>
                                 </span>
                         </div>
+
+                        <a class="button disabled" href="/manage/control/contents/">Недоступная кнопка</a>
+
+                        <input class="button big disabled" type="submit" name="editform" value="Недоступная"/>
+
                         <span class="clear"></span>
                         </form>
                 </div>

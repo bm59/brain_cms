@@ -73,7 +73,7 @@ class CDCHOICE extends VirtualType
 		if ($span) print '
 			<span class="clear"></span>';
 	}
-	function preSave(){        print_r($_POST);
+	function preSave(){
 		$errors = array();
 		$settings = $this->getSetting('settings');
 

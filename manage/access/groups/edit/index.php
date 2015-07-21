@@ -101,7 +101,7 @@ $settings = ($editid>0)?array('title'=>'Редактирование группы пользователей','bu
 
 		}	});
 </script>
-<div id="zbody">
+<div id="content">
 	<? include $_SERVER['DOCUMENT_ROOT']."/inc/site_admin/header.php"; ?>
 	<div id="content" class="forms">
         <div class="hr"></div>
@@ -144,9 +144,7 @@ $settings = ($editid>0)?array('title'=>'Редактирование группы пользователей','bu
 			<span class="clear"></span>
 		</form>
 		<div class="hr"><hr /></div>
-		<div id="paging" class="nopad">
 			<a href="/manage/access/groups/" class="button">Перейти к списку групп</a>
-		</div>
 		<span class="clear"></span>
 	</div>
 	<?/*include $_SERVER['DOCUMENT_ROOT']."/inc/footer.php";*/?>

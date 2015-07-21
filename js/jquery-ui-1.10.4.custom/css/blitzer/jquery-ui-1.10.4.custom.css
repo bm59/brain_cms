@@ -842,7 +842,7 @@ body .ui-tooltip {
     box-shadow: 1px 1px 3px 1px rgba(200, 200, 200, 0.2) inset;
 	background: #f6f6f6 url(images/ui-bg_highlight-hard_100_f6f6f6_1x100.png) 50% 50% repeat-x;
 	font-weight: bold;
-	color: #111111;
+	/*color: #111111;*/
 }
 .ui-state-hover a,
 .ui-state-hover a:hover,

@@ -124,3 +124,29 @@ a[title*="file"][href$=".pdf"]   	{background: url('/pics/file/pdf.png') no-repe
 a[title*="file"][href$=".rar"]   	{background: url('/pics/file/archive.png') no-repeat; line-height: 20px; padding: 4px 0 8px 35px; display: block;}
 a[title*="file"][href$=".zip"]   	{background: url('/pics/file/archive.png') no-repeat; line-height: 20px; padding: 4px 0 8px 35px; display: block;}
 a[title*="file"][href$=".7z"]   	{background: url('/pics/file/archive.png') no-repeat; line-height: 20px; padding: 4px 0 8px 35px; display: block;}
+
+
+/*Галерея фото в редакторе страницы*/
+/*.photogallery {border: 1px dashed #CCCCCC; padding: 10px;} - рамка для редактора tiny*/
+.photo_row {
+	display: inline-block;
+    height: 87px;
+    padding: 3px;
+    margin: 5px;
+    width: 130px;
+    border: 1px solid #CCCCCC;
+    -webkit-box-shadow: 1px 1px 3px 0px rgba(50, 50, 50, 0.5);
+-moz-box-shadow:    1px 1px 3px 0px rgba(50, 50, 50, 0.5);
+box-shadow:         1px 1px 3px 0px rgba(50, 50, 50, 0.5);
+    }
+.photo_row a {
+    background: none repeat scroll 0 0 #f1f1f1;
+    display: block;
+    height: 87px;
+    overflow: hidden;
+    text-align: center;
+    width: 130px;
+}
+.photo_row img {
+    vertical-align: top; border: 0 none; max-width: 130px;
+}

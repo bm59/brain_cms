@@ -55,7 +55,8 @@ class CDTextEditor extends VirtualType
 			            {title: 'pre', block: 'pre'}
 			        ]},
 			        {title: 'Стилизованная таблица', selector: 'table', classes: 'table-content'},
-			        {title: 'Абзац с отступом', block: 'p', styles: {'text-indent': '20px'}}
+			        {title: 'Абзац с отступом', block: 'p', styles: {'text-indent': '20px'}},
+			        {title: 'Галарея фото', block: 'div', classes: 'photogallery'}
 
 			    ],
 
