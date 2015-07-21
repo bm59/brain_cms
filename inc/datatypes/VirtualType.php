@@ -5,7 +5,7 @@
 class VirtualType
 {
 	var $Settings = array();
-	
+
 	function init($settings){
 		if (is_array($settings)){
 			foreach ($settings as $name=>$value) $this->setSetting($name,$value);

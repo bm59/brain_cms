@@ -21,7 +21,7 @@ if (configGet("AskUrl")!='/'){
                                 $ptrn = new $sctn['pattern'];
                                 $ifface = $ptrn->init(array('section'=>$sctn['id']));
                                 if ($ptrn->getSetting('name')=='PFolder'){
-                                        if ($sctn['path']=='control' || $sctn['path']=='access')
+                                        if ($sctn['path']=='control' || $sctn['path']=='access' || $sctn['path']=='sitecontent')
                                         $href = false;
                                 }
                         }
@@ -48,7 +48,7 @@ if (configGet("AskUrl")!='/'){
                         case 'PFolder':
                                 print ' &rarr; '.$pobj['name'];
                                 break;
-                        case 'PPublication':
+/*                        case 'PPublication':
                                 print ($pub['id']>0)?' &rarr; <a href="'.$SiteSections->getPath($pobj['id']).'">'.$pobj['name'].'</a>':' &rarr; '.$pobj['name'];
                                 break;
                         case 'PList':
@@ -56,12 +56,16 @@ if (configGet("AskUrl")!='/'){
                                 break;
                         case 'PSheet1':
                                 print ($pub['id']>0)?' &rarr; <a href="'.$SiteSections->getPath($pobj['id']).'">'.$pobj['name'].'</a>':' &rarr; '.$pobj['name'];
-                                break;
+                                break;*/
                         default:
-                                print ($href)?'&rarr; <a href="'.$SiteSections->getPath($pobj['id']).'">'.$pobj['name'].'</a>':' &rarr; '.$pobj['name'];
+                                print ($href)?'&rarr; <a href="/manage/control/contents/?section='.$sctn['id'].'">'.$pobj['name'].'</a>':' &rarr; '.$pobj['name'];
                                 break;
                 }
         }
+
+        if ($_GET['pub']>0 || $_GET['id']>0) print '&rarr; редактировать';
+        if ($_GET['pub']=='new') print '&rarr; добавить';
+
         print '</H1>';
 
 }

@@ -39,7 +39,7 @@ include $_SERVER['DOCUMENT_ROOT']."/inc/site_admin/meta.php";?>
 		</form>
 	</div>
 </body>
-<!--//<script>
-	addEvent(window.addEventListener || window.attachEvent ? window : document.addEventListener ? document : null, "load", function(){ if (form = document.forms['enter']) form.login.focus(); });
-</script>//-->
+<script>
+	$(document).ready(function(){		 $( "input[name='login']" ).focus();	});
+</script>
 </html>

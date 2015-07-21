@@ -211,7 +211,8 @@ FORM LABEL {position: relative; overflow: hidden; display: block; margin: 0px 6p
 .ta_big {padding: 10px 10px 20px 0px}
 .ta_big TEXTAREA {height: 150px;}
 
-.forms LABEL {position: relative; overflow: hidden; display: block; margin: 0px 12px 0px 0px;}
+.forms LABEL {position: relative; overflow: hidden; display: block; margin: 0px 12px 0px 0px; }
+.radio_ui LABEL {float: left; margin: 10px 0 ;}
 .forms FORM {margin-top: 0px; width: 100%;}
 FORM LABEL {position: relative; overflow: hidden; display: block; margin: 0px 6px 0px 4px;}
 .items {position: absolute; top: -12px; z-index: 10; background-color: #FFF;     border: 2px solid rgba(52, 152, 219, 1);

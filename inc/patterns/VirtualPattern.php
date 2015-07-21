@@ -52,6 +52,18 @@ class VirtualPattern
 					case 'CDFloatInfo':
 						$ttype = 'FLOAT';
 					break;
+					case 'CDBoolean':
+						$ttype = 'INT(1)';
+					break;
+					case 'CDSpinner':
+						$ttype = 'BIGINT(20)';
+					break;
+					case 'CDChoice':
+						$ttype = 'VARCHAR(1000)';
+					break;
+					case 'CDSlider':
+						$ttype = 'VARCHAR(255)';
+					break;
 				}
 				$tablefields[$t['name']] = $ttype;
 			}

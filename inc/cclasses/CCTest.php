@@ -1,6 +1,6 @@
 <?
 
-class CCVideo extends VirtualContent
+class CCTest extends VirtualContent
 {
         function init($settings){
                 VirtualContent::init($settings);
@@ -191,6 +191,7 @@ class CCVideo extends VirtualContent
                                 <div class="hr"><hr /></div>';
                         }
                         ?>
+                        <?include_once($_SERVER['DOCUMENT_ROOT']."/inc/site_admin/nav.php");?>
                         <p class="impfields">Поля, отмеченные знаком «<span class="important">*</span>», обязательные для заполнения.</p>
                         <form id="editform" name="editform" action="<?=$_SERVER['REQUEST_URI']?>" method="POST" enctype="multipart/form-data">
                                 <input type="hidden" name="editformpost" value="1">
@@ -208,6 +209,9 @@ class CCVideo extends VirtualContent
 
                                         $nospans = array("ptitle","pdescription");
 
+                                		if ($dt['name']=='choice_multi2')
+                                		{                                			$tface->init(array('values'=>array('1'=>'один', '2'=>'два', '3'=>'три', '4'=>'четыре')));
+                                		}
                                         $tface->drawEditor($stylearray[$tface->getSetting('name')],((in_array($tface->getSetting('name'),$nospans))?false:true));
 
                                         if ($dt['name']=='dopinfo' && $_GET['section']==25)
@@ -259,8 +263,8 @@ class CCVideo extends VirtualContent
                 $searchnumgood = isset($_POST['searchnumgood']) ? $_POST['searchnumgood']: (isset($_GET['searchnumgood']) ? $_GET['searchnumgood'] : '');
                 $searchtextgood = isset($_POST['searchtextgood']) ? $_POST['searchtextgood']: (isset($_GET['searchtextgood']) ? $_GET['searchtextgood'] : '');
                 ?>
-        <div id="content" class="forms">
-        <?include_once($_SERVER['DOCUMENT_ROOT']."/inc/site_admin/nav.php");?>
+    	<div id="content" class="forms">
+    	<?include_once($_SERVER['DOCUMENT_ROOT']."/inc/site_admin/nav.php");?>
         <form name="searchform" action="" method="POST">
 			<input type="hidden" name="searchaction" value="1">
 
@@ -385,7 +389,7 @@ class CCVideo extends VirtualContent
                         }
                         ?>
                 </div>
-            </div>
+  			</div>
                 <?
         }
 		function deletePub($id,$updateprec = true){

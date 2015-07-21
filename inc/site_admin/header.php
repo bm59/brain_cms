@@ -15,7 +15,7 @@
         ?>
         <div class="profile">
 	        <div class="autor">
-	                Пользователь: <?=$user['secondname'].' '.$user['firstname'].' '.$user['parentname']?>
+	                Здравствуйте, <?=$user['secondname'].' '.$user['firstname'].' '.$user['parentname']?>
 	                <div>
 	                        <?
 	                        if (floor(configGet('profileID'))!=$_SESSION['visitorID']){
