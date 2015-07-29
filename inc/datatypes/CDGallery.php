@@ -20,7 +20,7 @@ class CDGallery extends VirtualType
    			<script>
         $(function(){
         var btnUpload<?='_'.$this->getSetting('name')?>=$('#upl_button<?='_'.$this->getSetting('name')?>');
-        var status=$('.contentdesc<?='_'.$this->getSetting('name')?>');
+        var status=$('.sortable<?='_'.$this->getSetting('name')?>');
         var upload_me=new AjaxUpload(btnUpload<?='_'.$this->getSetting('name')?>, {
             action: '/uploader_image.php',
             responseType: 'json',
@@ -36,7 +36,9 @@ class CDGallery extends VirtualType
                     $('#loading<?='_'.$this->getSetting('name')?>').fadeOut(0);
                     status.html(status.html()+'<LI style="height: 170px;float: left;"><div class="gallery_container"><input type="hidden" id="uploadfilehidden<?=htmlspecialchars($this->getSetting('name'))?>" name="<?=htmlspecialchars($this->getSetting('name'))?>[]" value="'+response.id+'"><span class="button txtstyle"><input type="button" onclick="delete_file_image(this); return false" id="delete_button_image" style="background-image: url(/pics/editor/delete.gif)" title="Удалить изображение"></span><img style="height: 170px" class="contentimg" src="'+response.path+'" class="contentimg"></div></LI>');
                     //$('#uploadfilehidden<?=htmlspecialchars($this->getSetting('name'))?>').val(response.id);
-                }else{
+
+
+             }else{
                     $('#loading').fadeOut(0);
                     if (response.error!='') alert(response.error);
 
@@ -52,6 +54,7 @@ class CDGallery extends VirtualType
        		if (!confirm('Вы уверены, что хотите удалить этот файл?')) return false;
 
 			$(elem).parents('.gallery_container').remove();
+			$( "#sortable" ).sortable();
 			return false;
         }
 
@@ -64,12 +67,12 @@ class CDGallery extends VirtualType
   });
   </script>
 
-			<div class="place" <?=($divstyle!='')?$divstyle:''?>>
+			<div class="place gallery" <?=($divstyle!='')?$divstyle:''?>>
 				<label><?=htmlspecialchars($this->getSetting('description'))?><?=((isset($settings['important']))?' <span class="important">*</span>':'')?></label>
 			<?
 			/*if ($this->getSetting('name')=='image' && $_GET['section']==7) 	print '<div style="padding: 0 5px; color: #ff0000">Рекомендуемый размер:  1040x450 пикселей</div>';*/
 			?>
-                <div class="place forimage">
+                <div class="place forimage ">
 				<span id="upl_button<?='_'.$this->getSetting('name')?>" class="button">
 					Загрузить изображение
 				</span>
@@ -113,7 +116,7 @@ class CDGallery extends VirtualType
 				<div><small><?=$desc?></small></div>
 				<div id="<?=htmlspecialchars($this->getSetting('name'))?>imagecontent">
 				<div class="contentdesc<?='_'.$this->getSetting('name')?>">
-				<UL id="sortable">
+				<UL id="sortable" class="sortable<?='_'.$this->getSetting('name')?>">
 				<?
 				$images=$this->getSetting('value');
 				$images=explode('|',$images);
@@ -124,9 +127,9 @@ class CDGallery extends VirtualType
 					?>
 					<LI style="height: 170px;float: left;">
 					<div class="gallery_container">
-					<input type="hidden" id="uploadfilehidden<?=htmlspecialchars($this->getSetting('name'))?>" name="<?=htmlspecialchars($this->getSetting('name'))?>[]" value="<?=$f?>"><span class="button txtstyle">
-					<input type="button" onclick="delete_file_image(this); return false" id="delete_button_image" style="background-image: url(/pics/editor/delete.gif)" title="Удалить изображение"></span>
-					<img style="height: 170px" class="contentimg" src="<?=$image['path']?>" class="contentimg">
+					<input type="hidden" id="uploadfilehidden<?=htmlspecialchars($this->getSetting('name'))?>" name="<?=htmlspecialchars($this->getSetting('name'))?>[]" value="<?=$f?>"/>
+					<span class="button txtstyle"><input type="button" onclick="delete_file_image(this); return false" id="delete_button_image" style="background-image: url(/pics/editor/delete.gif)" title="Удалить изображение"/></span>
+					<img style="height: 170px" class="contentimg" src="<?=$image['path']?>" class="contentimg"/>
 					</div>
 					</LI>
 					<?

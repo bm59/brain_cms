@@ -258,7 +258,7 @@ class CCNewsCat extends VirtualContent
                         $list = $this->getList('',$_GET['page']);
                         if (count($list)==0){
                                 ?>
-                                <p>Отсутствуют публикации, удовлетворяющие заданным условиям</p>
+                                <p>Отсутствуют записи, удовлетворяющие заданным условиям</p>
                                 <span class="clear"></span>
                                 <div class="place">
                                         <a href="./?section=<?=$section['id']?>&pub=new" class="button big" style="float: right;">Добавить</a>
@@ -289,8 +289,8 @@ class CCNewsCat extends VirtualContent
                                                         <td class="t_32width"><?=$categs[$pub['cat_id']]?></td>
                                                         <td class="t_32width"><?=$pub['pseudolink']?></td>
                                                         <td class="t_32width">
-                                                                <a href="./?section=<?=$section['id']?>&delete=<?=$pub['id']?>" class="button txtstyle" onclick="if (!confirm('Удалить публикацию')) return false;">
-                                                                	<input type="button" style="background-image: url(/pics/editor/delete.gif)" title="Удалить публикацию"/>
+                                                                <a href="./?section=<?=$section['id']?>&delete=<?=$pub['id']?>" class="button txtstyle" onclick="if (!confirm('Удалить запись')) return false;">
+                                                                	<input type="button" style="background-image: url(/pics/editor/delete.gif)" title="Удалить запись"/>
                                                                 </a>
                                                         </td>
                                                 </tr>

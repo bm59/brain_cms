@@ -17,6 +17,15 @@ class CDTextEditor extends VirtualType
 		if (!$multiple_editor)
 		{			?><script type="text/javascript" src="/js/tinymce/tinymce.js"></script><?
 		}
+		else print '123';
+
+/*		 <form id="editform" name="editform" action="<?=$_SERVER['REQUEST_URI']?>" method="POST" enctype="multipart/form-data">
+         <?
+ 		global $multiple_editor;
+ 		$multiple_editor=true;
+		?>
+                 <input type="hidden" name="editformpost" value="1">
+                 <script type="text/javascript" src="/js/tinymce/tinymce.js">*/
 
 		if ($settings['texttype']=='full'){
 			?>
@@ -34,7 +43,7 @@ class CDTextEditor extends VirtualType
 //	    } ,
 
 			    theme: "modern",
-			    skin: 'redskin',
+			    skin: 'greenskin',
 			    height: 300,
 			    language:"ru",
 			    content_css: "/css/default.css?<?=rand();?>",

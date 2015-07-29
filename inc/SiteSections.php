@@ -270,15 +270,18 @@ class SiteSections extends VirtualClass
 
                 $list = $this->getList($parent,$public,$isservice);
                 $counter = 0;
+
                 foreach ($list as $section){
-                		$cid = $Content->getIdByPath($this->getPath($section['id']));
-                		$accessgranted = $VisitorType->isAccessGranted($group['id'],$cid);
+                		$cid = $section['id'];
+                		$accessgranted = $VisitorType->isAccessGranted($group['id'],$section['id']);
 
                 		$accessgranted_settings=array_key_exists($section['id'],$group['new_settings']);
 
-                		if (($accessgranted || $accessgranted_settings || $section['parent']==-1))
-                		{
+                		$child_access =  $VisitorType->check_child_access($section['id'],$group['new_settings']);
 
+
+                		if (($accessgranted || $accessgranted_settings || $child_access || $section['parent']==-1))
+                		{
 		                        $counter++;
 		                        foreach (configGet('registeredPatterns') as $v) if ($v['name']==$section['pattern']) $pattern = $v['description'];
 		                        $anchorcode = '';
@@ -297,7 +300,14 @@ class SiteSections extends VirtualClass
 
 
 		                        if ($section['isservice']==1) $anchorcode = '';
+
+		                        if ($mode=='development' || in_array('view', $group['new_settings'][$section['id']]))
 		                        $editcode = '<a href="./?section='.$section['id'].'">'.$section['name'].'</a>';
+		                        else $editcode = $section['name'];
+
+
+
+
 		                        if ((isset($section['settings']['noedit'])) || ($section['pattern']=='PFolder' || $section['pattern']=='PConference'))
 		                        $editcode = $section['name'];
 		                        if ($section['pattern']=='PFolder' && $section['parent']=='0')
@@ -328,14 +338,14 @@ class SiteSections extends VirtualClass
 		                                if (isset($section['settings']['noeditsettings']) || $mode!='development'){
 		                                        ?>
 		                                        <span class="button txtstyle disabled">
-		                                        	<input type="button" style="background-image: url(/pics/editor/prefs-disabled.gif)" title="Настройки недоступны" onclick="return false;" />
+		                                        	<input type="button" style="background-image: url(/pics/editor/settings-disabled.png)" title="Настройки недоступны" onclick="return false;" />
 		                                        </span>
 		                                        <?
 		                                }
 		                                else{
 		                                        ?>
 		                                        <span class="button txtstyle">
-		                                        	<input type="button" style="background-image: url(/pics/editor/prefs.gif)" title="Настройки" onclick="window.location.href = './?edit=<?=$section['id']?>'" />
+		                                        	<input type="button" style="background-image: url(/pics/editor/settings.png)" title="Настройки" onclick="window.location.href = './?edit=<?=$section['id']?>'" />
 		                                        </span>
 		                                        <?
 		                                }

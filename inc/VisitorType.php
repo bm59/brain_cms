@@ -51,6 +51,26 @@ class VisitorType extends VirtualClass
 			if (in_array($cid,$group['access'])) $retval = true; // Если страница находится в списке доступа группы
 		}
 		return $retval;
+
+	}
+	function check_child_access($parent=0,$settings=array(),$level=1){
+
+            if ($level<=3)
+            {
+
+	    		$childs=msq("SELECT * FROM `site_site_sections` WHERE `parent`=".$parent);
+	    		while ($ch=msr($childs))
+	    		{
+	    			if (array_key_exists($ch['id'],$settings))
+	    			return true;
+	    			else  if ($this->check_child_access($ch['id'],$settings,$level+1)) return true;
+	    		}
+
+    		}
+    		else
+    		return false;
+
+
 	}
 	function add($name = '',$access=''){ /* Добавление новой группы */
 		$errors = array();
@@ -182,15 +202,20 @@ class VisitorType extends VirtualClass
         	/*Получаем настройки доступных действий*/
         	if ($id>0)
         	{
+
 	            $section_settings=$SiteSections->get($sl['id']);
 	            $section_settings=$section_settings['settings']['enable_actions'];
-	        	if ($section_settings!='')
-	        	{	        		$actions=explode(',',$section_settings);
+
+	        	{	        		if ($section_settings=='' && $sl['pattern']!='PFolder')
+	        		$section_settings='view,add,edit,delete';
+
+	        		$actions=explode(',',$section_settings);
 	        		$action_comments=array('view'=>'просмотр', 'add'=>'добавление', 'edit'=>'редактирование', 'delete'=>'удаление', 'onoff'=>'вкл\откл');
 	        		?>
 	        			<div class="actions">
 	        			<?
 	        			foreach ($actions as $act)
+	        			if ($act!='')
 	        			{	        				?><div><label><input type="checkbox" id="action_<?=$sl['id'].'_'.$act?>" name="action_<?=$sl['id'].'_'.$act?>" <?=(($_POST['action_'.$sl['id'].'_'.$act]=='on' || in_array($act,$new_settings[$sl['id']])) ? ' checked="checked"':'')?>><?=$action_comments[$act]?></label></div><?
 	        			}
 	        			?>

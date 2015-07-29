@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ru" lang="ru"><head>
+<!--<base href="" /><!-- -->
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<script language="JavaScript" src="wz_jsgraphics.js"></script>
+<style>
+#canvas{
+	position:relative;
+	height:225px;
+	width:300px;
+	background-image:url(mendi.jpg);
+	border:1px solid #bbb;
+}
+</style>
+<script>
+var imgwidth = 300;
+var imgheight = 225;
+var jg = 0 ;
+var dotarray = [];
+var dotarrayxy = {x:[],y:[]};
+var mode = 'add';
+var select = -1;
+var startDrag = false;
+var coords = 0;
+
+var imgurl = 'images/mendi.jpg';
+var onloaded = false;
+window.onload = function(){
+	var canvas = document.getElementById('canvas');
+	coords = document.getElementById('coords');
+		canvas.style.width = imgwidth+'px';
+		canvas.style.height = imgheight+'px';
+		var offset = getOffset(canvas);
+		jg = new jsGraphics("canvas");
+		outcoords();
+		window.onmouseup = function(e)
+		{
+			startDrag = false;
+			drawdots();
+			incoords();
+		};
+		canvas.onmousedown = function(e){
+			var x = e.pageX-offset.left;
+			var y = e.pageY-offset.top;
+			var drop = false;
+			for(var i in dotarray){
+				if(Math.abs(dotarray[i].x-x+4)<8 && Math.abs(dotarray[i].y-y+4)<8){
+					select = i;
+					drop = true;
+					break;
+				}
+			}
+			if(drop){
+				startDrag = true;
+				drawdots();
+			}else{
+				dotarray.push({'x':x-4,'y':y-4});
+				dotarrayxy.x.push(x);
+				dotarrayxy.y.push(y);
+				select = dotarray.length-1;
+				incoords();
+				drawdots();
+			}
+		};
+		window.onmousemove = function(e){
+			var x = e.pageX-offset.left;
+			var y = e.pageY-offset.top;
+			if(x<0)x = 0;
+			if(y<0)y = 0;
+			if(x>imgwidth)x=imgwidth;
+			if(y>imgheight)y=imgheight;
+			if(startDrag && select>=0){
+				dotarray[select]={'x':x-4,'y':y-4};
+				dotarrayxy.x[select] = x;
+				dotarrayxy.y[select] =y;
+				drawdots(true);
+			}
+		};
+
+
+}
+var last  = 0;
+
+
+</script>
+</head>
+<body>
+<div id="main">
+	<table width="100%">
+<tbody><tr>
+<td align="left">
+<div id="canvas" style="background-image: url('0.jpg')"></div>
+</td>
+<td width="40%">
+<input id="clear" value="Очистить" onclick="if(confirm('Вы уверены что хотите очистить экран?')){clearjg()}" type="button"><br>
+<input id="delDot" value="Удалить синюю точку" onclick="delDot()" type="button"><br>
+</td>
+</tr>
+<tr>
+	<td id="boxer" align="left">
+		<input style="width:90%;" value="" id="coords" type="text" onkeyup="outcoords()">
+		<input onclick="addInput()" value="+" type="button">
+	</td>
+	<td></td>
+</tr>
+</tbody></table>
+
+
+
+</div>
+
+
+</body></html>

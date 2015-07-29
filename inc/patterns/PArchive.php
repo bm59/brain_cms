@@ -1,7 +1,4 @@
 <?
-/*
-Шаблон публикаций (Ленты)
-*/
 class PArchive extends VirtualPattern
 {
 	function init($settings){

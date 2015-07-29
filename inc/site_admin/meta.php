@@ -18,6 +18,7 @@ $SiteSections->init();
 <link rel="stylesheet" type="text/css" href="/css/multiple-select.css" media="all" />
 <link rel="stylesheet" type="text/css" href="/css/checkbox.css" media="all" />
 <!--//<link rel="stylesheet" type="text/css" href="/css/tablednd.css" media="all" />//-->
+<link rel="stylesheet" type="text/css" href="/css/highslide.css" />
 
 <script src="/js/manage.js" type="text/javascript"></script>
 
@@ -25,9 +26,13 @@ $SiteSections->init();
 <script src="/js/jquery-ui-1.10.4.custom/js/jquery-ui-1.10.4.custom.min.js" type="text/javascript"></script>
 <script src="/js/ajaxupload.3.5.js" type="text/javascript"></script>
 <script src="/js/jquery.multiple.select.js" type="text/javascript"></script>
+<script src="/js/highslide.js" type="text/javascript"></script>
 <!--//<script src="/js/jquery.tablednd.js" language="JavaScript" type="text/javascript"></script>//-->
 <!--//<script src="/js/imag_manage.js" language="JavaScript" type="text/javascript"></script>//-->
 <script type="text/javascript">
+	hs.graphicsDir = '/pics/graphics/';
+  	hs.outlineType = 'rounded-black';
+
 	jQuery(function(){jQuery.fn.scrollToTop=function(){jQuery(this).hide().removeAttr("href");if(jQuery(window).scrollTop()!="0"){jQuery(this).fadeIn("slow")}var scrollDiv=jQuery(this);jQuery(window).scroll(function(){if(jQuery(window).scrollTop()=="0"){jQuery(scrollDiv).fadeOut("slow")}else{jQuery(scrollDiv).fadeIn("slow")}});jQuery(this).click(function(){jQuery("html, body").animate({scrollTop:0},"fast")})}});
 	jQuery(function() {jQuery("#toTop").scrollToTop();});
  	$(document).ready(function(){
@@ -37,7 +42,7 @@ $SiteSections->init();
 		 });
 	});
 </script>
-
+<?include_once($_SERVER['DOCUMENT_ROOT']."/inc/site_admin/access.php");?>
 <title>Панель управления <?=' - '.ConfigGet('pr_doptit')?></title>
 </head>
 <body>

@@ -296,7 +296,7 @@ class CCRubricator extends VirtualContent
                         $list = $this->getChild('', $this->sqlstr);
                         if (count($list)==0){
                                 ?>
-                                <p>Отсутствуют публикации, удовлетворяющие заданным условиям</p>
+                                <p>Отсутствуют записи, удовлетворяющие заданным условиям</p>
                                 <span class="clear"></span>
                                 <div class="place">
                                 	<a href="./?section=<?=$section['id']?>&pub=new" class="button big" style="float: right;">Добавить</a>
@@ -344,8 +344,8 @@ class CCRubricator extends VirtualContent
 					                                                        	<div style="color:#666666"><?=$child_pub['pseudolink']?></div>
 					                                                        </td>
 					                                                        <td class="t_32width">
-									                                            <a href="./?section=<?=$section['id']?>&delete=<?=$child_pub['id']?>" class="button txtstyle" onclick="if (!confirm('Удалить публикацию')) return false;">
-				                                                                	<input type="button" style="background-image: url(/pics/editor/delete.gif)" title="Удалить публикацию"/>
+									                                            <a href="./?section=<?=$section['id']?>&delete=<?=$child_pub['id']?>" class="button txtstyle" onclick="if (!confirm('Удалить запись')) return false;">
+				                                                                	<input type="button" style="background-image: url(/pics/editor/delete.gif)" title="Удалить запись"/>
 				                                                                </a>
 					                                                        </td>
 					                                                </tr>

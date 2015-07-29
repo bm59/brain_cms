@@ -50,7 +50,8 @@ else{
     $sec=$SiteSections->get($_GET['section']);
 
 	$askcontent = $Content->getOne($cid);
-	$user = $SiteVisitor->getOne($_SESSION['visitorID']); // Данные пользователя
+
+    $user = $SiteVisitor->getOne($_SESSION['visitorID']); // Данные пользователя
 	$group = $VisitorType->getOne($user['type']); // Данные группы
 
 
@@ -58,8 +59,8 @@ else{
 
 
 	$accessgranted = $VisitorType->isAccessGranted($group['id'],$cid);
-	$accessgranted_settings=array_key_exists($cid,$group['new_settings']);
-
+    /*$accessgranted_settings=array_key_exists($cid,$group['new_settings']);*/
+    $accessgranted_settings=in_array('view', $group['new_settings'][$cid]);
 
 
 

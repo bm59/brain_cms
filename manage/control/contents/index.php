@@ -195,7 +195,7 @@ $deletesection = $SiteSections->get(floor($_GET['delete']),-1); $deletesection['
                                         foreach (configGet('registeredPatterns') as $v){
                                                 if (($v['useradd']==1) || ($delepmentmode=='development')) $values[$v['name']] = $v['description'];
                                         }
-
+                                        asort($values);
                                         print getSelectSinonim('pattern',$values,$adddata['pattern']);
                                         ?>
                                         </td></tr></table>

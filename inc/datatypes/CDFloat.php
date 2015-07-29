@@ -46,7 +46,7 @@ class CDFLOAT extends VirtualType
 	}
 	function postSave(){ return; }
 	function getValue(){ return $this->getSetting('value'); }
-	function getUpdateSQL(){ return "`".$this->getSetting('name')."`='".addslashes(floor($this->getSetting('value')))."'"; }
+	function getUpdateSQL(){ return "`".$this->getSetting('name')."`='".addslashes($this->getSetting('value'))."'"; }
 	function delete(){ return; }
 }
 ?>

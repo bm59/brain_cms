@@ -68,29 +68,32 @@ $settings = ($editid>0)?array('title'=>'Редактирование группы пользователей','bu
 <? include $_SERVER['DOCUMENT_ROOT']."/inc/site_admin/meta.php"; ?>
 <script type="text/javascript">
 	$(function()
-	{		check_access();
+	{		/*check_access();*/
 
-		$(document).on("click", "input[type='checkbox']",  function()
-		{			if ($(this).prop("checked")==true)
+		$(document).on("click", "input[type='checkbox'][id*='section_']",  function()
+		{/*			if ($(this).prop("checked")==true)
 			$(this).parent().parent().find('input').prop("checked", "checked");
 			else
 			$(this).parent().parent().find('input').prop("checked", "");
 
 			check_access();
-			check_access();
+			check_access();*/
+			if ($(this).prop("checked")==true)
+			$(this).parents('LI:first').find('input').prop("checked", "checked");
+			else $(this).parents('LI:first').find('input').prop("checked", "");
 		});
 
 		$(document).on("click", ".actions input[type='checkbox']",  function()
 		{
-				if ($(this).parent().parent().parent().find("input:checked").length>0)
-				$(this).parents('LI').find('input:first').prop("checked", "checked");
-				else $(this).parents('LI').find('input:first').prop("checked", "");
+				if ($(this).parents('LI:first').find(".actions input:checked").length>0)
+				$(this).parents('LI:first').find('input:first').prop("checked", "checked");
+				else $(this).parents('LI:first').find('input:first').prop("checked", "");
 		});
 
 
 		function check_access ()
 		{
-					$('.foraccess LI').has('UL').each(function()
+					$('.foraccess > UL > LI').has('UL').each(function()
 					{
 						if ($(this).find(' LI > label > input:checked ').length>0)
 						$(this).find('input:first').prop("checked", "checked");

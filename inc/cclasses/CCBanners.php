@@ -504,8 +504,8 @@ $(function() {
                                                         <td class="t_left"><?=$MySqlConnect->dateFromDBDot($pub['startdate'])?></td>
                                                         <td class="t_left"><?=$MySqlConnect->dateFromDBDot($pub['enddate'])?></td>
                                                         <td class="t_32width">
-                                                                <a href="./?section=<?=$section['id']?>&delete=<?=$pub['id']?>" class="button txtstyle" onclick="if (!confirm('Удалить публикацию')) return false;">
-                                                                	<input type="button" style="background-image: url(/pics/editor/delete.gif)" title="Удалить публикацию"/>
+                                                                <a href="./?section=<?=$section['id']?>&delete=<?=$pub['id']?>" class="button txtstyle" onclick="if (!confirm('Удалить запись')) return false;">
+                                                                	<input type="button" style="background-image: url(/pics/editor/delete.gif)" title="Удалить запись"/>
                                                                 </a>
                                                         </td>
                                                 </tr>

@@ -11,7 +11,7 @@ class CDSPINNER extends VirtualType
 		?>
 		  <script>
 		  $(function() {
-		    var spinner = $( "input[name='<?=htmlspecialchars($this->getSetting('name'))?>']" ).spinner();
+		    var spinner = $( "input[name='<?=htmlspecialchars($this->getSetting('name'))?>']" ).spinner(<?=(($settings['min']!='') ? '{min: '.$settings['min'].'}':'')?>);
 
 		  });
 		  </script>

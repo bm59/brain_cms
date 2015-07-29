@@ -1,7 +1,4 @@
 <?
-/*
-Шаблон публикаций (Ленты)
-*/
 class PRubricator extends VirtualPattern
 {
 	function init($settings){

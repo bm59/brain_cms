@@ -568,7 +568,7 @@ tinymce.ThemeManager.add('modern', function(editor) {
 			}
 
 			// Load content.min.css or content.inline.min.css
-			editor.contentCSS.push(skinUrl + '/content' + (editor.inline ? '.inline' : '') + '.min.css');
+			editor.contentCSS.push(skinUrl + '/content' + (editor.inline ? '.inline' : '') + '.min.css?'+ Math.random());
 		}
 
 		// Handle editor setProgressState change

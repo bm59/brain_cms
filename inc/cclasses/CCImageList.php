@@ -257,7 +257,7 @@ class CCImageList extends VirtualContent
                         $list = $this->getList($_GET['page'], array(), '', $searchnumgood, $searchtextgood);
                         if (count($list)==0){
                                 ?>
-                                <p>Отсутствуют публикации, удовлетворяющие заданным условиям</p>
+                                <p>Отсутствуют записи, удовлетворяющие заданным условиям</p>
                                 <span class="clear"></span>
                                 <div class="place">
                                         <a href="./?section=<?=$section['id']?>&pub=new" class="button big" style="float: right;">Добавить</a>
@@ -299,8 +299,8 @@ class CCImageList extends VirtualContent
                                                         <td class="t_left"><a href="./?section=<?=$section['id']?>&pub=<?=$pub['id']?>"><?=html_entity_decode(stripslashes($pub['name']))?></a></td>
                                                         <td class="t_32width"><img src="<?=$image['path']?>" width="150px"></td>
                                                         <td class="t_32width">
-                                                                <a href="./?section=<?=$section['id']?>&delete=<?=$pub['id']?>" class="button txtstyle" onclick="if (!confirm('Удалить публикацию')) return false;">
-                                                                        <input type="button" style="background-image: url(/pics/editor/delete.gif)" title="Удалить публикацию"/>
+                                                                <a href="./?section=<?=$section['id']?>&delete=<?=$pub['id']?>" class="button txtstyle" onclick="if (!confirm('Удалить запись')) return false;">
+                                                                        <input type="button" style="background-image: url(/pics/editor/delete.gif)" title="Удалить запись"/>
                                                                 </a>
                                                         </td>
                                                 </tr>

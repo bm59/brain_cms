@@ -1,7 +1,4 @@
 <?
-/*
-Шаблон публикаций (Ленты)
-*/
 class PNewsCat extends VirtualPattern
 {
 	function init($settings){

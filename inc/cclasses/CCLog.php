@@ -361,7 +361,7 @@ class CCLog extends VirtualContent
                         $list = $this->getList('',$_GET['page']);
                         if (count($list)==0){
                                 ?>
-                                <p>ќтсутствуют публикации, удовлетвор€ющие заданным услови€м</p>
+                                <p>ќтсутствуют записи, удовлетвор€ющие заданным услови€м</p>
                                 <span class="clear"></span>
                                 <?
                         }

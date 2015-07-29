@@ -286,28 +286,7 @@ function get_url_text($str)
 ini_set('display_errors', TRUE);
 ini_set('display_startup_errors', TRUE);*/
 
-function getSprValues($sprnam,$id=0)
-{	global $CDDataSet,$SiteSections;
-    $SiteSections= new SiteSections;
-    $SiteSections->init();
-    $Section = $SiteSections->get($SiteSections->getIdByPath($sprnam));
-    if ($Section['id']>0)
-    {
-	    $Section['id'] = floor($Section['id']);
-		$Pattern = new $Section['pattern'];
-		$Iface = $Pattern->init(array('section'=>$Section['id']));
-		$retval[-1]='&nbsp';
-		$q = msq("SELECT * FROM `".$Iface ->getSetting('table')."` ORDER BY `name`");
-		while ($r = msr($q))
-		{
-	            $retval[$r['id']] = $r['name'];
-
-	    }
-    }
-    return $retval;
-
-}
-function getSprValuesEx($sprnam,$id=0)
+function getSprValues($sprnam,$id=0,$add_empty=true)
 {
 	global $CDDataSet,$SiteSections;
     $SiteSections= new SiteSections;
@@ -318,8 +297,30 @@ function getSprValuesEx($sprnam,$id=0)
 	    $Section['id'] = floor($Section['id']);
 		$Pattern = new $Section['pattern'];
 		$Iface = $Pattern->init(array('section'=>$Section['id']));
-		$retval[-1]='&nbsp';
+		if ($add_empty) $retval[-1]='&nbsp';
 		$q = msq("SELECT * FROM `".$Iface ->getSetting('table')."` ORDER BY `name`");
+		while ($r = msr($q))
+		{
+	            $retval[$r['id']] = stripslashes(htmlspecialchars($r['name']));
+
+	    }
+    }
+    return $retval;
+
+}
+function getSprValuesEx($sprnam,$id=0,$add_empty=true,$order='')
+{
+	global $CDDataSet,$SiteSections;
+    $SiteSections= new SiteSections;
+    $SiteSections->init();
+    $Section = $SiteSections->get($SiteSections->getIdByPath($sprnam));
+    if ($Section['id']>0)
+    {
+	    $Section['id'] = floor($Section['id']);
+		$Pattern = new $Section['pattern'];
+		$Iface = $Pattern->init(array('section'=>$Section['id']));
+		if ($add_empty) $retval[-1]='&nbsp';
+		$q = msq("SELECT * FROM `".$Iface ->getSetting('table')."` ".(($order=='') ? 'ORDER BY `name`': $order));
 		while ($r = msr($q))
 		{
 	            $retval[$r['id']] = $r;
@@ -330,7 +331,7 @@ function getSprValuesEx($sprnam,$id=0)
 
 }
 
-function getSprValuesOrder($sprnam,$order,$id=0)
+function getSprValuesOrder($sprnam,$order,$id=0,$add_empty=true)
 {
 	global $CDDataSet,$SiteSections;
     $SiteSections= new SiteSections;
@@ -341,17 +342,18 @@ function getSprValuesOrder($sprnam,$order,$id=0)
 	    $Section['id'] = floor($Section['id']);
 		$Pattern = new $Section['pattern'];
 		$Iface = $Pattern->init(array('section'=>$Section['id']));
-		$retval[-1]='&nbsp';
-		$q = msq("SELECT * FROM `".$Iface ->getSetting('table')."`".$order);
+		if ($add_empty) $retval[-1]='&nbsp';
+		$q = msq("SELECT * FROM `".$Iface ->getSetting('table')."` ".$order);
 		while ($r = msr($q))
 		{
-	            $retval[$r['id']] = $r['name'];
+	            $retval[$r['id']] = stripslashes($r['name']);
 
 	    }
     }
     return $retval;
 
 }
+
 
 function abc_new($var){
 	$var = str_replace(" ","",$var);
