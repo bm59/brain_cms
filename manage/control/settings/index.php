@@ -52,9 +52,16 @@ $list = $iface->getList();
 		?>
   <script>
   $(function() {
-    $( "#sortable" ).sortable();
+    $( "#sortable" ).sortable({
+      handle: ".drag_icon"
+    });
     //$( "#sortable" ).disableSelection();
   });
+function selectText(elem) {
+  var range = document.createRange();
+  range.selectNode(elem);
+  window.getSelection().addRange(range);
+};
   </script>
 		<form name="setupdate" action="<?=$_SERVER['REQUEST_URI']?>" method="POST">
 		<UL id="sortable">
@@ -64,8 +71,11 @@ $list = $iface->getList();
 				?>
 				<LI>
 				<div class="place" id="item_<?=$set['id']?>">
-					<table style="width: 100%;"><tr><td>
-					<label><?=stripslashes(htmlspecialchars($set['description']))?> <small class="setdesc"><?=stripslashes(htmlspecialchars($set['name']))?></small></label>
+					<table style="width: 100%;">
+					<tr>
+					<td style="width: 20px; padding-top: 20px;"><div class="drag_icon"><img src="/pics/editor/up_down.png"></div></td>
+					<td>
+					<label><?=stripslashes(htmlspecialchars($set['description']))?> <small class="setdesc" onclick="selectText(this)"><?=stripslashes(htmlspecialchars($set['name']))?></small></label>
 					<?
 					if ($set['settings']['type']=='int')
 					{
