@@ -131,7 +131,8 @@ class SiteSections extends VirtualClass
                 $keywords = htmlspecialchars(trim($values['keywords']));
                 $title = htmlspecialchars(trim($values['title']));
                 $tags = htmlspecialchars(trim($values['tags']));
-
+                $header = htmlspecialchars(trim($values['header']));
+                
                 $visible = $values['visible'];
                 if($visible == "on")
                 $visible = 1;else
@@ -139,7 +140,7 @@ class SiteSections extends VirtualClass
 
                 $description = htmlspecialchars(trim($values['description']));
                 if (count($errors)==0){
-                        msq("UPDATE `".$this->getSetting('table')."` SET `name`='$name',`path`='$path',`keywords`='$keywords',`title`='$title',`visible`='$visible',`description`='$description',`tags`='$tags' WHERE `id`='".$values['id']."'");
+                        msq("UPDATE `".$this->getSetting('table')."` SET `name`='$name',`path`='$path',`keywords`='$keywords',`title`='$title',`visible`='$visible',`description`='$description',`tags`='$tags',`header`='$header' WHERE `id`='".$values['id']."'");
                 }
                 return $errors;
         }

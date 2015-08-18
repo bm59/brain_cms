@@ -22,7 +22,7 @@ class CDSPINNER extends VirtualType
 		<div class="place" <?=($divstyle!='')?$divstyle:''?>>
 			<label><?=htmlspecialchars($this->getSetting('description'))?><?=((isset($settings['important']))?' <span class="important">*</span>':'')?></label>
 			<?if ($settings['comment']!=''){?><small><?=$settings['comment']?></small><?}?>
-			<span class="input">
+			<span class="input" style="padding: 10px 0;">
 				<input type="text" name="<?=htmlspecialchars($this->getSetting('name'))?>" value="<?=stripslashes($this->getSetting('value'))?>" autocomplete="off" onfocus="$(this).parent().css({'border':'2px solid #c06eff'});"  onblur="$(this).parent().css({'border':'2px solid rgba(220, 220, 220, 1)'});">
 			</span>
 		</div>

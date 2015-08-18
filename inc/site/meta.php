@@ -25,6 +25,7 @@
 <script src="/js/jquery.js"	type="text/javascript"></script>
 <script src="/js/lightbox.js" type="text/javascript"></script>
 <script src="/js/gallery_editor.js" type="text/javascript"></script>
+<!-- <script src="/js/fix_gallery.js" type="text/javascript"></script> -->
 
 <!--[if lt IE 9]>
 <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>

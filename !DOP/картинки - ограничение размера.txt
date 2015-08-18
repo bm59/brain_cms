@@ -1,0 +1,6 @@
+--------------------
+MySQL (`site_site_data_types`)
+--------------------
+|auto_resize=true|auto_width=187|auto_height=120|
+|imgw=1001|imgwtype=1|imgh=730|imghtype=1|
+

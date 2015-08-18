@@ -1,0 +1,44 @@
+Шрифт редактора : Corier New
+
+------------------------
+Настройка цвета PHP
+------------------------
+variable - переменные php (0 0 128, жирный)
+normal - классы и функции (0 0 128)
+PHP tags - откр и закр тег (128 0 0)
+keywords - ключевые слова (0 128 128)
+string (128 0 0)
+superglobal variables (128 0 0)
+internal function (0 128 128, жирный)
+PHPDoc comment (128 128 128)
+Multi-line comment (128 128 128)
+Single-line comment (128 128 128)
+
+------------------------
+Настройка цвета HTML Editor
+------------------------
+tag names - переменные php (0 0 255)
+atribute values (0 128 151) убрать "italic"
+atribute names (128 0 128)
+comment delimeters (128 128 128)
+comment content (128 128 128)
+tag delimeters (58 0 128)
+
+------------------------
+Клавиши
+------------------------
+ctrl+shift+F - автоматически структурировать весь код
+ctrl+I - структурировать выделенный код
+ctrl+L - переход к строке
+
+Lower Case: CTRL+SHIFT+Y
+Upper Case: CTRL+SHIFT+X 
+
+TAB, shift+TAB - сдвиг кода
+
+
+------------------------
+Плагины
+------------------------
+http://www.aptana.com/products/studio3/success_plugin.html
+Удаление плагинов  Help - About

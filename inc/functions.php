@@ -634,7 +634,7 @@ function get_insert_sql($data, $table)
 	{
 		global $SiteSettings;
 		$set=$SiteSettings->getOne($SiteSettings->getIdByName($name));
-		return $set['value'];
+		return html_entity_decode(stripslashes($set['value']));
 	}
 	function WriteLog($item_id, $descr, $comment, $user_id='', $changes='')
 	{

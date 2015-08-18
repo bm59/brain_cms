@@ -163,7 +163,7 @@ function send_callbak()
 				  </div>
 
 				  <div class="txt-fld">
-				    <label for=""><div>Комментарий</div><div class="comment">(не обязательно)</div></label>
+				    <label><span>Комментарий</span><span class="comment">(не обязательно)</span></label>
 				    <input id="client_comment" class="client_comment" name="client_comment" type="text" />
 				  </div>
 

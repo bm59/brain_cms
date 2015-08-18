@@ -69,6 +69,30 @@ class Storage extends VirtualClass
 		foreach(explode(',',$storageobj['settings']['exts']) as $v) if (trim($v)!='') $exts[] = lower(trim($v));
 		if (count($exts)>0) if (!in_array($ext,$exts)) $retval['errors'][] = 'Допустимые расширения файла: '.implode(', ',$exts);
 		if (isset($storageobj['settings']['images'])) if (!$imgsize) $retval['errors'][] = 'Файл не является корректным изображением';
+
+
+        /*Проверяем ограничения на размер изображения*/
+        $dataset_name=preg_replace('|^([a-z]+)\_([0-9]+)$|','\\1',$theme);
+		{			$data_set=msr(msq("SELECT * FROM `site_site_data_sets` WHERE `name`='".$dataset_name."'"));
+			$data_type=msr(msq("SELECT * FROM `site_site_data_types` WHERE `dataset`=".$data_set['id']." and `name`='".$rubric."'"));
+
+			if ($data_type['settings']!='')
+			{				$mysql_settings=$this->explode($data_type['settings']);
+			}
+
+			if ($mysql_settings['imgw']!='') $storageobj['settings']['imgw']=$mysql_settings['imgw'];
+            if ($mysql_settings['imgwtype']!='') $storageobj['settings']['imgwtype']=$mysql_settings['imgwtype'];
+            if ($mysql_settings['imgh']!='') $storageobj['settings']['imgh']=$mysql_settings['imgh'];
+            if ($mysql_settings['imghtype']!='') $storageobj['settings']['imghtype']=$mysql_settings['imghtype'];
+
+            /*При автоматической обрезке, исходное изображение не должно быть меньшего размера*/
+            if ($mysql_settings['auto_resize']=='true')
+            {            	if ($imgsize[0]<$mysql_settings['auto_width'])  $retval['errors'][] = 'Ширина загружаемого изображения '.floor($imgsize[0]).'px, а должна быть больше или равна '.$mysql_settings['auto_width'].'px';
+                if ($imgsize[1]<$mysql_settings['auto_height'])  $retval['errors'][] = 'Высота загружаемого изображения '.floor($imgsize[1]).'px, а должна быть больше или равна '.$mysql_settings['auto_height'].'px';
+            }
+
+		}
+
 		if ($ext!='swf'){
 			if (floor($storageobj['settings']['imgw'])>0){
 				$imgw = floor($storageobj['settings']['imgw']);
@@ -89,25 +113,15 @@ class Storage extends VirtualClass
 
 
 				/*Обрезка изображений*/
-				if ($rubric=='image')
-				{
-					$dataset_name=preg_replace('|^([a-z]+)\_([0-9]+)$|','\\1',$theme);
-					if ($dataset_name!='')
-					{
-						$data_set=msr(msq("SELECT * FROM `site_site_data_sets` WHERE `name`='".$dataset_name."'"));
-						$data_type=msr(msq("SELECT * FROM `site_site_data_types` WHERE `dataset`=".$data_set['id']." and `name`='".$rubric."'"));
 
-						if (stripos($data_type['settings'],'auto_resize=true')!==false)
-						{
-							$resize_settings=$this->explode($data_type['settings']);
-							if ($resize_settings['auto_width']>0 && $resize_settings['auto_height']>0)
+				if ($mysql_settings['auto_resize']==true)
+				{							if ($mysql_settings['auto_width']>0 && $mysql_settings['auto_height']>0)
 							{
-								$this->ResizeFrame($storageobj['fullpath'].$filename, $resize_settings['auto_width'],$resize_settings['auto_height']);
-								$this->Crop($storageobj['fullpath'].$filename, $resize_settings['auto_width'],$resize_settings['auto_height']);
+								$this->ResizeFrame($storageobj['fullpath'].$filename, $mysql_settings['auto_width'],$mysql_settings['auto_height']);
+								$this->Crop($storageobj['fullpath'].$filename, $mysql_settings['auto_width'],$mysql_settings['auto_height']);
 							}
-						}
-					}
 				}
+
 
 
 				$uniqueid = mslastid();
@@ -161,6 +175,8 @@ class Storage extends VirtualClass
 	    	$dest_y = $maxHeight;
 	    	$dest_x = ($maxHeight / $srcsize[1]) * $srcsize[0];
 	    	$thumbimg = imagecreatetruecolor($dest_x, $dest_y);
+	    	imageAlphaBlending($thumbimg, false);
+			imageSaveAlpha($thumbimg,true);
 	    	imagecopyresampled($thumbimg,$srcimg,0,0,0,0,$dest_x,$dest_y, $srcsize[0], $srcsize[1]);
 	    	$resultimg= $save_func($thumbimg,$src);
 	    }
@@ -169,6 +185,8 @@ class Storage extends VirtualClass
 	    	$dest_x = $maxWidth;
 	    	$dest_y = ($maxWidth / $srcsize[0]) * $srcsize[1];
 	    	$thumbimg = imagecreatetruecolor($dest_x, $dest_y);
+     		imageAlphaBlending($thumbimg, false);
+			imageSaveAlpha($thumbimg,true);
 	    	imagecopyresampled($thumbimg,$srcimg,0,0,0,0,$dest_x,$dest_y, $srcsize[0], $srcsize[1]);
 	    	$resultimg = $save_func($thumbimg,$src);
 	    }
@@ -209,6 +227,8 @@ class Storage extends VirtualClass
 
 	    /*Копируем центр обрезанного изображения*/
 	    $thumbimg = imagecreatetruecolor($maxWidth, $maxHeight);
+	    imageAlphaBlending($thumbimg, false);
+		imageSaveAlpha($thumbimg,true);
 	    imagecopyresampled($thumbimg,$srcimg,0,0,floor($x_pos),floor($y_pos),$maxWidth,$maxHeight, $srcsize[0], $srcsize[1]);
 	    $thumbimg = $save_func($thumbimg,$src);
 

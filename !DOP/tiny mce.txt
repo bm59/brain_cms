@@ -1,0 +1,2 @@
+добавить свои цвета - \js\tinymce\plugins\textcolor\plugin.js
+добавить свой размер шрифта - \inc\datatypes\CDTextEditor.php

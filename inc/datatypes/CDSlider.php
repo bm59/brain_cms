@@ -19,7 +19,7 @@ class CDSlider extends VirtualType
       range: <?=$settings['range']!='' ? $settings['range'] : '"min"'?>,
       <?=$settings['min']!='' ? 'min: '.$settings['min'].',' : ''?>
       <?=$settings['max']!='' ? 'max: '.$settings['max'].',' : ''?>
-      <?=$settings['range']!='true' ? 'value: '.floor($this->getSetting('value')).',' : '0'?>
+      <?=$settings['range']!='true' ? 'value: '.floor($this->getSetting('value')).',' : ''?>
       <?=$settings['values']!='' ? 'values: '.$settings['values'].',' : ''?>
       slide: function( event, ui ) {
         <?if ($settings['range']!='true'){?>$( "input[name='<?=htmlspecialchars($this->getSetting('name'))?>']" ).val( ui.value );<?}?>

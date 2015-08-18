@@ -14,29 +14,20 @@ H1 {margin: 10px 0px; font-size: 20px; line-height: 24px; font-weight: lighter; 
 H2 {margin: 10px 0px; font-size: 18px; line-height: 24px; font-weight: lighter; color: #000;}
 H3 {margin: 10px 0px; font-size: 16px; line-height: 18px; font-weight: lighter; color: #000;}
 
+.adit {border: 1px dotted #CCCCCC; padding: 10px; color: #CCCCCC}
+
 .photogallery {border: 1px dashed #CCCCCC; padding: 10px;}
 .photogallery IMG {
 	display: inline-block;
-    height: 87px;
+	max-height: 130px;
     padding: 3px;
     margin: 5px;
-    width: 130px;
     border: 1px solid #CCCCCC;
     -webkit-box-shadow: 1px 1px 3px 0px rgba(50, 50, 50, 0.5);
 	-moz-box-shadow:    1px 1px 3px 0px rgba(50, 50, 50, 0.5);
 	box-shadow:         1px 1px 3px 0px rgba(50, 50, 50, 0.5);
 }
-.photogallery a {
-    background: none repeat scroll 0 0 #f1f1f1;
-    display: block;
-   /* height: 87px;*/
-    overflow: hidden;
-    text-align: center;
-    width: 130px;
-}
-.photogallery img {
-    vertical-align: top; border: 0 none; max-width: 130px;
-}
+
 
 
 P {padding: 10px 0px;}

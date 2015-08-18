@@ -34,7 +34,7 @@ class CDGallery extends VirtualType
                 $('#file').html('');
                 if(response.result==="ok"){
                     $('#loading<?='_'.$this->getSetting('name')?>').fadeOut(0);
-                    status.html(status.html()+'<LI style="height: 170px;float: left;"><div class="gallery_container"><input type="hidden" id="uploadfilehidden<?=htmlspecialchars($this->getSetting('name'))?>" name="<?=htmlspecialchars($this->getSetting('name'))?>[]" value="'+response.id+'"><span class="button txtstyle"><input type="button" onclick="delete_file_image(this); return false" id="delete_button_image" style="background-image: url(/pics/editor/delete.gif)" title="Удалить изображение"></span><img style="height: 170px" class="contentimg" src="'+response.path+'" class="contentimg"></div></LI>');
+                    status.html(status.html()+'<LI style="height: 170px;float: left;"><div class="gallery_container"><input type="hidden" id="uploadfilehidden<?=htmlspecialchars($this->getSetting('name'))?>" name="<?=htmlspecialchars($this->getSetting('name'))?>[]" value="'+response.id+'"><span class="button txtstyle"><input type="button" onclick="delete_file_image<?=htmlspecialchars($this->getSetting('name'))?>(this); return false" id="delete_button_image" style="background-image: url(/pics/editor/delete.gif)" title="Удалить изображение"></span><img style="height: 170px" class="contentimg" src="'+response.path+'" class="contentimg"></div></LI>');
                     //$('#uploadfilehidden<?=htmlspecialchars($this->getSetting('name'))?>').val(response.id);
 
 
@@ -49,12 +49,13 @@ class CDGallery extends VirtualType
 
 
     });
-    	function delete_file_image (elem)
+    	function delete_file_image<?=htmlspecialchars($this->getSetting('name'))?> (elem)
         {
        		if (!confirm('Вы уверены, что хотите удалить этот файл?')) return false;
 
-			$(elem).parents('.gallery_container').remove();
+			$(elem).parents('LI').remove();
 			$( "#sortable" ).sortable();
+
 			return false;
         }
 
@@ -87,17 +88,17 @@ class CDGallery extends VirtualType
 					$exts = upper(str_replace(',',', ',$st['settings']['exts']));
 					if ($exts!='') $desc.= ' формата '.$exts;
 					$wh = '';
-					if (floor($st['settings']['imgw'])>0){
-						$imgw = floor($st['settings']['imgw']);
-						if (floor($st['settings']['imgwtype'])==1) $wh.= 'ширина должна быть равна '.$imgw.'px';
-						if (floor($st['settings']['imgwtype'])==2) $wh.= 'ширина должна быть меньше или равна '.$imgw.'px';
-						if (floor($st['settings']['imgwtype'])==3) $wh.= 'ширина должна быть больше или равна '.$imgw.'px';
+					if (floor($settings['imgw'])>0){
+						$imgw = floor($settings['imgw']);
+						if (floor($settings['imgwtype'])==1) $wh.= 'ширина должна быть равна '.$imgw.'px';
+						if (floor($settings['imgwtype'])==2) $wh.= 'ширина должна быть меньше или равна '.$imgw.'px';
+						if (floor($settings['imgwtype'])==3) $wh.= 'ширина должна быть больше или равна '.$imgw.'px';
 					}
-					if (floor($st['settings']['imgh'])>0){
-						$imgh = floor($st['settings']['imgh']);
-						if (floor($st['settings']['imghtype'])==1) $wh.= (($wh=='')?'':', а ').'высота должна быть равна '.$imgh.'px';
-						if (floor($st['settings']['imghtype'])==2) $wh.= (($wh=='')?'':', а ').'высота должна быть меньше или равна '.$imgh.'px';
-						if (floor($st['settings']['imghtype'])==3) $wh.= (($wh=='')?'':', а ').'высота должна быть больше или равна '.$imgh.'px';
+					if (floor($settings['imgh'])>0){
+						$imgh = floor($settings['imgh']);
+						if (floor($settings['imghtype'])==1) $wh.= (($wh=='')?'':', а ').'высота должна быть равна '.$imgh.'px';
+						if (floor($settings['imghtype'])==2) $wh.= (($wh=='')?'':', а ').'высота должна быть меньше или равна '.$imgh.'px';
+						if (floor($settings['imghtype'])==3) $wh.= (($wh=='')?'':', а ').'высота должна быть больше или равна '.$imgh.'px';
 					}
 					if ($wh!='') $wh = ' Кроме того, '.$wh.'.';
 					$desc.='.'.$wh;
@@ -128,7 +129,7 @@ class CDGallery extends VirtualType
 					<LI style="height: 170px;float: left;">
 					<div class="gallery_container">
 					<input type="hidden" id="uploadfilehidden<?=htmlspecialchars($this->getSetting('name'))?>" name="<?=htmlspecialchars($this->getSetting('name'))?>[]" value="<?=$f?>"/>
-					<span class="button txtstyle"><input type="button" onclick="delete_file_image(this); return false" id="delete_button_image" style="background-image: url(/pics/editor/delete.gif)" title="Удалить изображение"/></span>
+					<span class="button txtstyle"><input type="button" onclick="delete_file_image<?=htmlspecialchars($this->getSetting('name'))?>(this); return false" id="delete_button_image" style="background-image: url(/pics/editor/delete.gif)" title="Удалить изображение"/></span>
 					<img style="height: 170px" class="contentimg" src="<?=$image['path']?>" class="contentimg"/>
 					</div>
 					</LI>

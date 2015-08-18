@@ -103,17 +103,17 @@ class CDImage extends VirtualType
 					$exts = upper(str_replace(',',', ',$st['settings']['exts']));
 					if ($exts!='') $desc.= ' формата '.$exts;
 					$wh = '';
-					if (floor($st['settings']['imgw'])>0){
-						$imgw = floor($st['settings']['imgw']);
-						if (floor($st['settings']['imgwtype'])==1) $wh.= 'ширина должна быть равна '.$imgw.'px';
-						if (floor($st['settings']['imgwtype'])==2) $wh.= 'ширина должна быть меньше или равна '.$imgw.'px';
-						if (floor($st['settings']['imgwtype'])==3) $wh.= 'ширина должна быть больше или равна '.$imgw.'px';
+					if (floor($settings['imgw'])>0){
+						$imgw = floor($settings['imgw']);
+						if (floor($settings['imgwtype'])==1) $wh.= 'ширина должна быть равна '.$imgw.'px';
+						if (floor($settings['imgwtype'])==2) $wh.= 'ширина должна быть меньше или равна '.$imgw.'px';
+						if (floor($settings['imgwtype'])==3) $wh.= 'ширина должна быть больше или равна '.$imgw.'px';
 					}
-					if (floor($st['settings']['imgh'])>0){
-						$imgh = floor($st['settings']['imgh']);
-						if (floor($st['settings']['imghtype'])==1) $wh.= (($wh=='')?'':', а ').'высота должна быть равна '.$imgh.'px';
-						if (floor($st['settings']['imghtype'])==2) $wh.= (($wh=='')?'':', а ').'высота должна быть меньше или равна '.$imgh.'px';
-						if (floor($st['settings']['imghtype'])==3) $wh.= (($wh=='')?'':', а ').'высота должна быть больше или равна '.$imgh.'px';
+					if (floor($settings['imgh'])>0){
+						$imgh = floor($settings['imgh']);
+						if (floor($settings['imghtype'])==1) $wh.= (($wh=='')?'':', а ').'высота должна быть равна '.$imgh.'px';
+						if (floor($settings['imghtype'])==2) $wh.= (($wh=='')?'':', а ').'высота должна быть меньше или равна '.$imgh.'px';
+						if (floor($settings['imghtype'])==3) $wh.= (($wh=='')?'':', а ').'высота должна быть больше или равна '.$imgh.'px';
 					}
 					if ($wh!='') $wh = ' Кроме того, '.$wh.'.';
 					$desc.='.'.$wh;

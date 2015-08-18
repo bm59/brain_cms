@@ -17,15 +17,12 @@ class CDTextEditor extends VirtualType
 		if (!$multiple_editor)
 		{			?><script type="text/javascript" src="/js/tinymce/tinymce.js"></script><?
 		}
-		else print '123';
-
-/*		 <form id="editform" name="editform" action="<?=$_SERVER['REQUEST_URI']?>" method="POST" enctype="multipart/form-data">
-         <?
- 		global $multiple_editor;
- 		$multiple_editor=true;
-		?>
-                 <input type="hidden" name="editformpost" value="1">
-                 <script type="text/javascript" src="/js/tinymce/tinymce.js">*/
+					/*		<form id="editform" name="editform" action="<?=$_SERVER['REQUEST_URI']?>" method="POST" enctype="multipart/form-data">
+                                <input type="hidden" name="editformpost" value="1">
+                                <script type="text/javascript" src="/js/tinymce/tinymce.js"></script>
+                                <?
+                                global $multiple_editor;
+                                $multiple_editor=true;*/
 
 		if ($settings['texttype']=='full'){
 			?>
@@ -47,7 +44,7 @@ class CDTextEditor extends VirtualType
 			    height: 300,
 			    language:"ru",
 			    content_css: "/css/default.css?<?=rand();?>",
-			    fontsize_formats: "8pt 10pt 12pt 14pt 18pt 24pt 36pt",
+			    fontsize_formats: "10pt 11pt 12pt 13pt 14pt 15pt 16pt 18pt 20pt 22pt 24pt 26pt",
 			    theme_advanced_blockformats:"p,h1,h2,h3",
 			    extended_valid_elements : "nobr[*]",
 
@@ -96,7 +93,7 @@ class CDTextEditor extends VirtualType
 			selector: "textarea.tiny#<?=htmlspecialchars($this->getSetting('name'))?>",
 
 			    theme: "modern",
-			    skin: 'redskin',
+			    skin: 'greenskin',
 			    height: 100,
 			    language:"ru",
 			    content_css: "/css/default.css?<?=rand();?>",

@@ -32,7 +32,7 @@
 					}
 			?>
 		</div>
-		<div class="dev"><a href="http://brain-site.ru" target="_blank" onclick="target='_blank';" title="Разработка сайта: brain-site.ru"><img src="/pics/dev_white.png" alt="Разработка сайта: brain-site.ru"/></a></div>
+		<div class="dev"><a href="http://brain-site.ru" onclick="target='_blank';" title="Разработка сайта: brain-site.ru"><img src="/pics/dev_white.png" alt="Разработка сайта: brain-site.ru"/></a></div>
 	</div>
 </div>
 
