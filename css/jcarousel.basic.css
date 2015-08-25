@@ -63,7 +63,7 @@
     width: 46px;
     height: 62px;
     text-align: center;
-    background: url(/pics/slider_arrow.png) no-repeat;
+    background: url(/pics/arrows/slider_arrow.png) no-repeat;
     background-position: 0px 0px;
         z-index: 2;
     /*background: #4E443C;
@@ -85,7 +85,7 @@
     width: 46px;
     height: 62px;
     text-align: center;
-    background: url(/pics/slider_arrow.png) no-repeat;
+    background: url(/pics/arrows/slider_arrow.png) no-repeat;
     background-position: -46px 0px;
         z-index: 2;
     /*background: #4E443C;

@@ -21,6 +21,8 @@ H1 {margin: 10px 0px; font-size: 20px; line-height: 24px; font-weight: lighter; 
 H2 {margin: 10px 0px; font-size: 18px; line-height: 24px; font-weight: lighter; color: #000;}
 H3 {margin: 10px 0px; font-size: 16px; line-height: 18px; font-weight: lighter; color: #000;}
 
+INPUT {border: none; background: none;}
+
 
 .alert {
     background: linear-gradient(135deg, #0099ff 0px, #ff66cc 40%, #000099 50%, #ff9900 60%, #009900 100%) repeat scroll 0 0 rgba(0, 0, 0, 0);
@@ -103,16 +105,15 @@ input[disabled="disabled"]  {background-color: #E1E1E1;}
 .button.txtstyle.disabled INPUT{cursor: default;}
 .ui-datepicker-trigger {height: 44px; padding-top: 10px;}
 
-INPUT {border: none; background: transparent url(/pics/i/blank.gif);}
 FORM LABEL {position: relative; overflow: hidden; display: block; margin: 0px 6px 0px 4px;}
 
 
 /*Список*/
 UL {list-style: none;margin:0;padding:0;}
 UL, OL {margin: 10px 0px 10px 0px;}
-UL LI {padding-left: 20px; background: url(/pics/i/ul.gif) 0px 9px no-repeat; position: relative;}
+UL LI {padding-left: 20px; background: url(/pics/inputs/ul.gif) 0px 9px no-repeat; position: relative;}
 OL LI {margin: 10px 0px 0px 20px; background-image: none; padding: 0px;}
-OL UL LI {background: url(/pics/i/ul.gif) 0px 10px no-repeat; padding-left: 20px; margin-left: 0px;}
+OL UL LI {background: url(/pics/inputs/ul.gif) 0px 10px no-repeat; padding-left: 20px; margin-left: 0px;}
 OL UL, OL OL, UL UL, UL OL {margin: 0px 0px 0px 40px;}
 
 .settings_image {border: 2px solid rgba(220, 220, 220, 1);
@@ -197,69 +198,14 @@ OL UL, OL OL, UL UL, UL OL {margin: 0px 0px 0px 40px;}
 .logo{float:left; width:450px;}
 .descr{margin-left:450px;padding-top:35px}
 
-/*кнопочки*/
-/*.button {position: relative; float: left; height: 32px; overflow: hidden; text-decoration: none; cursor: pointer; background-color: #FFCCCC;}
-.button .bl {display: block; float: left; background: url(/pics/inputs/btn-bl.gif) left top no-repeat; width: 15px; height: 32px;}
-.button .bc {display: block; float: left; background: url(/pics/inputs/btn-bc.gif) left top repeat-x; height: 32px; padding: 7px 0px; font-size: 11px; line-height: 18px; color: #5F5F5F;}
-.button .br {display: block; float: left; background: url(/pics/inputs/btn-br.gif) right top no-repeat; width: 15px; height: 32px;}
-.button .img {position: absolute; left: 0px; top: 0px; width: 32px; height: 32px; z-index: 4;}
-.button INPUT {position: absolute; left: 0px; top: 0px; z-index: 5; height: 32px; width: 100%; cursor: pointer;}
-.button:hover {background-color: #0CA2B8;}
-.button:hover .bl {background-position: left -32px;}
-.button:hover .bc {background-position: left -32px; color: #FFF;}
-.button:hover .br {background-position: left -32px;}
 
-.button.disabled {cursor: default;}
-.button.disabled:hover {background-color: #FFCCCC;}
-.button.disabled:hover .bl {background-position: left 0px;}
-.button.disabled:hover .bc {background-position: left 0px; color: #5F5F5F;}
-.button.disabled:hover .br {background-position: left 0px;}
-.button.disabled INPUT {cursor: default;}
-
-.button.big {height: 40px !important; overflow: hidden !important; cursor: pointer;}
-.button.big .bl {background-image: url(/pics/inputs/big-bl.gif); height: 40px;}
-.button.big .bc {background-image: url(/pics/inputs/big-bc.gif); height: 40px; padding: 9px 8px; font-size: 13px; line-height: 22px; color: #000;}
-.button.big .br {background-image: url(/pics/inputs/big-br.gif); height: 40px;}
-.button.big INPUT {height: 40px;}
-.button.big:hover .bl {background-position: left -40px;}
-.button.big:hover .bc {background-position: left -40px; color: #FFF}
-.button.big:hover .br {background-position: left -40px;}
-.button.delete {width: 32px; height: 32px;}
-.button.delete .bc {width: 2px;}
-.button.delete INPUT {width: 100%; height: 32px; background: url(/pics/editor/delete.gif) center center no-repeat;}
-.button.txtstyle {background-color: #C00 !important; position: relative; z-index: 1;}
-.button.txtstyle .bc {width: 2px;}
-.button.txtstyle INPUT {width: 32px; height: 32px; background-position: center center; background-repeat: no-repeat;}
-.button.txtstyle .icon {display: block; position: absolute; left: 0px; top: 0px;  z-index: 5; width: 32px; height: 32px; background-position: center center; background-repeat: no-repeat;}
-.button.info {cursor:help;}
-.button.info:hover .bl {background-position: left 0px;}
-.button.info:hover .bc {background-position: left 0px;}
-.button.info:hover .br {background-position: left 0px;}
-
-.button.vt {margin-top: 20px;}
-.button.disabled .bc {color: #5F5F5F;}
-.button.disabled:hover .bl {background-position: left 0px;}
-.button.disabled:hover .bc {background-position: left 0px; color: #5F5F5F;}
-.button.disabled:hover .br {background-position: left 0px;}*/
 /*поля ввода*/
 .input {margin-right: 10px;}
-/*.input {position: relative; float: left; position: relative; height: 55px; text-decoration: none; background: url(/pics/inputs/inp-bc.gif) left top repeat-x; background-color: #FFCCCC; width: 100%;}
-.input .bl {position: absolute; left: 0px; top: 0px; z-index: 2; display: block; background: url(/pics/inputs/inp-bl.gif) left top no-repeat; width: 7px; height: 55px;}
-.input .br {position: absolute; right: 0px; top: 0px; display: block; background: url(/pics/inputs/inp-br.gif) right top no-repeat; width: 7px; height: 55px;}
-.input .bc {display: block; margin: 0px 18px;}
-.input INPUT {position: relative; top: 5px; font-size: 13px; color: #000; padding: 14px 0px; background-color: transparent; height: 17px; width: 100%;}
-* HTML .input INPUT {top: 3px;}*/
-.input .bc DIV, .suggestSelect {position: relative; background: transparent url(/pics/i/select.gif) right center no-repeat; white-space: nowrap; overflow: hidden; cursor: pointer;}
+.input .bc DIV, .suggestSelect {position: relative; background: transparent url(/pics/inputs/select.gif) right center no-repeat; white-space: nowrap; overflow: hidden; cursor: pointer;}
+
 /*текстовое поле*/
-.ta {position: relative; float: left; position: relative; height: 315px; overflow: hidden; text-decoration: none; background: url(/pics/inputs/ta-bc.gif) left top repeat-x; background-color: #FFCCCC; width: 100%;}
-.ta .bl {position: absolute; left: 0px; top: 0px; z-index: 2; display: block; background: url(/pics/inputs/ta-bl.gif) left top no-repeat; width: 7px; height: 315px;}
-.ta .br {position: absolute; right: 0px; top: 0px; display: block; background: url(/pics/inputs/ta-br.gif) right top no-repeat; width: 7px; height: 315px;}
-.ta .bc {display: block; margin: 0px 18px;}
 .ta DIV {position: relative; top: 5px; height: 285px; width: 100%; padding: 10px 0px;}
 .ta TEXTAREA {position: absolute; left: 0px; width: 100%; margin: 0px; font-size: 13px; line-height: 18px; background-color: transparent; height: 285px; width: 100%;}
-.ta.medium {height: 100px; background-image: url(/pics/inputs/small-bc.gif);}
-.ta.medium .bl {background-image: url(/pics/inputs/small-bl.gif); width: 7px; height: 100px;}
-.ta.medium .br {background-image: url(/pics/inputs/small-br.gif); width: 7px; height: 100px;}
 .ta.medium DIV {height: 70px;}
 .ta.medium TEXTAREA {height: 70px; border: none;}
 .ta_big {padding: 10px 10px 20px 0px}
@@ -325,18 +271,17 @@ HTML:first-child .items LABEL INPUT {left: 0px; top: 1px;}
 #header .adcounter P {margin-top: 3px;}
 #header .adcounter SPAN {display: block; font-size: 50px; color: #000; line-height: 50px;}
 #header .profile {float:right; margin: 30px 60px 0 0}
-#header .avatar {float: left; height: 78px; width: 78px; margin: 0 15px 11px 30px; background: url(/pics/i/autor.gif) left top no-repeat;}
+#header .avatar {float: left; height: 78px; width: 78px; margin: 0 15px 11px 30px; background: url(/pics/inputs/autor.gif) left top no-repeat;}
 #header .avatar IMG {margin: 4px 0px 0px 4px; border: 1px solid #C6C6C6; padding: 4px;}
 #header .autor {float: left; height: 70px;}
 #header .autor DIV {position: relative; left: -3px; top: 10px;}
-/*#header .button .bc {color: #000;}
-#header .button:hover .bc {color: #FFF;}*/
+
 
 
 /*разметка*/
 #content {margin: 0px 50px;}
 
-/**/
+
 .pub.user {margin-left: 100px;}
 .pub.user .info {left: -100px; width: 90px;}
 .pub.user .userinfo {position: relative; margin: 30px 0px;}
@@ -351,15 +296,14 @@ HTML:first-child .items LABEL INPUT {left: 0px; top: 1px;}
 .place .forbutton .button.big {top: 50%; margin-top: -20px;}
 .place .forbutton LABEL {display: block; position: relative; padding-left: 20px;}
 .place .forbutton LABEL INPUT {position: absolute; left: 0px; top: 4px;}
-.place .progress {position: relative; top: 50%; margin-top: -9px; display: block; height: 18px; padding-left: 25px; background: url(/pics/i/wait.gif) left center no-repeat; color: #0CA2B8;}
 .place .false {position: relative; top: 50%; margin-top: -9px; display: block; height: 18px; color: #0C0;}
 .place .true {position: relative; top: 50%; margin-top: -9px; display: block; height: 18px; color: #C00;}
 .place .forselect {position: relative; height: 1px; clear: both; margin: 0px 10px 0px 4px;}
 .place .placeinfo {position: relative; clear: both; margin: 0px 6px 0px 4px;}
 .place .bannerplace {position: relative; clear: both; margin: 10px 6px 0px 4px;}
 .place .bannerplace.head {height: 100px; width: 450px; overflow: hidden;}
-.place .avatar {float: left; height: 78px; width: 78px; background: url(/pics/i/autor.gif) left top no-repeat; _border:1px solid #FFF;}
-.place .avatar DIV.loading {height: 78px; width: 78px; background: url(/pics/i/loading.gif) center center no-repeat;}
+.place .avatar {float: left; height: 78px; width: 78px; background: url(/pics/inputs/autor.gif) left top no-repeat; _border:1px solid #FFF;}
+.place .avatar DIV.loading {height: 78px; width: 78px; background: url(/pics/inputs/loading.gif) center center no-repeat;}
 .place .avatar IMG {margin: 4px 0px 0px 4px; border: 1px solid #C6C6C6; padding: 4px;}
 .place .avatar.loading IMG {margin: 4px 0px 0px 4px; border: 1px solid #D8D8D8; padding: 4px;}
 .place .plusinfo {margin: 0px 4px;}
@@ -385,19 +329,16 @@ HTML:first-child .place .forckecks LABEL INPUT {left: 0px; top: 1px;}
 #sortable LI {background: none; padding: 0; margin: 10px 0}
 
 /*пользователи, синхронизация, статистика*/
-/*.stat TH {background-color: #F5F5F5 !important; font-size: 14px; padding: 15px !important;}
-.stat TD {text-align: center;}
-.stat TH A {text-decoration: none;}*/
 .stat TD.edit {width: 32px;}
 .stat TD.avatar {width: 78px; padding: 5px;}
-.stat TD.avatar DIV {height: 78px; width: 78px; background: url(/pics/i/autor.gif) left top no-repeat; border: 1px solid #FFF;}
+.stat TD.avatar DIV {height: 78px; width: 78px; background: url(/pics/inputs/autor.gif) left top no-repeat; border: 1px solid #FFF;}
 .stat TD.avatar IMG {margin: 4px 0px 0px 4px; /*_margin-left: 0px;*/ border: 1px solid #C6C6C6; padding: 4px;}
 .pub {position: relative; margin: 10px 140px 10px 150px; _height: 1%}
 .pub.big {min-height: 140px; _height: 140px;}
 .pub .first {font-size: 20px; line-height: 24px;}
 .pub .date {position: absolute; left: -120px; width: 100px; _top: 0px;}
 .pub .info {position: absolute; left: -150px; width: 120px; _top: 30px; font-size: 13px; line-height: 18px;}
-.pub .avatar {position: relative; left: -4px; height: 78px; width: 78px; background: url(/pics/i/autor.gif) left top no-repeat; margin: 5px 0px;}
+.pub .avatar {position: relative; left: -4px; height: 78px; width: 78px; background: url(/pics/inputs/autor.gif) left top no-repeat; margin: 5px 0px;}
 .pub .avatar IMG {position: relative; left: 4px; top: 4px; border: 1px solid #C6C6C6; padding: 4px;}
 .back {margin: 20px 0px 0px 147px;}
 
@@ -408,6 +349,7 @@ HTML:first-child .place .forckecks LABEL INPUT {left: 0px; top: 1px;}
 .stat .t_center {text-align: center !important;}
 .stat .t_nowrap {white-space: nowrap;}
 .stat .t_minwidth {width: 1%;}
+.stat .t_minwidth.min {padding: 18px 0px !important;}
 .stat .t_32width {width: 32px; text-align: center;}
 .stat .t_110width {width: 110px;}
 .stat .t_32width .button {margin: auto;}
@@ -427,26 +369,18 @@ HTML:first-child .place .forckecks LABEL INPUT {left: 0px; top: 1px;}
 #paging {position: relative; z-index: 1; margin: 0px 140px 0px 147px;}
 #paging.nopad {margin: 0px;}
 #paging {margin-bottom: 20px !important;}
-/*#paging .button {border-radius: 0;box-shadow: none; padding: 10px 15px; color: #666666; background: #e0e0e0 none repeat scroll 0 0;}*/
 #paging SPAN.button {background-color: #666666; cursor: default; color: #FFFFFF;}
 #paging .button {border: none;box-shadow: none;background: #CCCCCC; padding: 8px 12px;}
-/*#paging SPAN.button {background-color: #0CA2B8; cursor: default;}
-#paging SPAN.button .bl {background-position: left -32px;}
-#paging SPAN.button .bc {background-position: left -32px; color: #FFF;}
-#paging SPAN.button .br {background-position: left -32px;}
-#paging .addnews {float: right; margin-right: 50px;}
-#paging.nopad .addnews {margin-right: 0px;}*/
 
-#footer {height: 100px;}
+
+
 
 .clear {display: block; height: 1px; clear: both; overflow: hidden;}
-.clear125 {display: block; height: 125px; clear: both; overflow: hidden;}
 .png {filter:expression(fixPNG(this));}
 .help {margin-left: 5px; cursor: help;}
 .help IMG {position: relative; top: 2px; display: inline !important;}
 #hiddenform DIV {width: 500px; margin-top: 10px; overflow: auto;}
 #hiddenform DIV P {margin: 10px 0px;}
-.linkback {padding-left: 20px; background: url(/pics/i/back.gif) left center no-repeat;}
 .margin-t-20 {margin-top: -20px !important;}
 H1 .link {border-bottom: 1px dashed #000; cursor: pointer;}
 .hidden {display: none;}
@@ -455,8 +389,7 @@ A.dashed {text-decoration: none; border-bottom: 1px dashed #0CA2B8;}
 .withcheck {padding-left: 20px; background: url(/pics/editor/submit.gif) left center no-repeat;}
 .table-description TD {padding: 2px 5px 2px;}
 
-/*бэкофис, список разделов*/
-
+/*Список разделов*/
 .listing H4 {font-size: 12px; line-height: 18px; font-weight: lighter; color: #000; clear: both;}
 .listing H4 STRONG {position: relative; float: left; display: block; width: 45px; color: #000; font-weight: normal;}
 .listing IMG {position: absolute; top: -2px; right: 5px; cursor: pointer; padding: 1px; border: 2px solid #FFF}
@@ -482,15 +415,7 @@ A.dashed {text-decoration: none; border-bottom: 1px dashed #0CA2B8;}
 .anchor IMG.active {border: 2px solid #5F5F5F;}
 
 
-/*.table-content {width: 100%; font-size: 12px; line-height: 18px; border-collapse: collapse;}
-.table-content CAPTION {text-align: left; color: #000; padding-bottom: 5px; font-size: 11px; line-height: 15px;}
-.table-content TH {text-align: center; font-size: 14px; color: #333333; padding: 15px 10px; background-color: #F5F5F5; color: #FFFFFF; border: 1px solid #CCCCCC; }
-.table-content TD {padding: 15px; border: 1px dashed #D8D8D8;}
-.table-content TD.th {color: #0CA2B8; background-color: #EAFBFF; font-weight: bold; text-align: left;}
-.table-content P {margin: 0px !important;}
-.table-content H1 {margin: 0px !important;}
-.table-content.stat TH {color: #000;}
-.table-content tr:hover td{background-color: #e2f3fe;}*/
+
 .table-content a:active,
 .table-content a:hover {
 	color: #00796b;
@@ -513,8 +438,6 @@ A.dashed {text-decoration: none; border-bottom: 1px dashed #0CA2B8;}
 	background: -moz-linear-gradient(top,  #ededed,  #ebebeb);
 	}
 .table-content th:first-child{text-align: left;padding-left:20px;}
-/*.table-content tr:first-child th:first-child{	-moz-border-radius-topleft:3px;	-webkit-border-top-left-radius:3px;	border-top-left-radius:3px;}
-.table-content tr:first-child th:last-child{	-moz-border-radius-topright:3px;-webkit-border-top-right-radius:3px;border-top-right-radius:3px;}*/
 .table-content tr{text-align: center; padding-left:20px;}
 .table-content tr td:first-child{	text-align: left;padding-left:20px;border-left: 0;}
 .table-content tr td {padding:18px;border-top: 1px solid #ffffff;border-bottom:1px solid #e0e0e0;border-left: 1px solid #e0e0e0;	background: #fafafa;background: -webkit-gradient(linear, left top, left bottom, from(#fbfbfb), to(#fafafa));background: -moz-linear-gradient(top,  #fbfbfb,  #fafafa);}
@@ -537,7 +460,7 @@ A.dashed {text-decoration: none; border-bottom: 1px dashed #0CA2B8;}
  z-index:9999;
  bottom:10px;
  right:30px;
- background: url('/pics/up.png') no-repeat;
+ background: url('/pics/arrows/up.png') no-repeat;
  width: 50px;
  height: 31px;
  border: none;
@@ -574,10 +497,6 @@ A.dashed {text-decoration: none; border-bottom: 1px dashed #0CA2B8;}
   background: #dcdcdc linear-gradient(#fff, #dcdcdc);
   box-shadow: 0 0 0 1px #aaa inset, 0 1px 1px #aaa;
 }
-/*.fast_menu a:active {
-  background: none;
-    box-shadow: 0 0 0 1px #bbb inset, 0 1px 3px rgba(0,0,0,.5) inset, 0 1px 2px #fff;
-}*/
 .fast_menu a.active {
   border: none;
   background: #dcdcdc linear-gradient(#fff, #dcdcdc);
