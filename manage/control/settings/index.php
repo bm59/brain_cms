@@ -19,9 +19,7 @@ if (isset($_GET['setdel'])){
 
 $list = $iface->getList();
 if (isset($_POST['setupdate'])){	$i=0;
-	foreach ($_POST as $k=>$v){
-
-		$set = $iface->getOne($iface->getIdByName(str_replace('_value','',$k)));
+	foreach ($_POST as $k=>$v){		$set = $iface->getOne($iface->getIdByName(str_replace('_value','',$k)));
 		if ($set['id']>0)
 		{
 			$i++;
@@ -156,6 +154,7 @@ function selectText(elem) {
 					$image='';
 					if ($set['value']>0)
 					{						$image=$Storage->getFile($set['value']);
+						if ($image['path']=='') $set['value']=0;
 					}
 					?>
 

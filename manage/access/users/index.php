@@ -35,9 +35,9 @@ include $_SERVER['DOCUMENT_ROOT']."/inc/site_admin/meta.php";
 		?>
 		<table class="table-content stat tusers">
 			<tr>
-				<th class="t_nowrap">Пользователь<a href="<?=configGet("AskUrl").'?order=1'?>" title="Сортировать по убыванию" class="sort"><img src="/pics/i/down.gif" width="5" height="10" /></a><a href="<?=configGet("AskUrl")?>" title="Сортировать по возрастанию" class="sort"><img src="/pics/i/up.gif" width="5" height="10" /></a></th>
+				<th class="t_nowrap">Пользователь<a href="<?=configGet("AskUrl").'?order=1'?>" title="Сортировать по убыванию" class="sort"><img src="/pics/arrows/down_sort_blue.gif" width="5" height="10" /></a><a href="<?=configGet("AskUrl")?>" title="Сортировать по возрастанию" class="sort"><img src="/pics/arrows/up_sort_blue.gif" width="5" height="10" /></a></th>
 				<th class="t_nowrap">Последний вход</th>
-				<th class="t_nowrap">Группа<a href="<?=configGet("AskUrl").'?order=3'?>" title="Сортировать по убыванию" class="sort"><img src="/pics/i/down.gif" width="5" height="10" /></a><a href="<?=configGet("AskUrl").'?order=2'?>" title="Сортировать по возрастанию" class="sort"><img src="/pics/i/up.gif" width="5" height="10" /></a></th>
+				<th class="t_nowrap">Группа<a href="<?=configGet("AskUrl").'?order=3'?>" title="Сортировать по убыванию" class="sort"><img src="/pics/arrows/down_sort_blue.gif" width="5" height="10" /></a><a href="<?=configGet("AskUrl").'?order=2'?>" title="Сортировать по возрастанию" class="sort"><img src="/pics/arrows/up_sort_blue.gif" width="5" height="10" /></a></th>
 				<th class="t_32width"></th>
 				<th class="t_32width"></th>
 			</tr>

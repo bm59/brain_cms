@@ -28,7 +28,7 @@ if (isset($_POST['profilepswd'])) $errors = $SiteVisitor->changePassword($_SESSI
         <br/>
 		<div class="pub user">
 			<div class="info">
-				<div class="avatar" style="margin: -4px 0px;"><img src="<?=($requestUser['picture']['path'])?$requestUser['picture']['path']:'/pics/i/empty_user.gif'?>" width="60" height="60" alt="" /></div>
+				<div class="avatar" style="margin: -4px 0px;"><img src="<?=($requestUser['picture']['path'])?$requestUser['picture']['path']:'/pics/inputs/empty_user.gif'?>" width="60" height="60" alt="" /></div>
 			</div>
 			<h1><?=$requestUser['secondname'].' '.$requestUser['firstname'].' '.$requestUser['parentname']?></h1>
 			<h2><?=$requestUserGroup['name']?></h2>

@@ -1,0 +1,49 @@
+<!-- Контекстное меню -->
+<script src="/js/jquery.contextMenu.js" type="text/javascript"></script>
+<link href="/css/jquery.contextMenu.css" rel="stylesheet" type="text/css" />
+
+
+
+--------------------------------------------------------------------------------
+
+
+
+
+
+<script type="text/javascript" class="showcase">
+$(function(){
+    $.contextMenu({
+        selector: '.coords_editor',
+        callback: function(key, options) {
+            if (key=='del_point')
+            {
+            	delDot();
+            }
+            if (key=='del_all')
+            {
+
+            	if(confirm('Вы уверены что хотите очистить экран?')){$(".coords_editor").contextMenu("hide"); clearjg(); }
+            }
+        },
+        items: {
+            "del_point": {name: "Удалить синюю точку", icon: "del_point"},
+            "del_all": {name: "Очистить все", icon: "del_all"},
+            "sep1": "---------",
+            "save": {name: "Сохранить", icon: "save"}
+        }
+    });
+
+
+});
+    </script>
+
+
+
+
+
+
+
+
+
+
+

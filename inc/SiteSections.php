@@ -334,7 +334,7 @@ class SiteSections extends VirtualClass
 		                        <tr>
 		                                <td class="t_left"><h4<?=$h4class?>><strong><?=$num.$counter.'.'?><?=$anchorcode?></strong><?=$editcode?><small><?=$this->getPath($section['id'])?></small></h4></td>
 		                                <td class="t_left t_nowrap"><?=$pattern?></td>
-		                                <td class="t_32width">
+		                                <td class="t_minwidth min">
 		                                <?
 		                                if (isset($section['settings']['noeditsettings']) || $mode!='development'){
 		                                        ?>
@@ -352,7 +352,7 @@ class SiteSections extends VirtualClass
 		                                }
 		                                ?>
 		                                </td>
-		                                <td class="t_32width">
+		                                <td class="t_minwidth">
 		                                <?
 		                                if ((isset($section['settings']['undeletable'])) && ($mode!='development')){
 		                                        ?>

@@ -25,7 +25,7 @@
 
 
 <div class="content_container">
-<div class="mininav"><a href="/">Главная</a><img src="/pics/nav_arrow.png"><?=$nav_text?></div>
+<div class="mininav"><a href="/">Главная</a><img src="/pics/arrows/arrow_nav.png"><?=$nav_text?></div>
 <H1><?=$headerh1?></H1>
 <?
 	$sheet = $Iface->get();

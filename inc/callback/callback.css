@@ -33,7 +33,7 @@
 
 #signup .txt-fld label { display: block; float: left; width: 120px; padding-top: 8px; color: #222; font-size:14px; text-align: left;  }
 #signup .txt-fld input { width: 214px; padding: 8px; border-radius: 4px; -moz-border-radius: 4px; -webkit-border-radius: 4px; font-size: 16px; color: #222; background: #F7F7F7; font-family: "Helvetica Neue"; outline: none; border-top: 1px solid #CCC; border-left: 1px solid #CCC; border-right: 1px solid #E7E6E6; border-bottom: 1px solid #E7E6E6; }
-#signup .txt-fld input.good_input { background: #DEF5E1 url(/pics/i/good.png) 206px center no-repeat; }
+#signup .txt-fld input.good_input { background: #DEF5E1 url(/pics/inputs/good.png) 206px center no-repeat; }
 #signup .txt-fld input.client_tel { background: #FDE0E0; }
 #signup .button a {text-decoration: none;}
 #signup .comment {font-size: 12px;}

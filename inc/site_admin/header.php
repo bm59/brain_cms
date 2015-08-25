@@ -3,6 +3,7 @@
 <?
             if (setting('admin_logo')>0)
             {
+	            print setting('admin_logo');
 	            $image=$Storage->getfile(setting('admin_logo'));
 	            if ($image['path']!='')
 	            {
