@@ -1,12 +1,15 @@
 <?
-/*
-Класс, описывающий визуальный редактор
-*/
 class CDTextEditor extends VirtualType
 {
+	function init($settings){
+		$settings['descr']='Текстовый редактор';
+		VirtualType::init($settings);
+	}
+	
 	function drawEditor(){
 		global $multiple_editor;
 		$settings = $this->getSetting('settings');
+		
 		?>
 		<div class="place">
 		<span class="input">

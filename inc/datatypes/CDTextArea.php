@@ -1,10 +1,8 @@
 <?
-/*
-Класс, описывающий тип «Текстовое поле»
-*/
 class CDTextArea extends VirtualType
 {
 	function init($settings){
+		$settings['descr']='Текстовый блок';
 		$maxlength = (floor($this->getSetting('maxlength'))>0)?floor($this->getSetting('maxlength')):0;
 		$this->setSetting('maxlength',$maxlength);
 		VirtualType::init($settings);

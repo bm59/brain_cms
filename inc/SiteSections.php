@@ -17,7 +17,8 @@ class SiteSections extends VirtualClass
                         "tags"=>"TEXT",
                         "description"=>"TEXT",
                         "visible"=>"TINYINT(6)",
-                        "settings"=>"TEXT"
+                        "settings"=>"TEXT",
+                		"personal_settings"=>"TEXT"
                 ));
 
         }
@@ -46,6 +47,13 @@ class SiteSections extends VirtualClass
                 $id = floor($id);
                 $section = $this->get($id);
                 msq("UPDATE `".$this->getSetting('table')."` SET `precedence`='$prec' WHERE `id`='".$section['id']."'");
+        }
+        function update_personal_settings($id,$set){
+        
+        	$id = floor($id);
+			if (!$id>0) return;
+        	msq("UPDATE `".$this->getSetting('table')."` SET `settings_personal`='$set' WHERE `id`='".$id."'");
+        	return true;
         }
         function setPrecedenceAbove($id, $parent_id){
 
@@ -334,6 +342,25 @@ class SiteSections extends VirtualClass
 		                        <tr>
 		                                <td class="t_left"><h4<?=$h4class?>><strong><?=$num.$counter.'.'?><?=$anchorcode?></strong><?=$editcode?><small><?=$this->getPath($section['id'])?></small></h4></td>
 		                                <td class="t_left t_nowrap"><?=$pattern?></td>
+		                                <td class="t_minwidth min">
+		                                <?
+		                                if (isset($section['settings']['noeditsettings']) || $mode!='development'){
+		                                        ?>
+		                                        <span class="button txtstyle disabled">
+		                                        	<input type="button" style="background-image: url(/pics/editor/pattern_disabled.png)" title="Настройки шаблона недоступны" onclick="return false;" />
+		                                        </span>
+		                                        <?
+		                                }
+		                                else{
+		                                        ?>
+		                                        <span class="button txtstyle">
+		                                        	<input type="button" style="background-image: url(/pics/editor/pattern.png)" title="Настройки шаблона" onclick="window.location.href = './?section=<?=$section['id']?>&type_edit=pattern'" />
+		                                        </span>
+		                                        <?
+		                                }
+		                                ?>		                                
+		                                </td>
+		                                
 		                                <td class="t_minwidth min">
 		                                <?
 		                                if (isset($section['settings']['noeditsettings']) || $mode!='development'){

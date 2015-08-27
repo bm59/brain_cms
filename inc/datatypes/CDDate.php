@@ -1,10 +1,11 @@
 <?
-
-/*
-Класс, описывающий тип «Дата» с календариком
-*/
 class CDDate extends VirtualType
 {
+	
+	function init($settings){
+		$settings['descr']='Дата';
+		VirtualType::init($settings);
+	}
 	function drawEditor($divstyle = ''){
 		if (preg_match("|^[0-9]{4}\-[0-9]{2}\-[0-9]{2}$|",$this->getSetting('value')))
 		$settings = $this->getSetting('settings');

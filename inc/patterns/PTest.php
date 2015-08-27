@@ -15,9 +15,11 @@ class PTest extends VirtualPattern
 		$iface = new CCTest;
 		$iface->init(array('mode'=>$this->getSetting('mode'),'isservice'=>$this->getSetting('isservice'),'section'=>$this->getSetting('section'),'pattern'=>$this,'table'=>$this->getSetting('table'),'dataset'=>$this->getSetting('dataset'),'imagestorage'=>$this->getSetting('imagestorage'),'smallimagestorage'=>$this->getSetting('smallimagestorage')));
 		$this->setSetting('cclass',$iface);
+	
 
-		$CDDataSet->add
-		(
+		 $CDDataSet->add
+		( 
+			
 			array
 			(
 					'name'=>'test',
@@ -39,7 +41,8 @@ class PTest extends VirtualPattern
                         /*'comment'=>'выберите значение'*/
 					)
 
-			)
+			),
+			$settings['section']
 		);
 
 		return $iface;

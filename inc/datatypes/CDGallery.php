@@ -1,10 +1,8 @@
 <?
-/*
-Класс, описывающий тип «Изображение»
-*/
 class CDGallery extends VirtualType
 {
 	function init($settings){
+		$settings['descr']='Картинки (галерея)';
 		VirtualType::init($settings);
 	}
 	function drawEditor($divstyle = '',$span = true){

@@ -20,6 +20,48 @@ class VirtualPattern
 			closedir($dir);
 		}
 	}
+	function get_default_type ($datatype)
+	{
+		$ttype = 'TEXT';
+		switch ($datatype['type']){
+			case 'CDDate':
+				$ttype = 'DATE';
+				break;
+			case 'CDText':
+				if ($datatype['settings']['maxlength']>0)
+					$ttype = 'VARCHAR('.$datatype['settings']['maxlength'].')';
+					else $ttype = 'VARCHAR(255)';
+					break;
+			case 'CDInteger':
+				$ttype = 'BIGINT(20)';
+				break;
+			case 'CDImage':
+				$ttype = 'BIGINT(20)';
+				break;
+			case 'CDFile':
+				$ttype = 'VARCHAR(255)';
+				break;
+			case 'CDFloat':
+				$ttype = 'FLOAT';
+				break;
+			case 'CDBoolean':
+				$ttype = 'INT(1)';
+				break;
+			case 'CDSpinner':
+				$ttype = 'BIGINT(20)';
+				break;
+			case 'CDChoice':
+				$ttype = 'VARCHAR(1000)';
+				break;
+			case 'CDSlider':
+				$ttype = 'VARCHAR(255)';
+				break;
+			case 'CDGallery':
+				$ttype = 'VARCHAR(1000)';
+				break;
+		}	
+		return $ttype;
+	}
 	function createDataSetTable($datasetid,$uid = 0,$tablefields = array()){
 		$uid = floor($uid);
 		global $CDDataSet;
@@ -27,44 +69,8 @@ class VirtualPattern
 		if ($datasetid>0){
 			$dataset = $CDDataSet->get($datasetid);
 			foreach ($dataset['types'] as $t){
-				$ttype = 'TEXT';
-				switch ($t['type']){
-					case 'CDDate':
-						$ttype = 'DATE';
-					break;
-					case 'CDText':
-						if ($t['settings']['maxlength']>0)
-						$ttype = 'VARCHAR('.$t['settings']['maxlength'].')';
-						else $ttype = 'VARCHAR(255)';
-					break;
-					case 'CDInteger':
-						$ttype = 'BIGINT(20)';
-					break;
-					case 'CDImage':
-						$ttype = 'BIGINT(20)';
-					break;
-					case 'CDFile':
-						$ttype = 'VARCHAR(255)';
-					break;
-					case 'CDFloat':
-						$ttype = 'FLOAT';
-					break;
-					case 'CDFloatInfo':
-						$ttype = 'FLOAT';
-					break;
-					case 'CDBoolean':
-						$ttype = 'INT(1)';
-					break;
-					case 'CDSpinner':
-						$ttype = 'BIGINT(20)';
-					break;
-					case 'CDChoice':
-						$ttype = 'VARCHAR(1000)';
-					break;
-					case 'CDSlider':
-						$ttype = 'VARCHAR(255)';
-					break;
-				}
+
+				$ttype=$this->get_default_type($t);
 				$tablefields[$t['name']] = $ttype;
 			}
 			return mstable(ConfigGet('pr_name').'_site',lower($this->getSetting('name')),$dataset['name'].(($uid>0)?'_'.$uid:''),$tablefields);

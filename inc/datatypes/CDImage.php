@@ -5,6 +5,7 @@
 class CDImage extends VirtualType
 {
 	function init($settings){
+		$settings['descr']='Картинка';
 		VirtualType::init($settings);
 	}
 	function drawEditor($divstyle = '',$span = true){

@@ -1,9 +1,24 @@
-<?
-$array=array('22'=>array('1'=>'1'));
+<style>
+<!--
+/* For modern browsers */
+.parent:before,
+.parent:after {
+   content: "";
+   display: table;
+}
+.parent:after {
+   clear: both;
+}
 
-if (in_array('22',$array)) print 'ok';
+/* для IE6-7 */
+.parent {
+   zoom: 1;
+}
 
-print 'home work';
-print 'home work branch';
-print 'home work branch 2';
-?>
+}
+-->
+</style>
+
+<div class="parent" ><div style="width: 100px; float: left;">123</div></div>
+
+<div style="float: left;"><span style="width: 100px">222</span></div>

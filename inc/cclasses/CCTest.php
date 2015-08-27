@@ -64,7 +64,8 @@ class CCTest extends VirtualContent
         function start(){
                 if (isset($_GET['pub'])){
                         global $CDDataSet;
-                        $dataset = $CDDataSet->get($this->getSetting('dataset'));
+                        $dataset = $CDDataSet->get($this->getSetting('dataset'), $this->getSetting('section'));
+                      
                         $imagestorage = $this->getSetting('imagestorage');
                         $smallimagestorage = $this->getSetting('smallimagestorage');
                         foreach ($dataset['types'] as $k=>$dt){
@@ -405,7 +406,7 @@ class CCTest extends VirtualContent
 			$id = floor($id);
 			global $CDDataSet;
 			if ($r = msr(msq("SELECT * FROM `".$this->getSetting('table')."` WHERE `id`='".$id."'"))){
-				$dataset = $CDDataSet->get($this->getSetting('dataset'));
+				$dataset = $CDDataSet->get($this->getSetting('dataset'), $this->getSetting('section'));
 				$imagestorage = $this->getSetting('imagestorage');
 				foreach ($dataset['types'] as $dt){
 					$tface = new $dt['type'];

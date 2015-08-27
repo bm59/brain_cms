@@ -636,6 +636,11 @@ function get_insert_sql($data, $table)
 		$set=$SiteSettings->getOne($SiteSettings->getIdByName($name));
 		return html_entity_decode(stripslashes($set['value']));
 	}
+	function alert_mysql()
+	{
+		if (mysql_error()!='') 
+		$_SESSION['global_alert'].=(($_SESSION['global_alert']!='') ? '<br/>':'').'<i><span style="color: #CC0000">Ошибка SQL:</span></i> '.mysql_error();
+	}
 	function WriteLog($item_id, $descr, $comment, $user_id='', $changes='')
 	{
  		global $user;

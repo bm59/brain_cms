@@ -7,7 +7,11 @@ include $_SERVER['DOCUMENT_ROOT']."/inc/site_admin/include.php";
 
 $contentStep = 1;
 $section = $SiteSections->get(floor($_GET['section']),-1); $section['id'] = floor($section['id']);
+
+
 if ($section['id']>0) $contentStep = 3;
+if ($section['id']>0 && $_GET['type_edit']=='pattern') $contentStep = 4;
+
 $editsection = $SiteSections->get(floor($_GET['edit']),-1); $editsection['id'] = floor($editsection['id']);
 if ($editsection['id']>0){
         if (!isset($editsection['settings']['noeditsettings']) || ($delepmentmode=='development')){
@@ -368,6 +372,9 @@ $deletesection = $SiteSections->get(floor($_GET['delete']),-1); $deletesection['
                 $SectionPattern = new $section['pattern'];
                 $SectionPattern->init(array('section'=>$section['id'],'mode'=>$delepmentmode,'isservice'=>0));
                 $SectionPattern->start();
+        }
+        if ($contentStep==4){
+        	include $_SERVER['DOCUMENT_ROOT']."/inc/site_admin/pattern/edit.php";
         }
         ?>
         <?include $_SERVER['DOCUMENT_ROOT']."/inc/site_admin/footer.php";?>

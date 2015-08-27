@@ -2,6 +2,7 @@
 class CDSPINNER extends VirtualType
 {
 	function init($settings){
+		$settings['descr']='Спиннер (целое)';
 		$maxlength = (floor($this->getSetting('maxlength'))>0)?floor($this->getSetting('maxlength')):255;
 		$this->setSetting('maxlength',$maxlength);
 		VirtualType::init($settings);

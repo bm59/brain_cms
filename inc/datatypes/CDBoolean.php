@@ -1,10 +1,8 @@
 <?
-/*
-Класс, описывающий тип «Текстовая строка»
-*/
 class CDBOOLEAN extends VirtualType
 {
 	function init($settings){
+		$settings['descr']='Да\Нет';
 		$maxlength = (floor($this->getSetting('maxlength'))>0)?floor($this->getSetting('maxlength')):255;
 		$this->setSetting('maxlength',$maxlength);
 		VirtualType::init($settings);

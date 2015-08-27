@@ -30,8 +30,9 @@ class DataSet extends VirtualClass
 		);
 	}
 
-	function get($id){
+	function get($id, $section_id){
 		global $CDDataType;
+		if (!$section_id>0 && $_GET['section']>0) $section_id=$_GET['section'];
 		$retval = array();
 		$id = floor($id);
 		if ($r = msr(msq("SELECT * FROM `".$this->getSetting('table')."` WHERE `id`='$id'"))){
@@ -39,28 +40,45 @@ class DataSet extends VirtualClass
 			$retval['description'] = $r['description'];
 			$retval['name'] = $r['name'];
 			$retval['settings'] = $this->explode($r['settings']);
-			$retval['types'] = $CDDataType->getDataSetList($id);
+			
+			$retval['types'] = $CDDataType->getDataSetList($id,$section_id);
 		}
 		return $retval;
 	}
-	function add($values){
+	function add($values, $section_id=0){
 		global $CDDataType;
 		if (!is_array($values['types'])) $values['types'] = array();
 		if (count($values['types'])==0) return false;
 		if (!preg_match("|^[a-zA-Z_0-9]+$|",$values['name'])) return false;
 		$values['description'] = trim($values['description']);
 		if (strlen($values['description'])==0) return false;
-		if ($this->checkPresence(0,$values['name'])) return false;
 		$settings = $this->implode($values['settings']);
-		msq("INSERT INTO `".$this->getSetting('table')."` (`description`,`name`,`settings`) VALUES ('".addslashes($values['description'])."','".$values['name']."','$settings')");
-		$id = mslastid();
-		foreach ($values['types'] as $type) $CDDataType->add(array('dataset'=>$id,'description'=>$type['description'],'name'=>$type['name'],'type'=>$type['type'],'settings'=>$type['settings']));
+		
+		$id=$this->checkPresence(0,$values['name']);
+		if ($id==0)
+		{
+			msq("INSERT INTO `".$this->getSetting('table')."` (`description`,`name`,`settings`) VALUES ('".addslashes($values['description'])."','".$values['name']."','$settings')");
+			$id = mslastid();
+		}
+		/* Есть ли типы данных для id раздела */
+		if ($this->checkDatatype($id,$values['name'],$section_id)==0)
+		{
+			foreach ($values['types'] as $type) 
+			$CDDataType->add(array('section_id'=>$section_id,'dataset'=>$id,'description'=>$type['description'],'name'=>$type['name'],'type'=>$type['type'],'settings'=>$type['settings']));
+		}
 	}
 	function checkPresence($id,$name = ''){
 		$id = floor($id);
 		if (trim($name)!='') if ($r = msr(msq("SELECT * FROM `".$this->getSetting('table')."` WHERE `name`='".addslashes(trim($name))."'"))) return $r['id'];
 		if (msr(msq("SELECT * FROM `".$this->getSetting('table')."` WHERE `id`='$id'"))) return $id;
 		return 0;
+	}
+	function checkDatatype($id,$name = '', $section_id){
+		$id = floor($id);
+	
+		$cnt=msr(msq("SELECT count(*) as cnt FROM `site_site_data_types` WHERE `dataset`='".$id."' and section_id=".$section_id));
+	
+		return floor($cnt['cnt']);
 	}
 }
 ?>

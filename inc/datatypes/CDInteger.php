@@ -1,10 +1,8 @@
 <?
-/*
-Класс, описывающий тип «Текстовая строка»
-*/
 class CDINTEGER extends VirtualType
 {
 	function init($settings){
+		$settings['descr']='Целое число';
 		$maxlength = (floor($this->getSetting('maxlength'))>0)?floor($this->getSetting('maxlength')):255;
 		$this->setSetting('maxlength',$maxlength);
 		VirtualType::init($settings);

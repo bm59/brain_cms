@@ -18,3 +18,4 @@ print  '<span class="clear"></span><br/>'.mysql_error();
 </div><!--//zbody//-->
 </body>
 </html>
+<?$_SESSION['global_alert']='' ?>

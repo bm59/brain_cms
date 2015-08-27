@@ -1,10 +1,8 @@
 <?
-/*
-Класс, описывающий тип «Видео»
-*/
 class CDFile extends VirtualType
 {
 	function init($settings){
+		$settings['descr']='Файл';
 		VirtualType::init($settings);
 
 	}
