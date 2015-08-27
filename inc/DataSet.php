@@ -76,37 +76,14 @@ class DataSet extends VirtualClass
 	function update_prec($id,$section_id){
 		$id = floor($id);
 		
-		print $id.'|'.$section_id;
 		if (!$id>0 || !$section_id>0) return false;
-		$q=msq("SELECT *
-		FROM `site_site_data_types`
-		WHERE section_id=$section_id
-		AND dataset=$id	
-		AND settings NOT LIKE '%|off|%'
-		UNION
-		SELECT *
-		FROM `site_site_data_types`
-		WHERE section_id=$section_id
-		AND dataset=$id		
-		AND settings LIKE '%|off|%'
-		ORDER BY `precedence`");
-		print "SELECT *
-		FROM `site_site_data_types`
-		WHERE section_id=$section_id
-		AND dataset=$id	
-		AND settings NOT LIKE '%|off|%'
-		UNION
-		SELECT *
-		FROM `site_site_data_types`
-		WHERE section_id=$section_id
-		AND dataset=$id		
-		AND settings LIKE '%|off|%'
-		ORDER BY `precedence`";
+		$q=msq("SELECT *, 1 as ord FROM `site_site_data_types` WHERE section_id=$section_id AND dataset=$id AND settings NOT LIKE '%|off|%'
+				UNION SELECT *, 2 as ord FROM `site_site_data_types` WHERE section_id=$section_id AND dataset=$id AND settings LIKE '%|off|%'  ORDER BY `ord`,`precedence`");
 		$i=0;
 		while ($r=msr($q))
 		{
-			$i++;
 			msq("UPDATE  `site_site_data_types` SET `precedence`='$i' WHERE id=".$r['id']." LIMIT 1");
+			$i++;
 		}
 		return true;
 	}

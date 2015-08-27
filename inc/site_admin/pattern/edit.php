@@ -68,7 +68,7 @@ if (floor($_POST['action'])==1)
 			
 			if (count($errors)) $error_ids[]=$id;
 			
-			for ($i = 0; $i < count($errors); $i++) $_SESSION['global_alert'].='<i><span style="color: #CC0000">Ошибка:</span></i> '.$errors[$i].' | '.$id.'<br/>';
+			for ($j = 0; $j < count($errors); $j++) $_SESSION['global_alert'].='<i><span style="color: #CC0000">Ошибка:</span></i> '.$errors[$i].' | '.$id.'<br/>';
 
 			if (count($errors)==0)
 			{
