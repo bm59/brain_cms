@@ -73,6 +73,43 @@ class DataSet extends VirtualClass
 		if (msr(msq("SELECT * FROM `".$this->getSetting('table')."` WHERE `id`='$id'"))) return $id;
 		return 0;
 	}
+	function update_prec($id,$section_id){
+		$id = floor($id);
+		
+		print $id.'|'.$section_id;
+		if (!$id>0 || !$section_id>0) return false;
+		$q=msq("SELECT *
+		FROM `site_site_data_types`
+		WHERE section_id=$section_id
+		AND dataset=$id	
+		AND settings NOT LIKE '%|off|%'
+		UNION
+		SELECT *
+		FROM `site_site_data_types`
+		WHERE section_id=$section_id
+		AND dataset=$id		
+		AND settings LIKE '%|off|%'
+		ORDER BY `precedence`");
+		print "SELECT *
+		FROM `site_site_data_types`
+		WHERE section_id=$section_id
+		AND dataset=$id	
+		AND settings NOT LIKE '%|off|%'
+		UNION
+		SELECT *
+		FROM `site_site_data_types`
+		WHERE section_id=$section_id
+		AND dataset=$id		
+		AND settings LIKE '%|off|%'
+		ORDER BY `precedence`";
+		$i=0;
+		while ($r=msr($q))
+		{
+			$i++;
+			msq("UPDATE  `site_site_data_types` SET `precedence`='$i' WHERE id=".$r['id']." LIMIT 1");
+		}
+		return true;
+	}
 	function checkDatatype($id,$name = '', $section_id){
 		$id = floor($id);
 	

@@ -102,6 +102,8 @@ if (floor($_POST['action'])==1)
 			$i++;
 		}
 	}
+	
+	$CDDataSet->update_prec($dataset['id'], $section['id']);
 }	
 	/*Обновляем данные*/
 	$columns=$CDDataType->get_column_info($SectionPattern->getSetting('table'));
