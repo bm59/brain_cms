@@ -66,12 +66,13 @@ class VirtualPattern
 		$uid = floor($uid);
 		global $CDDataSet;
 		$datasetid = $CDDataSet->checkPresence($datasetid);
-		if ($datasetid>0){
-			$dataset = $CDDataSet->get($datasetid);
+		if ($datasetid>0)
+		{
+			$dataset = $CDDataSet->get($datasetid, $uid);
 			foreach ($dataset['types'] as $t){
 
 				$ttype=$this->get_default_type($t);
-				$tablefields[$t['name']] = $ttype;
+				$tablefields[$t['name']] = $ttype.' COMMENT "'.$t['description'].'"';
 			}
 			return mstable(ConfigGet('pr_name').'_site',lower($this->getSetting('name')),$dataset['name'].(($uid>0)?'_'.$uid:''),$tablefields);
 		}

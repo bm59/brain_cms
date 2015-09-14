@@ -26,13 +26,22 @@ H3 {margin: 10px 0px; font-size: 16px; line-height: 18px; font-weight: lighter; 
 .air.h10 {height: 10px;}
 
 
+/*Сортировка*/
+.template .sort {width: 14px; height: 8px; background: url("/pics/inputs/sort.png"); display:  inline-block; vertical-align: middle; margin: 0 4px;}
+.template .sort.down {background-position: 0 -8px}
+.template .sort.up {background-position: 0 0;}
+.template .sort.up.active {background-position: 0 -16px}
+.template .sort.down.active {background-position: 0 -24px;}
+.template .sort.active {border: none;}
+
+/*Шаблон разделов*/
 .pattern .tab_alert TD {background: rgba(0, 0, 0, 0) -moz-linear-gradient(center top , #FFCCCC, #FF9999) repeat scroll 0 0 !important;} 
 .pattern .tab_ok TD {background: rgba(0, 0, 0, 0) -moz-linear-gradient(center top , #CCFFFF, #BDFFDE) repeat scroll 0 0 !important;} 
 .pattern LABEL {text-align: left; font-size: 11px;}
 .pattern select, .pattern input {margin: 0 0 15px !important;}
 .pattern .hr {border-top: 1px dashed #D8D8D8; height: 1px; margin: 10px 0; clear: both;}
 .pattern input[type="checkbox"] + label {margin: 2px; width: 100%;}
-.pattern .dt_settings {width: 300px;}
+.pattern .dt_settings {width: 500px; word-wrap: break-word;}
 
 
 .alert {
@@ -61,6 +70,7 @@ INPUT {border: none; background: none;}
     box-sizing: border-box;
     background-color: #ffffff;
 }
+.input select {padding: 9px 10px;}
 .input input:focus,input[type="text"]:focus,input[type="password"]:focus,textarea:focus,select:focus {
     background-color: rgba(255, 255, 255, 0.5);
     border: 2px solid #c06eff;
@@ -68,6 +78,7 @@ INPUT {border: none; background: none;}
     transition: all 100ms cubic-bezier(0.42, 0, 0.58, 1) 0s;
     outline: none;
 }
+.ui-spinner-input {padding: 12px 10px !important;}
 @-moz-document url-prefix() {
     select {
        color: transparent !important;
@@ -131,6 +142,13 @@ input[disabled="disabled"]  {background-color: #E1E1E1;}
 .button.txtstyle IMG {padding: 0; }
 .button.txtstyle INPUT {background-repeat: no-repeat; width: 16px; height: 16px; cursor: pointer;}
 .button.txtstyle.disabled INPUT{cursor: default;}
+.button.txtstyle .icon {
+    background-position: center center;
+    background-repeat: no-repeat;
+    display: block;
+    height: 16px;
+    width: 16px;
+}
 .ui-datepicker-trigger {height: 44px; padding-top: 10px;}
 
 FORM LABEL {position: relative; overflow: hidden; display: block; margin: 0px 6px 0px 4px;}
@@ -139,7 +157,7 @@ FORM LABEL {position: relative; overflow: hidden; display: block; margin: 0px 6p
 /*Список*/
 UL {list-style: none;margin:0;padding:0;}
 UL, OL {margin: 10px 0px 10px 0px;}
-UL LI {padding-left: 20px; background: url(/pics/inputs/ul.gif) 0px 9px no-repeat; position: relative;}
+UL LI {padding-left: 15px; background: url(/pics/inputs/ul.gif) 0px 7px no-repeat; position: relative;}
 OL LI {margin: 10px 0px 0px 20px; background-image: none; padding: 0px;}
 OL UL LI {background: url(/pics/inputs/ul.gif) 0px 10px no-repeat; padding-left: 20px; margin-left: 0px;}
 OL UL, OL OL, UL UL, UL OL {margin: 0px 0px 0px 40px;}
@@ -352,7 +370,8 @@ HTML:first-child .place .forckecks LABEL INPUT {left: 0px; top: 1px;}
 
 .gallery LI {list-style: none;}
 .gallery_container {height: 170px; float: left; position: relative; padding-bottom: 20px;}
-.gallery_container INPUT {background-image: url("/pics/editor/delete.gif"); position: absolute; right: 15px; top: 15px;}
+.gallery_container #delete_button_image {background-image: url("/pics/editor/delete.gif"); position: absolute; right: 35px; top: 15px;}
+.gallery_container #link_image {right: 15px; top: 15px; position: absolute; display: block;}
 
 #sortable LI {background: none; padding: 0; margin: 10px 0}
 
@@ -392,12 +411,11 @@ HTML:first-child .place .forckecks LABEL INPUT {left: 0px; top: 1px;}
 .sort {margin-left: 5px;}
 .sort IMG {display: inline;}
 
-/*пейджинг*/
-#paging {position: relative; z-index: 1; margin: 0px 140px 0px 147px;}
-#paging.nopad {margin: 0px;}
-#paging {margin-bottom: 20px !important;}
-#paging SPAN.button {background-color: #666666; cursor: default; color: #FFFFFF;}
-#paging .button {border: none;box-shadow: none;background: #CCCCCC; padding: 8px 12px;}
+/*Пейджинг*/
+#paging {padding: 10px 0;}
+#paging SPAN {padding:7px 12px; font-weight: bold; background-color: #f3f3f3; margin-right: 5px;}
+#paging a {padding:7px 12px; margin-right: 5px; color: #666666; background-color: #f3f3f3; text-decoration: none;}
+#paging a:hover {background-color: #f7f7f7;}
 
 
 

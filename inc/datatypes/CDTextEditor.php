@@ -3,6 +3,9 @@ class CDTextEditor extends VirtualType
 {
 	function init($settings){
 		$settings['descr']='Текстовый редактор';
+		$settings['help']=array(
+				'texttype=full'=>'Расширенный редактор'
+		);
 		VirtualType::init($settings);
 	}
 	
@@ -12,7 +15,7 @@ class CDTextEditor extends VirtualType
 		
 		?>
 		<div class="place">
-		<span class="input">
+		<div class="input">
 			<label><?=htmlspecialchars($this->getSetting('description'))?><?=((isset($settings['important']))?' <span class="important">*</span>':'')?></label>
 		<?
 		$css = ($this->getSetting('css')!='')?$this->getSetting('css'):'contentsite.css?1';
@@ -128,8 +131,8 @@ class CDTextEditor extends VirtualType
 		<?
 		}
 		?>
-			<div><textarea class="tiny" id="<?=htmlspecialchars($this->getSetting('name'))?>" name="<?=htmlspecialchars($this->getSetting('name'))?>" class="<?=$class?>"><?=htmlspecialchars($this->getSetting('value'))?></textarea></div>
-		</span>
+			<div><textarea class="tiny" id="<?=htmlspecialchars($this->getSetting('name'))?>" name="<?=htmlspecialchars($this->getSetting('name'))?>"><?=htmlspecialchars($this->getSetting('value'))?></textarea></div>
+		</div>
 		</div>
 		<input type="hidden" name="<?=htmlspecialchars($this->getSetting('name'))?>_htmlview" id="<?=htmlspecialchars($this->getSetting('name'))?>_htmlview" value="">
 		<span class="clear"></span>

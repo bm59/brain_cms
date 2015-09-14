@@ -59,8 +59,8 @@ else{
 
 
 	$accessgranted = $VisitorType->isAccessGranted($group['id'],$cid);
-    /*$accessgranted_settings=array_key_exists($cid,$group['new_settings']);*/
-    $accessgranted_settings=in_array('view', $group['new_settings'][$cid]);
+	
+    $accessgranted_settings=@in_array('view', $group['new_settings'][$cid]);
 
 
 

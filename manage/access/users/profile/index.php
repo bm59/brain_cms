@@ -4,14 +4,14 @@ include $_SERVER['DOCUMENT_ROOT']."/inc/site_admin/include.php";
 if (!$activeccid>0)
 $activeccid=$Content->getIdByPath(configGet("AskUrl"));
 
-if (!in_array('edit',$group['new_settings'][$activeccid]) && $mode!='development' && $_GET['user']>0)
+if (!@in_array('edit',$group['new_settings'][$activeccid]) && $mode!='development' && $_GET['user']>0)
 header("Location: /manage/control/contents/");
 
 $requestUserId = $_SESSION['visitorID'];
 $user = $SiteVisitor->getOne($_SESSION['visitorID']);
 $group = $VisitorType->getOne($user['type']);
 $requestUserId = floor($_GET['user']); /* Поставить седующие условие вместо этой строки, чтобы непривилигированные пользователи не могли заходить на страницу чужого профиля
-	if ((in_array('610',$group['access'])) || (isset($group['settings']['superaccess']))) $requestUserId = floor($_GET['user']);
+	if ((@in_array('610',$group['access'])) || (isset($group['settings']['superaccess']))) $requestUserId = floor($_GET['user']);
 */
 if (!$SiteVisitor->checkUserPresence($requestUserId)) $requestUserId = $_SESSION['visitorID'];
 configSet('profileID',$requestUserId);
@@ -38,7 +38,7 @@ if (isset($_POST['profilepswd'])) $errors = $SiteVisitor->changePassword($_SESSI
 				<span><strong>Электронная почта</strong><a href="mailto:<?=$requestUser['email']?>"><?=$requestUser['email']?></a></span>
 			</div>
 			<?
-			if ((in_array('410',$group['access'])) || (isset($group['settings']['superaccess']))){
+			if ((@in_array('410',$group['access'])) || (isset($group['settings']['superaccess']))){
 				?>
 				<a href="/manage/access/users/edit/?edit=<?=$requestUser['id']?>" class="button">Редактировать</a>
 				<?
@@ -47,7 +47,7 @@ if (isset($_POST['profilepswd'])) $errors = $SiteVisitor->changePassword($_SESSI
 		</div>
 		<?
 		if ($_SESSION['visitorID']==configGet('profileID')){
-			if ((!in_array('611',$group['access'])) && (!isset($group['settings']['superaccess']))){
+			if ((!@in_array('611',$group['access'])) && (!isset($group['settings']['superaccess']))){
 				?>
 				<div class="hr"><hr /></div>
 				<span class="clear"></span>
@@ -94,7 +94,7 @@ if (isset($_POST['profilepswd'])) $errors = $SiteVisitor->changePassword($_SESSI
 		?>
 		<span class="clear"></span>
 		<?
-		if ((in_array('610',$group['access'])) || (isset($group['settings']['superaccess']))){
+		if ((@in_array('610',$group['access'])) || (isset($group['settings']['superaccess']))){
 		?>
 		<div class="hr"><hr /></div>
 		<a href="/manage/access/users/" class="button">Перейти к списку пользователей</a>

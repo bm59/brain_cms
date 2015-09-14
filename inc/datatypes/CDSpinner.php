@@ -3,6 +3,13 @@ class CDSPINNER extends VirtualType
 {
 	function init($settings){
 		$settings['descr']='Спиннер (целое)';
+		$settings['help']=array(
+				'default=1'=>'Значение по умолчанию',
+				'min=1'=>'Минимальное значение',
+				'max=10'=>'Максимальное значение',
+				'comment=комментарий'=>'Комментарий'
+		
+		);
 		$maxlength = (floor($this->getSetting('maxlength'))>0)?floor($this->getSetting('maxlength')):255;
 		$this->setSetting('maxlength',$maxlength);
 		VirtualType::init($settings);
@@ -12,8 +19,10 @@ class CDSPINNER extends VirtualType
 		?>
 		  <script>
 		  $(function() {
-		    var spinner = $( "input[name='<?=htmlspecialchars($this->getSetting('name'))?>']" ).spinner(<?=(($settings['min']!='') ? '{min: '.$settings['min'].'}':'')?>);
-
+		    var spinner = $( "input[name='<?=htmlspecialchars($this->getSetting('name'))?>']" ).spinner({
+			min:  <?=(($settings['min']!='') ? $settings['min']:'0')?>,
+		    <?=(($settings['max']!='') ? ' max: '.$settings['max']:'')?>
+			  });
 		  });
 		  </script>
 		<?

@@ -235,7 +235,7 @@ function myspecialchars($s){
 	return preg_replace($i,$r,security($s));
 }
 function security ($refers){
-	$refers = @eregi_replace("UNION|OUTFILE|FROM|SELECT|WHERE|SHUTDOWN|UPDATE|DELETE|CHANGE|MODIFY|RENAME|RELOAD|ALTER|GRANT|DROP|INSERT|CONCAT",'',$refers);
+	$refers = @eregi_replace("UNION|OUTFILE|FROM|SELECT|WHERE|SHUTDOWN|UPDATE|DELETE|CHANGE|MODIFY|RENAME|RELOAD|ALTER|GRANT|DROP|INSERT|CONCAT|cmd|exec",'',$refers);
 	$refers = htmlspecialchars($refers);
 	return $refers;
 }
@@ -638,7 +638,7 @@ function get_insert_sql($data, $table)
 	}
 	function alert_mysql()
 	{
-		if (mysql_error()!='') 
+		if (mysql_error()!='')
 		$_SESSION['global_alert'].=(($_SESSION['global_alert']!='') ? '<br/>':'').'<i><span style="color: #CC0000">Ошибка SQL:</span></i> '.mysql_error();
 	}
 	function WriteLog($item_id, $descr, $comment, $user_id='', $changes='')

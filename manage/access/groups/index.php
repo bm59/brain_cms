@@ -2,7 +2,7 @@
 include $_SERVER['DOCUMENT_ROOT']."/inc/site_admin/include.php";
 
 if ($_GET['delete']>0)
-if (in_array('delete',$group['new_settings'][$activeccid]) || $mode=='development')
+if (@in_array('delete',$group['new_settings'][$activeccid]) || $mode=='development')
 {	$VisitorType->delete($_GET['delete']);
 	WriteLog($_GET['delete'], 'удаление группы');
 	header("Location: ".configGet("AskUrl"));
@@ -32,7 +32,7 @@ include $_SERVER['DOCUMENT_ROOT']."/inc/site_admin/meta.php";
 				$group = $VisitorType->getOne($groupid);
 				$href = (isset($group['settings']['noedit']))?array('',''):array('<a href="edit/?edit='.$group['id'].'">','</a>');
 
-				if (!in_array('edit',$group['new_settings'][$activeccid]) && $mode!='development')
+				if (!@in_array('edit',$group['new_settings'][$activeccid]) && $mode!='development')
 				$href=array();
 				?>
 				<tr id="item_<?=$group['id']?>">
@@ -40,7 +40,7 @@ include $_SERVER['DOCUMENT_ROOT']."/inc/site_admin/meta.php";
 					<td class="t_center"><?=$group['userscount']?></td>
 					<td class="t_32width">
 						<?
-						if ((isset($group['settings']['undeletable']) || !in_array('delete',$group['new_settings'][$activeccid])) && $mode!='development'){
+						if ((isset($group['settings']['undeletable']) || !@in_array('delete',$group['new_settings'][$activeccid])) && $mode!='development'){
 							?>
 							<span class="button txtstyle disabled">
 								<input type="button" style="background-image: url(/pics/editor/delete-disabled.gif)" title="Невозможно удалить" />
@@ -64,7 +64,7 @@ include $_SERVER['DOCUMENT_ROOT']."/inc/site_admin/meta.php";
 		<?
 		}
 
-		if (in_array('add',$group['new_settings'][$activeccid]) || $mode=='development')
+		if (@in_array('add',@$group['new_settings'][$activeccid]) || $mode=='development')
 		{
 		?>
 		<span class="clear"></span>

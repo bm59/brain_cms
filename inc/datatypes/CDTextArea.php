@@ -11,10 +11,10 @@ class CDTextArea extends VirtualType
 		$settings = $this->getSetting('settings');
 		?>
 		<div class="place">
-			<span class="input">
+			<div class="input">
 				<label><?=htmlspecialchars($this->getSetting('description'))?><?=((isset($settings['important']))?' <span class="important">*</span>':'')?></label>
 				<div><textarea name="<?=htmlspecialchars($this->getSetting('name'))?>"><?=stripslashes(eregi_replace('</textarea>', "&lt;/textarea&gt;", $this->getSetting('value')))?></textarea></div>
-		    </span>
+		    </div>
 		</div>
 		<span class="clear"></span>
 		<?

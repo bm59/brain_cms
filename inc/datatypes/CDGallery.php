@@ -3,6 +3,13 @@ class CDGallery extends VirtualType
 {
 	function init($settings){
 		$settings['descr']='Картинки (галерея)';
+		$settings['help']=array(
+				'auto_resize=true|auto_width=187|auto_height=120'=>'Автоматическая обрезка изображений',
+				'imgw=245|imgwtype=1|imgh=400|imghtype=1'=>'Проверка на размер изображений',
+				'comment=комментарий'=>'Комментарий',
+				'auto_mini=true|auto_mini_width=210|auto_mini_height=220'=>'Автоматическое создание миниатюр'
+		
+		);
 		VirtualType::init($settings);
 	}
 	function drawEditor($divstyle = '',$span = true){
@@ -10,7 +17,8 @@ class CDGallery extends VirtualType
 		global $Storage;
 		$st = $Storage->getStorage(floor($this->getSetting($this->getSetting('name').'storage')));
 		if (!floor($st['id'])>0)
-		$st = $Storage->getStorage(floor($this->getSetting('imagestorage')));
+		$st = $Storage->getStorage(0,array('path'=>'/site/images/','name'=>'Картинки','exts'=>array('jpg','gif','jpeg', 'png', 'swf')));
+		
 		$f = 0;
 		if (floor($st['id'])>0){
 
@@ -32,7 +40,7 @@ class CDGallery extends VirtualType
                 $('#file').html('');
                 if(response.result==="ok"){
                     $('#loading<?='_'.$this->getSetting('name')?>').fadeOut(0);
-                    status.html(status.html()+'<LI style="height: 170px;float: left;"><div class="gallery_container"><input type="hidden" id="uploadfilehidden<?=htmlspecialchars($this->getSetting('name'))?>" name="<?=htmlspecialchars($this->getSetting('name'))?>[]" value="'+response.id+'"><span class="button txtstyle"><input type="button" onclick="delete_file_image<?=htmlspecialchars($this->getSetting('name'))?>(this); return false" id="delete_button_image" style="background-image: url(/pics/editor/delete.gif)" title="Удалить изображение"></span><img style="height: 170px" class="contentimg" src="'+response.path+'" class="contentimg"></div></LI>');
+                    status.html(status.html()+'<LI style="height: 170px;float: left;"><div class="gallery_container"><input type="hidden" id="uploadfilehidden<?=htmlspecialchars($this->getSetting('name'))?>" name="<?=htmlspecialchars($this->getSetting('name'))?>[]" value="'+response.id+'"><span class="button txtstyle"><input type="button" onclick="delete_file_image<?=htmlspecialchars($this->getSetting('name'))?>(this); return false" id="delete_button_image" style="background-image: url(/pics/editor/delete.gif)" title="Удалить изображение"></span><span class="button txtstyle"><a id="link_image" class="link<?='_'.$this->getSetting('name')?>" target="_blank" title="Ссылка на картинку" href="'+response.path+'"><img alt="Ссылка на картинку" src="/pics/editor/link.png"></a></span><img style="height: 170px" class="contentimg" src="'+response.path+'" class="contentimg"></div></LI>');
                     //$('#uploadfilehidden<?=htmlspecialchars($this->getSetting('name'))?>').val(response.id);
 
 
@@ -68,6 +76,7 @@ class CDGallery extends VirtualType
 
 			<div class="place gallery" <?=($divstyle!='')?$divstyle:''?>>
 				<label><?=htmlspecialchars($this->getSetting('description'))?><?=((isset($settings['important']))?' <span class="important">*</span>':'')?></label>
+				<?if ($settings['comment']!=''){?><small><?=$settings['comment']?></small><?}?>
 			<?
 			/*if ($this->getSetting('name')=='image' && $_GET['section']==7) 	print '<div style="padding: 0 5px; color: #ff0000">Рекомендуемый размер:  1040x450 пикселей</div>';*/
 			?>
@@ -128,6 +137,7 @@ class CDGallery extends VirtualType
 					<div class="gallery_container">
 					<input type="hidden" id="uploadfilehidden<?=htmlspecialchars($this->getSetting('name'))?>" name="<?=htmlspecialchars($this->getSetting('name'))?>[]" value="<?=$f?>"/>
 					<span class="button txtstyle"><input type="button" onclick="delete_file_image<?=htmlspecialchars($this->getSetting('name'))?>(this); return false" id="delete_button_image" style="background-image: url(/pics/editor/delete.gif)" title="Удалить изображение"/></span>
+					<span class="button txtstyle"><a id="link_image" class="link<?='_'.$this->getSetting('name')?>" target="_blank" title="Ссылка на картинку" href="<?=$image['path'] ?>"><img alt="Ссылка на картинку" src="/pics/editor/link.png"></a></span>
 					<img style="height: 170px" class="contentimg" src="<?=$image['path']?>" class="contentimg"/>
 					</div>
 					</LI>
@@ -161,7 +171,7 @@ class CDGallery extends VirtualType
 
 		if (floor($this->getSetting('uid'))>0){
 			$st = $Storage->getStorage(floor($this->getSetting($this->getSetting('name').'storage')));
-			if (!$st['id']>0) $st = $Storage->getStorage(floor($this->getSetting('imagestorage')));
+			if (!$st['id']>0) $st = $Storage->getStorage(0,array('path'=>'/storage/site/images/','name'=>'Изображения сайта (общее)','exts'=>array('jpg','gif','jpeg', 'png', 'swf')));
 			if (floor($st['id'])>0){
 
 				$files=explode('|',$this->getSetting('value'));
@@ -196,9 +206,9 @@ class CDGallery extends VirtualType
 	function getUpdateSQL(){ return "`".$this->getSetting('name')."`='".$this->getSetting('value')."'"; }
 	function delete(){
 		global $Storage;
-		$st = $Storage->getStorage(floor($this->getSetting($this->getSetting('name').'storage')));
-		$flist = $Storage->getListByUID($st['id'],$this->getSetting('theme'),$this->getSetting('rubric'),floor($this->getSetting('uid')));
-		foreach ($flist as $f) $Storage->deleteFile($f['id']);
+		$images=explode('|',$this->getSetting('value'));
+		foreach ($images as $img)
+		$Storage->deleteFile($img);
 	}
 }
 ?>

@@ -30,11 +30,15 @@ class VirtualClass
 	function explode($settings = ''){ // Формирует массив из строки вида |name|name=value|name|name|...
 		$settings = explode('|',trim($settings));
 		$retval = array();
+
 		foreach ($settings as $v){
 			$v = trim($v);
 			if ($v!=''){
 				$values = explode('=',$v);
-				$retval[lower(trim($values[0]))] = trim($values[1]);
+				/* $retval[lower(trim($values[0]))] = trim($values[1]); */
+				if (isset($values[1]) && $values[1]!='')
+				$retval[lower(trim($values[0]))] = str_replace($values[0].'=', '', $v);
+				else $retval[lower(trim($values[0]))] = '';
 			}
 		}
 		return $retval;

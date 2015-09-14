@@ -49,7 +49,7 @@ class DataType extends VirtualClass
         include_once($dir."CDSlider.php"); */
 	}
 
-	function add($values, $add_column=false, $table_array=''){
+	function add($values, $add_column=false, $table_array='', $section_id){
 		global $CDDataSet;
 
 		$error='';
@@ -72,7 +72,10 @@ class DataType extends VirtualClass
 				return false;
 		}
 		
-		$settings = $this->implode($values['settings']);
+
+		if (is_array($values['settings']))
+		$values['settings'] = $this->implode($values['settings']);
+		
 		if (msr(msq("SELECT * FROM `".$this->getSetting('table')."` WHERE `section_id`='".$values['section_id']."' `dataset`='".$values['dataset']."' AND `name`='".$values['name']."'"))) 
 		{	
 			$_SESSION['global_alert'].='ѕоле с таким названием уже существует :'.$values['name'];
@@ -82,14 +85,71 @@ class DataType extends VirtualClass
 		$precedence = floor($precedence['prec']);
 		
 		
-		msq("INSERT INTO `".$this->getSetting('table')."` (`section_id`,`dataset`,`description`,`name`,`type`,`precedence`,`settings`,`setting_style_edit`) 
-		VALUES ('".$values['section_id']."','".$values['dataset']."','".addslashes($values['description'])."','".$values['name']."','".$values['type']."','$precedence','$settings','".$values['setting_style_edit']."')");
 
+		$cur_error=mysql_error();
+		
+		
 		if ($add_column) $this->add_column($values, $table_array);
+		
+		/* ≈сли при добавлении колонки не было ошибок */
+		if ($cur_error==mysql_error())
+		msq("INSERT INTO `".$this->getSetting('table')."` (`section_id`,`dataset`,`description`,`name`,`type`,`precedence`,`settings`,`setting_style_edit`,`setting_style_search`)
+		VALUES ('".$section_id."','".$values['dataset']."','".addslashes($values['description'])."','".$values['name']."','".$values['type']."','$precedence','".$values['settings']."','".$values['setting_style_edit']."','".$values['setting_style_search']."')");
 		alert_mysql();
 		$error.=mysql_error();
 		
 		return mslastid();
+	}
+	function get_search_field($data='', $search_fields_cnt)
+	{
+		$tface = $data['face'];
+		$type=get_class($tface);
+		if ($tface->Settings['setting_style_edit']['css']=='')
+			$tface->Settings['setting_style_edit']['css']='width: '.round(90/$search_fields_cnt).'%';
+
+		 
+		switch ($type) {
+			case 'CDCHOICE':
+				
+				$values=array('-1'=>'')+$tface->get_values();
+
+				if ($tface->Settings['settings']['type']=='multi'){?><input type="hidden" name="nouse_search_<?=$tface->getSetting('name')?>_type" value="<?=$type?>"><?}?>
+				<div class="place" style="z-index: 10;<?=$tface->Settings['setting_style_edit']['css']?>">
+					<label><?=htmlspecialchars($tface->getSetting('description'))?></label>
+					<?print getSelectSinonim('search_'.$tface->getSetting('name'),$values,$_REQUEST['search_'.$tface->getSetting('name')]);?>
+				</div>
+				<?
+				break;
+			default:
+				?>
+	        		<div class="place" style="z-index: 10;<?=$tface->Settings['setting_style_edit']['css']?>">
+		        		<label><?=$tface->Settings['description'] ?></label>
+						<span class="input">
+							<input type="text" name="search_<?=$tface->getSetting('name')?>" maxlength="20" value="<?=$_REQUEST['search_'.$tface->getSetting('name')]?>"/>
+						</span>
+					</div>
+	        		<?
+	        		break;
+	        	}
+	}
+	function get_view_field($data='', $val)
+	{
+		global $Storage;
+		
+		$tface = $data['face'];
+		$type=get_class($tface);
+			
+		switch ($type) {
+			case 'CDImage':
+				$image=$Storage->getFile($val);
+				if ($image['path']!='') 
+				print '<img src="'.$image['path'].'" width="150px">';	
+					
+			break;
+			default:
+				print $val;
+	        break;
+		 } 
 	}
 	function add_column($values, $table_array='') {
 		$error='';
@@ -148,20 +208,20 @@ class DataType extends VirtualClass
 			
 			foreach($values as $k=>$v){ $update.=(($update!='') ? ',':'')."`$k`='$v'";}
 			msq("UPDATE `".$this->getSetting('table')."` SET $update WHERE id=$id LIMIT 1");
-			print "UPDATE `".$this->getSetting('table')."` SET $update WHERE id=$id LIMIT 1";
 			alert_mysql();
 			$error.=mysql_error();
 	
 		}
 		
 		
-		/* ≈сли изменили тип колонки */
+		/* ≈сли изменили тип колонки или описание*/
  		if (isset($table_columns[$cur_data['name']]) && isset($values['name']) && $cur_data['name']!=$values['name'])
 		{
 			
 			foreach ($table_array as $tab)
 			{
-				msq("ALTER TABLE `$tab` CHANGE `".$cur_data['name']."` `".$values['name']."` ".$table_columns[$cur_data['name']]['Type']." CHARACTER SET cp1251 COLLATE cp1251_general_ci NULL DEFAULT NULL COMMENT '".$values['description']."'");
+				msq("ALTER TABLE `$tab` CHANGE `".$cur_data['name']."` `".$values['name']."` ".$table_columns[$cur_data['name']]['Type']."  NULL DEFAULT NULL COMMENT '".$values['description']."'");
+
 				alert_mysql();
 				$error.=mysql_error();
 				$changes=true;
@@ -204,7 +264,7 @@ class DataType extends VirtualClass
 		$section_id = floor($section_id);
 		$retval = array();
 		$q = msq("SELECT * FROM `".$this->getSetting('table')."` WHERE `section_id`=$section_id and `dataset`='".$datasetid."' ORDER BY `precedence`");
-		while ($r = msr($q)) $retval[] = array('id'=>$r['id'],'description'=>$r['description'],'name'=>$r['name'],'type'=>$r['type'],'precedence'=>$r['precedence'],'settings'=>$this->explode($r['settings']),'setting_style_edit'=>$r['setting_style_edit']);
+		while ($r = msr($q)) $retval[$r['name']] = array('id'=>$r['id'],'description'=>$r['description'],'name'=>$r['name'],'type'=>$r['type'],'precedence'=>$r['precedence'],'settings'=>$this->explode($r['settings']),'setting_style_edit'=>$this->explode($r['setting_style_edit']),'setting_style_search'=>$this->explode($r['setting_style_search']));
 		return $retval;
 	}
 }

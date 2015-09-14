@@ -11,7 +11,7 @@ if (floor($_GET['switch_off'])>0)
 }
 
 if ($_GET['delete']>0)
-if (in_array('delete',$group['new_settings'][$activeccid]) || $mode=='development')
+if (@in_array('delete',$group['new_settings'][$activeccid]) || $mode=='development')
 {
 	$SiteVisitor->delete($_GET['delete']);
 	WriteLog($_GET['delete'], 'удаление пользователя');
@@ -50,7 +50,7 @@ include $_SERVER['DOCUMENT_ROOT']."/inc/site_admin/meta.php";
 
 				$href=array('<a href="'.$_SERVER['REDIRECT_URL'].'profile/?user='.$user['id'].'">','</a>');
 
-				if (!in_array('edit',$group['new_settings'][$activeccid]) && $mode!='development')
+				if (!@in_array('edit',$group['new_settings'][$activeccid]) && $mode!='development')
 				$href=array();
 
 				?>
@@ -62,17 +62,17 @@ include $_SERVER['DOCUMENT_ROOT']."/inc/site_admin/meta.php";
 					<td class="t_left"><?=$usertype['name']?></td>
 					<td class="t_32width">
 						<?
-						if ((isset($user['settings']['noswitch']) || !in_array('onoff',$group['new_settings'][$activeccid])) && $mode!='development'){
+						if ((isset($user['settings']['noswitch']) || !@in_array('onoff',$group['new_settings'][$activeccid])) && $mode!='development'){
 							?>
 							<a class="button txtstyle disabled">
-								<span class="icon" style="background-image: url(/pics/editor/status-disabled.gif)" title="Нельзя выключить" />
+								<span class="icon" style="background-image: url(/pics/editor/disabled.png)" title="Нельзя выключить" />
 							</a>
 							<?
 						}
 						else{
 							?>
 							<a href="<?=configGet("AskUrl").'?switch_'.((isset($user['settings']['engage']))?'off':'on').'='.$user['id']?>" class="button txtstyle">
-								<span class="icon" style="background-image: url(/pics/editor/<?=(isset($user['settings']['engage']))?'on':'off'?>.gif)" title="Включен" />
+								<span class="icon" style="background-image: url(/pics/editor/<?=(isset($user['settings']['engage']))?'on':'off'?>.png)" title="Включен" />
 							</a>
 							<?
 						}
@@ -80,7 +80,7 @@ include $_SERVER['DOCUMENT_ROOT']."/inc/site_admin/meta.php";
 					</td>
 					<td class="t_32width">
 						<?
-						if ((isset($group['settings']['undeletable']) || !in_array('delete',$group['new_settings'][$activeccid])) && $mode!='development'){
+						if ((isset($group['settings']['undeletable']) || !@in_array('delete',$group['new_settings'][$activeccid])) && $mode!='development'){
 							?>
 							<span class="button txtstyle disabled">
 								<input type="button" style="background-image: url(/pics/editor/delete-disabled.gif)" title="Невозможно удалить" />
@@ -104,7 +104,7 @@ include $_SERVER['DOCUMENT_ROOT']."/inc/site_admin/meta.php";
 		<?
 		}
 
-		if (in_array('add',$group['new_settings'][$activeccid]) || $mode=='development')
+		if (@in_array('add',$group['new_settings'][$activeccid]) || $mode=='development')
 		{
 		?>
 		<span class="clear"></span>

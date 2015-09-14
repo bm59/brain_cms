@@ -14,7 +14,7 @@ class DataSet extends VirtualClass
 			foreach ($settings as $name=>$value) $this->setSetting($name,$value);
 		}
 		/* Добавление наборов */
-		$this->add(array(
+/* 		$this->add(array(
 				'name'=>'sheet1',
 				'description'=>'Лист (1 колонка)',
 				'types'=>array(
@@ -27,10 +27,10 @@ class DataSet extends VirtualClass
 					)
 				)
 
-		);
+		); */
 	}
 
-	function get($id, $section_id){
+	function get($id, $section_id=0){
 		global $CDDataType;
 		if (!$section_id>0 && $_GET['section']>0) $section_id=$_GET['section'];
 		$retval = array();
@@ -47,6 +47,7 @@ class DataSet extends VirtualClass
 	}
 	function add($values, $section_id=0){
 		global $CDDataType;
+
 		if (!is_array($values['types'])) $values['types'] = array();
 		if (count($values['types'])==0) return false;
 		if (!preg_match("|^[a-zA-Z_0-9]+$|",$values['name'])) return false;
@@ -63,8 +64,9 @@ class DataSet extends VirtualClass
 		/* Есть ли типы данных для id раздела */
 		if ($this->checkDatatype($id,$values['name'],$section_id)==0)
 		{
+			
 			foreach ($values['types'] as $type) 
-			$CDDataType->add(array('section_id'=>$section_id,'dataset'=>$id,'description'=>$type['description'],'name'=>$type['name'],'type'=>$type['type'],'settings'=>$type['settings']));
+			$CDDataType->add(array('section_id'=>$section_id,'dataset'=>$id,'description'=>$type['description'],'name'=>$type['name'],'type'=>$type['type'],'settings'=>$type['settings']), '','', $section_id);
 		}
 	}
 	function checkPresence($id,$name = ''){
@@ -93,6 +95,14 @@ class DataSet extends VirtualClass
 		$cnt=msr(msq("SELECT count(*) as cnt FROM `site_site_data_types` WHERE `dataset`='".$id."' and section_id=".$section_id));
 	
 		return floor($cnt['cnt']);
+	}
+	function delete($id,$section_id){
+		$id = floor($id);
+		
+		if ($section_id>0)
+		$cnt=msr(msq("DELETE FROM `site_site_data_types` WHERE `dataset`='".$id."' and section_id=".$section_id));
+	
+		return;
 	}
 }
 ?>

@@ -1,4 +1,5 @@
 <?
+/* Подключение всех необходимых модулей */
 include_once($_SERVER['DOCUMENT_ROOT']."/inc/configuration.php");
 
 include_once($_SERVER['DOCUMENT_ROOT']."/config/site.php");
@@ -21,19 +22,10 @@ include_once($_SERVER['DOCUMENT_ROOT']."/inc/cclasses/VirtualContent.php");
 
 include_once($_SERVER['DOCUMENT_ROOT']."/inc/SiteSettings.php");
 include_once($_SERVER['DOCUMENT_ROOT']."/inc/SiteSections.php");
+
 include_once($_SERVER['DOCUMENT_ROOT']."/inc/site_admin/init.php");
 
-$section = $SiteSections->get($_REQUEST['section_id']);
 
+configSet("pr_doptit", setting('pr_doptit'));
 
-include $_SERVER['DOCUMENT_ROOT']."/inc/site_admin/pattern/var.php";
-include $_SERVER['DOCUMENT_ROOT']."/inc/site_admin/pattern/functions.php"; 
-
-mysql_query("SET NAMES cp1251"); // для mysql
-header("Content-type: text/html; charset=windows-1251");
-
-if ($_REQUEST['action']=='add_empty')
-{
-	print_dt(array('id'=>'new'.$_REQUEST['new_count']));
-} 
 ?>

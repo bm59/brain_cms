@@ -5,12 +5,8 @@ function configSet($param,$value){ global $GlobalConfiguration; $GlobalConfigura
 function configGet($param){ global $GlobalConfiguration; return $GlobalConfiguration[$param]; }
 
 /*Переменные сессии*/
-$SessionVariables = array();
 session_start();
-session_register("SessionVariables");
-$SessionVariables = $_SESSION["SessionVariables"];
-/*function sessionSet($name,$value){ global $SessionVariables; $SessionVariables[$name] = $value; }
-function sessionGet($name){ global $SessionVariables; return $SessionVariables[$name]; }*/
+
 
 /*Cookies*/
 function cookieSet($name,$value,$days = 0){

@@ -181,7 +181,7 @@ function selectText(elem) {
 					</td><td style="width: 32px;">
 					<label>&nbsp;</label>
 					<?
-					if ((isset($set['settings']['undeletable']) || !in_array('delete',$group['new_settings'][$activeccid])) && $mode!='development'){
+					if ((isset($set['settings']['undeletable']) || !@in_array('delete',$group['new_settings'][$activeccid])) && $mode!='development'){
 						?>
 						<span class="button txtstyle disabled">
 							<input type="button" style="background-image: url(/pics/editor/delete-disabled.gif)" title="Невозможно удалить" onclick="return false;" />
@@ -203,7 +203,7 @@ function selectText(elem) {
 				<?
 			}
 
-			if (in_array('edit',$group['new_settings'][$activeccid]) || $mode=='development')
+			if (@in_array('edit',$group['new_settings'][$activeccid]) || $mode=='development')
 			{
 			?>
 			<div class="place">
@@ -229,7 +229,7 @@ function selectText(elem) {
 			</ul>';
 		}
 
-		if (in_array('add',$group['new_settings'][$activeccid]) || $mode=='development')
+		if (@in_array('add',$group['new_settings'][$activeccid]) || $mode=='development')
 		{
 		?>
 		<div class="hr"></div>

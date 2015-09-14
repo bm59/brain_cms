@@ -5,7 +5,7 @@
 	$dt_settings_checkbox=array('important'=>'Îáÿçàòåëüíî äëÿ çàïîëíåíèÿ', 'nospan'=>'Nospan (div clear)', 'show_search'=>'Âûâîäèòü â ïîèñêå ğàçäåëà', 'show_list'=>'Âûâîäèòü â òàáëèöå ñïèñêà');
 	
 	/*Íàñòğîéêè ïåğñîíàëüíûå ğàçäåëà*/
-	$sec_settings_checkbox=array('onoff'=>'Âêë\Îòêë çàïèñåé', 'precedence'=>'Ïîğÿäîê çàïèñåé');
+	$sec_settings_checkbox=array('onoff'=>'Âêë\Îòêë çàïèñåé', 'precedence'=>'Ïîğÿäîê çàïèñåé', 'show_id'=>'Ïîêàçûâàòü id', 'no_paging'=>'Áåç ïåéäæèíãà');
 	
 	/*Äàííûå øàáëîíà*/
 	$SectionPattern = new $section['pattern'];
@@ -20,7 +20,7 @@
 	foreach ($all_types as $at)
 	{
 		$type=new $at;
-		$type->init();
+		$type->init(array());
 		$type_array[$at]['description']=$type->getSetting('descr');
 		$type_array[$at]['default_type']=$SectionPattern->get_default_type(array('type'=>$at));
 	

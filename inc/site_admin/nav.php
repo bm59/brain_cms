@@ -3,7 +3,7 @@
 if (configGet("AskUrl")!='/'){
 
         if (!$_GET['section']>0 && !$_GET['edit']>0)
-        $activeccid = $SiteSections->getIdByPath(ereg_replace('/manage/', '', configGet("AskUrl")));
+        $activeccid = $SiteSections->getIdByPath(preg_replace('/manage/', '', configGet("AskUrl")));
         else
         {
         	$s_id=(($_GET['section']>0) ? $_GET['section'] : $_GET['edit']);

@@ -1,0 +1,30 @@
+<?include_once($_SERVER['DOCUMENT_ROOT']."/inc/ajax_securuty.php");?>
+
+
+
+
+
+
+
+var session_id = '<?php echo session_id(); ?>';
+$(function() {
+    $(document).on('click','.onoff', function() {
+
+		$.ajax({
+            type: "POST",
+            url: "/inc/site_admin/pattern/ajax_class.php",
+            data: "action=onoff&id=1&session_id="+session_id,
+            dataType: 'json',
+            success: function(data){
+                alert(data.signal);
+            }
+        }); 
+		
+        return false;
+    });
+});
+
+
+
+ПРоверяем сессию
+ if (session_id()!=$_REQUEST['session_id']) die('Ошибка!!!');

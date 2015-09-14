@@ -2,7 +2,17 @@
 class CDSlider extends VirtualType
 {
 	function init($settings){
+
 		$settings['descr']='Слайдер';
+		$settings['help']=array(
+				'default=1'=>'Значение по умолчанию', 
+				'min=1'=>'Минимальное значение',
+				'max=10'=>'Максимальное значение', 
+				'comment=комментарий'=>'Комментарий', 
+				'range=true'=>'Выбор интервала (вместо default использовать values)',
+				'values=[ 25, 50 ]'=>'Значение по умолчанию для интервала',
+				
+		);
 		$maxlength = (floor($this->getSetting('maxlength'))>0)?floor($this->getSetting('maxlength')):255;
 		$this->setSetting('maxlength',$maxlength);
 		VirtualType::init($settings);

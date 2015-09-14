@@ -49,12 +49,12 @@ class CDVideo extends VirtualType
 			<div class="place">
 				<label><?=htmlspecialchars($this->getSetting('description'))?><?=((isset($settings['important']))?' <span class="important">*</span>':'')?></label>
 				<input type="hidden" id="uploadfilehidden<?=htmlspecialchars($this->getSetting('name'))?>" name="<?=htmlspecialchars($this->getSetting('name'))?>" value="<?=$this->getSetting('value')?>">
-				<span class="button">
+				<div class="button">
 					Загрузить файл
 					<div class="fileselect">
 					<input type="file" name="<?=htmlspecialchars($this->getSetting('name'))?>2" id="<?=htmlspecialchars($this->getSetting('name'))?>2" onchange="uploadFileAjax(this,'<?=htmlspecialchars($this->getSetting('editformid'))?>','fileuploadframe','uploadfilehidden<?=htmlspecialchars($this->getSetting('name'))?>',<?=$st['id']?>,'<?=trim($this->getSetting('theme'))?>','<?=trim($this->getSetting('rubric'))?>',<?=floor($this->getSetting('uid'))?>,'on<?=htmlspecialchars($this->getSetting('name'))?>StartLoading();','on<?=htmlspecialchars($this->getSetting('name'))?>FinishLoading(uploadimage,uploadimageid,uploadimagewidth,uploadimageheight);','onready');"/>
 					</div>
-				</span>
+				</div>
 				<span id="<?=htmlspecialchars($this->getSetting('name'))?>uploadimagedeletebutton" class="button txtstyle" <?=(floor($this->getSetting('value'))<1)?'style="display:none;"':''?>>
 					<input type="button" onclick="uploadFileAjax(this,'<?=htmlspecialchars($this->getSetting('editformid'))?>','fileuploadframe','uploadfilehidden<?=htmlspecialchars($this->getSetting('name'))?>',<?=$st['id']?>,'<?=trim($this->getSetting('theme'))?>','<?=trim($this->getSetting('rubric'))?>',<?=floor($this->getSetting('uid'))?>,'on<?=htmlspecialchars($this->getSetting('name'))?>StartLoading();','on<?=htmlspecialchars($this->getSetting('name'))?>FinishDeleting();','anytime');return false;" style="background-image: url(/pics/editor/delete.gif)" title="Удалить ролик" />
 				</span>

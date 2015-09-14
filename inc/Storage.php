@@ -60,7 +60,7 @@ class Storage extends VirtualClass
 		$rubric = trim($rubric);
 		if (!preg_match("|^[a-zA-Z_0-9]+$|",$rubric)) $rubric = '';
 		$uid = floor($uid);
-		$ext = lower(trim(ereg_replace(".*\.","",basename($file['name']))));
+		$ext = lower(trim(preg_replace("/.*?\./","",basename($file['name']))));
 		if (($ext=='') || (floor($file['size'])==0)) $retval['errors'][] = 'Не удается загрузить файл на сервер';
 		$filename = lower("temp_".getUniqueStr(10).".".$ext);
 		if (floor($file['size']/1024)>$storageobj['settings']['maxsize']) $retval['errors'][] = 'Размер загружаемого файла ('.getFileSizeString($file['size']).') больше максимально допустимого ('.getFileSizeString($storageobj['settings']['maxsize']*1024).')';
@@ -127,7 +127,7 @@ class Storage extends VirtualClass
 				$uniqueid = mslastid();
 				$retval['id'] = $uniqueid;
 				$retval['name'] = $filename;
-				$retval['ext'] = ereg_replace(".*\.","",$retval['name']);
+				$retval['ext'] = preg_replace("/.*?\./","",$retval['name']);
 				$retval['path'] = $storageobj['path'].$retval['name'];
 				$retval['fullpath'] = $_SERVER['DOCUMENT_ROOT'].$retval['path'];
 				$retval['size'] = floor(@filesize($retval['fullpath']));
@@ -244,7 +244,7 @@ class Storage extends VirtualClass
 				$retval['id'] = $id;
 				$retval['storage'] = $st['id'];
 				$retval['name'] = lower($r['name']);
-				$retval['ext'] = ereg_replace(".*\.","",$retval['name']);
+				$retval['ext'] = preg_replace("/.*?\./","",$retval['name']);
 				$retval['path'] = $st['path'].$retval['name'];
 				$retval['fullpath'] = $_SERVER['DOCUMENT_ROOT'].$retval['path'];
 				if (floor($st['settings']['imgwtype'])==1) $retval['width'] = floor($st['settings']['imgw']);

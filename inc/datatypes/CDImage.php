@@ -6,14 +6,24 @@ class CDImage extends VirtualType
 {
 	function init($settings){
 		$settings['descr']='Картинка';
+		$settings['help']=array(
+				'auto_resize=true|auto_width=187|auto_height=120'=>'Автоматическая обрезка изображений',
+				'imgw=245|imgwtype=1|imgh=400|imghtype=1'=>'Проверка на размер изображений',
+				'comment=комментарий'=>'Комментарий',
+		
+		);
 		VirtualType::init($settings);
 	}
 	function drawEditor($divstyle = '',$span = true){
-		$settings = $this->getSetting('settings');
 		global $Storage;
+		
+		$settings = $this->getSetting('settings');
+		
 		$st = $Storage->getStorage(floor($this->getSetting($this->getSetting('name').'storage')));
+		
 		if (!floor($st['id'])>0)
-		$st = $Storage->getStorage(floor($this->getSetting('imagestorage')));
+		$st = $Storage->getStorage(0,array('path'=>'/site/images/','name'=>'Картинки','exts'=>array('jpg','gif','jpeg', 'png', 'swf')));
+		
 		$f = 0;
 		if (floor($st['id'])>0){
 			$image = $Storage->getFile($this->getSetting('value'));
@@ -39,6 +49,8 @@ class CDImage extends VirtualType
                 if(response.result==="ok"){
                     $('#loading<?='_'.$this->getSetting('name')?>').fadeOut(0);
                     $('#delete_container<?='_'.$this->getSetting('name')?>').fadeIn(0);
+                    $('#link_container<?='_'.$this->getSetting('name')?>').fadeIn(0);
+                    $('.link<?='_'.$this->getSetting('name')?>').attr('href', response.path);
                     status.html('<img style="width: 170px" class="contentimg" src="'+response.path+'" class="contentimg">');
                     $('#uploadfilehidden<?=htmlspecialchars($this->getSetting('name'))?>').val(response.id);
                 }else{
@@ -65,6 +77,7 @@ class CDImage extends VirtualType
 			            if(arr_resp[0]==="true")
 			            {
                          	 $('#delete_container<?='_'.$this->getSetting('name')?>').fadeOut(0);
+                         	 $('#link_container<?='_'.$this->getSetting('name')?>').fadeOut(0);
                          	 $('.contentdesc<?='_'.$this->getSetting('name')?>').html('');
 			            }
 			            else
@@ -81,6 +94,7 @@ class CDImage extends VirtualType
 
 			<div class="place" <?=($divstyle!='')?$divstyle:''?>>
 				<label><?=htmlspecialchars($this->getSetting('description'))?><?=((isset($settings['important']))?' <span class="important">*</span>':'')?></label>
+				<?if ($settings['comment']!=''){?><small><?=$settings['comment']?></small><?}?>
 			<?
 			/*if ($this->getSetting('name')=='image' && $_GET['section']==7) 	print '<div style="padding: 0 5px; color: #ff0000">Рекомендуемый размер:  1040x450 пикселей</div>';*/
 			?>
@@ -93,6 +107,7 @@ class CDImage extends VirtualType
 				<span class="button txtstyle" id="delete_container<?='_'.$this->getSetting('name')?>" <?=(floor($this->getSetting('value'))<1)?'style="display:none;"':''?>>
 					<input type="button" title="Удалить изображение" style="background-image: url(/pics/editor/delete.gif)" id="delete_button<?='_'.$this->getSetting('name')?>" onclick="delete_file<?='_'.$this->getSetting('name')?>(); return false">
 				</span>
+				<span class="button txtstyle" id="link_container<?='_'.$this->getSetting('name')?>" <?=(floor($this->getSetting('value'))<1)?'style="display:none;"':''?>><a class="link<?='_'.$this->getSetting('name')?>" target="_blank" title="Ссылка на картинку" href="<?=$image['path'] ?>"><img alt="Ссылка на картинку" src="/pics/editor/link.png" style="margin-top: -4px;"></a></span>
 				</div>
                <span class="clear"></span>
 				<div id="upl_error<?='_'.$this->getSetting('name')?>"></div>
@@ -156,13 +171,8 @@ class CDImage extends VirtualType
 						else print '
 						<img class="contentimg" src="'.$image['path'].'" style="width: 170px"/>';
 
-						if ((floor($wh[0])>=200) && (floor($wh[1])>=200))
-						print '
-						<div class="contenttxt"><a href="'.$image['path'].'" target="_blank">Ссылка на файл</a></div>';
 					}
 
-					/*else print '
-						<div class="contenttxt"><a href="'.$image['path'].'">Ссылка на файл</a></div>';*/
 				}
 				?>
 				</div>
@@ -184,14 +194,16 @@ class CDImage extends VirtualType
 	function postSave(){
 		$settings = $this->getSetting('settings');
 		global $Storage;
-
+		
 		if (floor($this->getSetting('uid'))>0){
+			
 			$st = $Storage->getStorage(floor($this->getSetting($this->getSetting('name').'storage')));
-			if (!$st['id']>0) $st = $Storage->getStorage(floor($this->getSetting('imagestorage')));
+			if (!$st['id']>0) $st = $Storage->getStorage(0,array('path'=>'/storage/site/images/','name'=>'Изображения сайта (общее)','exts'=>array('jpg','gif','jpeg', 'png', 'swf')));
 			if (floor($st['id'])>0){
 				$f = $Storage->getFile($this->getSetting('value'));
 				if (floor($f['id'])>0){
 					if (substr($f['name'],0,5)=='temp_'){
+						
 						if ($Storage->renameFile($f['id'],$this->getSetting('theme'),$this->getSetting('rubric'),floor($this->getSetting('uid')))){
 							$nf = $Storage->getFile($f['id']);
 

@@ -15,12 +15,11 @@
 
 	
 	/*Сохранение и добавление*/
-	$save_fields=array('name','description','type','settings','setting_style_edit');
+	$save_fields=array('name','description','type','settings','setting_style_edit','setting_style_search');
 	
 	
 if (floor($_POST['action'])==1)
 {
-	/* print_r($_POST); */	
 	$SiteSections->update_personal_settings($section['id'], $_POST['settings_section']);
 
 	
@@ -31,7 +30,7 @@ if (floor($_POST['action'])==1)
 		$table_array=$ret['tables'];
 		$sections_array=$ret['ids'];
 	} */
-
+	
 	$table_array[]=$SectionPattern->getsetting('table');
 	$sections_array[]=$section['id'];
 	
@@ -54,6 +53,8 @@ if (floor($_POST['action'])==1)
 			{
 				if (isset($_POST[$sf.'_'.$id])) $update[$sf]=$_POST[$sf.'_'.$id];
 			}
+			
+			
 
 
 			
@@ -74,7 +75,7 @@ if (floor($_POST['action'])==1)
 			{
 				if (stripos($id, 'new')===false)
 				{
-					$result=$CDDataType->update(
+				 	$result=$CDDataType->update(
 						$id, 
 						$update, 
 						$columns,
@@ -90,12 +91,12 @@ if (floor($_POST['action'])==1)
 				{
 						$update['dataset']=$dataset['id'];
 						$update['table_type']=$_POST['table_type_'.$id];
-						$result=$CDDataType->add($update, true, $table_array);
+						$result=$CDDataType->add($update, true, $table_array, $section['id']);
 						if ($result===false) 
 						{
 							$error_ids[]=$id; 
 						}
-						elseif($result>0) {$ok_ids[]=$result; print $result.'!';} 
+						elseif($result>0) {$ok_ids[]=$result;} 
 				}
 			}
 			
@@ -107,6 +108,7 @@ if (floor($_POST['action'])==1)
 }	
 	/*Обновляем данные*/
 	$columns=$CDDataType->get_column_info($SectionPattern->getSetting('table'));
+	/* print_r($columns); */
 	$dataset=$CDDataSet->get($SectionPattern->getSetting('dataset'));
 
 	
@@ -122,129 +124,14 @@ if (floor($_POST['action'])==1)
 			$id=preg_replace('|^id\_([a-z_A-Z_0-9]+)$|','\\1',$k);
 			if (stripos($id, 'new')!==false)
 			{
-			if (!in_array($id, $store_ids) && !in_array($_POST['name_'.$id], $store_names)) $add_error[]=array('id'=>$id, 'description'=>$_POST['description_'.$id],
-					'name'=>$_POST['name_'.$id],'type'=>$_POST['type_'.$id],'settings'=>$_POST['settings_'.$id], 'setting_style_edit'=>$_POST['setting_style_edit_'.$id]);
+			if (!@in_array($id, $store_ids) && !@in_array($_POST['name_'.$id], $store_names)) $add_error[]=array('id'=>$id, 'description'=>$_POST['description_'.$id],
+					'name'=>$_POST['name_'.$id],'type'=>$_POST['type_'.$id],'settings'=>$_POST['settings_'.$id], 'setting_style_edit'=>$_POST['setting_style_edit_'.$id], 'setting_style_search'=>$_POST['setting_style_search_'.$id]);
 			}
 		}
 	}
 	
-
-
-	
 ?>
-<script>
-  $(function() {
-
-	new_count=$("input[type=hidden][name*=id_new]").length+1;
-	
-    $( "#sortable" ).sortable({
-      handle: ".drag_icon"
-    });
-
-    $(document).on('change','select', function() {
-
-     	cur_id=$(this).attr('name');
-     	cur_id=cur_id.split('_');
-     	alert(cur_id[1]);
-		if (cur_id[1]!='')
-		$('[name=table_type_'+cur_id[1]+']').val($(this).find(':selected').attr('data-default'));
-		
-        return false;
-    });
-
-    
-    $(document).on('change',".dt_settings input[type='checkbox']", function() {
-
-		var inp_str=$(this).parents('.dt_settings').find('.setting_text').val();
-		if ($(this).is(":checked")==false)
-		{
-			inp_str=inp_str.replace($(this).attr('data-name')+'|','');
-			if (inp_str=='|') inp_str='';
-		}
-		else 
-		inp_str+=(inp_str=='' ? '|':'')+$(this).attr('data-name')+'|';
-
-		$(this).parents('.dt_settings').find('.setting_text').val(inp_str);
-		//alert($(this).attr('data-name'));
-        return false;
-    });
-
-    $(document).on('change',".section_settings input[type='checkbox']", function() {
-
-		var inp_str=$(this).parents('.section_settings').find('.setting_text').val();
-		if ($(this).is(":checked")==false)
-		{
-			inp_str=inp_str.replace($(this).attr('data-name')+'|','');
-			if (inp_str=='|') inp_str='';
-		}
-		else 
-		inp_str+=(inp_str=='' ? '|':'')+$(this).attr('data-name')+'|';
-
-		$(this).parents('.section_settings').find('.setting_text').val(inp_str);
-		//alert($(this).attr('data-name'));
-        return false;
-    });
-
-    
-    $(document).on('click',"#save_form .show_settings", function() {
-
-
-		var parent=$(this).parents('td').prev();
-		if (!parent.find('.dt_settings').is(':visible'))
-		{
-			$('.dt_settings').show();
-		}
-		else
-		{
-			$('.dt_settings').hide();
-		}
-		var elem=$(this).parents('td');
-      	destination = elem.offset().top-50;
-        $("html, body").animate({scrollTop:destination},"slow");
-        return false;
-    });
-
-    $(document).on('click',"#save_form .on_off", function() {
-
-		cur_val=$('[name='+$(this).attr('data-inp')+']');
-    	var inp_str=$(this).parents('tr').find('.setting_text').val();
-		if (cur_val.val()==1)
-		{
-			inp_str=inp_str.replace('off|','');
-			cur_val.val(0);
-			$(this).css('backgroundImage', 'url("/pics/editor/on.png")');
-		}
-		else
-		{ 
-			inp_str+=(inp_str=='' ? '|':'')+'off|';
-			cur_val.val(1);
-			$(this).css('backgroundImage', 'url("/pics/editor/off.png")');
-		}
-
-		$(this).parents('tr').find('.setting_text').val(inp_str);
-		//alert($(this).attr('data-name'));
-        return false;
-        
-    });
-
-
-		
-	
-  });
-
-  var new_count=1;
-  function add_empty() {
-  	$.ajax({
-          type: "POST",
-          url: "/inc/site_admin/pattern/ajax.php",
-          data: "action=add_empty&section_id=<?=$_GET['section']?>&new_count="+new_count,
-          success: function(html){
-        	  $('#sortable').append(html);
-        	  new_count++;
-          }
-      });
-  }
-</script>
+<script src="/inc/site_admin/pattern/main.js" type="text/javascript"></script>
 <div id="content">
 <?include_once($_SERVER['DOCUMENT_ROOT']."/inc/site_admin/nav.php");?>
 <?
@@ -263,11 +150,15 @@ if ($_SESSION['global_alert']) print '<div class="alert"><div>'.$_SESSION['globa
 	
 <div class="hr"></div>
 <h2>Шаблон:</h2> 
+	<!-- Настройки раздела -->
+	<label class="settings_main">Настройки раздела (разделитель |):&nbsp;&nbsp;&nbsp;| <a href="#"><span><a href="#">on_page=5</a></span>	| <span><a href="#">default_order=ORDER BY `id`</a></span></label>
+	<div class="clear"></div><br/>
+
 <form id="save_form" name="save_form" action="" method="POST" enctype="multipart/form-data">
 <div class="stat section_settings">
 <?
 $section = $SiteSections->get($section['id']);
-$str_settings=$section['settings_personal'];
+$str_settings=$section['settings_personal_str'];
 foreach($sec_settings_checkbox as $k=>$v)
 {
 	/* Включена ли настройка */
@@ -279,8 +170,7 @@ foreach($sec_settings_checkbox as $k=>$v)
 ?>
 	<div class="clear"></div>
 	<br/>
-	<!-- Настройки раздела -->
-	<label>Настройки раздела (разделитель |):</label>
+
 	<span class="input">
 		<input type="text" value="<?=$str_settings?>"  class="setting_text" name="settings_section">
 	</span>
@@ -289,14 +179,18 @@ foreach($sec_settings_checkbox as $k=>$v)
 
 <input type="hidden" name="action" value="1">
 	<table class="table-content stat pattern">
-	<tbody id="sortable">
+	<tbody id="sortable" class="connectedSortable">
 	<? 
 	$dataset=$CDDataSet->get($SectionPattern->getSetting('dataset'), $section['id']);
-	 $dataset['types']=array_merge ($dataset['types'],$add_error); 
+	/* $dataset['types']=array_merge ($dataset['types'],$add_error);  */
+	
+	
+	$dt_names=array();/* Поля ктр. есть не используем в шаблонах добавления */
 	foreach ($dataset['types'] as $ds)
 	{
-	 	if (in_array($ds['id'], $error_ids)) 	$ds['tr_type']='tab_alert';
-	 	if (in_array($ds['id'], $ok_ids)) 		$ds['tr_type']='tab_ok';
+		$dt_names[]=$ds['name'];
+		if (@in_array($ds['id'], $error_ids)) 	$ds['tr_type']='tab_alert';
+	 	if (@in_array($ds['id'], $ok_ids)) 		$ds['tr_type']='tab_ok';
 		print_dt($ds);
 
 	}
@@ -305,7 +199,7 @@ foreach($sec_settings_checkbox as $k=>$v)
 	</table>
 		<div class="place">
 		 	<span style="float: left;">
-		        <input class="button big" onclick="add_empty(); return false;" type="submit" name="save_form" value="Добавить поле"/>
+		        <input class="button big" onclick="add_empty(<?=$_GET['section'] ?>); return false;" type="submit" name="save_form" value="Добавить поле"/>
 		    </span>
 		    <span style="float: right;">
 <!-- 		    	<div class="stat">
@@ -316,4 +210,5 @@ foreach($sec_settings_checkbox as $k=>$v)
 		</div>	
 	                   
 </form>
+<?include_once($_SERVER['DOCUMENT_ROOT']."/inc/site_admin/pattern/add_pattern.php");?>
 </div>

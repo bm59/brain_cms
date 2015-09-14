@@ -3,6 +3,10 @@ class CDFile extends VirtualType
 {
 	function init($settings){
 		$settings['descr']='Файл';
+		$settings['help']=array(
+				'exts=jpg,gif,jpeg,png,swf'=>'Расширения'
+		
+		);
 		VirtualType::init($settings);
 
 	}
@@ -11,28 +15,19 @@ class CDFile extends VirtualType
 
 		global $Storage;
 		$st = $Storage->getStorage(floor($this->getSetting($this->getSetting('name').'_filestorage')));
-
+		
+		if (!floor($st['id'])>0)
+		$st = $Storage->getStorage(0,array('path'=>'/site/files/','name'=>'Файлы сайта (общее)'));
+		
 		$f = 0;
 		if (floor($st['id'])>0){
-			$exts = upper(str_replace(',',', ',$st['settings']['exts']));
+			$exts = upper(str_replace(',',', ',$settings['exts']));
 			?>
 			<style type="text/css">
-#add_file {margin-bottom: 10px; width: 200px; text-align: center;}
-#upl_error {color: red}
-#upl_button {
- 	width: 100%; margin: 5px 0;
- 	padding: 4px 0;
- 	border-radius: 2px;
- 	display: inline-block;
- 	color: #FFF;
-	border: solid 1px #555;
-	background: #6e6e6e;
-	background: -webkit-gradient(linear, left top, left bottom, from(#888), to(#575757));
-	background: -moz-linear-gradient(top,  #888,  #575757);
-	background: -ms-linear-gradient(top,  #888,  #575757);
-        background-image: -o-linear-gradient(top,#888,  #575757);
-	filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#888888', endColorstr='#575757');
- 	}
+#add_file {padding-top: 10px;}
+#add_file img {display: inline-block; padding-left: 30px;}
+#upl_error {color: red; padding-top: 10px;}
+#loading {padding-top: 10px;}
 			</style>
 			<script>
         $(function(){
@@ -85,11 +80,11 @@ class CDFile extends VirtualType
 				?>
 				<div class="contentdesc"><small><?=$desc?></small></div>
 
-
+			<div class="clear"></div>
 			<div id="add_file" style="float: left;">
-			        <div id="upl_button">загрузить файл</div><br />
-			        <img id="loading" src="/pics/loading.gif" height="28" style="display: none;" />
-			        <!--//<img id="file" src="" height="150" style="display: none;" />//-->
+			        <a id="upl_button" class="button">загрузить файл</a>
+			        <div class="clear"></div>
+			        <img id="loading" src="/pics/inputs/loading2.gif" height="28" style="display: none;" />
 			         <div id="upl_error"></div>
 			         <div id="upl_status">
 			         <?
@@ -135,9 +130,7 @@ class CDFile extends VirtualType
 	function getUpdateSQL(){ return "`".$this->getSetting('name')."`='".$this->getSetting('value')."'"; }
 	function delete(){
 		global $Storage;
-		$st = $Storage->getStorage(floor($this->getSetting($this->getSetting('name').'_filestorage')));
-		$flist = $Storage->getListByUID($st['id'],$this->getSetting('theme'),$this->getSetting('rubric'),floor($this->getSetting('uid')));
-		foreach ($flist as $f) $Storage->deleteFile($f['id']);
+		@unlink($_SERVER['DOCUMENT_ROOT'].$this->getSetting('value'));
 	}
 }
 ?>

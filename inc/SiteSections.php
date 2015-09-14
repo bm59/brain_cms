@@ -43,6 +43,15 @@ class SiteSections extends VirtualClass
                         msq("UPDATE `".$this->getSetting('table')."` SET `precedence`='$prec' WHERE `id`='".$section['id']."'");
                 }
         }
+        function setSettings($id, $val) {
+        	if ($val!='')
+        	{
+        		$cur=$this->get($id);
+        		if ($id>0 && $this->implode($cur['settings_personal'])!=$val)
+        		print $this->implode($cur['settings_personal']);
+        	}
+        	
+        }
         function setPrecedence($id,$prec){
                 $id = floor($id);
                 $section = $this->get($id);
@@ -120,14 +129,17 @@ class SiteSections extends VirtualClass
                                     $visible = 0;
 
                 $settings = $values['settings']; if (!is_array($settings)) $settings = array();
+                $settings_personal = $values['settings_personal']; if (!is_array($settings_personal)) $settings_personal = array();
+                
                 if ($isservice>0){
                         $parent = 0;
                         $settings['noeditsettings'] = '';
                         $settings['undeletable'] = '';
                 }
                 $settings = $this->implode($settings);
+                $settings_personal = $this->implode($settings);
                 if (count($errors)==0){
-                        msq("INSERT INTO `".$this->getSetting('table')."` (`name`,`path`,`pattern`,`parent`,`precedence`,`isservice`,`keywords`,`title`,`description`,`visible`,`settings`,`tags`) VALUES ('$name','$path','$pattern','$parent','$precedence','$isservice','$keywords','$title','$description','$visible','$settings','$tags')");
+                        msq("INSERT INTO `".$this->getSetting('table')."` (`name`,`path`,`pattern`,`parent`,`precedence`,`isservice`,`keywords`,`title`,`description`,`visible`,`settings`,`tags`, `settings_personal`) VALUES ('$name','$path','$pattern','$parent','$precedence','$isservice','$keywords','$title','$description','$visible','$settings','$tags', '$settings_personal')");
                 }
                 return $errors;
         }
@@ -158,6 +170,12 @@ class SiteSections extends VirtualClass
                 if ($r = msr(msq("SELECT * FROM `".$this->getSetting('table')."` WHERE `id`='$id'"))){
                         $retval = $r;
                         $retval['settings'] = $this->explode($r['settings']);
+                        $retval['settings_personal'] = $this->explode($r['settings_personal']);
+                        $retval['settings_personal_str'] = $r['settings_personal'];
+                        $retval['setting_style_edit'] = $this->explode($r['setting_style_edit']);
+                        $retval['setting_style_edit_str'] = $r['setting_style_edit'];
+                        $retval['setting_style_search'] = $this->explode($r['setting_style_search']);
+                        $retval['setting_style_search_str'] = $r['setting_style_search_str'];
                         if ($r['pattern']=='PFolder') $retval['settings']['noedit'] = 1;
                 }
                 return $retval;
@@ -344,10 +362,10 @@ class SiteSections extends VirtualClass
 		                                <td class="t_left t_nowrap"><?=$pattern?></td>
 		                                <td class="t_minwidth min">
 		                                <?
-		                                if (isset($section['settings']['noeditsettings']) || $mode!='development'){
+		                                if (isset($section['settings']['noeditsettings']) || $mode!='development' || $section['id']<=7 || $section['pattern']=='PSheet1'){
 		                                        ?>
 		                                        <span class="button txtstyle disabled">
-		                                        	<input type="button" style="background-image: url(/pics/editor/pattern_disabled.png)" title="Настройки шаблона недоступны" onclick="return false;" />
+		                                        	<input type="button" style="background-image: url(/pics/editor/pattern-disabled.png)" title="Настройки шаблона недоступны" onclick="return false;" />
 		                                        </span>
 		                                        <?
 		                                }

@@ -77,27 +77,16 @@ return strtolower($content);
                 </div>';
         return $retval;
 }*/
-function getSelectSinonim($name,$values = array(),$selected = '|nokey|',$always = false)
+function getSelectSinonim($name,$values = array(),$selected = '')
 {
-
 		if (count($values)==0) return '';
-        /*if (count($values)==1) foreach ($values as $k=>$v) return '<input type="hidden" name="'.$name.'" value="'.$k.'">';*/
-        $firstval = '|nodata|';
-        $firstshowval = '';
+
+        $retval ='<div class="input"><select name="'.$name.'">';
         foreach ($values as $k=>$v){
-            if ($firstval==='|nodata|'){ $firstval = $k; $firstshowval = $v; }
-            if ($k==$selected){ $firstval = $k; $firstshowval = $v; }
-        }
-        if ($firstval=='|nodata|') $firstval = '';
-        if ($width!='') $stylewidth='width:'.$width;
-        $retval ='<div class="input"><select name="'.$name.'" style="'.$stylewidth.'">';
-        foreach ($values as $k=>$v){
-            $title = ($titles[$k]!='')?' title="'.stripslashes($titles[$k]).'"':'';
             $retval.= '
-            <option value="'.$k.'" '.(($k==$selected) ? 'selected="selected"':'').'>'.$v.'</option>';
+            <option value="'.$k.'" '.(($k==$selected && $selected!==NULL) ? 'selected="selected"':'').'>'.$v.'</option>';
         }
-        $retval.= '
-               </select></div>';
+        $retval.= '</select></div>';
 
 		return $retval;
 }

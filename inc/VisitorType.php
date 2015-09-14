@@ -129,10 +129,11 @@ class VisitorType extends VirtualClass
 	}
 	function getOne($id = 0, $r = array()){ /* Получение информации о конкретной группе */
 		global $SiteVisitor;
-		$id = floor($id);
-		$retval = $this->getCacheValue('group_'.$id);
-		if (floor($retval['id'])>0) return $retval;
 		$retval = array();
+		
+		$id = floor($id);
+		if (floor($retval['id'])>0) return $retval;
+		
 		if (count($r)==0){
 			$r = msr(msq("SELECT * FROM `".$this->getSetting('table')."` WHERE `id`='".$id."'"));
 			if (!is_array($r)) $r = array();
@@ -156,6 +157,10 @@ class VisitorType extends VirtualClass
 			}
 			/*==foreach ($accessstr as $v) if (floor($v)>0) $access[] = floor($v);*/
 			$settings = $this->explode($r['settings']);
+			
+			if (!is_array($settings)) $settings=array();
+			if (!is_array($new_settings)) $new_settings=array();
+			
 			$retval = array('id'=>$r['id'],'name'=>$r['name'],'access'=>$access,'settings'=>$settings, 'new_settings'=>$new_settings);
 		}
 		$count = msr(msq("SELECT COUNT(id) AS cnt FROM `".$SiteVisitor->getSetting('table')."` WHERE `type`='".$id."'"));
@@ -216,7 +221,7 @@ class VisitorType extends VirtualClass
 	        			<?
 	        			foreach ($actions as $act)
 	        			if ($act!='')
-	        			{	        				?><div><label><input type="checkbox" id="action_<?=$sl['id'].'_'.$act?>" name="action_<?=$sl['id'].'_'.$act?>" <?=(($_POST['action_'.$sl['id'].'_'.$act]=='on' || in_array($act,$new_settings[$sl['id']])) ? ' checked="checked"':'')?>><?=$action_comments[$act]?></label></div><?
+	        			{	        				?><div><label><input type="checkbox" id="action_<?=$sl['id'].'_'.$act?>" name="action_<?=$sl['id'].'_'.$act?>" <?=(($_POST['action_'.$sl['id'].'_'.$act]=='on' || @in_array($act,$new_settings[$sl['id']])) ? ' checked="checked"':'')?>><?=$action_comments[$act]?></label></div><?
 	        			}
 	        			?>
 	        			</div>

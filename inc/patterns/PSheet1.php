@@ -8,6 +8,21 @@ class PSheet1 extends VirtualPattern
 		global $CDDataSet,$Storage;
 		$settings['name'] = 'PSheet1';
 		$settings['dataset'] = $CDDataSet->checkPresence(0,'sheet1');
+		$CDDataSet->add
+		(
+				array
+				(
+						'name'=>'sheet1',
+						'description'=>'Лист (1 колонка)',
+						'types'=>array
+						(
+								array('name'=>'text', 'description'=>'Текст', 'type'=>'CDTextEditor',  'settings'=>array('texttype'=>'full')),
+						)
+		
+				),
+				$settings['section']
+		);
+		
 		$settings['imagestorage'] = $Storage->getStorage(0,array('path'=>'/site/images/','name'=>'Изображения сайта (общее)','exts'=>array('jpg','gif','jpeg'),'images'=>1));
 		$settings['filestorage'] = $Storage->getStorage(0,array('path'=>'/site/files/','name'=>'Файлы сайта (общее)'));
 		VirtualPattern::init($settings);

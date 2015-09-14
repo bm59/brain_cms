@@ -1,19 +1,17 @@
 <?
-$source_descr='Справочник';
-$source_name='PSpr';
+$source_descr='Универсальный';
+$source_name='PUniversal';
 /* Имя класса */
-class PSpr extends VirtualPattern
+class PUniversal extends VirtualPattern
 {
 	function init($settings){
 		global $CDDataSet,$Storage,$SiteSections;
 		
-		$descr='Справочник';
-		$SiteSections->update_personal_settings($settings['section'], '|onoff|show_id|default_order=ORDER BY `name`|');
-		
+		$descr='Универсальный';
+		$SiteSections->update_personal_settings($settings['section'], '|onoff|show_id|');
 		
 		$settings['name']=substr(get_class(), 1, strlen(get_class()));
-		
-		
+
 		$class_name='CC'.$settings['name'];
 		$settings['dataset'] = $CDDataSet->checkPresence(0, mb_strtolower($settings['name']));
 		
@@ -40,7 +38,6 @@ class PSpr extends VirtualPattern
 
 		$SiteSettings = new SiteSettings;
 		$SiteSettings->init();
-
 
 		VirtualPattern::init($settings);
 
