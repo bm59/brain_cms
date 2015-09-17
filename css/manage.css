@@ -149,7 +149,7 @@ input[disabled="disabled"]  {background-color: #E1E1E1;}
     height: 16px;
     width: 16px;
 }
-.ui-datepicker-trigger {height: 44px; padding-top: 10px;}
+.ui-datepicker-trigger {height: 42px; padding-top: 10px;}
 
 FORM LABEL {position: relative; overflow: hidden; display: block; margin: 0px 6px 0px 4px;}
 
@@ -437,7 +437,7 @@ A.dashed {text-decoration: none; border-bottom: 1px dashed #0CA2B8;}
 /*Список разделов*/
 .listing H4 {font-size: 12px; line-height: 18px; font-weight: lighter; color: #000; clear: both;}
 .listing H4 STRONG {position: relative; float: left; display: block; width: 45px; color: #000; font-weight: normal;}
-.listing IMG {position: absolute; top: -2px; right: 5px; cursor: pointer; padding: 1px; border: 2px solid #FFF}
+.listing h4 IMG {position: absolute; top: -2px; right: 5px; cursor: pointer; padding: 1px; border: 2px solid #FFF}
 .listing .anchor IMG {position: absolute; top: -2px; right: 5px; cursor: pointer; padding: 1px; border: 2px solid #F5F5F5}
 .listing  IMG.active {border-color: #cc0000;}
 .listing IMG.active_prec {border-color: #0000cc;}

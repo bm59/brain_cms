@@ -3,11 +3,10 @@
 <?
             if (setting('admin_logo')>0)
             {
-	            print setting('admin_logo');
 	            $image=$Storage->getfile(setting('admin_logo'));
 	            if ($image['path']!='')
 	            {
-	            ?><a href="/manage/"><img src="<?=$image['path']?>" class="logor" /></a><?
+	            ?><a href="/manage/"><img src="<?=$image['path']?>" class="logor" style="width: 206px;"/></a><?
 	            }
             }
             else{?><a href="/manage/"><img src="/pics/logo_cms.png" class="logor" /></a><?}

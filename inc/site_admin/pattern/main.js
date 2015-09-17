@@ -1,6 +1,48 @@
  $(function() {
+	 
+	 function getGet(name) {
+		    var s = window.location.search;
+		    s = s.match(new RegExp(name + '=([^&=]+)'));
+		    return s ? s[1] : false;
+		}
 
 	new_count=$("input[type=hidden][name*=id_new]").length+1;
+	
+    $.contextMenu({
+        selector: 'body',
+        callback: function(key, options) {
+            if (key=='save')
+            {
+            	$( "#save_form" ).submit();
+            }
+            if (key=='hide_off')
+            {
+            	$("input[name^='off_'][value=1]").parents('tr').hide();
+            }
+            if (key=='show_off')
+            {
+            	$("input[name^='off_'][value=1]").parents('tr').show();
+            }
+            if (key=='section_go')
+            {
+            	window.location.href = './?section='+getGet('section');
+            }
+            if (key=='section_add')
+            {
+            	window.location.href = './?section='+getGet('section')+'&pub=new';
+            }
+        },
+        items: {
+            
+             "save": {name: "Сохранить", icon: "save"},
+             "sep1": "---------",
+             "hide_off": {name: "Скрыть отключенные", icon: "hide_off"},
+             "show_off": {name: "Показать отключенные", icon: "show_off"},
+             "sep2": "---------",
+             "section_go": {name: "Перейти раздел", icon: "section_go"},
+             "section_add": {name: "Добавить в раздел", icon: "section_add"},
+        }
+    });
 	
   /*   $( "#sortable" ).sortable({
       handle: ".drag_icon"
@@ -12,7 +54,7 @@
         });
       });
 
-	/* РР·РјРµРЅРµРЅРёРµ СЃРµР»РµРєС‚Р° С‚РёРї РґР°РЅРЅС‹С… */
+	/* Изменение селекта тип данных */
     $(document).on('change','select', function() {
 
      	cur_id=$(this).attr('name');
@@ -23,7 +65,7 @@
         return false;
     });
 
-    /* Р§РµРєР±РѕРєСЃС‹ РІ РѕР±С‰РёС… РЅР°СЃС‚СЂРѕР№РєР°С… СЂР°Р·РґРµР»Р° */
+    /* Чекбоксы в общих настройках раздела */
     $(document).on('change',".dt_settings input[type='checkbox']", function() {
 
 		var inp_str=$(this).parents('.dt_settings').find('.setting_text').val();
@@ -40,7 +82,7 @@
         return false;
     });
 
-    /* Р§РµРєР±РѕРєСЃС‹ РІ РЅР°СЃС‚СЂРѕР№РєР°С… РєРѕР»РѕРЅРєРё */
+    /* Чекбоксы в настройках колонки */
      $(document).on('change',".section_settings input[type='checkbox']", function() {
 
 		var inp_str=$(this).parents('.section_settings').find('.setting_text').val();
@@ -57,7 +99,7 @@
         return false;
     });
 
-     /* РљР»РёРє РЅР° РїРѕРґСЃРєР°Р·РєРµ */
+     /* Клик на подсказке */
      $(document).on('click',".help a", function() {
 
     	var inp_str=$(this).parents('.dt_settings').find('.setting_text').val();
@@ -94,7 +136,7 @@
         return false;
     });
 
-     /* РџРѕРґСЃРєР°Р·РєРё РІ РѕСЃРЅРѕРІРЅС‹С… РЅР°СЃС‚СЂРѕР№РєР°С… СЂР°Р·РґРµР»Р° */
+     /* Подсказки в основных настройках раздела */
      $(document).on('click',".settings_main a", function() {
 
     	var inp_str=$('.section_settings .setting_text').val();
@@ -108,7 +150,7 @@
         return false;
     });
 
-     /* РџРѕРґСЃРєР°Р·РєРё РІ СЃС‚РёР»СЏС… Edit Search */
+     /* Подсказки в стилях Edit Search */
      $(document).on('click',".style_help a", function() {
 
      	var inp_str=$('[name='+$(this).attr('data-field')+']').val();
@@ -122,7 +164,7 @@
         return false;
     });
 
-     /* РРєРѕРЅРєР° - РїРѕРєР°Р·Р°С‚СЊ РЅР°СЃС‚СЂРѕР№РєРё */
+     /* Иконка - показать настройки */
     $(document).on('click',".connectedSortable .show_settings", function() {
 
 
@@ -141,7 +183,7 @@
         return false;
     });
 
-    /* Р’РєР»СЋС‡РµРЅРёРµ\РѕС‚РєР»СЋС‡РµРЅРёРµ РєРѕР»РѕРЅРѕРє */
+    /* Включение\отключение колонок */
     $(document).on('click',".connectedSortable .on_off", function() {
 
 		cur_val=$('[name='+$(this).attr('data-inp')+']');
@@ -166,7 +208,7 @@
     });
 
 
-     /* Р”РѕР±Р°РІР»РµРЅРёРµ С€Р°Р±Р»РѕРЅР° */
+     /* Добавление шаблона */
 
     $('#sortable2 .drag_icon img').attr('src','/pics/editor/upload.png');
 

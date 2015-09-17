@@ -31,7 +31,8 @@ if (!$SiteVisitor->isAuth() && $_SESSION['visitorID']>0) $user = $SiteVisitor->a
 $redirect = '';
 $exceptions = array(
 	'/uploader.php',
-	'/uploader_image.php'
+	'/uploader_image.php',
+	'/inc/datatypes/photo_editor/index.php'
 ); // —траницы, дл€ которых всегда открыт доступ
 if (!$SiteVisitor->isAuth()) $redirect='/manage/';
 else{

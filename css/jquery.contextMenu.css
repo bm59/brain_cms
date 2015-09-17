@@ -39,6 +39,7 @@
     background-position: 4px 7px;
     padding: 5px 5px 10px 24px;
     background-color: #a8a8a8;
+    background-repeat: no-repeat;
     position: relative;
     -webkit-user-select: none;
        -moz-user-select: -moz-none;
@@ -93,7 +94,12 @@
 .context-menu-item.icon-del_all { background-image: url(/pics/editor/trash_white.png); }
 .context-menu-item.icon-del_point { background-image: url(/pics/editor/delete_white.png); }
 .context-menu-item.icon-save { background-image: url(/pics/editor/save.png); }
- 
+.context-menu-item.icon-hide_off{ background-image: url(/pics/editor/hide.png); }
+.context-menu-item.icon-show_off{ background-image: url(/pics/editor/show_white.png); }
+.context-menu-item.icon-section_add{ background-image: url(/pics/editor/plus_white.png); }
+.context-menu-item.icon-section_go{ background-image: url(/pics/editor/go_white.png); }
+.context-menu-item.icon-edit_pattern{ background-image: url(/pics/editor/pattern_white.png); }
+
 /* vertically align inside labels */
 .context-menu-input > label > * { vertical-align: top; }
 

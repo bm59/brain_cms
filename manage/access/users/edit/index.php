@@ -126,7 +126,7 @@ include $_SERVER['DOCUMENT_ROOT']."/inc/site_admin/meta.php";?>
 			<span class="clear"></span>
 		</form>
 		<div class="hr"><hr /></div>
-		<div id="paging" class="nopad">
+		<div class="nopad">
 			<a href="../" class="button">Перейти к списку пользователей</a>
 		</div>
 		<span class="clear"></span>

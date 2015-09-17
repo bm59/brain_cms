@@ -1,0 +1,8 @@
+TRUNCATE `site_storages_files`;
+TRUNCATE `site_log`;
+DELETE FROM `site_site_sections` WHERE id>7;
+ALTER TABLE `site_site_sections` AUTO_INCREMENT=7;
+TRUNCATE `site_site_data_sets`;
+TRUNCATE `site_site_data_types`;
+TRUNCATE `site_site_psheet1_sheet1`;
+

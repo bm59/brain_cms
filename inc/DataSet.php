@@ -40,7 +40,7 @@ class DataSet extends VirtualClass
 			$retval['description'] = $r['description'];
 			$retval['name'] = $r['name'];
 			$retval['settings'] = $this->explode($r['settings']);
-			
+			$retval['settings_personal'] = $this->explode($r['settings_personal']);
 			$retval['types'] = $CDDataType->getDataSetList($id,$section_id);
 		}
 		return $retval;
@@ -74,6 +74,11 @@ class DataSet extends VirtualClass
 		if (trim($name)!='') if ($r = msr(msq("SELECT * FROM `".$this->getSetting('table')."` WHERE `name`='".addslashes(trim($name))."'"))) return $r['id'];
 		if (msr(msq("SELECT * FROM `".$this->getSetting('table')."` WHERE `id`='$id'"))) return $id;
 		return 0;
+	}
+	function checkDatatypes($section_id){
+		$id = floor($id);
+		$cnt=msr(msq("SELECT count(*) as `cnt` FROM `site_site_data_types` WHERE `section_id`='$section_id'"));
+		return $cnt['cnt'];
 	}
 	function update_prec($id,$section_id){
 		$id = floor($id);

@@ -1,21 +1,19 @@
 <?
-$source_descr='Справочник';
-$source_name='PSpr';
+$source_descr='Новости';
+$source_name='PNews';
 /* Имя класса */
-class PSpr extends VirtualPattern
+class PNews extends VirtualPattern
 {
 	function init($settings){
 		global $CDDataSet,$Storage,$SiteSections;
 		
-		$descr='Справочник';
+		$descr='Новости';
 		
 		if ($CDDataSet->checkDatatypes($settings['section'])==0)
-		$SiteSections->update_personal_settings($settings['section'], '|onoff|show_id|default_order=ORDER BY `name`|');
-		
+		$SiteSections->update_personal_settings($settings['section'], '|onoff|show_id|');
 		
 		$settings['name']=substr(get_class(), 1, strlen(get_class()));
-		
-		
+
 		$class_name='CC'.$settings['name'];
 		$settings['dataset'] = $CDDataSet->checkPresence(0, mb_strtolower($settings['name']));
 		
@@ -28,12 +26,14 @@ class PSpr extends VirtualPattern
 						'description'=>$descr,
 						'types'=>array
 						(
+								array('description'=>'Дата', 'name'=>'date', 'type'=>'CDDate'),
 								array('name'=>'name', 'description'=>'Наименование', 'type'=>'CDText',  'settings'=>array('important'=>'', 'show_search'=>'', 'show_list'=>'')),
-								array('name'=>'description', 'description'=>'Описание', 'type'=>'CDText',  'settings'=>array('off'=>'')),
-								array('name'=>'image', 'description'=>'Изображение', 'type'=>'CDImage',   'settings'=>array('off'=>'', 'exts'=>array('jpg','gif','jpeg','png'))),
-								array('name'=>'ptitle', 'description'=>'Title страницы', 'type'=>'CDText','settings'=>array('off'=>'')),
-								array('name'=>'pdescription', 'description'=>'Description страницы', 'type'=>'CDText', 'settings'=>array('off'=>'')),
-								array('name'=>'pseudolink', 'description'=>'Псеводоним ссылки', 'type'=>'CDText', 'settings'=>array('off'=>''))
+								array('description'=>'Текст', 'name'=>'text', 'type'=>'CDTextEditor', 'settings'=>'|texttype=full|'),
+								array('name'=>'image', 'description'=>'Изображение', 'type'=>'CDImage',   'settings'=>array('exts'=>'jpg,gif,jpeg,png')),
+								array('name'=>'tag_id', 'description'=>'Теги', 'type'=>'CDChoice',   'settings'=>'|source=#source_type=spr#spr_path=%SOURCE_PATH%#spr_field=name#spr_usl=WHERE `show`=1#spr_order=ORDER BY `name`#name_only=0|type=multi|off|'),
+								array('name'=>'ptitle', 'description'=>'Title страницы', 'type'=>'CDText','settings'=>array()),
+								array('name'=>'pdescription', 'description'=>'Description страницы', 'type'=>'CDText', 'settings'=>array()),
+								array('name'=>'pseudolink', 'description'=>'Псеводоним ссылки', 'type'=>'CDText', 'settings'=>array())
 						)
 		
 				),
@@ -42,7 +42,6 @@ class PSpr extends VirtualPattern
 
 		$SiteSettings = new SiteSettings;
 		$SiteSettings->init();
-
 
 		VirtualPattern::init($settings);
 

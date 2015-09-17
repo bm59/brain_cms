@@ -7,8 +7,8 @@ class CDSelect extends VirtualType
 				'values=первый, второй, третий'=>'Значения без id',
 				'values=2#первый, 3#второй, 4#третий'=>'Значения с id',
 				'comment=комментарий'=>'Комментарий',
-				'source=#source_type=table#table_name=site_site_pspr_spr_27#table_field=name#table_usl=WHERE `show`=1#table_order=ORDER BY `name`#name_only=0'=>'Источник таблица',
-				'source=#source_type=spr#spr_path=/sitecontent/spr/#spr_field=name#spr_usl=WHERE `show`=1#spr_order=ORDER BY `name`#name_only=0'=>'Источник справочник'
+				'source=#source_type=table#table_name=%SOURCE_TABLE%#table_field=name#table_usl=WHERE `show`=1#table_order=ORDER BY `name`#name_only=0'=>'Источник таблица',
+				'source=#source_type=spr#spr_path=%SOURCE_PATH%#spr_field=name#spr_usl=WHERE `show`=1#spr_order=ORDER BY `name`#name_only=0'=>'Источник справочник'
 		);
 
 		VirtualType::init($settings);

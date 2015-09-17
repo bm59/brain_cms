@@ -42,6 +42,7 @@ if (floor($_POST['action'])==1)
 		foreach($_POST as $k=>$v){
 		if (preg_match('|^id\_[a-z_A-Z_0-9]+$|',$k))
 		{
+			$update=array();
 			
 			$id=preg_replace('|^id\_([a-z_A-Z_0-9]+)$|','\\1',$k);
 						 

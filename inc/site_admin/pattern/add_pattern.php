@@ -10,6 +10,7 @@ array(
 		array('description'=>'Галерея изображений', 'name'=>'gallery', 'type'=>'CDGallery'),
 		array('description'=>'Счетчик', 'name'=>'spinner', 'type'=>'CDSpinner','pre_settings'=>'|default=5|min=1|max=10|important|'),
 		array('description'=>'Файл', 'name'=>'file', 'type'=>'CDFile'),
+		array('description'=>'Дата', 'name'=>'date', 'type'=>'CDDate'),
 		
 		array('description'=>'Title', 'name'=>'ptitle', 'type'=>'CDText', 'setting_style_edit'=>'width:32%; margin-right:2%;'),
 		array('description'=>'Description', 'name'=>'pdescription', 'type'=>'CDText', 'setting_style_edit'=>'width:32%; margin-right:2%;'),

@@ -379,6 +379,7 @@ class CCLog extends VirtualContent
                                                         <th class="t_32width">id</th>
                                                         <th class="t_32width">дата</th>
                                                         <th class="t_minwidth">id записи</th>
+                                                        <th class="t_minwidth">id раздела</th>
                                                         <th class="t_minwidth">user id</th>
                                                         <th class="t_minwidth">user name</th>
                                                         <th>действие</th>
@@ -392,7 +393,10 @@ class CCLog extends VirtualContent
                                                         <!--//<td class="t_32width"><input type="hidden" name="pubshow_<?=$pub['id']?>" value="1"><input type="checkbox" name="checkshow<?=$pub['id']?>" <?=($pub['show']>0)?'checked':''?> /></td>//-->
                                                         <td class="t_32width"><?=$pub['id']?></td>
                                                         <td class="t_32width"><nobr><?=$MySqlConnect->dateFromDBDot($pub['date'])?> <?=$MySqlConnect->TimeFromDB($pub['date'])?></nobr></td>
-                                                        <td class="t_32width"><?=$pub['item_id']?></td>
+                                                        <td class="t_32width">
+                                                        	<a target="blank" href="/manage/control/contents/?section=<?=$pub['section_id'] ?>&pub=<?=$pub['item_id']?>"><?=$pub['item_id']?></a>
+                                                        </td>
+                                                        <td class="t_32width"><?=$pub['section_id']?></td>
                                                         <td class="t_32width"><?=$pub['user_id']?></td>
                                                         <td class="t_32width">
                                                         	<div><?=$pub['user_name']?></div>

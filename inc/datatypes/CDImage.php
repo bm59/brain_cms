@@ -10,6 +10,12 @@ class CDImage extends VirtualType
 				'auto_resize=true|auto_width=187|auto_height=120'=>'Автоматическая обрезка изображений',
 				'imgw=245|imgwtype=1|imgh=400|imghtype=1'=>'Проверка на размер изображений',
 				'comment=комментарий'=>'Комментарий',
+				'auto_mini=true|auto_mini_width=210|auto_mini_height=220'=>'Автоматическое создание миниатюр', 
+				'exts=jpg,gif,jpeg,png'=>'Расширения',
+				'editor_proport=auto'=>'Пропорция 3:4 или auto',
+				'editor_imgh=200|editor_imgw=150'=>'Мин. размер в редакторе',
+				'editor_minh=200|editor_minw=100'=>'Минимизировать к размеру',
+				'editor_as_min=1'=>'Сохранять изображение из редактора как миниатюру',
 		
 		);
 		VirtualType::init($settings);
@@ -40,7 +46,7 @@ class CDImage extends VirtualType
             name: 'upl_file',
             data: {},
             onSubmit: function(file, ext){
-                $('#loading').attr('src', '/pics/loading.gif').fadeIn(0);
+                $('#loading').show();
                 this.setData({sid : '<?=session_id()?>', theme: '<?=trim($this->getSetting('theme'))?>', rubric: '<?=trim($this->getSetting('rubric'))?>', stid: '<?=$st['id']?>', uid: <?=floor($this->getSetting('uid'))?>,old_id : $('#uploadfilehidden<?=htmlspecialchars($this->getSetting('name'))?>').val()});
             },
             onComplete: function(file, response){
@@ -49,12 +55,18 @@ class CDImage extends VirtualType
                 if(response.result==="ok"){
                     $('#loading<?='_'.$this->getSetting('name')?>').fadeOut(0);
                     $('#delete_container<?='_'.$this->getSetting('name')?>').fadeIn(0);
+                    $('#editor_container<?='_'.$this->getSetting('name')?>').fadeIn(0);
                     $('#link_container<?='_'.$this->getSetting('name')?>').fadeIn(0);
+
+                    $('.editor<?='_'.$this->getSetting('name')?>').attr('href', '/inc/datatypes/photo_editor/?file='+response.path+'&rubric=<?=$this->getSetting('rubric') ?>&section=<?=$_GET['section']?>');
+                    
                     $('.link<?='_'.$this->getSetting('name')?>').attr('href', response.path);
-                    status.html('<img style="width: 170px" class="contentimg" src="'+response.path+'" class="contentimg">');
+                    status.html('<img style="max-width: 170px" class="contentimg" id="contentimg<?='_'.$this->getSetting('name')?>" src="'+response.path+'">');
                     $('#uploadfilehidden<?=htmlspecialchars($this->getSetting('name'))?>').val(response.id);
-                }else{
-                    $('#loading').fadeOut(0);
+                    $('#loading').hide();
+                }
+                else{
+                    $('#loading').hide();
                     if (response.error!='') alert(response.error);
 
 
@@ -78,6 +90,7 @@ class CDImage extends VirtualType
 			            {
                          	 $('#delete_container<?='_'.$this->getSetting('name')?>').fadeOut(0);
                          	 $('#link_container<?='_'.$this->getSetting('name')?>').fadeOut(0);
+                         	 $('#editor_container<?='_'.$this->getSetting('name')?>').fadeOut(0);
                          	 $('.contentdesc<?='_'.$this->getSetting('name')?>').html('');
 			            }
 			            else
@@ -88,7 +101,28 @@ class CDImage extends VirtualType
 			    });
 			    return false;
         }
+    	function wait_editor()
+    	{
+			/* alert('start_wait'); */
+    		var interval = setInterval(function()
+    		{
 
+    			
+    			if ($.cookie('change_photo')=='1' && $.cookie('change_photo')!='null')
+    			{
+    	            
+					/* alert('Есть изменения'); */
+    	            $.cookie('change_photo', null, {path: '/'});
+    	            $('#contentimg<?='_'.$this->getSetting('name')?>').attr('src',$('#contentimg<?='_'.$this->getSetting('name')?>').attr("src").split("?")[0] + "?" + Math.random());
+    	            clearInterval(interval);
+    			}
+
+
+
+    		}, 1000);
+
+
+    	}
 
 			</script>
 
@@ -103,11 +137,13 @@ class CDImage extends VirtualType
 				<span id="upl_button<?='_'.$this->getSetting('name')?>" class="button">
 					Загрузить изображение
 				</span>
+				<img src="/pics/inputs/loading2.gif" id="loading" style="position: absolute; top: 0; left: 170px; display: none;">
 
 				<span class="button txtstyle" id="delete_container<?='_'.$this->getSetting('name')?>" <?=(floor($this->getSetting('value'))<1)?'style="display:none;"':''?>>
 					<input type="button" title="Удалить изображение" style="background-image: url(/pics/editor/delete.gif)" id="delete_button<?='_'.$this->getSetting('name')?>" onclick="delete_file<?='_'.$this->getSetting('name')?>(); return false">
 				</span>
 				<span class="button txtstyle" id="link_container<?='_'.$this->getSetting('name')?>" <?=(floor($this->getSetting('value'))<1)?'style="display:none;"':''?>><a class="link<?='_'.$this->getSetting('name')?>" target="_blank" title="Ссылка на картинку" href="<?=$image['path'] ?>"><img alt="Ссылка на картинку" src="/pics/editor/link.png" style="margin-top: -4px;"></a></span>
+				<span class="button txtstyle" id="editor_container<?='_'.$this->getSetting('name')?>" <?=(floor($this->getSetting('value'))<1)?'style="display:none;"':''?>><a class="editor<?='_'.$this->getSetting('name')?>" target="_blank" title="Редактор фото" href="/inc/datatypes/photo_editor/?file=<?=$image['path'] ?>&rubric=<?=$this->getSetting('rubric') ?>&section=<?=$_GET['section'] ?>" onclick="wait_editor();"><img alt="Редактор фото" src="/pics/editor/photo_editor.png" style="margin-top: -4px;"></a></span>
 				</div>
                <span class="clear"></span>
 				<div id="upl_error<?='_'.$this->getSetting('name')?>"></div>
@@ -116,7 +152,7 @@ class CDImage extends VirtualType
 				<span class="clear"></span>
 				<?
 					$desc = '';
-					$exts = upper(str_replace(',',', ',$st['settings']['exts']));
+					$exts = upper(str_replace(',',', ',$settings['exts']));
 					if ($exts!='') $desc.= ' формата '.$exts;
 					$wh = '';
 					if (floor($settings['imgw'])>0){
@@ -169,7 +205,7 @@ class CDImage extends VirtualType
 							print $iinner;
 						}
 						else print '
-						<img class="contentimg" src="'.$image['path'].'" style="width: 170px"/>';
+						<img class="contentimg" id="contentimg'.$this->getSetting('name').'" src="'.$image['path'].'" style="width: 170px"/>';
 
 					}
 
@@ -198,7 +234,7 @@ class CDImage extends VirtualType
 		if (floor($this->getSetting('uid'))>0){
 			
 			$st = $Storage->getStorage(floor($this->getSetting($this->getSetting('name').'storage')));
-			if (!$st['id']>0) $st = $Storage->getStorage(0,array('path'=>'/storage/site/images/','name'=>'Изображения сайта (общее)','exts'=>array('jpg','gif','jpeg', 'png', 'swf')));
+			if (!$st['id']>0) $st = $Storage->getStorage(0,array('path'=>'/site/images/','name'=>'Изображения сайта (общее)','exts'=>array('jpg','gif','jpeg', 'png', 'swf')));
 			if (floor($st['id'])>0){
 				$f = $Storage->getFile($this->getSetting('value'));
 				if (floor($f['id'])>0){
@@ -215,6 +251,16 @@ class CDImage extends VirtualType
 			       						ResizeFrameMaxSide($mini_fname, 210,220);
 			       						/*Crop($mini_fname, 210, 220);*/
 							}
+							
+							/* Сохранять данные из редактора в миниатюру */
+							if ($settings['editor_as_min'])
+							{
+								
+								
+								$mini_fname_old=str_replace('.'.$f['ext'], '_mini.'.$f['ext'], $f['path']);
+								$mini_fname=str_replace('.'.$nf['ext'], '_mini.'.$nf['ext'], $nf['path']);
+								rename($_SERVER['DOCUMENT_ROOT'].$mini_fname_old, $_SERVER['DOCUMENT_ROOT'].$mini_fname);
+							}
 						}
 					}
 				}
@@ -230,6 +276,7 @@ class CDImage extends VirtualType
 	function delete(){
 		global $Storage;
 		$st = $Storage->getStorage(floor($this->getSetting($this->getSetting('name').'storage')));
+		if (!$st['id']>0) $st = $Storage->getStorage(0,array('path'=>'/site/images/','name'=>'Изображения сайта (общее)','exts'=>array('jpg','gif','jpeg', 'png', 'swf')));
 		$flist = $Storage->getListByUID($st['id'],$this->getSetting('theme'),$this->getSetting('rubric'),floor($this->getSetting('uid')));
 		foreach ($flist as $f) $Storage->deleteFile($f['id']);
 	}

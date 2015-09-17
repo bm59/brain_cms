@@ -76,7 +76,7 @@ class DataType extends VirtualClass
 		if (is_array($values['settings']))
 		$values['settings'] = $this->implode($values['settings']);
 		
-		if (msr(msq("SELECT * FROM `".$this->getSetting('table')."` WHERE `section_id`='".$values['section_id']."' `dataset`='".$values['dataset']."' AND `name`='".$values['name']."'"))) 
+		if (msr(msq("SELECT * FROM `".$this->getSetting('table')."` WHERE `section_id`='".$section_id."' and `dataset`='".$values['dataset']."' AND `name`='".$values['name']."'"))) 
 		{	
 			$_SESSION['global_alert'].='ѕоле с таким названием уже существует :'.$values['name'];
 			return false;
@@ -94,7 +94,7 @@ class DataType extends VirtualClass
 		/* ≈сли при добавлении колонки не было ошибок */
 		if ($cur_error==mysql_error())
 		msq("INSERT INTO `".$this->getSetting('table')."` (`section_id`,`dataset`,`description`,`name`,`type`,`precedence`,`settings`,`setting_style_edit`,`setting_style_search`)
-		VALUES ('".$section_id."','".$values['dataset']."','".addslashes($values['description'])."','".$values['name']."','".$values['type']."','$precedence','".$values['settings']."','".$values['setting_style_edit']."','".$values['setting_style_search']."')");
+		VALUES ('".$section_id."','".$values['dataset']."','".addslashes($values['description'])."','".$values['name']."','".$values['type']."','".$values['precedence']."','".$values['settings']."','".$values['setting_style_edit']."','".$values['setting_style_search']."')");
 		alert_mysql();
 		$error.=mysql_error();
 		
@@ -134,7 +134,7 @@ class DataType extends VirtualClass
 	}
 	function get_view_field($data='', $val)
 	{
-		global $Storage;
+		global $Storage, $MySqlObject;
 		
 		$tface = $data['face'];
 		$type=get_class($tface);
@@ -143,8 +143,16 @@ class DataType extends VirtualClass
 			case 'CDImage':
 				$image=$Storage->getFile($val);
 				if ($image['path']!='') 
-				print '<img src="'.$image['path'].'" width="150px">';	
-					
+				print '<img src="'.$image['path'].'" width="'.(($image['width']>150) ? '150' : $image['width']).'px">';	
+				else print '&nbsp';	
+			break;
+			case 'CDDate':
+					print $MySqlObject->dateFromDBDot($val);
+			break;
+			case 'CDTextEditor':
+				if (strlen($val)>300)
+				$val=htmlspecialchars(trim(mb_substr($val, 0, 300 )).'...');
+				print $val;
 			break;
 			default:
 				print $val;
@@ -198,7 +206,10 @@ class DataType extends VirtualClass
 		foreach ($cur_data as $k=>$v)
 		{
 			if (isset($values[$k]) && $v!=$values[$k])
-			$changes=true;	
+			{
+				/* print "changes $k: $v<>".$values[$k].'<br/>'; */
+				$changes=true;	
+			}
 		}
 		
 		/* ≈сли изменили название пол€, мен€ем его в таблице */

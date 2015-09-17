@@ -95,7 +95,7 @@ class VirtualContent
 				</form>
 				<div class="hr"><hr/></div>
 		                        <?
-		                        $list = $this->getList($_GET['page'], array(), '', $searchnumgood, $searchtextgood);
+		                        $list = $this->getList($_GET['page']);
 		                        if (count($list)==0){
 		                                ?>
 		                                <p>Отсутствуют записи, удовлетворяющие заданным условиям</p>
@@ -311,7 +311,7 @@ class VirtualContent
 		                </div>
 		  			</div>
 		                <?
-		        }
+		}
 		function drawAddEdit(){
 			global $CDDataSet,$SiteSections;
 			$section = $SiteSections->get($this->getSetting('section'));
@@ -540,8 +540,12 @@ class VirtualContent
 				$dataset['types'][$k]['face'] = $tface;
 			}
 	
-			if ($rub_ids!='') $update.=', `rubrics`="'.$rub_ids.'"';
+	
 			msq("UPDATE `".$this->getSetting('table')."` SET ".$update." WHERE `id`='".$pub['id']."'");
+			
+			
+			
+			WriteLog($pub['id'], (($_GET['pub']=='new') ? 'добавление':'редактирование').' записи', '','','',$this->getSetting('section'));
 		}
 	
 		$this->setSetting('dataface',$dataset);
@@ -592,6 +596,8 @@ class VirtualContent
 		while ($r = msr($q)) $this->deletePub($r['id']);
 		msq("DROP TABLE `".$this->getSetting('table')."`");
 		
+		
+		
 		$CDDataSet->delete($pattern->getSetting('dataset'), $this->getSetting('section'));
 		return true;
 	}
@@ -607,6 +613,9 @@ class VirtualContent
 				$tface->delete();
 			}
 			msq("DELETE FROM `".$this->getSetting('table')."` WHERE `id`='".$id."'");
+			
+			WriteLog($id, 'удаление записи', '','','',$this->getSetting('section'));
+			
 			if ($updateprec) $this->updatePrecedence();
 			return true;
 		}

@@ -372,6 +372,40 @@ $deletesection = $SiteSections->get(floor($_GET['delete']),-1); $deletesection['
                 $SectionPattern = new $section['pattern'];
                 $SectionPattern->init(array('section'=>$section['id'],'mode'=>$delepmentmode,'isservice'=>0));
                 $SectionPattern->start();
+                ?>
+                <script>
+           	 function getGet(name) {
+     		    var s = window.location.search;
+     		    s = s.match(new RegExp(name + '=([^&=]+)'));
+     		    return s ? s[1] : false;
+     			}
+                 $(function() {
+                	    $.contextMenu({
+                	        selector: 'body',
+                	        callback: function(key, options) {
+                	            if (key=='save')
+                	            {
+                	            	$( "#editform" ).submit();
+                	            }
+                	            if (key=='section_add')
+                	            {
+                	            	$( "#editform" ).submit();
+                	            }
+                	            if (key=='edit_pattern')
+                	            {
+                	            	window.location.href = './?section='+getGet('section')+'&type_edit=pattern';
+                	            }
+                	        },
+                	        items: {
+<?if ($_GET['pub']=='new'){ ?>"section_add": {name: "Добавить", icon: "section_add"},<?} ?>
+<?if ($_GET['pub']!='new'){ ?>"save": {name: "Сохранить", icon: "save"},<?} ?>
+<?if ($mode=='development' && $section['pattern']!='PSheet1'){ ?>"edit_pattern": {name: "Редактировать шаблон", icon: "edit_pattern"},<?} ?>												
+                	             
+                	        }
+                	    });
+                 });
+                 </script>
+                <?
         }
         if ($contentStep==4){
         	include $_SERVER['DOCUMENT_ROOT']."/inc/site_admin/pattern/edit.php";

@@ -1,21 +1,19 @@
 <?
-$source_descr='Справочник';
-$source_name='PSpr';
+$source_descr='Рубрикатор';
+$source_name='PRubricator';
 /* Имя класса */
-class PSpr extends VirtualPattern
+class PRubricator extends VirtualPattern
 {
 	function init($settings){
 		global $CDDataSet,$Storage,$SiteSections;
 		
-		$descr='Справочник';
+		$descr='Рубрикатор';
 		
 		if ($CDDataSet->checkDatatypes($settings['section'])==0)
-		$SiteSections->update_personal_settings($settings['section'], '|onoff|show_id|default_order=ORDER BY `name`|');
-		
+		$SiteSections->update_personal_settings($settings['section'], '|onoff|show_id|');
 		
 		$settings['name']=substr(get_class(), 1, strlen(get_class()));
-		
-		
+
 		$class_name='CC'.$settings['name'];
 		$settings['dataset'] = $CDDataSet->checkPresence(0, mb_strtolower($settings['name']));
 		
@@ -30,7 +28,7 @@ class PSpr extends VirtualPattern
 						(
 								array('name'=>'name', 'description'=>'Наименование', 'type'=>'CDText',  'settings'=>array('important'=>'', 'show_search'=>'', 'show_list'=>'')),
 								array('name'=>'description', 'description'=>'Описание', 'type'=>'CDText',  'settings'=>array('off'=>'')),
-								array('name'=>'image', 'description'=>'Изображение', 'type'=>'CDImage',   'settings'=>array('off'=>'', 'exts'=>array('jpg','gif','jpeg','png'))),
+								array('name'=>'image', 'description'=>'Изображение', 'type'=>'CDImage',   'settings'=>array('off'=>'', 'exts'=>'jpg,gif,jpeg,png')),
 								array('name'=>'ptitle', 'description'=>'Title страницы', 'type'=>'CDText','settings'=>array('off'=>'')),
 								array('name'=>'pdescription', 'description'=>'Description страницы', 'type'=>'CDText', 'settings'=>array('off'=>'')),
 								array('name'=>'pseudolink', 'description'=>'Псеводоним ссылки', 'type'=>'CDText', 'settings'=>array('off'=>''))
@@ -43,13 +41,12 @@ class PSpr extends VirtualPattern
 		$SiteSettings = new SiteSettings;
 		$SiteSettings->init();
 
-
 		VirtualPattern::init($settings);
 
 		$iface = new $class_name;
-		$this->setSetting('table',$this->createDataSetTable($this->getSetting('dataset'),$this->getSetting('section'),array('show'=>'INT(1)', 'precedence'=>'BIGINT(20)')));
+		$this->setSetting('table',$this->createDataSetTable($this->getSetting('dataset'),$this->getSetting('section'),array('show'=>'INT(1)', 'precedence'=>'BIGINT(20)', 'parent_id'=>'BIGINT(20)')));
 		
-		$iface->init(array('mode'=>$this->getSetting('mode'),'isservice'=>$this->getSetting('isservice'),'section'=>$this->getSetting('section'),'pattern'=>$this,'table'=>$this->getSetting('table'),'dataset'=>$this->getSetting('dataset'),'imagestorage'=>$this->getSetting('imagestorage'),'smallimagestorage'=>$this->getSetting('smallimagestorage')));
+		$iface->init(array('mode'=>$this->getSetting('mode'),'isservice'=>$this->getSetting('isservice'),'section'=>$this->getSetting('section'),'pattern'=>$this,'table'=>$this->getSetting('table'),'dataset'=>$this->getSetting('dataset')));
 		$this->setSetting('cclass',$iface);
 		
 		return $iface;

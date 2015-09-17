@@ -8,7 +8,9 @@ class PTest extends VirtualPattern
 		global $CDDataSet,$Storage,$SiteSections;
 		
 		$descr='Тестовый раздел';
-		/* $SiteSections->update_personal_settings($settings['section'], '|onoff|show_id|default_order=ORDER BY `name`|'); */
+		
+		if ($CDDataSet->checkDatatypes($settings['section'])==0)
+		$SiteSections->update_personal_settings($settings['section'], '|onoff|show_id|default_order=ORDER BY `name`|');
 		
 		$settings['name']=substr(get_class(), 1, strlen(get_class()));
 
@@ -45,7 +47,7 @@ class PTest extends VirtualPattern
 		$iface = new $class_name;
 		$this->setSetting('table',$this->createDataSetTable($this->getSetting('dataset'),$this->getSetting('section'),array('show'=>'INT(1)', 'precedence'=>'BIGINT(20)')));
 		
-		$iface->init(array('mode'=>$this->getSetting('mode'),'isservice'=>$this->getSetting('isservice'),'section'=>$this->getSetting('section'),'pattern'=>$this,'table'=>$this->getSetting('table'),'dataset'=>$this->getSetting('dataset'),'imagestorage'=>$this->getSetting('imagestorage'),'smallimagestorage'=>$this->getSetting('smallimagestorage')));
+		$iface->init(array('mode'=>$this->getSetting('mode'),'isservice'=>$this->getSetting('isservice'),'section'=>$this->getSetting('section'),'pattern'=>$this,'table'=>$this->getSetting('table'),'dataset'=>$this->getSetting('dataset')));
 		$this->setSetting('cclass',$iface);
 		
 		return $iface;

@@ -66,15 +66,13 @@ class Storage extends VirtualClass
 		if (floor($file['size']/1024)>$storageobj['settings']['maxsize']) $retval['errors'][] = 'Размер загружаемого файла ('.getFileSizeString($file['size']).') больше максимально допустимого ('.getFileSizeString($storageobj['settings']['maxsize']*1024).')';
 		$imgsize = @getimagesize($file['tmp_name']);
 		$exts = array();
-		foreach(explode(',',$storageobj['settings']['exts']) as $v) if (trim($v)!='') $exts[] = lower(trim($v));
-		if (count($exts)>0) if (!in_array($ext,$exts)) $retval['errors'][] = 'Допустимые расширения файла: '.implode(', ',$exts);
-		if (isset($storageobj['settings']['images'])) if (!$imgsize) $retval['errors'][] = 'Файл не является корректным изображением';
-
+		
 
         /*Проверяем ограничения на размер изображения*/
+		$section_id=preg_replace('|^([a-z]+)\_([0-9]+)$|','\\2',$theme);
         $dataset_name=preg_replace('|^([a-z]+)\_([0-9]+)$|','\\1',$theme);
 		{			$data_set=msr(msq("SELECT * FROM `site_site_data_sets` WHERE `name`='".$dataset_name."'"));
-			$data_type=msr(msq("SELECT * FROM `site_site_data_types` WHERE `dataset`=".$data_set['id']." and `name`='".$rubric."'"));
+			$data_type=msr(msq("SELECT * FROM `site_site_data_types` WHERE `dataset`=".$data_set['id']." and `section_id`=$section_id and `name`='".$rubric."'"));
 
 			if ($data_type['settings']!='')
 			{				$mysql_settings=$this->explode($data_type['settings']);
@@ -92,6 +90,13 @@ class Storage extends VirtualClass
             }
 
 		}
+		
+		
+		foreach(explode(',',$mysql_settings['exts']) as $v) if (trim($v)!='') $exts[] = lower(trim($v));
+		
+		if (count($exts)>0) if (!in_array($ext,$exts)) $retval['errors'][] = 'Допустимые расширения файла: '.implode(', ',$exts);
+		if (isset($storageobj['settings']['images'])) if (!$imgsize) $retval['errors'][] = 'Файл не является корректным изображением';
+		
 
 		if ($ext!='swf'){
 			if (floor($storageobj['settings']['imgw'])>0){
@@ -109,7 +114,7 @@ class Storage extends VirtualClass
 		}
 		if (count($retval['errors'])==0){
 			if ((@move_uploaded_file($file['tmp_name'],$storageobj['fullpath'].$filename)) || (@rename($file['tmp_name'],$storageobj['fullpath'].$filename))){
-				msq("INSERT INTO `".$this->getSetting('files')."` (`stid`,`name`,`theme`,`rubric`,`uid`) VALUES ('".$storageobj['id']."','$filename','$theme','$rubric','$uid')");
+				msq("INSERT INTO `".$this->getSetting('files')."` (`stid`,`name`,`theme`,`rubric`,`uid`,`date`) VALUES ('".$storageobj['id']."','$filename','$theme','$rubric','$uid', NOW())");
 
 
 				/*Обрезка изображений*/
@@ -280,6 +285,16 @@ class Storage extends VirtualClass
         }
 
 
+	}
+	function delete_tmp_files() {
+		$res =msq("SELECT * FROM `site_storages_files` WHERE `name` like '%temp_%' and datediff( now( ) , `date`  )>1");
+	
+		while($row = msr($res)) {
+			$this->deleteFile($row['id']);
+			msq("DELETE FROM `site_storages_files` WHERE id=".$row['id']);
+		}
+	
+	
 	}
 
 	function getStorage($id,$create = array()){ // Добавляет новое хранилище, либо возвращает уже созданное

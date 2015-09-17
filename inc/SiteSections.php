@@ -362,7 +362,7 @@ class SiteSections extends VirtualClass
 		                                <td class="t_left t_nowrap"><?=$pattern?></td>
 		                                <td class="t_minwidth min">
 		                                <?
-		                                if (isset($section['settings']['noeditsettings']) || $mode!='development' || $section['id']<=7 || $section['pattern']=='PSheet1'){
+		                                if (isset($section['settings']['noeditsettings']) || $mode!='development' || $section['id']<=7 || $section['pattern']=='PSheet1' || $section['pattern']=='PFolder'){
 		                                        ?>
 		                                        <span class="button txtstyle disabled">
 		                                        	<input type="button" style="background-image: url(/pics/editor/pattern-disabled.png)" title="Настройки шаблона недоступны" onclick="return false;" />
@@ -372,7 +372,7 @@ class SiteSections extends VirtualClass
 		                                else{
 		                                        ?>
 		                                        <span class="button txtstyle">
-		                                        	<input type="button" style="background-image: url(/pics/editor/pattern.png)" title="Настройки шаблона" onclick="window.location.href = './?section=<?=$section['id']?>&type_edit=pattern'" />
+		                                        	<a href="./?section=<?=$section['id']?>&type_edit=pattern" title="Настройки шаблона"><img src="/pics/editor/pattern.png" alt="Настройки шаблона"></a>
 		                                        </span>
 		                                        <?
 		                                }
@@ -391,7 +391,7 @@ class SiteSections extends VirtualClass
 		                                else{
 		                                        ?>
 		                                        <span class="button txtstyle">
-		                                        	<input type="button" style="background-image: url(/pics/editor/settings.png)" title="Настройки" onclick="window.location.href = './?edit=<?=$section['id']?>'" />
+		                                        	<a href="./?edit=<?=$section['id']?>" title="Настройки"><img src="/pics/editor/settings.png" alt="Настройки"></a>
 		                                        </span>
 		                                        <?
 		                                }
@@ -409,7 +409,7 @@ class SiteSections extends VirtualClass
 		                                else{
 		                                        ?>
 		                                        <span class="button txtstyle">
-		                                        	<input type="button" style="background-image: url(/pics/editor/delete.gif)" title="Удалить" onclick="if (confirm('Вы действительно хотите удалить этот раздел?')) window.location.href = './?delete=<?=$section['id']?>';" />
+		                                        	<a href="./?delete=<?=$section['id']?>" onclick="if (!confirm('Удалить запись')) return false;" title="Удалить"><img src="/pics/editor/delete.gif" alt="Удалить"></a>
 		                                        </span>
 		                                <?
 		                                }

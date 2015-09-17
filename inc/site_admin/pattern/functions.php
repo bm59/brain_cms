@@ -73,7 +73,7 @@ function print_dt($ds) {
 						$tface = new $ds['type'];
 						$tface->init(array());
 						$help=$tface->Settings['help'];
-						$help['list_class=t_left']='класс для таблицы (t_minwidth, t_32width, t_nowrap, t_center)';
+						$help['list_class=t_minwidth']='класс для таблицы (t_minwidth, t_32width, t_nowrap, t_center)';
 						/* if ($help) */
 						{
 							?><div class="help"><br/><?

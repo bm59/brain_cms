@@ -501,7 +501,6 @@ function get_insert_sql($data, $table)
 
     function ResizeFrame($src=null,$maxWidth=null,$maxHeight=null) {
 
-
 	    list($w_i, $h_i, $type) = getimagesize($src);
 
 
@@ -522,25 +521,37 @@ function get_insert_sql($data, $table)
 	    $srcsize = getimagesize($src);
 
 	    if ($srcsize[0]<=$maxWidth && $srcsize[1]<=$maxHeight) return true;
-
-
-	    /*Если пропорция по X больше*/
-	    if (($srcsize[0]/$maxWidth) > ($srcsize[1]/$maxHeight))
+	    
+	    
+	    /* Если задан максимум только одной из сторон */
+	    if ($maxWidth>0 && $maxHeight>0)
 	    {
+	    	 
 	    	$dest_y = $maxHeight;
-	    	$dest_x = ($maxHeight / $srcsize[1]) * $srcsize[0];
-	    	$thumbimg = imagecreatetruecolor($dest_x, $dest_y);
-	    	imagecopyresampled($thumbimg,$srcimg,0,0,0,0,$dest_x,$dest_y, $srcsize[0], $srcsize[1]);
-	    	$resultimg= $save_func($thumbimg,$src);
-	    }
-	    else
-	    {
 	    	$dest_x = $maxWidth;
-	    	$dest_y = ($maxWidth / $srcsize[0]) * $srcsize[1];
-	    	$thumbimg = imagecreatetruecolor($dest_x, $dest_y);
-	    	imagecopyresampled($thumbimg,$srcimg,0,0,0,0,$dest_x,$dest_y, $srcsize[0], $srcsize[1]);
-	    	$resultimg = $save_func($thumbimg,$src);
 	    }
+	    else 
+	    {
+	    	/*Если пропорция по X больше*/
+	    	if (($srcsize[0]/$maxWidth) > ($srcsize[1]/$maxHeight))
+	    	{
+	    		$dest_y = $maxHeight;
+	    		$dest_x = ($maxHeight / $srcsize[1]) * $srcsize[0];
+	    	}
+	    	else
+	    	{
+	    		$dest_x = $maxWidth;
+	    		$dest_y = ($maxWidth / $srcsize[0]) * $srcsize[1];
+	    	}
+	    }
+	    
+
+	    $thumbimg = imagecreatetruecolor($dest_x, $dest_y);
+	    imageAlphaBlending($thumbimg, false);
+		imageSaveAlpha($thumbimg,true);
+	    imagecopyresampled($thumbimg,$srcimg,0,0,0,0,$dest_x,$dest_y, $srcsize[0], $srcsize[1]);
+	    $resultimg= $save_func($thumbimg,$src);
+	    
 
     }
     function ResizeFrameMaxSide($src=null,$maxWidth=null,$maxHeight=null) {
@@ -575,6 +586,8 @@ function get_insert_sql($data, $table)
 	    	$dest_y = $maxHeight;
 	    	$dest_x = ($maxHeight / $srcsize[1]) * $srcsize[0];
 	    	$thumbimg = imagecreatetruecolor($dest_x, $dest_y);
+	    	imageAlphaBlending($thumbimg, false);
+	    	imageSaveAlpha($thumbimg,true);
 	    	imagecopyresampled($thumbimg,$srcimg,0,0,0,0,$dest_x,$dest_y, $srcsize[0], $srcsize[1]);
 	    	$resultimg= $save_func($thumbimg,$src);
 	    }
@@ -630,18 +643,57 @@ function get_insert_sql($data, $table)
 	    $thumbimg = $save_func($thumbimg,$src);
 
     }
+    function crop_editor($image, $x_o, $y_o, $w_o, $h_o, $editor_minw, $editor_minh, $save_as_min) {
+    
+    
+    	if (($x_o < 0) || ($y_o < 0) || ($w_o < 0) || ($h_o < 0)) {
+    		echo "Некорректные входные параметры";
+    		return false;
+    	}
+    	list($w_i, $h_i, $type) = getimagesize($image); // Получаем размеры и тип изображения (число)
+    	$types = array("", "gif", "jpeg", "png"); // Массив с типами изображений
+    	$ext = $types[$type]; // Зная "числовой" тип изображения, узнаём название типа
+    	if ($ext) {
+    		$func = 'imagecreatefrom'.$ext; // Получаем название функции, соответствующую типу, для создания изображения
+    		$img_i = $func($image); // Создаём дескриптор для работы с исходным изображением
+    	} else {
+    		echo 'Некорректное изображение'; // Выводим ошибку, если формат изображения недопустимый
+    		return false;
+    	}
+    	if ($x_o + $w_o > $w_i) $w_o = $w_i - $x_o; // Если ширина выходного изображения больше исходного (с учётом x_o), то уменьшаем её
+    	if ($y_o + $h_o > $h_i) $h_o = $h_i - $y_o; // Если высота выходного изображения больше исходного (с учётом y_o), то уменьшаем её
+    	$img_o = imagecreatetruecolor($w_o, $h_o); // Создаём дескриптор для выходного изображения
+    	imageAlphaBlending($img_o, false);
+    	imageSaveAlpha($img_o,true);
+    	imagecopy($img_o, $img_i, 0, 0, $x_o, $y_o, $w_o, $h_o); // Переносим часть изображения из исходного в выходное
+    	$func = 'image'.$ext; // Получаем функция для сохранения результата
+    
+    	
+    	if ($save_as_min)
+    	$image=str_replace('.','_mini.',$image);
+    	
+    	$new_i=$func($img_o, $image);  // Сохраняем изображение
+    	
+    	/* Если надо уменьшить до размеров */
+    	if ($editor_minw>0 && $editor_minh>0)
+    	ResizeFrame($image, $editor_minw, $editor_minh);  
+    	
+    	return basename($image);
+    
+    
+    }
     function setting($name)
 	{
 		global $SiteSettings;
 		$set=$SiteSettings->getOne($SiteSettings->getIdByName($name));
 		return html_entity_decode(stripslashes($set['value']));
 	}
-	function alert_mysql()
+	function alert_mysql($comment='')
 	{
 		if (mysql_error()!='')
-		$_SESSION['global_alert'].=(($_SESSION['global_alert']!='') ? '<br/>':'').'<i><span style="color: #CC0000">Ошибка SQL:</span></i> '.mysql_error();
+		$_SESSION['global_alert'].=(($_SESSION['global_alert']!='') ? '<br/>':'').'<i><span style="color: #CC0000">Ошибка SQL:'.$comment.'</span></i> '.mysql_error();
 	}
-	function WriteLog($item_id, $descr, $comment, $user_id='', $changes='')
+	function WriteLog($item_id, $descr, $comment, $user_id='', $changes='', $section_id=0)
 	{
  		global $user;
         if (setting('log_enable'))
@@ -650,7 +702,8 @@ function get_insert_sql($data, $table)
  			$user_name=$user['login'];
 
 
- 			msq("INSERT INTO `".ConfigGet('pr_name')."_log` (`date`,`item_id`,`descr`,`comment`, `user_id`, `changes`, `user_name`, `ip`) VALUES ( NOW(), $item_id, '".$descr."', '".$comment."',  '".$user['id']."', '".$changes."', '".$user_name."', '".$_SERVER['REMOTE_ADDR']."')");
+ 			msq("INSERT INTO `".ConfigGet('pr_name')."_log` (`date`,`item_id`,`descr`,`comment`, `user_id`, `changes`, `user_name`, `ip`, `section_id`) VALUES ( NOW(), $item_id, '".$descr."', '".$comment."',  '".$user['id']."', '".$changes."', '".$user_name."', '".$_SERVER['REMOTE_ADDR']."', '".$section_id."')");
+ 			
 	    }
 	}
 ?>

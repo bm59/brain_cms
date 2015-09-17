@@ -9,7 +9,7 @@ include $_SERVER['DOCUMENT_ROOT']."/inc/site_admin/meta.php";?>
             if (setting('admin_logo')>0)
             $image=$Storage->getfile(setting('admin_logo'));
             if ($image['path']!='')
-            {            ?><a href="/manage/"><img src="<?=$image['path']?>" height="150px;"></a><?
+            {            ?><a href="/manage/"><img src="<?=$image['path']?>" width="206px;"></a><?
             }
             else{?><a href="/manage/"><img src="/pics/logo_cms.png"></a><?}?>
 

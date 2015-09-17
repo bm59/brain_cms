@@ -7,7 +7,8 @@ class CDGallery extends VirtualType
 				'auto_resize=true|auto_width=187|auto_height=120'=>'Автоматическая обрезка изображений',
 				'imgw=245|imgwtype=1|imgh=400|imghtype=1'=>'Проверка на размер изображений',
 				'comment=комментарий'=>'Комментарий',
-				'auto_mini=true|auto_mini_width=210|auto_mini_height=220'=>'Автоматическое создание миниатюр'
+				'auto_mini=true|auto_mini_width=210|auto_mini_height=220'=>'Автоматическое создание миниатюр',
+				'exts=jpg,gif,jpeg,png'=>'Расширения'
 		
 		);
 		VirtualType::init($settings);
@@ -33,7 +34,7 @@ class CDGallery extends VirtualType
             name: 'upl_file',
             data: {},
             onSubmit: function(file, ext){
-                $('#loading').attr('src', '/pics/loading.gif').fadeIn(0);
+            	$('#loading').show();
                 this.setData({sid : '<?=session_id()?>', theme: '<?=trim($this->getSetting('theme'))?>', rubric: '<?=trim($this->getSetting('rubric'))?>', stid: '<?=$st['id']?>', uid: <?=floor($this->getSetting('uid'))?>});
             },
             onComplete: function(file, response){
@@ -42,10 +43,10 @@ class CDGallery extends VirtualType
                     $('#loading<?='_'.$this->getSetting('name')?>').fadeOut(0);
                     status.html(status.html()+'<LI style="height: 170px;float: left;"><div class="gallery_container"><input type="hidden" id="uploadfilehidden<?=htmlspecialchars($this->getSetting('name'))?>" name="<?=htmlspecialchars($this->getSetting('name'))?>[]" value="'+response.id+'"><span class="button txtstyle"><input type="button" onclick="delete_file_image<?=htmlspecialchars($this->getSetting('name'))?>(this); return false" id="delete_button_image" style="background-image: url(/pics/editor/delete.gif)" title="Удалить изображение"></span><span class="button txtstyle"><a id="link_image" class="link<?='_'.$this->getSetting('name')?>" target="_blank" title="Ссылка на картинку" href="'+response.path+'"><img alt="Ссылка на картинку" src="/pics/editor/link.png"></a></span><img style="height: 170px" class="contentimg" src="'+response.path+'" class="contentimg"></div></LI>');
                     //$('#uploadfilehidden<?=htmlspecialchars($this->getSetting('name'))?>').val(response.id);
-
+                    $('#loading').hide();
 
              }else{
-                    $('#loading').fadeOut(0);
+                    $('#loading').hide();
                     if (response.error!='') alert(response.error);
 
 
@@ -84,6 +85,7 @@ class CDGallery extends VirtualType
 				<span id="upl_button<?='_'.$this->getSetting('name')?>" class="button">
 					Загрузить изображение
 				</span>
+				<img src="/pics/inputs/loading2.gif" id="loading" style="position: absolute; top: 0; left: 170px; display: none;">
 				</div>
                <span class="clear"></span>
 				<div id="upl_error<?='_'.$this->getSetting('name')?>"></div>
@@ -92,7 +94,7 @@ class CDGallery extends VirtualType
 				<span class="clear"></span>
 				<?
 					$desc = '';
-					$exts = upper(str_replace(',',', ',$st['settings']['exts']));
+					$exts = upper(str_replace(',',', ',$settings['exts']));
 					if ($exts!='') $desc.= ' формата '.$exts;
 					$wh = '';
 					if (floor($settings['imgw'])>0){
