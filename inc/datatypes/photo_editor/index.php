@@ -13,7 +13,7 @@ if (isset($_POST['edit_image']))
 {
 
 	print 'OK';
-	
+
 	$image['path']=$_POST['path'];
 	$image['x1']=$_POST['x1'];
 	$image['y1']=$_POST['y1'];
@@ -24,7 +24,7 @@ if (isset($_POST['edit_image']))
 	{
 		if ($image['x1']>0 || $image['x2']>0 || $image['y2']>0)
 		{
-			
+
 			$mini_image=crop_editor($_SERVER['DOCUMENT_ROOT'].$image['path'], $image['x1'], $image['y1'], $image['x2']-$image['x1'], $image['y2']-$image['y1'], $_POST['editor_minw'], $_POST['editor_minh'], $_POST['editor_as_min']);
 		}
 
@@ -44,7 +44,7 @@ $calc_h=$settings['editor_imgh']>0 ? $settings['editor_imgh'] : $settings['edito
 
 if ($settings['editor_proport']=='auto')
 {
-	
+
 	$settings['editor_proport']=$calc_w.':'.$calc_h;
 }
 
@@ -95,7 +95,7 @@ var ias = $('img#photo').imgAreaSelect({
 					            		instance: true,
 
 <?if ($calc_w>0){?>						minWidth: '<?=$calc_w?>',<?} ?>
-<?if ($calc_h>0){?>						minHeight: '<?=$calc_h?>',<?} ?>					            	
+<?if ($calc_h>0){?>						minHeight: '<?=$calc_h?>',<?} ?>
 
             onSelectEnd: function (img, selection) {
                 $('input[name="x1"]').val(selection.x1);
@@ -116,24 +116,21 @@ var ias = $('img#photo').imgAreaSelect({
 			}
 
 			ias.setOptions({ x1: new_x1, y1: new_y1, x2: new_x2, y2: new_y2 });
-			ias.update(); */ 
+			ias.update(); */
 			/* ias.setOptions({ aspectRatio: '1:1' });
 			ias.update();
 			alert(ias.getOptions().aspectRatio); */
-			
-			
+
+
 	    });
-		$('.ratio').click(function () {
-			ias.setOptions({ aspectRatio: '1:1'});
+
+
+		$('#change_ratio').click(function () {
+			ias.setOptions({ aspectRatio: $('[name=ratio_val]').val()});
 			ias.update();
-						
-						
-		});
-		$('.ratio_off').click(function () {
-			ias.setOptions({ aspectRatio: ''});
-			ias.update();
-						
-						
+			return false;
+
+
 		});
 
 
@@ -141,10 +138,10 @@ var ias = $('img#photo').imgAreaSelect({
 
 	function check_size()
 	{
-		
+
 		var error=false;
 		<? if ($calc_w>0) {?>
-		if (($('input[name="x2"]').val()-$('input[name="x1"]').val())<<?=$calc_w?>) 
+		if (($('input[name="x2"]').val()-$('input[name="x1"]').val())<<?=$calc_w?>)
 		{
 			alert('Ширина выделеной области '+($('input[name="x2"]').val()-$('input[name="x1"]').val())+' меньше допустимой <?=$calc_w?>');
 			error=true;
@@ -166,19 +163,17 @@ var ias = $('img#photo').imgAreaSelect({
 </script>
 <?include $_SERVER['DOCUMENT_ROOT']."/inc/site_admin/header.php";?>
 	<div id="content">
-	
+
 		<?include_once($_SERVER['DOCUMENT_ROOT']."/inc/site_admin/nav.php");?>
-		
+
 		<?
-		foreach ($settings as $k=>$v)
-		print $k.'='.$v.'<br/>';
-		print '<a href="'.$_GET['file'].'" target="_blank">'.$_GET['file'].'</a>';
-		
+
+
 		$image = getimagesize ($_SERVER['DOCUMENT_ROOT'].$_GET['file']);
 		if (($calc_w>0 && $calc_h>0) && $image[0]==$calc_w && $image[1]==$calc_h) $error.='<h2>Изображение соответствует размеру</h2>';
-		
+
 		if (($calc_w>0 && $calc_h>0) && $image[0]<$calc_w || $image[1]<$calc_h) $error.='<h2>Изображение меньше минимальных размеров</h2>';
-		
+
 
 		if ($error!='')
 		{
@@ -193,10 +188,8 @@ var ias = $('img#photo').imgAreaSelect({
 	<div style="padding: 10px  0 10px 0px; margin-left: -5px">
 		<input type="submit" value="Сохранить изменения" onclick="check_size(); return false;" name="editform" class="button big">
 	</div>
-	
-	<!-- <button id="rectangle" type="button">Rectangle</button> -->
-	<a href="#" class="ratio">Ratio 1:1</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;<a href="#" class="ratio_off">Сбросить Ratio</a>		
 
+	<!-- <button id="rectangle" type="button">Rectangle</button> -->
 	<div>
 		<img id="photo" src="<?=$_GET['file']?>?<?=time()?>" style="border: 1px solid #CCCCCC;"/>
 	</div>
@@ -212,7 +205,19 @@ var ias = $('img#photo').imgAreaSelect({
 	<input type="hidden" name="path" value="<?=$_GET['file']?>" />
 	<input type="hidden" name="type_edit" value="<?=$_GET['type']?>" />
 </form>
-<?} ?>
+
+<span style="width: 400px; float: left;" class="input">
+	<input type="text" placeholder="Пророрция: 1:1" name="ratio_val" maxlength="255" value="1:1">
+</span>
+<a style="display: block; float:left; margin: 13px 0 0 10px;" class="button" href="#" id="change_ratio">Установить ratio</a>
+<div class="clear"></div>
+<h2>Базовые настройки:</h2>
+<?
+}
+		foreach ($settings as $k=>$v)
+		print $k.'='.$v.'<br/>';
+		print '<a href="'.$_GET['file'].'" target="_blank">'.$_GET['file'].'</a>';
+?>
 
 </div>
 <?include $_SERVER['DOCUMENT_ROOT']."/inc/site_admin/footer.php";?>
