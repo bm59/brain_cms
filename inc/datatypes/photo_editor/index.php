@@ -9,23 +9,32 @@ if (!isset($_POST['edit_image']))
 
 }
 
+$datatype=msr(msq("SELECT * FROM `site_site_data_types` WHERE `section_id`=".$_GET['section']." and  `name`='".$_GET['rubric']."'"));
+
+if ($_GET['str_settings']!='')
+$datatype['settings']=$_GET['str_settings'];
+
+$settings=$VirtualPattern->explode($datatype['settings']);
+
 if (isset($_POST['edit_image']))
 {
-
-	print 'OK';
-
+	$size = getimagesize ($_SERVER['DOCUMENT_ROOT'].$_POST['path']);
+	
+	
 	$image['path']=$_POST['path'];
 	$image['x1']=$_POST['x1'];
 	$image['y1']=$_POST['y1'];
 	$image['x2']=$_POST['x2'];
 	$image['y2']=$_POST['y2'];
-
-	/* if ($_POST['type_edit']=='mini') */
+	
+	if ($image['x2']<$size[0]-1 || $image['y2']<$size[1]-1)
 	{
 		if ($image['x1']>0 || $image['x2']>0 || $image['y2']>0)
 		{
 
-			$mini_image=crop_editor($_SERVER['DOCUMENT_ROOT'].$image['path'], $image['x1'], $image['y1'], $image['x2']-$image['x1'], $image['y2']-$image['y1'], $_POST['editor_minw'], $_POST['editor_minh'], $_POST['editor_as_min']);
+			$mini_image=crop_editor($_SERVER['DOCUMENT_ROOT'].$image['path'], $image['x1'], $image['y1'], $image['x2']-$image['x1'], $image['y2']-$image['y1'], $settings);
+			/* print 'режем';	 */
+		
 		}
 
 
@@ -33,9 +42,7 @@ if (isset($_POST['edit_image']))
 }
 
 
-$datatype=msr(msq("SELECT * FROM `site_site_data_types` WHERE `section_id`=".$_GET['section']." and  `name`='".$_GET['rubric']."'"));
 
-$settings=$VirtualPattern->explode($datatype['settings']);
 
 
 $calc_w=$settings['editor_imgw']>0 ? $settings['editor_imgw'] : $settings['editor_minw'];
@@ -54,11 +61,14 @@ configSet('contentdescription', 'Редактор фото');
 <?
 include_once($_SERVER['DOCUMENT_ROOT']."/inc/site_admin/meta.php");
 
+$size = getimagesize ($_SERVER['DOCUMENT_ROOT'].$_GET['file']);
+
 $def_x1=$calc_w>0 ? '10': '10';
 $def_y1=$calc_h>0 ? '10': '10';
 
-$def_x2=$calc_w>0 ? $calc_w+10: 150;
-$def_y2=$calc_h>0 ? $calc_h+10: 150;
+$def_x2=$calc_w>0 ? $calc_w+10: (($size[0]-10<=150) ? $size[0]-10 : 150);
+$def_y2=$calc_h>0 ? $calc_h+10: (($size[1]-10<=150) ? $size[1]-10 : 150);
+
 
 if ($_POST['edit_image']!='')
 {
@@ -66,8 +76,7 @@ if ($_POST['edit_image']!='')
 	?>
 	<script type="text/javascript">
 	$(document).ready(function () {
-		$.cookie('change_photo', '1', {path: '/'});
-		<?if ($mini_image!=''){?>$.cookie('add_mini', '<?=$mini_image?>', {path: '/'});<?}?>
+		$.cookie('change_photo_<?=$_GET['section']?>_<?=$_GET['rubric'] ?><?=(($_GET['image_id']>0) ? '_'.$_GET['image_id']:'') ?>', '1', {path: '/'});
 		window.close();
 	});
 	</script>
@@ -75,8 +84,8 @@ if ($_POST['edit_image']!='')
 }
 ?>
 
-<script src="/js/jquery.imgareaselect.js" language="JavaScript" type="text/javascript"></script>
-<link rel="stylesheet" type="text/css" href="/css/imgareaselect-default.css" media="all" />
+<script src="/js/inputs/jquery.imgareaselect.js" language="JavaScript" type="text/javascript"></script>
+<link rel="stylesheet" type="text/css" href="/css/inputs/imgareaselect-default.css" media="all" />
 
 <script type="text/javascript">
 
@@ -93,9 +102,10 @@ var ias = $('img#photo').imgAreaSelect({
 					            		handles: true,
 					            		keys: true,
 					            		instance: true,
+					            		onSelectChange: preview, 
 
-<?if ($calc_w>0){?>						minWidth: '<?=$calc_w?>',<?} ?>
-<?if ($calc_h>0){?>						minHeight: '<?=$calc_h?>',<?} ?>
+<?if ($calc_w>0 && (!$settings['editor_min_more'] || $settings['editor_minw']!='')){?>						minWidth: '<?=$calc_w?>',<?} ?>
+<?if ($calc_h>0 && (!$settings['editor_min_more'] || $settings['editor_minh']!='')){?>						minHeight: '<?=$calc_h?>',<?} ?>
 
             onSelectEnd: function (img, selection) {
                 $('input[name="x1"]').val(selection.x1);
@@ -104,6 +114,8 @@ var ias = $('img#photo').imgAreaSelect({
                 $('input[name="y2"]').val(selection.y2);
             }
     });
+
+		preview('', ias.getSelection()); 
 
 		$('button#rectangle').click(function () {
 /* 			selection=ias.getSelection();
@@ -124,7 +136,17 @@ var ias = $('img#photo').imgAreaSelect({
 
 	    });
 
+		function preview (img, selection)
+		{
 
+			$('#x1').html('x<sub>1</sub>: '+selection.x1);
+			$('#x2').html('x<sub>2</sub>: '+selection.x2);
+			$('#y1').html('y<sub>1</sub>: '+selection.y1);
+			$('#y2').html('y<sub>2</sub>: '+selection.y2);
+		    $('#w').html('Ширина: '+selection.width);
+		    $('#h').html('Высота: '+selection.height); 	
+		}
+		
 		$('#change_ratio').click(function () {
 			ias.setOptions({ aspectRatio: $('[name=ratio_val]').val()});
 			ias.update();
@@ -133,6 +155,61 @@ var ias = $('img#photo').imgAreaSelect({
 
 		});
 
+		$('#change_point').click(function () {
+
+			var val=$('[name=point_val]').val();
+			val=val.split(',');
+			
+			ias.setSelection(val[0], val[1], val[2], val[3], true);
+			preview('', ias.getSelection());
+			ias.update();
+
+			selection=ias.getSelection();
+
+            $('input[name="x1"]').val(selection.x1);
+            $('input[name="y1"]').val(selection.y1);
+            $('input[name="x2"]').val(selection.x2);
+            $('input[name="y2"]').val(selection.y2);
+
+			
+			return false;
+
+
+		});
+
+		$('#center_gorizontal, #center_vertical').click(function () {
+
+			var img_w=<?=floor($size[0]) ?>;
+			var img_h=<?=floor($size[1]) ?>;
+
+			selection=ias.getSelection();
+
+			if ($(this).attr('id')=='center_gorizontal')
+			{
+
+				var select_width=selection.x2-selection.x1;
+
+				new_x1=Math.round((img_w-select_width)/2);
+				new_x2=new_x1+select_width;
+				ias.setSelection(new_x1, selection.y1, new_x2, selection.y2, true);
+			}
+
+			if ($(this).attr('id')=='center_vertical')
+			{
+
+				var select_height=selection.y2-selection.y1;
+
+				new_y1=Math.round((img_h-select_height)/2);
+				new_y2=new_y1+select_height;
+				ias.setSelection(selection.x1, new_y1, selection.x2, new_y2, true);
+			}
+
+			
+			ias.update();
+
+		});
+
+
 
 });
 
@@ -140,14 +217,14 @@ var ias = $('img#photo').imgAreaSelect({
 	{
 
 		var error=false;
-		<? if ($calc_w>0) {?>
+		<? if ($calc_w>0 && !$settings['editor_min_more']) {?>
 		if (($('input[name="x2"]').val()-$('input[name="x1"]').val())<<?=$calc_w?>)
 		{
 			alert('Ширина выделеной области '+($('input[name="x2"]').val()-$('input[name="x1"]').val())+' меньше допустимой <?=$calc_w?>');
 			error=true;
 		}
 		<?} ?>
-		<? if ($calc_h>0) {?>
+		<? if ($calc_h>0 && !$settings['editor_min_more']) {?>
 		if (($('input[name="y2"]').val()-$('input[name="y1"]').val())<<?=$calc_h?>)
 		{
 			alert('Высота выделеной области '+($('input[name="y2"]').val()-$('input[name="y1"]').val())+' меньше допустимой <?=$calc_h?>');
@@ -168,11 +245,10 @@ var ias = $('img#photo').imgAreaSelect({
 
 		<?
 
-
 		$image = getimagesize ($_SERVER['DOCUMENT_ROOT'].$_GET['file']);
-		if (($calc_w>0 && $calc_h>0) && $image[0]==$calc_w && $image[1]==$calc_h) $error.='<h2>Изображение соответствует размеру</h2>';
+		if (($calc_w>0 && $calc_h>0) && $image[0]==$calc_w && $image[1]==$calc_h) $error.='<h2 style="color: #FF0000">Изображение соответствует размеру</h2>';
 
-		if (($calc_w>0 && $calc_h>0) && $image[0]<$calc_w || $image[1]<$calc_h) $error.='<h2>Изображение меньше минимальных размеров</h2>';
+		if (($calc_w>0 && $calc_h>0) && $image[0]<$calc_w || $image[1]<$calc_h) $error.='<h2 style="color: #FF0000">Изображение меньше минимальных размеров</h2>';
 
 
 		if ($error!='')
@@ -180,8 +256,7 @@ var ias = $('img#photo').imgAreaSelect({
 			print $error;
 			print '<br/>ширина: '.$image[0].'; высота: '.$image[1];
 		}
-		else
-		{
+
 		?>
 
 <form id="save_form" name="save_form"  action="" enctype="multipart/form-data" method="POST">
@@ -191,8 +266,10 @@ var ias = $('img#photo').imgAreaSelect({
 
 	<!-- <button id="rectangle" type="button">Rectangle</button> -->
 	<div>
-		<img id="photo" src="<?=$_GET['file']?>?<?=time()?>" style="border: 1px solid #CCCCCC;"/>
+		<img id="photo" src="<?=$_GET['file']?>?<?=time()?>" style="border: 1px solid #CCCCCC; display: block; float: left"/>
 	</div>
+	
+
 
 	<input type="hidden" name="x1" value="<?=(($_POST['x1']>0) ? $_POST['x1'] : $def_x1)?>" />
 	<input type="hidden" name="y1" value="<?=(($_POST['y1']>0) ? $_POST['y1'] : $def_y1)?>" />
@@ -206,18 +283,46 @@ var ias = $('img#photo').imgAreaSelect({
 	<input type="hidden" name="type_edit" value="<?=$_GET['type']?>" />
 </form>
 
+
+
+	<div class="clear"></div>
+	<br>
+		<div class="prew" style="float: left; background: #eee none repeat scroll 0 0; border: 2px solid #ddd; padding: 0.6em;">
+			<div id="w">Ширина: </div>
+			<div id="h">Высота: </div>
+			<div id="x1">x<sub>1</sub>: </div>
+			<div id="x2">x<sub>2</sub>: </div>
+			<div id="y1">y<sub>1</sub>: </div>
+			<div id="y2">y<sub>2</sub>: </div>
+		</div>
+		
+		<div style="float: left; margin-left: 15px; background: #eee none repeat scroll 0 0; border: 2px solid #ddd; padding: 0.6em;">
+		<?if (count($settings)>0) {?>
+		<div>Базовые настройки:</div>
+		<?
+			foreach ($settings as $k=>$v)
+			print $k.'='.$v.'<br/>';
+		}
+		print '<a href="'.$_GET['file'].'" target="_blank">'.$_GET['file'].'</a>';
+		?>
+		</div>
+
+	<div class="clear"></div>		
+		
+		
+		
 <span style="width: 400px; float: left;" class="input">
-	<input type="text" placeholder="Пророрция: 1:1" name="ratio_val" maxlength="255" value="1:1">
+	<input type="text" placeholder="Пророрция: 1:1" name="ratio_val" maxlength="255" value="<?=$settings['editor_proport']>0 ? $settings['editor_proport'] : '1:1'?>">
 </span>
 <a style="display: block; float:left; margin: 13px 0 0 10px;" class="button" href="#" id="change_ratio">Установить ratio</a>
 <div class="clear"></div>
-<h2>Базовые настройки:</h2>
-<?
-}
-		foreach ($settings as $k=>$v)
-		print $k.'='.$v.'<br/>';
-		print '<a href="'.$_GET['file'].'" target="_blank">'.$_GET['file'].'</a>';
-?>
+<span style="width: 400px; float: left;" class="input">
+	<input type="text" placeholder="Точки: 0,0,150,150" name="point_val" maxlength="255" value="0,0,<?=$size[0]-1?>,<?=$size[1]-1?> ">
+</span>
+<a style="display: block; float:left; margin: 13px 0 0 10px;" class="button" href="#" id="change_point" onclick="return false">Установить точки</a>
+<div class="clear"></div>
+<a style="display: block; float:left;" class="button" href="#" id="center_gorizontal" onclick="return false">Центрировать по горизонтали</a><a style="display: block; float:left; padding-left: 20px;" class="button" href="#" id="center_vertical" onclick="return false">Центрировать по вертикали</a>
+<div class="clear"></div>
 
 </div>
 <?include $_SERVER['DOCUMENT_ROOT']."/inc/site_admin/footer.php";?>

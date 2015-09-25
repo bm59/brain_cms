@@ -117,7 +117,6 @@ input[disabled="disabled"]  {background-color: #E1E1E1;}
   color: #FFFFFF;
   font-size: 12px;
   text-decoration: none;
-  padding: .8em 1em calc(.8em + 3px);
  /* border-radius: 3px;*/
   background: #00bba6;
   box-shadow: 0 -2px #00796b inset;
@@ -149,7 +148,7 @@ input[disabled="disabled"]  {background-color: #E1E1E1;}
     height: 16px;
     width: 16px;
 }
-.ui-datepicker-trigger {height: 42px; padding-top: 10px;}
+.ui-datepicker-trigger {height: 42px; padding-top: 10px; cursor: pointer;}
 
 FORM LABEL {position: relative; overflow: hidden; display: block; margin: 0px 6px 0px 4px;}
 
@@ -370,8 +369,9 @@ HTML:first-child .place .forckecks LABEL INPUT {left: 0px; top: 1px;}
 
 .gallery LI {list-style: none;}
 .gallery_container {height: 170px; float: left; position: relative; padding-bottom: 20px;}
-.gallery_container #delete_button_image {background-image: url("/pics/editor/delete.gif"); position: absolute; right: 35px; top: 15px;}
-.gallery_container #link_image {right: 15px; top: 15px; position: absolute; display: block;}
+.gallery_container #delete_button_image {background-image: url("/pics/editor/delete.gif"); position: absolute; right: 55px; top: 15px;}
+.gallery_container #link_image {right: 35px; top: 15px; position: absolute; display: block;}
+.gallery_container #editor_image {right: 15px; top: 15px; position: absolute; display: block;}
 
 #sortable LI {background: none; padding: 0; margin: 10px 0}
 

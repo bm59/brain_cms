@@ -240,7 +240,7 @@ class VirtualContent
 			
 			<!-- Редактировать, Удалить -->
 			<td class="t_minwidth">
-				<a href="/manage/control/contents/?section=<?=$section['id']?>&pub=<?=$pub['id']?>" title="Редактировать"><img src="/pics/editor/prefs.gif" alt="Редактировать"></a>
+				<a class="button txtstyle" href="/manage/control/contents/?section=<?=$section['id']?>&pub=<?=$pub['id']?>" title="Редактировать"><img src="/pics/editor/prefs.gif" alt="Редактировать"></a>
 			</td>
 			<td class="t_minwidth">
 				<a href="./?section=<?=$section['id']?>&delete=<?=$pub['id']?>" class="button txtstyle" onclick="if (!confirm('Удалить запись')) return false;">
@@ -315,7 +315,14 @@ class VirtualContent
 		function drawAddEdit(){
 			global $CDDataSet,$SiteSections;
 			$section = $SiteSections->get($this->getSetting('section'));
-			$pub = $this->getPub($_GET['pub']); $pub['id'] = floor($pub['id']);
+			
+			$SectionPattern = new $section['pattern'];
+			$Iface = $SectionPattern->init(array('section'=>$section['id'],'mode'=>$delepmentmode,'isservice'=>0));
+			
+			$init_pattern=$Iface->getSetting('pattern');
+			
+			$pub = $this->getPub($_GET['pub']); 
+			$pub['id'] = floor($pub['id']);
 			?>
 		                <div id="content" class="forms">
 		                        <?include_once($_SERVER['DOCUMENT_ROOT']."/inc/site_admin/nav.php");?>
@@ -333,7 +340,6 @@ class VirtualContent
 		                                <div class="hr"><hr /></div>';
 		                        }
 		                        ?>
-		                        <?include_once($_SERVER['DOCUMENT_ROOT']."/inc/site_admin/nav.php");?>
 		                        <p class="impfields">Поля, отмеченные знаком «<span class="important">*</span>», обязательные для заполнения.</p>
 		                        <form id="editform" name="editform" action="<?=$_SERVER['REQUEST_URI']?>" method="POST" enctype="multipart/form-data">
 		                                <input type="hidden" name="editformpost" value="1">
@@ -356,6 +362,17 @@ class VirtualContent
 		
 		    									if (!isset($dt['settings']['off']))
 		                                        $tface->drawEditor($stylearray[$tface->getSetting('name')],((in_array($tface->getSetting('name'),$nospans))?false:true));
+		    									
+		    									
+		    									/* Подсказки у поля в паттерне: $this->setSetting('type_settings_settings', array('min_w|'=>'Минимальная ширина')); */
+		    									if (count($init_pattern->Settings['type_settings_'.$dt['name']])>0)
+		    									{
+		    										foreach ($init_pattern->Settings['type_settings_'.$dt['name']] as $k=>$v)
+		    										print $k.' - '.$v.'<br/>';
+		    										
+		    										?><div class="clear"></div><?
+		    									}
+
 		
 		                                }
 		                        ?>
@@ -377,23 +394,20 @@ class VirtualContent
 		global $CDDataSet;
 	
 		$dataset = $CDDataSet->get($this->getSetting('dataset'));
-		foreach ($dataset['types'] as $k=>$dt){
+		$imagestorage = $this->getSetting('imagestorage');
+		
+		if ($_GET['pub']>0) $pub = $this->getPub(floor($_GET['pub']));
+		
+		
+			foreach ($dataset['types'] as $k=>$dt){
 			$tface = new $dt['type'];
-			$tface->init(array('name'=>$dt['name'],'description'=>$dt['description'],'theme'=>$dataset['name'].'_'.$this->getSetting('section'), 'theme'=>$dataset['name'].'_'.$this->getSetting('section'),'rubric'=>$dt['name'],'settings'=>$dt['settings']));
+			$tface->init(array('name'=>$dt['name'],'value'=>$pub[$dt['name']], 'uid'=>floor($pub['id']),'imagestorage'=>floor($imagestorage['id']),'description'=>$dt['description'],'imagestorage'=>floor($imagestorage['id']),'theme'=>$dataset['name'].'_'.$this->getSetting('section'), 'theme'=>$dataset['name'].'_'.$this->getSetting('section'),'rubric'=>$dt['name'],'settings'=>$dt['settings']));
 			$dataset['types'][$k]['face'] = $tface;
 		}
 			
 	
 		if (isset($_GET['pub'])){
-	
-			$pub = $this->getPub(floor($_GET['pub']));
-			if (floor($pub['id'])>0){
-				foreach ($dataset['types'] as $k=>$dt){
-					$tface = $dt['face'];
-					$tface->init(array('value'=>$pub[$dt['name']],'uid'=>floor($pub['id'])));
-					$dataset['types'][$k]['face'] = $tface;
-				}
-			}
+			
 			$this->setSetting('dataface',$dataset);
 			if (floor($_POST['editformpost'])==1){
 				$this->setSetting('saveerrors',$this->save());
@@ -497,6 +511,16 @@ class VirtualContent
 			$retval= $r;
 			return $retval;
 	}
+	function getPubByField($field,$value){
+		$retval = array();
+		if ($r = msr(msq("SELECT * FROM `".$this->getSetting('table')."` WHERE `".$field."`='".$descr."'")))
+			 
+		foreach ($r as $k=>$v)
+		$r[$k]=html_entity_decode(stripslashes($v));
+		
+		$retval= $r;
+		return $retval;
+	}
 	function updatePrecedence(){
 		$precedence = 0;
 		$q = msq("SELECT `id` FROM `".$this->getSetting('table')."` ORDER BY `precedence` ASC");
@@ -551,13 +575,13 @@ class VirtualContent
 		$this->setSetting('dataface',$dataset);
 		return $errors;
 	}
-    function getList($page=0){
+    function getList($page=0, $str_usl='', $str_order_by=''){
 
         	$retval = array();
         	
-        	$q = "SELECT * FROM `".$this->getSetting('table')."`".$this->sqlstr;;
+        	$q = "SELECT * FROM `".$this->getSetting('table')."`".$this->sqlstr.$str_usl;
         	$count = msq($q);
-        	$count = mysql_num_rows($count);
+        	$count = @mysql_num_rows($count);
         	
         	$page = floor($page);
         	if ($page==-1 || isset($this->Settings['settings_personal']['no_paging'])) $this->setSetting('onpage',10000);
@@ -578,11 +602,11 @@ class VirtualContent
         	else
         	$order_by=$this->Settings['settings_personal']['default_order']!='' ? $this->Settings['settings_personal']['default_order'] : "ORDER BY `id` DESC";  
         	
+        	if ($str_order_by) $order_by=$str_order_by;
+        	
         	
         	$this->order_by=$order_by;
-        	
         	$q = msq($q." ".$order_by." LIMIT ".(($page-1)*$this->getSetting('onpage')).",".$this->getSetting('onpage'));
-        	
         	
         	while ($r = msr($q)) $retval[] = $r;
         	

@@ -23,8 +23,8 @@ class CDBOOLEAN extends VirtualType
 		<div class="place" <?=($divstyle!='')?$divstyle:''?>>
 					<label><?=htmlspecialchars($this->getSetting('description'))?>&nbsp;<span>[<?=(($this->getSetting('value') || ($this->getSetting('value')=='' && $settings['default']==1)) ? 'да':'нет')?>]</label>
 					<div class="styled">
-						<input type="checkbox" name="<?=htmlspecialchars($this->getSetting('name'))?>" id="checkbox" class="checkbox" <?=(($this->getSetting('value') || ($this->getSetting('value')=='' && $settings['default']==1)) ? 'checked="checked"':'')?>>
-						<label for="checkbox"></label>
+						<input type="checkbox" name="<?=htmlspecialchars($this->getSetting('name'))?>" id="<?=htmlspecialchars($this->getSetting('name'))?>" class="checkbox" <?=(($this->getSetting('value') || ($this->getSetting('value')=='' && $settings['default']==1)) ? 'checked="checked"':'')?>>
+						<label for="<?=htmlspecialchars($this->getSetting('name'))?>"></label>
 					</div>
 		</div>
 		<?

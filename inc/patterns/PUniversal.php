@@ -37,6 +37,15 @@ class PUniversal extends VirtualPattern
 				),
 				$settings['section']
 		);
+		
+		
+		
+		/* Подсказка для поля 
+		$this->setSetting('type_settings_%FIELD_NAME%',array('|imgw=200|imgh=200|'=>'Минимальная ширина'));*/
+		
+		/* Подсказка раздела для редактора шаблонов
+		$help=array('show_vote_count'=>'Показывать сколько человек проголосовали');
+		$this->setSetting('help', $help);*/
 
 		$SiteSettings = new SiteSettings;
 		$SiteSettings->init();

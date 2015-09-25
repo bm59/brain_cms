@@ -985,7 +985,7 @@ $.imgAreaSelect = function (img, options) {
              * default 5px
              */
             if (!parseInt($handles.css('width')) >= 0)
-                $handles.width(30).height(30);
+                $handles.width(10).height(10);
         }
 
         /* Calculate scale factors */

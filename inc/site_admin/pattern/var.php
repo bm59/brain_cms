@@ -12,6 +12,8 @@
 	$Iface = $SectionPattern->init(array('section'=>$section['id'],'mode'=>$delepmentmode,'isservice'=>0));
 	$all_types=$CDDataType->getSetting('all_types');
 	
+	$help=$SectionPattern->getSetting('help');
+	
 	/*Данные колонок*/
 	$columns=$CDDataType->get_column_info($SectionPattern->getSetting('table'),$section['id']);
 	

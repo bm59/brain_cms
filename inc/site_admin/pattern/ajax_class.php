@@ -25,6 +25,22 @@
 		 
 		 }
 		 
+		 if ($_POST['action']=='delitem' && $_POST['id']>0 && $_POST['table']!='')
+		 {
+		 	$cur_item=msr(msq("SELECT * FROM `".$_POST['table']."` WHERE `id`=".$_POST['id']));
+		 
+		 	if ($cur_item['id']>0)
+		 	{
+		 			
+		 		msq("DELETE FROM `".$_POST['table']."` WHERE `id`=".$cur_item['id']." LIMIT 1");
+		 		print
+		 		'{
+				   "ok": "ok"';
+		 		$ok=true;
+		 	}
+		 		
+		 }
+		 
 		 if ($ok)
 		 {
 		 	print '

@@ -32,8 +32,9 @@ class DataSet extends VirtualClass
 
 	function get($id, $section_id=0){
 		global $CDDataType;
-		if (!$section_id>0 && $_GET['section']>0) $section_id=$_GET['section'];
+		
 		$retval = array();
+		if (!$section_id>0 && $_GET['section']>0) $section_id=$_GET['section'];
 		$id = floor($id);
 		if ($r = msr(msq("SELECT * FROM `".$this->getSetting('table')."` WHERE `id`='$id'"))){
 			$retval['id'] = $id;

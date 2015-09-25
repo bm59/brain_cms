@@ -151,8 +151,15 @@ if ($_SESSION['global_alert']) print '<div class="alert"><div>'.$_SESSION['globa
 	
 <div class="hr"></div>
 <h2>Шаблон:</h2> 
+
 	<!-- Настройки раздела -->
-	<label class="settings_main">Настройки раздела (разделитель |):&nbsp;&nbsp;&nbsp;| <a href="#"><span><a href="#">on_page=5</a></span>	| <span><a href="#">default_order=ORDER BY `id`</a></span></label>
+	<label class="settings_main">Настройки раздела (разделитель |):&nbsp;&nbsp;&nbsp;| <a href="#"><span><a href="#">on_page=5</a></span>&nbsp;|&nbsp;<span><a href="#">default_order=ORDER BY `id`</a></span>
+	<?
+	foreach ($help as $k=>$v)
+	print '&nbsp;|&nbsp;<span><a href="#">'.$k.'</a> - '.$v.'</span>';
+	?>
+	
+	</label>
 	<div class="clear"></div><br/>
 
 <form id="save_form" name="save_form" action="" method="POST" enctype="multipart/form-data">

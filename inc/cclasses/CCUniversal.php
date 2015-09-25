@@ -16,7 +16,7 @@ class CCUniversal extends VirtualContent
         		
                 
                 
-                $this->like_array=array();/* √де нет в названии "name", но нужен поиск по like*/
+                $this->like_array=array();/* √де нет в названии "name", но нужен поиск по like - search_href*/
                 $this->not_like_array=array();/* √де есть в названии "name", но не нужен поиск по like*/
                 $this->no_auto=array(); /*Ќе обрабатывать переменные, ручна€ обработка*/
                 

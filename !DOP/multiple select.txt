@@ -1,4 +1,4 @@
-<link rel="stylesheet" type="text/css" href="/css/multiple-select.css" media="all" />
+<link rel="stylesheet" type="text/css" href="/css/inputs/multiple-select.css" media="all" />
 <script src="/js/jquery.multiple.select.js" language="JavaScript" type="text/javascript"></script>
 
                                 <script type="text/javascript">

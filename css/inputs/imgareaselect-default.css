@@ -1,22 +1,22 @@
 /*
- * imgAreaSelect default style
+ * imgAreaSelect animated border style
  */
 
-/*.imgareaselect-border1 {
-    background: url(border-v.gif) repeat-y left top;
+.imgareaselect-border1 {
+	background: url(/pics/inputs/img_area/border-anim-v.gif) repeat-y left top;
 }
 
 .imgareaselect-border2 {
-    background: url(border-h.gif) repeat-x left top;
+    background: url(/pics/inputs/img_area/border-anim-h.gif) repeat-x left top;
 }
 
 .imgareaselect-border3 {
-    background: url(border-v.gif) repeat-y right top;
+    background: url(/pics/inputs/img_area/border-anim-v.gif) repeat-y right top;
 }
 
 .imgareaselect-border4 {
-    background: url(border-h.gif) repeat-x left bottom;
-}*/
+    background: url(/pics/inputs/img_area/border-anim-h.gif) repeat-x left bottom;
+}
 
 .imgareaselect-border1, .imgareaselect-border2,
 .imgareaselect-border3, .imgareaselect-border4 {
@@ -37,5 +37,5 @@
     opacity: 0.5;
 }
 
-.imgareaselect-selection {
+.imgareaselect-selection {  
 }

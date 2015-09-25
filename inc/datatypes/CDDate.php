@@ -9,7 +9,9 @@ class CDDate extends VirtualType
 	function drawEditor($divstyle = ''){
 		if (preg_match("|^[0-9]{4}\-[0-9]{2}\-[0-9]{2}$|",$this->getSetting('value')))
 		$settings = $this->getSetting('settings');
-
+		
+		
+		if (preg_match("|^[0-9]{4}\-[0-9]{2}\-[0-9]{2}|",$this->getSetting('value')))
 		$this->setSetting('value', msdfromdb($this->getSetting('value')));
 		?>
 							<script type="text/javascript">

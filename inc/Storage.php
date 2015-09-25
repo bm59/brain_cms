@@ -50,7 +50,7 @@ class Storage extends VirtualClass
 		}
 		return false;
 	}
-	function uploadFile($stid,$theme,$rubric,$uid,$file){
+	function uploadFile($stid,$theme,$rubric,$uid,$file,$str_settings=''){
 		global $CDDataSet;
 		$retval = array('errors'=>array());
 		$storageobj = $this->getStorage($stid);
@@ -74,9 +74,12 @@ class Storage extends VirtualClass
 		{			$data_set=msr(msq("SELECT * FROM `site_site_data_sets` WHERE `name`='".$dataset_name."'"));
 			$data_type=msr(msq("SELECT * FROM `site_site_data_types` WHERE `dataset`=".$data_set['id']." and `section_id`=$section_id and `name`='".$rubric."'"));
 
+			if ($str_settings!='') $data_type['settings']=$str_settings;
+			
 			if ($data_type['settings']!='')
 			{				$mysql_settings=$this->explode($data_type['settings']);
 			}
+			
 
 			if ($mysql_settings['imgw']!='') $storageobj['settings']['imgw']=$mysql_settings['imgw'];
             if ($mysql_settings['imgwtype']!='') $storageobj['settings']['imgwtype']=$mysql_settings['imgwtype'];

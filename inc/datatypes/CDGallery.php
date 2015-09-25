@@ -8,7 +8,11 @@ class CDGallery extends VirtualType
 				'imgw=245|imgwtype=1|imgh=400|imghtype=1'=>'Проверка на размер изображений',
 				'comment=комментарий'=>'Комментарий',
 				'auto_mini=true|auto_mini_width=210|auto_mini_height=220'=>'Автоматическое создание миниатюр',
-				'exts=jpg,gif,jpeg,png'=>'Расширения'
+				'exts=jpg,gif,jpeg,png'=>'Расширения',
+				'editor_imgh=200|editor_imgw=150'=>'Мин. размер в редакторе',
+				'editor_minh=200|editor_minw=100'=>'Минимизировать к размеру',
+				'editor_min_more=1'=>'Минимизирует если область выделенная область больше',
+				'editor_as_min=1'=>'Сохранять изображение из редактора как миниатюру',
 		
 		);
 		VirtualType::init($settings);
@@ -41,7 +45,8 @@ class CDGallery extends VirtualType
                 $('#file').html('');
                 if(response.result==="ok"){
                     $('#loading<?='_'.$this->getSetting('name')?>').fadeOut(0);
-                    status.html(status.html()+'<LI style="height: 170px;float: left;"><div class="gallery_container"><input type="hidden" id="uploadfilehidden<?=htmlspecialchars($this->getSetting('name'))?>" name="<?=htmlspecialchars($this->getSetting('name'))?>[]" value="'+response.id+'"><span class="button txtstyle"><input type="button" onclick="delete_file_image<?=htmlspecialchars($this->getSetting('name'))?>(this); return false" id="delete_button_image" style="background-image: url(/pics/editor/delete.gif)" title="Удалить изображение"></span><span class="button txtstyle"><a id="link_image" class="link<?='_'.$this->getSetting('name')?>" target="_blank" title="Ссылка на картинку" href="'+response.path+'"><img alt="Ссылка на картинку" src="/pics/editor/link.png"></a></span><img style="height: 170px" class="contentimg" src="'+response.path+'" class="contentimg"></div></LI>');
+                    var editor_link='<span class="button txtstyle"><a onclick="wait_editor_gallery('+response.id+');" href="/inc/datatypes/photo_editor/?file='+response.path+'&rubric=<?=htmlspecialchars($this->getSetting('name'))?>&section=<?=$_GET['section']?>&image_id='+response.id+'" title="Редактор фото" target="_blank" class="editor_gallery" id="editor_image"><img style="margin-top: -4px;" src="/pics/editor/photo_editor.png" alt="Редактор фото"></a></span>';
+                    status.html(status.html()+'<LI id="'+response.id+'" style="height: 170px;float: left;"><div class="gallery_container"><input type="hidden" id="uploadfilehidden<?=htmlspecialchars($this->getSetting('name'))?>" name="<?=htmlspecialchars($this->getSetting('name'))?>[]" value="'+response.id+'"><span class="button txtstyle"><input type="button" onclick="delete_file_image<?=htmlspecialchars($this->getSetting('name'))?>(this); return false" id="delete_button_image" style="background-image: url(/pics/editor/delete.gif)" title="Удалить изображение"></span><span class="button txtstyle"><a id="link_image" class="link<?='_'.$this->getSetting('name')?>" target="_blank" title="Ссылка на картинку" href="'+response.path+'"><img alt="Ссылка на картинку" src="/pics/editor/link.png"></a></span>'+editor_link+'<img style="height: 170px" class="contentimg" src="'+response.path+'" class="contentimg"></div></LI>');
                     //$('#uploadfilehidden<?=htmlspecialchars($this->getSetting('name'))?>').val(response.id);
                     $('#loading').hide();
 
@@ -65,6 +70,34 @@ class CDGallery extends VirtualType
 
 			return false;
         }
+
+    	function wait_editor_gallery(image_id) 
+    	{
+    		/*alert('start_wait'+'change_photo<?='_'.$_GET['section']?><?='_'.$this->getSetting('name')?>_'+image_id);*/ 
+    		var interval = setInterval(function()
+    		{
+
+    			
+    			if ($.cookie('change_photo<?='_'.$_GET['section']?><?='_'.$this->getSetting('name')?>_'+image_id)=='1' && $.cookie('change_photo<?='_'.$_GET['section']?><?='_'.$this->getSetting('name')?>_'+image_id)!='null')
+    			{
+
+    				/*alert('Есть изменения');*/ 
+    	            $.cookie('change_photo<?='_'.$_GET['section']?><?='_'.$this->getSetting('name')?>_'+image_id, null, {path: '/'});
+    	            
+    	            var src=$('#'+image_id+' .contentimg').attr("src").split("?")[0] + "?" + Math.random();
+    	            $('#'+image_id+' .contentimg').attr('src','');
+    	            $('#'+image_id+' .contentimg').attr('src',src);
+    	            
+    	            
+    	            clearInterval(interval);
+    			}
+
+
+
+    		}, 1000);
+
+
+    	}
 
 
 			</script>
@@ -135,11 +168,12 @@ class CDGallery extends VirtualType
 				{                 	$image = $Storage->getFile($img);
 					$f = floor($image['id']);
 					?>
-					<LI style="height: 170px;float: left;">
+					<LI style="height: 170px;float: left;" id="<?=$image['id'] ?>">
 					<div class="gallery_container">
 					<input type="hidden" id="uploadfilehidden<?=htmlspecialchars($this->getSetting('name'))?>" name="<?=htmlspecialchars($this->getSetting('name'))?>[]" value="<?=$f?>"/>
 					<span class="button txtstyle"><input type="button" onclick="delete_file_image<?=htmlspecialchars($this->getSetting('name'))?>(this); return false" id="delete_button_image" style="background-image: url(/pics/editor/delete.gif)" title="Удалить изображение"/></span>
 					<span class="button txtstyle"><a id="link_image" class="link<?='_'.$this->getSetting('name')?>" target="_blank" title="Ссылка на картинку" href="<?=$image['path'] ?>"><img alt="Ссылка на картинку" src="/pics/editor/link.png"></a></span>
+					<span class="button txtstyle"><a id="editor_image" class="editor<?='_'.$this->getSetting('name')?>" target="_blank" title="Редактор фото" href="/inc/datatypes/photo_editor/?file=<?=$image['path'] ?>&rubric=<?=$this->getSetting('rubric') ?>&section=<?=$_GET['section'] ?>&image_id=<?=$image['id']?>" onclick="wait_editor_gallery(<?=$image['id']?>);"><img alt="Редактор фото" src="/pics/editor/photo_editor.png" style="margin-top: -4px;"></a></span>
 					<img style="height: 170px" class="contentimg" src="<?=$image['path']?>" class="contentimg"/>
 					</div>
 					</LI>

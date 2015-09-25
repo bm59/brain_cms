@@ -8,53 +8,57 @@ if(isset($_REQUEST['GLOBALS']) || isset($_FILES['GLOBALS'])){ die(); }
 if(!is_array($GLOBALS)){ die(); }
 
 $badcount = 0;
-$baddata = array("UNION",
-		"OUTFILE",
-		"FROM",
-		"SELECT",
-		"WHERE",
-		"SHUTDOWN",
-		"UPDATE",
-		"DELETE",
-		"CHANGE",
-		"MODIFY",
-		"RENAME",
-		"RELOAD",
-		"ALTER",
-		"GRANT",
-		"DROP",
-		"INSERT",
-		"CONCAT",
-		"cmd",
-		"exec",
-		"--",
+$baddata = array("/UNION/i",
+		"/OUTFILE/i",
+		"/FROM/i",
+		"/SELECT/i",
+		"/WHERE/i",
+		"/SHUTDOWN/i",
+		"/UPDATE/i",
+		"/DELETE/i",
+		"/CHANGE/i",
+		"/MODIFY/i",
+		"/RENAME/i",
+		"/RELOAD/i",
+		"/ALTER/i",
+		"/GRANT/i",
+		"/DROP/i",
+		"/INSERT/i",
+		"/CONCAT/i",
+		"/OR/i",
+		"/TRUNCATE/i",
+		"/ALTER/i",
+		"/cmd/i",
+		"/exec/i",
 		// HTML LINE
-		"\([^>]*\"?[^)]*\)",
-		"<[^>]*body*\"?[^>]*>",
-		"<[^>]*script*\"?[^>]*>",
-		"<[^>]*object*\"?[^>]*>",
-		"<[^>]*iframe*\"?[^>]*>",
-		"<[^>]*img*\"?[^>]*>",
-		"<[^>]*frame*\"?[^>]*>",
-		"<[^>]*applet*\"?[^>]*>",
-		"<[^>]*meta*\"?[^>]*>",
-		"<[^>]*style*\"?[^>]*>",
-		"<[^>]*form*\"?[^>]*>",
-		"<[^>]*div*\"?[^>]*>");
+		"/<(.*?)script(.*?)>/si",
+		"/<(.*?)object(.*?)>/si",
+		"/<(.*?)frame(.*?)>/si",
+		"/<(.*?)iframe(.*?)>/si",
+		"/<(.*?)form(.*?)>/si",
+		"/<(.*?)meta(.*?)>/si",
+		"/<(.*?)applet(.*?)>/si",
+		"/<(.*?)body(.*?)>/si"
+		
+		
+);
 if(!isset($_REQUEST)) return;
 foreach($_REQUEST as $params => $inputdata){
-foreach($baddata as $badkey => $badvalue){
-if(is_string($inputdata) && eregi($badvalue,$inputdata)){ $badcount=1; }
-}
+	foreach($baddata as $badkey => $badvalue){
+		if(is_string($inputdata) && preg_match($badvalue, $inputdata))
+		{ 
+			$badcount=1; 
+			/* exit('ERROR: '.$params.'='.$inputdata."|".$badvalue); */
+			exit('ERROR: BADDATA'); 
+		}
+	}
 }
 
-if($badcount==1){
-exit();
-}
+
 
 $array = array( "\x27", "\x22", "\x60", "\t",'\n','\r', '\\', "'",
 "¬","#",";","~","[","]","{","}","=","+",")","(",
-"*","&","^","%","$","<",">","?","!",".pl", ".php",'"' );
+"*","&","^","%","$","<",">","?","!",".pl", '"' );
 
 $_GET = str_replace($array, '', $_GET);
 $_POST = str_replace($array, '', $_POST);

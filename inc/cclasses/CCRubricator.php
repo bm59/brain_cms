@@ -385,7 +385,7 @@ $(function() {
 			<span class="input" style="width: 400px; margin-left: 30px; float: left;">
 				<input type="text" value="" maxlength="255" name="search_text" placeholder="Поиск">
 			</span>
-			<div style="float: left; padding-top: 20px;"><a href="#" title="Очистить" onclick="return false;" class="clear_search"><img src="/pics/inputs/clear.png" alt="Очистить"></a></div>
+			<div style="float: left; padding-top: 20px;"><a href="#" title="Очистить" onclick="if (!confirm('Удалить запись')) return false;" class="clear_search"><img src="/pics/inputs/clear.png" alt="Очистить"></a></div>
 		</div>
 		<div class="clear"></div>
    	<div class="hr"><hr></div>

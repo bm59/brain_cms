@@ -72,20 +72,36 @@ if ($mode!='development' && !in_array('delete', $group['new_settings'][$cid]))
   	$(function() {
        $( "a[title*='Удалить'] IMG").attr("src","/pics/editor/delete-disabled.gif");
        $( "a[title*='Удалить']").attr("href","");
+       $( "a[title*='Удалить']").prop('onclick',null);
        $( "a[title*='Удалить']").click(function(){return false;});
 
+       $( "a:contains('Удалить')").prop('onclick',null);
        $( "a:contains('Удалить')").click(function(){return false;});
        $( "a:contains('Удалить')").attr("href","");
-
        $( "input[title*='Удалить']").css("backgroundImage", "url('/pics/editor/delete-disabled.gif')");
+       
        $( "input[title*='Удалить']").click(function(){return false;});
+       
+
+       $( "a[title*='Очистить'] IMG").attr("src","/pics/editor/clear-disabled.png");
+       $( "a[title*='Очистить']").attr("href","");
+       $( "a[title*='Очистить']").prop('onclick',null);
+       $( "a[title*='Очистить']").click(function(){return false;});
+
+       
+       $( "a:contains('Очистить')").attr("href","");
+       $( "a:contains('Очистить')").prop('onclick',null);
+       $( "a:contains('Очистить')").click(function(){return false;});
+       $( "input[title*='Очистить']").css("backgroundImage", "url('/pics/editor/clear-disabled.png')");
+
+        $( "input[title*='Очистить']").click(function(){return false;});
   	});
   </script>
 
 
 
 <?
- if (floor($_GET['delete'])>0)
+ if (floor($_GET['delete'])>0 || floor($_GET['clear'])>0)
  { 	header('Location: '.$path);
  	die();
  }

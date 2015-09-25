@@ -498,6 +498,16 @@ function get_insert_sql($data, $table)
 	return $sql;
 
 }
+function get_array_sql($q)
+{
+	$return=array();
+	
+	while ($r=msr($q))
+	$return[]=$r;
+	
+	return $return;
+
+}
 
     function ResizeFrame($src=null,$maxWidth=null,$maxHeight=null) {
 
@@ -643,7 +653,7 @@ function get_insert_sql($data, $table)
 	    $thumbimg = $save_func($thumbimg,$src);
 
     }
-    function crop_editor($image, $x_o, $y_o, $w_o, $h_o, $editor_minw, $editor_minh, $save_as_min) {
+    function crop_editor($image, $x_o, $y_o, $w_o, $h_o, $settings) {
     
     
     	if (($x_o < 0) || ($y_o < 0) || ($w_o < 0) || ($h_o < 0)) {
@@ -669,14 +679,19 @@ function get_insert_sql($data, $table)
     	$func = 'image'.$ext; // Получаем функция для сохранения результата
     
     	
-    	if ($save_as_min)
+    	if ($settings['editor_as_min'])
     	$image=str_replace('.','_mini.',$image);
     	
     	$new_i=$func($img_o, $image);  // Сохраняем изображение
     	
+    	
     	/* Если надо уменьшить до размеров */
-    	if ($editor_minw>0 && $editor_minh>0)
-    	ResizeFrame($image, $editor_minw, $editor_minh);  
+    	if ($settings['editor_minw']>0 && $settings['editor_minh']>0)
+    	{
+    		if (!$settings['editor_min_more'] || ($settings['editor_minw']<$x_o + $w_o || $settings['editor_minh']<$y_o + $h_o))
+    		
+    		ResizeFrame($image, $settings['editor_minw'], $settings['editor_minh']);  
+    	}
     	
     	return basename($image);
     
