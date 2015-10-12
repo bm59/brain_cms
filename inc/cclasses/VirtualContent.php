@@ -7,6 +7,7 @@ class VirtualContent
 	var $Settings = array();
 	public $urlstr;
 	public $sqlstr;
+	public $editor_cnt=0;
 
 	function init($settings = array()){
 		if (is_array($settings)){
@@ -20,6 +21,73 @@ class VirtualContent
 			}
 			closedir($dir);
 		}
+	}
+	function ExportStatXls($query){
+		global $MySqlObject;
+		 
+		deleteTempFiles('/storage/xls/');
+	
+		include_once($_SERVER['DOCUMENT_ROOT']."/inc/excel/PHPExcel.php");
+		include_once($_SERVER['DOCUMENT_ROOT']."/inc/excel/PHPExcel/Writer/Excel2007.php");
+		 
+		// Create new PHPExcel object
+	
+		$objPHPExcel = new PHPExcel();
+	
+	
+	
+		$objPHPExcel->setActiveSheetIndex(0)
+		->setCellValue('B2', iconv('windows-1251', 'utf-8', 'Дата'))
+		->setCellValue('C2', iconv('windows-1251', 'utf-8', 'Показов'))
+		->setCellValue('D2', iconv('windows-1251', 'utf-8', 'Кликов'))
+		->setCellValue('E2', iconv('windows-1251', 'utf-8', 'Уникальных'));
+	
+	
+		$styleHeader = array('font'=> array('bold'=>true), 'alignment' => array('horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_CENTER));
+		foreach(range('B','E') as $columnID) {
+			$objPHPExcel->getActiveSheet()->getStyle($columnID.'2')->applyFromArray($styleHeader);
+		}
+	
+		foreach(range('B','E') as $columnID) {
+			$objPHPExcel->getActiveSheet()->getColumnDimension($columnID)
+			->setAutoSize(true);
+		}
+	
+		$objPHPExcel->getActiveSheet()->setTitle('statistics');
+	
+		$i=2;
+		while ($r=msr($query))
+		{
+			$i++;
+				
+			$objPHPExcel->setActiveSheetIndex(0)
+			->setCellValue('B'.$i, iconv('windows-1251', 'utf-8', $MySqlObject->dateFromDBDot($r['date'])))
+			->setCellValue('C'.$i, iconv('windows-1251', 'utf-8', $r['show']))
+			->setCellValue('D'.$i, iconv('windows-1251', 'utf-8', $r['click']))
+			->setCellValue('E'.$i, iconv('windows-1251', 'utf-8', $r['unique']));
+		}
+	
+		$styleArray = array(
+				'borders' => array(
+						'allborders' => array(
+								'style' => PHPExcel_Style_Border::BORDER_THIN
+						)
+				)
+		);
+	
+		$objPHPExcel->getActiveSheet()->getStyle('B2:E'.$i)->applyFromArray($styleArray);
+	
+	
+		// Save Excel 2007 file
+		$file_name="temp_".time().".xlsx";
+		$objWriter = new PHPExcel_Writer_Excel2007($objPHPExcel);
+		$objWriter->save($_SERVER['DOCUMENT_ROOT']."/storage/xls/".$file_name);
+	
+		?>
+			<script>
+			window.location.href = "<?="/storage/xls/".$file_name?>";
+			</script>
+			<?
 	}
 	function drawPubsList(){
 		global $SiteSections, $CDDataSet, $CDDataType;
@@ -43,6 +111,7 @@ class VirtualContent
 		    	<div id="content" class="forms">
 		    	<?include_once($_SERVER['DOCUMENT_ROOT']."/inc/site_admin/nav.php");?>
 		        <form name="searchform" action="" method="POST">
+		        	<input type="hidden" name="searchaction">
 					<?
 					$search_fields_cnt=0;
 					?>
@@ -313,13 +382,19 @@ class VirtualContent
 		                <?
 		}
 		function drawAddEdit(){
-			global $CDDataSet,$SiteSections;
+			global $CDDataSet,$SiteSections, $multiple_editor;
 			$section = $SiteSections->get($this->getSetting('section'));
 			
 			$SectionPattern = new $section['pattern'];
 			$Iface = $SectionPattern->init(array('section'=>$section['id'],'mode'=>$delepmentmode,'isservice'=>0));
 			
 			$init_pattern=$Iface->getSetting('pattern');
+			
+			if ($this->editor_cnt>1)
+			{
+				$multiple_editor=true;
+				?><script type="text/javascript" src="/js/tinymce/tinymce.js"></script><?
+			}
 			
 			$pub = $this->getPub($_GET['pub']); 
 			$pub['id'] = floor($pub['id']);
@@ -389,17 +464,21 @@ class VirtualContent
 		                        </form>
 		                </div>
 		                <?
+		                if (isset($this->Settings['settings_personal']['reklama']))
+		                include_once($_SERVER['DOCUMENT_ROOT']."/inc/site_admin/reklama/add_pattern.php");
 	}
 	function start(){
 		global $CDDataSet;
-	
+		
 		$dataset = $CDDataSet->get($this->getSetting('dataset'));
 		$imagestorage = $this->getSetting('imagestorage');
 		
-		if ($_GET['pub']>0) $pub = $this->getPub(floor($_GET['pub']));
-		
-		
-			foreach ($dataset['types'] as $k=>$dt){
+		if ($_GET['pub']>0) 
+		$pub = $this->getPub(floor($_GET['pub']));
+		foreach ($dataset['types'] as $k=>$dt){
+			
+			if ($dt['type']=='CDTextEditor')
+			$this->editor_cnt++;
 			$tface = new $dt['type'];
 			$tface->init(array('name'=>$dt['name'],'value'=>$pub[$dt['name']], 'uid'=>floor($pub['id']),'imagestorage'=>floor($imagestorage['id']),'description'=>$dt['description'],'imagestorage'=>floor($imagestorage['id']),'theme'=>$dataset['name'].'_'.$this->getSetting('section'), 'theme'=>$dataset['name'].'_'.$this->getSetting('section'),'rubric'=>$dt['name'],'settings'=>$dt['settings']));
 			$dataset['types'][$k]['face'] = $tface;
@@ -428,6 +507,7 @@ class VirtualContent
 		}
 	}
 	function getSearch(){
+		global $MySqlObject;
 	
 		foreach ($_REQUEST as $k=>$v)
 			if (stripos($k,'search')!==false && $v!='' && $v!='-1')
@@ -447,13 +527,13 @@ class VirtualContent
 	
 						
 					if ($_REQUEST['nouse_'.$k.'_type']=='CDCHOICE')
-						$this->sqlstr.=$sql_pref.$mysql_k." like '%,".$v.",%'";
+					$this->sqlstr.=$sql_pref.$mysql_k." like '%,".$v.",%'";
 					elseif ((stripos($k,'name')!==false || in_array($k,$this->like_array)) and !in_array($k,$this->not_like_array))
 					$this->sqlstr.=$sql_pref.$mysql_k." like '%".$v."%'";
-					elseif ($k=='search_date_from')
-					$this->sqlstr.=$sql_pref.$mysql_k.">='".$MySqlConnect->dateToDB($v)."'";
-					elseif ($k=='search_date_to')
-					$this->sqlstr.=$sql_pref.$mysql_k."<='".$MySqlConnect->dateToDB($v)."'";
+					elseif (stripos($k, '_from') && $v!='')
+					$this->sqlstr.=$sql_pref.$mysql_k.">='".$MySqlObject->dateToDB($v)."'";
+					elseif (stripos($k, '_to') && $v!='')
+					$this->sqlstr.=$sql_pref.$mysql_k."<='".$MySqlObject->dateToDB($v)."'";
 					else $this->sqlstr.=$sql_pref.$mysql_k."='".$v."'";
 	
 				}
@@ -510,6 +590,15 @@ class VirtualContent
 				$r[$k]=html_entity_decode(stripslashes($v));
 			$retval= $r;
 			return $retval;
+	}
+	function incField($field_name='', $id=0){
+		if ($field_name=='' || !$id>0) return false;
+		$r = msr(msq("SELECT * FROM `".$this->getSetting('table')."` WHERE `id`='".$id."'"));
+		
+		if ($r['id']>0)
+		msq("UPDATE `".$this->getSetting('table')."` SET `$field_name`='".(floor($r[$field_name])+1)."' WHERE id=".$r['id']." LIMIT 1");
+		
+		return $retval;
 	}
 	function getPubByField($field,$value){
 		$retval = array();
@@ -580,6 +669,7 @@ class VirtualContent
         	$retval = array();
         	
         	$q = "SELECT * FROM `".$this->getSetting('table')."`".$this->sqlstr.$str_usl;
+        	
         	$count = msq($q);
         	$count = @mysql_num_rows($count);
         	

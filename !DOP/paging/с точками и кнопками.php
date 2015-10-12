@@ -32,7 +32,7 @@ if ($pagescount>1 && $_GET['id']==''){
 	if ($_GET['page']+$dif<$pagescount) print '<a href="?page='.$pagescount.$urlstr.'">Последняя</a>';
 	?>
 </div>
-		        					<?
+<?
 
-		        				}
+}
 ?>

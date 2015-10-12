@@ -721,4 +721,33 @@ function get_array_sql($q)
  			
 	    }
 	}
+	function deleteTempFiles($path=''){
+		
+		
+		$d = dir($_SERVER['DOCUMENT_ROOT'].$path);
+		while (($e = $d->read()) !== false)
+		if (!is_dir("$dirname/$e") && stripos($e, 'temp_')!==false)
+		{
+			@unlink($_SERVER['DOCUMENT_ROOT'].$path.$e);
+		}
+		
+	}
+	function print_tag ($ids, $tag_array, $url)
+	{
+		if ($ids=='') return false;
+		
+		$return='';
+		
+		$ids=explode(',', $ids);
+		
+		$ids=clear_array_empty($ids);
+		
+		foreach ($ids as $id)
+		{
+			if (isset($tag_array[$id]))
+			$return.=($return=='' ? '':'<div>,&nbsp;</div>').'<a href="'.$url.'?tag='.$id.'">'.$tag_array[$id]['name'].'</a>';
+		}
+		
+		return '<div class="tags"><div class="tag_header">“›√»:&nbsp;&nbsp;&nbsp;</div>'.$return.'</div>';
+	}
 ?>

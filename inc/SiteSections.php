@@ -259,6 +259,14 @@ class SiteSections extends VirtualClass
                 }
                 return $retval;
         }
+        function getListWhere($where){
+        	$retval = array('-1'=>'');
+        	$q = msq("SELECT * FROM `".$this->getSetting('table')."` $where");
+        	while ($r = msr($q)){
+						 $retval[$r['id']] = $r['name'];
+        	}
+        	return $retval;
+        }
         function getParentsList($id){
                 $id = floor($id);
                 $retval = array();

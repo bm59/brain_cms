@@ -26,14 +26,15 @@ class PNews extends VirtualPattern
 						'description'=>$descr,
 						'types'=>array
 						(
-								array('description'=>'Дата', 'name'=>'date', 'type'=>'CDDate'),
+								array('description'=>'Дата', 'name'=>'date', 'type'=>'CDDate',  'settings'=>array('show_search'=>'', 'show_list'=>'')),
 								array('name'=>'name', 'description'=>'Наименование', 'type'=>'CDText',  'settings'=>array('important'=>'', 'show_search'=>'', 'show_list'=>'')),
 								array('description'=>'Текст', 'name'=>'text', 'type'=>'CDTextEditor', 'settings'=>'|texttype=full|'),
 								array('name'=>'image', 'description'=>'Изображение', 'type'=>'CDImage',   'settings'=>array('exts'=>'jpg,gif,jpeg,png')),
 								array('name'=>'tag_id', 'description'=>'Теги', 'type'=>'CDChoice',   'settings'=>'|source=#source_type=spr#spr_path=%SOURCE_PATH%#spr_field=name#spr_usl=WHERE `show`=1#spr_order=ORDER BY `name`#name_only=0|type=multi|off|'),
 								array('name'=>'ptitle', 'description'=>'Title страницы', 'type'=>'CDText','settings'=>array()),
 								array('name'=>'pdescription', 'description'=>'Description страницы', 'type'=>'CDText', 'settings'=>array()),
-								array('name'=>'pseudolink', 'description'=>'Псеводоним ссылки', 'type'=>'CDText', 'settings'=>array())
+								array('name'=>'pseudolink', 'description'=>'Псеводоним ссылки', 'type'=>'CDText', 'settings'=>array()),
+								array('name'=>'show_count', 'description'=>'Показов', 'type'=>'CDInteger','settings'=>array('off'=>''))
 						)
 		
 				),

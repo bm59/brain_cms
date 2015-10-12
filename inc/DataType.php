@@ -120,6 +120,57 @@ class DataType extends VirtualClass
 				</div>
 				<?
 				break;
+			case 'CDDate':
+				
+				?>
+											<script type="text/javascript">
+							$(function(){
+
+								$.datepicker.regional['ru'] =
+								{
+									closeText: 'Закрыть',
+									prevText: '&#x3c;Пред',
+									nextText: 'След&#x3e;',
+									currentText: 'Сегодня',
+									monthNames: ['Январь','Февраль','Март','Апрель','Май','Июнь',
+									'Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь'],
+									monthNamesShort: ['Янв','Фев','Мар','Апр','Май','Июн',
+									'Июл','Авг','Сен','Окт','Ноя','Дек'],
+									dayNames: ['воскресенье','понедельник','вторник','среда','четверг','пятница','суббота'],
+									dayNamesShort: ['вск','пнд','втр','срд','чтв','птн','сбт'],
+									dayNamesMin: ['Вс','Пн','Вт','Ср','Чт','Пт','Сб'],
+									dateFormat: 'dd.mm.yy',
+									firstDay: 1,
+									isRTL: false
+								};
+
+								$.datepicker.setDefaults($.extend($.datepicker.regional["ru"]));
+
+									$("[name=search_<?=$tface->getSetting('name')?>_from]").datepicker({
+									showOn: "both",
+									buttonImage: "/pics/editor/calendar.gif",
+									buttonImageOnly: true
+								});
+								$.datepicker.setDefaults($.extend($.datepicker.regional["ru"]));
+
+									$("[name=search_<?=$tface->getSetting('name')?>_to]").datepicker({
+									showOn: "both",
+									buttonImage: "/pics/editor/calendar.gif",
+									buttonImageOnly: true
+								});
+                               
+							});
+							</script>
+		<div style="z-index: 11; width: 158px;" id="date_calendar" class="place">
+			<label>Дата c</label>
+			<div><input type="text" name="search_<?=$tface->getSetting('name')?>_from" value="<?=$_POST['search_'.$tface->getSetting('name').'_from']?>" style="width: 100px; float: left;"></div>
+		</div>
+		<div style="z-index: 11; width: 158px;" id="date_calendar" class="place">
+			<label>Дата по</label>
+			<div><input type="text" name="search_<?=$tface->getSetting('name')?>_to" value="<?=$_POST['search_'.$tface->getSetting('name').'_to']?>" style="width: 100px; float: left;"></div>
+		</div>
+				<?
+			break;
 			default:
 				?>
 	        		<div class="place" style="z-index: 10;<?=$tface->Settings['setting_style_edit']['css']?>">
@@ -155,18 +206,20 @@ class DataType extends VirtualClass
 				print $val;
 			break;
 			default:
-				print $val;
+				print stripcslashes($val);
 	        break;
 		 } 
 	}
-	function add_column($values, $table_array='') {
+	function add_column($values, $table_array='', $default='') {
 		$error='';
 		if (!$values['dataset']>0) return false;
+		
+		$def=$default!='' ? $default : ' NULL DEFAULT NULL';
 
 		foreach($table_array as $tab)
 		if ($tab!='')
 		{
-			msq("ALTER TABLE `$tab` ADD `".$values['name']."` ".$values['table_type']." NULL DEFAULT NULL COMMENT '".$values['description']."'");
+			msq("ALTER TABLE `$tab` ADD `".$values['name']."` ".$values['table_type']."  $def COMMENT '".$values['description']."'");
 			alert_mysql();
 			$error.=mysql_error();
 		

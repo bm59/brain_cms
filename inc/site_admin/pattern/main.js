@@ -1,5 +1,5 @@
  $(function() {
-	 
+
 	 function getGet(name) {
 		    var s = window.location.search;
 		    s = s.match(new RegExp(name + '=([^&=]+)'));
@@ -7,9 +7,9 @@
 		}
 
 	new_count=$("input[type=hidden][name*=id_new]").length+1;
-	
+
     $.contextMenu({
-        selector: 'body',
+        selector: '#zbody',
         callback: function(key, options) {
             if (key=='save')
             {
@@ -33,17 +33,17 @@
             }
         },
         items: {
-            
+
              "save": {name: "Сохранить", icon: "save"},
              "sep1": "---------",
              "hide_off": {name: "Скрыть отключенные", icon: "hide_off"},
              "show_off": {name: "Показать отключенные", icon: "show_off"},
              "sep2": "---------",
-             "section_go": {name: "Перейти раздел", icon: "section_go"},
+             "section_go": {name: "Перейти в раздел", icon: "section_go"},
              "section_add": {name: "Добавить в раздел", icon: "section_add"},
         }
     });
-	
+
   /*   $( "#sortable" ).sortable({
       handle: ".drag_icon"
     }); */
@@ -61,7 +61,7 @@
      	cur_id=cur_id.split('_');
 		if (cur_id[1]!='')
 		$('[name=table_type_'+cur_id[1]+']').val($(this).find(':selected').attr('data-default'));
-		
+
         return false;
     });
 
@@ -74,7 +74,7 @@
 			inp_str=inp_str.replace($(this).attr('data-name')+'|','');
 			if (inp_str=='|') inp_str='';
 		}
-		else 
+		else
 		inp_str+=(inp_str=='' ? '|':'')+$(this).attr('data-name')+'|';
 
 		$(this).parents('.dt_settings').find('.setting_text').val(inp_str);
@@ -91,7 +91,7 @@
 			inp_str=inp_str.replace($(this).attr('data-name')+'|','');
 			if (inp_str=='|') inp_str='';
 		}
-		else 
+		else
 		inp_str+=(inp_str=='' ? '|':'')+$(this).attr('data-name')+'|';
 
 		$(this).parents('.section_settings').find('.setting_text').val(inp_str);
@@ -108,29 +108,29 @@
 		var split_str=search_str.split('=');
 		if (split_str[0]!='') search_str=split_str[0];
 
-		    	
+
 		if ($(this).css('color')!='rgb(255, 0, 0)')
 		{
 			inp_str+=(inp_str=='' ? '|':'')+$(this).html()+'|';
 			$(this).css('color', 'rgb(255, 0, 0);');
 			$(this).css('text-decoration', 'none');
-			
+
 			$(this).parents('.dt_settings').find('.setting_text').val(inp_str);
 		}
 		else
 		{
-			
 
-			var result=new RegExp("("+search_str+"?[^\\|]+\\|)", "i").exec(inp_str); 
+
+			var result=new RegExp("("+search_str+"?[^\\|]+\\|)", "i").exec(inp_str);
 			if (result)
 			{
 				inp_str=inp_str.replace(result[0],'');
-				
+
 			}
-				
-				
+
+
 			$(this).css('color', 'rgb(0, 0, 0);');
-			$(this).css('text-decoration', 'underline');	
+			$(this).css('text-decoration', 'underline');
 		}
 		$(this).parents('.dt_settings').find('.setting_text').val(inp_str);
         return false;
@@ -145,7 +145,7 @@
 
     	inp_str+=(inp_str=='' ? '|':'')+$(this).html()+'|';
 
-		
+
     	$('.section_settings .setting_text').val(inp_str);
         return false;
     });
@@ -159,7 +159,7 @@
 
     	inp_str+=(inp_str=='' ? '|':'')+$(this).html()+'|';
 
-		
+
     	$('[name='+$(this).attr('data-field')+']').val(inp_str);
         return false;
     });
@@ -195,7 +195,7 @@
 			$(this).css('backgroundImage', 'url("/pics/editor/on.png")');
 		}
 		else
-		{ 
+		{
 			inp_str+=(inp_str=='' ? '|':'')+'off|';
 			cur_val.val(1);
 			$(this).css('backgroundImage', 'url("/pics/editor/off.png")');
@@ -204,7 +204,7 @@
 		$(this).parents('tr').find('.setting_text').val(inp_str);
 		//alert($(this).attr('data-name'));
         return false;
-        
+
     });
 
 
@@ -222,10 +222,10 @@
         $("html, body").animate({scrollTop:destination},"fast");
 
         return false;
-        
+
     });
-		
-	
+
+
   });
 
   var new_count=1;

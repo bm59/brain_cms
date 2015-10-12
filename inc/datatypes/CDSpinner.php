@@ -16,6 +16,7 @@ class CDSPINNER extends VirtualType
 	}
 	function drawEditor($divstyle = '',$span = true){
 		$settings = $this->getSetting('settings');
+		
 		?>
 		  <script>
 		  $(function() {
@@ -51,7 +52,7 @@ class CDSPINNER extends VirtualType
 
 		if ((isset($settings['important'])) && (!is_float($newvalue))) $errors[] = 'Заполните поле «'.$this->getSetting('description').'»';
 		if ((isset($settings['important'])) && ($newvalue==='')) $errors[] = 'Заполните поле «'.$this->getSetting('description').'»';
-		if ($newvalue!='0')
+		//if ($newvalue!='0')
 		$this->setSetting('value',$newvalue);
 		return $errors;
 	}

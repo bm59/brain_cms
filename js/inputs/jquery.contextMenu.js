@@ -22,6 +22,11 @@
 $.support.htmlMenuitem = ('HTMLMenuItemElement' in window);
 $.support.htmlCommand = ('HTMLCommandElement' in window);
 $.support.eventSelectstart = ("onselectstart" in document.documentElement);
+
+$(document).keydown(function(e)	{if(e.ctrlKey){ctrlMode = true;};});
+$(document).keyup(function(e)	{ctrlMode = false; });
+
+var ctrlMode = false;
 /* // should the need arise, test for css user-select
 $.support.cssUserSelect = (function(){
     var t = false,
@@ -204,8 +209,11 @@ var // currently active contextMenu trigger
     handle = {
         // abort anything
         abortevent: function(e){
-            e.preventDefault();
-            e.stopImmediatePropagation();
+        	if (ctrlMode==true)
+        	{
+        		e.preventDefault();
+            	e.stopImmediatePropagation();
+        	}
         },
         
         // contextmenu show dispatcher
@@ -213,12 +221,15 @@ var // currently active contextMenu trigger
             var $this = $(this);
             
             // disable actual context-menu
-            e.preventDefault();
-            e.stopImmediatePropagation();
+            if (ctrlMode==true)
+            {
+            	e.preventDefault();
+            	e.stopImmediatePropagation();
+            }
             
             // abort native-triggered events unless we're triggering on right click
-            if (e.data.trigger != 'right' && e.originalEvent) {
-                return;
+            if ((e.data.trigger != 'right' || ctrlMode==false) && e.originalEvent) {
+            	return;
             }
             
             // abort event if menu is visible for this trigger

@@ -13,8 +13,8 @@ class CDImage extends VirtualType
 				'auto_mini=true|auto_mini_width=210|auto_mini_height=220'=>'Автоматическое создание миниатюр', 
 				'exts=jpg,gif,jpeg,png'=>'Расширения',
 				'editor_proport=auto'=>'Пропорция 3:4 или auto',
-				'editor_imgh=200|editor_imgw=150'=>'Мин. размер в редакторе',
-				'editor_minh=200|editor_minw=100'=>'Минимизировать к размеру',
+				'editor_imgw=150|editor_imgh=200'=>'Мин. размер в редакторе',
+				'editor_minw=100|editor_minh=200'=>'Минимизировать к размеру',
 				'editor_min_more=1'=>'Минимизирует если область выделенная область больше',
 				'editor_as_min=1'=>'Сохранять изображение из редактора как миниатюру',
 		

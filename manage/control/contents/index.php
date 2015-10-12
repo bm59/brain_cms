@@ -381,7 +381,7 @@ $deletesection = $SiteSections->get(floor($_GET['delete']),-1); $deletesection['
      			}
                  $(function() {
                 	    $.contextMenu({
-                	        selector: 'body',
+                	        selector: '#zbody',
                 	        callback: function(key, options) {
                 	            if (key=='save')
                 	            {

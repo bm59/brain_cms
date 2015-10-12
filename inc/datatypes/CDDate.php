@@ -4,12 +4,16 @@ class CDDate extends VirtualType
 	
 	function init($settings){
 		$settings['descr']='Дата';
+		$settings['help']=array(
+				'changemonth'=>'Выбор месяца из списка',
+				'changeyear'=>'Выбор года из списка',
+				'numberofmonths=3'=>'Несколько месяцев',
+				'nodefault'=>'Не устанавливать сегодняшнюю дату по умолчанию'
+		);
 		VirtualType::init($settings);
 	}
 	function drawEditor($divstyle = ''){
-		if (preg_match("|^[0-9]{4}\-[0-9]{2}\-[0-9]{2}$|",$this->getSetting('value')))
 		$settings = $this->getSetting('settings');
-		
 		
 		if (preg_match("|^[0-9]{4}\-[0-9]{2}\-[0-9]{2}|",$this->getSetting('value')))
 		$this->setSetting('value', msdfromdb($this->getSetting('value')));
@@ -40,9 +44,12 @@ class CDDate extends VirtualType
 									$("#<?=htmlspecialchars($this->getSetting('name'))?>").datepicker({
 									showOn: "both",
 									buttonImage: "/pics/editor/calendar.gif",
-									buttonImageOnly: true
+									buttonImageOnly: true,
+									<?=(isset($settings['numberofmonths']) ? 'numberOfMonths:  '.$settings['numberofmonths'].',':'')?>
+									<?=(isset($settings['changemonth']) ? 'changeMonth: true, ':'')?>
+									<?=(isset($settings['changeyear']) ? 'changeYear: true, ':'')?>
 								});
-                                <?if ($this->getSetting('value')==''){?>$("#<?=htmlspecialchars($this->getSetting('name'))?>").datepicker( "setDate" , "0");<?}?>
+                                <?if ($this->getSetting('value')=='' && !isset($settings['nodefault'])){?>$("#<?=htmlspecialchars($this->getSetting('name'))?>").datepicker( "setDate" , "0");<?}?>
 							});
 							</script>
         <?

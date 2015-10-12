@@ -26,8 +26,8 @@ class PBanners extends VirtualPattern
 						'description'=>$descr,
 						'types'=>array
 						(
-							array('name'=>'date_start', 'description'=>'Дата начала', 'type'=>'CDDate',  'settings'=>array('important'=>'', 'show_list'=>'', 'list_class'=>'t_minwidth')),
-							array('name'=>'date_end', 'description'=>'Дата окончания', 'type'=>'CDDate',  'settings'=>array('important'=>'', 'show_list'=>'', 'list_class'=>'t_minwidth')),
+							array('name'=>'date_start', 'description'=>'Дата начала', 'type'=>'CDDate',  'settings'=>array('nodefault'=>'','changemonth'=>'','changeyear'=>'','numberofmonths'=>'3','important'=>'', 'show_list'=>'', 'list_class'=>'t_minwidth')),
+							array('name'=>'date_end', 'description'=>'Дата окончания', 'type'=>'CDDate',  'settings'=>array('nodefault'=>'','changemonth'=>'','changeyear'=>'','numberofmonths'=>'3','important'=>'', 'show_list'=>'', 'list_class'=>'t_minwidth')),
 							array('name'=>'name', 'description'=>'Наименование', 'type'=>'CDText',  'settings'=>array('important'=>'', 'show_search'=>'', 'show_list'=>'', 'show_list'=>'')),
 							array('name'=>'href', 'description'=>'Ссылка', 'type'=>'CDText',  'settings'=>array('show_search'=>'', 'show_list'=>'')),
 							array('name'=>'image', 'description'=>'Изображение', 'type'=>'CDImage',   'settings'=>array('exts'=>'jpg,gif,jpeg,png,swf')),

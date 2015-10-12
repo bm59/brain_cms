@@ -21,16 +21,11 @@ A IMG {border: none;}
 H1 {font-size: 22px; color: #000; padding: 10px 0; line-height: 22px;}
 H2 {font-size: 18px; color: #000; padding: 10px 0; line-height: 18px;}
 H3 {font-size: 16px; color: #000; padding: 10px 0; line-height: 16px;}
+
 P {padding: 10px 0px;}
 .overlay {width: 100%; height: 100%; display: block; z-index: 10;position: absolute; background-color: rgba(204, 204, 204, 0);}
 TABLE TH {vertical-align: top;}
 TABLE TD {vertical-align: top;}
-.clear {clear: both; height: 0px; overflow: hidden;}
-.center {text-align: center;}
-.col {float: left;  box-sizing: border-box;}
-
-.air {background: rgba(0, 0, 0, 0) none repeat scroll 0 0;display: block;width: 100%;}
-.air.s60 {height: 60px;}
 
 .hr {border-top: 1px solid #D8D8D8; height: 1px; margin: 30px 0; clear: both;}
 .hr hr {display:none;}
@@ -116,21 +111,6 @@ border:1px solid #999999;
 .table-content TH.last  {border-top-right-radius: 10px; padding-right: 10px;}
 .even {background:#f7f7f7;}
 .odd {}
-
-
-/*Файлы*/
-a[title*="file"]				    {background: url('/pics/file/file.png') no-repeat; line-height: 20px; padding: 4px 0 8px 35px; display: block;}
-a[title*="file"][href$=".doc"|]   	{background: url('/pics/file/doc.png') no-repeat; line-height: 20px; padding: 4px 0 8px 35px; display: block;}
-a[title*="file"][href$=".docx"]  	{background: url('/pics/file/doc.png') no-repeat; line-height: 20px; padding: 4px 0 8px 35px; display: block;}
-a[title*="file"][href$=".xls"]   	{background: url('/pics/file/xls.png') no-repeat; line-height: 20px; padding: 4px 0 8px 35px; display: block;}
-a[title*="file"][href$=".xlsx"]   	{background: url('/pics/file/xls.png') no-repeat; line-height: 20px; padding: 4px 0 8px 35px; display: block;}
-a[title*="file"][href$=".ppt"]   	{background: url('/pics/file/ppt.png') no-repeat; line-height: 20px; padding: 4px 0 8px 35px; display: block;}
-a[title*="file"][href$=".pptx"]   	{background: url('/pics/file/ppt.png') no-repeat; line-height: 20px; padding: 4px 0 8px 35px; display: block;}
-a[title*="file"][href$=".pdf"]   	{background: url('/pics/file/pdf.png') no-repeat; line-height: 20px; padding: 4px 0 8px 35px; display: block;}
-a[title*="file"][href$=".rar"]   	{background: url('/pics/file/archive.png') no-repeat; line-height: 20px; padding: 4px 0 8px 35px; display: block;}
-a[title*="file"][href$=".zip"]   	{background: url('/pics/file/archive.png') no-repeat; line-height: 20px; padding: 4px 0 8px 35px; display: block;}
-a[title*="file"][href$=".7z"]   	{background: url('/pics/file/archive.png') no-repeat; line-height: 20px; padding: 4px 0 8px 35px; display: block;}
-
 
 /*Галерея фото в редакторе страницы*/
 /*.photogallery {border: 1px dashed #CCCCCC; padding: 10px;} - рамка для редактора tiny*/

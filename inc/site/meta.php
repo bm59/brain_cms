@@ -1,11 +1,3 @@
-<?
-	$SiteSections= new SiteSections;
-	$SiteSections->init();
-	$ss = $SiteSections->get($SiteSections->getIdByPath('/sitecontent'.configGet("AskUrl")));
-
-	$SiteSettings = new SiteSettings;
-	$SiteSettings->init();
-?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
@@ -16,10 +8,12 @@
 <meta name="description" content="<?=$SiteSections->getDescription($ss['id'])?>" />
 <meta name="keywords" content="<?=$SiteSections->getKeywords($ss['id'])?>" />
 
-<!--//<link rel="icon" href="/favicon.ico" type="image/x-icon" />
-<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />//-->
+<link rel="icon" href="/favicon.ico" type="image/x-icon" />
+<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
 
+<link rel="stylesheet" type="text/css" href="/css/universal.css" media="all" />
 <link rel="stylesheet" type="text/css" href="/css/site.css" media="all" />
+<link rel="stylesheet" type="text/css" href="/css/fonts.css" media="all" />
 <link rel="stylesheet" type="text/css" href="/css/lightbox.css" media="all" />
 <link rel="stylesheet" type="text/css" href="/css/inputs/voting.css" media="all" />
 

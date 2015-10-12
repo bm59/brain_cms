@@ -27,4 +27,10 @@ include_once($_SERVER['DOCUMENT_ROOT']."/inc/site/init.php");
 
 
 configSet("pr_doptit", setting('pr_doptit'));
+
+
+$SiteSections= new SiteSections;
+$SiteSections->init();
+$ss = $SiteSections->get($SiteSections->getIdByPath('/sitecontent'.configGet("AskUrl")));
+
 ?>

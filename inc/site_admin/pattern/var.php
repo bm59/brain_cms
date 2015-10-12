@@ -5,7 +5,7 @@
 	$dt_settings_checkbox=array('important'=>'Обязательно для заполнения', 'nospan'=>'Nospan (div clear)', 'show_search'=>'Выводить в поиске раздела', 'show_list'=>'Выводить в таблице списка');
 	
 	/*Настройки персональные раздела*/
-	$sec_settings_checkbox=array('onoff'=>'Вкл\Откл записей', 'precedence'=>'Порядок записей', 'show_id'=>'Показывать id', 'no_paging'=>'Без пейджинга');
+	$sec_settings_checkbox=array('onoff'=>'Вкл\Откл записей', 'precedence'=>'Порядок записей', 'show_id'=>'Показывать id', 'no_paging'=>'Без пейджинга', 'reklama'=>'С коммерческим размещением');
 	
 	/*Данные шаблона*/
 	$SectionPattern = new $section['pattern'];
