@@ -24,49 +24,49 @@ class VirtualContent
 	}
 	function ExportStatXls($query){
 		global $MySqlObject;
-		 
+
 		deleteTempFiles('/storage/xls/');
-	
+
 		include_once($_SERVER['DOCUMENT_ROOT']."/inc/excel/PHPExcel.php");
 		include_once($_SERVER['DOCUMENT_ROOT']."/inc/excel/PHPExcel/Writer/Excel2007.php");
-		 
+
 		// Create new PHPExcel object
-	
+
 		$objPHPExcel = new PHPExcel();
-	
-	
-	
+
+
+
 		$objPHPExcel->setActiveSheetIndex(0)
 		->setCellValue('B2', iconv('windows-1251', 'utf-8', 'Дата'))
 		->setCellValue('C2', iconv('windows-1251', 'utf-8', 'Показов'))
 		->setCellValue('D2', iconv('windows-1251', 'utf-8', 'Кликов'))
 		->setCellValue('E2', iconv('windows-1251', 'utf-8', 'Уникальных'));
-	
-	
+
+
 		$styleHeader = array('font'=> array('bold'=>true), 'alignment' => array('horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_CENTER));
 		foreach(range('B','E') as $columnID) {
 			$objPHPExcel->getActiveSheet()->getStyle($columnID.'2')->applyFromArray($styleHeader);
 		}
-	
+
 		foreach(range('B','E') as $columnID) {
 			$objPHPExcel->getActiveSheet()->getColumnDimension($columnID)
 			->setAutoSize(true);
 		}
-	
+
 		$objPHPExcel->getActiveSheet()->setTitle('statistics');
-	
+
 		$i=2;
 		while ($r=msr($query))
 		{
 			$i++;
-				
+
 			$objPHPExcel->setActiveSheetIndex(0)
 			->setCellValue('B'.$i, iconv('windows-1251', 'utf-8', $MySqlObject->dateFromDBDot($r['date'])))
 			->setCellValue('C'.$i, iconv('windows-1251', 'utf-8', $r['show']))
 			->setCellValue('D'.$i, iconv('windows-1251', 'utf-8', $r['click']))
 			->setCellValue('E'.$i, iconv('windows-1251', 'utf-8', $r['unique']));
 		}
-	
+
 		$styleArray = array(
 				'borders' => array(
 						'allborders' => array(
@@ -74,15 +74,15 @@ class VirtualContent
 						)
 				)
 		);
-	
+
 		$objPHPExcel->getActiveSheet()->getStyle('B2:E'.$i)->applyFromArray($styleArray);
-	
-	
+
+
 		// Save Excel 2007 file
 		$file_name="temp_".time().".xlsx";
 		$objWriter = new PHPExcel_Writer_Excel2007($objPHPExcel);
 		$objWriter->save($_SERVER['DOCUMENT_ROOT']."/storage/xls/".$file_name);
-	
+
 		?>
 			<script>
 			window.location.href = "<?="/storage/xls/".$file_name?>";
@@ -91,13 +91,13 @@ class VirtualContent
 	}
 	function drawPubsList(){
 		global $SiteSections, $CDDataSet, $CDDataType;
-	
+
 		$this->generateMeta('name');
-	
+
 		$dataset = $this->getSetting('dataface');
-	
+
 		$section = $SiteSections->get($this->getSetting('section'));
-	
+
 		if (isset($_POST['showsave'])){
 			foreach ($_POST as $k=>$v){
 				if (preg_match('|^prec\_[0-9]+$|',$k)){
@@ -123,12 +123,12 @@ class VirtualContent
 						if (!isset($this->search_show)) $this->search_show='-1';
 						$vals=array('-1'=>'','0'=>'Отключен', '1'=>'Включен');
 						print getSelectSinonim('search_show',$vals,$_POST['search_show'],true);
-						
+
 						$search_fields_cnt++;
 						?>
-					</div>	
+					</div>
 					<?}?>
-					
+
 					<!-- Поля для поиска -->
 					<?
 					$search_fields=array();
@@ -140,11 +140,11 @@ class VirtualContent
 							$search_fields_cnt++;
 						}
 					}
-		
+
 					foreach ($search_fields as $sf){
 						$CDDataType->get_search_field($dataset['types'][$sf],$search_fields_cnt);
 					}
-					
+
 					if ($search_fields_cnt>0)
 					{
 					?>
@@ -157,9 +157,9 @@ class VirtualContent
 						</span>
 					</div>
 					<span class="clear"></span>
-					<?	
+					<?
 					}
-				
+
 					?>
 				</form>
 				<div class="hr"><hr/></div>
@@ -183,16 +183,16 @@ class VirtualContent
 		                                        <?
 		                                        /* Поля отображаемые в таблице */
 		                                        $show_fields=array();
-		  
+
 		                                        foreach ($dataset['types'] as $dt)
 		                                        {
 		                                        	if (isset($dt['settings']['show_list']) && !isset($dt['settings']['off']))
 		                                        	$show_fields[]=$dt['name'];
 		                                        }
-		                                        
-		
-		                                        
-		                                        
+
+
+
+
 		                                        ?>
 		<script>
 		var session_id = '<?php echo session_id(); ?>';
@@ -210,9 +210,9 @@ class VirtualContent
 			            success: function(data){
 			            	elem.children('img').attr('src', '/pics/editor/'+data.signal);
 			            }
-			        }); 
+			        });
 				}
-				
+
 		        return false;
 		    });
 		});
@@ -221,92 +221,91 @@ class VirtualContent
 		<tr class="template">
 		<?
 		$table_th=array();
-		
-		if (isset($this->Settings['settings_personal']['onoff'])) 		$table_th[]=array('name'=>'show', 'description'=>'Вкл', 'class'=>'t_minwidth t_center'); 
+
+		if (isset($this->Settings['settings_personal']['onoff'])) 		$table_th[]=array('name'=>'show', 'description'=>'Вкл', 'class'=>'t_minwidth t_center');
 		if (isset($this->Settings['settings_personal']['show_id']))		$table_th[]=array('name'=>'id', 'description'=>'№', 'class'=>'t_minwidth  t_center');
 		if (isset($this->Settings['settings_personal']['precedence']))	$table_th[]=array('name'=>'precedence', 'description'=>'Порядок', 'class'=>'t_32width');
-			
-		
-		
+
+
+
 		foreach($show_fields as $sf){
 			$set=$dataset['types'][$sf]['face']->Settings;
 			$table_th[]=array('name'=>$set['name'], 'description'=>$set['description'], 'class'=>$set['settings']['list_class']);
 		}
-		
-		
-		
+
+
+
 		/* Редактирование и удаление */
 		$table_th[]=array('name'=>'', 'description'=>'', 'class'=>'t_minwidth');
 		$table_th[]=array('name'=>'', 'description'=>'', 'class'=>'t_minwidth');
-		
-		
-		
+
+
+
 			foreach($table_th as $th){
 				$sort_button='';
 				$active_sort='';
-				
-				
+
+
 				if ($th['name']!='')
 				{
 					$type_sort='down';
-					if (stripos($this->order_by, '`'.$th['name'].'`')!==false) 
+					if (stripos($this->order_by, '`'.$th['name'].'`')!==false)
 					{
 						$active_sort=' active';
 						$type_sort=stripos($this->order_by,'DESC') ? 'down':'up';
 					}
-					
+
 					$sort_button='<a class="sort '.$type_sort.$active_sort.'" href="?section='.$section['id'].(($_GET['page']>1) ? '&page='.$_GET['page']:'').$this->urlstr.'&sort='.$th['name'].'&sort_type='.(($type_sort=='down') ? 'ASC':'DESC').'"></a>';
 				}
-				
-				
+
+
 				?>
 				<th <?=$th['class']!='' ? 'class="'.$th['class'].'"' :'' ?>>
 					<div><div><?=$th['description']?></div><div style="height: 8px;"><?=$sort_button?></div></div>
 				</th>
 				<?
 			}
-		
-		?>                                                   
+
+		?>
 		</tr>
 		<?
 		/* Поля ктр. дублируют ссылку на редактирование */
 		$editlink_double=array('name');
-		
+
 		foreach ($list as $pub)
 		{
 			?>
 		<tr>
-			
+
 			<!-- Вкл. Откл -->
-			<?if (isset($this->Settings['settings_personal']['onoff'])){?>			
+			<?if (isset($this->Settings['settings_personal']['onoff'])){?>
 				<td class="t_minwidth  t_center">
 					<a href="#" onclick="return false;" class="onoff" data-id="<?=$pub['id']?>">
 						<img id="onoff_<?=$pub['id']?>" src="/pics/editor/<?=$pub['show']==0 ? 'off.png' : 'on.png'?>" title="<?=$pub['show']==0 ? 'Отключена' : 'Включена'?>" style="display: inline;">
 					</a>
 				</td>
 			<?}?>
-			
-			
+
+
 			<!-- ID, порядок -->
 			<?if (isset($this->Settings['settings_personal']['show_id'])){?>		<td class="t_minwidth  t_center"><?=$pub['id'] ?></td><?}?>
 			<?if (isset($this->Settings['settings_personal']['precedence'])){?>		<td class="t_32width  t_center"><input type="text" name="prec_<?=$pub['id']?>" value="<?=floor($pub['precedence'])?>"/></td><?}?>
-			
-			
+
+
 			<!-- Видимые поля -->
 			<?
 			foreach($show_fields as $sf)
 			{
 				$set=$dataset['types'][$sf]['face']->Settings;
-				
 				$href=array();
-				if (in_array($sf,$editlink_double)) $href=array('<a href="/manage/control/contents/?section='.$section['id'].'&pub='.$pub['id'].'" title="Редактировать">', '</a>');
+				if (in_array($sf,$editlink_double) && !isset($set['settings']['editable'])) $href=array('<a href="/manage/control/contents/?section='.$section['id'].'&pub='.$pub['id'].'" title="Редактировать">', '</a>');
 				?>
 				<td <?=$set['settings']['list_class']!='' ? 'class="'.$set['settings']['list_class'].'"' : ''?>>
 					<?=$href[0]?><?=$CDDataType->get_view_field($dataset['types'][$sf],$pub[$sf]);?><?=$href[1]?>
 				</td>
 			<?}?>
-			
-			
+
+
 			<!-- Редактировать, Удалить -->
 			<td class="t_minwidth">
 				<a class="button txtstyle" href="/manage/control/contents/?section=<?=$section['id']?>&pub=<?=$pub['id']?>" title="Редактировать"><img src="/pics/editor/prefs.gif" alt="Редактировать"></a>
@@ -315,7 +314,7 @@ class VirtualContent
 				<a href="./?section=<?=$section['id']?>&delete=<?=$pub['id']?>" class="button txtstyle" onclick="if (!confirm('Удалить запись')) return false;">
 				<input type="button" style="background-image: url(/pics/editor/delete.gif)" title="Удалить запись"/>
 				</a>
-			</td>	
+			</td>
 		</tr>
 		<?}?>
 		                                        </table>
@@ -334,41 +333,41 @@ class VirtualContent
 		                                <?
 		                                $pagescount=$this->getSetting('pagescount');
 		                                if(!$_GET['page']>0) $_GET['page']=1;
-		                                
+
 		                                if ($pagescount>1 && $_GET['id']==''){
 		                                	?>
 												<div class="hr"><hr/></div>
 												<div id="paging" class="nopad">
 													<?
 													$dif=5;
-													
+
 													$href = '?section='.$section['id'].$this->urlstr;
 													if ($_REQUEST['sort']!='') $href .='&sort='.$_REQUEST['sort'];
 													if ($_REQUEST['sort_type']!='') $href .='&sort_type='.$_REQUEST['sort_type'];
-													
+
 													if ($_GET['page']>$dif/2+1) print '<a href="'.$href.'">В начало</a>';
-												
+
 													for ($i=1; $i<=$pagescount; $i++)
 													{
 														$inner = '';
 					        							$block = array('<a href="'.$href.'&page='.$i.'">','</a>');
-			
-			
+
+
 					        							if (
 					        									($i>($_GET['page']-($dif/2))) && ($i<($_GET['page']+($dif/2)))
-			
+
 					        									|| ($i<=$dif && $_GET['page']<=$dif-$dif/2)
 					        									|| ($i>$pagescount-$dif && $_GET['page']>$pagescount-$dif/2+1)
-			
+
 					        								)
 					        							{
 					        								$inner = $i;
 					        								if ($i==$_GET['page']) $block = array('<span>','</span>');
 					        							}
-			
+
 					        							if ($inner!='') print $block[0].$inner.$block[1];
 													}
-												
+
 													if ($_GET['page']!=$pagescount && $pagescount>1) print '<a href="'.$href."&page=".($_GET['page']+1).'">Следующая</a>';
 				        							if ($_GET['page']<$pagescount && $pagescount>$dif) print '<a href="'.$href."&page=".($_GET['page']+1).'">Последняя</a>';
 													?>
@@ -384,19 +383,19 @@ class VirtualContent
 		function drawAddEdit(){
 			global $CDDataSet,$SiteSections, $multiple_editor;
 			$section = $SiteSections->get($this->getSetting('section'));
-			
+
 			$SectionPattern = new $section['pattern'];
 			$Iface = $SectionPattern->init(array('section'=>$section['id'],'mode'=>$delepmentmode,'isservice'=>0));
-			
+
 			$init_pattern=$Iface->getSetting('pattern');
-			
+
 			if ($this->editor_cnt>1)
 			{
 				$multiple_editor=true;
 				?><script type="text/javascript" src="/js/tinymce/tinymce.js"></script><?
 			}
-			
-			$pub = $this->getPub($_GET['pub']); 
+
+			$pub = $this->getPub($_GET['pub']);
 			$pub['id'] = floor($pub['id']);
 			?>
 		                <div id="content" class="forms">
@@ -425,41 +424,41 @@ class VirtualContent
 		                                		"pseudolink"=>'style="width:32%;"'
 		                                );
 		                                $nospans = array("ptitle","pdescription");
-		                                
-		                                
+
+
 		                                $dataset = $this->getSetting('dataface');
 		                                foreach ($dataset['types'] as $dt)
 		                                {
 		                                		$tface = $dt['face'];
-		                                        
+
 		                                        if (isset($dt['setting_style_edit']['css'])) $stylearray[$dt['name']]='style="'.$dt['setting_style_edit']['css'].'"';
 		                                        if (isset($dt['settings']['nospan'])) $nospans[]=$dt['name'];
-		
+
 		    									if (!isset($dt['settings']['off']))
 		                                        $tface->drawEditor($stylearray[$tface->getSetting('name')],((in_array($tface->getSetting('name'),$nospans))?false:true));
-		    									
-		    									
+
+
 		    									/* Подсказки у поля в паттерне: $this->setSetting('type_settings_settings', array('min_w|'=>'Минимальная ширина')); */
 		    									if (count($init_pattern->Settings['type_settings_'.$dt['name']])>0)
 		    									{
 		    										foreach ($init_pattern->Settings['type_settings_'.$dt['name']] as $k=>$v)
 		    										print $k.' - '.$v.'<br/>';
-		    										
+
 		    										?><div class="clear"></div><?
 		    									}
 
-		
+
 		                                }
 		                        ?>
-		
-		
+
+
 		                        </table>
 		                        <div class="place">
 		                                <span style="float: right;">
 		                                	<input class="button big" type="submit" name="editform" value="<?=($pub['id']>0)?'Сохранить изменения':'Добавить'?>"/>
 		                                </span>
 		                        </div>
-		
+
 		                        <span class="clear"></span>
 		                        </form>
 		                </div>
@@ -469,24 +468,24 @@ class VirtualContent
 	}
 	function start(){
 		global $CDDataSet;
-		
+
 		$dataset = $CDDataSet->get($this->getSetting('dataset'));
 		$imagestorage = $this->getSetting('imagestorage');
-		
-		if ($_GET['pub']>0) 
+
+		if ($_GET['pub']>0)
 		$pub = $this->getPub(floor($_GET['pub']));
 		foreach ($dataset['types'] as $k=>$dt){
-			
+
 			if ($dt['type']=='CDTextEditor')
 			$this->editor_cnt++;
 			$tface = new $dt['type'];
 			$tface->init(array('name'=>$dt['name'],'value'=>$pub[$dt['name']], 'uid'=>floor($pub['id']),'imagestorage'=>floor($imagestorage['id']),'description'=>$dt['description'],'imagestorage'=>floor($imagestorage['id']),'theme'=>$dataset['name'].'_'.$this->getSetting('section'), 'theme'=>$dataset['name'].'_'.$this->getSetting('section'),'rubric'=>$dt['name'],'settings'=>$dt['settings']));
 			$dataset['types'][$k]['face'] = $tface;
 		}
-			
-	
+
+
 		if (isset($_GET['pub'])){
-			
+
 			$this->setSetting('dataface',$dataset);
 			if (floor($_POST['editformpost'])==1){
 				$this->setSetting('saveerrors',$this->save());
@@ -508,24 +507,24 @@ class VirtualContent
 	}
 	function getSearch(){
 		global $MySqlObject;
-	
+
 		foreach ($_REQUEST as $k=>$v)
 			if (stripos($k,'search')!==false && $v!='' && $v!='-1')
 				if (!in_array($k,$this->no_auto))
 				{
 					$this->$k=$v;
-	
+
 					$mysql_k=strtr($k,$this->field_tr);
 					$mysql_k=strtr($mysql_k,$this->field_change);
-	
+
 					$this->urlstr.='&'.$k.'='.$v;
-	
+
 					if (!in_array($mysql_k,$this->field_change)) $mysql_k='`'.$mysql_k.'`';
-	
+
 					if ($this->sqlstr =='') $sql_pref=' WHERE ';  /*!!!Заменить на WHERE если нет других условий*/
 					else $sql_pref=' and ';
-	
-						
+
+
 					if ($_REQUEST['nouse_'.$k.'_type']=='CDCHOICE')
 					$this->sqlstr.=$sql_pref.$mysql_k." like '%,".$v.",%'";
 					elseif ((stripos($k,'name')!==false || in_array($k,$this->like_array)) and !in_array($k,$this->not_like_array))
@@ -535,7 +534,7 @@ class VirtualContent
 					elseif (stripos($k, '_to') && $v!='')
 					$this->sqlstr.=$sql_pref.$mysql_k."<='".$MySqlObject->dateToDB($v)."'";
 					else $this->sqlstr.=$sql_pref.$mysql_k."='".$v."'";
-	
+
 				}
 	}
 	function generateMeta($field='', $dop_title='')
@@ -556,12 +555,12 @@ class VirtualContent
 						msq("UPDATE `".$this->getSetting('table')."` SET `pseudolink`='".get_url_text($r[$field]).(($i>1) ? "_".$i:"")."' WHERE id=".$r['id']);
 						$num=$i;
 					}
-	
+
 				}
 			}
-	
+
 		}
-		
+
 		if (@array_key_exists('ptitle',$pub))
 		{
 			$q = msq("SELECT * FROM `".$this->getSetting('table')."` WHERE 	`ptitle`='' or `ptitle` is NULL");
@@ -570,7 +569,7 @@ class VirtualContent
 				msq("UPDATE `".$this->getSetting('table')."` SET `ptitle`='".$r[$field].$dop_title."' WHERE id=".$r['id']);
 			}
 		}
-		
+
 		if (@array_key_exists('pdescription',$pub))
 		{
 			$q = msq("SELECT * FROM `".$this->getSetting('table')."` WHERE 	`pdescription`='' or `pdescription` is NULL");
@@ -579,13 +578,13 @@ class VirtualContent
 				msq("UPDATE `".$this->getSetting('table')."` SET `pdescription`='".$r[$field].$dop_title."' WHERE id=".$r['id']);
 			}
 		}
-			
+
 	}
 	function getPub($id){
 		$retval = array();
 		$id = floor($id);
 		if ($r = msr(msq("SELECT * FROM `".$this->getSetting('table')."` WHERE `id`='".$id."'")))
-	
+
 			foreach ($r as $k=>$v)
 				$r[$k]=html_entity_decode(stripslashes($v));
 			$retval= $r;
@@ -594,19 +593,19 @@ class VirtualContent
 	function incField($field_name='', $id=0){
 		if ($field_name=='' || !$id>0) return false;
 		$r = msr(msq("SELECT * FROM `".$this->getSetting('table')."` WHERE `id`='".$id."'"));
-		
+
 		if ($r['id']>0)
 		msq("UPDATE `".$this->getSetting('table')."` SET `$field_name`='".(floor($r[$field_name])+1)."' WHERE id=".$r['id']." LIMIT 1");
-		
+
 		return $retval;
 	}
 	function getPubByField($field,$value){
 		$retval = array();
 		if ($r = msr(msq("SELECT * FROM `".$this->getSetting('table')."` WHERE `".$field."`='".$descr."'")))
-			 
+
 		foreach ($r as $k=>$v)
 		$r[$k]=html_entity_decode(stripslashes($v));
-		
+
 		$retval= $r;
 		return $retval;
 	}
@@ -622,7 +621,7 @@ class VirtualContent
 		$errors = array();
 		$dataset = $this->getSetting('dataface');
 		foreach ($dataset['types'] as $k=>$dt){
-			 
+
 			if (!isset($dt['settings']['off']))
 			{
 				$tface = $dt['face'];
@@ -630,9 +629,9 @@ class VirtualContent
 				foreach ($err as $v) $errors[] = $v;
 				$dataset['types'][$k]['face'] = $tface;
 			}
-	
+
 		}
-	
+
 		if (count($errors)==0){
 			$update = '';
 			$pub = $this->getPub($_GET['pub']); $pub['id'] = floor($pub['id']);
@@ -643,7 +642,7 @@ class VirtualContent
 				msq("INSERT INTO `".$this->getSetting('table')."` (`show`) VALUES ('1')");
 				$pub['id'] = mslastid();
 			}
-	
+
 			foreach ($dataset['types'] as $dt)
 			{
 				$tface = $dt['face'];
@@ -652,66 +651,66 @@ class VirtualContent
 				$update.= (($update!='')?',':'').$tface->getUpdateSQL((int)$_GET['section']);
 				$dataset['types'][$k]['face'] = $tface;
 			}
-	
-	
+
+
 			msq("UPDATE `".$this->getSetting('table')."` SET ".$update." WHERE `id`='".$pub['id']."'");
-			
-			
-			
+
+
+
 			WriteLog($pub['id'], (($_GET['pub']=='new') ? 'добавление':'редактирование').' записи', '','','',$this->getSetting('section'));
 		}
-	
+
 		$this->setSetting('dataface',$dataset);
 		return $errors;
 	}
     function getList($page=0, $str_usl='', $str_order_by=''){
 
         	$retval = array();
-        	
+
         	$q = "SELECT * FROM `".$this->getSetting('table')."`".$this->sqlstr.$str_usl;
-        	
+
         	$count = msq($q);
         	$count = @mysql_num_rows($count);
-        	
+
         	$page = floor($page);
         	if ($page==-1 || isset($this->Settings['settings_personal']['no_paging'])) $this->setSetting('onpage',10000);
         	if ($page<1) $page = 1;
-        	
-        	
+
+
         	$this->setSetting('pagescount',ceil($count/$this->getSetting('onpage')));
         	$this->setSetting('count',ceil($count));
-        	
+
         	if ($this->getSetting('pagescount')>0 && $page>$this->getSetting('pagescount')) $page = $this->getSetting('pagescount');
         	$this->setSetting('page',$page);
-        	
-        
+
+
         	if ($_GET['sort']!='')
         	{
         		$order_by="ORDER BY `".$_GET['sort']."` ".$_GET['sort_type'];
         	}
         	else
-        	$order_by=$this->Settings['settings_personal']['default_order']!='' ? $this->Settings['settings_personal']['default_order'] : "ORDER BY `id` DESC";  
-        	
+        	$order_by=$this->Settings['settings_personal']['default_order']!='' ? $this->Settings['settings_personal']['default_order'] : "ORDER BY `id` DESC";
+
         	if ($str_order_by) $order_by=$str_order_by;
-        	
-        	
+
+
         	$this->order_by=$order_by;
         	$q = msq($q." ".$order_by." LIMIT ".(($page-1)*$this->getSetting('onpage')).",".$this->getSetting('onpage'));
-        	
+
         	while ($r = msr($q)) $retval[] = $r;
-        	
+
         	return $retval;
     }
 	function delete(){
 		global $CDDataSet;
 		$pattern=$this->getSetting('pattern');
-		
+
 		$q = msq("SELECT * FROM `".$this->getSetting('table')."`");
 		while ($r = msr($q)) $this->deletePub($r['id']);
 		msq("DROP TABLE `".$this->getSetting('table')."`");
-		
-		
-		
+
+
+
 		$CDDataSet->delete($pattern->getSetting('dataset'), $this->getSetting('section'));
 		return true;
 	}
@@ -727,9 +726,9 @@ class VirtualContent
 				$tface->delete();
 			}
 			msq("DELETE FROM `".$this->getSetting('table')."` WHERE `id`='".$id."'");
-			
+
 			WriteLog($id, 'удаление записи', '','','',$this->getSetting('section'));
-			
+
 			if ($updateprec) $this->updatePrecedence();
 			return true;
 		}

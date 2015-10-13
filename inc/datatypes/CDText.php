@@ -3,6 +3,10 @@ class CDText extends VirtualType
 {
 	function init($settings){
 		$settings['descr']='Текстовое поле';
+		$settings['help']=array(
+				'ucfirst'=>'Делает первую букву заглавной',
+				'editable'=>'Редактируемый'
+		);
 		$maxlength = (floor($this->getSetting('maxlength'))>0)?floor($this->getSetting('maxlength')):255;
 		$this->setSetting('maxlength',$maxlength);
 		VirtualType::init($settings);
@@ -18,6 +22,26 @@ class CDText extends VirtualType
 			</script>
 			<?
 			$selection = 'id="auto_'.htmlspecialchars($this->getSetting('name')).'" onkeypress="javascript:auto_onkeypress(this, event.charCode, event.keyCode);" onkeyup="javascript:auto_onchange(this);"';
+		}
+		if (isset($settings['ucfirst']))
+		{        	?>
+			<script>
+			function ucfirst( str )
+			{
+				var f = str.charAt(0).toUpperCase();
+				return f + str.substr(1, str.length-1);
+			}
+
+			$(function()
+			{
+			    $("[name=<?=htmlspecialchars($this->getSetting('name'))?>]").keyup(function ()
+			    {
+                   $(this).val(ucfirst($(this).val()));
+			   	   return false;
+			    });
+			});
+			</script>
+			<?
 		}
 		?>
 		<div class="place" <?=($divstyle!='')?$divstyle:''?>>

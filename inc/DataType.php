@@ -15,7 +15,7 @@ class DataType extends VirtualClass
 			"setting_style_edit"=>"TEXT",
 			"setting_style_search"=>"TEXT"
 		));
-		
+
 		include_once($_SERVER['DOCUMENT_ROOT']."/inc/datatypes/VirtualType.php");
 
 		if ($dir = @opendir($_SERVER['DOCUMENT_ROOT']."/inc/datatypes/")){
@@ -53,51 +53,51 @@ class DataType extends VirtualClass
 		global $CDDataSet;
 
 		$error='';
-		if (!preg_match("|^[a-z0-9_]+$|",$values['name'])) 
+		if (!preg_match("|^[a-z0-9_]+$|",$values['name']))
 		{
 			$_SESSION['global_alert'].='Ошибка в названии :'.$values['name'];
 			return false;
 		}
 		$values['description'] = trim($values['description']);
 		if (strlen($values['description'])==0)
-		{		
+		{
 			$_SESSION['global_alert'].='Ошибка в описании :'.$values['description'];
 			return false;
 		}
-		
+
 		$values['dataset'] = $CDDataSet->checkPresence($values['dataset'], '', $values['section_id']);
 		if ($values['dataset']==0)
 		{
 				$_SESSION['global_alert'].='Не найден dataset';
 				return false;
 		}
-		
+
 
 		if (is_array($values['settings']))
 		$values['settings'] = $this->implode($values['settings']);
-		
-		if (msr(msq("SELECT * FROM `".$this->getSetting('table')."` WHERE `section_id`='".$section_id."' and `dataset`='".$values['dataset']."' AND `name`='".$values['name']."'"))) 
-		{	
+
+		if (msr(msq("SELECT * FROM `".$this->getSetting('table')."` WHERE `section_id`='".$section_id."' and `dataset`='".$values['dataset']."' AND `name`='".$values['name']."'")))
+		{
 			$_SESSION['global_alert'].='Поле с таким названием уже существует :'.$values['name'];
 			return false;
 		}
 		$precedence = msr(msq("SELECT COUNT(id) AS prec FROM `".$this->getSetting('table')."` WHERE `dataset`='".$values['dataset']."'"));
 		$precedence = floor($precedence['prec']);
-		
-		
+
+
 
 		$cur_error=mysql_error();
-		
-		
+
+
 		if ($add_column) $this->add_column($values, $table_array);
-		
+
 		/* Если при добавлении колонки не было ошибок */
 		if ($cur_error==mysql_error())
 		msq("INSERT INTO `".$this->getSetting('table')."` (`section_id`,`dataset`,`description`,`name`,`type`,`precedence`,`settings`,`setting_style_edit`,`setting_style_search`)
 		VALUES ('".$section_id."','".$values['dataset']."','".addslashes($values['description'])."','".$values['name']."','".$values['type']."','".$values['precedence']."','".$values['settings']."','".$values['setting_style_edit']."','".$values['setting_style_search']."')");
 		alert_mysql();
 		$error.=mysql_error();
-		
+
 		return mslastid();
 	}
 	function get_search_field($data='', $search_fields_cnt)
@@ -107,10 +107,10 @@ class DataType extends VirtualClass
 		if ($tface->Settings['setting_style_edit']['css']=='')
 			$tface->Settings['setting_style_edit']['css']='width: '.round(90/$search_fields_cnt).'%';
 
-		 
+
 		switch ($type) {
 			case 'CDCHOICE':
-				
+
 				$values=array('-1'=>'')+$tface->get_values();
 
 				if ($tface->Settings['settings']['type']=='multi'){?><input type="hidden" name="nouse_search_<?=$tface->getSetting('name')?>_type" value="<?=$type?>"><?}?>
@@ -121,7 +121,7 @@ class DataType extends VirtualClass
 				<?
 				break;
 			case 'CDDate':
-				
+
 				?>
 											<script type="text/javascript">
 							$(function(){
@@ -158,7 +158,7 @@ class DataType extends VirtualClass
 									buttonImage: "/pics/editor/calendar.gif",
 									buttonImageOnly: true
 								});
-                               
+
 							});
 							</script>
 		<div style="z-index: 11; width: 158px;" id="date_calendar" class="place">
@@ -186,16 +186,20 @@ class DataType extends VirtualClass
 	function get_view_field($data='', $val)
 	{
 		global $Storage, $MySqlObject;
-		
+
 		$tface = $data['face'];
 		$type=get_class($tface);
-			
+
+
+		$settings=$tface->Settings['settings'];
+
+
 		switch ($type) {
 			case 'CDImage':
 				$image=$Storage->getFile($val);
-				if ($image['path']!='') 
-				print '<img src="'.$image['path'].'" width="'.(($image['width']>150) ? '150' : $image['width']).'px">';	
-				else print '&nbsp';	
+				if ($image['path']!='')
+				print '<img src="'.$image['path'].'" width="'.(($image['width']>150) ? '150' : $image['width']).'px">';
+				else print '&nbsp';
 			break;
 			case 'CDDate':
 					print $MySqlObject->dateFromDBDot($val);
@@ -206,14 +210,20 @@ class DataType extends VirtualClass
 				print $val;
 			break;
 			default:
+				if (isset($settings['editable']))
+				{					?>
+					<input type="text" name="<?=htmlspecialchars($tface->getSetting('name')).'_'.$data['id']?>"  value="<?=stripslashes(htmlspecialchars($val))?>" />
+					<?
+				}
+				else
 				print stripcslashes($val);
 	        break;
-		 } 
+		 }
 	}
 	function add_column($values, $table_array='', $default='') {
 		$error='';
 		if (!$values['dataset']>0) return false;
-		
+
 		$def=$default!='' ? $default : ' NULL DEFAULT NULL';
 
 		foreach($table_array as $tab)
@@ -222,14 +232,14 @@ class DataType extends VirtualClass
 			msq("ALTER TABLE `$tab` ADD `".$values['name']."` ".$values['table_type']."  $def COMMENT '".$values['description']."'");
 			alert_mysql();
 			$error.=mysql_error();
-		
+
 		}
 		return $error;
 	}
 	function get_dataset_tables($pattern='') {
 		global $SiteSections;
 		$return=array();
-		
+
 		$q=msq("SELECT * FROM `site_site_sections` WHERE `pattern`='$pattern'");
 		while ($r=msr($q))
 		{
@@ -244,44 +254,44 @@ class DataType extends VirtualClass
 				$return['ids'][]=$Section['id'];
 			}
 		}
-		return $return; 
-	
+		return $return;
+
 	}
 	function update($id, $values, $table_columns, $table_type_options, $table_array, $section_id)
 	{
 		$error='';
 		if (!$id>0) return;
-		
+
 		/* Проверяем есть ли изменения */
 		$cur_data=msr(msq("SELECT * FROM `".$this->getSetting('table')."` WHERE `id`=$id and section_id=".$section_id));
-		
+
 		$changes=false;
 		foreach ($cur_data as $k=>$v)
 		{
 			if (isset($values[$k]) && $v!=$values[$k])
 			{
 				/* print "changes $k: $v<>".$values[$k].'<br/>'; */
-				$changes=true;	
+				$changes=true;
 			}
 		}
-		
+
 		/* Если изменили название поля, меняем его в таблице */
 		if ($changes)
 		{
 			$update='';
-			
+
 			foreach($values as $k=>$v){ $update.=(($update!='') ? ',':'')."`$k`='$v'";}
 			msq("UPDATE `".$this->getSetting('table')."` SET $update WHERE id=$id LIMIT 1");
 			alert_mysql();
 			$error.=mysql_error();
-	
+
 		}
-		
-		
+
+
 		/* Если изменили тип колонки или описание*/
  		if (isset($table_columns[$cur_data['name']]) && isset($values['name']) && $cur_data['name']!=$values['name'])
 		{
-			
+
 			foreach ($table_array as $tab)
 			{
 				msq("ALTER TABLE `$tab` CHANGE `".$cur_data['name']."` `".$values['name']."` ".$table_columns[$cur_data['name']]['Type']."  NULL DEFAULT NULL COMMENT '".$values['description']."'");
@@ -290,7 +300,7 @@ class DataType extends VirtualClass
 				$error.=mysql_error();
 				$changes=true;
 			}
-		} 
+		}
 		/* Если был изменены настройки колонки */
  		if ($table_columns[$cur_data['name']]['Type']!=$table_type_options)
 		{
@@ -301,7 +311,7 @@ class DataType extends VirtualClass
 				$error.=mysql_error();
 				$changes=true;
 			}
-			
+
 		}
 		if ($changes && $error=='') return true;
 		else return $error;
