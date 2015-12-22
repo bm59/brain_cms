@@ -1,0 +1,4700 @@
+--- !ruby/object:Ruble::Bundle
+displayName: ! "Ruby on Rails"
+path: bundle.rb
+children:
+- !ruby/object:Ruble::Menu
+  displayName: ! "Rails"
+  path: bundle.rb
+  scope: source.ruby, project.rails, source.yaml, text.haml, text.html.ruby
+  children:
+  - !ruby/object:Ruble::Menu
+    displayName: ! "Preview"
+    path: bundle.rb
+    commandName: ! "Preview"
+  - !ruby/object:Ruble::Menu
+    displayName: ! '-'
+    path: bundle.rb
+    commandName: ! '-'
+  - !ruby/object:Ruble::Menu
+    displayName: ! "Go To"
+    path: bundle.rb
+    children:
+    - !ruby/object:Ruble::Menu
+      displayName: ! "Go to Alternate File"
+      path: bundle.rb
+      commandName: ! "Go to Alternate File"
+    - !ruby/object:Ruble::Menu
+      displayName: ! "Go to File on Current Line"
+      path: bundle.rb
+      commandName: ! "Go to File on Current Line"
+    - !ruby/object:Ruble::Menu
+      displayName: ! '-'
+      path: bundle.rb
+      commandName: ! '-'
+    - !ruby/object:Ruble::Menu
+      displayName: ! "Go to Model"
+      path: bundle.rb
+      commandName: ! "Go to Model"
+    - !ruby/object:Ruble::Menu
+      displayName: ! "Go to View"
+      path: bundle.rb
+      commandName: ! "Go to View"
+    - !ruby/object:Ruble::Menu
+      displayName: ! "Go to Controller"
+      path: bundle.rb
+      commandName: ! "Go to Controller"
+    - !ruby/object:Ruble::Menu
+      displayName: ! "Go to Functional Test"
+      path: bundle.rb
+      commandName: ! "Go to Functional Test"
+    - !ruby/object:Ruble::Menu
+      displayName: ! "Go to Helper"
+      path: bundle.rb
+      commandName: ! "Go to Helper"
+    - !ruby/object:Ruble::Menu
+      displayName: ! "Go to Javascript"
+      path: bundle.rb
+      commandName: ! "Go to Javascript"
+    - !ruby/object:Ruble::Menu
+      displayName: ! "Go to Stylesheet"
+      path: bundle.rb
+      commandName: ! "Go to Stylesheet"
+    - !ruby/object:Ruble::Menu
+      displayName: ! "Go to Unit Test"
+      path: bundle.rb
+      commandName: ! "Go to Unit Test"
+    - !ruby/object:Ruble::Menu
+      displayName: ! "Go to Fixture"
+      path: bundle.rb
+      commandName: ! "Go to Fixture"
+  - !ruby/object:Ruble::Menu
+    displayName: ! "Run Tests"
+    path: bundle.rb
+    children:
+    - !ruby/object:Ruble::Menu
+      displayName: ! "Test All"
+      path: bundle.rb
+      commandName: ! "Test All"
+    - !ruby/object:Ruble::Menu
+      displayName: ! "Test Functionals"
+      path: bundle.rb
+      commandName: ! "Test Functionals"
+    - !ruby/object:Ruble::Menu
+      displayName: ! "Test Integration"
+      path: bundle.rb
+      commandName: ! "Test Integration"
+    - !ruby/object:Ruble::Menu
+      displayName: ! "Test Plugins"
+      path: bundle.rb
+      commandName: ! "Test Plugins"
+    - !ruby/object:Ruble::Menu
+      displayName: ! "Test Recent"
+      path: bundle.rb
+      commandName: ! "Test Recent"
+    - !ruby/object:Ruble::Menu
+      displayName: ! "Test Uncommitted"
+      path: bundle.rb
+      commandName: ! "Test Uncommitted"
+    - !ruby/object:Ruble::Menu
+      displayName: ! "Test Units"
+      path: bundle.rb
+      commandName: ! "Test Units"
+  - !ruby/object:Ruble::Menu
+    displayName: ! '-'
+    path: bundle.rb
+    commandName: ! '-'
+  - !ruby/object:Ruble::Menu
+    displayName: ! "Call Generate Script"
+    path: bundle.rb
+    commandName: ! "Call Generate Script"
+  - !ruby/object:Ruble::Menu
+    displayName: ! "Database"
+    path: bundle.rb
+    children:
+    - !ruby/object:Ruble::Menu
+      displayName: ! "Migrate to Current"
+      path: bundle.rb
+      commandName: ! "Migrate to Current"
+    - !ruby/object:Ruble::Menu
+      displayName: ! "Migrate to Version..."
+      path: bundle.rb
+      commandName: ! "Migrate to Version..."
+    - !ruby/object:Ruble::Menu
+      displayName: ! "Migrate to Previous Version"
+      path: bundle.rb
+      commandName: ! "Migrate to Previous Version"
+    - !ruby/object:Ruble::Menu
+      displayName: ! "Redo Last Migration"
+      path: bundle.rb
+      commandName: ! "Redo Last Migration"
+    - !ruby/object:Ruble::Menu
+      displayName: ! '-'
+      path: bundle.rb
+      commandName: ! '-'
+    - !ruby/object:Ruble::Menu
+      displayName: ! "Load Fixtures (Development DB)"
+      path: bundle.rb
+      commandName: ! "Load Fixtures (Development DB)"
+    - !ruby/object:Ruble::Menu
+      displayName: ! "Load Fixtures (Test DB)"
+      path: bundle.rb
+      commandName: ! "Load Fixtures (Test DB)"
+    - !ruby/object:Ruble::Menu
+      displayName: ! '-'
+      path: bundle.rb
+      commandName: ! '-'
+    - !ruby/object:Ruble::Menu
+      displayName: ! "Load schema.rb to DB"
+      path: bundle.rb
+      commandName: ! "Load schema.rb to DB"
+    - !ruby/object:Ruble::Menu
+      displayName: ! "Dump DB to schema.rb"
+      path: bundle.rb
+      commandName: ! "Dump DB to schema.rb"
+    - !ruby/object:Ruble::Menu
+      displayName: ! "Clone Development DB to Test DB"
+      path: bundle.rb
+      commandName: ! "Clone Development DB to Test DB"
+  - !ruby/object:Ruble::Menu
+    displayName: ! '-'
+    path: bundle.rb
+    commandName: ! '-'
+  - !ruby/object:Ruble::Menu
+    displayName: params[...]
+    path: bundle.rb
+    commandName: params[...]
+  - !ruby/object:Ruble::Menu
+    displayName: session[...]
+    path: bundle.rb
+    commandName: session[...]
+  - !ruby/object:Ruble::Menu
+    displayName: ! "Logger"
+    path: bundle.rb
+    children:
+    - !ruby/object:Ruble::Menu
+      displayName: logger.debug
+      path: bundle.rb
+      commandName: logger.debug
+    - !ruby/object:Ruble::Menu
+      displayName: logger.info
+      path: bundle.rb
+      commandName: logger.info
+    - !ruby/object:Ruble::Menu
+      displayName: logger.warn
+      path: bundle.rb
+      commandName: logger.warn
+    - !ruby/object:Ruble::Menu
+      displayName: logger.error
+      path: bundle.rb
+      commandName: logger.error
+    - !ruby/object:Ruble::Menu
+      displayName: logger.fatal
+      path: bundle.rb
+      commandName: logger.fatal
+    - !ruby/object:Ruble::Menu
+      displayName: RAILS_DEFAULT_LOGGER.debug
+      path: bundle.rb
+      commandName: RAILS_DEFAULT_LOGGER.debug
+  - !ruby/object:Ruble::Menu
+    displayName: ! '-'
+    path: bundle.rb
+    commandName: ! '-'
+  - !ruby/object:Ruble::Menu
+    displayName: ! "Models"
+    path: bundle.rb
+    children:
+    - !ruby/object:Ruble::Menu
+      displayName: ! "Show DB Schema for Current Class"
+      path: bundle.rb
+      commandName: ! "Show DB Schema for Current Class"
+    - !ruby/object:Ruble::Menu
+      displayName: ! '-'
+      path: bundle.rb
+      commandName: ! '-'
+    - !ruby/object:Ruble::Menu
+      displayName: alias_attribute
+      path: bundle.rb
+      commandName: alias_attribute
+    - !ruby/object:Ruble::Menu
+      displayName: ! '-'
+      path: bundle.rb
+      commandName: ! '-'
+    - !ruby/object:Ruble::Menu
+      displayName: ! "Callbacks"
+      path: bundle.rb
+      children:
+      - !ruby/object:Ruble::Menu
+        displayName: before_validation
+        path: bundle.rb
+        commandName: before_validation
+      - !ruby/object:Ruble::Menu
+        displayName: before_validation_on_create
+        path: bundle.rb
+        commandName: before_validation_on_create
+      - !ruby/object:Ruble::Menu
+        displayName: before_validation_on_update
+        path: bundle.rb
+        commandName: before_validation_on_update
+      - !ruby/object:Ruble::Menu
+        displayName: after_validation
+        path: bundle.rb
+        commandName: after_validation
+      - !ruby/object:Ruble::Menu
+        displayName: after_validation_on_create
+        path: bundle.rb
+        commandName: after_validation_on_create
+      - !ruby/object:Ruble::Menu
+        displayName: after_validation_on_update
+        path: bundle.rb
+        commandName: after_validation_on_update
+      - !ruby/object:Ruble::Menu
+        displayName: before_save
+        path: bundle.rb
+        commandName: before_save
+      - !ruby/object:Ruble::Menu
+        displayName: after_save
+        path: bundle.rb
+        commandName: after_save
+      - !ruby/object:Ruble::Menu
+        displayName: before_create
+        path: bundle.rb
+        commandName: before_create
+      - !ruby/object:Ruble::Menu
+        displayName: after_create
+        path: bundle.rb
+        commandName: after_create
+      - !ruby/object:Ruble::Menu
+        displayName: before_update
+        path: bundle.rb
+        commandName: before_update
+      - !ruby/object:Ruble::Menu
+        displayName: after_update
+        path: bundle.rb
+        commandName: after_update
+      - !ruby/object:Ruble::Menu
+        displayName: before_destroy
+        path: bundle.rb
+        commandName: before_destroy
+      - !ruby/object:Ruble::Menu
+        displayName: after_destroy
+        path: bundle.rb
+        commandName: after_destroy
+    - !ruby/object:Ruble::Menu
+      displayName: ! "Associations"
+      path: bundle.rb
+      children:
+      - !ruby/object:Ruble::Menu
+        displayName: belongs_to
+        path: bundle.rb
+        commandName: belongs_to
+      - !ruby/object:Ruble::Menu
+        displayName: has_and_belongs_to_many
+        path: bundle.rb
+        commandName: has_and_belongs_to_many
+      - !ruby/object:Ruble::Menu
+        displayName: has_one
+        path: bundle.rb
+        commandName: has_one
+      - !ruby/object:Ruble::Menu
+        displayName: has_many
+        path: bundle.rb
+        commandName: has_many
+      - !ruby/object:Ruble::Menu
+        displayName: has_many :dependent => :destroy
+        path: bundle.rb
+        commandName: has_many :dependent => :destroy
+      - !ruby/object:Ruble::Menu
+        displayName: has_many (through)
+        path: bundle.rb
+        commandName: has_many (through)
+      - !ruby/object:Ruble::Menu
+        displayName: ! '-'
+        path: bundle.rb
+        commandName: ! '-'
+      - !ruby/object:Ruble::Menu
+        displayName: accepts_nested_attributes_for
+        path: bundle.rb
+        commandName: accepts_nested_attributes_for
+    - !ruby/object:Ruble::Menu
+      displayName: ! "Scopes"
+      path: bundle.rb
+      children:
+      - !ruby/object:Ruble::Menu
+        displayName: find(id)
+        path: bundle.rb
+        commandName: find(id)
+      - !ruby/object:Ruble::Menu
+        displayName: find(:all)
+        path: bundle.rb
+        commandName: find(:all)
+      - !ruby/object:Ruble::Menu
+        displayName: find(:first)
+        path: bundle.rb
+        commandName: find(:first)
+      - !ruby/object:Ruble::Menu
+        displayName: find(:last)
+        path: bundle.rb
+        commandName: find(:last)
+      - !ruby/object:Ruble::Menu
+        displayName: find_in_batches
+        path: bundle.rb
+        commandName: find_in_batches
+      - !ruby/object:Ruble::Menu
+        displayName: ! '-'
+        path: bundle.rb
+        commandName: ! '-'
+      - !ruby/object:Ruble::Menu
+        displayName: scoped_by
+        path: bundle.rb
+        commandName: scoped_by
+    - !ruby/object:Ruble::Menu
+      displayName: ! "Finders"
+      path: bundle.rb
+      children:
+      - !ruby/object:Ruble::Menu
+        displayName: find(id)
+        path: bundle.rb
+        commandName: find(id)
+      - !ruby/object:Ruble::Menu
+        displayName: find(:all)
+        path: bundle.rb
+        commandName: find(:all)
+      - !ruby/object:Ruble::Menu
+        displayName: find(:first)
+        path: bundle.rb
+        commandName: find(:first)
+      - !ruby/object:Ruble::Menu
+        displayName: find(:last)
+        path: bundle.rb
+        commandName: find(:last)
+      - !ruby/object:Ruble::Menu
+        displayName: find_in_batches
+        path: bundle.rb
+        commandName: find_in_batches
+      - !ruby/object:Ruble::Menu
+        displayName: ! '-'
+        path: bundle.rb
+        commandName: ! '-'
+      - !ruby/object:Ruble::Menu
+        displayName: scoped_by
+        path: bundle.rb
+        commandName: scoped_by
+    - !ruby/object:Ruble::Menu
+      displayName: ! "Validations"
+      path: bundle.rb
+      children:
+      - !ruby/object:Ruble::Menu
+        displayName: validates_acceptance_of
+        path: bundle.rb
+        commandName: validates_acceptance_of
+      - !ruby/object:Ruble::Menu
+        displayName: validates_acceptance_of if
+        path: bundle.rb
+        commandName: validates_acceptance_of if
+      - !ruby/object:Ruble::Menu
+        displayName: validates_associated
+        path: bundle.rb
+        commandName: validates_associated
+      - !ruby/object:Ruble::Menu
+        displayName: validates_associated if
+        path: bundle.rb
+        commandName: validates_associated if
+      - !ruby/object:Ruble::Menu
+        displayName: validates_confirmation_of
+        path: bundle.rb
+        commandName: validates_confirmation_of
+      - !ruby/object:Ruble::Menu
+        displayName: validates_confirmation_of if
+        path: bundle.rb
+        commandName: validates_confirmation_of if
+      - !ruby/object:Ruble::Menu
+        displayName: validates_exclusion_of
+        path: bundle.rb
+        commandName: validates_exclusion_of
+      - !ruby/object:Ruble::Menu
+        displayName: validates_exclusion_of if
+        path: bundle.rb
+        commandName: validates_exclusion_of if
+      - !ruby/object:Ruble::Menu
+        displayName: validates_inclusion_of
+        path: bundle.rb
+        commandName: validates_inclusion_of
+      - !ruby/object:Ruble::Menu
+        displayName: validates_inclusion_of if
+        path: bundle.rb
+        commandName: validates_inclusion_of if
+      - !ruby/object:Ruble::Menu
+        displayName: validates_format_of
+        path: bundle.rb
+        commandName: validates_format_of
+      - !ruby/object:Ruble::Menu
+        displayName: validates_format_of if
+        path: bundle.rb
+        commandName: validates_format_of if
+      - !ruby/object:Ruble::Menu
+        displayName: validates_length_of
+        path: bundle.rb
+        commandName: validates_length_of
+      - !ruby/object:Ruble::Menu
+        displayName: validates_length_of if
+        path: bundle.rb
+        commandName: validates_length_of if
+      - !ruby/object:Ruble::Menu
+        displayName: validates_numericality_of
+        path: bundle.rb
+        commandName: validates_numericality_of
+      - !ruby/object:Ruble::Menu
+        displayName: validates_numericality_of if
+        path: bundle.rb
+        commandName: validates_numericality_of if
+      - !ruby/object:Ruble::Menu
+        displayName: validates_presence_of
+        path: bundle.rb
+        commandName: validates_presence_of
+      - !ruby/object:Ruble::Menu
+        displayName: validates_presence_of if
+        path: bundle.rb
+        commandName: validates_presence_of if
+      - !ruby/object:Ruble::Menu
+        displayName: validates_uniqueness_of
+        path: bundle.rb
+        commandName: validates_uniqueness_of
+      - !ruby/object:Ruble::Menu
+        displayName: validates_uniqueness_of if
+        path: bundle.rb
+        commandName: validates_uniqueness_of if
+  - !ruby/object:Ruble::Menu
+    displayName: ! "Controllers"
+    path: bundle.rb
+    children:
+    - !ruby/object:Ruble::Menu
+      displayName: ! "Create controller class"
+      path: bundle.rb
+      commandName: ! "Create controller class"
+    - !ruby/object:Ruble::Menu
+      displayName: ! "Create resources controller class"
+      path: bundle.rb
+      commandName: ! "Create resources controller class"
+    - !ruby/object:Ruble::Menu
+      displayName: layout
+      path: bundle.rb
+      commandName: layout
+    - !ruby/object:Ruble::Menu
+      displayName: before_filter
+      path: bundle.rb
+      commandName: before_filter
+    - !ruby/object:Ruble::Menu
+      displayName: flash[...]
+      path: bundle.rb
+      commandName: flash[...]
+    - !ruby/object:Ruble::Menu
+      displayName: respond_to
+      path: bundle.rb
+      children:
+      - !ruby/object:Ruble::Menu
+        displayName: respond_to (html)
+        path: bundle.rb
+        commandName: respond_to (html)
+      - !ruby/object:Ruble::Menu
+        displayName: respond_to
+        path: bundle.rb
+        commandName: respond_to
+      - !ruby/object:Ruble::Menu
+        displayName: wants.format
+        path: bundle.rb
+        commandName: wants.format
+    - !ruby/object:Ruble::Menu
+      displayName: redirect_to
+      path: bundle.rb
+      children:
+      - !ruby/object:Ruble::Menu
+        displayName: redirect_to (path)
+        path: bundle.rb
+        commandName: redirect_to (path)
+      - !ruby/object:Ruble::Menu
+        displayName: redirect_to (path plural)
+        path: bundle.rb
+        commandName: redirect_to (path plural)
+      - !ruby/object:Ruble::Menu
+        displayName: redirect_to (nested path)
+        path: bundle.rb
+        commandName: redirect_to (nested path)
+      - !ruby/object:Ruble::Menu
+        displayName: redirect_to (nested path plural)
+        path: bundle.rb
+        commandName: redirect_to (nested path plural)
+      - !ruby/object:Ruble::Menu
+        displayName: redirect_to (action)
+        path: bundle.rb
+        commandName: redirect_to (action)
+      - !ruby/object:Ruble::Menu
+        displayName: redirect_to (action, id)
+        path: bundle.rb
+        commandName: redirect_to (action, id)
+      - !ruby/object:Ruble::Menu
+        displayName: redirect_to (controller)
+        path: bundle.rb
+        commandName: redirect_to (controller)
+      - !ruby/object:Ruble::Menu
+        displayName: redirect_to (controller, action)
+        path: bundle.rb
+        commandName: redirect_to (controller, action)
+      - !ruby/object:Ruble::Menu
+        displayName: redirect_to (controller, action, id)
+        path: bundle.rb
+        commandName: redirect_to (controller, action, id)
+      - !ruby/object:Ruble::Menu
+        displayName: redirect_to :back
+        path: bundle.rb
+        commandName: redirect_to :back
+    - !ruby/object:Ruble::Menu
+      displayName: render
+      path: bundle.rb
+      children:
+      - !ruby/object:Ruble::Menu
+        displayName: render (action)
+        path: bundle.rb
+        commandName: render (action)
+      - !ruby/object:Ruble::Menu
+        displayName: render (action, layout)
+        path: bundle.rb
+        commandName: render (action, layout)
+      - !ruby/object:Ruble::Menu
+        displayName: render (file)
+        path: bundle.rb
+        commandName: render (file)
+      - !ruby/object:Ruble::Menu
+        displayName: render (file, use_full_path)
+        path: bundle.rb
+        commandName: render (file, use_full_path)
+      - !ruby/object:Ruble::Menu
+        displayName: render (inline)
+        path: bundle.rb
+        commandName: render (inline)
+      - !ruby/object:Ruble::Menu
+        displayName: render (inline, locals)
+        path: bundle.rb
+        commandName: render (inline, locals)
+      - !ruby/object:Ruble::Menu
+        displayName: render (inline, type)
+        path: bundle.rb
+        commandName: render (inline, type)
+      - !ruby/object:Ruble::Menu
+        displayName: render (layout)
+        path: bundle.rb
+        commandName: render (layout)
+      - !ruby/object:Ruble::Menu
+        displayName: render (nothing)
+        path: bundle.rb
+        commandName: render (nothing)
+      - !ruby/object:Ruble::Menu
+        displayName: render (nothing, status)
+        path: bundle.rb
+        commandName: render (nothing, status)
+      - !ruby/object:Ruble::Menu
+        displayName: render (partial)
+        path: bundle.rb
+        commandName: render (partial)
+      - !ruby/object:Ruble::Menu
+        displayName: render (partial, collection)
+        path: bundle.rb
+        commandName: render (partial, collection)
+      - !ruby/object:Ruble::Menu
+        displayName: render (partial, locals)
+        path: bundle.rb
+        commandName: render (partial, locals)
+      - !ruby/object:Ruble::Menu
+        displayName: render (partial, object)
+        path: bundle.rb
+        commandName: render (partial, object)
+      - !ruby/object:Ruble::Menu
+        displayName: render (partial, status)
+        path: bundle.rb
+        commandName: render (partial, status)
+      - !ruby/object:Ruble::Menu
+        displayName: render (text)
+        path: bundle.rb
+        commandName: render (text)
+      - !ruby/object:Ruble::Menu
+        displayName: render (text, layout)
+        path: bundle.rb
+        commandName: render (text, layout)
+      - !ruby/object:Ruble::Menu
+        displayName: render (text, layout => true)
+        path: bundle.rb
+        commandName: render (text, layout => true)
+      - !ruby/object:Ruble::Menu
+        displayName: render (text, status)
+        path: bundle.rb
+        commandName: render (text, status)
+      - !ruby/object:Ruble::Menu
+        displayName: render (update)
+        path: bundle.rb
+        commandName: render (update)
+    - !ruby/object:Ruble::Menu
+      displayName: ! "REST methods"
+      path: bundle.rb
+      children:
+      - !ruby/object:Ruble::Menu
+        displayName: def create - resource
+        path: bundle.rb
+        commandName: def create - resource
+    - !ruby/object:Ruble::Menu
+      displayName: ! '-'
+      path: bundle.rb
+      commandName: ! '-'
+    - !ruby/object:Ruble::Menu
+      displayName: verify - render
+      path: bundle.rb
+      commandName: verify - render
+    - !ruby/object:Ruble::Menu
+      displayName: verify - redirect
+      path: bundle.rb
+      commandName: verify - redirect
+  - !ruby/object:Ruble::Menu
+    displayName: ! "View Templates"
+    path: bundle.rb
+    children:
+    - !ruby/object:Ruble::Menu
+      displayName: ! "Create Partial From Selection"
+      path: bundle.rb
+      commandName: ! "Create Partial From Selection"
+    - !ruby/object:Ruble::Menu
+      displayName: ! '-'
+      path: bundle.rb
+      commandName: ! '-'
+    - !ruby/object:Ruble::Menu
+      displayName: form_for
+      path: bundle.rb
+      commandName: form_for
+    - !ruby/object:Ruble::Menu
+      displayName: form_for with errors
+      path: bundle.rb
+      commandName: form_for with errors
+    - !ruby/object:Ruble::Menu
+      displayName: form_for f.drop-down list
+      path: bundle.rb
+      children:
+      - !ruby/object:Ruble::Menu
+        displayName: f.label (ffl)
+        path: bundle.rb
+        commandName: f.label (ffl)
+      - !ruby/object:Ruble::Menu
+        displayName: f.text_field (fftf)
+        path: bundle.rb
+        commandName: f.text_field (fftf)
+      - !ruby/object:Ruble::Menu
+        displayName: f.text_area (ffta)
+        path: bundle.rb
+        commandName: f.text_area (ffta)
+      - !ruby/object:Ruble::Menu
+        displayName: f.check_box (ffcb)
+        path: bundle.rb
+        commandName: f.check_box (ffcb)
+      - !ruby/object:Ruble::Menu
+        displayName: f.radio_button (ffrb)
+        path: bundle.rb
+        commandName: f.radio_button (ffrb)
+      - !ruby/object:Ruble::Menu
+        displayName: f.password_field (ffpf)
+        path: bundle.rb
+        commandName: f.password_field (ffpf)
+      - !ruby/object:Ruble::Menu
+        displayName: f.hidden_field (ffhf)
+        path: bundle.rb
+        commandName: f.hidden_field (ffhf)
+      - !ruby/object:Ruble::Menu
+        displayName: f.file_field (ffff)
+        path: bundle.rb
+        commandName: f.file_field (ffff)
+      - !ruby/object:Ruble::Menu
+        displayName: f.submit (ffs)
+        path: bundle.rb
+        commandName: f.submit (ffs)
+      - !ruby/object:Ruble::Menu
+        displayName: f.fields_for (nff)
+        path: bundle.rb
+        commandName: f.fields_for (nff)
+    - !ruby/object:Ruble::Menu
+      displayName: form_for helpers
+      path: bundle.rb
+      children:
+      - !ruby/object:Ruble::Menu
+        displayName: form_for label
+        path: bundle.rb
+        commandName: form_for label
+      - !ruby/object:Ruble::Menu
+        displayName: form_for text_field
+        path: bundle.rb
+        commandName: form_for text_field
+      - !ruby/object:Ruble::Menu
+        displayName: form_for text_area
+        path: bundle.rb
+        commandName: form_for text_area
+      - !ruby/object:Ruble::Menu
+        displayName: form_for check_box
+        path: bundle.rb
+        commandName: form_for check_box
+      - !ruby/object:Ruble::Menu
+        displayName: form_for radio_button
+        path: bundle.rb
+        commandName: form_for radio_button
+      - !ruby/object:Ruble::Menu
+        displayName: form_for password_field
+        path: bundle.rb
+        commandName: form_for password_field
+      - !ruby/object:Ruble::Menu
+        displayName: form_for hidden_field
+        path: bundle.rb
+        commandName: form_for hidden_field
+      - !ruby/object:Ruble::Menu
+        displayName: form_for file_field
+        path: bundle.rb
+        commandName: form_for file_field
+      - !ruby/object:Ruble::Menu
+        displayName: form_for submit
+        path: bundle.rb
+        commandName: form_for submit
+      - !ruby/object:Ruble::Menu
+        displayName: form_for fields_for
+        path: bundle.rb
+        commandName: form_for fields_for
+    - !ruby/object:Ruble::Menu
+      displayName: fields_for
+      path: bundle.rb
+      commandName: fields_for
+    - !ruby/object:Ruble::Menu
+      displayName: ! '-'
+      path: bundle.rb
+      commandName: ! '-'
+    - !ruby/object:Ruble::Menu
+      displayName: form_tag
+      path: bundle.rb
+      commandName: form_tag
+    - !ruby/object:Ruble::Menu
+      displayName: submit_tag
+      path: bundle.rb
+      commandName: submit_tag
+    - !ruby/object:Ruble::Menu
+      displayName: image_submit_tag
+      path: bundle.rb
+      commandName: image_submit_tag
+    - !ruby/object:Ruble::Menu
+      displayName: link_to
+      path: bundle.rb
+      children:
+      - !ruby/object:Ruble::Menu
+        displayName: link_to (path)
+        path: bundle.rb
+        commandName: link_to (path)
+      - !ruby/object:Ruble::Menu
+        displayName: link_to (path plural)
+        path: bundle.rb
+        commandName: link_to (path plural)
+      - !ruby/object:Ruble::Menu
+        displayName: link_to (nested path)
+        path: bundle.rb
+        commandName: link_to (nested path)
+      - !ruby/object:Ruble::Menu
+        displayName: link_to (nested path plural)
+        path: bundle.rb
+        commandName: link_to (nested path plural)
+      - !ruby/object:Ruble::Menu
+        displayName: link_to (action)
+        path: bundle.rb
+        commandName: link_to (action)
+      - !ruby/object:Ruble::Menu
+        displayName: link_to (action, id)
+        path: bundle.rb
+        commandName: link_to (action, id)
+      - !ruby/object:Ruble::Menu
+        displayName: link_to (controller)
+        path: bundle.rb
+        commandName: link_to (controller)
+      - !ruby/object:Ruble::Menu
+        displayName: link_to (controller, action)
+        path: bundle.rb
+        commandName: link_to (controller, action)
+      - !ruby/object:Ruble::Menu
+        displayName: link_to (controller, action, id)
+        path: bundle.rb
+        commandName: link_to (controller, action, id)
+      - !ruby/object:Ruble::Menu
+        displayName: link_to model
+        path: bundle.rb
+        commandName: link_to model
+    - !ruby/object:Ruble::Menu
+      displayName: end (ERB)
+      path: bundle.rb
+      commandName: end (ERB)
+    - !ruby/object:Ruble::Menu
+      displayName: ! '-'
+      path: bundle.rb
+      commandName: ! '-'
+    - !ruby/object:Ruble::Menu
+      displayName: map(&:sym_proc)
+      path: bundle.rb
+      commandName: map(&:sym_proc)
+    - !ruby/object:Ruble::Menu
+      displayName: ! '-'
+      path: bundle.rb
+      commandName: ! '-'
+    - !ruby/object:Ruble::Menu
+      displayName: content_for
+      path: bundle.rb
+      commandName: content_for
+    - !ruby/object:Ruble::Menu
+      displayName: ! "for loop in rhtml"
+      path: bundle.rb
+      commandName: ! "for loop in rhtml"
+  - !ruby/object:Ruble::Menu
+    displayName: ! "Layouts"
+    path: bundle.rb
+    children:
+    - !ruby/object:Ruble::Menu
+      displayName: javascript_include_tag
+      path: bundle.rb
+      commandName: javascript_include_tag
+    - !ruby/object:Ruble::Menu
+      displayName: stylesheet_link_tag
+      path: bundle.rb
+      commandName: stylesheet_link_tag
+  - !ruby/object:Ruble::Menu
+    displayName: RJS
+    path: bundle.rb
+    children:
+    - !ruby/object:Ruble::Menu
+      displayName: page.replace (id, partial)
+      path: bundle.rb
+      commandName: page.replace (id, partial)
+    - !ruby/object:Ruble::Menu
+      displayName: page.hide (*ids)
+      path: bundle.rb
+      commandName: page.hide (*ids)
+    - !ruby/object:Ruble::Menu
+      displayName: page.replace_html (id, partial)
+      path: bundle.rb
+      commandName: page.replace_html (id, partial)
+    - !ruby/object:Ruble::Menu
+      displayName: page.insert_html (position, id, partial)
+      path: bundle.rb
+      commandName: page.insert_html (position, id, partial)
+    - !ruby/object:Ruble::Menu
+      displayName: page.visual_effect (effect, id)
+      path: bundle.rb
+      commandName: page.visual_effect (effect, id)
+    - !ruby/object:Ruble::Menu
+      displayName: page.show (*ids)
+      path: bundle.rb
+      commandName: page.show (*ids)
+    - !ruby/object:Ruble::Menu
+      displayName: page.toggle (*ids)
+      path: bundle.rb
+      commandName: page.toggle (*ids)
+  - !ruby/object:Ruble::Menu
+    displayName: ! "Migrations"
+    path: bundle.rb
+    children:
+    - !ruby/object:Ruble::Menu
+      displayName: ! "Columns"
+      path: bundle.rb
+      children:
+      - !ruby/object:Ruble::Menu
+        displayName: ! "Add / Remove Column"
+        path: bundle.rb
+        commandName: ! "Add / Remove Column"
+      - !ruby/object:Ruble::Menu
+        displayName: ! "Add / Remove Several Columns"
+        path: bundle.rb
+        commandName: ! "Add / Remove Several Columns"
+      - !ruby/object:Ruble::Menu
+        displayName: ! "Add / Remove Several Columns (marcc)"
+        path: bundle.rb
+        commandName: ! "Add / Remove Several Columns (marcc)"
+      - !ruby/object:Ruble::Menu
+        displayName: ! "Add / Remove Timestamps"
+        path: bundle.rb
+        commandName: ! "Add / Remove Timestamps"
+      - !ruby/object:Ruble::Menu
+        displayName: ! "Change Column"
+        path: bundle.rb
+        commandName: ! "Change Column"
+      - !ruby/object:Ruble::Menu
+        displayName: ! "Change Column Default"
+        path: bundle.rb
+        commandName: ! "Change Column Default"
+      - !ruby/object:Ruble::Menu
+        displayName: ! "Rename Column"
+        path: bundle.rb
+        commandName: ! "Rename Column"
+      - !ruby/object:Ruble::Menu
+        displayName: ! "Rename Several Columns"
+        path: bundle.rb
+        commandName: ! "Rename Several Columns"
+      - !ruby/object:Ruble::Menu
+        displayName: ! "Rename Several Columns (mncc)"
+        path: bundle.rb
+        commandName: ! "Rename Several Columns (mncc)"
+      - !ruby/object:Ruble::Menu
+        displayName: ! "Remove / Add Column"
+        path: bundle.rb
+        commandName: ! "Remove / Add Column"
+      - !ruby/object:Ruble::Menu
+        displayName: ! "Remove / Add Timestamps"
+        path: bundle.rb
+        commandName: ! "Remove / Add Timestamps"
+    - !ruby/object:Ruble::Menu
+      displayName: ! "Tables"
+      path: bundle.rb
+      children:
+      - !ruby/object:Ruble::Menu
+        displayName: ! "Create / Drop Table"
+        path: bundle.rb
+        commandName: ! "Create / Drop Table"
+      - !ruby/object:Ruble::Menu
+        displayName: ! "Rename Table"
+        path: bundle.rb
+        commandName: ! "Rename Table"
+      - !ruby/object:Ruble::Menu
+        displayName: ! "Drop / Create Table"
+        path: bundle.rb
+        commandName: ! "Drop / Create Table"
+      - !ruby/object:Ruble::Menu
+        displayName: ! "Change Table"
+        path: bundle.rb
+        commandName: ! "Change Table"
+      - !ruby/object:Ruble::Menu
+        displayName: ! "Create columns helpers"
+        path: bundle.rb
+        children:
+        - !ruby/object:Ruble::Menu
+          displayName: ! "Table column string"
+          path: bundle.rb
+          commandName: ! "Table column string"
+        - !ruby/object:Ruble::Menu
+          displayName: ! "Table column text"
+          path: bundle.rb
+          commandName: ! "Table column text"
+        - !ruby/object:Ruble::Menu
+          displayName: ! "Table column integer"
+          path: bundle.rb
+          commandName: ! "Table column integer"
+        - !ruby/object:Ruble::Menu
+          displayName: ! "Table column float"
+          path: bundle.rb
+          commandName: ! "Table column float"
+        - !ruby/object:Ruble::Menu
+          displayName: ! "Table column decimal"
+          path: bundle.rb
+          commandName: ! "Table column decimal"
+        - !ruby/object:Ruble::Menu
+          displayName: ! "Table column datetime"
+          path: bundle.rb
+          commandName: ! "Table column datetime"
+        - !ruby/object:Ruble::Menu
+          displayName: ! "Table column timestamp"
+          path: bundle.rb
+          commandName: ! "Table column timestamp"
+        - !ruby/object:Ruble::Menu
+          displayName: ! "Table column time"
+          path: bundle.rb
+          commandName: ! "Table column time"
+        - !ruby/object:Ruble::Menu
+          displayName: ! "Table column date"
+          path: bundle.rb
+          commandName: ! "Table column date"
+        - !ruby/object:Ruble::Menu
+          displayName: ! "Table column boolean"
+          path: bundle.rb
+          commandName: ! "Table column boolean"
+        - !ruby/object:Ruble::Menu
+          displayName: ! "Table column binary"
+          path: bundle.rb
+          commandName: ! "Table column binary"
+        - !ruby/object:Ruble::Menu
+          displayName: ! "Table column timestamps"
+          path: bundle.rb
+          commandName: ! "Table column timestamps"
+        - !ruby/object:Ruble::Menu
+          displayName: ! "Table column lock_version"
+          path: bundle.rb
+          commandName: ! "Table column lock_version"
+        - !ruby/object:Ruble::Menu
+          displayName: ! "Table column(s) references"
+          path: bundle.rb
+          commandName: ! "Table column(s) references"
+      - !ruby/object:Ruble::Menu
+        displayName: ! "Create Column in Table"
+        path: bundle.rb
+        commandName: ! "Create Column in Table"
+      - !ruby/object:Ruble::Menu
+        displayName: ! "Change columns t. drop-down list"
+        path: bundle.rb
+        children:
+        - !ruby/object:Ruble::Menu
+          displayName: t.change (tch)
+          path: bundle.rb
+          commandName: t.change (tch)
+        - !ruby/object:Ruble::Menu
+          displayName: t.rename (tre)
+          path: bundle.rb
+          commandName: t.rename (tre)
+      - !ruby/object:Ruble::Menu
+        displayName: ! "Change columns t. helpers"
+        path: bundle.rb
+        children:
+        - !ruby/object:Ruble::Menu
+          displayName: ! "Table column(s) change"
+          path: bundle.rb
+          commandName: ! "Table column(s) change"
+        - !ruby/object:Ruble::Menu
+          displayName: ! "Table column(s) rename"
+          path: bundle.rb
+          commandName: ! "Table column(s) rename"
+    - !ruby/object:Ruble::Menu
+      displayName: ! "Indices"
+      path: bundle.rb
+      children:
+      - !ruby/object:Ruble::Menu
+        displayName: ! "Add / Remove Index"
+        path: bundle.rb
+        commandName: ! "Add / Remove Index"
+      - !ruby/object:Ruble::Menu
+        displayName: ! "Add / Remove Named Index"
+        path: bundle.rb
+        commandName: ! "Add / Remove Named Index"
+      - !ruby/object:Ruble::Menu
+        displayName: ! "Add / Remove Unique Index"
+        path: bundle.rb
+        commandName: ! "Add / Remove Unique Index"
+  - !ruby/object:Ruble::Menu
+    displayName: ! "Environment"
+    path: bundle.rb
+    children:
+    - !ruby/object:Ruble::Menu
+      displayName: config.gem
+      path: bundle.rb
+      commandName: config.gem
+  - !ruby/object:Ruble::Menu
+    displayName: ! "Routes"
+    path: bundle.rb
+    children:
+    - !ruby/object:Ruble::Menu
+      displayName: map.named_route
+      path: bundle.rb
+      commandName: map.named_route
+    - !ruby/object:Ruble::Menu
+      displayName: map.resources
+      path: bundle.rb
+      commandName: map.resources
+    - !ruby/object:Ruble::Menu
+      displayName: map.resource
+      path: bundle.rb
+      commandName: map.resource
+    - !ruby/object:Ruble::Menu
+      displayName: map.with_options
+      path: bundle.rb
+      commandName: map.with_options
+    - !ruby/object:Ruble::Menu
+      displayName: map.catch_all
+      path: bundle.rb
+      commandName: map.catch_all
+  - !ruby/object:Ruble::Menu
+    displayName: ActiveSupport
+    path: bundle.rb
+    children:
+    - !ruby/object:Ruble::Menu
+      displayName: cattr_accessor
+      path: bundle.rb
+      commandName: cattr_accessor
+    - !ruby/object:Ruble::Menu
+      displayName: mattr_accessor
+      path: bundle.rb
+      commandName: mattr_accessor
+    - !ruby/object:Ruble::Menu
+      displayName: returning do |variable| ... end
+      path: bundle.rb
+      commandName: returning do |variable| ... end
+  - !ruby/object:Ruble::Menu
+    displayName: ! '-'
+    path: bundle.rb
+    commandName: ! '-'
+  - !ruby/object:Ruble::Menu
+    displayName: ! "Fixtures"
+    path: bundle.rb
+    children:
+    - !ruby/object:Ruble::Menu
+      displayName: $LABEL
+      path: bundle.rb
+      commandName: $LABEL
+    - !ruby/object:Ruble::Menu
+      displayName: <%= Fixtures.identify(:symbol) %>
+      path: bundle.rb
+      commandName: <%= Fixtures.identify(:symbol) %>
+    - !ruby/object:Ruble::Menu
+      displayName: ! '-'
+      path: bundle.rb
+      commandName: ! '-'
+    - !ruby/object:Ruble::Menu
+      displayName: ! "Autocomplete Foreign Key Fixture Reference"
+      path: bundle.rb
+      commandName: ! "Autocomplete Foreign Key Fixture Reference"
+    - !ruby/object:Ruble::Menu
+      displayName: ! "Autocomplete Foreign Key Fixture Reference (habtm)"
+      path: bundle.rb
+      commandName: ! "Autocomplete Foreign Key Fixture Reference (habtm)"
+  - !ruby/object:Ruble::Menu
+    displayName: test do...end
+    path: bundle.rb
+    commandName: test do...end
+  - !ruby/object:Ruble::Menu
+    displayName: ! "Unit Tests"
+    path: bundle.rb
+    children:
+    - !ruby/object:Ruble::Menu
+      displayName: assert_difference
+      path: bundle.rb
+      commandName: assert_difference
+    - !ruby/object:Ruble::Menu
+      displayName: assert_no_difference
+      path: bundle.rb
+      commandName: assert_no_difference
+  - !ruby/object:Ruble::Menu
+    displayName: ! "Functional Tests"
+    path: bundle.rb
+    children:
+    - !ruby/object:Ruble::Menu
+      displayName: ! "Create functional test class"
+      path: bundle.rb
+      commandName: ! "Create functional test class"
+    - !ruby/object:Ruble::Menu
+      displayName: def test_should_get_action
+      path: bundle.rb
+      commandName: def test_should_get_action
+    - !ruby/object:Ruble::Menu
+      displayName: def test_should_post_action
+      path: bundle.rb
+      commandName: def test_should_post_action
+    - !ruby/object:Ruble::Menu
+      displayName: ! '-'
+      path: bundle.rb
+      commandName: ! '-'
+    - !ruby/object:Ruble::Menu
+      displayName: assert_response
+      path: bundle.rb
+      commandName: assert_response
+    - !ruby/object:Ruble::Menu
+      displayName: assert_redirected_to
+      path: bundle.rb
+      commandName: assert_redirected_to
+    - !ruby/object:Ruble::Menu
+      displayName: assert_redirected_to (path)
+      path: bundle.rb
+      commandName: assert_redirected_to (path)
+    - !ruby/object:Ruble::Menu
+      displayName: assert_redirected_to (path plural)
+      path: bundle.rb
+      commandName: assert_redirected_to (path plural)
+    - !ruby/object:Ruble::Menu
+      displayName: assert_redirected_to (nested path)
+      path: bundle.rb
+      commandName: assert_redirected_to (nested path)
+    - !ruby/object:Ruble::Menu
+      displayName: assert_redirected_to (nested path plural)
+      path: bundle.rb
+      commandName: assert_redirected_to (nested path plural)
+    - !ruby/object:Ruble::Menu
+      displayName: ! '-'
+      path: bundle.rb
+      commandName: ! '-'
+    - !ruby/object:Ruble::Menu
+      displayName: assert_select
+      path: bundle.rb
+      commandName: assert_select
+    - !ruby/object:Ruble::Menu
+      displayName: ! '-'
+      path: bundle.rb
+      commandName: ! '-'
+    - !ruby/object:Ruble::Menu
+      displayName: assert_rjs
+      path: bundle.rb
+      commandName: assert_rjs
+    - !ruby/object:Ruble::Menu
+      displayName: ! '-'
+      path: bundle.rb
+      commandName: ! '-'
+    - !ruby/object:Ruble::Menu
+      displayName: assert(var= assigns(:var))
+      path: bundle.rb
+      commandName: assert(var= assigns(:var))
+  - !ruby/object:Ruble::Menu
+    displayName: ! "Ajax Tests"
+    path: bundle.rb
+    children:
+    - !ruby/object:Ruble::Menu
+      displayName: xhr post
+      path: bundle.rb
+      commandName: xhr post
+    - !ruby/object:Ruble::Menu
+      displayName: xhr get
+      path: bundle.rb
+      commandName: xhr get
+    - !ruby/object:Ruble::Menu
+      displayName: xhr delete
+      path: bundle.rb
+      commandName: xhr delete
+    - !ruby/object:Ruble::Menu
+      displayName: xhr put
+      path: bundle.rb
+      commandName: xhr put
+  - !ruby/object:Ruble::Menu
+    displayName: ! '-'
+    path: bundle.rb
+    commandName: ! '-'
+  - !ruby/object:Ruble::Menu
+    displayName: ! "Documentation for Word"
+    path: bundle.rb
+    commandName: ! "Documentation for Word"
+  - !ruby/object:Ruble::Menu
+    displayName: find_each
+    path: bundle.rb
+    commandName: find_each
+  - !ruby/object:Ruble::Menu
+    displayName: ! "List Columns of a Model"
+    path: bundle.rb
+    commandName: ! "List Columns of a Model"
+- !ruby/object:Ruble::SmartTypingPair
+  scope: text.html.ruby
+  path: bundle.rb
+  pairs:
+  - ! '%'
+  - ! '%'
+  - ! '"'
+  - ! '"'
+  - (
+  - )
+  - ! '{'
+  - ! '}'
+  - ! '['
+  - ! ']'
+  - <
+  - ! '>'
+  displayName: smart_typing_pairs-
+- !ruby/object:Ruble::SmartTypingPair
+  scope: text.html.ruby meta.tag
+  path: bundle.rb
+  pairs:
+  - ! '%'
+  - ! '%'
+  - ! '"'
+  - ! '"'
+  - (
+  - )
+  - ! '{'
+  - ! '}'
+  - ! '['
+  - ! ']'
+  - <
+  - ! '>'
+  - ! ''''
+  - ! ''''
+  displayName: smart_typing_pairs-
+- !ruby/object:Ruble::SmartTypingPair
+  scope: text.html.ruby meta.tag string
+  path: bundle.rb
+  pairs:
+  - ! '"'
+  - ! '"'
+  - (
+  - )
+  - ! '{'
+  - ! '}'
+  - ! '['
+  - ! ']'
+  - ! '%'
+  - ! '%'
+  - <
+  - ! '>'
+  displayName: smart_typing_pairs-
+- !ruby/object:Ruble::Command
+  displayName: ! "Preview"
+  path: commands/preview.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  keyBindingMap:
+    !ruby/object:Ruble::Platform ALL:
+    - M1+M2+P
+  scope: source.ruby.rails, text.html.ruby, text.haml
+  outputType: discard
+- !ruby/object:Ruble::Command
+  displayName: ! "Documentation for Word"
+  path: commands/documentation_for_word.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - selection
+  - word
+  scope: source.ruby.rails, text.html.ruby, text.haml
+  outputType: show_as_html
+- !ruby/object:Ruble::Command
+  displayName: ! "Go to Controller"
+  path: commands/go_to_file.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  keyBindingMap:
+    !ruby/object:Ruble::Platform ALL:
+    - M1+M2+M3+ARROW_DOWN
+  scope: source.ruby, text.html.ruby, source.ruby.rails.embedded.html, meta.rails.helper,
+    meta.rails.functional_test, source.js, source.css, source.yaml, meta.rails.model,
+    meta.rails.unit_test, text.haml
+  outputType: show_as_tooltip
+- !ruby/object:Ruble::Command
+  displayName: ! "Go to Alternate File"
+  path: commands/go_to_file.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  keyBindingMap:
+    !ruby/object:Ruble::Platform ALL:
+    - M1+M2+M3+ARROW_DOWN
+  scope: source.ruby.rails, text.html.ruby, source.ruby.rails.embedded.html, source.yaml,
+    text.haml, source.css, source.js, source.sass
+  outputType: show_as_tooltip
+- !ruby/object:Ruble::Command
+  displayName: ! "Go to File on Current Line"
+  path: commands/go_to_file.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  keyBindingMap:
+    !ruby/object:Ruble::Platform ALL:
+    - M1+M2+M3+ARROW_DOWN
+  scope: source.ruby.rails, text.html.ruby, source.ruby.rails.embedded.html, text.haml
+  outputType: show_as_tooltip
+- !ruby/object:Ruble::Command
+  displayName: ! "Go to Fixture"
+  path: commands/go_to_file.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  keyBindingMap:
+    !ruby/object:Ruble::Platform ALL:
+    - M1+M2+M3+ARROW_DOWN
+  scope: meta.rails.controller, meta.rails.helper, meta.rails.model, meta.rails.unit_test,
+    meta.rails.functional_test
+  outputType: show_as_tooltip
+- !ruby/object:Ruble::Command
+  displayName: ! "Go to Functional Test"
+  path: commands/go_to_file.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  keyBindingMap:
+    !ruby/object:Ruble::Platform ALL:
+    - M1+M2+M3+ARROW_DOWN
+  scope: meta.rails.controller, meta.rails.helper, meta.rails.model, source.yaml,
+    meta.rails.unit_test
+  outputType: show_as_tooltip
+- !ruby/object:Ruble::Command
+  displayName: ! "Go to Helper"
+  path: commands/go_to_file.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  keyBindingMap:
+    !ruby/object:Ruble::Platform ALL:
+    - M1+M2+M3+ARROW_DOWN
+  scope: text.html.ruby, source.ruby.rails.embedded.html, meta.rails.controller, meta.rails.model,
+    meta.rails.unit_test, meta.rails.functional_test, text.haml
+  outputType: show_as_tooltip
+- !ruby/object:Ruble::Command
+  displayName: ! "Go to Javascript"
+  path: commands/go_to_file.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  keyBindingMap:
+    !ruby/object:Ruble::Platform ALL:
+    - M1+M2+M3+ARROW_DOWN
+  scope: text.html.ruby, source.ruby.rails.embedded.html, meta.rails.controller, meta.rails.helper,
+    text.haml
+  outputType: show_as_tooltip
+- !ruby/object:Ruble::Command
+  displayName: ! "Go to Model"
+  path: commands/go_to_file.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  keyBindingMap:
+    !ruby/object:Ruble::Platform ALL:
+    - M1+M2+M3+ARROW_DOWN
+  scope: text.html.ruby, source.ruby.rails.embedded.html, meta.rails.helper, meta.rails.unit_test,
+    source.js, source.css, source.yaml, meta.rails.controller, meta.rails.functional_test,
+    text.haml
+  outputType: show_as_tooltip
+- !ruby/object:Ruble::Command
+  displayName: ! "Go to Stylesheet"
+  path: commands/go_to_file.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  keyBindingMap:
+    !ruby/object:Ruble::Platform ALL:
+    - M1+M2+M3+ARROW_DOWN
+  scope: text.html.ruby, source.ruby.rails.embedded.html, meta.rails.controller, meta.rails.helper,
+    text.haml
+  outputType: show_as_tooltip
+- !ruby/object:Ruble::Command
+  displayName: ! "Go to Unit Test"
+  path: commands/go_to_file.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  keyBindingMap:
+    !ruby/object:Ruble::Platform ALL:
+    - M1+M2+M3+ARROW_DOWN
+  scope: meta.rails.controller, meta.rails.helper, meta.rails.model, meta.rails.functional_test,
+    source.yaml
+  outputType: show_as_tooltip
+- !ruby/object:Ruble::Command
+  displayName: ! "Go to View"
+  path: commands/go_to_file.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  keyBindingMap:
+    !ruby/object:Ruble::Platform ALL:
+    - M1+M2+M3+ARROW_DOWN
+  scope: meta.rails.controller, meta.rails.mailer, source.js, source.css
+  outputType: show_as_tooltip
+- !ruby/object:Ruble::Command
+  displayName: ! "Create Partial From Selection"
+  path: commands/make_selection_into_partial.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - selection
+  - line
+  scope: source.ruby.rails, text.html.ruby, text.haml
+  outputType: replace_selection
+- !ruby/object:Ruble::Command
+  displayName: ! "Show DB Schema for Current Class"
+  path: commands/show_db_schema.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  keyBindingMap:
+    !ruby/object:Ruble::Platform ALL:
+    - CONTROL+SHIFT+COMMAND+S
+  scope: source.ruby, text.html.ruby, source.ruby.rails.embedded.html, meta.rails.helper,
+    meta.rails.functional_test, source.js, source.css, source.yaml, meta.rails.model,
+    meta.rails.unit_test, text.haml
+  outputType: show_as_tooltip
+- !ruby/object:Ruble::Command
+  displayName: ! "List Columns of a Model"
+  path: commands/list_model_columns.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - selection
+  - word
+  keyBindingMap:
+    !ruby/object:Ruble::Platform ALL:
+    - M3+SPACE
+  scope: source.ruby.rails, text.html.ruby, text.haml
+  outputType: insert_as_text
+  customProperties:
+    prefix_values:
+    - .
+- !ruby/object:Ruble::Command
+  displayName: ! "Clone Development DB to Test DB"
+  path: commands/db_migration.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  keyBindingMap:
+    !ruby/object:Ruble::Platform ALL:
+    - M1+M2+\
+  scope: source.ruby.rails, source.yaml
+  outputType: discard
+- !ruby/object:Ruble::Command
+  displayName: ! "Dump DB to schema.rb"
+  path: commands/db_migration.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  keyBindingMap:
+    !ruby/object:Ruble::Platform ALL:
+    - M1+M2+\
+  scope: source.ruby.rails, source.yaml
+  outputType: discard
+- !ruby/object:Ruble::Command
+  displayName: ! "Load schema.rb to DB"
+  path: commands/db_migration.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  keyBindingMap:
+    !ruby/object:Ruble::Platform ALL:
+    - M1+M2+\
+  scope: source.ruby.rails, source.yaml
+  outputType: discard
+- !ruby/object:Ruble::Command
+  displayName: ! "Load Fixtures (Test DB)"
+  path: commands/db_migration.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  keyBindingMap:
+    !ruby/object:Ruble::Platform ALL:
+    - M1+M2+\
+  scope: source.ruby.rails, source.yaml
+  outputType: discard
+- !ruby/object:Ruble::Command
+  displayName: ! "Load Fixtures (Development DB)"
+  path: commands/db_migration.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  keyBindingMap:
+    !ruby/object:Ruble::Platform ALL:
+    - M1+M2+\
+  scope: source.ruby.rails, source.yaml
+  outputType: discard
+- !ruby/object:Ruble::Command
+  displayName: ! "Migrate to Previous Version"
+  path: commands/db_migration.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  keyBindingMap:
+    !ruby/object:Ruble::Platform ALL:
+    - M1+M2+\
+  scope: source.ruby.rails, source.yaml
+  outputType: discard
+- !ruby/object:Ruble::Command
+  displayName: ! "Migrate to Current"
+  path: commands/db_migration.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  keyBindingMap:
+    !ruby/object:Ruble::Platform ALL:
+    - M1+M2+\
+  scope: source.ruby.rails, source.yaml
+  outputType: discard
+- !ruby/object:Ruble::Command
+  displayName: ! "Redo Last Migration"
+  path: commands/db_migration.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  keyBindingMap:
+    !ruby/object:Ruble::Platform ALL:
+    - M1+M2+\
+  scope: source.ruby.rails, source.yaml
+  outputType: discard
+- !ruby/object:Ruble::Command
+  displayName: ! "Add / Remove Column"
+  path: commands/db_migration.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - selection
+  scope: source.ruby.rails
+  outputType: insert_as_snippet
+  customProperties:
+    prefix_values:
+    - mcol
+- !ruby/object:Ruble::Command
+  displayName: ! "Add / Remove Index"
+  path: commands/db_migration.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - selection
+  scope: source.ruby.rails
+  outputType: insert_as_snippet
+  customProperties:
+    prefix_values:
+    - mind
+- !ruby/object:Ruble::Command
+  displayName: ! "Add / Remove Named Index"
+  path: commands/db_migration.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - selection
+  scope: source.ruby.rails
+  outputType: insert_as_snippet
+  customProperties:
+    prefix_values:
+    - mind
+- !ruby/object:Ruble::Command
+  displayName: ! "Add / Remove Several Columns (marcc)"
+  path: commands/db_migration.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - selection
+  scope: source.ruby.rails
+  outputType: insert_as_snippet
+  customProperties:
+    prefix_values:
+    - marcc
+- !ruby/object:Ruble::Command
+  displayName: ! "Add / Remove Several Columns"
+  path: commands/db_migration.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - selection
+  scope: source.ruby.rails
+  outputType: insert_as_snippet
+  customProperties:
+    prefix_values:
+    - mcol
+- !ruby/object:Ruble::Command
+  displayName: ! "Add / Remove Timestamps"
+  path: commands/db_migration.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - selection
+  scope: source.ruby.rails
+  outputType: insert_as_snippet
+  customProperties:
+    prefix_values:
+    - mcol
+- !ruby/object:Ruble::Command
+  displayName: ! "Add / Remove Unique Index"
+  path: commands/db_migration.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - selection
+  scope: source.ruby.rails
+  outputType: insert_as_snippet
+  customProperties:
+    prefix_values:
+    - mind
+- !ruby/object:Ruble::Command
+  displayName: ! "Change Table"
+  path: commands/db_migration.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - selection
+  scope: source.ruby.rails
+  outputType: insert_as_snippet
+  customProperties:
+    prefix_values:
+    - mtab
+- !ruby/object:Ruble::Command
+  displayName: ! "Change Column Default"
+  path: commands/db_migration.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - selection
+  scope: source.ruby.rails
+  outputType: insert_as_snippet
+  customProperties:
+    prefix_values:
+    - mcol
+- !ruby/object:Ruble::Command
+  displayName: ! "Change Column"
+  path: commands/db_migration.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - selection
+  scope: source.ruby.rails
+  outputType: insert_as_snippet
+  customProperties:
+    prefix_values:
+    - mcol
+- !ruby/object:Ruble::Command
+  displayName: ! "Create / Drop Table"
+  path: commands/db_migration.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - selection
+  scope: source.ruby.rails
+  outputType: insert_as_snippet
+  customProperties:
+    prefix_values:
+    - mtab
+- !ruby/object:Ruble::Command
+  displayName: ! "Remove / Add Timestamps"
+  path: commands/db_migration.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - selection
+  scope: source.ruby.rails
+  outputType: insert_as_snippet
+  customProperties:
+    prefix_values:
+    - mcol
+- !ruby/object:Ruble::Command
+  displayName: ! "Rename Several Columns (mncc)"
+  path: commands/db_migration.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - selection
+  scope: source.ruby.rails
+  outputType: insert_as_snippet
+  customProperties:
+    prefix_values:
+    - mncc
+- !ruby/object:Ruble::Command
+  displayName: ! "Rename Several Columns"
+  path: commands/db_migration.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - selection
+  scope: source.ruby.rails
+  outputType: insert_as_snippet
+  customProperties:
+    prefix_values:
+    - mcol
+- !ruby/object:Ruble::Command
+  displayName: ! "Rename Column"
+  path: commands/db_migration.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - selection
+  scope: source.ruby.rails
+  outputType: insert_as_snippet
+  customProperties:
+    prefix_values:
+    - mcol
+- !ruby/object:Ruble::Command
+  displayName: ! "Rename Table"
+  path: commands/db_migration.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - selection
+  scope: source.ruby.rails
+  outputType: insert_as_snippet
+  customProperties:
+    prefix_values:
+    - mtab
+- !ruby/object:Ruble::Command
+  displayName: ! "Autocomplete Foreign Key Fixture Reference (habtm)"
+  path: commands/autocomplete_foreign_key_fixture_reference_habtm.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - selection
+  - line
+  keyBindingMap:
+    !ruby/object:Ruble::Platform ALL:
+    - M4+M2+ESC
+  scope: source.yaml
+  outputType: insert_as_snippet
+- !ruby/object:Ruble::Command
+  displayName: ! "Test All"
+  path: commands/test.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  keyBindingMap:
+    !ruby/object:Ruble::Platform ALL:
+    - CONTROL+\
+  scope: source.ruby.rails, source.yaml
+  outputType: discard
+- !ruby/object:Ruble::Command
+  displayName: ! "Test Functionals"
+  path: commands/test.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  keyBindingMap:
+    !ruby/object:Ruble::Platform ALL:
+    - CONTROL+\
+  scope: source.ruby.rails, source.yaml
+  outputType: discard
+- !ruby/object:Ruble::Command
+  displayName: ! "Test Integration"
+  path: commands/test.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  keyBindingMap:
+    !ruby/object:Ruble::Platform ALL:
+    - CONTROL+\
+  scope: source.ruby.rails, source.yaml
+  outputType: discard
+- !ruby/object:Ruble::Command
+  displayName: ! "Test Plugins"
+  path: commands/test.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  keyBindingMap:
+    !ruby/object:Ruble::Platform ALL:
+    - CONTROL+\
+  scope: source.ruby.rails, source.yaml
+  outputType: discard
+- !ruby/object:Ruble::Command
+  displayName: ! "Test Recent"
+  path: commands/test.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  keyBindingMap:
+    !ruby/object:Ruble::Platform ALL:
+    - CONTROL+\
+  scope: source.ruby.rails, source.yaml
+  outputType: discard
+- !ruby/object:Ruble::Command
+  displayName: ! "Test Uncommitted"
+  path: commands/test.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  keyBindingMap:
+    !ruby/object:Ruble::Platform ALL:
+    - CONTROL+\
+  scope: source.ruby.rails, source.yaml
+  outputType: discard
+- !ruby/object:Ruble::Command
+  displayName: ! "Test Units"
+  path: commands/test.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  keyBindingMap:
+    !ruby/object:Ruble::Platform ALL:
+    - CONTROL+\
+  scope: source.ruby.rails, source.yaml
+  outputType: discard
+- !ruby/object:Ruble::Command
+  displayName: ! "Autocomplete Foreign Key Fixture Reference"
+  path: commands/autocomplete_foreign_key_fixture_reference.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - selection
+  - line
+  keyBindingMap:
+    !ruby/object:Ruble::Platform ALL:
+    - M4+ESC
+  scope: source.yaml, source.ruby.rails, meta.rails.unit_test, meta.rails.functional_test
+  outputType: insert_as_snippet
+- !ruby/object:Ruble::Command
+  displayName: ! "Call Generate Script"
+  path: commands/generate.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  keyBindingMap:
+    !ruby/object:Ruble::Platform ALL:
+    - CONTROL+SHIFT+\
+  scope: source.ruby.rails, source.yaml, project.rails
+  outputType: discard
+- !ruby/object:Ruble::Command
+  displayName: respond_to (html)
+  path: snippets/controller_snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - selection
+  - word
+  keyBindingMap:
+    !ruby/object:Ruble::Platform ALL:
+    - M1+SHIFT+H
+  scope: source.ruby, meta.rails.controller
+  outputType: insert_as_snippet
+- !ruby/object:Ruble::Snippet
+  displayName: form_tag
+  path: snippets/180_rails_snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  customProperties:
+    prefix_values:
+    - ft
+  expansion: ! "form_tag(:action => \"${1:update}\", {:${2:class} => \"${3:form}\"})
+    do\n\t$0\n"
+  scope: text_html_ruby, text_haml
+- !ruby/object:Ruble::Snippet
+  displayName: ! "Create Column in Table"
+  path: snippets/migration_snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  customProperties:
+    prefix_values:
+    - mcol
+  expansion: ! "t.column ${1:title}, :${2:string}\n\t$0"
+  scope: source.ruby.rails
+- !ruby/object:Ruble::Snippet
+  displayName: ! "Drop / Create Table"
+  path: snippets/migration_snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  customProperties:
+    prefix_values:
+    - mtab
+  expansion: ! 'drop_table :${1:table}${2: [press tab twice to generate create_table]}'
+  scope: source.ruby.rails
+- !ruby/object:Ruble::Snippet
+  displayName: ! "Remove / Add Column"
+  path: snippets/migration_snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  customProperties:
+    prefix_values:
+    - mcol
+  expansion: ! 'remove_column :${1:table}, :${2:column}${3: [press tab twice to generate
+    add_column]}'
+  scope: source.ruby.rails
+- !ruby/object:Ruble::Snippet
+  displayName: ! "Table column(s) change"
+  path: snippets/migration_snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  customProperties:
+    prefix_values:
+    - tch
+  expansion: ! 't.change :${1:name}${2:, :${3:string}${4:, :${5:limit} => ${6:80}}}
+
+    $0'
+  scope: source.ruby.rails
+- !ruby/object:Ruble::Snippet
+  displayName: ! "Table column(s) rename"
+  path: snippets/migration_snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  customProperties:
+    prefix_values:
+    - tre
+  expansion: ! 't.rename :${1:old_column_name}, :${2:new_column_name}
+
+    $0'
+  scope: source.ruby.rails
+- !ruby/object:Ruble::Snippet
+  displayName: ! "Table column"
+  path: snippets/migration_snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  customProperties:
+    prefix_values:
+    - mcol
+  expansion: ! "t.column ${1:title}, :${2:string}\n\t$0"
+  scope: source.ruby.rails
+- !ruby/object:Ruble::Snippet
+  displayName: ! "Table column binary"
+  path: snippets/migration_snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  customProperties:
+    prefix_values:
+    - t.
+    - tcbi
+  expansion: ! 't.binary :${1:title}${2:, :limit => ${3:2}.megabytes}
+
+    $0'
+  scope: source.ruby.rails
+- !ruby/object:Ruble::Snippet
+  displayName: ! "Table column boolean"
+  path: snippets/migration_snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  customProperties:
+    prefix_values:
+    - t.
+    - tcb
+  expansion: ! 't.boolean :${1:title}
+
+    $0'
+  scope: source.ruby.rails
+- !ruby/object:Ruble::Snippet
+  displayName: ! "Table column date"
+  path: snippets/migration_snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  customProperties:
+    prefix_values:
+    - t.
+    - tcda
+  expansion: ! 't.date :${1:title}
+
+    $0'
+  scope: source.ruby.rails
+- !ruby/object:Ruble::Snippet
+  displayName: ! "Table column datetime"
+  path: snippets/migration_snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  customProperties:
+    prefix_values:
+    - t.
+    - tcdt
+  expansion: ! 't.datetime :${1:title}
+
+    $0'
+  scope: source.ruby.rails
+- !ruby/object:Ruble::Snippet
+  displayName: ! "Table column decimal"
+  path: snippets/migration_snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  customProperties:
+    prefix_values:
+    - t.
+    - tcd
+  expansion: ! 't.decimal :${1:title}${2:${3:, :precision => ${4:10}}${5:, :scale
+    => ${6:2}}}
+
+    $0'
+  scope: source.ruby.rails
+- !ruby/object:Ruble::Snippet
+  displayName: ! "Table column float"
+  path: snippets/migration_snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  customProperties:
+    prefix_values:
+    - t.
+    - tcf
+  expansion: ! 't.float :${1:title}
+
+    $0'
+  scope: source.ruby.rails
+- !ruby/object:Ruble::Snippet
+  displayName: ! "Table column integer"
+  path: snippets/migration_snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  customProperties:
+    prefix_values:
+    - t.
+    - tci
+  expansion: ! 't.integer :${1:title}
+
+    $0'
+  scope: source.ruby.rails
+- !ruby/object:Ruble::Snippet
+  displayName: ! "Table column lock_version"
+  path: snippets/migration_snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  customProperties:
+    prefix_values:
+    - t.
+    - tcl
+  expansion: ! 't.binary integer :lock_version, :null => false, :default => 0
+
+    $0'
+  scope: source.ruby.rails
+- !ruby/object:Ruble::Snippet
+  displayName: ! "Table column(s) references"
+  path: snippets/migration_snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  customProperties:
+    prefix_values:
+    - t.
+    - tcr
+  expansion: ! 't.references :${1:taggable}${2:, :polymorphic => ${3:{ :default =>
+    ''${4:Photo}'' }}}
+
+    $0'
+  scope: source.ruby.rails
+- !ruby/object:Ruble::Snippet
+  displayName: ! "Table column string"
+  path: snippets/migration_snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  customProperties:
+    prefix_values:
+    - t.
+    - tcs
+  expansion: ! 't.string :${1:title}
+
+    $0'
+  scope: source.ruby.rails
+- !ruby/object:Ruble::Snippet
+  displayName: ! "Table column text"
+  path: snippets/migration_snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  customProperties:
+    prefix_values:
+    - t.
+    - tct
+  expansion: ! 't.text :${1:title}
+
+    $0'
+  scope: source.ruby.rails
+- !ruby/object:Ruble::Snippet
+  displayName: ! "Table column time"
+  path: snippets/migration_snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  customProperties:
+    prefix_values:
+    - t.
+    - tcti
+  expansion: ! 't.time :${1:title}
+
+    $0'
+  scope: source.ruby.rails
+- !ruby/object:Ruble::Snippet
+  displayName: ! "Table column timestamp"
+  path: snippets/migration_snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  customProperties:
+    prefix_values:
+    - t.
+    - tcts
+  expansion: ! 't.timestamp :${1:title}
+
+    $0'
+  scope: source.ruby.rails
+- !ruby/object:Ruble::Snippet
+  displayName: ! "Table column timestamps"
+  path: snippets/migration_snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  customProperties:
+    prefix_values:
+    - t.
+    - tctss
+  expansion: ! 't.timestamps
+
+    $0'
+  scope: source.ruby.rails
+- !ruby/object:Ruble::Snippet
+  displayName: t.change (tch)
+  path: snippets/migration_snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  customProperties:
+    prefix_values:
+    - t.
+  expansion: ! 't.change :${1:name}${2:, :${3:string}${4:, :${5:limit} => ${6:80}}}
+
+    t.$0'
+  scope: source.ruby.rails
+- !ruby/object:Ruble::Snippet
+  displayName: t.rename (tre)
+  path: snippets/migration_snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  customProperties:
+    prefix_values:
+    - t.
+  expansion: ! 't.rename :${1:old_column_name}, :${2:new_column_name}
+
+    t.$0'
+  scope: source.ruby.rails
+- !ruby/object:Ruble::Snippet
+  displayName: assert_redirected_to
+  path: snippets/test_snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  customProperties:
+    prefix_values:
+    - art
+  expansion: assert_redirected_to :action => "${1:index}"
+  scope: source.ruby.rails
+- !ruby/object:Ruble::Snippet
+  displayName: assert_response
+  path: snippets/test_snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  customProperties:
+    prefix_values:
+    - asre
+  expansion: assert_response :${1:success}, @response.body$0
+  scope: source.ruby.rails
+- !ruby/object:Ruble::Snippet
+  displayName: test do...end
+  path: snippets/test_snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  customProperties:
+    prefix_values:
+    - test
+  expansion: ! "test \"${1:something interesting}\" do\n  $0\nend"
+  scope: source.ruby.rails
+- !ruby/object:Ruble::Snippet
+  displayName: verify - render
+  path: snippets/test_snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  customProperties:
+    prefix_values:
+    - verify
+  expansion: ! 'verify :only => [:$1], :method => :post, :render => {:status => 500,
+    :text => "use HTTP-POST"}
+
+'
+  scope: source.ruby.rails
+- !ruby/object:Ruble::Snippet
+  displayName: verify - redirect
+  path: snippets/test_snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  customProperties:
+    prefix_values:
+    - verify
+  expansion: ! 'verify :only => [:$1], :session => :user, :params => :id, :redirect_to
+    => {:action => ''${2:index}''}
+
+'
+  scope: source.ruby.rails
+- !ruby/object:Ruble::Snippet
+  displayName: <%= Fixtures.identify(:symbol) %>
+  path: snippets/test_snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  customProperties:
+    prefix_values:
+    - fi
+  expansion: ${TM_RAILS_TEMPLATE_START_RUBY_EXPR}Fixtures.identify(:${1:name})${TM_RAILS_TEMPLATE_END_RUBY_EXPR}$0
+  scope: source_yaml
+- !ruby/object:Ruble::Snippet
+  displayName: alias_attribute
+  path: snippets/snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  customProperties:
+    prefix_values:
+    - alias
+  expansion: alias_attribute :${1:new_name}, :${2:old_name}
+  scope: source.ruby.rails
+- !ruby/object:Ruble::Snippet
+  displayName: cattr_accessor
+  path: snippets/snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  customProperties:
+    prefix_values:
+    - crw
+  expansion: cattr_accessor :${1:attr_names}
+  scope: source.ruby.rails
+- !ruby/object:Ruble::Snippet
+  displayName: config.gem
+  path: snippets/snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  customProperties:
+    prefix_values:
+    - config.gem
+  expansion: config.gem "${1:name}", :lib => "${1}", :version => "${6:>= 1.0.0}",
+    :source => "${8:http://gemcutter.org}"
+  scope: source.ruby.rails
+- !ruby/object:Ruble::Snippet
+  displayName: content_for
+  path: snippets/snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  customProperties:
+    prefix_values:
+    - conf
+  expansion: ! "<% content_for :${1:yield_label_in_layout} do -%>\n\t$0\n<% end -%>"
+  scope: text.html.ruby
+- !ruby/object:Ruble::Snippet
+  displayName: ! "Create controller class"
+  path: snippets/snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  customProperties:
+    prefix_values:
+    - cla
+  expansion: ! "class ${1:Model}Controller < ApplicationController\n\tbefore_filter
+    :find_${2:model}\n\n\t$0\n\n\tprivate\n\tdef find_${2}\n\t\t@$2 = $1.find(params[:id])
+    if params[:id]\n\tend\nend"
+  scope: source.ruby
+- !ruby/object:Ruble::Snippet
+  displayName: ! "Create functional test class"
+  path: snippets/snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  customProperties:
+    prefix_values:
+    - cla
+  expansion: ! "require File.dirname(__FILE__) + '/../test_helper'\n\nclass ${1:Model}ControllerTest
+    < ActionController::TestCase\n\tdeft$0\nend\n"
+  scope: source.ruby
+- !ruby/object:Ruble::Snippet
+  displayName: ! "Create resources controller class"
+  path: snippets/snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  customProperties:
+    prefix_values:
+    - resources
+  expansion: ! "class ${1:Model}sController < ApplicationController\n  before_filter
+    :find_${1}, :only => [:show, :edit, :update, :destroy]\n\n  # GET \\/${1}s\n  #
+    GET \\/${1}s.xml\n  def index\n    @${1}s = ${1:Model}.all\n\n    respond_to do
+    |wants|\n      wants.html # index.html.erb\n      wants.xml  { render :xml =>
+    @${1}s }\n    end\n  end\n\n  # GET \\/${1}s\\/1\n  # GET \\/${1}s\\/1.xml\n  def
+    show\n    respond_to do |wants|\n      wants.html # show.html.erb\n      wants.xml
+    \ { render :xml => @${1} }\n    end\n  end\n\n  # GET \\/${1}s\\/new\n  # GET
+    \\/${1}s\\/new.xml\n  def new\n    @${1} = ${1:Model}.new\n\n    respond_to do
+    |wants|\n      wants.html # new.html.erb\n      wants.xml  { render :xml => @${1}
+    }\n    end\n  end\n\n  # GET \\/${1}s\\/1\\/edit\n  def edit\n  end\n\n  # POST
+    \\/${1}s\n  # POST \\/${1}s.xml\n  def create\n    @${1} = ${1:Model}.new(params[:${1}])\n\n
+    \   respond_to do |wants|\n      if @${1}.save\n        flash[:notice] = '${1:Model}
+    was successfully created.'\n        wants.html { redirect_to(@${1}) }\n        wants.xml
+    \ { render :xml => @${1}, :status => :created, :location => @${1} }\n      else\n
+    \       wants.html { render :action => \"new\" }\n        wants.xml  { render
+    :xml => @${1}.errors, :status => :unprocessable_entity }\n      end\n    end\n
+    \ end\n\n  # PUT \\/${1}s\\/1\n  # PUT \\/${1}s\\/1.xml\n  def update\n    respond_to
+    do |wants|\n      if @${1}.update_attributes(params[:${1}])\n        flash[:notice]
+    = '${1:Model} was successfully updated.'\n        wants.html { redirect_to(@${1})
+    }\n        wants.xml  { head :ok }\n      else\n        wants.html { render :action
+    => \"edit\" }\n        wants.xml  { render :xml => @${1}.errors, :status => :unprocessable_entity
+    }\n      end\n    end\n  end\n\n  # DELETE \\/${1}s\\/1\n  # DELETE \\/${1}s\\/1.xml\n
+    \ def destroy\n    @${1}.destroy\n\n    respond_to do |wants|\n      wants.html
+    { redirect_to(${1}s_url) }\n      wants.xml  { head :ok }\n    end\n  end\n\n
+    \ private\n    def find_${1}\n      @${1} = ${1:Model}.find(params[:id])\n    end\n\nend\n"
+  scope: source.ruby
+- !ruby/object:Ruble::Snippet
+  displayName: ! "Create sweeper class"
+  path: snippets/snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  customProperties:
+    prefix_values:
+    - sweeper
+  expansion: ! "class ${1:Model}Sweeper < ActionController::Caching::Sweeper\n  observe
+    ${1:Model}\n\n  def after_save(${1})\n    expire_cache(${1})\n  end\n\n  def after_destroy(${1})\n
+    \   expire_cache(${1})\n  end\n\n  private\n\n    def expire_cache(${1})\n      expire_page
+    ${1}s_path \n      expire_page ${1}_path(${1})\n    end\n\nend"
+  scope: source.ruby.rails
+- !ruby/object:Ruble::Snippet
+  displayName: def create - resource
+  path: snippets/snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  customProperties:
+    prefix_values:
+    - defcreate
+  expansion: ! "def create\n  @${1:model} = ${2}.new(params[:$1])\n  $0\n  respond_to
+    do |wants|\n    if @$1.save\n      flash[:notice] = '$2 was successfully created.'\n
+    \     wants.html { redirect_to(@$1) }\n      wants.xml { render :xml => @$1, :status
+    => :created, :location => @$1 }\n    else\n      wants.html { render :action =>
+    \"new\" }\n      wants.xml { render :xml => @$1.errors, :status => :unprocessable_entity
+    }\n    end\n  end\nend\n"
+  scope: meta.rails.controller
+- !ruby/object:Ruble::Snippet
+  displayName: def test_should_get_action
+  path: snippets/snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  customProperties:
+    prefix_values:
+    - deftg
+  expansion: ! "def test_should_get_${1:action}\n  @${3:model} = $3s(:${5:fixture_name})\n
+    \ get :${1}, :id => @$3.to_param\n  assert_response :success\n  $0\nend"
+  scope: meta.rails.functional_test
+- !ruby/object:Ruble::Snippet
+  displayName: def test_should_post_action
+  path: snippets/snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  customProperties:
+    prefix_values:
+    - deftp
+  expansion: ! "def test_should_post_${1:action}\n  @${2:model} = ${2:model}s(:${5:fixture_name})\n
+    \ post :${1}, :id => @${2:model}.to_param, :${2:model} => { $0 }\n  assert_response
+    :redirect\n\nend"
+  scope: meta.rails.functional_test
+- !ruby/object:Ruble::Snippet
+  displayName: default_scope
+  path: snippets/snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  customProperties:
+    prefix_values:
+    - dc
+  expansion: default_scope :${1:order} => 'created_at DESC', :joins => :${2:table}
+  scope: source.ruby.rails
+- !ruby/object:Ruble::Snippet
+  displayName: end (ERB)
+  path: snippets/snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  customProperties:
+    prefix_values:
+    - end
+  expansion: <% end -%>
+  scope: text.html.ruby
+- !ruby/object:Ruble::Snippet
+  displayName: ! "for loop in rhtml"
+  path: snippets/snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  customProperties:
+    prefix_values:
+    - for
+  expansion: ! "<% if !${1:list}.blank? %>\n  <% for ${2:item} in ${1} %>\n    $3\n
+    \ <% end %>\n<% else %>\n  $4\n<% end %>\n"
+  scope: text.html.ruby
+- !ruby/object:Ruble::Snippet
+  displayName: layout
+  path: snippets/snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  customProperties:
+    prefix_values:
+    - layout
+  expansion: layout "${1:template_name}", :only => [:${2:action}, :${3:action}], :except
+    => [:${4:action}, :${5:action}]
+  scope: source.ruby.rails
+- !ruby/object:Ruble::Snippet
+  displayName: map(&:sym_proc)
+  path: snippets/snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  customProperties:
+    prefix_values:
+    - mp
+  expansion: map(&:${1:id})
+  scope: source.ruby.rails
+- !ruby/object:Ruble::Snippet
+  displayName: mattr_accessor
+  path: snippets/snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  customProperties:
+    prefix_values:
+    - mrw
+  expansion: mattr_accessor :${1:attr_names}
+  scope: source.ruby.rails
+- !ruby/object:Ruble::Snippet
+  displayName: named_scope lambda
+  path: snippets/snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  customProperties:
+    prefix_values:
+    - ncl
+  expansion: named_scope :${1:name}, lambda { |${2:param}| { :conditions => ['${5:field}
+    = ?', $2] } }\n
+  scope: source.ruby.rails
+- !ruby/object:Ruble::Snippet
+  displayName: named_scope
+  path: snippets/snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  customProperties:
+    prefix_values:
+    - nc
+  expansion: named_scope :${1:name}, :joins => :${3:table}, :conditions => ['${6:field}
+    = ?', ${7:true}]\n
+  scope: source.ruby.rails
+- !ruby/object:Ruble::Snippet
+  displayName: flash[...]
+  path: snippets/snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  customProperties:
+    prefix_values:
+    - flash
+  expansion: flash[:${1:notice}] = "${2:Successfully created...}"$0
+  scope: source.ruby.rails
+- !ruby/object:Ruble::Snippet
+  displayName: params[...]
+  path: snippets/snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  expansion: params[:${1:id}]
+  scope: source.ruby.rails
+  keyBindingMap:
+    !ruby/object:Ruble::Platform ALL:
+    - CTRL+P
+- !ruby/object:Ruble::Snippet
+  displayName: session[...]
+  path: snippets/snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  expansion: session[:${1:user}]
+  scope: source.ruby.rails
+  keyBindingMap:
+    !ruby/object:Ruble::Platform ALL:
+    - CTRL+J
+- !ruby/object:Ruble::Snippet
+  displayName: returning do |variable| ... end
+  path: snippets/snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  customProperties:
+    prefix_values:
+    - returning
+  expansion: ! "returning ${1:variable} do |${2:v}|\n  $0\nend"
+  scope: source.ruby.rails
+- !ruby/object:Ruble::Snippet
+  displayName: scoped_by
+  path: snippets/snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  customProperties:
+    prefix_values:
+    - sb
+  expansion: scoped_by_${1:attribute}(${2:id})
+  scope: source.ruby.rails
+- !ruby/object:Ruble::Snippet
+  displayName: stylesheet_link_tag
+  path: snippets/snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  customProperties:
+    prefix_values:
+    - slt
+  expansion: ${TM_RAILS_TEMPLATE_START_RUBY_EXPR}stylesheet_link_tag ${1::all}, :cache
+    => ${3:true}$TM_RAILS_TEMPLATE_END_RUBY_EXPR
+  scope: text.html.ruby, text.haml
+- !ruby/object:Ruble::Snippet
+  displayName: submit_tag
+  path: snippets/snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  customProperties:
+    prefix_values:
+    - st
+  expansion: ${TM_RAILS_TEMPLATE_START_RUBY_EXPR}submit_tag "${1:Save changes}", :id
+    => "${3:submit}", :name => "$3", :class => "${7:form_}$3", :disabled => ${9:false},
+    :disable_with => "${11:Please wait...}"${TM_RAILS_TEMPLATE_END_RUBY_EXPR}
+  scope: text.html.ruby, text.haml
+- !ruby/object:Ruble::Snippet
+  displayName: image_submit_tag
+  path: snippets/snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  customProperties:
+    prefix_values:
+    - ist
+  expansion: ${TM_RAILS_TEMPLATE_START_RUBY_EXPR}image_submit_tag("${1:agree}.${2:png}",
+    :id => "${1}", :name => "${1}", :class => "${1}-button", :disabled => ${10:false})${TM_RAILS_TEMPLATE_END_RUBY_EXPR}
+  scope: text.html.ruby, text.haml
+- !ruby/object:Ruble::Snippet
+  displayName: javascript_include_tag
+  path: snippets/snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  customProperties:
+    prefix_values:
+    - jit
+  expansion: ${TM_RAILS_TEMPLATE_START_RUBY_EXPR}javascript_include_tag ${1::all},
+    :cache => ${3:true}${TM_RAILS_TEMPLATE_END_RUBY_EXPR}
+  scope: text.html.ruby, text.haml
+- !ruby/object:Ruble::Snippet
+  displayName: page.hide (*ids)
+  path: snippets/page_snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  customProperties:
+    prefix_values:
+    - hide
+  expansion: page.hide "${2:id(s)}"
+  scope: source.ruby.rails.rjs
+- !ruby/object:Ruble::Snippet
+  displayName: page.insert_html (position, id, partial)
+  path: snippets/page_snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  customProperties:
+    prefix_values:
+    - ins
+  expansion: page.insert_html :${1:top}, "${3:id}", :partial => "${5:template}"
+  scope: source.ruby.rails.rjs
+- !ruby/object:Ruble::Snippet
+  displayName: page.replace (id, partial)
+  path: snippets/page_snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  customProperties:
+    prefix_values:
+    - rep
+  expansion: page.replace "${2:id}", :partial => "${4:template}"
+  scope: source.ruby.rails.rjs
+- !ruby/object:Ruble::Snippet
+  displayName: page.replace_html (id, partial)
+  path: snippets/page_snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  customProperties:
+    prefix_values:
+    - reph
+  expansion: page.replace_html "${2:id}", :partial => "${4:template}"
+  scope: source.ruby.rails.rjs
+- !ruby/object:Ruble::Snippet
+  displayName: page.show (*ids)
+  path: snippets/page_snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  customProperties:
+    prefix_values:
+    - show
+  expansion: page.show "${2:id(s)}"
+  scope: source.ruby.rails.rjs
+- !ruby/object:Ruble::Snippet
+  displayName: page.toggle (*ids)
+  path: snippets/page_snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  customProperties:
+    prefix_values:
+    - tog
+  expansion: page.toggle "${2:id(s)}"
+  scope: source.ruby.rails.rjs
+- !ruby/object:Ruble::Snippet
+  displayName: page.visual_effect (effect, id)
+  path: snippets/page_snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  customProperties:
+    prefix_values:
+    - vis
+  expansion: page.visual_effect :${1:toggle_slide}, "${3:DOM ID}"
+  scope: source.ruby.rails.rjs
+- !ruby/object:Ruble::Snippet
+  displayName: find(:all)
+  path: snippets/model_snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  customProperties:
+    prefix_values:
+    - fina
+  expansion: find(:all, :conditions => ['${3:field} = ?', ${5:true}])
+  scope: source.ruby.rails
+- !ruby/object:Ruble::Snippet
+  displayName: find(:first)
+  path: snippets/model_snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  customProperties:
+    prefix_values:
+    - finf
+  expansion: find(:first, :conditions => ['${3:field} = ?', ${5:true}])
+  scope: source.ruby.rails
+- !ruby/object:Ruble::Snippet
+  displayName: find(:last)
+  path: snippets/model_snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  customProperties:
+    prefix_values:
+    - finl
+  expansion: find(:last, :conditions => ['${3:field} = ?', ${5:true}])
+  scope: source.ruby.rails
+- !ruby/object:Ruble::Snippet
+  displayName: find(id)
+  path: snippets/model_snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  customProperties:
+    prefix_values:
+    - fini
+  expansion: find(${1:id})
+  scope: source.ruby.rails
+- !ruby/object:Ruble::Snippet
+  displayName: find_each
+  path: snippets/model_snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  customProperties:
+    prefix_values:
+    - fine
+  expansion: ! "find_each(:conditions => {:${2:field} => ${3:true}}) do |${TM_CURRENT_WORD}|\n
+    \ $0\nend"
+  scope: source.ruby.rails
+- !ruby/object:Ruble::Snippet
+  displayName: find_in_batches
+  path: snippets/model_snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  customProperties:
+    prefix_values:
+    - finb
+  expansion: ! "find_in_batches(:conditions => {:${2:field} => ${3:true}}) do |${TM_CURRENT_WORD}s|\n
+    \ ${TM_CURRENT_WORD}s.each do |${TM_CURRENT_WORD}|\n    $0\n  end\nend"
+  scope: source.ruby.rails
+- !ruby/object:Ruble::Snippet
+  displayName: belongs_to
+  path: snippets/model_snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  customProperties:
+    prefix_values:
+    - bt
+  expansion: belongs_to :${1:object}, :class_name => "${1}", :foreign_key => "${1}_id"
+  scope: source.ruby.rails
+- !ruby/object:Ruble::Snippet
+  displayName: has_and_belongs_to_many
+  path: snippets/model_snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  customProperties:
+    prefix_values:
+    - habtm
+  expansion: has_and_belongs_to_many :${1:object}, :join_table => "${3:table_name}",
+    :foreign_key => "${1}_id"
+  scope: source.ruby.rails
+- !ruby/object:Ruble::Snippet
+  displayName: has_many
+  path: snippets/model_snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  customProperties:
+    prefix_values:
+    - hm
+  expansion: has_many :${1:object}s, :class_name => "${1}", :foreign_key => "${4:reference}_id"
+  scope: source.ruby.rails
+- !ruby/object:Ruble::Snippet
+  displayName: has_many (through)
+  path: snippets/model_snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  customProperties:
+    prefix_values:
+    - hmt
+  expansion: has_many :${1:objects}, :through => :${2:join_association}, :source =>
+    :${2}_table_foreign_key_to_${1}_table
+  scope: source.ruby.rails
+- !ruby/object:Ruble::Snippet
+  displayName: has_many :dependent => :destroy
+  path: snippets/model_snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  customProperties:
+    prefix_values:
+    - hmd
+  expansion: has_many :${1:object}s, :class_name => "${1}", :foreign_key => "${4:reference}_id",
+    :dependent => :destroy$0
+  scope: source.ruby.rails
+- !ruby/object:Ruble::Snippet
+  displayName: has_one
+  path: snippets/model_snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  customProperties:
+    prefix_values:
+    - ho
+  expansion: has_one :${1:object}, :class_name => "${1}", :foreign_key => "${1}_id"
+  scope: source.ruby.rails
+- !ruby/object:Ruble::Snippet
+  displayName: validates_acceptance_of if
+  path: snippets/model_snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  customProperties:
+    prefix_values:
+    - vaoif
+  expansion: validates_acceptance_of :${1:terms}, :accept => '${1}', :message => '${6:You
+    must accept the terms of service}', :if => proc { |{7:obj}| ${7}.${8:condition?}
+    }
+  scope: source.ruby.rails
+- !ruby/object:Ruble::Snippet
+  displayName: validates_acceptance_of
+  path: snippets/model_snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  customProperties:
+    prefix_values:
+    - vao
+  expansion: validates_acceptance_of :${1:terms}, :accept => '${1}', :message => '${6:You
+    must accept the terms of service}'
+  scope: source.ruby.rails
+- !ruby/object:Ruble::Snippet
+  displayName: validates_associated
+  path: snippets/model_snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  customProperties:
+    prefix_values:
+    - va
+  expansion: validates_associated :${1:attribute}, :on => :${3:create}
+  scope: source.ruby.rails
+- !ruby/object:Ruble::Snippet
+  displayName: validates_associated if
+  path: snippets/model_snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  customProperties:
+    prefix_values:
+    - vaif
+  expansion: validates_associated :${1:attribute}, :on => :${3:create}, :if => proc
+    { |obj| ${5:obj.condition?} }
+  scope: source.ruby.rails
+- !ruby/object:Ruble::Snippet
+  displayName: validates_confirmation_of
+  path: snippets/model_snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  customProperties:
+    prefix_values:
+    - vc
+  expansion: validates_confirmation_of :${1:attribute}, :on => :${3:create}, :message
+    => '${4:should match confirmation}'
+  scope: source.ruby.rails
+- !ruby/object:Ruble::Snippet
+  displayName: validates_confirmation_of if
+  path: snippets/model_snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  customProperties:
+    prefix_values:
+    - vcif
+  expansion: validates_confirmation_of :${1:attribute}, :on => :${3:create}, :message
+    => '${4:should match confirmation}'}, :if => proc { |obj| ${5:obj.condition?}
+    }
+  scope: source.ruby.rails
+- !ruby/object:Ruble::Snippet
+  displayName: validates_exclusion_of
+  path: snippets/model_snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  customProperties:
+    prefix_values:
+    - ve
+  expansion: validates_exclusion_of :${1:attribute}, :in => %w( ${4:mov avi} ), :on
+    => :${5:create}, :message => '${6:extension %s is not allowed}'
+  scope: source.ruby.rails
+- !ruby/object:Ruble::Snippet
+  displayName: validates_format_of if
+  path: snippets/model_snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  customProperties:
+    prefix_values:
+    - vfif
+  expansion: validates_format_of :${1:attribute}, :with => /${2:^[wd]+$}/, :on =>
+    :${5:create}, :message => '${6:is invalid}', :if => proc { |obj| ${7:obj.condition?}
+    }
+  scope: source.ruby.rails
+- !ruby/object:Ruble::Snippet
+  displayName: validates_format_of
+  path: snippets/model_snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  customProperties:
+    prefix_values:
+    - vf
+  expansion: validates_format_of :${1:attribute}, :with => /${2:^[wd]+$}/, :on =>
+    :${5:create}, :message => '${6:is invalid}'
+  scope: source.ruby.rails
+- !ruby/object:Ruble::Snippet
+  displayName: validates_inclusion_of if
+  path: snippets/model_snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  customProperties:
+    prefix_values:
+    - viif
+  expansion: validates_inclusion_of :${1:attribute}, :in => %w( ${4:mov avi} ), :on
+    => :${5:create}, :message => '${6:extension %s is not included in the list}',
+    :if => proc { |obj| ${7:obj.condition?} }
+  scope: source.ruby.rails
+- !ruby/object:Ruble::Snippet
+  displayName: validates_inclusion_of
+  path: snippets/model_snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  customProperties:
+    prefix_values:
+    - vi
+  expansion: validates_inclusion_of :${1:attribute}, :in => %w( ${4:mov avi} ), :on
+    => :${5:create}, :message => '${6:extension %s is not included in the list}'
+  scope: source.ruby.rails
+- !ruby/object:Ruble::Snippet
+  displayName: validates_length_of
+  path: snippets/model_snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  customProperties:
+    prefix_values:
+    - vl
+  expansion: validates_length_of :${1:attribute}, :within => ${2:3..20}, :on => :${4:create},
+    :message => '${5:must be present}'
+  scope: source.ruby.rails
+- !ruby/object:Ruble::Snippet
+  displayName: validates_length_of if
+  path: snippets/model_snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  customProperties:
+    prefix_values:
+    - vlif
+  expansion: validates_length_of :${1:attribute}, :within => ${2:3..20}, :on => :${4:create},
+    :message => '${5:must be present}', :if => proc { |obj| ${6:obj.condition?} }
+  scope: source.ruby.rails
+- !ruby/object:Ruble::Snippet
+  displayName: validates_numericality_of
+  path: snippets/model_snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  customProperties:
+    prefix_values:
+    - vn
+  expansion: validates_numericality_of :${1:attribute}, :on => :${3:create}, :message
+    => '${4:is not a number}'
+  scope: source.ruby.rails
+- !ruby/object:Ruble::Snippet
+  displayName: validates_numericality_of if
+  path: snippets/model_snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  customProperties:
+    prefix_values:
+    - vnif
+  expansion: validates_numericality_of :${1:attribute}, :on => :${3:create}, :message
+    => '${4:is not a number}', :if => proc { |obj| ${5:obj.condition?} }
+  scope: source.ruby.rails
+- !ruby/object:Ruble::Snippet
+  displayName: validates_presence_of
+  path: snippets/model_snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  customProperties:
+    prefix_values:
+    - vp
+  expansion: validates_presence_of :${1:attribute}, :on => :${3:create}, :message
+    => "${4:can't be blank}"
+  scope: source.ruby.rails
+- !ruby/object:Ruble::Snippet
+  displayName: validates_presence_of if
+  path: snippets/model_snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  customProperties:
+    prefix_values:
+    - vpif
+  expansion: validates_exclusion_of :${1:attribute}, :in => %w( ${4:mov avi} ), :on
+    => :${5:create}, :message => '${6:extension %s is not allowed}', :if => proc {
+    |obj| ${5:obj.condition?} }
+  scope: source.ruby.rails
+- !ruby/object:Ruble::Snippet
+  displayName: validates_uniqueness_of
+  path: snippets/model_snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  customProperties:
+    prefix_values:
+    - vu
+  expansion: validates_uniqueness_of :${1:attribute}, :on => :${3:create}, :message
+    => '${4:must be unique}'
+  scope: source.ruby.rails
+- !ruby/object:Ruble::Snippet
+  displayName: validates_uniqueness_of if
+  path: snippets/model_snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  customProperties:
+    prefix_values:
+    - vuif
+  expansion: validates_uniqueness_of :${1:attribute}, :on => :${3:create}, :message
+    => '${4:must be unique}'}, :if => proc { |obj| ${6:obj.condition?} }
+  scope: source.ruby.rails
+- !ruby/object:Ruble::Snippet
+  displayName: accepts_nested_attributes_for
+  path: snippets/accepts_nested_attributes_snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  customProperties:
+    prefix_values:
+    - anaf
+  expansion: ! 'accepts_nested_attributes_for :${1:association_name}, :allow_destroy
+    => true, :reject_if => proc { |obj| ${2:obj.blank?} }
+
+'
+  scope: source_ruby_rails
+- !ruby/object:Ruble::Snippet
+  displayName: link_to (action)
+  path: snippets/route_snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  customProperties:
+    prefix_values:
+    - lia
+  expansion: link_to "${1:link text...}", :action => "${2:index}"
+  scope: text.html.ruby, text.haml
+- !ruby/object:Ruble::Snippet
+  displayName: link_to (action, id)
+  path: snippets/route_snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  customProperties:
+    prefix_values:
+    - liai
+  expansion: link_to "${1:link text...}", :action => "${2:index}", :id => ${3:@item}
+  scope: text.html.ruby, text.haml
+- !ruby/object:Ruble::Snippet
+  displayName: link_to (controller)
+  path: snippets/route_snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  customProperties:
+    prefix_values:
+    - lic
+  expansion: link_to "${1:link text...}", :controller => "${2:items}"
+  scope: text.html.ruby, text.haml
+- !ruby/object:Ruble::Snippet
+  displayName: link_to (controller, action)
+  path: snippets/route_snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  customProperties:
+    prefix_values:
+    - lica
+  expansion: link_to "${1:link text...}", :controller => "${2:items}", :action =>
+    ${3:@index}
+  scope: text.html.ruby, text.haml
+- !ruby/object:Ruble::Snippet
+  displayName: link_to (controller, action, id)
+  path: snippets/route_snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  customProperties:
+    prefix_values:
+    - licai
+  expansion: link_to "${1:link text...}", :controller => "${2:items}", :action =>
+    ${3:@index}, :id => ${4:@item}
+  scope: text.html.ruby, text.haml
+- !ruby/object:Ruble::Snippet
+  displayName: link_to (nested path plural)
+  path: snippets/route_snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  customProperties:
+    prefix_values:
+    - linpp
+  expansion: link_to "${2:link text...}", ${10:parent}_${11:child}_path(${12:@}${10})
+  scope: text.html.ruby, text.haml
+- !ruby/object:Ruble::Snippet
+  displayName: link_to (nested path)
+  path: snippets/route_snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  customProperties:
+    prefix_values:
+    - linp
+  expansion: link_to "${2:link text...}", ${12:parent}_${13:child}_path(${14:@}${12},
+    ${16:@}${13})
+  scope: text.html.ruby, text.haml
+- !ruby/object:Ruble::Snippet
+  displayName: link_to (path plural)
+  path: snippets/route_snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  customProperties:
+    prefix_values:
+    - lipp
+  expansion: link_to "${2:link text...}", ${4:model}s_path
+  scope: text.html.ruby, text.haml
+- !ruby/object:Ruble::Snippet
+  displayName: link_to (path)
+  path: snippets/route_snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  customProperties:
+    prefix_values:
+    - lip
+  expansion: link_to "${2:link text...}", ${12:model}_path(${13:@}${12})
+  scope: text.html.ruby, text.haml
+- !ruby/object:Ruble::Snippet
+  displayName: link_to model
+  path: snippets/route_snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  customProperties:
+    prefix_values:
+    - lim
+  expansion: link_to ${1:model}.${2:name}, ${1}_path($1)
+  scope: text.html.ruby, text.haml
+- !ruby/object:Ruble::Snippet
+  displayName: redirect_to (action)
+  path: snippets/route_snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  customProperties:
+    prefix_values:
+    - rea
+  expansion: redirect_to action => "${1:index}"
+  scope: source.ruby.rails
+- !ruby/object:Ruble::Snippet
+  displayName: redirect_to (action, id)
+  path: snippets/route_snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  customProperties:
+    prefix_values:
+    - reai
+  expansion: redirect_to :action => "${1:index}", :id => ${0:@item}
+  scope: source.ruby.rails
+- !ruby/object:Ruble::Snippet
+  displayName: redirect_to (controller)
+  path: snippets/route_snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  customProperties:
+    prefix_values:
+    - rec
+  expansion: redirect_to :controller => "${1:items}"
+  scope: source.ruby.rails
+- !ruby/object:Ruble::Snippet
+  displayName: redirect_to (controller, action)
+  path: snippets/route_snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  customProperties:
+    prefix_values:
+    - reca
+  expansion: redirect_to :controller => "${1:items}", :action => ${2:list}
+  scope: source.ruby.rails
+- !ruby/object:Ruble::Snippet
+  displayName: redirect_to (controller, action, id)
+  path: snippets/route_snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  customProperties:
+    prefix_values:
+    - recai
+  expansion: redirect_to :controller => "${1:items}", :action => ${2:show}, :id =>
+    ${0:@item}
+  scope: source.ruby.rails
+- !ruby/object:Ruble::Snippet
+  displayName: redirect_to (nested path plural)
+  path: snippets/route_snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  customProperties:
+    prefix_values:
+    - renpp
+  expansion: redirect_to(${10:parent}_${11:child}_path(${12:@}${10}))
+  scope: source.ruby.rails
+- !ruby/object:Ruble::Snippet
+  displayName: redirect_to (nested path)
+  path: snippets/route_snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  customProperties:
+    prefix_values:
+    - renp
+  expansion: redirect_to(${12:parent}_${13:child}_path(${14:@}${12}, ${16:@}${13}))
+  scope: source.ruby.rails
+- !ruby/object:Ruble::Snippet
+  displayName: redirect_to (path plural)
+  path: snippets/route_snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  customProperties:
+    prefix_values:
+    - repp
+  expansion: redirect_to(${10:model}s_path)
+  scope: source.ruby.rails
+- !ruby/object:Ruble::Snippet
+  displayName: redirect_to (path)
+  path: snippets/route_snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  customProperties:
+    prefix_values:
+    - rep
+  expansion: redirect_to(${12:model}_path(${13:@}${12}))
+  scope: source.ruby.rails
+- !ruby/object:Ruble::Snippet
+  displayName: redirect_to :back
+  path: snippets/route_snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  customProperties:
+    prefix_values:
+    - reb
+  expansion: redirect_to :back
+  scope: source.ruby.rails
+- !ruby/object:Ruble::Snippet
+  displayName: map.catch_all
+  path: snippets/route_snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  customProperties:
+    prefix_values:
+    - mapca
+  expansion: ${1:map}.catch_all "*${2:anything}", :controller => "${3:default}", :action
+    => "${4:error}"\n
+  scope: meta.rails.routes
+- !ruby/object:Ruble::Snippet
+  displayName: map.named_route
+  path: snippets/route_snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  customProperties:
+    prefix_values:
+    - map
+  expansion: ${1:map}.${2:connect} '${3::controller/:action/:id}'
+  scope: meta.rails.routes
+- !ruby/object:Ruble::Snippet
+  displayName: map.resource
+  path: snippets/route_snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  customProperties:
+    prefix_values:
+    - mapr
+  expansion: ! "${1:map}.resource :${2:resource} do |${2}|\n  $0\nend"
+  scope: meta.rails.routes
+- !ruby/object:Ruble::Snippet
+  displayName: map.resources
+  path: snippets/route_snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  customProperties:
+    prefix_values:
+    - maprs
+  expansion: ! "${1:map}.resources :${2:resource} do |${2}|\n  $0\nend"
+  scope: meta.rails.routes
+- !ruby/object:Ruble::Snippet
+  displayName: map.with_options
+  path: snippets/route_snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  customProperties:
+    prefix_values:
+    - mapwo
+  expansion: ! "${1:map}.with_options :${2:controller} => '${3:thing}' do |${3}|\n
+    \ $0\nend\n"
+  scope: meta.rails.routes
+- !ruby/object:Ruble::Snippet
+  displayName: after_create
+  path: snippets/hook_snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  customProperties:
+    prefix_values:
+    - aftc
+  expansion: ! 'after_create '
+  scope: source.ruby.rails
+- !ruby/object:Ruble::Snippet
+  displayName: after_destroy
+  path: snippets/hook_snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  customProperties:
+    prefix_values:
+    - aftd
+  expansion: ! 'after_destroy '
+  scope: source.ruby.rails
+- !ruby/object:Ruble::Snippet
+  displayName: after_save
+  path: snippets/hook_snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  customProperties:
+    prefix_values:
+    - afts
+  expansion: ! 'after_save '
+  scope: source.ruby.rails
+- !ruby/object:Ruble::Snippet
+  displayName: after_update
+  path: snippets/hook_snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  customProperties:
+    prefix_values:
+    - aftu
+  expansion: ! 'after_update '
+  scope: source.ruby.rails
+- !ruby/object:Ruble::Snippet
+  displayName: after_validation
+  path: snippets/hook_snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  customProperties:
+    prefix_values:
+    - aftv
+  expansion: ! 'after_validation '
+  scope: source.ruby.rails
+- !ruby/object:Ruble::Snippet
+  displayName: after_validation_on_create
+  path: snippets/hook_snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  customProperties:
+    prefix_values:
+    - aftvoc
+  expansion: ! 'after_validation_on_create '
+  scope: source.ruby.rails
+- !ruby/object:Ruble::Snippet
+  displayName: after_validation_on_update
+  path: snippets/hook_snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  customProperties:
+    prefix_values:
+    - aftvou
+  expansion: ! 'after_validation_on_update '
+  scope: source.ruby.rails
+- !ruby/object:Ruble::Snippet
+  displayName: before_create
+  path: snippets/hook_snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  customProperties:
+    prefix_values:
+    - befc
+  expansion: ! 'before_create '
+  scope: source.ruby.rails
+- !ruby/object:Ruble::Snippet
+  displayName: before_destroy
+  path: snippets/hook_snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  customProperties:
+    prefix_values:
+    - befd
+  expansion: ! 'before_destroy '
+  scope: source.ruby.rails
+- !ruby/object:Ruble::Snippet
+  displayName: before_filter
+  path: snippets/hook_snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  customProperties:
+    prefix_values:
+    - bf
+  expansion: ! 'before_filter '
+  scope: source.ruby.rails
+- !ruby/object:Ruble::Snippet
+  displayName: before_save
+  path: snippets/hook_snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  customProperties:
+    prefix_values:
+    - befs
+  expansion: ! 'before_save '
+  scope: source.ruby.rails
+- !ruby/object:Ruble::Snippet
+  displayName: before_update
+  path: snippets/hook_snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  customProperties:
+    prefix_values:
+    - befu
+  expansion: ! 'before_update '
+  scope: source.ruby.rails
+- !ruby/object:Ruble::Snippet
+  displayName: before_validation
+  path: snippets/hook_snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  customProperties:
+    prefix_values:
+    - befv
+  expansion: ! 'before_validation '
+  scope: source.ruby.rails
+- !ruby/object:Ruble::Snippet
+  displayName: before_validation_on_create
+  path: snippets/hook_snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  customProperties:
+    prefix_values:
+    - befvoc
+  expansion: ! 'before_validation_on_create '
+  scope: source.ruby.rails
+- !ruby/object:Ruble::Snippet
+  displayName: before_validation_on_update
+  path: snippets/hook_snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  customProperties:
+    prefix_values:
+    - befvou
+  expansion: ! 'before_validation_on_update '
+  scope: source.ruby.rails
+- !ruby/object:Ruble::Snippet
+  displayName: $LABEL
+  path: snippets/label_snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  customProperties:
+    prefix_values:
+    - $L
+  expansion: $LABEL
+  scope: source_yaml
+- !ruby/object:Ruble::Snippet
+  displayName: form_for check_box
+  path: snippets/form_snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  customProperties:
+    prefix_values:
+    - f.
+    - ffcb
+  expansion: ${TM_RAILS_TEMPLATE_START_RUBY_EXPR}f.check_box :${1:attribute}${TM_RAILS_TEMPLATE_END_RUBY_EXPR}
+  scope: text.html.ruby, text.haml
+- !ruby/object:Ruble::Snippet
+  displayName: form_for fields_for
+  path: snippets/form_snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  customProperties:
+    prefix_values:
+    - f.
+    - nff
+  expansion: ! "${TM_RAILS_TEMPLATE_START_RUBY_INLINE}f.fields_for :${1:attribute}
+    do |${2:f}|${TM_RAILS_TEMPLATE_END_RUBY_INLINE}\n  $0\n${TM_RAILS_TEMPLATE_END_RUBY_BLOCK}"
+  scope: text.html.ruby, text.haml
+- !ruby/object:Ruble::Snippet
+  displayName: form_for file_field
+  path: snippets/form_snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  customProperties:
+    prefix_values:
+    - f.
+    - ffff
+  expansion: ${TM_RAILS_TEMPLATE_START_RUBY_EXPR}f.file_field :${1:attribute}${TM_RAILS_TEMPLATE_END_RUBY_EXPR}
+  scope: text.html.ruby, text.haml
+- !ruby/object:Ruble::Snippet
+  displayName: form_for hidden_field
+  path: snippets/form_snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  customProperties:
+    prefix_values:
+    - f.
+    - ffhf
+  expansion: ${TM_RAILS_TEMPLATE_START_RUBY_EXPR}f.hidden_field :${1:attribute}${TM_RAILS_TEMPLATE_END_RUBY_EXPR}
+  scope: text.html.ruby, text.haml
+- !ruby/object:Ruble::Snippet
+  displayName: form_for label
+  path: snippets/form_snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  customProperties:
+    prefix_values:
+    - f.
+    - ffl
+  expansion: ${TM_RAILS_TEMPLATE_START_RUBY_EXPR}f.label :${1:attribute}, "${1}"${TM_RAILS_TEMPLATE_END_RUBY_EXPR}
+  scope: text.html.ruby, text.haml
+- !ruby/object:Ruble::Snippet
+  displayName: form_for password_field
+  path: snippets/form_snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  customProperties:
+    prefix_values:
+    - f.
+    - ffpf
+  expansion: ${TM_RAILS_TEMPLATE_START_RUBY_EXPR}f.password_field :${1:attribute}${TM_RAILS_TEMPLATE_END_RUBY_EXPR}
+  scope: text.html.ruby, text.haml
+- !ruby/object:Ruble::Snippet
+  displayName: form_for radio_button
+  path: snippets/form_snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  customProperties:
+    prefix_values:
+    - f.
+    - ffrb
+  expansion: ${TM_RAILS_TEMPLATE_START_RUBY_EXPR}f.radio_button :${1:attribute}, :${2:tag_value}${TM_RAILS_TEMPLATE_END_RUBY_EXPR}
+  scope: text.html.ruby, text.haml
+- !ruby/object:Ruble::Snippet
+  displayName: form_for submit
+  path: snippets/form_snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  customProperties:
+    prefix_values:
+    - f.
+    - ffs
+  expansion: ${TM_RAILS_TEMPLATE_START_RUBY_EXPR}f.submit "${1:Submit}", :disable_with
+    => '$1ing...'${TM_RAILS_TEMPLATE_END_RUBY_EXPR}
+  scope: text.html.ruby, text.haml
+- !ruby/object:Ruble::Snippet
+  displayName: form_for text_area
+  path: snippets/form_snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  customProperties:
+    prefix_values:
+    - f.
+    - ffta
+  expansion: ${TM_RAILS_TEMPLATE_START_RUBY_EXPR}f.text_area :${1:attribute}${TM_RAILS_TEMPLATE_END_RUBY_EXPR}
+  scope: text.html.ruby, text.haml
+- !ruby/object:Ruble::Snippet
+  displayName: form_for text_field
+  path: snippets/form_snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  customProperties:
+    prefix_values:
+    - f.
+    - fftf
+  expansion: ${TM_RAILS_TEMPLATE_START_RUBY_EXPR}f.text_field :${1:attribute}${TM_RAILS_TEMPLATE_END_RUBY_EXPR}
+  scope: text.html.ruby, text.haml
+- !ruby/object:Ruble::Snippet
+  displayName: form_for with errors
+  path: snippets/form_snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  customProperties:
+    prefix_values:
+    - ffe
+  expansion: ! "${TM_RAILS_TEMPLATE_START_RUBY_EXPR}error_messages_for :${1:model}${TM_RAILS_TEMPLATE_END_RUBY_EXPR}\n${TM_RAILS_TEMPLATE_START_RUBY_INLINE}form_for
+    @$1 do |f|${TM_RAILS_TEMPLATE_END_RUBY_INLINE}\n  $0\n${TM_RAILS_TEMPLATE_END_RUBY_BLOCK}"
+  scope: text.html.ruby, text.haml
+- !ruby/object:Ruble::Snippet
+  displayName: form_for
+  path: snippets/form_snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  customProperties:
+    prefix_values:
+    - ff
+  expansion: ! "${TM_RAILS_TEMPLATE_START_RUBY_INLINE}form_for @${1:model} do |f|${TM_RAILS_TEMPLATE_END_RUBY_INLINE}\n
+    \ $0\n${TM_RAILS_TEMPLATE_END_RUBY_BLOCK}"
+  scope: text.html.ruby, text.haml
+- !ruby/object:Ruble::Snippet
+  displayName: fields_for
+  path: snippets/form_snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  customProperties:
+    prefix_values:
+    - fields
+  expansion: ! "${TM_RAILS_TEMPLATE_START_RUBY_INLINE}fields_for :${1:model}, @$1
+    do |$1|${TM_RAILS_TEMPLATE_END_RUBY_INLINE}\n  $0\n${TM_RAILS_TEMPLATE_END_RUBY_BLOCK}"
+  scope: text.html.ruby, text.haml
+- !ruby/object:Ruble::Snippet
+  displayName: xhr put
+  path: snippets/xhr_snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  customProperties:
+    prefix_values:
+    - xput
+  expansion: xhr :put, :${1:update}, :id => ${2:1}, :${3:object} => { $4 }$0
+  scope: source.ruby.rails
+- !ruby/object:Ruble::Snippet
+  displayName: xhr delete
+  path: snippets/xhr_snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  customProperties:
+    prefix_values:
+    - xdelete
+  expansion: xhr :delete, :${1:destroy}, :id => ${2:1}$0
+  scope: source.ruby.rails
+- !ruby/object:Ruble::Snippet
+  displayName: xhr get
+  path: snippets/xhr_snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  customProperties:
+    prefix_values:
+    - xget
+  expansion: xhr :get, :${1:show}, :id => ${3:1}$0
+  scope: source.ruby.rails
+- !ruby/object:Ruble::Snippet
+  displayName: xhr post
+  path: snippets/xhr_snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  customProperties:
+    prefix_values:
+    - xpost
+  expansion: xhr :post, :${1:create}, :${2:object} => { $3 }
+  scope: source.ruby.rails
+- !ruby/object:Ruble::Snippet
+  displayName: assert(var = assigns(:var))
+  path: snippets/assert_snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  customProperties:
+    prefix_values:
+    - asg
+  expansion: ! 'assert(${1:var} = assigns(:${1}), "Cannot find @${1}")
+
+    $0'
+  scope: source.ruby
+- !ruby/object:Ruble::Snippet
+  displayName: assert_difference
+  path: snippets/assert_snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  customProperties:
+    prefix_values:
+    - asd
+  expansion: ! 'assert_difference "${1:Model}.${2:count}", ${3:1} do
+
+    $0
+
+    end'
+  scope: source.ruby
+- !ruby/object:Ruble::Snippet
+  displayName: assert_no_difference
+  path: snippets/assert_snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  customProperties:
+    prefix_values:
+    - asnd
+  expansion: ! 'assert_no_difference "${1:Model}.${2:count}", ${3:1} do
+
+    $0
+
+    end'
+  scope: source.ruby
+- !ruby/object:Ruble::Snippet
+  displayName: assert_redirected_to (nested path plural)
+  path: snippets/assert_snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  customProperties:
+    prefix_values:
+    - artnpp
+  expansion: assert_redirected_to ${1:parent}_${2:child}_path(@${1})
+  scope: source.ruby
+- !ruby/object:Ruble::Snippet
+  displayName: assert_redirected_to (nested path)
+  path: snippets/assert_snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  customProperties:
+    prefix_values:
+    - artnp
+  expansion: assert_redirected_to ${1:parent}_${2:child}_path(@${1}, @${2})
+  scope: source.ruby
+- !ruby/object:Ruble::Snippet
+  displayName: assert_redirected_to (path plural)
+  path: snippets/assert_snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  customProperties:
+    prefix_values:
+    - artpp
+  expansion: assert_redirected_to ${1:model}s_path
+  scope: source.ruby
+- !ruby/object:Ruble::Snippet
+  displayName: assert_redirected_to (path)
+  path: snippets/assert_snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  customProperties:
+    prefix_values:
+    - artp
+  expansion: assert_redirected_to ${1:model}_path(@${1})
+  scope: source.ruby
+- !ruby/object:Ruble::Snippet
+  displayName: assert_rjs
+  path: snippets/assert_snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  customProperties:
+    prefix_values:
+    - asrj
+  expansion: assert_rjs :${1:replace}, "${2:dom id}"
+  scope: source.ruby
+- !ruby/object:Ruble::Snippet
+  displayName: assert_select
+  path: snippets/assert_snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  customProperties:
+    prefix_values:
+    - ass
+  expansion: ! "assert_select '${1:path}', :${2:text} => '${3:inner_html}' do\n  $0\nend"
+  scope: source.ruby
+- !ruby/object:Ruble::Snippet
+  displayName: render (action)
+  path: snippets/render_snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  customProperties:
+    prefix_values:
+    - ra
+  expansion: render :action => '${1:action}'
+  scope: source.ruby.rails
+- !ruby/object:Ruble::Snippet
+  displayName: render (action, layout)
+  path: snippets/render_snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  customProperties:
+    prefix_values:
+    - ral
+  expansion: render :action => '${1:action}', :layout => '${2:layoutname}'
+  scope: source.ruby.rails
+- !ruby/object:Ruble::Snippet
+  displayName: render (file)
+  path: snippets/render_snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  customProperties:
+    prefix_values:
+    - rf
+  expansion: render :file => '${1:filepath}'
+  scope: source.ruby.rails
+- !ruby/object:Ruble::Snippet
+  displayName: render (file, use_full_path)
+  path: snippets/render_snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  customProperties:
+    prefix_values:
+    - rfu
+  expansion: render :file => '${1:filepath}', :use_full_path => ${2:false}
+  scope: source.ruby.rails
+- !ruby/object:Ruble::Snippet
+  displayName: render (inline)
+  path: snippets/render_snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  customProperties:
+    prefix_values:
+    - ri
+  expansion: render :inline => '${1:<%= "hello" %>}'
+  scope: source.ruby.rails
+- !ruby/object:Ruble::Snippet
+  displayName: render (inline, locals)
+  path: snippets/render_snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  customProperties:
+    prefix_values:
+    - ril
+  expansion: render :inline => '${1:<%= "hello" %>}', :locals => { ${2::name} => '${3:value}'$4
+    }
+  scope: source.ruby.rails
+- !ruby/object:Ruble::Snippet
+  displayName: render (inline, type)
+  path: snippets/render_snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  customProperties:
+    prefix_values:
+    - rit
+  expansion: render :inline => '${1:<%= "hello" %>}', :type => ${2::rxml}
+  scope: source.ruby.rails
+- !ruby/object:Ruble::Snippet
+  displayName: render (layout)
+  path: snippets/render_snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  customProperties:
+    prefix_values:
+    - rl
+  expansion: render :layout => '${1:layoutname}'
+  scope: source.ruby.rails
+- !ruby/object:Ruble::Snippet
+  displayName: render (nothing)
+  path: snippets/render_snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  customProperties:
+    prefix_values:
+    - rn
+  expansion: render :nothing => '${1:true}'
+  scope: source.ruby.rails
+- !ruby/object:Ruble::Snippet
+  displayName: render (nothing, status)
+  path: snippets/render_snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  customProperties:
+    prefix_values:
+    - rns
+  expansion: render :nothing => '${1:true}', :status => ${2:401}
+  scope: source.ruby.rails
+- !ruby/object:Ruble::Snippet
+  displayName: render (partial)
+  path: snippets/render_snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  customProperties:
+    prefix_values:
+    - rp
+  expansion: render :partial => '${1:item}'
+  scope: source.ruby.rails, text.html.ruby, text.haml
+- !ruby/object:Ruble::Snippet
+  displayName: render (partial, collection)
+  path: snippets/render_snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  customProperties:
+    prefix_values:
+    - rpc
+  expansion: render :partial => '${1:item}', :collection => @$1s
+  scope: source.ruby.rails, text.html.ruby, text.haml
+- !ruby/object:Ruble::Snippet
+  displayName: render (partial, locals)
+  path: snippets/render_snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  customProperties:
+    prefix_values:
+    - rpl
+  expansion: render :partial => '${1:item}', :locals => { :$1 => @${1}$0 }
+  scope: source.ruby.rails, text.html.ruby, text.haml
+- !ruby/object:Ruble::Snippet
+  displayName: render (partial, object)
+  path: snippets/render_snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  customProperties:
+    prefix_values:
+    - rpo
+  expansion: render :partial => '${1:item}', :object => @$1
+  scope: source.ruby.rails, text.html.ruby, text.haml
+- !ruby/object:Ruble::Snippet
+  displayName: render (partial, status)
+  path: snippets/render_snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  customProperties:
+    prefix_values:
+    - rps
+  expansion: render :partial => '${1:item}', :status => ${2:500}
+  scope: source.ruby.rails, text.html.ruby, text.haml
+- !ruby/object:Ruble::Snippet
+  displayName: render (text)
+  path: snippets/render_snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  customProperties:
+    prefix_values:
+    - rt
+  expansion: render :text => '${1:text to render}'
+  scope: source.ruby.rails
+- !ruby/object:Ruble::Snippet
+  displayName: render (text, layout)
+  path: snippets/render_snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  customProperties:
+    prefix_values:
+    - rtl
+  expansion: render :text => '${1:text to render}', :layout => '${2:layoutname}'
+  scope: source.ruby.rails
+- !ruby/object:Ruble::Snippet
+  displayName: render (text, layout => true)
+  path: snippets/render_snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  customProperties:
+    prefix_values:
+    - rtlt
+  expansion: render :text => '${1:text to render}', :layout => '${2:true}'
+  scope: source.ruby.rails
+- !ruby/object:Ruble::Snippet
+  displayName: render (text, status)
+  path: snippets/render_snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  customProperties:
+    prefix_values:
+    - rts
+  expansion: render :text => '${1:text to render}', :status => ${2:401}
+  scope: source.ruby.rails
+- !ruby/object:Ruble::Snippet
+  displayName: render (update)
+  path: snippets/render_snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  customProperties:
+    prefix_values:
+    - ru
+  expansion: ! "render :update do |${2:page}|\n  $2.$0\nend"
+  scope: source.ruby.rails
+- !ruby/object:Ruble::Snippet
+  displayName: respond_to
+  path: snippets/controller_snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  customProperties:
+    prefix_values:
+    - rest
+  expansion: ! "respond_to do |wants|\n  wants.${1:html} { $0 }\nend"
+  scope: source.ruby, meta.rails.controller
+- !ruby/object:Ruble::Snippet
+  displayName: wants.format
+  path: snippets/controller_snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  customProperties:
+    prefix_values:
+    - wants
+  expansion: wants.${1:js/xml/html} { $0 }
+  scope: source.ruby, meta.rails.controller
+- !ruby/object:Ruble::Snippet
+  displayName: logger.debug
+  path: snippets/logger_snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  customProperties:
+    prefix_values:
+    - logd
+  expansion: logger.debug { "${1:message}" }$0
+  scope: source.ruby.rails
+- !ruby/object:Ruble::Snippet
+  displayName: logger.error
+  path: snippets/logger_snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  customProperties:
+    prefix_values:
+    - loge
+  expansion: logger.error { "${1:message}" }$0
+  scope: source.ruby.rails
+- !ruby/object:Ruble::Snippet
+  displayName: logger.fatal
+  path: snippets/logger_snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  customProperties:
+    prefix_values:
+    - logf
+  expansion: logger.fatal { "${1:message}" }$0
+  scope: source.ruby.rails
+- !ruby/object:Ruble::Snippet
+  displayName: logger.info
+  path: snippets/logger_snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  customProperties:
+    prefix_values:
+    - logi
+  expansion: logger.info { "${1:message}" }$0
+  scope: source.ruby.rails
+- !ruby/object:Ruble::Snippet
+  displayName: logger.warn
+  path: snippets/logger_snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  customProperties:
+    prefix_values:
+    - logw
+  expansion: logger.warn { "${1:message}" }$0
+  scope: source.ruby.rails
+- !ruby/object:Ruble::Snippet
+  displayName: RAILS_DEFAULT_LOGGER.debug
+  path: snippets/logger_snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  customProperties:
+    prefix_values:
+    - rdb
+  expansion: RAILS_DEFAULT_LOGGER.debug { "${1:message}" }$0
+  scope: source.ruby.rails
+- !ruby/object:Ruble::Env
+  scope: text.html.ruby
+  path: bundle.rb
+  displayName: environment-
+- !ruby/object:Ruble::Env
+  scope: text.haml
+  path: bundle.rb
+  displayName: environment-
+- !ruby/object:Ruble::Template
+  displayName: ! "HTML ERB Template"
+  path: templates/templates.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  filetype: ! '*.html.erb'
+- !ruby/object:Ruble::Template
+  displayName: ! "RHTML Template"
+  path: templates/templates.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  filetype: ! '*.rhtml'
+- !ruby/object:Ruble::ContentAssist
+  displayName: ERb Content Assist
+  path: commands/content_assist.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  scope: source.ruby.rails.embedded.html
+visible: true
+author: Many
+copyright: ! 'Copyright 2010 Aptana Inc. Distributed under the MIT license.
+
+  Portions Copyright 2006 syncPEOPLE, LLC, distributed under the terms of the MIT
+  License.'
+description: Rails bundle for RadRails, based heavily on Dr. Nic's tmbundle (http://github.com/drnic/ruby-on-rails-tmbundle),
+  which in turn was based heavily on the original SyncPeople bundle.
+repository: git://github.com/aptana/rails.ruble.git
+customProperties:
+  fileTypes:
+  - ! '*.rb'
+  fileTypeRegistry:
+    ! '*.rb': source.ruby.rails

@@ -8,16 +8,15 @@ class CDCHOICE extends VirtualType
 				'values=первый, второй, третий'=>'Значения без id',
 				'values=2#первый, 3#второй, 4#третий'=>'Значения с id',
 				'comment=комментарий'=>'Комментарий',
+				'editable'=>'Редактируемый',
 				'source=#source_type=table#table_name=%SOURCE_TABLE%#table_field=name#table_usl=WHERE `show`=1#table_order=ORDER BY `name`#name_only=0'=>'Источник таблица',
 				'source=#source_type=spr#spr_path=%SOURCE_PATH%#spr_field=name#spr_usl=WHERE `show`=1#spr_order=ORDER BY `name`#name_only=0'=>'Источник справочник'
 		);
 
 		VirtualType::init($settings);
 	}
-	function get_values() {
+	function get_values($settings) {
 		global $SiteSections;
-	
-		$settings = $this->getSetting('settings');
 	
 		/*Внешний массив*/
 		if (is_array($this->getSetting('values')))
@@ -128,15 +127,12 @@ class CDCHOICE extends VirtualType
   	<div id="<?=$this->getSetting('name')?>" class="radio_ui">
     <?
     $i=0;
-    $settings['values']=$this->get_values() ;
+    $settings['values']=$this->get_values($this->getSetting('settings')) ;
     foreach ($settings['values'] as $k=>$v)
     {    	$i++;
     	if ($k=='') $k=$v;
 
     	$selected='';
-    	
-    /* 	if (trim($k)==trim($this->getSetting('value'))) print 'OOOK'.$k;
-    	else print '|'.$k.'|'.$this->getSetting('value').'|<br/>'; */
 
     	if ($k==$this->getSetting('value') || stripos($this->getSetting('value'), ','.$k.',')!==false)  $selected='checked="checked"';
 

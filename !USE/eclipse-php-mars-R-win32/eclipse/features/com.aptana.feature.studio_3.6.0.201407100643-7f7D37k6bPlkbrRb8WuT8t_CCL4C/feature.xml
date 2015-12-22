@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feature
+      id="com.aptana.feature.studio"
+      label="%featureName"
+      version="3.6.0.201407100643-7f7D37k6bPlkbrRb8WuT8t_CCL4C"
+      provider-name="%providerName"
+      plugin="com.aptana.branding">
+
+   <description url="http://www.aptana.com">
+      %description
+   </description>
+
+   <copyright url="%copyrightURL">
+      %copyright
+   </copyright>
+
+   <license url="%licenseURL">
+      %license
+   </license>
+
+   <url>
+      <update label="%updateSiteName" url="http://download.aptana.com/studio3/plugin/update/"/>
+   </url>
+
+   <includes
+         id="com.aptana.feature"
+         version="3.6.0.1402537589-B27k88Bma9kxYA5ZR9833355984B"/>
+
+   <includes
+         id="org.radrails.rails"
+         version="3.4.2.1400262587-7n-7Z7oKtUqxrXdp"
+         name="RadRails"/>
+
+   <includes
+         id="com.aptana.php.feature"
+         version="3.4.2.201406111917-7J7E-7IObXdeTYVX"/>
+
+   <includes
+         id="com.aptana.pydev.feature"
+         version="3.0.0.201406111920-7v--7uVyx2EKHY"/>
+
+   <plugin
+         id="com.aptana.ui.override"
+         download-size="0"
+         install-size="0"
+         version="1.0.0.1362523908"
+         fragment="true"
+         unpack="false"/>
+
+   <plugin
+         id="com.aptana.editor.common.override"
+         download-size="0"
+         install-size="0"
+         version="1.0.0.1351531287"
+         fragment="true"
+         unpack="false"/>
+
+   <plugin
+         id="com.aptana.editor.diff"
+         download-size="0"
+         install-size="0"
+         version="3.0.0.1365788962"
+         unpack="false"/>
+
+   <plugin
+         id="com.aptana.editor.beaver"
+         download-size="0"
+         install-size="0"
+         version="3.0.0.1365788962"
+         unpack="false"/>
+
+   <plugin
+         id="com.aptana.editor.yaml"
+         download-size="0"
+         install-size="0"
+         version="3.0.0.1367440210"
+         unpack="false"/>
+
+   <plugin
+         id="com.aptana.editor.idl"
+         download-size="0"
+         install-size="0"
+         version="3.0.0.1365788962"
+         unpack="false"/>
+
+   <plugin
+         id="com.aptana.editor.markdown"
+         download-size="0"
+         install-size="0"
+         version="3.0.0.1365788962"
+         unpack="false"/>
+
+   <plugin
+         id="com.aptana.studio.rubles"
+         download-size="0"
+         install-size="0"
+         version="3.0.0.1365788974"
+         unpack="false"/>
+
+   <plugin
+         id="com.amazon.s3"
+         download-size="0"
+         install-size="0"
+         version="3.0.0.1385945603"/>
+
+   <plugin
+         id="com.aptana.filesystem.s3"
+         download-size="0"
+         install-size="0"
+         version="3.0.0.1385948737"/>
+
+   <plugin
+         id="com.aptana.ui.s3"
+         download-size="0"
+         install-size="0"
+         version="3.0.0.1385945613"/>
+
+</feature>

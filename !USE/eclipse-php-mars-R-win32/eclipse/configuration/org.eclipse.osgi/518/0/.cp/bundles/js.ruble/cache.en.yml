@@ -1,0 +1,414 @@
+--- !!com.aptana.scripting.model.BundleElement 
+author: Christopher Williams
+children: 
+- !!com.aptana.scripting.model.MenuElement 
+  children: 
+  - !!com.aptana.scripting.model.MenuElement 
+    children: 
+    - !!com.aptana.scripting.model.MenuElement 
+      children: 
+      - !!com.aptana.scripting.model.MenuElement 
+        commandName: "if"
+        displayName: "if"
+        path: bundle.rb
+      - !!com.aptana.scripting.model.MenuElement 
+        commandName: "if ... else"
+        displayName: "if ... else"
+        path: bundle.rb
+      - !!com.aptana.scripting.model.MenuElement 
+        commandName: "-"
+        displayName: "-"
+        path: bundle.rb
+      - !!com.aptana.scripting.model.MenuElement 
+        commandName: "for (...) {...}"
+        displayName: "for (...) {...}"
+        path: bundle.rb
+      - !!com.aptana.scripting.model.MenuElement 
+        commandName: "for (...) {...} (Improved Native For-Loop)"
+        displayName: "for (...) {...} (Improved Native For-Loop)"
+        path: bundle.rb
+      displayName: "Control"
+      path: bundle.rb
+    - !!com.aptana.scripting.model.MenuElement 
+      children: 
+      - !!com.aptana.scripting.model.MenuElement 
+        commandName: "Object key - key: \"value\""
+        displayName: "Object key - key: \"value\""
+        path: bundle.rb
+      - !!com.aptana.scripting.model.MenuElement 
+        commandName: "Object Value JS"
+        displayName: "Object Value JS"
+        path: bundle.rb
+      - !!com.aptana.scripting.model.MenuElement 
+        commandName: "-"
+        displayName: "-"
+        path: bundle.rb
+      - !!com.aptana.scripting.model.MenuElement 
+        commandName: "Prototype"
+        displayName: "Prototype"
+        path: bundle.rb
+      displayName: "Language"
+      path: bundle.rb
+    - !!com.aptana.scripting.model.MenuElement 
+      children: 
+      - !!com.aptana.scripting.model.MenuElement 
+        commandName: "Anonymous Function"
+        displayName: "Anonymous Function"
+        path: bundle.rb
+      - !!com.aptana.scripting.model.MenuElement 
+        commandName: "Function"
+        displayName: "Function"
+        path: bundle.rb
+      - !!com.aptana.scripting.model.MenuElement 
+        commandName: "-"
+        displayName: "-"
+        path: bundle.rb
+      - !!com.aptana.scripting.model.MenuElement 
+        commandName: "New Function"
+        displayName: "New Function"
+        path: bundle.rb
+      - !!com.aptana.scripting.model.MenuElement 
+        commandName: "New Method"
+        displayName: "New Method"
+        path: bundle.rb
+      - !!com.aptana.scripting.model.MenuElement 
+        commandName: "-"
+        displayName: "-"
+        path: bundle.rb
+      - !!com.aptana.scripting.model.MenuElement 
+        commandName: "Object Method"
+        displayName: "Object Method"
+        path: bundle.rb
+      - !!com.aptana.scripting.model.MenuElement 
+        commandName: "Object Method String"
+        displayName: "Object Method String"
+        path: bundle.rb
+      displayName: "Function"
+      path: bundle.rb
+    displayName: "Core"
+    path: bundle.rb
+  - !!com.aptana.scripting.model.MenuElement 
+    children: 
+    - !!com.aptana.scripting.model.MenuElement 
+      commandName: "setTimeout function"
+      displayName: "setTimeout function"
+      path: bundle.rb
+    displayName: "BOM"
+    path: bundle.rb
+  - !!com.aptana.scripting.model.MenuElement 
+    commandName: "Documentation for Word"
+    displayName: "Documentation for Word"
+    path: bundle.rb
+  - !!com.aptana.scripting.model.MenuElement 
+    commandName: "-"
+    displayName: "-"
+    path: bundle.rb
+  - !!com.aptana.scripting.model.MenuElement 
+    commandName: "Copy as Bookmarklet to Clipboard"
+    displayName: "Copy as Bookmarklet to Clipboard"
+    path: bundle.rb
+  displayName: "JavaScript"
+  path: bundle.rb
+  scope: source.js
+- !!com.aptana.scripting.model.SmartTypingPairsElement 
+  displayName: smart_typing_pairs-
+  pairs: 
+  - "\""
+  - "\""
+  - (
+  - )
+  - "{"
+  - "}"
+  - "["
+  - "]"
+  - "'"
+  - "'"
+  path: bundle.rb
+  scope: source.js
+- !command 
+  async: false
+  displayName: "Reformat Document"
+  input: 
+  - selection
+  - document
+  keyBindingMap: 
+    ? !!com.aptana.scripting.model.Platform ALL
+    : 
+      - CTRL+SHIFT+H
+
+  outputType: replace_selection
+  path: commands/format.rb
+  runType: current_thread
+  scope: source.js
+  workingDirectoryType: UNDEFINED
+- !command 
+  async: false
+  displayName: "Documentation for Word"
+  input: 
+  - selection
+  outputType: show_as_html
+  path: commands/documentation_for_word.rb
+  runType: current_thread
+  scope: source.js
+  workingDirectoryType: UNDEFINED
+- !command 
+  async: false
+  displayName: "Copy as Bookmarklet to Clipboard"
+  input: 
+  - selection
+  keyBindingMap: 
+    ? !!com.aptana.scripting.model.Platform ALL
+    : 
+      - CTRL+SHIFT+H
+
+  outputType: copy_to_clipboard
+  path: commands/copy_as_bookmarklet_to_clipboard.rb
+  runType: current_thread
+  scope: source.js
+  workingDirectoryType: UNDEFINED
+- !!com.aptana.scripting.model.SnippetElement 
+  async: false
+  customProperties: 
+    prefix_values: 
+    - ":f"
+  displayName: "Object Method"
+  expansion: |-
+    ${1:method_name}: function(${2:attribute}){
+      $0
+    }${3:,}
+  input: 
+  - none
+  path: snippets/snippets.rb
+  runType: current_thread
+  scope: source.js
+  workingDirectoryType: UNDEFINED
+- !!com.aptana.scripting.model.SnippetElement 
+  async: false
+  customProperties: 
+    prefix_values: 
+    - fun
+  displayName: "Function"
+  expansion: |-
+    function ${1:function_name} (${2:argument}) {
+      ${0:// body...}
+    }
+  input: 
+  - none
+  path: snippets/snippets.rb
+  runType: current_thread
+  scope: source.js
+  workingDirectoryType: UNDEFINED
+- !!com.aptana.scripting.model.SnippetElement 
+  async: false
+  customProperties: 
+    prefix_values: 
+    - fun
+  displayName: "New Function"
+  expansion: |-
+    function (${1:args}) {
+      ${0:// body...}
+    }
+  input: 
+  - none
+  path: snippets/snippets.rb
+  runType: current_thread
+  scope: source.js
+  workingDirectoryType: UNDEFINED
+- !!com.aptana.scripting.model.SnippetElement 
+  async: false
+  customProperties: 
+    prefix_values: 
+    - ":"
+  displayName: "New Method"
+  expansion: |-
+    : function (${1:args}) {
+        $0
+    },
+  input: 
+  - none
+  path: snippets/snippets.rb
+  runType: current_thread
+  scope: source.js
+  workingDirectoryType: UNDEFINED
+- !!com.aptana.scripting.model.SnippetElement 
+  async: false
+  customProperties: 
+    prefix_values: 
+    - proto
+  displayName: "Prototype"
+  expansion: |
+    ${1:class_name}.prototype.${2:method_name} = function(${3:first_argument}) {
+      ${0:// body...}
+    };
+
+  input: 
+  - none
+  path: snippets/snippets.rb
+  runType: current_thread
+  scope: source.js
+  workingDirectoryType: UNDEFINED
+- !!com.aptana.scripting.model.SnippetElement 
+  async: false
+  customProperties: 
+    prefix_values: 
+    - f
+  displayName: "Anonymous Function"
+  expansion: function($1) {${0:$TM_SELECTED_TEXT}};
+  input: 
+  - none
+  path: snippets/snippets.rb
+  runType: current_thread
+  scope: source.js
+  workingDirectoryType: UNDEFINED
+- !!com.aptana.scripting.model.SnippetElement 
+  async: false
+  customProperties: 
+    prefix_values: 
+    - if
+  displayName: "if"
+  expansion: if (${1:true}) {${0:$TM_SELECTED_TEXT}};
+  input: 
+  - none
+  path: snippets/snippets.rb
+  runType: current_thread
+  scope: source.js
+  workingDirectoryType: UNDEFINED
+- !!com.aptana.scripting.model.SnippetElement 
+  async: false
+  customProperties: 
+    prefix_values: 
+    - ife
+  displayName: "if ... else"
+  expansion: if (${1:true}) {${0:$TM_SELECTED_TEXT}} else{};
+  input: 
+  - none
+  path: snippets/snippets.rb
+  runType: current_thread
+  scope: source.js
+  workingDirectoryType: UNDEFINED
+- !!com.aptana.scripting.model.SnippetElement 
+  async: false
+  customProperties: 
+    prefix_values: 
+    - for
+  displayName: "for (...) {...}"
+  expansion: |-
+    for (var ${2:i}=0; ${2:i} < ${1:Things}.length; ${2:i}++) {
+      ${1:Things}[${2:i}]
+    };
+  input: 
+  - none
+  path: snippets/snippets.rb
+  runType: current_thread
+  scope: source.js
+  workingDirectoryType: UNDEFINED
+- !!com.aptana.scripting.model.SnippetElement 
+  async: false
+  customProperties: 
+    prefix_values: 
+    - for
+  displayName: "for (...) {...} (Improved Native For-Loop)"
+  expansion: |-
+    for (var ${2:i} = ${1:Things}.length - 1; ${2:i} >= 0; ${2:i}--){
+      ${1:Things}[${2:i}]
+    };
+  input: 
+  - none
+  path: snippets/snippets.rb
+  runType: current_thread
+  scope: source.js
+  workingDirectoryType: UNDEFINED
+- !!com.aptana.scripting.model.SnippetElement 
+  async: false
+  customProperties: 
+    prefix_values: 
+    - for
+  displayName: for (...) {...} (High-Performance For-Loop)
+  expansion: |-
+    for(var ${2:i}=0,${3:j}=${1:Things}.length; ${2:i}<${3:j}; ${2:i}++){
+      ${1:Things}[${2:i}]
+    };
+  input: 
+  - none
+  path: snippets/snippets.rb
+  runType: current_thread
+  scope: source.js
+  workingDirectoryType: UNDEFINED
+- !!com.aptana.scripting.model.SnippetElement 
+  async: false
+  customProperties: 
+    prefix_values: 
+    - ":,"
+  displayName: "Object Value JS"
+  expansion: ${1:value_name}:${0:value},
+  input: 
+  - none
+  path: snippets/snippets.rb
+  runType: current_thread
+  scope: source.js
+  workingDirectoryType: UNDEFINED
+- !!com.aptana.scripting.model.SnippetElement 
+  async: false
+  customProperties: 
+    prefix_values: 
+    - ":"
+  displayName: "Object key - key: \"value\""
+  expansion: "${1:key}: ${2:\"${3:value}\"}${4:, }"
+  input: 
+  - none
+  path: snippets/snippets.rb
+  runType: current_thread
+  scope: source.js
+  workingDirectoryType: UNDEFINED
+- !!com.aptana.scripting.model.SnippetElement 
+  async: false
+  customProperties: 
+    prefix_values: 
+    - timeout
+  displayName: "setTimeout function"
+  expansion: setTimeout(function() {$0}, ${1:10});
+  input: 
+  - none
+  path: snippets/snippets.rb
+  runType: current_thread
+  scope: source.js
+  workingDirectoryType: UNDEFINED
+- !!com.aptana.scripting.model.SnippetElement 
+  async: false
+  customProperties: 
+    prefix_values: 
+    - "\":f"
+  displayName: "Object Method String"
+  expansion: |-
+    '${1:${2:#thing}:${3:click}}': function(element){
+      $0
+    }${4:,}
+  input: 
+  - none
+  path: snippets/snippets.rb
+  runType: current_thread
+  scope: source.js
+  workingDirectoryType: UNDEFINED
+- !environment 
+  displayName: environment-
+  path: bundle.rb
+  scope: source.js
+- !template 
+  async: false
+  displayName: JavaScript Template
+  filetype: "*.js"
+  input: 
+  - none
+  path: templates/templates.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+copyright: Copyright 2010 Aptana Inc. Distributed under the MIT license.
+decreaseIndentMarkers: 
+  source.js: !regexp /^(.*\*\/)?\s*(\}|\))([^{]*\{)?([;,]?\s*|\.[^{]*|\s*\)[;\s]*)$/
+description: Javascript bundle for RadRails, ported from the TextMate bundle
+displayName: "JavaScript"
+increaseIndentMarkers: 
+  source.js: !regexp /^.*(\{[^}"'']*|\([^)"'']*)$/
+path: bundle.rb
+repository: git://github.com/aptana/js.ruble.git
+visible: true

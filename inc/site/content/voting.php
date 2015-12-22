@@ -36,21 +36,34 @@ if ($voting['id']>0 && count($voting['answers'])>0)
 	</script>
 	<div class="voting">
 		<div class="question"><?=$voting['name'] ?></div>
-		<div class="content">
+		<div class="content" style="text-align: center; padding: 0;">
 			<?
-			if  (!cookieGet('vid')>0)
+			if  (cookieGet('vid'.$voting['id'])!=1)
 			{
 			?>
 				<div class="answers">
 				<?
 				foreach ($voting['answers'] as $k=>$v)
 				{
-					?><div><input id="answer_<?=$v['id']?>" name="answer" type="radio" data-name="<?=$k['text']?>"><label for="answer_<?=$v['id']?>"><span><span></span></span><?=$v['text']?></label></div><?
+					$image=$image=$Storage->getFile($v['image']);
+					?>
+					<div>
+						<input id="answer_<?=$v['id']?>" name="answer" type="radio" data-name="<?=$k['text']?>"><label for="answer_<?=$v['id']?>"><span><span></span></span><?=$v['text']?></label>
+						<?
+						if ($image['id']>0)
+						{
+							?>
+							<div><a onclick="return hs.expand(this)" class="highslide" href="<?=$image['path'] ?>"><img src="<?=$image['path'] ?>" style="max-width: 80px; padding: 5px 0 10px 0;"/></a></div>
+							<?	
+						}
+						?>
+					</div><?
 				}
 				?>
 				</div>
 				<div class="clear"></div>
 				<a class="button">Голосовать</a>
+				<div class="air p20"></div>
 			<?
 			} 
 			else 

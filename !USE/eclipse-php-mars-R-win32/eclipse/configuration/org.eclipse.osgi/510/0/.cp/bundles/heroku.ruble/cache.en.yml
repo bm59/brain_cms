@@ -1,0 +1,318 @@
+--- !ruby/object:Ruble::Bundle
+displayName: ! "Heroku"
+path: bundle.rb
+children:
+- !ruby/object:Ruble::Menu
+  displayName: ! "Heroku"
+  path: bundle.rb
+  scope: source.ruby, project.rails
+  children:
+  - !ruby/object:Ruble::Menu
+    displayName: ! "Create App"
+    path: bundle.rb
+    commandName: ! "Create App"
+  - !ruby/object:Ruble::Menu
+    displayName: ! '-'
+    path: bundle.rb
+    commandName: ! '-'
+  - !ruby/object:Ruble::Menu
+    displayName: ! "Deploy App"
+    path: bundle.rb
+    commandName: ! "Deploy App"
+  - !ruby/object:Ruble::Menu
+    displayName: ! '-'
+    path: bundle.rb
+    commandName: ! '-'
+  - !ruby/object:Ruble::Menu
+    displayName: ! "Open App in Web Browser"
+    path: bundle.rb
+    commandName: ! "Open App in Web Browser"
+  - !ruby/object:Ruble::Menu
+    displayName: ! "Sharing"
+    path: bundle.rb
+    children:
+    - !ruby/object:Ruble::Menu
+      displayName: ! "Add Collaborator"
+      path: bundle.rb
+      commandName: ! "Add Collaborator"
+    - !ruby/object:Ruble::Menu
+      displayName: ! "Remove Collaborator"
+      path: bundle.rb
+      commandName: ! "Remove Collaborator"
+  - !ruby/object:Ruble::Menu
+    displayName: ! "Database"
+    path: bundle.rb
+    children:
+    - !ruby/object:Ruble::Menu
+      displayName: ! "Rake db:migrate on Heroku"
+      path: bundle.rb
+      commandName: ! "Rake db:migrate on Heroku"
+    - !ruby/object:Ruble::Menu
+      displayName: ! "Push Local Database to Heroku"
+      path: bundle.rb
+      commandName: ! "Push Local Database to Heroku"
+    - !ruby/object:Ruble::Menu
+      displayName: ! "Pull Remote Database from Heroku"
+      path: bundle.rb
+      commandName: ! "Pull Remote Database from Heroku"
+  - !ruby/object:Ruble::Menu
+    displayName: ! "Maintenance"
+    path: bundle.rb
+    children:
+    - !ruby/object:Ruble::Menu
+      displayName: ! "Turn Maintence On"
+      path: bundle.rb
+      commandName: ! "Turn Maintence On"
+    - !ruby/object:Ruble::Menu
+      displayName: ! "Turn Maintence Off"
+      path: bundle.rb
+      commandName: ! "Turn Maintence Off"
+  - !ruby/object:Ruble::Menu
+    displayName: ! "Remote"
+    path: bundle.rb
+    children:
+    - !ruby/object:Ruble::Menu
+      displayName: ! "Console"
+      path: bundle.rb
+      commandName: ! "Console"
+    - !ruby/object:Ruble::Menu
+      displayName: ! "Rake Command"
+      path: bundle.rb
+      commandName: ! "Rake Command"
+  - !ruby/object:Ruble::Menu
+    displayName: ! "Config Vars"
+    path: bundle.rb
+    children:
+    - !ruby/object:Ruble::Menu
+      displayName: ! "Add Config Var"
+      path: bundle.rb
+      commandName: ! "Add Config Var"
+    - !ruby/object:Ruble::Menu
+      displayName: ! "Clear Config Vars"
+      path: bundle.rb
+      commandName: ! "Clear Config Vars"
+  - !ruby/object:Ruble::Menu
+    displayName: ! "Backups"
+    path: bundle.rb
+    children:
+    - !ruby/object:Ruble::Menu
+      displayName: ! "Capture Bundle"
+      path: bundle.rb
+      commandName: ! "Capture Bundle"
+    - !ruby/object:Ruble::Menu
+      displayName: ! "Download Bundle"
+      path: bundle.rb
+      commandName: ! "Download Bundle"
+  - !ruby/object:Ruble::Menu
+    displayName: ! "App Info"
+    path: bundle.rb
+    commandName: ! "App Info"
+  - !ruby/object:Ruble::Menu
+    displayName: ! "Rename App"
+    path: bundle.rb
+    commandName: ! "Rename App"
+- !ruby/object:Ruble::Command
+  displayName: ! "Add Collaborator"
+  path: commands/sharing.rb
+  runType: current_thread
+  workingDirectoryType: CURRENT_PROJECT
+  async: false
+  input:
+  - none
+  scope: source.ruby, project.rails
+  outputType: discard
+- !ruby/object:Ruble::Command
+  displayName: ! "Remove Collaborator"
+  path: commands/sharing.rb
+  runType: current_thread
+  workingDirectoryType: CURRENT_PROJECT
+  async: false
+  input:
+  - none
+  scope: source.ruby, project.rails
+  outputType: discard
+- !ruby/object:Ruble::Command
+  displayName: ! "Install Gem"
+  path: commands/install.rb
+  runType: current_thread
+  workingDirectoryType: CURRENT_PROJECT
+  async: false
+  input:
+  - none
+  scope: source.ruby, project.rails
+  outputType: discard
+- !ruby/object:Ruble::Command
+  displayName: ! "Rake db:migrate on Heroku"
+  path: commands/database.rb
+  runType: current_thread
+  workingDirectoryType: CURRENT_PROJECT
+  async: false
+  input:
+  - none
+  scope: source.ruby, project.rails
+  outputType: discard
+- !ruby/object:Ruble::Command
+  displayName: ! "Push Local Database to Heroku"
+  path: commands/database.rb
+  runType: current_thread
+  workingDirectoryType: CURRENT_PROJECT
+  async: false
+  input:
+  - none
+  scope: source.ruby, project.rails
+  outputType: discard
+- !ruby/object:Ruble::Command
+  displayName: ! "Pull Remote Database from Heroku"
+  path: commands/database.rb
+  runType: current_thread
+  workingDirectoryType: CURRENT_PROJECT
+  async: false
+  input:
+  - none
+  scope: source.ruby, project.rails
+  outputType: discard
+- !ruby/object:Ruble::Command
+  displayName: ! "Turn Maintence On"
+  path: commands/maintenance.rb
+  runType: current_thread
+  workingDirectoryType: CURRENT_PROJECT
+  async: false
+  input:
+  - none
+  scope: source.ruby, project.rails
+  outputType: discard
+- !ruby/object:Ruble::Command
+  displayName: ! "Turn Maintence Off"
+  path: commands/maintenance.rb
+  runType: current_thread
+  workingDirectoryType: CURRENT_PROJECT
+  async: false
+  input:
+  - none
+  scope: source.ruby, project.rails
+  outputType: discard
+- !ruby/object:Ruble::Command
+  displayName: ! "Add Config Var"
+  path: commands/config_vars.rb
+  runType: current_thread
+  workingDirectoryType: CURRENT_PROJECT
+  async: false
+  input:
+  - none
+  scope: source.ruby, project.rails
+  outputType: discard
+- !ruby/object:Ruble::Command
+  displayName: ! "Clear Config Vars"
+  path: commands/config_vars.rb
+  runType: current_thread
+  workingDirectoryType: CURRENT_PROJECT
+  async: false
+  input:
+  - none
+  scope: source.ruby, project.rails
+  outputType: discard
+- !ruby/object:Ruble::Command
+  displayName: ! "Console"
+  path: commands/remote.rb
+  runType: current_thread
+  workingDirectoryType: CURRENT_PROJECT
+  async: false
+  input:
+  - none
+  scope: source.ruby, project.rails
+  outputType: discard
+- !ruby/object:Ruble::Command
+  displayName: ! "Rake Command"
+  path: commands/remote.rb
+  runType: current_thread
+  workingDirectoryType: CURRENT_PROJECT
+  async: false
+  input:
+  - none
+  scope: source.ruby, project.rails
+  outputType: discard
+- !ruby/object:Ruble::Command
+  displayName: ! "App Info"
+  path: commands/app.rb
+  runType: current_thread
+  workingDirectoryType: CURRENT_PROJECT
+  async: false
+  input:
+  - none
+  scope: source.ruby, project.rails
+  outputType: discard
+- !ruby/object:Ruble::Command
+  displayName: ! "Create App"
+  path: commands/app.rb
+  runType: current_thread
+  workingDirectoryType: CURRENT_PROJECT
+  async: false
+  input:
+  - none
+  scope: source.ruby, project.rails
+  outputType: discard
+- !ruby/object:Ruble::Command
+  displayName: ! "Deploy App"
+  path: commands/app.rb
+  runType: current_thread
+  workingDirectoryType: CURRENT_PROJECT
+  async: false
+  input:
+  - none
+  scope: source.ruby, project.rails
+  outputType: discard
+- !ruby/object:Ruble::Command
+  displayName: ! "Open App in Web Browser"
+  path: commands/app.rb
+  runType: current_thread
+  workingDirectoryType: CURRENT_PROJECT
+  async: false
+  input:
+  - none
+  scope: source.ruby, project.rails
+  outputType: discard
+- !ruby/object:Ruble::Command
+  displayName: ! "Rename App"
+  path: commands/app.rb
+  runType: current_thread
+  workingDirectoryType: CURRENT_PROJECT
+  async: false
+  input:
+  - none
+  scope: source.ruby, project.rails
+  outputType: discard
+- !ruby/object:Ruble::Command
+  displayName: ! "Create and Deploy App"
+  path: commands/app.rb
+  runType: current_thread
+  workingDirectoryType: CURRENT_PROJECT
+  async: false
+  input:
+  - none
+  scope: source.ruby, project.rails
+  outputType: discard
+- !ruby/object:Ruble::Command
+  displayName: ! "Download Bundle"
+  path: commands/backups.rb
+  runType: current_thread
+  workingDirectoryType: CURRENT_PROJECT
+  async: false
+  input:
+  - none
+  scope: source.ruby, project.rails
+  outputType: discard
+- !ruby/object:Ruble::Command
+  displayName: ! "Capture Bundle"
+  path: commands/backups.rb
+  runType: current_thread
+  workingDirectoryType: CURRENT_PROJECT
+  async: false
+  input:
+  - none
+  scope: source.ruby, project.rails
+  outputType: discard
+visible: true
+author: Kris Rasmussen
+copyright: Copyright 2010 Aptana Inc. Distributed under the MIT license.
+description: Easy deployment with Heroku from within Studio 3
+repository: git://github.com/aptana/heroku.ruble.git

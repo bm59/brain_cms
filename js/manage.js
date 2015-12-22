@@ -15,7 +15,9 @@
 
 			});
     }
-
+    function Gotopage(url){
+    	document.location.replace(url);
+    }
     function set_click_up_down (table_id)
     {
         $("#"+table_id+" .up").click(function()

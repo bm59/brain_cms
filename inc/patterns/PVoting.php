@@ -48,7 +48,7 @@ class PVoting extends VirtualPattern
 		$this->setSetting('help', $help);
 				
 		$this->setSetting('table',$this->createDataSetTable($this->getSetting('dataset'),$this->getSetting('section'),array('show'=>'INT(1)', 'precedence'=>'BIGINT(20)', 'result'=>'BIGINT(20) DEFAULT 0')));
-		$this->setSetting('table_answers',mstable(ConfigGet('pr_name').'_site','voting','answers',array('show'=>'INT(1) DEFAULT 0', 'precedence'=>'BIGINT(20)', 'text'=>'VARCHAR(255)', 'voting_id'=>'BIGINT(20)', 'result'=>'BIGINT(20) DEFAULT 0')));
+		$this->setSetting('table_answers',mstable(ConfigGet('pr_name').'_site','voting','answers',array('show'=>'INT(1) DEFAULT 0', 'precedence'=>'BIGINT(20)', 'text'=>'VARCHAR(255)', 'voting_id'=>'BIGINT(20)', 'result'=>'BIGINT(20) DEFAULT 0', 'image'=>'BIGINT(20)')));
 		$this->setSetting('table_log',mstable(ConfigGet('pr_name').'_site','voting','log',array('voting_id'=>'BIGINT(20)', 'question_id'=>'BIGINT(20)', 'ip'=>'VARCHAR(20)', 'real_ip'=>'VARCHAR(20)', 'time_page'=>'BIGINT(20)', 'time_vote'=>'BIGINT(20)', 'time_diff'=>'BIGINT(20)', 'server_info'=>'TEXT', 'page'=>'VARCHAR(255)')));
 /* 		$this->setSetting('table',$this->createDataSetTable($this->getSetting('dataset'),$this->getSetting('section'),array('show'=>'INT(1)', 'precedence'=>'BIGINT(20)'))); */
 		

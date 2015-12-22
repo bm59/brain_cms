@@ -4,18 +4,21 @@
 
 .nopad {padding:0;}
 .nomar {margin:0;}
-.nodecor {text-decoration: none; cursor: pointer;}
-.decor {text-decoration: underline;}
-.hovdecor:hover {text-decoration: underline;}
+.nodecor {text-decoration: none;}
+.decor {text-decoration: underline !important;}
 .rel {position: relative;}
 .bold {font-weight: bold;}
 .italic {font-style: italic;}
+.normal {font-weight: normal !important;}
 .fright {float: right;}
-.left {float: left;}
+.fleft {float: left;}
 .center {text-align: center;}
 .left {text-align: left;}
 .imgbord {border: 1px solid #D3D3D3}
 
+
+.noresize {resize: none;}/*textarea*/
+.nobr {white-space: nowrap} 
 
 /*Воздух*/
 .air {background: rgba(0, 0, 0, 0) none repeat scroll 0 0;display: block;width: 100%;}

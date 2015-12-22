@@ -1,0 +1,497 @@
+--- !ruby/object:Ruble::Bundle
+displayName: ! "HAML"
+path: bundle.rb
+children:
+- !ruby/object:Ruble::Menu
+  displayName: ! "HAML"
+  path: bundle.rb
+  children:
+  - !ruby/object:Ruble::Menu
+    displayName: ! "Insert DocType"
+    path: bundle.rb
+    children:
+    - !ruby/object:Ruble::Menu
+      displayName: ! "XHTML - 1.0 Strict"
+      path: bundle.rb
+      commandName: ! "XHTML - 1.0 Strict"
+    - !ruby/object:Ruble::Menu
+      displayName: ! "XHTML - 1.0 Transitional"
+      path: bundle.rb
+      commandName: ! "XHTML - 1.0 Transitional"
+    - !ruby/object:Ruble::Menu
+      displayName: ! "XHTML - 1.1"
+      path: bundle.rb
+      commandName: ! "XHTML - 1.1"
+    - !ruby/object:Ruble::Menu
+      displayName: ! "XHTML - Mobile"
+      path: bundle.rb
+      commandName: ! "XHTML - Mobile"
+  - !ruby/object:Ruble::Menu
+    displayName: ! "Insert XML Prolog"
+    path: bundle.rb
+    children:
+    - !ruby/object:Ruble::Menu
+      displayName: ! "XML prolog"
+      path: bundle.rb
+      commandName: ! "XML prolog"
+    - !ruby/object:Ruble::Menu
+      displayName: ! "XML prolog iso-8859-1"
+      path: bundle.rb
+      commandName: ! "XML prolog iso-8859-1"
+  - !ruby/object:Ruble::Menu
+    displayName: ! "Filters"
+    path: bundle.rb
+    children:
+    - !ruby/object:Ruble::Menu
+      displayName: ! "CDATA"
+      path: bundle.rb
+      commandName: ! "CDATA"
+    - !ruby/object:Ruble::Menu
+      displayName: ! "Escaped"
+      path: bundle.rb
+      commandName: ! "Escaped"
+    - !ruby/object:Ruble::Menu
+      displayName: ! "Erb"
+      path: bundle.rb
+      commandName: ! "Erb"
+    - !ruby/object:Ruble::Menu
+      displayName: ! "Javascript"
+      path: bundle.rb
+      commandName: ! "Javascript"
+    - !ruby/object:Ruble::Menu
+      displayName: ! "Markdown"
+      path: bundle.rb
+      commandName: ! "Markdown"
+    - !ruby/object:Ruble::Menu
+      displayName: ! "Maruku"
+      path: bundle.rb
+      commandName: ! "Maruku"
+    - !ruby/object:Ruble::Menu
+      displayName: ! "Plain"
+      path: bundle.rb
+      commandName: ! "Plain"
+    - !ruby/object:Ruble::Menu
+      displayName: ! "Preserve"
+      path: bundle.rb
+      commandName: ! "Preserve"
+    - !ruby/object:Ruble::Menu
+      displayName: ! "Ruby"
+      path: bundle.rb
+      commandName: ! "Ruby"
+    - !ruby/object:Ruble::Menu
+      displayName: ! "Sass"
+      path: bundle.rb
+      commandName: ! "Sass"
+    - !ruby/object:Ruble::Menu
+      displayName: ! "Textile"
+      path: bundle.rb
+      commandName: ! "Textile"
+  - !ruby/object:Ruble::Menu
+    displayName: ! "Meta Tags"
+    path: bundle.rb
+    children:
+    - !ruby/object:Ruble::Menu
+      displayName: ! "Meta - Generic"
+      path: bundle.rb
+      commandName: ! "Meta - Generic"
+    - !ruby/object:Ruble::Menu
+      displayName: ! "Meta - http-equiv"
+      path: bundle.rb
+      commandName: ! "Meta - http-equiv"
+  - !ruby/object:Ruble::Menu
+    displayName: ! '-'
+    path: bundle.rb
+    commandName: ! '-'
+  - !ruby/object:Ruble::Menu
+    displayName: ! "HTML - en-US"
+    path: bundle.rb
+    commandName: ! "HTML - en-US"
+  - !ruby/object:Ruble::Menu
+    displayName: ! "Element Attribute"
+    path: bundle.rb
+    commandName: ! "Element Attribute"
+  - !ruby/object:Ruble::Menu
+    displayName: ! "IE Conditional"
+    path: bundle.rb
+    commandName: ! "IE Conditional"
+  - !ruby/object:Ruble::Menu
+    displayName: ! "Page Class"
+    path: bundle.rb
+    commandName: ! "Page Class"
+  - !ruby/object:Ruble::Menu
+    displayName: ! "Insert Tag"
+    path: bundle.rb
+    commandName: ! "Insert Tag"
+  - !ruby/object:Ruble::Menu
+    displayName: ! "Convert HTML to HAML"
+    path: bundle.rb
+    commandName: ! "Convert HTML to HAML"
+  - !ruby/object:Ruble::Menu
+    displayName: ! "Check Syntax"
+    path: bundle.rb
+    commandName: ! "Check Syntax"
+- !ruby/object:Ruble::Command
+  displayName: ! "Check Syntax"
+  path: commands/check_syntax.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  keyBindingMap:
+    !ruby/object:Ruble::Platform ALL:
+    - M2+M4+V
+  scope: text.haml
+  outputType: show_as_tooltip
+- !ruby/object:Ruble::Command
+  displayName: ! "Convert HTML to HAML"
+  path: commands/convert_html_to_haml.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - selection
+  - document
+  outputType: replace_selection
+- !ruby/object:Ruble::Snippet
+  displayName: ! "CDATA"
+  path: snippets/snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  scope: text.haml
+  customProperties:
+    prefix_values:
+    - filter
+  expansion: ":cdata\n  $0"
+- !ruby/object:Ruble::Snippet
+  displayName: ! "Erb"
+  path: snippets/snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  scope: text.haml
+  customProperties:
+    prefix_values:
+    - filter
+  expansion: ":erb\n  $0"
+- !ruby/object:Ruble::Snippet
+  displayName: ! "Escaped"
+  path: snippets/snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  scope: text.haml
+  customProperties:
+    prefix_values:
+    - filter
+  expansion: ":escaped\n  $0"
+- !ruby/object:Ruble::Snippet
+  displayName: ! "Javascript"
+  path: snippets/snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  scope: text.haml
+  customProperties:
+    prefix_values:
+    - filter
+  expansion: ":javascript\n  $0"
+- !ruby/object:Ruble::Snippet
+  displayName: ! "Markdown"
+  path: snippets/snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  scope: text.haml
+  customProperties:
+    prefix_values:
+    - filter
+  expansion: ":markdown\n  $0"
+- !ruby/object:Ruble::Snippet
+  displayName: ! "Maruku"
+  path: snippets/snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  scope: text.haml
+  customProperties:
+    prefix_values:
+    - filter
+  expansion: ":maruku\n  $0"
+- !ruby/object:Ruble::Snippet
+  displayName: ! "Preserve"
+  path: snippets/snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  scope: text.haml
+  customProperties:
+    prefix_values:
+    - filter
+  expansion: ":preserve\n  $0"
+- !ruby/object:Ruble::Snippet
+  displayName: ! "Ruby"
+  path: snippets/snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  scope: text.haml
+  customProperties:
+    prefix_values:
+    - filter
+  expansion: ":ruby\n  $0"
+- !ruby/object:Ruble::Snippet
+  displayName: ! "Sass"
+  path: snippets/snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  scope: text.haml
+  customProperties:
+    prefix_values:
+    - filter
+  expansion: ":sass\n  $0"
+- !ruby/object:Ruble::Snippet
+  displayName: ! "Textile"
+  path: snippets/snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  scope: text.haml
+  customProperties:
+    prefix_values:
+    - filter
+  expansion: ":textile\n  $0"
+- !ruby/object:Ruble::Snippet
+  displayName: ! "Plain"
+  path: snippets/snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  scope: text.haml
+  customProperties:
+    prefix_values:
+    - filter
+  expansion: ":plain\n  $0"
+- !ruby/object:Ruble::Snippet
+  displayName: ! "Meta - http-equiv"
+  path: snippets/snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  scope: text.haml
+  customProperties:
+    prefix_values:
+    - meta
+  expansion: ! '%meta{ ''http-equiv'' => ''Content-Type'', :content => ''text/html;'',
+    ''charset'' => ''utf-8''${1:, }$2 }$0'
+- !ruby/object:Ruble::Snippet
+  displayName: ! "Meta - Generic"
+  path: snippets/snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  scope: text.haml
+  customProperties:
+    prefix_values:
+    - meta
+  expansion: ! '%meta{ :name => ''$1'', :content => ''$2''${3:, }$4 }$0'
+- !ruby/object:Ruble::Snippet
+  displayName: ! "XHTML - 1.0 Strict"
+  path: snippets/snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  scope: text.haml
+  customProperties:
+    prefix_values:
+    - doctype
+  expansion: ! '!!! strict'
+- !ruby/object:Ruble::Snippet
+  displayName: ! "XHTML - 1.0 Transitional"
+  path: snippets/snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  scope: text.haml
+  customProperties:
+    prefix_values:
+    - doctype
+  expansion: ! '!!!'
+- !ruby/object:Ruble::Snippet
+  displayName: ! "XHTML - 1.1"
+  path: snippets/snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  scope: text.haml
+  customProperties:
+    prefix_values:
+    - doctype
+  expansion: ! '!!! 1.1'
+- !ruby/object:Ruble::Snippet
+  displayName: ! "XHTML - Mobile"
+  path: snippets/snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  scope: text.haml
+  customProperties:
+    prefix_values:
+    - doctype
+  expansion: ! '!!! Mobile'
+- !ruby/object:Ruble::Snippet
+  displayName: ! "XML prolog iso-8859-1"
+  path: snippets/snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  scope: text.haml
+  customProperties:
+    prefix_values:
+    - xml
+  expansion: ! '!!! XML iso-8859-1'
+- !ruby/object:Ruble::Snippet
+  displayName: ! "XML prolog"
+  path: snippets/snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  scope: text.haml
+  customProperties:
+    prefix_values:
+    - xml
+  expansion: ! '!!! XML'
+- !ruby/object:Ruble::Snippet
+  displayName: ! "Insert Tag"
+  path: snippets/snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  scope: text.haml
+  expansion: ! '%${1:p}'
+  keyBindingMap:
+    !ruby/object:Ruble::Platform ALL:
+    - CONTROL+M2+,
+- !ruby/object:Ruble::Snippet
+  displayName: ! "HTML - en-US"
+  path: snippets/snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  scope: text.haml
+  customProperties:
+    prefix_values:
+    - html
+  expansion: ! '%html{ :xmlns => "http://www.w3.org/1999/xhtml", :lang => "en", ''xml:lang''
+    => "en" }'
+- !ruby/object:Ruble::Snippet
+  displayName: ! "IE Conditional"
+  path: snippets/snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  scope: text.haml
+  customProperties:
+    prefix_values:
+    - ie
+  expansion: ! "/[if ${1:lte }IE${3: ${2:version}}]\n  $0"
+- !ruby/object:Ruble::Snippet
+  displayName: ! "Page Class"
+  path: snippets/snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  scope: text.haml
+  customProperties:
+    prefix_values:
+    - pc
+  expansion: page_class
+- !ruby/object:Ruble::Snippet
+  displayName: ! "Element Attribute"
+  path: snippets/snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  scope: text.haml
+  customProperties:
+    prefix_values:
+    - ! ':'
+  expansion: ':${1:AttributeName} => "$2"${3:, }$0'
+- !ruby/object:Ruble::Env
+  scope: text.haml
+  path: bundle.rb
+  displayName: environment-
+- !ruby/object:Ruble::Template
+  displayName: ! "HAML Template"
+  path: templates/templates.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  filetype: ! '*.haml'
+visible: true
+author: Christopher Williams
+copyright: Copyright 2010 Aptana Inc. Distributed under the MIT license.
+repository: git://github.com/aptana/haml.ruble.git
+description: ! 'Ported from Matt Polito''s HAML bundle for TextMate.
+
+
+  <a href="http://unspace.ca/discover/haml">HTML Abstraction Markup Language</a> is
+  a templating engine for Ruby on Rails.
+
+'
+foldingStartMarkers:
+  text.haml: !regexp /^\s*([-%#\:\.\w\=].*)\s$/
+foldingStopMarkers:
+  text.haml: !regexp /^\s*$/

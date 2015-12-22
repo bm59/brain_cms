@@ -1,0 +1,199 @@
+--- !ruby/object:Ruble::Bundle
+displayName: ! "Math"
+path: bundle.rb
+children:
+- !ruby/object:Ruble::Menu
+  displayName: ! "Math"
+  path: bundle.rb
+  children:
+  - !ruby/object:Ruble::Menu
+    displayName: ! "Evaluate Line / Selection"
+    path: bundle.rb
+    commandName: ! "Evaluate Line / Selection"
+  - !ruby/object:Ruble::Menu
+    displayName: ! "Evaluate and Replace Expression"
+    path: bundle.rb
+    commandName: ! "Evaluate and Replace Expression"
+  - !ruby/object:Ruble::Menu
+    displayName: ! "Evaluate and Replace Expression (rounded)"
+    path: bundle.rb
+    commandName: ! "Evaluate and Replace Expression (rounded)"
+  - !ruby/object:Ruble::Menu
+    displayName: ! '-'
+    path: bundle.rb
+    commandName: ! '-'
+  - !ruby/object:Ruble::Menu
+    displayName: ! "Add Numbers in Line / Selection"
+    path: bundle.rb
+    commandName: ! "Add Numbers in Line / Selection"
+  - !ruby/object:Ruble::Menu
+    displayName: ! "Subtract Numbers in Line / Selection"
+    path: bundle.rb
+    commandName: ! "Subtract Numbers in Line / Selection"
+  - !ruby/object:Ruble::Menu
+    displayName: ! '-'
+    path: bundle.rb
+    commandName: ! '-'
+  - !ruby/object:Ruble::Menu
+    displayName: ! "Convert"
+    path: bundle.rb
+    children:
+    - !ruby/object:Ruble::Menu
+      displayName: ! "Decimal to Hex"
+      path: bundle.rb
+      commandName: ! "Decimal to Hex"
+    - !ruby/object:Ruble::Menu
+      displayName: ! "Decimal to Octal"
+      path: bundle.rb
+      commandName: ! "Decimal to Octal"
+    - !ruby/object:Ruble::Menu
+      displayName: ! "Hex to Decimal"
+      path: bundle.rb
+      commandName: ! "Hex to Decimal"
+    - !ruby/object:Ruble::Menu
+      displayName: ! "Octal to Decimal"
+      path: bundle.rb
+      commandName: ! "Octal to Decimal"
+  - !ruby/object:Ruble::Menu
+    displayName: ! '-'
+    path: bundle.rb
+    commandName: ! '-'
+  - !ruby/object:Ruble::Menu
+    displayName: ! "Send Line / Selection to Google Calculator"
+    path: bundle.rb
+    commandName: ! "Send Line / Selection to Google Calculator"
+- !ruby/object:Ruble::Command
+  displayName: ! "Send Line / Selection to Google Calculator"
+  path: commands/send_to_google_calculator.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - selection
+  - line
+  keyBindingMap:
+    !ruby/object:Ruble::Platform ALL:
+    - CONTROL+M2+C
+  outputType: replace_selection
+- !ruby/object:Ruble::Command
+  displayName: ! "Decimal to Hex"
+  path: commands/decimal_to_hex.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - selection
+  - word
+  keyBindingMap:
+    !ruby/object:Ruble::Platform ALL:
+    - CONTROL+M2+C
+  outputType: replace_selection
+- !ruby/object:Ruble::Command
+  displayName: ! "Subtract Numbers in Line / Selection"
+  path: commands/subtract_selected_numbers.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - selection
+  - line
+  keyBindingMap:
+    !ruby/object:Ruble::Platform ALL:
+    - CONTROL+M2+C
+  outputType: insert_as_text
+- !ruby/object:Ruble::Command
+  displayName: ! "Hex to Decimal"
+  path: commands/hex_to_decimal.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - selection
+  - word
+  keyBindingMap:
+    !ruby/object:Ruble::Platform ALL:
+    - CONTROL+M2+C
+  outputType: replace_selection
+- !ruby/object:Ruble::Command
+  displayName: ! "Add Numbers in Line / Selection"
+  path: commands/add_selected_numbers.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - selection
+  - line
+  keyBindingMap:
+    !ruby/object:Ruble::Platform ALL:
+    - CONTROL+M2+C
+  outputType: insert_as_text
+- !ruby/object:Ruble::Command
+  displayName: ! "Evaluate and Replace Expression (rounded)"
+  path: commands/evaluate_round_and_replace_expression.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - selection
+  - line
+  keyBindingMap:
+    !ruby/object:Ruble::Platform ALL:
+    - CONTROL+M2+C
+  outputType: replace_selection
+- !ruby/object:Ruble::Command
+  displayName: ! "Decimal to Octal"
+  path: commands/decimal_to_octal.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - selection
+  - word
+  keyBindingMap:
+    !ruby/object:Ruble::Platform ALL:
+    - CONTROL+M2+C
+  outputType: replace_selection
+- !ruby/object:Ruble::Command
+  displayName: ! "Octal to Decimal"
+  path: commands/octal_to_decimal.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - selection
+  - word
+  keyBindingMap:
+    !ruby/object:Ruble::Platform ALL:
+    - CONTROL+M2+C
+  outputType: replace_selection
+- !ruby/object:Ruble::Command
+  displayName: ! "Evaluate Line / Selection"
+  path: commands/evaluate_expression.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - selection
+  - line
+  keyBindingMap:
+    !ruby/object:Ruble::Platform ALL:
+    - CONTROL+M2+C
+  outputType: insert_as_text
+- !ruby/object:Ruble::Command
+  displayName: ! "Evaluate and Replace Expression"
+  path: commands/evaluate_and_replace_expression.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - selection
+  - line
+  keyBindingMap:
+    !ruby/object:Ruble::Platform ALL:
+    - CONTROL+M2+C
+  outputType: replace_selection
+visible: true
+author: Christopher Williams
+copyright: Copyright 2010 Aptana Inc. Distributed under the MIT license.
+description: Support for performing different calculations, ported from TextMate.
+repository: git://github.com/aptana/math.ruble.git

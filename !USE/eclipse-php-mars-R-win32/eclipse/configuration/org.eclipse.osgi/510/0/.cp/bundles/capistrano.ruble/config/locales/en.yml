@@ -1,0 +1,26 @@
+en:
+  bundle_name: 'Capistrano'
+  bundle_description: "Ported from TextMate Bundle written by Mark Cornick."
+  deploy: 'Deploy'
+  open_docs: 'Open Capistrano Documentation'
+  application_servers: 'Application Servers'
+  restart_app_servers: 'Restart App Servers'
+  start_app_servers: 'Start App Servers'
+  stop_app_servers: 'Stop App Servers'
+  database_servers: 'Database Servers'
+  deploy_with_migrations: 'Deploy With Migrations'
+  migrate_database: 'Migrate Database'
+  web_servers: 'Web Servers'
+  disable_application: 'Disable Application'
+  enable_application: 'Enable Application'
+  pending_operations: 'Pending Operations'
+  display_pending_commits: 'Display Pending Commits'
+  display_pending_diffs: 'Display Pending Diffs'
+  maintenance: 'Maintenance'
+  rollback: 'Rollback'
+  clean_up_old_releases: 'Clean Up Old Releases'
+  run_from_studio_project: "Please run this from within a Studio project."
+  no_capfile_found_in_0: "Couldn't find a Capfile in %{directory}."
+  no_target_specified: "No target specified."
+  multistage: 'Multistage'
+  please_select_stage: 'Please select a stage.'

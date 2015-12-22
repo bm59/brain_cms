@@ -47,7 +47,7 @@ function print_dt($ds) {
 				</span>
 			</td>
 			<td class="t_left">
-				<div class="dt_settings" style="display: none;">
+				<div class="dt_settings styled" style="display: none;">
 					<?
 					/* ѕредвар. настройки в шаблонах добавлени€ */
 					if ($ds['pre_settings']!='') $_POST['settings_'.$ds['id']]=$ds['pre_settings'];
@@ -74,6 +74,7 @@ function print_dt($ds) {
 						$tface->init(array());
 						$help=$tface->Settings['help'];
 						$help['list_class=t_minwidth']='класс дл€ таблицы (t_minwidth, t_32width, t_nowrap, t_center)';
+						$help['list_style=width: 300px']='произвольный стиль дл€ колонки';
 						/* if ($help) */
 						{
 							?><div class="help"><br/><?

@@ -151,19 +151,20 @@ if ($_SESSION['global_alert']) print '<div class="alert"><div>'.$_SESSION['globa
 	
 <div class="hr"></div>
 <h2>Шаблон:</h2> 
-
-	<!-- Настройки раздела -->
-	<label class="settings_main">Настройки раздела (разделитель |):&nbsp;&nbsp;&nbsp;| <a href="#"><span><a href="#">on_page=5</a></span>&nbsp;|&nbsp;<span><a href="#">default_order=ORDER BY `id`</a></span>
-	<?
-	foreach ($help as $k=>$v)
-	print '&nbsp;|&nbsp;<span><a href="#">'.$k.'</a> - '.$v.'</span>';
-	?>
 	
-	</label>
+		<!-- Настройки раздела -->
+		<label class="settings_main">Настройки раздела (разделитель |):&nbsp;&nbsp;&nbsp;| <a href="#"><span><a href="#">on_page=5</a></span>&nbsp;|&nbsp;<span><a href="#">default_order=ORDER BY `id`</a></span>
+		<?
+		foreach ($help as $k=>$v)
+		print '&nbsp;|&nbsp;<span><a href="#">'.$k.'</a> - '.$v.'</span>';
+		?>
+		
+		</label>
 	<div class="clear"></div><br/>
 
 <form id="save_form" name="save_form" action="" method="POST" enctype="multipart/form-data">
 <div class="stat section_settings">
+<div class="styled">
 <?
 $section = $SiteSections->get($section['id']);
 $str_settings=$section['settings_personal_str'];
@@ -182,6 +183,7 @@ foreach($sec_settings_checkbox as $k=>$v)
 	<span class="input">
 		<input type="text" value="<?=$str_settings?>"  class="setting_text" name="settings_section">
 	</span>
+</div>
 </div>
 <div class="clear"></div>
 

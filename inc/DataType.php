@@ -110,8 +110,8 @@ class DataType extends VirtualClass
 
 		switch ($type) {
 			case 'CDCHOICE':
-
-				$values=array('-1'=>'')+$tface->get_values();
+				//print_r($tface);
+				$values=array('-1'=>'')+$tface->get_values($tface->Settings['settings']);
 
 				if ($tface->Settings['settings']['type']=='multi'){?><input type="hidden" name="nouse_search_<?=$tface->getSetting('name')?>_type" value="<?=$type?>"><?}?>
 				<div class="place" style="z-index: 10;<?=$tface->Settings['setting_style_edit']['css']?>">
@@ -183,16 +183,14 @@ class DataType extends VirtualClass
 	        		break;
 	        	}
 	}
-	function get_view_field($data='', $val)
+	function get_view_field($data='', $val, $pub='')
 	{
 		global $Storage, $MySqlObject;
 
 		$tface = $data['face'];
 		$type=get_class($tface);
 
-
 		$settings=$tface->Settings['settings'];
-
 
 		switch ($type) {
 			case 'CDImage':
@@ -206,13 +204,143 @@ class DataType extends VirtualClass
 			break;
 			case 'CDTextEditor':
 				if (strlen($val)>300)
-				$val=htmlspecialchars(trim(mb_substr($val, 0, 300 )).'...');
+				$val=htmlspecialchars_decode(trim(mb_substr($val, 0, 300 )).'...');
 				print $val;
+			break;
+			case 'CDSelect':
+					if (isset($settings['editable']))
+					{
+						$CDSelect=new CDSelect;
+						$values=$CDSelect->get_values($settings);
+						
+						?>
+						<script>
+						$(function() {
+							$('[name=<?=htmlspecialchars($tface->getSetting('name')).'_'.$pub['id']?>]').on('change', function() {
+	
+			   						$.ajax({
+				   			            type: "POST",
+				   			            url: "/inc/site_admin/pattern/ajax_class.php",
+				   			            data: "action=edit_field&field_name=<?=$tface->getSetting('name')?>&id=<?=$pub['id']?>&section_id=<?=$_GET['section']?>&value="+$(this).val()+"&session_id="+session_id,
+				   			            dataType: 'json',
+				   			            success: function(data){
+				   			            	elem.children('img').attr('src', '/pics/editor/'+data.signal);
+				   			            }
+				   			        });
+							});
+						});
+						</script>
+						<?
+						print getSelectSinonim($tface->getSetting('name').'_'.$pub['id'],$values,stripslashes($val),true);
+					}
+					else
+					print stripcslashes($val);
+			break;
+			case 'CDCHOICE':
+				if (isset($settings['editable']))
+				{
+					if ($settings['type']=='') $settings['type']='radio';
+					
+					$CDCHOICE=new CDCHOICE;
+					?>	
+					  <script>
+					  $(function() {
+					    $( "#<?=$tface->getSetting('name').'_'.$pub['id']?>" ).buttonset();
+
+					    $('#<?=$tface->getSetting('name').'_'.$pub['id']?>').change(function() {
+							
+					    	var val='';
+					    	
+							<?
+							if ($settings['type']=='radio')
+							{
+								?>
+								val=$("#<?=$tface->getSetting('name').'_'.$pub['id']?> [type=radio]:checked").val();
+								<?
+							} 
+							else 
+							{
+								?>
+							    $("#<?=$tface->getSetting('name').'_'.$pub['id']?> [type=checkbox]:checked").each(function() {
+							    	val+=(val=='' ? ',':'')+$(this).val()+',';
+								});
+								
+								<?
+							}
+							?>
+		   					$.ajax({
+		   			            type: "POST",
+		   			            url: "/inc/site_admin/pattern/ajax_class.php",
+		   			            data: "action=edit_field&field_name=<?=$tface->getSetting('name')?>&id=<?=$pub['id']?>&section_id=<?=$_GET['section']?>&value="+val+"&session_id="+session_id,
+		   			            dataType: 'json',
+		   			            success: function(data){
+		   			            	elem.children('img').attr('src', '/pics/editor/'+data.signal);
+		   			            }
+		   			        });
+					    });
+					  });
+					  </script>		
+					
+					<div id="<?=$tface->getSetting('name').'_'.$pub['id']?>" class="radio_ui">
+				    <?
+				    $i=0;
+				    $settings['values']=$CDCHOICE->get_values($settings);
+				    foreach ($settings['values'] as $k=>$v)
+				    {
+				    	$i++;
+				    	if ($k=='') $k=$v;
+				
+				    	$selected='';
+				
+				    	if ($k==$val || stripos($val, ','.$k.',')!==false)  $selected='checked="checked"';
+				
+				    	if ($settings['type']=='') $settings['type']='radio';
+				    	
+				    	if ($settings['type']=='radio')
+				    	{?>
+				    	<input type="radio" id="radio<?=$i?>_<?=$tface->getSetting('name').'_'.$pub['id']?>" value="<?=$k?>" name="<?=$tface->getSetting('name').'_'.$pub['id']?>" <?=$selected?>><label for="radio<?=$i?>_<?=$tface->getSetting('name').'_'.$pub['id']?>"><?=$v?></label>
+				    	<?
+				    	}
+				    	else
+				    	{
+				       	?>
+				       	<input type="checkbox" id="check<?=$i?>_<?=$tface->getSetting('name').'_'.$pub['id']?>" value="<?=$k?>" name="<?=$tface->getSetting('name').'_'.$pub['id']?>[]" <?=$selected?>><label for="check<?=$i?>_<?=$tface->getSetting('name').'_'.$pub['id']?>"><?=$v?></label>
+				       	<?
+				    	}
+				
+				
+				    }
+				    ?>
+					</div>
+					<?
+				}
+				else print stripcslashes($val);
+					
 			break;
 			default:
 				if (isset($settings['editable']))
 				{					?>
-					<input type="text" name="<?=htmlspecialchars($tface->getSetting('name')).'_'.$data['id']?>"  value="<?=stripslashes(htmlspecialchars($val))?>" />
+					<script>
+					$(function() {
+						$('[name=<?=htmlspecialchars($tface->getSetting('name')).'_'.$pub['id']?>]').keyup(function ()
+						{
+			                var default_val='<?=stripslashes(htmlspecialchars($val))?>';
+
+			                if ($(this).val()!=default_val)
+
+			   					$.ajax({
+			   			            type: "POST",
+			   			            url: "/inc/site_admin/pattern/ajax_class.php",
+			   			            data: "action=edit_field&field_name=<?=$tface->getSetting('name')?>&id=<?=$pub['id']?>&section_id=<?=$_GET['section']?>&value="+$(this).val()+"&session_id="+session_id,
+			   			            dataType: 'json',
+			   			            success: function(data){
+			   			            	elem.children('img').attr('src', '/pics/editor/'+data.signal);
+			   			            }
+			   			        });
+						});
+					});
+					</script>
+					<input type="text" name="<?=htmlspecialchars($tface->getSetting('name')).'_'.$pub['id']?>"  value="<?=stripslashes(htmlspecialchars($val))?>" />
 					<?
 				}
 				else

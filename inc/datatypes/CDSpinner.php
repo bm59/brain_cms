@@ -7,7 +7,8 @@ class CDSPINNER extends VirtualType
 				'default=1'=>'Значение по умолчанию',
 				'min=1'=>'Минимальное значение',
 				'max=10'=>'Максимальное значение',
-				'comment=комментарий'=>'Комментарий'
+				'comment=комментарий'=>'Комментарий',
+				'format=rub'=>'Формат значения',
 		
 		);
 		$maxlength = (floor($this->getSetting('maxlength'))>0)?floor($this->getSetting('maxlength')):255;
@@ -20,10 +21,20 @@ class CDSPINNER extends VirtualType
 		?>
 		  <script>
 		  $(function() {
+			
 		    var spinner = $( "input[name='<?=htmlspecialchars($this->getSetting('name'))?>']" ).spinner({
 			min:  <?=(($settings['min']!='') ? $settings['min']:'0')?>,
+			numberFormat: "C",
 		    <?=(($settings['max']!='') ? ' max: '.$settings['max']:'')?>
 			  });
+
+			<? if ($settings['format']!='') {?>
+			$("input[name='<?=htmlspecialchars($this->getSetting('name'))?>']").keyup(function() {
+				$( "input[name='<?=htmlspecialchars($this->getSetting('name'))?>']" ).spinner( "option", "culture", "<?=$settings['format'] ?>" );
+
+			});
+			$( "input[name='<?=htmlspecialchars($this->getSetting('name'))?>']" ).spinner( "option", "culture", "<?=$settings['format'] ?>" );
+			<? }?>	
 		  });
 		  </script>
 		<?
@@ -43,12 +54,14 @@ class CDSPINNER extends VirtualType
 	}
 	function preSave(){
 		$errors = array();
+
 		$settings = $this->getSetting('settings');
-		$newvalue = htmlspecialchars(trim($_POST[$this->getSetting('name')]));
-		$newvalue = substr($newvalue,0,$this->getSetting('maxlength'));
+		
+		$newvalue=preg_replace('/[^0-9]/', '', $_POST[$this->getSetting('name')]);
 
 		if ($newvalue!='' && $newvalue>-1)
-		$newvalue = floatval(str_replace(',', '.', $newvalue));
+		$newvalue = floatval($newvalue);
+
 
 		if ((isset($settings['important'])) && (!is_float($newvalue))) $errors[] = 'Заполните поле «'.$this->getSetting('description').'»';
 		if ((isset($settings['important'])) && ($newvalue==='')) $errors[] = 'Заполните поле «'.$this->getSetting('description').'»';

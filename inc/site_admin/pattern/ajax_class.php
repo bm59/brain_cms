@@ -41,6 +41,15 @@
 		 		
 		 }
 		 
+		 if ($_POST['action']=='edit_field' && $_POST['section_id']>0 && $_POST['id']>0 && isset($_POST['value']) && $_POST['field_name']!='')
+		 {
+		 		$tab=getTableById($_POST['section_id']);
+		 	
+		 		if ($tab!='')	
+				msq("UPDATE `$tab` SET `".$_POST['field_name']."`='".htmlspecialchars(iconv('utf-8', 'windows-1251', $_POST['value']))."' WHERE id='".$_POST['id']."' LIMIT 1");
+		 	 
+		 }
+		 
 		 if ($ok)
 		 {
 		 	print '

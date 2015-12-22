@@ -89,7 +89,7 @@ class VirtualContent
 			</script>
 			<?
 	}
-	function drawPubsList(){
+	function drawPubsList($param=''){
 		global $SiteSections, $CDDataSet, $CDDataType;
 
 		$this->generateMeta('name');
@@ -300,8 +300,8 @@ class VirtualContent
 				$href=array();
 				if (in_array($sf,$editlink_double) && !isset($set['settings']['editable'])) $href=array('<a href="/manage/control/contents/?section='.$section['id'].'&pub='.$pub['id'].'" title="Редактировать">', '</a>');
 				?>
-				<td <?=$set['settings']['list_class']!='' ? 'class="'.$set['settings']['list_class'].'"' : ''?>>
-					<?=$href[0]?><?=$CDDataType->get_view_field($dataset['types'][$sf],$pub[$sf]);?><?=$href[1]?>
+				<td <?=$set['settings']['list_class']!='' ? 'class="'.$set['settings']['list_class'].'"' : ''?> <?=$set['settings']['list_style']!='' ? 'style="'.$set['settings']['list_style'].'"' : ''?>>
+					<?=$href[0]?><?=$CDDataType->get_view_field($dataset['types'][$sf],$pub[$sf], $pub);?><?=$href[1]?>
 				</td>
 			<?}?>
 
@@ -375,10 +375,85 @@ class VirtualContent
 		                                	<?
 		                                }
 		                        }
+		                        
+		                        if ($param)
+		                        $this->get_txt_export();
 		                        ?>
 		                </div>
 		  			</div>
 		                <?
+		}
+		function get_txt_export(){
+			$exts='txt';
+			?>
+			<style type="text/css">
+#add_file {padding-top: 10px;}
+#add_file img {display: inline-block; padding-left: 30px;}
+#upl_error {color: red; padding-top: 10px;}
+#loading {padding-top: 10px;}
+			</style>
+			<script>
+        $(function(){
+        var btnUpload=$('#upl_button');
+        var status=$('#upl_status');
+        var error=$('#upl_error');
+        var old_file='';
+        var upload_me=new AjaxUpload(btnUpload, {
+            action: '/uploader_txt.php',
+            responseType: 'json',
+            name: 'upl_file',
+            data: {sid : '<?=session_id()?>', section_id: '<?=$_GET['section'] ?>'},
+            onSubmit: function(file, ext){
+            	status.hide();
+                <?if ($exts!=''){?>
+                if (! (ext && /^(<?=strtolower(str_replace(', ', '|', $exts))?>)$/.test(ext))){
+                    error.html('<nobr>Допустимые форматы: <?=strtolower($exts)?></nobr>');
+                    return false;
+                }
+                <?}?>
+                $('#file').fadeOut(0);
+                $('#loading').attr('src', '/pics/loading.gif').fadeIn(0);
+            },
+            onComplete: function(file, response){
+                status.html('');
+                error.html('');
+                $('#file').html('');
+                if(response.result==="ok"){
+                    $('#loading').fadeOut(0);
+                    upload_me.setData({sid : '<?=session_id()?>'});
+                    status.html(response.comment+'&nbsp;&nbsp;&nbsp;<a href="/manage/control/contents/?section=<?=$_GET['section'] ?>">Обновить страницу</a>');
+                    status.show();
+                }else{
+                    status.html(response.error);
+                    $('#loading').fadeOut(0);
+
+                }
+            }
+        });
+    });
+			</script>
+			<div class="hr"><hr/></div>
+			<div class="place">
+			<label>Импорт из txt файла</label>
+			<small>Каждое значение должно быть в отдельной строке</small>
+			<input type="hidden" id="uploadfilehidden_txt" name="upload_txt" value="upload_txt">
+
+             	<span class="clear"></span>
+				<div class="contentdesc"></div>
+
+			<div class="clear"></div>
+			<div id="add_file" style="float: left;">
+			        <a id="upl_button" class="button">загрузить файл</a>
+			        <div class="clear"></div>
+			        <img id="loading" src="/pics/inputs/loading2.gif" height="28" style="display: none;" />
+			         <div id="upl_error"></div>
+			         <div class="clear"></div>
+			         <div id="upl_status"></div>
+			         <input type="hidden" name="<?=$this->getSetting('name')?>" id="<?=$this->getSetting('name')?>" value="<?=stripslashes($this->getSetting('value'))?>">
+			    </div>
+		    </div>
+		    <div class="clear"></div>
+			<?
 		}
 		function drawAddEdit(){
 			global $CDDataSet,$SiteSections, $multiple_editor;
@@ -449,6 +524,8 @@ class VirtualContent
 
 
 		                                }
+		                                
+		
 		                        ?>
 
 
@@ -511,6 +588,7 @@ class VirtualContent
 		foreach ($_REQUEST as $k=>$v)
 			if (stripos($k,'search')!==false && $v!='' && $v!='-1')
 				if (!in_array($k,$this->no_auto))
+				if (strpos($k, 'nouse_')===false)
 				{
 					$this->$k=$v;
 

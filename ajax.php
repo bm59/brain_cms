@@ -27,7 +27,7 @@ if ($_POST['action']=='send_vote' && $_POST['answer_id']>0 && $_POST['vote_id']>
 		
 		/* Если уже голосовали или добавили голос устанавливаем куку */
 		if ($add_vote==false) $add_vote=1;
-		cookieSet('vid', $add_vote, 30);
+		cookieSet('vid'.$_POST['vote_id'], $add_vote, 30);
 		
 		$show_total=$voting_Section['settings_personal']['show_vote_count'];
 			

@@ -56,7 +56,7 @@
     .styled .checkbox:checked + label:after {
       left: 26px;
     }
-    /* Показываем получение фокуса. */
+    /* Показываем получение фокуса. 
     .styled .checkbox:focus + label:before {
 
-    }
+    }*/

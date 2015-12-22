@@ -750,4 +750,22 @@ function get_array_sql($q)
 		
 		return '<div class="tags"><div class="tag_header">“›√»:&nbsp;&nbsp;&nbsp;</div>'.$return.'</div>';
 	}
+	function getTableById($section_id)
+	{
+		global $CDDataSet,$SiteSections;
+		$SiteSections= new SiteSections;
+		$SiteSections->init();
+	
+		$Section = $SiteSections->get($section_id);
+		$Section['id'] = floor($Section['id']);
+	
+		if ($Section['id']>0)
+		{
+			$Pattern = new $Section['pattern'];
+			$Iface = $Pattern->init(array('section'=>$Section['id']));
+		}
+	
+		return $Iface->getSetting('table');
+	
+	}
 ?>

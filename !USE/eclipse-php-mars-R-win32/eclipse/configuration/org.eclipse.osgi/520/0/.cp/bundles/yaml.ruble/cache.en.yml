@@ -1,0 +1,114 @@
+--- !ruby/object:Ruble::Bundle
+displayName: ! "YAML"
+path: bundle.rb
+children:
+- !ruby/object:Ruble::Menu
+  displayName: ! "YAML"
+  path: bundle.rb
+  children:
+  - !ruby/object:Ruble::Menu
+    displayName: ! "key: value"
+    path: bundle.rb
+    commandName: ! "key: value"
+  - !ruby/object:Ruble::Menu
+    displayName: ! "Add list item"
+    path: bundle.rb
+    commandName: ! "Add list item"
+  - !ruby/object:Ruble::Menu
+    displayName: ! '-'
+    path: bundle.rb
+    commandName: ! '-'
+  - !ruby/object:Ruble::Menu
+    displayName: ! "Sort Keys Alphabetically"
+    path: bundle.rb
+    commandName: ! "Sort Keys Alphabetically"
+  - !ruby/object:Ruble::Menu
+    displayName: ! "Convert Document / Selection to Ruby"
+    path: bundle.rb
+    commandName: ! "Convert Document / Selection to Ruby"
+  - !ruby/object:Ruble::Menu
+    displayName: ! '-'
+    path: bundle.rb
+    commandName: ! '-'
+  - !ruby/object:Ruble::Menu
+    displayName: ! "Syntax Cheat Sheet"
+    path: bundle.rb
+    commandName: ! "Syntax Cheat Sheet"
+- !ruby/object:Ruble::Command
+  displayName: ! "Add list item"
+  path: commands/add_list_item.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - selection
+  - line
+  keyBindingMap:
+    !ruby/object:Ruble::Platform ALL:
+    - NUMPAD_ENTER
+  scope: source.yaml
+  outputType: insert_as_snippet
+- !ruby/object:Ruble::Command
+  displayName: ! "Convert Document / Selection to Ruby"
+  path: commands/convert_to_ruby.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - selection
+  - document
+  keyBindingMap:
+    !ruby/object:Ruble::Platform ALL:
+    - CONTROL+M2+H
+  scope: source.yaml
+  outputType: create_new_document
+- !ruby/object:Ruble::Command
+  displayName: ! "Syntax Cheat Sheet"
+  path: commands/syntax_cheat_sheet.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  scope: source.yaml
+  outputType: show_as_html
+- !ruby/object:Ruble::Command
+  displayName: ! "Sort Keys Alphabetically"
+  path: commands/sort_keys_alphabetically.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - selection
+  scope: source.yaml
+  outputType: replace_selection
+- !ruby/object:Ruble::Snippet
+  displayName: ! "key: value"
+  path: snippets/snippets.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  keyBindingMap:
+    !ruby/object:Ruble::Platform ALL:
+    - CONTROL+M2+;
+  scope: source.yaml - string
+  expansion: ! '${1:key}: ${2:value}$0'
+- !ruby/object:Ruble::Env
+  scope: source.yaml
+  path: bundle.rb
+  displayName: environment-
+visible: true
+author: Benjamin Jackson
+customProperties:
+  contact_email_rot_13: ora@vapbzhzqrfvta.pbz
+description: ! '<a href="http://www.yaml.org/">YAML</a> is a straightforward machine
+  parsable data serialization format designed for human readability and interaction
+  with scripting languages such as Perl and Python.
+
+'
+increaseIndentMarkers:
+  source.yaml: !regexp /^\s*.*(:|-) ?(&\w+)?(\{[^}"']*|\([^)"']*)?$/
+decreaseIndentMarkers:
+  source.yaml: !regexp /^\s+\}$/

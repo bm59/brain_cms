@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feature
+      id="org.eclipse.dltk.core"
+      label="%featureName"
+      version="5.2.0.201505210948"
+      provider-name="%providerName"
+      plugin="org.eclipse.dltk"
+      image="eclipse_update_120.jpg">
+
+   <description url="http://www.eclipse.org/dltk">
+      %description
+   </description>
+
+   <copyright url="http://www.eclipse.org/legal/epl-v10.html">
+      Copyright (c) 2005, 2007 IBM Corporation and others.
+All rights reserved.   This program and the accompanying materials
+are made available under the terms of the Eclipse Public License v1.0
+which accompanies this distribution, and is available at
+http://www.eclipse.org/legal/epl-v10.html
+   </copyright>
+
+   <license url="%licenseURL">
+      %license
+   </license>
+
+   <requires>
+      <import feature="org.eclipse.platform" version="3.4" match="greaterOrEqual"/>
+      <import feature="org.eclipse.emf.ecore" version="2.4" match="greaterOrEqual"/>
+   </requires>
+
+   <plugin
+         id="org.eclipse.dltk.core"
+         download-size="1741"
+         install-size="3669"
+         version="5.2.0.201505210948"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.dltk.ui"
+         download-size="4414"
+         install-size="9157"
+         version="5.2.0.201505210948"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.dltk.debug"
+         download-size="333"
+         install-size="653"
+         version="5.2.0.201505210948"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.dltk.debug.ui"
+         download-size="646"
+         install-size="1290"
+         version="5.2.0.201505210948"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.dltk.launching"
+         download-size="284"
+         install-size="631"
+         version="5.2.0.201505210948"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.dltk.console"
+         download-size="29"
+         install-size="48"
+         version="5.2.0.201505210948"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.dltk.console.ui"
+         download-size="93"
+         install-size="182"
+         version="5.2.0.201505210948"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.dltk.validators.core"
+         download-size="83"
+         install-size="165"
+         version="5.2.0.201505210948"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.dltk.validators.ui"
+         download-size="80"
+         install-size="153"
+         version="5.2.0.201505210948"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.dltk"
+         download-size="14"
+         install-size="17"
+         version="5.2.0.201505210948"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.dltk.testing"
+         download-size="407"
+         install-size="803"
+         version="5.2.0.201505210948"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.dltk.validators.externalchecker"
+         download-size="72"
+         install-size="144"
+         version="5.2.0.201505210948"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.dltk.formatter"
+         download-size="64"
+         install-size="122"
+         version="5.2.0.201505210948"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.dltk.core.manipulation"
+         download-size="132"
+         install-size="364"
+         version="5.2.0.201505210948"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.dltk.logconsole"
+         download-size="22"
+         install-size="34"
+         version="5.2.0.201505210948"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.dltk.logconsole.ui"
+         download-size="19"
+         install-size="31"
+         version="5.2.0.201505210948"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.dltk.annotations"
+         download-size="10"
+         install-size="12"
+         version="5.2.0.201505210948"
+         unpack="false"/>
+
+</feature>

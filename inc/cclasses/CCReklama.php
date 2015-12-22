@@ -636,15 +636,8 @@ class CCReklama extends VirtualContent
    function SetReklamaData($id){
 	   	global $SiteSections;
 	   	
-	   	
 	   	$active=false;
 	   	$reklama_item=msr(msq("SELECT *, datediff(NOW(), date_start) as start, datediff(NOW(), date_end) as end FROM `".$this->getSetting('table')."` WHERE `id`='$id'"));
-   	
-	    if (!$reklama_item['id']>0) return false;
-	    
-	   	if ($reklama_item['start']>=0 && $reklama_item['end']<=0)
-	   	$active=true;
-	   		
 	   	
 	   	$Section=$SiteSections->get($reklama_item['section_id']);
 	   	if ($Section['id']>0)
@@ -653,6 +646,19 @@ class CCReklama extends VirtualContent
 	   		$Iface = $Pattern->init(array('section'=>$Section['id']));
 	   	}
 	   	$table=$Iface->getSetting('table');
+	   	
+	   	
+
+	    if (!$reklama_item['id']>0)
+	    {
+	    	msq("UPDATE `$table` SET `reklama`=0, `reklama_precedence`=0 WHERE id=".$item['id']);
+	    	return false;
+	    }
+	    
+	   	if ($reklama_item['start']>=0 && $reklama_item['end']<=0)
+	   	$active=true;
+	   		
+
 	   	
 	   	
 	   	$item=msr(msq("SELECT * FROM `$table` WHERE id=".$reklama_item['item_id']));
@@ -664,7 +670,46 @@ class CCReklama extends VirtualContent
 	   		msq("UPDATE `$table` SET `reklama`=0, `reklama_precedence`=0 WHERE id=".$item['id']);
 	   	}
 
+	  
 	   	return  $item;
+   }
+   function deletePub($id,$updateprec = true){
+   	global $SiteSections;
+   	
+   	$id = floor($id);
+   	global $CDDataSet;
+   	
+   	$active=false;
+   	$reklama_item=msr(msq("SELECT *, datediff(NOW(), date_start) as start, datediff(NOW(), date_end) as end FROM `".$this->getSetting('table')."` WHERE `id`='$id'"));
+   	
+   	$Section=$SiteSections->get($reklama_item['section_id']);
+   	if ($Section['id']>0)
+   	{
+   		$Pattern = new $Section['pattern'];
+   		$Iface = $Pattern->init(array('section'=>$Section['id']));
+   	}
+   	$table=$Iface->getSetting('table');
+   	
+   	$item=msr(msq("SELECT * FROM `$table` WHERE id=".$reklama_item['item_id']));
+   	
+   	msq("UPDATE `$table` SET `reklama`=0, `reklama_precedence`=0 WHERE id=".$item['id']);
+   	
+/*    	if ($r = msr(msq("SELECT * FROM `".$this->getSetting('table')."` WHERE `id`='".$id."'"))){
+   		$dataset = $CDDataSet->get($this->getSetting('dataset'));
+   		$imagestorage = $this->getSetting('imagestorage');
+   		foreach ($dataset['types'] as $dt){
+   			$tface = new $dt['type'];
+   			$tface->init(array('name'=>$dt['name'],'description'=>$dt['description'],'value'=>$r[$dt['name']],'imagestorage'=>floor($imagestorage['id']),'theme'=>$dataset['name'].'_'.$this->getSetting('section'),'rubric'=>$dt['name'],'uid'=>floor($r['id']),'settings'=>$dt['settings']));
+   			$tface->delete();
+   		}
+   		msq("DELETE FROM `".$this->getSetting('table')."` WHERE `id`='".$id."'");
+   
+   		WriteLog($id, 'удаление записи', '','','',$this->getSetting('section'));
+   
+   		if ($updateprec) $this->updatePrecedence();
+   		return true;
+   	}
+   	return false; */
    }
    function SetReklamaAll(){
 

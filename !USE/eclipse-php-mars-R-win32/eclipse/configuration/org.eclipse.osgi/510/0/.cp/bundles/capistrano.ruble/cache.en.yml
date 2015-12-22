@@ -1,0 +1,212 @@
+--- !ruby/object:Ruble::Bundle
+displayName: ! "Capistrano"
+path: bundle.rb
+children:
+- !ruby/object:Ruble::Menu
+  displayName: ! "Capistrano"
+  path: bundle.rb
+  children:
+  - !ruby/object:Ruble::Menu
+    displayName: ! "Deploy"
+    path: bundle.rb
+    commandName: ! "Deploy"
+  - !ruby/object:Ruble::Menu
+    displayName: ! '-'
+    path: bundle.rb
+    commandName: ! '-'
+  - !ruby/object:Ruble::Menu
+    displayName: ! "Open Capistrano Documentation"
+    path: bundle.rb
+    commandName: ! "Open Capistrano Documentation"
+  - !ruby/object:Ruble::Menu
+    displayName: ! '-'
+    path: bundle.rb
+    commandName: ! '-'
+  - !ruby/object:Ruble::Menu
+    displayName: ! "Application Servers"
+    path: bundle.rb
+    children:
+    - !ruby/object:Ruble::Menu
+      displayName: ! "Restart App Servers"
+      path: bundle.rb
+      commandName: ! "Restart App Servers"
+    - !ruby/object:Ruble::Menu
+      displayName: ! "Start App Servers"
+      path: bundle.rb
+      commandName: ! "Start App Servers"
+    - !ruby/object:Ruble::Menu
+      displayName: ! "Stop App Servers"
+      path: bundle.rb
+      commandName: ! "Stop App Servers"
+  - !ruby/object:Ruble::Menu
+    displayName: ! "Database Servers"
+    path: bundle.rb
+    children:
+    - !ruby/object:Ruble::Menu
+      displayName: ! "Deploy With Migrations"
+      path: bundle.rb
+      commandName: ! "Deploy With Migrations"
+    - !ruby/object:Ruble::Menu
+      displayName: ! "Migrate Database"
+      path: bundle.rb
+      commandName: ! "Migrate Database"
+  - !ruby/object:Ruble::Menu
+    displayName: ! "Web Servers"
+    path: bundle.rb
+    children:
+    - !ruby/object:Ruble::Menu
+      displayName: ! "Disable Application"
+      path: bundle.rb
+      commandName: ! "Disable Application"
+    - !ruby/object:Ruble::Menu
+      displayName: ! "Enable Application"
+      path: bundle.rb
+      commandName: ! "Enable Application"
+  - !ruby/object:Ruble::Menu
+    displayName: ! "Pending Operations"
+    path: bundle.rb
+    children:
+    - !ruby/object:Ruble::Menu
+      displayName: ! "Display Pending Commits"
+      path: bundle.rb
+      commandName: ! "Display Pending Commits"
+    - !ruby/object:Ruble::Menu
+      displayName: ! "Display Pending Diffs"
+      path: bundle.rb
+      commandName: ! "Display Pending Diffs"
+  - !ruby/object:Ruble::Menu
+    displayName: ! "Maintenance"
+    path: bundle.rb
+    children:
+    - !ruby/object:Ruble::Menu
+      displayName: ! "Rollback"
+      path: bundle.rb
+      commandName: ! "Rollback"
+    - !ruby/object:Ruble::Menu
+      displayName: ! "Clean Up Old Releases"
+      path: bundle.rb
+      commandName: ! "Clean Up Old Releases"
+- !ruby/object:Ruble::Command
+  displayName: ! "Disable Application"
+  path: commands/disable_application.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  outputType: discard
+- !ruby/object:Ruble::Command
+  displayName: ! "Deploy With Migrations"
+  path: commands/deploy_with_migrations.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  outputType: discard
+- !ruby/object:Ruble::Command
+  displayName: ! "Restart App Servers"
+  path: commands/restart_app_servers.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  outputType: discard
+- !ruby/object:Ruble::Command
+  displayName: ! "Start App Servers"
+  path: commands/start_app_servers.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  outputType: discard
+- !ruby/object:Ruble::Command
+  displayName: ! "Migrate Database"
+  path: commands/migrate_database.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  outputType: discard
+- !ruby/object:Ruble::Command
+  displayName: ! "Stop App Servers"
+  path: commands/stop_app_servers.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  outputType: discard
+- !ruby/object:Ruble::Command
+  displayName: ! "Enable Application"
+  path: commands/enable_application.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  outputType: discard
+- !ruby/object:Ruble::Command
+  displayName: ! "Open Capistrano Documentation"
+  path: commands/open_capistrano_documentation.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  outputType: discard
+- !ruby/object:Ruble::Command
+  displayName: ! "Deploy"
+  path: commands/deploy.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  outputType: discard
+- !ruby/object:Ruble::Command
+  displayName: ! "Display Pending Diffs"
+  path: commands/display_pending_diffs.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  outputType: create_new_document
+- !ruby/object:Ruble::Command
+  displayName: ! "Display Pending Commits"
+  path: commands/display_pending_commits.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  outputType: discard
+- !ruby/object:Ruble::Command
+  displayName: ! "Rollback"
+  path: commands/rollback.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  outputType: discard
+- !ruby/object:Ruble::Command
+  displayName: ! "Clean Up Old Releases"
+  path: commands/clean_up_old_releases.rb
+  runType: current_thread
+  workingDirectoryType: UNDEFINED
+  async: false
+  input:
+  - none
+  outputType: discard
+visible: true
+author: Mark Cornick
+customProperties:
+  contact_email_rot_13: znex@ivtrg.pbz
+copyright: Original TextMate bundle Copyright (C) 2008 Mark Cornick of Viget Labs
+  (http://www.viget.com/)
+description: ! "Ported from TextMate Bundle written by Mark Cornick."

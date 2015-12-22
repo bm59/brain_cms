@@ -25,6 +25,8 @@ $SiteSections->init();
 
 <script src="/js/jquery.js" type="text/javascript"></script>
 <script src="/js/jquery-ui-1.10.4.custom/js/jquery-ui-1.10.4.custom.min.js" type="text/javascript"></script>
+<script src="/js/spinner_default.js" type="text/javascript"></script>
+<script src="/js/spinner_rub.js" type="text/javascript"></script>
 <script src="/js/ajaxupload.3.5.js" type="text/javascript"></script>
 <script src="/js/inputs/jquery.multiple.select.js" type="text/javascript"></script>
 <script src="/js/highslide.js" type="text/javascript"></script>

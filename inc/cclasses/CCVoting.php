@@ -181,6 +181,15 @@ class CCVoting extends VirtualContent
 											</td>
 	   		                        		<td class="t_minwidth"><img src="/pics/editor/up_down.png" class="drag_icon"></td>
 	   		                        		<td><input type="text" value="<?=$va['text'] ?>" maxlength="255" name="answer_<?=$va['id'] ?>"></td>
+	   		                        		<td>
+	   		                        		<?
+	   		                        		$settings=Array ('name'=>'image_'.$va['id'], 'value'=>$va['image'],'uid'=>1, 'imagestorage'=>'0', 'description'=>'Картинка', 'theme_'=>'voting_34', 'rubric'=>'image_'.$va['id'], 'settings' => Array () ) ;
+	   		                        		$img=new CDImage();
+	   		                        		$img->init($settings);
+	   		                        		$img->drawEditor();
+	   		                        		
+	   		                        		?>
+	   		                        		</td>
 	   		                        		<td class="t_32width">
 	   		                        		<?
 	   		                        		$procent=round($va['result']*100/$pub['result']).'%';
@@ -560,12 +569,13 @@ class CCVoting extends VirtualContent
    			msq("UPDATE `".$this->getSetting('table')."` SET ".$update." WHERE `id`='".$pub['id']."'");
    			/* print_r($_POST); */
    			$i=0;
+   			
    			foreach ($_POST as $k=>$v)
    			if (preg_match('|^answer\_([a-z_A-Z_0-9]+)$|',$k,$arr))
    			{
    				if (stripos($arr[1], 'new')!==false)
    				$this->addAnswer(array('text'=>$v, 'precedence'=>$i, 'voting_id'=>$pub['id']));
-   				elseif($arr[1]>0) $this->updateAnswer(array('text'=>$v, 'precedence'=>$i), ' WHERE `id`='.$arr[1]);
+   				elseif($arr[1]>0) $this->updateAnswer(array('text'=>$v, 'precedence'=>$i, 'image'=>$_POST['image_'.$arr[1]]), ' WHERE `id`='.$arr[1]);
    				
    				$i++;
    				
@@ -704,11 +714,11 @@ class CCVoting extends VirtualContent
    		$return=true;
    		
    		if ($server_info['HTTP_X_REAL_IP']!='') 
-   		$where="`real_ip`='".$server_info['HTTP_X_REAL_IP']."'";
+   		$where=" and `real_ip`='".$server_info['HTTP_X_REAL_IP']."'";
    		elseif ($server_info['REMOTE_ADDR']!='') 
-   		$where.=(($where!='') ? ' and ':'')."`ip`='".$server_info['REMOTE_ADDR']."'";
+   		$where.=" and `ip`='".$server_info['REMOTE_ADDR']."'";
    		
-   		$log=msr(msq("SELECT * FROM `site_site_voting_log` WHERE ".$where));
+   		$log=msr(msq("SELECT * FROM `site_site_voting_log` WHERE `voting_id`=$voting_id ".$where));
    		
    		if ($log['id']>0) $return=false;
    		

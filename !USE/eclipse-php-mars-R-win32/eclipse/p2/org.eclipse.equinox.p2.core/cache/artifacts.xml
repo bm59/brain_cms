@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<?artifactRepository version='1.1.0'?>
+<repository name='download cache' type='org.eclipse.equinox.p2.artifact.repository.simpleRepository' version='1.0.0'>
+  <properties size='2'>
+    <property name='p2.system' value='true'/>
+    <property name='p2.timestamp' value='1434907363739'/>
+  </properties>
+  <mappings size='3'>
+    <rule filter='(&amp; (classifier=osgi.bundle))' output='${repoUrl}/plugins/${id}_${version}.jar'/>
+    <rule filter='(&amp; (classifier=binary))' output='${repoUrl}/binary/${id}_${version}'/>
+    <rule filter='(&amp; (classifier=org.eclipse.update.feature))' output='${repoUrl}/features/${id}_${version}.jar'/>
+  </mappings>
+  <artifacts size='6'>
+    <artifact classifier='binary' id='org.eclipse.rcp_root' version='4.5.0.v20150603-2331'>
+      <properties size='1'>
+        <property name='download.size' value='26220'/>
+      </properties>
+    </artifact>
+    <artifact classifier='binary' id='org.eclipse.dltk.core_root' version='5.2.0.201505210948'>
+      <properties size='1'>
+        <property name='download.size' value='7720'/>
+      </properties>
+    </artifact>
+    <artifact classifier='binary' id='org.eclipse.platform_root' version='4.5.0.v20150603-2358'>
+      <properties size='1'>
+        <property name='download.size' value='195'/>
+      </properties>
+    </artifact>
+    <artifact classifier='binary' id='epp.package.php.executable.win32.win32.x86' version='4.5.0.20150621-1200'>
+      <properties size='1'>
+        <property name='download.size' value='31627'/>
+      </properties>
+    </artifact>
+    <artifact classifier='binary' id='org.eclipse.platform.ide.executable.win32.win32.x86' version='4.5.0.I20150603-2000'>
+      <properties size='1'>
+        <property name='download.size' value='31625'/>
+      </properties>
+    </artifact>
+    <artifact classifier='binary' id='org.eclipse.dltk.mylyn_root' version='5.2.0.201505210948'>
+      <properties size='1'>
+        <property name='download.size' value='7720'/>
+      </properties>
+    </artifact>
+  </artifacts>
+</repository>
