@@ -126,7 +126,7 @@ $settings = ($editid>0)?array('title'=>'Редактирование группы пользователей','bu
 			<div class="place" style="width: 300px;">
 				<label>Название</label>
 				<span class="input">
-					<input name="name" maxlength="25" <?=(isset($data['settings']['norename']))?'disabled="disabled"':''?> value="<?=$data['name']?>" />
+					<input name="name" <?=(isset($data['settings']['norename']))?'disabled="disabled"':''?> value="<?=$data['name']?>" />
 				</span>
 			</div>
 			<span class="clear"></span>

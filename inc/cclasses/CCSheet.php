@@ -12,7 +12,7 @@ class CCSheet extends VirtualContent
 		global $CDDataSet;
 		$retval = array();
 		$r = msr(msq("SELECT * FROM `".$this->getSetting('table')."` WHERE `section_id`='".$this->getSetting('section')."'"));
-		$dataset = $CDDataSet->get($this->getSetting('dataset'));
+		$dataset = $CDDataSet->get($this->getSetting('dataset'), $this->getSetting('section'));
 		foreach ($dataset['types'] as $k=>$dt){
 			$retval[$dt['name']] = $r[$dt['name']];
 		}

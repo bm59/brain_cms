@@ -265,7 +265,7 @@ var ias = $('img#photo').imgAreaSelect({
 	</div>
 
 	<!-- <button id="rectangle" type="button">Rectangle</button> -->
-	<div>
+	<div class="editor_container">
 		<img id="photo" src="<?=$_GET['file']?>?<?=time()?>" style="border: 1px solid #CCCCCC; display: block; float: left"/>
 	</div>
 	

@@ -22,6 +22,44 @@ include $_SERVER['DOCUMENT_ROOT']."/inc/site_admin/meta.php";
 ?>
 
 	<?include $_SERVER['DOCUMENT_ROOT']."/inc/site_admin/header.php";?>
+	<script>
+	$(function() {
+		$.expr[':'].contains = function( elem, i, match, array ) {
+		    return (elem.textContent || elem.innerText || jQuery.text( elem ) || "").toLowerCase().indexOf(match[3].toLowerCase()) >= 0;
+		}
+			 	
+		$('[name=search_group]').change(function()
+		{
+
+			
+				if ($(this).val()=='-1') $('.table-content td').show();
+				else
+				{
+					 $('.table-content td').hide();
+					 $(".table-content .group_name:contains('"+$(this).val()+"')").parents('tr').find('td').show();
+				}
+
+					
+
+		});
+		function search_name (s_text)
+		{
+			if (s_text!='')
+			{
+				$('.table-content td').hide();
+				$(".table-content .user_name:contains("+s_text+")").parents('tr').find('td').show();
+			}
+			else
+			$('.table-content td').show();
+		}
+
+		$('[name=search_name]').keyup(function()
+		{
+			search_name($(this).val());
+
+		});
+	});
+	</script>
 	<div id="content">
 	<?include_once($_SERVER['DOCUMENT_ROOT']."/inc/site_admin/nav.php");?>
 		<?
@@ -33,6 +71,31 @@ include $_SERVER['DOCUMENT_ROOT']."/inc/site_admin/meta.php";
 		}
 		else{
 		?>
+		<div>
+			<table>
+			<tr>
+				<td>
+					<span class="input">
+						<input value="" maxlength="40" name="search_name" placeholder="Имя пользователя">
+					</span>
+				</td>
+				<td>
+					<?
+					$values['-1']='';
+					$q = msq("SELECT * FROM `site_bk_users_types` ORDER BY `name`");
+					while ($r = msr($q))
+					{
+				            $values[stripslashes(htmlspecialchars($r['name']))] = stripslashes(htmlspecialchars($r['name']));
+			
+				    }
+					?>
+		
+						<?print getSelectSinonim('search_group',$values,$_REQUEST['search_group']);?>
+	
+				</td>
+			</tr>
+			</table>
+		</div>
 		<table class="table-content stat tusers">
 			<tr>
 				<th class="t_nowrap">Пользователь<a href="<?=configGet("AskUrl").'?order=1'?>" title="Сортировать по убыванию" class="sort"><img src="/pics/arrows/down_sort_blue.gif" width="5" height="10" /></a><a href="<?=configGet("AskUrl")?>" title="Сортировать по возрастанию" class="sort"><img src="/pics/arrows/up_sort_blue.gif" width="5" height="10" /></a></th>
@@ -55,11 +118,11 @@ include $_SERVER['DOCUMENT_ROOT']."/inc/site_admin/meta.php";
 
 				?>
 				<tr id="item_<?=$user['id']?>">
-					<td class="t_left">
+					<td class="t_left user_name">
 					<?=$href[0].$user['secondname'].' '.$user['firstname'].' '.$user['parentname'].$href[1]?>
 					<?=$help?></td>
 					<td class="t_left"><?=$lasttime?></td>
-					<td class="t_left"><?=$usertype['name']?></td>
+					<td class="t_left group_name"><?=$usertype['name']?></td>
 					<td class="t_32width">
 						<?
 						if ((isset($user['settings']['noswitch']) || !@in_array('onoff',$group['new_settings'][$activeccid])) && $mode!='development'){

@@ -254,7 +254,7 @@ class CDImage extends VirtualType
 							{
 			              				$mini_fname=str_replace('.'.$nf['ext'], '_mini.'.$nf['ext'], $nf['fullpath']);
 										copy($nf['fullpath'], $mini_fname);
-			       						ResizeFrameMaxSide($mini_fname, 210,220);
+			       						crop($mini_fname, $settings['auto_mini_width'],$settings['auto_mini_height']);
 			       						/*Crop($mini_fname, 210, 220);*/
 							}
 							

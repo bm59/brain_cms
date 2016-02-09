@@ -33,7 +33,8 @@ $exceptions = array(
 	'/uploader.php',
 	'/uploader_image.php',
 	'/uploader_txt.php',
-	'/inc/datatypes/photo_editor/index.php'
+	'/inc/datatypes/photo_editor/index.php',
+	'/ajax.php'
 ); // —траницы, дл€ которых всегда открыт доступ
 if (!$SiteVisitor->isAuth()) $redirect='/manage/';
 else{

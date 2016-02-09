@@ -19,10 +19,13 @@ class CDGallery extends VirtualType
 	}
 	function drawEditor($divstyle = '',$span = true){
 		$settings = $this->getSetting('settings');
+
 		global $Storage;
 		$st = $Storage->getStorage(floor($this->getSetting($this->getSetting('name').'storage')));
 		if (!floor($st['id'])>0)
 		$st = $Storage->getStorage(0,array('path'=>'/site/images/','name'=>' артинки','exts'=>array('jpg','gif','jpeg', 'png', 'swf')));
+		
+		
 		
 		$f = 0;
 		if (floor($st['id'])>0){
@@ -39,7 +42,7 @@ class CDGallery extends VirtualType
             data: {},
             onSubmit: function(file, ext){
             	$('#loading').show();
-                this.setData({sid : '<?=session_id()?>', theme: '<?=trim($this->getSetting('theme'))?>', rubric: '<?=trim($this->getSetting('rubric'))?>', stid: '<?=$st['id']?>', uid: <?=floor($this->getSetting('uid'))?>});
+                this.setData({sid : '<?=session_id()?>', theme: '<?=trim($settings['theme'])?>', rubric: '<?=trim($settings['rubric'])?>', stid: '<?=$st['id']?>', uid: <?=floor($settings['uid'])?>});
             },
             onComplete: function(file, response){
                 $('#file').html('');
@@ -142,7 +145,7 @@ class CDGallery extends VirtualType
 						if (floor($settings['imghtype'])==2) $wh.= (($wh=='')?'':', а ').'высота должна быть меньше или равна '.$imgh.'px';
 						if (floor($settings['imghtype'])==3) $wh.= (($wh=='')?'':', а ').'высота должна быть больше или равна '.$imgh.'px';
 					}
-					if ($wh!='') $wh = '  роме того, '.$wh.'.';
+					if ($wh!='') $wh = ' '.$wh.'.';
 					$desc.='.'.$wh;
 				?>
 				<?
@@ -219,15 +222,17 @@ class CDGallery extends VirtualType
 							if ($Storage->renameFile($f['id'],$this->getSetting('theme'),$this->getSetting('rubric'),floor($this->getSetting('uid')))){
 								$nf = $Storage->getFile($f['id']);
 
-	                            /*|auto_mini=true|auto_mini_width=210|auto_mini_height=220|*/
-				                if ($settings['auto_mini'] && ($settings['auto_mini_width']>0 || $settings['auto_mini_height']>0))
-								{
-				              				$mini_fname=str_replace('.'.$nf['ext'], '_mini.'.$nf['ext'], $nf['fullpath']);
-											copy($nf['fullpath'], $mini_fname);
-				       						ResizeFrameMaxSide($mini_fname, 210,220);
-				       						/*Crop($mini_fname, 210, 220);*/
-								}
 							}
+						}
+						
+						if ($settings['auto_mini'] && ($settings['auto_mini_width']>0 || $settings['auto_mini_height']>0))
+						{
+							
+							$nf = $Storage->getFile($f['id']);
+							$mini_fname=str_replace('.'.$nf['ext'], '_mini.'.$nf['ext'], $nf['fullpath']);
+							copy($nf['fullpath'], $mini_fname);
+							crop($mini_fname, $settings['auto_mini_width'], $settings['auto_mini_height']);
+							/*Crop($mini_fname, 210, 220);*/
 						}
 					}
 					$flist = $Storage->getListByUID($st['id'],$this->getSetting('theme'),$this->getSetting('rubric'),floor($this->getSetting('uid')));

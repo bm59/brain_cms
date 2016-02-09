@@ -105,7 +105,7 @@ class DataType extends VirtualClass
 		$tface = $data['face'];
 		$type=get_class($tface);
 		if ($tface->Settings['setting_style_edit']['css']=='')
-			$tface->Settings['setting_style_edit']['css']='width: '.round(90/$search_fields_cnt).'%';
+			$tface->Settings['setting_style_edit']['css']='width: '.round(80/$search_fields_cnt).'%';
 
 
 		switch ($type) {

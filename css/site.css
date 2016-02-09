@@ -117,7 +117,7 @@ border:1px solid #999999;
 /* Фото */
 .photo_row {
 	display: inline-block;
-    height: 130px;
+    height: 180px;
     padding: 3px;
     margin: 5px;
     width: 130px;
@@ -129,10 +129,12 @@ border:1px solid #999999;
 .photo_row a {
     background: none repeat scroll 0 0 #f1f1f1;
     display: block;
-    height: 130px;
-    line-height: 130px;
+    height: 100%;
+    line-height: 100%;
     overflow: hidden;
     text-align: center;
-    width: 130px;
+    width: 100%; 
+    position: relative;
 }
-.photo_row img {vertical-align: middle; border: 0 none; max-width: 130px;}
+.photo_row img {vertical-align: middle; border: 0 none; position: absolute; left:0; top:0;}
+

@@ -679,7 +679,7 @@ class VirtualContent
 	}
 	function getPubByField($field,$value){
 		$retval = array();
-		if ($r = msr(msq("SELECT * FROM `".$this->getSetting('table')."` WHERE `".$field."`='".$descr."'")))
+		if ($r = msr(msq("SELECT * FROM `".$this->getSetting('table')."` WHERE `".$field."`='".$value."'")))
 
 		foreach ($r as $k=>$v)
 		$r[$k]=html_entity_decode(stripslashes($v));

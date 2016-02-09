@@ -73,7 +73,7 @@ $.imgAreaSelect = function (img, options) {
          * jQuery object representing the parent element that the plugin
          * elements are appended to
          */
-        $parent,
+        $parent='.editor_container',
 
         /* Parent element offset (as returned by .offset()) */
         parOfs = { left: 0, top: 0 },
@@ -841,7 +841,7 @@ $.imgAreaSelect = function (img, options) {
         setOptions(options = $.extend({
             classPrefix: 'imgareaselect',
             movable: true,
-            parent: 'body',
+            parent: $parent,
             resizable: true,
             resizeMargin: 10,
             onInit: function () {},

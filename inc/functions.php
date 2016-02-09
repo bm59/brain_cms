@@ -353,7 +353,28 @@ function getSprValuesOrder($sprnam,$order,$id=0,$add_empty=true)
     return $retval;
 
 }
+function getSprValuesShow($sprnam,$order,$id=0,$add_empty=true)
+{
+	global $CDDataSet,$SiteSections;
+	$SiteSections= new SiteSections;
+	$SiteSections->init();
+	$Section = $SiteSections->get($SiteSections->getIdByPath($sprnam));
+	if ($Section['id']>0)
+	{
+		$Section['id'] = floor($Section['id']);
+		$Pattern = new $Section['pattern'];
+		$Iface = $Pattern->init(array('section'=>$Section['id']));
+		if ($add_empty) $retval[-1]='&nbsp';
+		$q = msq("SELECT * FROM `".$Iface ->getSetting('table')."` WHERE `show`=1 ".$order);
+		while ($r = msr($q))
+		{
+			$retval[$r['id']] = stripslashes($r['name']);
 
+		}
+	}
+	return $retval;
+
+}
 
 function abc_new($var){
 	$var = str_replace(" ","",$var);
@@ -564,6 +585,36 @@ function get_array_sql($q)
 	    
 
     }
+    function  image_block_position ($path, $res_width, $res_height)
+    {
+    	$size = getimagesize ($_SERVER['DOCUMENT_ROOT'].$path);
+    	
+    	$width_dif=$size[0]-$res_width;
+    	$height_dif=$size[1]-$res_height;
+    	
+    	
+    	if ($width_dif>$height_dif)
+    	{
+    		$procent=$height_dif/$size[1]*100;
+    			
+    		$new_size=$size[0]-($size[0]/100*$procent);
+    			
+    		$margin=floor(($new_size-$res_width)/2);
+    			
+    			
+    		$style="max-height: ".$res_height."px;".($margin>0 ? "margin-left: -".$margin."px":"");
+    	}
+    	elseif ($width_dif<$height_dif)
+    	{
+    		$procent=$width_dif/$size[0]*100;
+    		$new_size=$size[1]-($size[1]/100*$procent);
+    		$margin=floor(($new_size-$res_height)/2);
+    			
+    		$style="max-width: ".$res_width."px;".($margin>0 ? "margin-top: -".$margin."px":"");
+    	}	
+    	
+    	return '<img src="'.$path.'" alt="" style="'.$style.'"/>';
+    }
     function ResizeFrameMaxSide($src=null,$maxWidth=null,$maxHeight=null) {
 
 
@@ -613,6 +664,44 @@ function get_array_sql($q)
 	    }
 
     }
+/*     function crop($src=null,$maxWidth=null,$maxHeight=null) {
+    
+    
+    	list($w_i, $h_i, $type) = getimagesize($src);
+    
+    
+    	$types = array("", "gif", "jpeg", "png");
+    	$ext = $types[$type]; // Зная "числовой" тип изображения, узнаём название типа
+    
+    	if ($ext) {
+    		$func = 'imagecreatefrom'.$ext; // Получаем название функции, соответствующую типу, для создания изображения
+    		$save_func='image'.$ext;
+    		$img_i = $func($image); // Создаём дескриптор для работы с исходным изображением
+    	} else {
+    		echo 'Некорректное изображение'; // Выводим ошибку, если формат изображения недопустимый
+    		return false;
+    	}
+    
+    
+    	$srcimg = $func($src);
+    	$srcsize = getimagesize($src);
+    
+    	if (($srcsize[0]/$maxWidth) < ($srcsize[1]/$maxHeight))
+    	{
+    		$y_pos=($srcsize[1]-$maxHeight)/2;
+    		$srcsize[1]=($srcsize[1]-$y_pos*2);
+    	}
+    	else
+    	{
+    		$x_pos=($srcsize[0]-$maxWidth)/2;
+    		$srcsize[0]=($srcsize[0]-$x_pos*2);
+    	}
+    
+    	$thumbimg = imagecreatetruecolor($maxWidth, $maxHeight);
+    	imagecopyresampled($thumbimg,$srcimg,0,0,floor($x_pos),floor($y_pos),$maxWidth,$maxHeight, $srcsize[0], $srcsize[1]);
+    	$thumbimg = $save_func($thumbimg,$src);
+    
+    } */
     function crop($src=null,$maxWidth=null,$maxHeight=null) {
 
 
@@ -634,22 +723,31 @@ function get_array_sql($q)
 
 	    $srcimg = $func($src);
 	    $srcsize = getimagesize($src);
-
-        /*Если обрезка по высоте*/
-        if ($srcsize[1]>$maxHeight)
-        {
-        	$y_pos=($srcsize[1]-$maxHeight)/2;
-        	$srcsize[1]=($srcsize[1]-$y_pos*2);
-        }
-        else
-        {
-        	$x_pos=($srcsize[0]-$maxWidth)/2;
-        	$srcsize[0]=($srcsize[0]-$x_pos*2);
-        }
-
+	    
+	    $width_dif=$srcsize[0]-$maxWidth;
+	    $height_dif=$srcsize[1]-$maxHeight;
+	    
+	     
+	    $change_width=$srcsize[0]/$maxWidth;
+	    $change_height=$srcsize[1]/$maxHeight;
+	    
+	    
 	    /*Копируем центр обрезанного изображения*/
 	    $thumbimg = imagecreatetruecolor($maxWidth, $maxHeight);
-	    imagecopyresampled($thumbimg,$srcimg,0,0,floor($x_pos),floor($y_pos),$maxWidth,$maxHeight, $srcsize[0], $srcsize[1]);
+	    
+
+        /*Если обрезка по высоте*/
+        if ($change_width<$change_height)
+        {
+        	$y_pos=($srcsize[1]-($maxHeight*$change_width)) / 2;
+        	imagecopyresampled($thumbimg,$srcimg,0,0,floor($x_pos),floor($y_pos),$maxWidth,$maxHeight, $srcsize[0], $srcsize[1]-$y_pos*2);
+        }
+        else 
+        {
+        	$x_pos=($srcsize[0]-($maxWidth*$change_height)) / 2;
+        	imagecopyresampled($thumbimg,$srcimg,0,0,floor($x_pos),floor($y_pos),$maxWidth,$maxHeight, $srcsize[0]-$x_pos*2, $srcsize[1]);
+        }
+
 	    $thumbimg = $save_func($thumbimg,$src);
 
     }

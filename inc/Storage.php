@@ -262,6 +262,10 @@ class Storage extends VirtualClass
 				elseif ($retval['ext']=='swf') $retval['height'] = '100%';
 				elseif ($imgsize = @getimagesize($retval['fullpath'])) $retval['height'] = floor($imgsize[1]);
 
+
+				if (!file_exists($retval['fullpath'] ))
+				$retval['path'] = '';
+				
 				$this->setCacheValue('storage_file_'.$id, $retval) ;
 			}
 
