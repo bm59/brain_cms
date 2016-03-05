@@ -221,7 +221,10 @@ class VisitorType extends VirtualClass
 	        			<?
 	        			foreach ($actions as $act)
 	        			if ($act!='')
-	        			{	        				?><div><label><input type="checkbox" id="action_<?=$sl['id'].'_'.$act?>" name="action_<?=$sl['id'].'_'.$act?>" <?=(($_POST['action_'.$sl['id'].'_'.$act]=='on' || @in_array($act,$new_settings[$sl['id']])) ? ' checked="checked"':'')?>><?=$action_comments[$act]?></label></div><?
+	        			{	        				if ($action_comments[$act]=='')
+	        				$action_comments[$act]=$act;
+	        				
+	        				?><div><label><input type="checkbox" id="action_<?=$sl['id'].'_'.$act?>" name="action_<?=$sl['id'].'_'.$act?>" <?=(($_POST['action_'.$sl['id'].'_'.$act]=='on' || @in_array($act,$new_settings[$sl['id']])) ? ' checked="checked"':'')?>><?=$action_comments[$act]?></label></div><?
 	        			}
 	        			?>
 	        			</div>

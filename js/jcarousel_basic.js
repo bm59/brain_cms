@@ -9,7 +9,15 @@ $(function() {
         jcarousel.jcarousel({
                 wrap: 'circular'
             });
-
+       
+        jcarousel.hover(
+        		function(){
+        			jcarousel.jcarouselAutoscroll('stop');
+        	    	},function(){
+        	    		jcarousel.jcarouselAutoscroll('start');
+        	    	}
+        );
+        
        jcarousel.jcarouselAutoscroll({
             interval: 3500,
             target: '+=1',
