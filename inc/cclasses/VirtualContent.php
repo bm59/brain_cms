@@ -1,6 +1,6 @@
 <?
 /*
-Базовый класс функционала разделов
+Р‘Р°Р·РѕРІС‹Р№ РєР»Р°СЃСЃ С„СѓРЅРєС†РёРѕРЅР°Р»Р° СЂР°Р·РґРµР»РѕРІ
 */
 class VirtualContent
 {
@@ -37,10 +37,10 @@ class VirtualContent
 
 
 		$objPHPExcel->setActiveSheetIndex(0)
-		->setCellValue('B2', iconv('windows-1251', 'utf-8', 'Дата'))
-		->setCellValue('C2', iconv('windows-1251', 'utf-8', 'Показов'))
-		->setCellValue('D2', iconv('windows-1251', 'utf-8', 'Кликов'))
-		->setCellValue('E2', iconv('windows-1251', 'utf-8', 'Уникальных'));
+		->setCellValue('B2', 'Р”Р°С‚Р°')
+		->setCellValue('C2', 'РџРѕРєР°Р·РѕРІ')
+		->setCellValue('D2', 'РљР»РёРєРѕРІ')
+		->setCellValue('E2', 'РЈРЅРёРєР°Р»СЊРЅС‹С…');
 
 
 		$styleHeader = array('font'=> array('bold'=>true), 'alignment' => array('horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_CENTER));
@@ -61,10 +61,10 @@ class VirtualContent
 			$i++;
 
 			$objPHPExcel->setActiveSheetIndex(0)
-			->setCellValue('B'.$i, iconv('windows-1251', 'utf-8', $MySqlObject->dateFromDBDot($r['date'])))
-			->setCellValue('C'.$i, iconv('windows-1251', 'utf-8', $r['show']))
-			->setCellValue('D'.$i, iconv('windows-1251', 'utf-8', $r['click']))
-			->setCellValue('E'.$i, iconv('windows-1251', 'utf-8', $r['unique']));
+			->setCellValue('B'.$i, $MySqlObject->dateFromDBDot($r['date']))
+			->setCellValue('C'.$i, $r['show'])
+			->setCellValue('D'.$i, $r['click'])
+			->setCellValue('E'.$i, $r['unique']);
 		}
 
 		$styleArray = array(
@@ -115,13 +115,13 @@ class VirtualContent
 					<?
 					$search_fields_cnt=0;
 					?>
-					<!-- Влючен\Отключен -->
+					<!-- Р’Р»СЋС‡РµРЅ\РћС‚РєР»СЋС‡РµРЅ -->
 					<?if (isset($this->Settings['settings_personal']['onoff'])){?>
 					<div class="place" style="z-index: 10; width: 10%;">
-						<label>Включен</label>
+						<label>Р’РєР»СЋС‡РµРЅ</label>
 						<?
 						if (!isset($this->search_show)) $this->search_show='-1';
-						$vals=array('-1'=>'','0'=>'Отключен', '1'=>'Включен');
+						$vals=array('-1'=>'','0'=>'РћС‚РєР»СЋС‡РµРЅ', '1'=>'Р’РєР»СЋС‡РµРЅ');
 						print getSelectSinonim('search_show',$vals,$_POST['search_show'],true);
 
 						$search_fields_cnt++;
@@ -129,7 +129,7 @@ class VirtualContent
 					</div>
 					<?}?>
 
-					<!-- Поля для поиска -->
+					<!-- РџРѕР»СЏ РґР»СЏ РїРѕРёСЃРєР° -->
 					<?
 					$search_fields=array();
 					foreach ($dataset['types'] as $dt)
@@ -152,7 +152,7 @@ class VirtualContent
 						<label>&nbsp;</label>
 						<span class="forbutton">
 							<span>
-								<input class="button" type="submit" value="Найти" >
+								<input class="button" type="submit" value="РќР°Р№С‚Рё" >
 							</span>
 						</span>
 					</div>
@@ -167,21 +167,21 @@ class VirtualContent
 		                        $list = $this->getList($_GET['page']);
 		                        if (count($list)==0){
 		                                ?>
-		                                <p>Отсутствуют записи, удовлетворяющие заданным условиям</p>
+		                                <p>РћС‚СЃСѓС‚СЃС‚РІСѓСЋС‚ Р·Р°РїРёСЃРё, СѓРґРѕРІР»РµС‚РІРѕСЂСЏСЋС‰РёРµ Р·Р°РґР°РЅРЅС‹Рј СѓСЃР»РѕРІРёСЏРј</p>
 		                                <span class="clear"></span>
 		                                <div class="place">
-		                                	<a href="./?section=<?=$section['id']?>&pub=new" class="button big" style="float: right;">Добавить</a>
+		                                	<a href="./?section=<?=$section['id']?>&pub=new" class="button big" style="float: right;">Р”РѕР±Р°РІРёС‚СЊ</a>
 		                                </div>
 		                                <?
 		                        }
 		                        else{
-		                         print 'Всего записей: '.$this->getSetting('count');
+		                         print 'Р’СЃРµРіРѕ Р·Р°РїРёСЃРµР№: '.$this->getSetting('count');
 		                         $Storage = new Storage;
 		                         $Storage ->init();
 		                                ?>
 		                                <form id="showsave" class="showsave" name="showsave" action="./?section=<?=$section['id']?><?=($this->getSetting('page')>1)?'&page='.$this->getSetting('page'):''?>" method="POST">
 		                                        <?
-		                                        /* Поля отображаемые в таблице */
+		                                        /* РџРѕР»СЏ РѕС‚РѕР±СЂР°Р¶Р°РµРјС‹Рµ РІ С‚Р°Р±Р»РёС†Рµ */
 		                                        $show_fields=array();
 
 		                                        foreach ($dataset['types'] as $dt)
@@ -222,9 +222,9 @@ class VirtualContent
 		<?
 		$table_th=array();
 
-		if (isset($this->Settings['settings_personal']['onoff'])) 		$table_th[]=array('name'=>'show', 'description'=>'Вкл', 'class'=>'t_minwidth t_center');
-		if (isset($this->Settings['settings_personal']['show_id']))		$table_th[]=array('name'=>'id', 'description'=>'№', 'class'=>'t_minwidth  t_center');
-		if (isset($this->Settings['settings_personal']['precedence']))	$table_th[]=array('name'=>'precedence', 'description'=>'Порядок', 'class'=>'t_32width');
+		if (isset($this->Settings['settings_personal']['onoff'])) 		$table_th[]=array('name'=>'show', 'description'=>'Р’РєР»', 'class'=>'t_minwidth t_center');
+		if (isset($this->Settings['settings_personal']['show_id']))		$table_th[]=array('name'=>'id', 'description'=>'в„–', 'class'=>'t_minwidth  t_center');
+		if (isset($this->Settings['settings_personal']['precedence']))	$table_th[]=array('name'=>'precedence', 'description'=>'РџРѕСЂСЏРґРѕРє', 'class'=>'t_32width');
 
 
 
@@ -235,7 +235,7 @@ class VirtualContent
 
 
 
-		/* Редактирование и удаление */
+		/* Р РµРґР°РєС‚РёСЂРѕРІР°РЅРёРµ Рё СѓРґР°Р»РµРЅРёРµ */
 		$table_th[]=array('name'=>'', 'description'=>'', 'class'=>'t_minwidth');
 		$table_th[]=array('name'=>'', 'description'=>'', 'class'=>'t_minwidth');
 
@@ -269,7 +269,7 @@ class VirtualContent
 		?>
 		</tr>
 		<?
-		/* Поля ктр. дублируют ссылку на редактирование */
+		/* РџРѕР»СЏ РєС‚СЂ. РґСѓР±Р»РёСЂСѓСЋС‚ СЃСЃС‹Р»РєСѓ РЅР° СЂРµРґР°РєС‚РёСЂРѕРІР°РЅРёРµ */
 		$editlink_double=array('name');
 
 		foreach ($list as $pub)
@@ -277,28 +277,28 @@ class VirtualContent
 			?>
 		<tr>
 
-			<!-- Вкл. Откл -->
+			<!-- Р’РєР». РћС‚РєР» -->
 			<?if (isset($this->Settings['settings_personal']['onoff'])){?>
 				<td class="t_minwidth  t_center">
 					<a href="#" onclick="return false;" class="onoff" data-id="<?=$pub['id']?>">
-						<img id="onoff_<?=$pub['id']?>" src="/pics/editor/<?=$pub['show']==0 ? 'off.png' : 'on.png'?>" title="<?=$pub['show']==0 ? 'Отключена' : 'Включена'?>" style="display: inline;">
+						<img id="onoff_<?=$pub['id']?>" src="/pics/editor/<?=$pub['show']==0 ? 'off.png' : 'on.png'?>" title="<?=$pub['show']==0 ? 'РћС‚РєР»СЋС‡РµРЅР°' : 'Р’РєР»СЋС‡РµРЅР°'?>" style="display: inline;">
 					</a>
 				</td>
 			<?}?>
 
 
-			<!-- ID, порядок -->
+			<!-- ID, РїРѕСЂСЏРґРѕРє -->
 			<?if (isset($this->Settings['settings_personal']['show_id'])){?>		<td class="t_minwidth  t_center"><?=$pub['id'] ?></td><?}?>
 			<?if (isset($this->Settings['settings_personal']['precedence'])){?>		<td class="t_32width  t_center"><input type="text" name="prec_<?=$pub['id']?>" value="<?=floor($pub['precedence'])?>"/></td><?}?>
 
 
-			<!-- Видимые поля -->
+			<!-- Р’РёРґРёРјС‹Рµ РїРѕР»СЏ -->
 			<?
 			foreach($show_fields as $sf)
 			{
 				$set=$dataset['types'][$sf]['face']->Settings;
 				$href=array();
-				if (in_array($sf,$editlink_double) && !isset($set['settings']['editable'])) $href=array('<a href="/manage/control/contents/?section='.$section['id'].'&pub='.$pub['id'].'" title="Редактировать">', '</a>');
+				if (in_array($sf,$editlink_double) && !isset($set['settings']['editable'])) $href=array('<a href="/manage/control/contents/?section='.$section['id'].'&pub='.$pub['id'].'" title="Р РµРґР°РєС‚РёСЂРѕРІР°С‚СЊ">', '</a>');
 				?>
 				<td <?=$set['settings']['list_class']!='' ? 'class="'.$set['settings']['list_class'].'"' : ''?> <?=$set['settings']['list_style']!='' ? 'style="'.$set['settings']['list_style'].'"' : ''?>>
 					<?=$href[0]?><?=$CDDataType->get_view_field($dataset['types'][$sf],$pub[$sf], $pub);?><?=$href[1]?>
@@ -306,13 +306,13 @@ class VirtualContent
 			<?}?>
 
 
-			<!-- Редактировать, Удалить -->
+			<!-- Р РµРґР°РєС‚РёСЂРѕРІР°С‚СЊ, РЈРґР°Р»РёС‚СЊ -->
 			<td class="t_minwidth">
-				<a class="button txtstyle" href="/manage/control/contents/?section=<?=$section['id']?>&pub=<?=$pub['id']?>" title="Редактировать"><img src="/pics/editor/prefs.gif" alt="Редактировать"></a>
+				<a class="button txtstyle" href="/manage/control/contents/?section=<?=$section['id']?>&pub=<?=$pub['id']?>" title="Р РµРґР°РєС‚РёСЂРѕРІР°С‚СЊ"><img src="/pics/editor/prefs.gif" alt="Р РµРґР°РєС‚РёСЂРѕРІР°С‚СЊ"></a>
 			</td>
 			<td class="t_minwidth">
-				<a href="./?section=<?=$section['id']?>&delete=<?=$pub['id']?>" class="button txtstyle" onclick="if (!confirm('Удалить запись')) return false;">
-				<input type="button" style="background-image: url(/pics/editor/delete.gif)" title="Удалить запись"/>
+				<a href="./?section=<?=$section['id']?>&delete=<?=$pub['id']?>" class="button txtstyle" onclick="if (!confirm('РЈРґР°Р»РёС‚СЊ Р·Р°РїРёСЃСЊ')) return false;">
+				<input type="button" style="background-image: url(/pics/editor/delete.gif)" title="РЈРґР°Р»РёС‚СЊ Р·Р°РїРёСЃСЊ"/>
 				</a>
 			</td>
 		</tr>
@@ -322,10 +322,10 @@ class VirtualContent
 		                                        <div class="place">
 		                                        <?if (isset($this->Settings['settings_personal']['precedence'])){?>
 		                                                <span>
-		                                                	<input class="button big" type="submit" name="showsave" value="Сохранить порядок" />
+		                                                	<input class="button big" type="submit" name="showsave" value="РЎРѕС…СЂР°РЅРёС‚СЊ РїРѕСЂСЏРґРѕРє" />
 		                                                </span>
 		                                        <?} ?>
-		                                                <a href="./?section=<?=$section['id']?>&pub=new" class="button big" style="float: right;">Добавить</a>
+		                                                <a href="./?section=<?=$section['id']?>&pub=new" class="button big" style="float: right;">Р”РѕР±Р°РІРёС‚СЊ</a>
 		                                        </div>
 		                                        <span class="clear"></span>
 		                                </form>
@@ -345,7 +345,7 @@ class VirtualContent
 													if ($_REQUEST['sort']!='') $href .='&sort='.$_REQUEST['sort'];
 													if ($_REQUEST['sort_type']!='') $href .='&sort_type='.$_REQUEST['sort_type'];
 
-													if ($_GET['page']>$dif/2+1) print '<a href="'.$href.'">В начало</a>';
+													if ($_GET['page']>$dif/2+1) print '<a href="'.$href.'">Р’ РЅР°С‡Р°Р»Рѕ</a>';
 
 													for ($i=1; $i<=$pagescount; $i++)
 													{
@@ -368,14 +368,14 @@ class VirtualContent
 					        							if ($inner!='') print $block[0].$inner.$block[1];
 													}
 
-													if ($_GET['page']!=$pagescount && $pagescount>1) print '<a href="'.$href."&page=".($_GET['page']+1).'">Следующая</a>';
-				        							if ($_GET['page']<$pagescount && $pagescount>$dif) print '<a href="'.$href."&page=".($_GET['page']+1).'">Последняя</a>';
+													if ($_GET['page']!=$pagescount && $pagescount>1) print '<a href="'.$href."&page=".($_GET['page']+1).'">РЎР»РµРґСѓСЋС‰Р°СЏ</a>';
+				        							if ($_GET['page']<$pagescount && $pagescount>$dif) print '<a href="'.$href."&page=".($_GET['page']+1).'">РџРѕСЃР»РµРґРЅСЏСЏ</a>';
 													?>
 												</div>
 		                                	<?
 		                                }
 		                        }
-		                        
+
 		                        if ($param)
 		                        $this->get_txt_export();
 		                        ?>
@@ -407,7 +407,7 @@ class VirtualContent
             	status.hide();
                 <?if ($exts!=''){?>
                 if (! (ext && /^(<?=strtolower(str_replace(', ', '|', $exts))?>)$/.test(ext))){
-                    error.html('<nobr>Допустимые форматы: <?=strtolower($exts)?></nobr>');
+                    error.html('<nobr>Р”РѕРїСѓСЃС‚РёРјС‹Рµ С„РѕСЂРјР°С‚С‹: <?=strtolower($exts)?></nobr>');
                     return false;
                 }
                 <?}?>
@@ -421,7 +421,7 @@ class VirtualContent
                 if(response.result==="ok"){
                     $('#loading').fadeOut(0);
                     upload_me.setData({sid : '<?=session_id()?>'});
-                    status.html(response.comment+'&nbsp;&nbsp;&nbsp;<a href="/manage/control/contents/?section=<?=$_GET['section'] ?>">Обновить страницу</a>');
+                    status.html(response.comment+'&nbsp;&nbsp;&nbsp;<a href="/manage/control/contents/?section=<?=$_GET['section'] ?>">РћР±РЅРѕРІРёС‚СЊ СЃС‚СЂР°РЅРёС†Сѓ</a>');
                     status.show();
                 }else{
                     status.html(response.error);
@@ -434,8 +434,8 @@ class VirtualContent
 			</script>
 			<div class="hr"><hr/></div>
 			<div class="place">
-			<label>Импорт из txt файла</label>
-			<small>Каждое значение должно быть в отдельной строке</small>
+			<label>РРјРїРѕСЂС‚ РёР· txt С„Р°Р№Р»Р°</label>
+			<small>РљР°Р¶РґРѕРµ Р·РЅР°С‡РµРЅРёРµ РґРѕР»Р¶РЅРѕ Р±С‹С‚СЊ РІ РѕС‚РґРµР»СЊРЅРѕР№ СЃС‚СЂРѕРєРµ</small>
 			<input type="hidden" id="uploadfilehidden_txt" name="upload_txt" value="upload_txt">
 
              	<span class="clear"></span>
@@ -443,7 +443,7 @@ class VirtualContent
 
 			<div class="clear"></div>
 			<div id="add_file" style="float: left;">
-			        <a id="upl_button" class="button">загрузить файл</a>
+			        <a id="upl_button" class="button">Р·Р°РіСЂСѓР·РёС‚СЊ С„Р°Р№Р»</a>
 			        <div class="clear"></div>
 			        <img id="loading" src="/pics/inputs/loading2.gif" height="28" style="display: none;" />
 			         <div id="upl_error"></div>
@@ -480,7 +480,7 @@ class VirtualContent
 		                        if (!is_array($saveerrors)) $saveerrors = array();
 		                        if (count($saveerrors)>0){
 		                                print '
-		                                <p><strong>Сохранение не выполнено по следующим причинам:</strong></p>
+		                                <p><strong>РЎРѕС…СЂР°РЅРµРЅРёРµ РЅРµ РІС‹РїРѕР»РЅРµРЅРѕ РїРѕ СЃР»РµРґСѓСЋС‰РёРј РїСЂРёС‡РёРЅР°Рј:</strong></p>
 		                                <ul class="errors">';
 		                                        foreach ($saveerrors as $v) print '
 		                                        <li>'.$v.'</li>';
@@ -489,7 +489,7 @@ class VirtualContent
 		                                <div class="hr"><hr /></div>';
 		                        }
 		                        ?>
-		                        <p class="impfields">Поля, отмеченные знаком «<span class="important">*</span>», обязательные для заполнения.</p>
+		                        <p class="impfields">РџРѕР»СЏ, РѕС‚РјРµС‡РµРЅРЅС‹Рµ Р·РЅР°РєРѕРј В«<span class="important">*</span>В», РѕР±СЏР·Р°С‚РµР»СЊРЅС‹Рµ РґР»СЏ Р·Р°РїРѕР»РЅРµРЅРёСЏ.</p>
 		                        <form id="editform" name="editform" action="<?=$_SERVER['REQUEST_URI']?>" method="POST" enctype="multipart/form-data">
 		                                <input type="hidden" name="editformpost" value="1">
 		                                <?
@@ -513,7 +513,7 @@ class VirtualContent
 		                                        $tface->drawEditor($stylearray[$tface->getSetting('name')],((in_array($tface->getSetting('name'),$nospans))?false:true));
 
 
-		    									/* Подсказки у поля в паттерне: $this->setSetting('type_settings_settings', array('min_w|'=>'Минимальная ширина')); */
+		    									/* РџРѕРґСЃРєР°Р·РєРё Сѓ РїРѕР»СЏ РІ РїР°С‚С‚РµСЂРЅРµ: $this->setSetting('type_settings_settings', array('min_w|'=>'РњРёРЅРёРјР°Р»СЊРЅР°СЏ С€РёСЂРёРЅР°')); */
 		    									if (count($init_pattern->Settings['type_settings_'.$dt['name']])>0)
 		    									{
 		    										foreach ($init_pattern->Settings['type_settings_'.$dt['name']] as $k=>$v)
@@ -524,15 +524,15 @@ class VirtualContent
 
 
 		                                }
-		                                
-		
+
+
 		                        ?>
 
 
 		                        </table>
 		                        <div class="place">
 		                                <span style="float: right;">
-		                                	<input class="button big" type="submit" name="editform" value="<?=($pub['id']>0)?'Сохранить изменения':'Добавить'?>"/>
+		                                	<input class="button big" type="submit" name="editform" value="<?=($pub['id']>0)?'РЎРѕС…СЂР°РЅРёС‚СЊ РёР·РјРµРЅРµРЅРёСЏ':'Р”РѕР±Р°РІРёС‚СЊ'?>"/>
 		                                </span>
 		                        </div>
 
@@ -599,7 +599,7 @@ class VirtualContent
 
 					if (!in_array($mysql_k,$this->field_change)) $mysql_k='`'.$mysql_k.'`';
 
-					if ($this->sqlstr =='') $sql_pref=' WHERE ';  /*!!!Заменить на WHERE если нет других условий*/
+					if ($this->sqlstr =='') $sql_pref=' WHERE ';  /*!!!Р—Р°РјРµРЅРёС‚СЊ РЅР° WHERE РµСЃР»Рё РЅРµС‚ РґСЂСѓРіРёС… СѓСЃР»РѕРІРёР№*/
 					else $sql_pref=' and ';
 
 
@@ -614,6 +614,21 @@ class VirtualContent
 					else $this->sqlstr.=$sql_pref.$mysql_k."='".$v."'";
 
 				}
+	}
+	function insertNotDouble ($values, $table)
+	{
+		foreach ($values as $k=>$v)
+		{
+			$where.=($where==''? '':' and ')."`$k`='$v'";
+			$keys.=($keys==''? '':', ')."`$k`";
+			$vals.=($vals==''? '':', ')."'$v'";
+		}
+			
+		$double=msr(msq("SELECT * FROM `$table` WHERE ".$where));
+			
+		if (!$double['id']>0)
+			msq("INSERT INTO `$table` ($keys) VALUES($vals)");
+	
 	}
 	function generateMeta($field='', $dop_title='')
 	{
@@ -735,7 +750,7 @@ class VirtualContent
 
 
 
-			WriteLog($pub['id'], (($_GET['pub']=='new') ? 'добавление':'редактирование').' записи', '','','',$this->getSetting('section'));
+			WriteLog($pub['id'], (($_GET['pub']=='new') ? 'РґРѕР±Р°РІР»РµРЅРёРµ':'СЂРµРґР°РєС‚РёСЂРѕРІР°РЅРёРµ').' Р·Р°РїРёСЃРё', '','','',$this->getSetting('section'));
 		}
 
 		$this->setSetting('dataface',$dataset);
@@ -805,16 +820,16 @@ class VirtualContent
 			}
 			msq("DELETE FROM `".$this->getSetting('table')."` WHERE `id`='".$id."'");
 
-			WriteLog($id, 'удаление записи', '','','',$this->getSetting('section'));
+			WriteLog($id, 'СѓРґР°Р»РµРЅРёРµ Р·Р°РїРёСЃРё', '','','',$this->getSetting('section'));
 
 			if ($updateprec) $this->updatePrecedence();
 			return true;
 		}
 		return false;
 	}
-	function getSetting($name){ return $this->Settings[$name]; } // Получение значения, хранящегося в $Settings
+	function getSetting($name){ return $this->Settings[$name]; } // РџРѕР»СѓС‡РµРЅРёРµ Р·РЅР°С‡РµРЅРёСЏ, С…СЂР°РЅСЏС‰РµРіРѕСЃСЏ РІ $Settings
 	function setSetting($name,$value){ $this->Settings[$name] = $value; }
-	function implode($settings = array()){ // Формирует строку вида |name|name=value|name|name|...
+	function implode($settings = array()){ // Р¤РѕСЂРјРёСЂСѓРµС‚ СЃС‚СЂРѕРєСѓ РІРёРґР° |name|name=value|name|name|...
 		if (!is_array($settings)) $settings = array();
 		$retval = '|';
 		$doubles = array();
@@ -830,7 +845,7 @@ class VirtualContent
 		if ($retval=='|') $retval = '';
 		return $retval;
 	}
-	function explode($settings = ''){ // Формирует массив из строки вида |name|name=value|name|name|...
+	function explode($settings = ''){ // Р¤РѕСЂРјРёСЂСѓРµС‚ РјР°СЃСЃРёРІ РёР· СЃС‚СЂРѕРєРё РІРёРґР° |name|name=value|name|name|...
 		$settings = explode('|',trim($settings));
 		$retval = array();
 		foreach ($settings as $v){

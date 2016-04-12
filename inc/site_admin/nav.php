@@ -11,7 +11,7 @@ if (configGet("AskUrl")!='/'){
         }
 
         $plist = $SiteSections->getParentsList($activeccid);
-        print '<H1><a href="/manage/">Панель управления</a>';
+        print '<H1><a href="/manage/">РџР°РЅРµР»СЊ СѓРїСЂР°РІР»РµРЅРёСЏ</a>';
         foreach ($plist as $p){
                 if ($p!=$activeccid){
                         $pobj = $SiteSections->get($p);
@@ -63,8 +63,8 @@ if (configGet("AskUrl")!='/'){
                 }
         }
 
-        if ($_GET['pub']>0 || $_GET['id']>0) print '&rarr; редактировать';
-        if ($_GET['pub']=='new') print '&rarr; добавить';
+        if ($_GET['pub']>0 || $_GET['id']>0) print '&rarr; СЂРµРґР°РєС‚РёСЂРѕРІР°С‚СЊ';
+        if ($_GET['pub']=='new') print '&rarr; РґРѕР±Р°РІРёС‚СЊ';
 
         print '</H1>';
 

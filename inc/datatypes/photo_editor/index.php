@@ -19,22 +19,22 @@ $settings=$VirtualPattern->explode($datatype['settings']);
 if (isset($_POST['edit_image']))
 {
 	$size = getimagesize ($_SERVER['DOCUMENT_ROOT'].$_POST['path']);
-	
-	
+
+
 	$image['path']=$_POST['path'];
 	$image['x1']=$_POST['x1'];
 	$image['y1']=$_POST['y1'];
 	$image['x2']=$_POST['x2'];
 	$image['y2']=$_POST['y2'];
-	
+
 	if ($image['x2']<$size[0]-1 || $image['y2']<$size[1]-1)
 	{
 		if ($image['x1']>0 || $image['x2']>0 || $image['y2']>0)
 		{
 
 			$mini_image=crop_editor($_SERVER['DOCUMENT_ROOT'].$image['path'], $image['x1'], $image['y1'], $image['x2']-$image['x1'], $image['y2']-$image['y1'], $settings);
-			/* print 'режем';	 */
-		
+			/* print 'СЂРµР¶РµРј';	 */
+
 		}
 
 
@@ -55,8 +55,8 @@ if ($settings['editor_proport']=='auto')
 	$settings['editor_proport']=$calc_w.':'.$calc_h;
 }
 
-configSet('contenttitle', 'Редактор фото');
-configSet('contentdescription', 'Редактор фото');
+configSet('contenttitle', 'Р РµРґР°РєС‚РѕСЂ С„РѕС‚Рѕ');
+configSet('contentdescription', 'Р РµРґР°РєС‚РѕСЂ С„РѕС‚Рѕ');
 ?>
 <?
 include_once($_SERVER['DOCUMENT_ROOT']."/inc/site_admin/meta.php");
@@ -102,7 +102,7 @@ var ias = $('img#photo').imgAreaSelect({
 					            		handles: true,
 					            		keys: true,
 					            		instance: true,
-					            		onSelectChange: preview, 
+					            		onSelectChange: preview,
 
 <?if ($calc_w>0 && (!$settings['editor_min_more'] || $settings['editor_minw']!='')){?>						minWidth: '<?=$calc_w?>',<?} ?>
 <?if ($calc_h>0 && (!$settings['editor_min_more'] || $settings['editor_minh']!='')){?>						minHeight: '<?=$calc_h?>',<?} ?>
@@ -115,7 +115,7 @@ var ias = $('img#photo').imgAreaSelect({
             }
     });
 
-		preview('', ias.getSelection()); 
+		preview('', ias.getSelection());
 
 		$('button#rectangle').click(function () {
 /* 			selection=ias.getSelection();
@@ -143,10 +143,10 @@ var ias = $('img#photo').imgAreaSelect({
 			$('#x2').html('x<sub>2</sub>: '+selection.x2);
 			$('#y1').html('y<sub>1</sub>: '+selection.y1);
 			$('#y2').html('y<sub>2</sub>: '+selection.y2);
-		    $('#w').html('Ширина: '+selection.width);
-		    $('#h').html('Высота: '+selection.height); 	
+		    $('#w').html('РЁРёСЂРёРЅР°: '+selection.width);
+		    $('#h').html('Р’С‹СЃРѕС‚Р°: '+selection.height);
 		}
-		
+
 		$('#change_ratio').click(function () {
 			ias.setOptions({ aspectRatio: $('[name=ratio_val]').val()});
 			ias.update();
@@ -159,7 +159,7 @@ var ias = $('img#photo').imgAreaSelect({
 
 			var val=$('[name=point_val]').val();
 			val=val.split(',');
-			
+
 			ias.setSelection(val[0], val[1], val[2], val[3], true);
 			preview('', ias.getSelection());
 			ias.update();
@@ -171,7 +171,7 @@ var ias = $('img#photo').imgAreaSelect({
             $('input[name="x2"]').val(selection.x2);
             $('input[name="y2"]').val(selection.y2);
 
-			
+
 			return false;
 
 
@@ -204,7 +204,7 @@ var ias = $('img#photo').imgAreaSelect({
 				ias.setSelection(selection.x1, new_y1, selection.x2, new_y2, true);
 			}
 
-			
+
 			ias.update();
 
 		});
@@ -220,14 +220,14 @@ var ias = $('img#photo').imgAreaSelect({
 		<? if ($calc_w>0 && !$settings['editor_min_more']) {?>
 		if (($('input[name="x2"]').val()-$('input[name="x1"]').val())<<?=$calc_w?>)
 		{
-			alert('Ширина выделеной области '+($('input[name="x2"]').val()-$('input[name="x1"]').val())+' меньше допустимой <?=$calc_w?>');
+			alert('РЁРёСЂРёРЅР° РІС‹РґРµР»РµРЅРѕР№ РѕР±Р»Р°СЃС‚Рё '+($('input[name="x2"]').val()-$('input[name="x1"]').val())+' РјРµРЅСЊС€Рµ РґРѕРїСѓСЃС‚РёРјРѕР№ <?=$calc_w?>');
 			error=true;
 		}
 		<?} ?>
 		<? if ($calc_h>0 && !$settings['editor_min_more']) {?>
 		if (($('input[name="y2"]').val()-$('input[name="y1"]').val())<<?=$calc_h?>)
 		{
-			alert('Высота выделеной области '+($('input[name="y2"]').val()-$('input[name="y1"]').val())+' меньше допустимой <?=$calc_h?>');
+			alert('Р’С‹СЃРѕС‚Р° РІС‹РґРµР»РµРЅРѕР№ РѕР±Р»Р°СЃС‚Рё '+($('input[name="y2"]').val()-$('input[name="y1"]').val())+' РјРµРЅСЊС€Рµ РґРѕРїСѓСЃС‚РёРјРѕР№ <?=$calc_h?>');
 			error=true;
 		}
 		<?} ?>
@@ -246,29 +246,29 @@ var ias = $('img#photo').imgAreaSelect({
 		<?
 
 		$image = getimagesize ($_SERVER['DOCUMENT_ROOT'].$_GET['file']);
-		if (($calc_w>0 && $calc_h>0) && $image[0]==$calc_w && $image[1]==$calc_h) $error.='<h2 style="color: #FF0000">Изображение соответствует размеру</h2>';
+		if (($calc_w>0 && $calc_h>0) && $image[0]==$calc_w && $image[1]==$calc_h) $error.='<h2 style="color: #FF0000">РР·РѕР±СЂР°Р¶РµРЅРёРµ СЃРѕРѕС‚РІРµС‚СЃС‚РІСѓРµС‚ СЂР°Р·РјРµСЂСѓ</h2>';
 
-		if (($calc_w>0 && $calc_h>0) && $image[0]<$calc_w || $image[1]<$calc_h) $error.='<h2 style="color: #FF0000">Изображение меньше минимальных размеров</h2>';
+		if (($calc_w>0 && $calc_h>0) && $image[0]<$calc_w || $image[1]<$calc_h) $error.='<h2 style="color: #FF0000">РР·РѕР±СЂР°Р¶РµРЅРёРµ РјРµРЅСЊС€Рµ РјРёРЅРёРјР°Р»СЊРЅС‹С… СЂР°Р·РјРµСЂРѕРІ</h2>';
 
 
 		if ($error!='')
 		{
 			print $error;
-			print '<br/>ширина: '.$image[0].'; высота: '.$image[1];
+			print '<br/>С€РёСЂРёРЅР°: '.$image[0].'; РІС‹СЃРѕС‚Р°: '.$image[1];
 		}
 
 		?>
 
 <form id="save_form" name="save_form"  action="" enctype="multipart/form-data" method="POST">
 	<div style="padding: 10px  0 10px 0px; margin-left: -5px">
-		<input type="submit" value="Сохранить изменения" onclick="check_size(); return false;" name="editform" class="button big">
+		<input type="submit" value="РЎРѕС…СЂР°РЅРёС‚СЊ РёР·РјРµРЅРµРЅРёСЏ" onclick="check_size(); return false;" name="editform" class="button big">
 	</div>
 
 	<!-- <button id="rectangle" type="button">Rectangle</button> -->
 	<div class="editor_container">
 		<img id="photo" src="<?=$_GET['file']?>?<?=time()?>" style="border: 1px solid #CCCCCC; display: block; float: left"/>
 	</div>
-	
+
 
 
 	<input type="hidden" name="x1" value="<?=(($_POST['x1']>0) ? $_POST['x1'] : $def_x1)?>" />
@@ -288,17 +288,17 @@ var ias = $('img#photo').imgAreaSelect({
 	<div class="clear"></div>
 	<br>
 		<div class="prew" style="float: left; background: #eee none repeat scroll 0 0; border: 2px solid #ddd; padding: 0.6em;">
-			<div id="w">Ширина: </div>
-			<div id="h">Высота: </div>
+			<div id="w">РЁРёСЂРёРЅР°: </div>
+			<div id="h">Р’С‹СЃРѕС‚Р°: </div>
 			<div id="x1">x<sub>1</sub>: </div>
 			<div id="x2">x<sub>2</sub>: </div>
 			<div id="y1">y<sub>1</sub>: </div>
 			<div id="y2">y<sub>2</sub>: </div>
 		</div>
-		
+
 		<div style="float: left; margin-left: 15px; background: #eee none repeat scroll 0 0; border: 2px solid #ddd; padding: 0.6em;">
 		<?if (count($settings)>0) {?>
-		<div>Базовые настройки:</div>
+		<div>Р‘Р°Р·РѕРІС‹Рµ РЅР°СЃС‚СЂРѕР№РєРё:</div>
 		<?
 			foreach ($settings as $k=>$v)
 			print $k.'='.$v.'<br/>';
@@ -307,21 +307,21 @@ var ias = $('img#photo').imgAreaSelect({
 		?>
 		</div>
 
-	<div class="clear"></div>		
-		
-		
-		
+	<div class="clear"></div>
+
+
+
 <span style="width: 400px; float: left;" class="input">
-	<input type="text" placeholder="Пророрция: 1:1" name="ratio_val" maxlength="255" value="<?=$settings['editor_proport']>0 ? $settings['editor_proport'] : '1:1'?>">
+	<input type="text" placeholder="РџСЂРѕСЂРѕСЂС†РёСЏ: 1:1" name="ratio_val" maxlength="255" value="<?=$settings['editor_proport']>0 ? $settings['editor_proport'] : '1:1'?>">
 </span>
-<a style="display: block; float:left; margin: 13px 0 0 10px;" class="button" href="#" id="change_ratio">Установить ratio</a>
+<a style="display: block; float:left; margin: 13px 0 0 10px;" class="button" href="#" id="change_ratio">РЈСЃС‚Р°РЅРѕРІРёС‚СЊ ratio</a>
 <div class="clear"></div>
 <span style="width: 400px; float: left;" class="input">
-	<input type="text" placeholder="Точки: 0,0,150,150" name="point_val" maxlength="255" value="0,0,<?=$size[0]-1?>,<?=$size[1]-1?> ">
+	<input type="text" placeholder="РўРѕС‡РєРё: 0,0,150,150" name="point_val" maxlength="255" value="0,0,<?=$size[0]-1?>,<?=$size[1]-1?> ">
 </span>
-<a style="display: block; float:left; margin: 13px 0 0 10px;" class="button" href="#" id="change_point" onclick="return false">Установить точки</a>
+<a style="display: block; float:left; margin: 13px 0 0 10px;" class="button" href="#" id="change_point" onclick="return false">РЈСЃС‚Р°РЅРѕРІРёС‚СЊ С‚РѕС‡РєРё</a>
 <div class="clear"></div>
-<a style="display: block; float:left;" class="button" href="#" id="center_gorizontal" onclick="return false">Центрировать по горизонтали</a><a style="display: block; float:left; padding-left: 20px;" class="button" href="#" id="center_vertical" onclick="return false">Центрировать по вертикали</a>
+<a style="display: block; float:left;" class="button" href="#" id="center_gorizontal" onclick="return false">Р¦РµРЅС‚СЂРёСЂРѕРІР°С‚СЊ РїРѕ РіРѕСЂРёР·РѕРЅС‚Р°Р»Рё</a><a style="display: block; float:left; padding-left: 20px;" class="button" href="#" id="center_vertical" onclick="return false">Р¦РµРЅС‚СЂРёСЂРѕРІР°С‚СЊ РїРѕ РІРµСЂС‚РёРєР°Р»Рё</a>
 <div class="clear"></div>
 
 </div>

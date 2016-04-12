@@ -1,22 +1,22 @@
 <div class="clear"></div><br/><br/>
-<h2>Добавить шаблонное поле</h2>
+<h2>Р”РѕР±Р°РІРёС‚СЊ С€Р°Р±Р»РѕРЅРЅРѕРµ РїРѕР»Рµ</h2>
 <?
 $add_patterns=
 array(
-	
-		array('description'=>'Имя', 'name'=>'name', 'type'=>'CDText'),
-		array('description'=>'Текст', 'name'=>'text', 'type'=>'CDTextEditor', 'pre_settings'=>'|texttype=full|'),
-		array('description'=>'Картинка', 'name'=>'image', 'type'=>'CDImage'),
-		array('description'=>'Галерея изображений', 'name'=>'gallery', 'type'=>'CDGallery'),
-		array('description'=>'Счетчик', 'name'=>'spinner', 'type'=>'CDSpinner','pre_settings'=>'|default=5|min=1|max=10|important|'),
-		array('description'=>'Файл', 'name'=>'file', 'type'=>'CDFile'),
-		array('description'=>'Дата', 'name'=>'date', 'type'=>'CDDate'),
-		
+
+		array('description'=>'РРјСЏ', 'name'=>'name', 'type'=>'CDText'),
+		array('description'=>'РўРµРєСЃС‚', 'name'=>'text', 'type'=>'CDTextEditor', 'pre_settings'=>'|texttype=full|'),
+		array('description'=>'РљР°СЂС‚РёРЅРєР°', 'name'=>'image', 'type'=>'CDImage'),
+		array('description'=>'Р“Р°Р»РµСЂРµСЏ РёР·РѕР±СЂР°Р¶РµРЅРёР№', 'name'=>'gallery', 'type'=>'CDGallery'),
+		array('description'=>'РЎС‡РµС‚С‡РёРє', 'name'=>'spinner', 'type'=>'CDSpinner','pre_settings'=>'|default=5|min=1|max=10|important|'),
+		array('description'=>'Р¤Р°Р№Р»', 'name'=>'file', 'type'=>'CDFile'),
+		array('description'=>'Р”Р°С‚Р°', 'name'=>'date', 'type'=>'CDDate'),
+
 		array('description'=>'Title', 'name'=>'ptitle', 'type'=>'CDText', 'setting_style_edit'=>'width:32%; margin-right:2%;'),
 		array('description'=>'Description', 'name'=>'pdescription', 'type'=>'CDText', 'setting_style_edit'=>'width:32%; margin-right:2%;'),
-		array('description'=>'Псевдоним ссылки', 'name'=>'pseudolink', 'type'=>'CDText', 'setting_style_edit'=>'width:32%;'),
-		
-		
+		array('description'=>'РџСЃРµРІРґРѕРЅРёРј СЃСЃС‹Р»РєРё', 'name'=>'pseudolink', 'type'=>'CDText', 'setting_style_edit'=>'width:32%;'),
+
+
 );
 ?>
 <table class="table-content stat pattern">
@@ -27,7 +27,7 @@ $i=0;
 foreach ($add_patterns as $ap)
 if (!in_array($ap['name'], $dt_names))
 {
-	
+
 	$ds=$ap;
 	$ds['id']='new_'.(100+$i);
 	$datatype['type']=$ap['type'];

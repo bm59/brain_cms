@@ -2,7 +2,7 @@
 class CDBOOLEAN extends VirtualType
 {
 	function init($settings){
-		$settings['descr']='Δΰ\Νες';
+		$settings['descr']='Π”Π°\ΠΠµΡ‚';
 		$maxlength = (floor($this->getSetting('maxlength'))>0)?floor($this->getSetting('maxlength')):255;
 		$this->setSetting('maxlength',$maxlength);
 		VirtualType::init($settings);
@@ -14,14 +14,14 @@ class CDBOOLEAN extends VirtualType
 			$(document).ready(function() {
 				   $('input[name="<?=htmlspecialchars($this->getSetting('name'))?>"]').change(function() {
 				        if ($(this).prop("checked"))
-                        $(this).parents('.place').find('label span').html('[δΰ]');
+                        $(this).parents('.place').find('label span').html('[Π΄Π°]');
                         else
-                        $(this).parents('.place').find('label span').html('[νες]');
+                        $(this).parents('.place').find('label span').html('[Π½ΠµΡ‚]');
 				    });
 			});
 			</script>
 		<div class="place" <?=($divstyle!='')?$divstyle:''?>>
-					<label><?=htmlspecialchars($this->getSetting('description'))?>&nbsp;<span>[<?=(($this->getSetting('value') || ($this->getSetting('value')=='' && $settings['default']==1)) ? 'δΰ':'νες')?>]</label>
+					<label><?=htmlspecialchars($this->getSetting('description'))?>&nbsp;<span>[<?=(($this->getSetting('value') || ($this->getSetting('value')=='' && $settings['default']==1)) ? 'Π΄Π°':'Π½ΠµΡ‚')?>]</label>
 					<div class="styled">
 						<input type="checkbox" name="<?=htmlspecialchars($this->getSetting('name'))?>" id="<?=htmlspecialchars($this->getSetting('name'))?>" class="checkbox" <?=(($this->getSetting('value') || ($this->getSetting('value')=='' && $settings['default']==1)) ? 'checked="checked"':'')?>>
 						<label for="<?=htmlspecialchars($this->getSetting('name'))?>"></label>

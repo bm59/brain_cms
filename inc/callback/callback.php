@@ -6,17 +6,17 @@ if ($_GET['action']=='callback')
     $SiteSettings = new SiteSettings;
 	$SiteSettings->init();
 
-    date_default_timezone_set("UTC"); // Устанавливаем часовой пояс по Гринвичу
-  	$time = time(); // Вот это значение отправляем в базу
-  	$offset = 3; // Допустим, у пользователя смещение относительно Гринвича составляет +3 часа
-  	$time += 5 * 3600; // Добавляем 3 часа к времени по Гринвичу
+    date_default_timezone_set("UTC"); // РЈСЃС‚Р°РЅР°РІР»РёРІР°РµРј С‡Р°СЃРѕРІРѕР№ РїРѕСЏСЃ РїРѕ Р“СЂРёРЅРІРёС‡Сѓ
+  	$time = time(); // Р’РѕС‚ СЌС‚Рѕ Р·РЅР°С‡РµРЅРёРµ РѕС‚РїСЂР°РІР»СЏРµРј РІ Р±Р°Р·Сѓ
+  	$offset = 3; // Р”РѕРїСѓСЃС‚РёРј, Сѓ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ СЃРјРµС‰РµРЅРёРµ РѕС‚РЅРѕСЃРёС‚РµР»СЊРЅРѕ Р“СЂРёРЅРІРёС‡Р° СЃРѕСЃС‚Р°РІР»СЏРµС‚ +3 С‡Р°СЃР°
+  	$time += 5 * 3600; // Р”РѕР±Р°РІР»СЏРµРј 3 С‡Р°СЃР° Рє РІСЂРµРјРµРЅРё РїРѕ Р“СЂРёРЅРІРёС‡Сѓ
 
     $callback_email=$SiteSettings->getOne($SiteSettings->getIdByName('callback_email'));
 
-    $msg='<strong>Поступил заказ звонка с сайта '.$_SERVER['HTTP_HOST'].'</strong><br/>
-    Телефон: '.$_GET['client_tel'].'<br/>
-    Комментарий: '.$_GET['client_comment'].'<br/>
-    Время поступления заявки:'.date("d.m.Y H:i", $time);
+    $msg='<strong>РџРѕСЃС‚СѓРїРёР» Р·Р°РєР°Р· Р·РІРѕРЅРєР° СЃ СЃР°Р№С‚Р° '.$_SERVER['HTTP_HOST'].'</strong><br/>
+    РўРµР»РµС„РѕРЅ: '.$_GET['client_tel'].'<br/>
+    РљРѕРјРјРµРЅС‚Р°СЂРёР№: '.$_GET['client_comment'].'<br/>
+    Р’СЂРµРјСЏ РїРѕСЃС‚СѓРїР»РµРЅРёСЏ Р·Р°СЏРІРєРё:'.date("d.m.Y H:i", $time);
 
 	$em_ar=explode('|', $callback_email['value']);
  	foreach ($em_ar as $em)
@@ -24,7 +24,7 @@ if ($_GET['action']=='callback')
 
 
  		if ($em!='')
-		defaultEmail($em,$msg,'заказ звонка: '.$_GET['client_tel'].' с сайта '.$_SERVER['HTTP_HOST'],'noreply@'.$_SERVER['HTTP_HOST']);
+		defaultEmail($em,$msg,'Р·Р°РєР°Р· Р·РІРѕРЅРєР°: '.$_GET['client_tel'].' СЃ СЃР°Р№С‚Р° '.$_SERVER['HTTP_HOST'],'noreply@'.$_SERVER['HTTP_HOST']);
  	}
 
 
@@ -94,7 +94,7 @@ function send_callbak()
 	if (is_right==0)
 	{
 		$('.result').css('color','#FF0000');
-		$('.result').text('Ошибка: номере должно быть минимум 7 цифр, в мобильном более 10 цифр');
+		$('.result').text('РћС€РёР±РєР°: РЅРѕРјРµСЂРµ РґРѕР»Р¶РЅРѕ Р±С‹С‚СЊ РјРёРЅРёРјСѓРј 7 С†РёС„СЂ, РІ РјРѕР±РёР»СЊРЅРѕРј Р±РѕР»РµРµ 10 С†РёС„СЂ');
 	}
 	else
 	{
@@ -112,7 +112,7 @@ function send_callbak()
 			   		$('.client_comment').val('');
 
 
-					$('.result').text('Ваш запрос успешно отправлен, окно закроется автоматически через 5 секунд');
+					$('.result').text('Р’Р°С€ Р·Р°РїСЂРѕСЃ СѓСЃРїРµС€РЅРѕ РѕС‚РїСЂР°РІР»РµРЅ, РѕРєРЅРѕ Р·Р°РєСЂРѕРµС‚СЃСЏ Р°РІС‚РѕРјР°С‚РёС‡РµСЃРєРё С‡РµСЂРµР· 5 СЃРµРєСѓРЅРґ');
 
 					setTimeout(function()
 					{
@@ -125,7 +125,7 @@ function send_callbak()
 
           		}
           		else
-          		$('.result').text('Ошибка: запрос не отправлен!');
+          		$('.result').text('РћС€РёР±РєР°: Р·Р°РїСЂРѕСЃ РЅРµ РѕС‚РїСЂР°РІР»РµРЅ!');
 
 
 
@@ -150,20 +150,20 @@ function send_callbak()
 		<div id="signup">
 			<div id="signup-ct">
 				<div id="signup-header">
-					<h2>Заказать обратный звонок</h2>
-					<p>Мы вам перезвоним в ближайшее время</p>
+					<h2>Р—Р°РєР°Р·Р°С‚СЊ РѕР±СЂР°С‚РЅС‹Р№ Р·РІРѕРЅРѕРє</h2>
+					<p>РњС‹ РІР°Рј РїРµСЂРµР·РІРѕРЅРёРј РІ Р±Р»РёР¶Р°Р№С€РµРµ РІСЂРµРјСЏ</p>
 					<a class="modal_close" href="#" onclick="return false;"></a>
 				</div>
 
 				<form action="" class="-visor-no-click">
 
 				  <div class="txt-fld">
-				    <label>Ваш телефон<span class="important">*</span>:</label>
+				    <label>Р’Р°С€ С‚РµР»РµС„РѕРЅ<span class="important">*</span>:</label>
 				    <input id="client_tel" class="client_tel" name="client_tel" type="text" onkeyup="check_tel(this); return false;" autocomplete="off"/>
 				  </div>
 
 				  <div class="txt-fld">
-				    <label><span>Комментарий</span><span class="comment">(не обязательно)</span></label>
+				    <label><span>РљРѕРјРјРµРЅС‚Р°СЂРёР№</span><span class="comment">(РЅРµ РѕР±СЏР·Р°С‚РµР»СЊРЅРѕ)</span></label>
 				    <input id="client_comment" class="client_comment" name="client_comment" type="text" />
 				  </div>
 
@@ -172,7 +172,7 @@ function send_callbak()
                   <div class="clear"></div>
 					  <div class="button" style="float: right; padding: 0 19px 15px 0;">
 							<div>
-							<a class="callback_button" onclick="send_callbak(); return false;" href="#"> Отправить </a>
+							<a class="callback_button" onclick="send_callbak(); return false;" href="#"> РћС‚РїСЂР°РІРёС‚СЊ </a>
 							</div>
 					  </div>
 

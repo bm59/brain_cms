@@ -32,25 +32,25 @@ if (isset($_POST['addedituser'])){
 	$data['email'] = trim($_POST['email']);
 	if ($editid>0)
 	{		$errors = $SiteVisitor->edit($editid,$data);
-		WriteLog($editid, 'редактирование пользователя');
+		WriteLog($editid, 'СЂРµРґР°РєС‚РёСЂРѕРІР°РЅРёРµ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ');
 	}
 	else
 	{		$errors = $SiteVisitor->add($data);
-		WriteLog(0, 'добавление пользователя', $data['login']);
+		WriteLog(0, 'РґРѕР±Р°РІР»РµРЅРёРµ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ', $data['login']);
 	}
 	if (count($errors)==0) header("Location: ../\n");
 }
-$settings = ($editid>0)?array('title'=>'Редактирование пользователя','button'=>'Сохранить изменения','pswd'=>' (если Вы не хотите менять пароль — оставьте поле пустым)'):array('title'=>'Добавление пользователя','button'=>'Создать пользователя','pswd'=>' (не менее 4-х символов)');
+$settings = ($editid>0)?array('title'=>'Р РµРґР°РєС‚РёСЂРѕРІР°РЅРёРµ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ','button'=>'РЎРѕС…СЂР°РЅРёС‚СЊ РёР·РјРµРЅРµРЅРёСЏ','pswd'=>' (РµСЃР»Рё Р’С‹ РЅРµ С…РѕС‚РёС‚Рµ РјРµРЅСЏС‚СЊ РїР°СЂРѕР»СЊ вЂ” РѕСЃС‚Р°РІСЊС‚Рµ РїРѕР»Рµ РїСѓСЃС‚С‹Рј)'):array('title'=>'Р”РѕР±Р°РІР»РµРЅРёРµ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ','button'=>'РЎРѕР·РґР°С‚СЊ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ','pswd'=>' (РЅРµ РјРµРЅРµРµ 4-С… СЃРёРјРІРѕР»РѕРІ)');
 include $_SERVER['DOCUMENT_ROOT']."/inc/site_admin/meta.php";?>
 	<?include $_SERVER['DOCUMENT_ROOT']."/inc/site_admin/header.php";?>
 	<div id="content" class="forms">
 		<div class="hr"></div>
-		<h1><a href="/manage/">Панель управления</a> &rarr; Доступ &rarr; <a href="/manage/access/users/">Пользователи</a> &rarr; <?=$settings['title']?></h1>
+		<h1><a href="/manage/">РџР°РЅРµР»СЊ СѓРїСЂР°РІР»РµРЅРёСЏ</a> &rarr; Р”РѕСЃС‚СѓРї &rarr; <a href="/manage/access/users/">РџРѕР»СЊР·РѕРІР°С‚РµР»Рё</a> &rarr; <?=$settings['title']?></h1>
 		<br/>
 		<?
 		if (count($errors)>0){
 			print '
-			<p><strong>'.$settings['title'].' не выполнено по следующим причинам:</strong></p>
+			<p><strong>'.$settings['title'].' РЅРµ РІС‹РїРѕР»РЅРµРЅРѕ РїРѕ СЃР»РµРґСѓСЋС‰РёРј РїСЂРёС‡РёРЅР°Рј:</strong></p>
 			<ul class="errors">';
 				foreach ($errors as $v) print '
 				<li>'.$v.'</li>';
@@ -61,39 +61,39 @@ include $_SERVER['DOCUMENT_ROOT']."/inc/site_admin/meta.php";?>
 		<form id="editform" name="editform" action="<?=$_SERVER['REQUEST_URI']?>" method="POST" enctype="multipart/form-data">
 			<input type="hidden" name="addedituser" value="<?=$editid?>">
 			<div class="place" style="width: 250px; margin-right: 2%;">
-				<label>Фамилия</label>
+				<label>Р¤Р°РјРёР»РёСЏ</label>
 				<span class="input">
 					<input name="secondname" maxlength="30" <?=(isset($data['settings']['norename']))?'disabled="disabled"':''?> value="<?=$data['secondname']?>" />
 				</span>
 			</div>
 			<div class="place" style="width: 250px; margin-right: 2%;">
-				<label>Имя</label>
+				<label>РРјСЏ</label>
 				<span class="input">
 					<input name="firstname" maxlength="30" <?=(isset($data['settings']['norename']))?'disabled="disabled"':''?> value="<?=$data['firstname']?>" />
 				</span>
 			</div>
 			<div class="place" style="width: 250px;">
-				<label>Отчество</label>
+				<label>РћС‚С‡РµСЃС‚РІРѕ</label>
 				<span class="input">
 					<input name="parentname" maxlength="30" <?=(isset($data['settings']['norename']))?'disabled="disabled"':''?> value="<?=$data['parentname']?>" />
 				</span>
 			</div>
 			<span class="clear"></span>
 			<div class="place" style="width: 300px; margin-right: 2%;">
-				<label>Логин</label>
+				<label>Р›РѕРіРёРЅ</label>
 				<span class="input">
 					<input name="login" maxlength="30" <?=(isset($data['settings']['nologinchange']))?'disabled="disabled"':''?> value="<?=$data['login']?>" />
 				</span>
 			</div>
 			<div class="place" style="width: 450px;">
-				<label>Пароль<?=$settings['pswd']?></label>
+				<label>РџР°СЂРѕР»СЊ<?=$settings['pswd']?></label>
 				<span class="input" style="width: 250px;">
 					<input <?=($editid>0)?'type="password"':'type="text"'?> name="pswd" maxlength="30" value="<?=$data['pswd']?>" />
 				</span>
 			</div>
 			<span class="clear"></span>
 			<div class="place" style="width: 300px; margin-right: 2%;">
-				<label>Электронная почта</label>
+				<label>Р­Р»РµРєС‚СЂРѕРЅРЅР°СЏ РїРѕС‡С‚Р°</label>
 				<span class="input">
 					<input name="email" maxlength="40" value="<?=$data['email']?>" />
 				</span>
@@ -102,7 +102,7 @@ include $_SERVER['DOCUMENT_ROOT']."/inc/site_admin/meta.php";?>
 			if (!isset($data['settings']['notypechange'])){
 			?>
 			<div class="place" style="width: 300px; z-index: 10;">
-				<label>Группа пользователей</label>
+				<label>Р“СЂСѓРїРїР° РїРѕР»СЊР·РѕРІР°С‚РµР»РµР№</label>
 				<?
 				$values = array();
 				$types = $VisitorType->getList();
@@ -127,7 +127,7 @@ include $_SERVER['DOCUMENT_ROOT']."/inc/site_admin/meta.php";?>
 		</form>
 		<div class="hr"><hr /></div>
 		<div class="nopad">
-			<a href="../" class="button">Перейти к списку пользователей</a>
+			<a href="../" class="button">РџРµСЂРµР№С‚Рё Рє СЃРїРёСЃРєСѓ РїРѕР»СЊР·РѕРІР°С‚РµР»РµР№</a>
 		</div>
 		<span class="clear"></span>
 	</div>

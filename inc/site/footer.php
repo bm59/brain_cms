@@ -32,7 +32,7 @@
 					}
 			?>
 		</div>
-		<div class="dev"><a href="http://brain-site.ru" onclick="target='_blank';" title="Ðàçðàáîòêà ñàéòà: brain-site.ru"><img src="/pics/dev_white.png" alt="Ðàçðàáîòêà ñàéòà: brain-site.ru"/></a></div>
+		<div class="dev"><a href="http://brain-site.ru" onclick="target='_blank';" title="Ð Ð°Ð·Ñ€Ð°Ð±Ð¾Ñ‚ÐºÐ° ÑÐ°Ð¹Ñ‚Ð°: brain-site.ru"><img src="/pics/dev_white.png" alt="Ð Ð°Ð·Ñ€Ð°Ð±Ð¾Ñ‚ÐºÐ° ÑÐ°Ð¹Ñ‚Ð°: brain-site.ru"/></a></div>
 	</div>
 </div>
 

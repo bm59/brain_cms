@@ -3,15 +3,15 @@ class CDSlider extends VirtualType
 {
 	function init($settings){
 
-		$settings['descr']='Ñëàéäåð';
+		$settings['descr']='Ð¡Ð»Ð°Ð¹Ð´ÐµÑ€';
 		$settings['help']=array(
-				'default=1'=>'Çíà÷åíèå ïî óìîë÷àíèþ', 
-				'min=1'=>'Ìèíèìàëüíîå çíà÷åíèå',
-				'max=10'=>'Ìàêñèìàëüíîå çíà÷åíèå', 
-				'comment=êîììåíòàðèé'=>'Êîììåíòàðèé', 
-				'range=true'=>'Âûáîð èíòåðâàëà (âìåñòî default èñïîëüçîâàòü values)',
-				'values=[ 25, 50 ]'=>'Çíà÷åíèå ïî óìîë÷àíèþ äëÿ èíòåðâàëà',
-				
+				'default=1'=>'Ð—Ð½Ð°Ñ‡ÐµÐ½Ð¸Ðµ Ð¿Ð¾ ÑƒÐ¼Ð¾Ð»Ñ‡Ð°Ð½Ð¸ÑŽ',
+				'min=1'=>'ÐœÐ¸Ð½Ð¸Ð¼Ð°Ð»ÑŒÐ½Ð¾Ðµ Ð·Ð½Ð°Ñ‡ÐµÐ½Ð¸Ðµ',
+				'max=10'=>'ÐœÐ°ÐºÑÐ¸Ð¼Ð°Ð»ÑŒÐ½Ð¾Ðµ Ð·Ð½Ð°Ñ‡ÐµÐ½Ð¸Ðµ',
+				'comment=ÐºÐ¾Ð¼Ð¼ÐµÐ½Ñ‚Ð°Ñ€Ð¸Ð¹'=>'ÐšÐ¾Ð¼Ð¼ÐµÐ½Ñ‚Ð°Ñ€Ð¸Ð¹',
+				'range=true'=>'Ð’Ñ‹Ð±Ð¾Ñ€ Ð¸Ð½Ñ‚ÐµÑ€Ð²Ð°Ð»Ð° (Ð²Ð¼ÐµÑÑ‚Ð¾ default Ð¸ÑÐ¿Ð¾Ð»ÑŒÐ·Ð¾Ð²Ð°Ñ‚ÑŒ values)',
+				'values=[ 25, 50 ]'=>'Ð—Ð½Ð°Ñ‡ÐµÐ½Ð¸Ðµ Ð¿Ð¾ ÑƒÐ¼Ð¾Ð»Ñ‡Ð°Ð½Ð¸ÑŽ Ð´Ð»Ñ Ð¸Ð½Ñ‚ÐµÑ€Ð²Ð°Ð»Ð°',
+
 		);
 		$maxlength = (floor($this->getSetting('maxlength'))>0)?floor($this->getSetting('maxlength')):255;
 		$this->setSetting('maxlength',$maxlength);
@@ -74,8 +74,8 @@ class CDSlider extends VirtualType
 		$settings = $this->getSetting('settings');
 		$newvalue = htmlspecialchars(trim($_POST[$this->getSetting('name')]));
 
-		if ((isset($settings['important'])) && (!is_float($newvalue))) $errors[] = 'Çàïîëíèòå ïîëå «'.$this->getSetting('description').'»';
-		if ((isset($settings['important'])) && ($newvalue==='')) $errors[] = 'Çàïîëíèòå ïîëå «'.$this->getSetting('description').'»';
+		if ((isset($settings['important'])) && (!is_float($newvalue))) $errors[] = 'Ð—Ð°Ð¿Ð¾Ð»Ð½Ð¸Ñ‚Ðµ Ð¿Ð¾Ð»Ðµ Â«'.$this->getSetting('description').'Â»';
+		if ((isset($settings['important'])) && ($newvalue==='')) $errors[] = 'Ð—Ð°Ð¿Ð¾Ð»Ð½Ð¸Ñ‚Ðµ Ð¿Ð¾Ð»Ðµ Â«'.$this->getSetting('description').'Â»';
 		if ($newvalue!='0')
 		$this->setSetting('value',$newvalue);
 		return $errors;

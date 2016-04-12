@@ -38,7 +38,7 @@
 	   }
 	}
 
-	/*Óäàëÿåì ôàéëû êîòîğûå áûëè óäàëåíû ïîëüçîâàòåëåì*/
+	/*Ğ£Ğ´Ğ°Ğ»ÑĞµĞ¼ Ñ„Ğ°Ğ¹Ğ»Ñ‹ ĞºĞ¾Ñ‚Ğ¾Ñ€Ñ‹Ğµ Ğ±Ñ‹Ğ»Ğ¸ ÑƒĞ´Ğ°Ğ»ĞµĞ½Ñ‹ Ğ¿Ğ¾Ğ»ÑŒĞ·Ğ¾Ğ²Ğ°Ñ‚ĞµĞ»ĞµĞ¼*/
 	$deleted_images=msq("SELECT * FROM `dop_image` WHERE `good_id`='".$pub['id']."'".((count($saved_id)>0) ?  " and id not in (".implode(',',$saved_id).")" : ""));
 	if (mysql_num_rows($deleted_images)>0)
 	while ($del=msr($deleted_images))
@@ -49,7 +49,7 @@
 
 
 
-    /*Î÷èùàåì ïàïêó îò ñòàğûõ âğåìåííûõ ôàéëîâ*/
+    /*ĞÑ‡Ğ¸Ñ‰Ğ°ĞµĞ¼ Ğ¿Ğ°Ğ¿ĞºÑƒ Ğ¾Ñ‚ ÑÑ‚Ğ°Ñ€Ñ‹Ñ… Ğ²Ñ€ĞµĞ¼ĞµĞ½Ğ½Ñ‹Ñ… Ñ„Ğ°Ğ¹Ğ»Ğ¾Ğ²*/
     $dir = $_SERVER['DOCUMENT_ROOT']."/storage/image_ajax/";
     $d=dir($dir);
     while (($e = $d->read()) !== false)

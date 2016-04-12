@@ -4,22 +4,22 @@
 $path='/manage/control/contents/';
 if ($_GET['section']>0) $path.='?section='.$_GET['section'];
 
-/*Добавление записей*/
+/*Р”РѕР±Р°РІР»РµРЅРёРµ Р·Р°РїРёСЃРµР№*/
 if ($mode!='development' && !in_array('add', $group['new_settings'][$cid]))
 {
 ?>
 	<script>
   	$(function() {
-       $( ".button:contains('Добавить')").addClass("disabled");
-       $( ".button:contains('Добавить')").click(function(){return false;});
-       $( "input[value*='Добавить']").addClass("disabled");
-       $( "input[value*='Добавить']").click(function(){return false;});
+       $( ".button:contains('Р”РѕР±Р°РІРёС‚СЊ')").addClass("disabled");
+       $( ".button:contains('Р”РѕР±Р°РІРёС‚СЊ')").click(function(){return false;});
+       $( "input[value*='Р”РѕР±Р°РІРёС‚СЊ']").addClass("disabled");
+       $( "input[value*='Р”РѕР±Р°РІРёС‚СЊ']").click(function(){return false;});
 
        <?if (!$_GET['pub']>0){?>
-       	$( ".button:contains('Сохранить изменения')").addClass("disabled");
-       	$( ".button:contains('Сохранить изменения')").click(function(){return false;});
-       	$( "input[value*='Сохранить изменения']").addClass("disabled");
-       	$( "input[value*='Сохранить изменения']").click(function(){return false;});
+       	$( ".button:contains('РЎРѕС…СЂР°РЅРёС‚СЊ РёР·РјРµРЅРµРЅРёСЏ')").addClass("disabled");
+       	$( ".button:contains('РЎРѕС…СЂР°РЅРёС‚СЊ РёР·РјРµРЅРµРЅРёСЏ')").click(function(){return false;});
+       	$( "input[value*='РЎРѕС…СЂР°РЅРёС‚СЊ РёР·РјРµРЅРµРЅРёСЏ']").addClass("disabled");
+       	$( "input[value*='РЎРѕС…СЂР°РЅРёС‚СЊ РёР·РјРµРЅРµРЅРёСЏ']").click(function(){return false;});
        <?}?>
   	});
   </script>
@@ -32,23 +32,23 @@ if ($mode!='development' && !in_array('add', $group['new_settings'][$cid]))
 }
 ?>
 <?
-/*Редактирование*/
+/*Р РµРґР°РєС‚РёСЂРѕРІР°РЅРёРµ*/
 if ($mode!='development' && !in_array('edit', $group['new_settings'][$cid]))
 {
 ?>
 	<script>
   	$(function() {
-       $( "a[title*='Редактировать'] IMG").attr("src","/pics/editor/prefs-disabled.gif");
-       $( "a[title*='Редактировать']").attr("href","");
-       $( "a[title*='Редактировать']").click(function(){return false;});
+       $( "a[title*='Р РµРґР°РєС‚РёСЂРѕРІР°С‚СЊ'] IMG").attr("src","/pics/editor/prefs-disabled.gif");
+       $( "a[title*='Р РµРґР°РєС‚РёСЂРѕРІР°С‚СЊ']").attr("href","");
+       $( "a[title*='Р РµРґР°РєС‚РёСЂРѕРІР°С‚СЊ']").click(function(){return false;});
 
-       $( "a:contains('Редактировать')").click(function(){return false;});
-       $( "a:contains('Редактировать')").attr("href","");
+       $( "a:contains('Р РµРґР°РєС‚РёСЂРѕРІР°С‚СЊ')").click(function(){return false;});
+       $( "a:contains('Р РµРґР°РєС‚РёСЂРѕРІР°С‚СЊ')").attr("href","");
 
-       $( ".button:contains('Сохранить')").addClass("disabled");
-       $( ".button:contains('Сохранить')").click(function(){return false;});
-       $( "input[value*='Сохранить']").addClass("disabled");
-       $( "input[value*='Сохранить']").click(function(){return false;});
+       $( ".button:contains('РЎРѕС…СЂР°РЅРёС‚СЊ')").addClass("disabled");
+       $( ".button:contains('РЎРѕС…СЂР°РЅРёС‚СЊ')").click(function(){return false;});
+       $( "input[value*='РЎРѕС…СЂР°РЅРёС‚СЊ']").addClass("disabled");
+       $( "input[value*='РЎРѕС…СЂР°РЅРёС‚СЊ']").click(function(){return false;});
 
 
   	});
@@ -64,37 +64,37 @@ if ($mode!='development' && !in_array('edit', $group['new_settings'][$cid]))
  }
 }
 
-/*Удаление*/
+/*РЈРґР°Р»РµРЅРёРµ*/
 if ($mode!='development' && !in_array('delete', $group['new_settings'][$cid]))
 {
 ?>
 	<script>
   	$(function() {
-       $( "a[title*='Удалить'] IMG").attr("src","/pics/editor/delete-disabled.gif");
-       $( "a[title*='Удалить']").attr("href","");
-       $( "a[title*='Удалить']").prop('onclick',null);
-       $( "a[title*='Удалить']").click(function(){return false;});
+       $( "a[title*='РЈРґР°Р»РёС‚СЊ'] IMG").attr("src","/pics/editor/delete-disabled.gif");
+       $( "a[title*='РЈРґР°Р»РёС‚СЊ']").attr("href","");
+       $( "a[title*='РЈРґР°Р»РёС‚СЊ']").prop('onclick',null);
+       $( "a[title*='РЈРґР°Р»РёС‚СЊ']").click(function(){return false;});
 
-       $( "a:contains('Удалить')").prop('onclick',null);
-       $( "a:contains('Удалить')").click(function(){return false;});
-       $( "a:contains('Удалить')").attr("href","");
-       $( "input[title*='Удалить']").css("backgroundImage", "url('/pics/editor/delete-disabled.gif')");
-       
-       $( "input[title*='Удалить']").click(function(){return false;});
-       
+       $( "a:contains('РЈРґР°Р»РёС‚СЊ')").prop('onclick',null);
+       $( "a:contains('РЈРґР°Р»РёС‚СЊ')").click(function(){return false;});
+       $( "a:contains('РЈРґР°Р»РёС‚СЊ')").attr("href","");
+       $( "input[title*='РЈРґР°Р»РёС‚СЊ']").css("backgroundImage", "url('/pics/editor/delete-disabled.gif')");
 
-       $( "a[title*='Очистить'] IMG").attr("src","/pics/editor/clear-disabled.png");
-       $( "a[title*='Очистить']").attr("href","");
-       $( "a[title*='Очистить']").prop('onclick',null);
-       $( "a[title*='Очистить']").click(function(){return false;});
+       $( "input[title*='РЈРґР°Р»РёС‚СЊ']").click(function(){return false;});
 
-       
-       $( "a:contains('Очистить')").attr("href","");
-       $( "a:contains('Очистить')").prop('onclick',null);
-       $( "a:contains('Очистить')").click(function(){return false;});
-       $( "input[title*='Очистить']").css("backgroundImage", "url('/pics/editor/clear-disabled.png')");
 
-        $( "input[title*='Очистить']").click(function(){return false;});
+       $( "a[title*='РћС‡РёСЃС‚РёС‚СЊ'] IMG").attr("src","/pics/editor/clear-disabled.png");
+       $( "a[title*='РћС‡РёСЃС‚РёС‚СЊ']").attr("href","");
+       $( "a[title*='РћС‡РёСЃС‚РёС‚СЊ']").prop('onclick',null);
+       $( "a[title*='РћС‡РёСЃС‚РёС‚СЊ']").click(function(){return false;});
+
+
+       $( "a:contains('РћС‡РёСЃС‚РёС‚СЊ')").attr("href","");
+       $( "a:contains('РћС‡РёСЃС‚РёС‚СЊ')").prop('onclick',null);
+       $( "a:contains('РћС‡РёСЃС‚РёС‚СЊ')").click(function(){return false;});
+       $( "input[title*='РћС‡РёСЃС‚РёС‚СЊ']").css("backgroundImage", "url('/pics/editor/clear-disabled.png')");
+
+        $( "input[title*='РћС‡РёСЃС‚РёС‚СЊ']").click(function(){return false;});
   	});
   </script>
 

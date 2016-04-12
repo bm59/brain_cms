@@ -1,30 +1,30 @@
 <?
 /*
-Êëàññ ðàáîòû ñ ÁÄ MySQL
+ÐšÐ»Ð°ÑÑ Ñ€Ð°Ð±Ð¾Ñ‚Ñ‹ Ñ Ð‘Ð” MySQL
 */
 class MySqlConnect
 {
-	var $Settings = array(); /* Íàñòðîéêè êëàññà */
-	var $Errors = array( /* Îïèñàíèå îøèáîê ïîäêëþ÷åíèÿ */
-		'ServerConnect'=>'Ñåðâåð áàçû äàííûõ íåäîñòóïåí â äàííûé ìîìåíò. Ïîïðîáóéòå îáðàòèòüñÿ ïîçäíåå.',
-		'BaseConnect'=>'Îøèáêà ïîäêëþ÷åíèÿ ê áàçå äàííûõ. Ïîïðîáóéòå îáðàòèòüñÿ ïîçäíåå.'
+	var $Settings = array(); /* ÐÐ°ÑÑ‚Ñ€Ð¾Ð¹ÐºÐ¸ ÐºÐ»Ð°ÑÑÐ° */
+	var $Errors = array( /* ÐžÐ¿Ð¸ÑÐ°Ð½Ð¸Ðµ Ð¾ÑˆÐ¸Ð±Ð¾Ðº Ð¿Ð¾Ð´ÐºÐ»ÑŽÑ‡ÐµÐ½Ð¸Ñ */
+		'ServerConnect'=>'Ð¡ÐµÑ€Ð²ÐµÑ€ Ð±Ð°Ð·Ñ‹ Ð´Ð°Ð½Ð½Ñ‹Ñ… Ð½ÐµÐ´Ð¾ÑÑ‚ÑƒÐ¿ÐµÐ½ Ð² Ð´Ð°Ð½Ð½Ñ‹Ð¹ Ð¼Ð¾Ð¼ÐµÐ½Ñ‚. ÐŸÐ¾Ð¿Ñ€Ð¾Ð±ÑƒÐ¹Ñ‚Ðµ Ð¾Ð±Ñ€Ð°Ñ‚Ð¸Ñ‚ÑŒÑÑ Ð¿Ð¾Ð·Ð´Ð½ÐµÐµ.',
+		'BaseConnect'=>'ÐžÑˆÐ¸Ð±ÐºÐ° Ð¿Ð¾Ð´ÐºÐ»ÑŽÑ‡ÐµÐ½Ð¸Ñ Ðº Ð±Ð°Ð·Ðµ Ð´Ð°Ð½Ð½Ñ‹Ñ…. ÐŸÐ¾Ð¿Ñ€Ð¾Ð±ÑƒÐ¹Ñ‚Ðµ Ð¾Ð±Ñ€Ð°Ñ‚Ð¸Ñ‚ÑŒÑÑ Ð¿Ð¾Ð·Ð´Ð½ÐµÐµ.'
 	);
 
-	function error($code){ if ($this->Errors[$code]) return $this->Errors[$code]; else return 'Îøèáêà ÁÄ'; }
-	function connect(){ /* Ïîäêëþ÷åíèå ê ÁÄ */
+	function error($code){ if ($this->Errors[$code]) return $this->Errors[$code]; else return 'ÐžÑˆÐ¸Ð±ÐºÐ° Ð‘Ð”'; }
+	function connect(){ /* ÐŸÐ¾Ð´ÐºÐ»ÑŽÑ‡ÐµÐ½Ð¸Ðµ Ðº Ð‘Ð” */
 		$this->Settings['QuerriesNumber'] = 0;
 		$this->Settings['Server'] = @mysql_connect(configGet("DBHost"),configGet("DBUser"),configGet("DBPassword")) or die($this->error("ServerConnect"));
 		$this->Settings['Connected'] = @mysql_select_db(configGet("DBBase"),$this->Settings['Server']) or die($this->error("BaseConnect"));
-		@mysql_query("SET NAMES cp1251",$this->Settings['Server']);
+		@mysql_query("SET NAMES utf8",$this->Settings['Server']);
 	}
 	function querriesNumberPlus() { $this->Settings['QuerriesNumber']++; }
 	function getQuerriesNumber() { return $this->Settings['QuerriesNumber']; }
-	function query($query){ $this->querriesNumberPlus(); return mysql_query($query,$this->Settings['Server']);} /* Çàïðîñ ê ÁÄ */
+	function query($query){ $this->querriesNumberPlus(); return mysql_query($query,$this->Settings['Server']);} /* Ð—Ð°Ð¿Ñ€Ð¾Ñ Ðº Ð‘Ð” */
 	function row($result) { return @mysql_fetch_assoc($result); }
 	function rowsNum() { return	@mysql_affected_rows($this->Settings['Server']); }
-	function lastInsertId() { $res = $this->query("SELECT LAST_INSERT_ID() as idd"); return @mysql_result($res,0); } /* Ïîëó÷åíèå ïîñëåäíåãî çíà÷åíèÿ auto_increment */
-	function dateToDB($date) { if (!preg_match("|^[0-9]{2}\.[0-9]{2}\.[0-9]{4}$|",$date)) return ''; return substr($date,6,4)."-".substr($date,3,2)."-".substr($date,0,2); } /* Ïðåîáðàçîâàíèå äàòû èç ôîðìàòà ÄÄ.ÌÌ.ÃÃÃÃ â ôîðìàò ÃÃÃÃ-ÌÌ-ÄÄ */
-	function dateFromDBDot($date) { if (!preg_match("|^[0-9]{4}\-[0-9]{2}\-[0-9]{2}|",$date)) return ''; return substr($date,8,2).".".substr($date,5,2).".".substr($date,0,4); } /* Ïðåîáðàçîâàíèå äàòû èç ôîðìàòà ÃÃÃÃ-ÌÌ-ÄÄ â ôîðìàò ÄÄ.ÌÌ.ÃÃÃÃ */
+	function lastInsertId() { $res = $this->query("SELECT LAST_INSERT_ID() as idd"); return @mysql_result($res,0); } /* ÐŸÐ¾Ð»ÑƒÑ‡ÐµÐ½Ð¸Ðµ Ð¿Ð¾ÑÐ»ÐµÐ´Ð½ÐµÐ³Ð¾ Ð·Ð½Ð°Ñ‡ÐµÐ½Ð¸Ñ auto_increment */
+	function dateToDB($date) { if (!preg_match("|^[0-9]{2}\.[0-9]{2}\.[0-9]{4}$|",$date)) return ''; return substr($date,6,4)."-".substr($date,3,2)."-".substr($date,0,2); } /* ÐŸÑ€ÐµÐ¾Ð±Ñ€Ð°Ð·Ð¾Ð²Ð°Ð½Ð¸Ðµ Ð´Ð°Ñ‚Ñ‹ Ð¸Ð· Ñ„Ð¾Ñ€Ð¼Ð°Ñ‚Ð° Ð”Ð”.ÐœÐœ.Ð“Ð“Ð“Ð“ Ð² Ñ„Ð¾Ñ€Ð¼Ð°Ñ‚ Ð“Ð“Ð“Ð“-ÐœÐœ-Ð”Ð” */
+	function dateFromDBDot($date) { if (!preg_match("|^[0-9]{4}\-[0-9]{2}\-[0-9]{2}|",$date)) return ''; return substr($date,8,2).".".substr($date,5,2).".".substr($date,0,4); } /* ÐŸÑ€ÐµÐ¾Ð±Ñ€Ð°Ð·Ð¾Ð²Ð°Ð½Ð¸Ðµ Ð´Ð°Ñ‚Ñ‹ Ð¸Ð· Ñ„Ð¾Ñ€Ð¼Ð°Ñ‚Ð° Ð“Ð“Ð“Ð“-ÐœÐœ-Ð”Ð” Ð² Ñ„Ð¾Ñ€Ð¼Ð°Ñ‚ Ð”Ð”.ÐœÐœ.Ð“Ð“Ð“Ð“ */
 	function dateTimeFromDB($date) { if (!preg_match("|^[0-9]{4}\-[0-9]{2}\-[0-9]{2}\s[0-9]{2}\:[0-9]{2}\:[0-9]{2}$|",$date)) return ''; return substr($date,8,2).".".substr($date,5,2).".".substr($date,0,4)." ".substr($date,11,5); }
 	function TimeFromDB($date) { if (!preg_match("|^[0-9]{4}\-[0-9]{2}\-[0-9]{2}\s[0-9]{2}\:[0-9]{2}\:[0-9]{2}$|",$date)) return ''; return substr($date,11,5); }
 	function dateTimeFromDBShort($date) { if (!preg_match("|^[0-9]{4}\-[0-9]{2}\-[0-9]{2}\s[0-9]{2}\:[0-9]{2}\:[0-9]{2}$|",$date)) return ''; return substr($date,8,2).".".substr($date,5,2).".".substr($date,2,2)." ".substr($date,11,5); }
@@ -40,23 +40,23 @@ class MySqlConnect
 		$now_weekday=date('w', $date);
 		switch ($now_weekday)
 		{
-        	case '0': $retval='Âñ'; break;
-        	case '1': $retval='Ïí'; break;
-        	case '2': $retval='Âò'; break;
-        	case '3': $retval='Ñð'; break;
-        	case '4': $retval='×ò'; break;
-        	case '5': $retval='Ïò'; break;
-        	case '6': $retval='Ñá'; break;
+        	case '0': $retval='Ð’Ñ'; break;
+        	case '1': $retval='ÐŸÐ½'; break;
+        	case '2': $retval='Ð’Ñ‚'; break;
+        	case '3': $retval='Ð¡Ñ€'; break;
+        	case '4': $retval='Ð§Ñ‚'; break;
+        	case '5': $retval='ÐŸÑ‚'; break;
+        	case '6': $retval='Ð¡Ð±'; break;
        	}
 
         return $retval;
 	}
 }
 
-/* ×òîáû íå ïèñàòü êàæäûé ðàç îáðàùåíèå ê êëàññó — ãëîáàëüíûå ñîêðàùåííûå ôóíêöèè: */
+/* Ð§Ñ‚Ð¾Ð±Ñ‹ Ð½Ðµ Ð¿Ð¸ÑÐ°Ñ‚ÑŒ ÐºÐ°Ð¶Ð´Ñ‹Ð¹ Ñ€Ð°Ð· Ð¾Ð±Ñ€Ð°Ñ‰ÐµÐ½Ð¸Ðµ Ðº ÐºÐ»Ð°ÑÑÑƒ â€” Ð³Ð»Ð¾Ð±Ð°Ð»ÑŒÐ½Ñ‹Ðµ ÑÐ¾ÐºÑ€Ð°Ñ‰ÐµÐ½Ð½Ñ‹Ðµ Ñ„ÑƒÐ½ÐºÑ†Ð¸Ð¸: */
 function msq($query){ global $MySqlObject; return $MySqlObject->query($query); }
 function msr($result){ global $MySqlObject; return $MySqlObject->row($result); }
-function mstable($module,$theme,$block,$fields){ // Ñîçäàåò òàáëèöó â ÁÄ, èëè âîçâðàùàåò íàçâàíèå óæå ñîçäàííîé òàáëèöû
+function mstable($module,$theme,$block,$fields){ // Ð¡Ð¾Ð·Ð´Ð°ÐµÑ‚ Ñ‚Ð°Ð±Ð»Ð¸Ñ†Ñƒ Ð² Ð‘Ð”, Ð¸Ð»Ð¸ Ð²Ð¾Ð·Ð²Ñ€Ð°Ñ‰Ð°ÐµÑ‚ Ð½Ð°Ð·Ð²Ð°Ð½Ð¸Ðµ ÑƒÐ¶Ðµ ÑÐ¾Ð·Ð´Ð°Ð½Ð½Ð¾Ð¹ Ñ‚Ð°Ð±Ð»Ð¸Ñ†Ñ‹
 	$module = trim($module);
 	$theme = trim($theme);
 	$block = trim($block);
@@ -74,6 +74,6 @@ function msdfromdb($date) { global $MySqlObject; return $MySqlObject->dateFromDB
 function msdttodb($date) { global $MySqlObject; return $MySqlObject->dateTimeToDB($date); }
 function msdtfromdb($date) { global $MySqlObject; return $MySqlObject->dateTimeFromDB($date); }
 
-$MySqlObject = new MySqlConnect; /* Ñîçäàíèå è èíèöèàëèçàöèÿ îáúåêòà */
+$MySqlObject = new MySqlConnect; /* Ð¡Ð¾Ð·Ð´Ð°Ð½Ð¸Ðµ Ð¸ Ð¸Ð½Ð¸Ñ†Ð¸Ð°Ð»Ð¸Ð·Ð°Ñ†Ð¸Ñ Ð¾Ð±ÑŠÐµÐºÑ‚Ð° */
 $MySqlObject->connect();
 ?>

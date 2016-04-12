@@ -1,6 +1,6 @@
 <?
 /*
-Класс, описывающий посетителя сайта, информацию о нем, тип и т.д.
+РљР»Р°СЃСЃ, РѕРїРёСЃС‹РІР°СЋС‰РёР№ РїРѕСЃРµС‚РёС‚РµР»СЏ СЃР°Р№С‚Р°, РёРЅС„РѕСЂРјР°С†РёСЋ Рѕ РЅРµРј, С‚РёРї Рё С‚.Рґ.
 */
 class SiteVisitor extends VirtualClass
 {
@@ -19,7 +19,7 @@ class SiteVisitor extends VirtualClass
 			"settings"=>"TEXT"
 		));
 
-		$this->Settings['iconsstorage'] = $Storage->getStorage(0,array('path'=>'/users/icons/','name'=>'Иконки для пользователей бэк-офиса','imgw'=>60,'imgwtype'=>1,'imgh'=>60,'imghtype'=>1,'exts'=>array('jpg','gif','jpeg'),'images'=>1));
+		$this->Settings['iconsstorage'] = $Storage->getStorage(0,array('path'=>'/users/icons/','name'=>'РРєРѕРЅРєРё РґР»СЏ РїРѕР»СЊР·РѕРІР°С‚РµР»РµР№ Р±СЌРє-РѕС„РёСЃР°','imgw'=>60,'imgwtype'=>1,'imgh'=>60,'imghtype'=>1,'exts'=>array('jpg','gif','jpeg'),'images'=>1));
 	}
 	function isAuth(){
 		$user = $this->getOne($_SESSION['visitorID']);
@@ -72,20 +72,20 @@ class SiteVisitor extends VirtualClass
 		$user = $this->getOne($id);
 		return $VisitorType->getRedirectContent($user['type'],$cid);
 	}
-	function add($data){ // Добавление нового пользователя
+	function add($data){ // Р”РѕР±Р°РІР»РµРЅРёРµ РЅРѕРІРѕРіРѕ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ
 		global $VisitorType,$Storage;
 		$errors = array();
 		$data['picture']['id'] = floor($data['picture']['id']);
-		if (strlen($data['secondname'])==0) $errors['secondname'] = 'Не указана фамилия';
-		if (strlen($data['firstname'])==0) $errors['firstname'] = 'Не указано имя';
-		if (strlen($data['login'])<3) $errors['loginlength'] = 'Логин должен состоять не менее чем из 3-х символов';
-		if (!preg_match('|^[a-zA-Z\s0-9]+$|',$data['login'])) $errors['login'] = 'Логин должен состоять из букв латинского алфавита, пробелов и цифр';
-		elseif (!$this->isUniqueLogin($data['login'])) $errors['loginunique'] = 'Пользователь с таким логином уже зарегистрирован';
-		if (strlen($data['pswd'])<4) $errors['pswdlength'] = 'Пароль должен состоять не менее чем из 4-х символов';
-		if (!preg_match('|^[a-zA-Z_0-9]+$|',$data['pswd'])) $errors['pswd'] = 'Пароль должен состоять из букв латинского алфавита, знака подчеркивания и цифр';
-		/*if (!checkEmail($data['email'])) $errors['email'] = 'Указан некорректный email';*/
+		if (strlen($data['secondname'])==0) $errors['secondname'] = 'РќРµ СѓРєР°Р·Р°РЅР° С„Р°РјРёР»РёСЏ';
+		if (strlen($data['firstname'])==0) $errors['firstname'] = 'РќРµ СѓРєР°Р·Р°РЅРѕ РёРјСЏ';
+		if (strlen($data['login'])<3) $errors['loginlength'] = 'Р›РѕРіРёРЅ РґРѕР»Р¶РµРЅ СЃРѕСЃС‚РѕСЏС‚СЊ РЅРµ РјРµРЅРµРµ С‡РµРј РёР· 3-С… СЃРёРјРІРѕР»РѕРІ';
+		if (!preg_match('|^[a-zA-Z\s0-9]+$|',$data['login'])) $errors['login'] = 'Р›РѕРіРёРЅ РґРѕР»Р¶РµРЅ СЃРѕСЃС‚РѕСЏС‚СЊ РёР· Р±СѓРєРІ Р»Р°С‚РёРЅСЃРєРѕРіРѕ Р°Р»С„Р°РІРёС‚Р°, РїСЂРѕР±РµР»РѕРІ Рё С†РёС„СЂ';
+		elseif (!$this->isUniqueLogin($data['login'])) $errors['loginunique'] = 'РџРѕР»СЊР·РѕРІР°С‚РµР»СЊ СЃ С‚Р°РєРёРј Р»РѕРіРёРЅРѕРј СѓР¶Рµ Р·Р°СЂРµРіРёСЃС‚СЂРёСЂРѕРІР°РЅ';
+		if (strlen($data['pswd'])<4) $errors['pswdlength'] = 'РџР°СЂРѕР»СЊ РґРѕР»Р¶РµРЅ СЃРѕСЃС‚РѕСЏС‚СЊ РЅРµ РјРµРЅРµРµ С‡РµРј РёР· 4-С… СЃРёРјРІРѕР»РѕРІ';
+		if (!preg_match('|^[a-zA-Z_0-9]+$|',$data['pswd'])) $errors['pswd'] = 'РџР°СЂРѕР»СЊ РґРѕР»Р¶РµРЅ СЃРѕСЃС‚РѕСЏС‚СЊ РёР· Р±СѓРєРІ Р»Р°С‚РёРЅСЃРєРѕРіРѕ Р°Р»С„Р°РІРёС‚Р°, Р·РЅР°РєР° РїРѕРґС‡РµСЂРєРёРІР°РЅРёСЏ Рё С†РёС„СЂ';
+		/*if (!checkEmail($data['email'])) $errors['email'] = 'РЈРєР°Р·Р°РЅ РЅРµРєРѕСЂСЂРµРєС‚РЅС‹Р№ email';*/
 		$data['type'] = $VisitorType->checkTypePresence($data['type']);
-		if ($data['type']<1) $errors['type'] = 'Не выбрана группа, определяющая права доступа';
+		if ($data['type']<1) $errors['type'] = 'РќРµ РІС‹Р±СЂР°РЅР° РіСЂСѓРїРїР°, РѕРїСЂРµРґРµР»СЏСЋС‰Р°СЏ РїСЂР°РІР° РґРѕСЃС‚СѓРїР°';
 		if (count($errors)==0){
 			$data['regdate'] = date("Y-m-d");
 			msq("INSERT INTO `".$this->getSetting('table')."` (`regdate`,`login`,`pswd`,`type`,`firstname`,`secondname`,`parentname`,`email`,`picture`, `settings`) VALUES ('".$data['regdate']."','".$data['login']."','".md5($data['pswd'])."','".$data['type']."','".$data['firstname']."','".$data['secondname']."','".$data['parentname']."','".$data['email']."','".$data['picture']['id']."', '|engage|')");
@@ -94,13 +94,13 @@ class SiteVisitor extends VirtualClass
 		}
 		return $errors;
 	}
-	function edit($id,$data){ /* Редактирование пользователя */
+	function edit($id,$data){ /* Р РµРґР°РєС‚РёСЂРѕРІР°РЅРёРµ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ */
 		global $VisitorType,$Storage;
 		$id = floor($id);
 		$olddata = $this->getOne($id);
 		$errors = array();
-		if (count($olddata)==0) $errors['id'] = 'Редактируемого пользователя не существует';
-		if (isset($olddata['settings']['noedit'])){ $errors['edit'] = 'Этого пользователя редактировать нельзя'; return $errors; }
+		if (count($olddata)==0) $errors['id'] = 'Р РµРґР°РєС‚РёСЂСѓРµРјРѕРіРѕ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ РЅРµ СЃСѓС‰РµСЃС‚РІСѓРµС‚';
+		if (isset($olddata['settings']['noedit'])){ $errors['edit'] = 'Р­С‚РѕРіРѕ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ СЂРµРґР°РєС‚РёСЂРѕРІР°С‚СЊ РЅРµР»СЊР·СЏ'; return $errors; }
 		if ($olddata['picture']['id']!=$data['picture']['id']){
 			$Storage->deleteFile($olddata['picture']['id']);
 			if ($newfile = $Storage->getFile($data['picture']['id'])){
@@ -115,28 +115,28 @@ class SiteVisitor extends VirtualClass
 			$data['parentname'] = $olddata['parentname'];
 		}
 		else{
-			if ($data['secondname']=='') $errors['secondname'] = 'Не указана фамилия';
-			if ($data['firstname']=='') $errors['firstname'] = 'Не указано имя';
+			if ($data['secondname']=='') $errors['secondname'] = 'РќРµ СѓРєР°Р·Р°РЅР° С„Р°РјРёР»РёСЏ';
+			if ($data['firstname']=='') $errors['firstname'] = 'РќРµ СѓРєР°Р·Р°РЅРѕ РёРјСЏ';
 		}
 		if (isset($olddata['settings']['nologinchange'])) $data['login'] = $olddata['login'];
 		else{
-			if (strlen($data['login'])<3) $errors['loginlength'] = 'Логин должен состоять не менее чем из 3-х символов';
-			if (!preg_match('|^[a-zA-Z\s0-9]+$|',$data['login'])) $errors['login'] = 'Логин должен состоять из букв латинского алфавита, пробелов и цифр';
-			elseif (!$this->isUniqueLogin($data['login'],$id)) $errors['loginunique'] = 'Пользователь с таким логином уже зарегистрирован';
+			if (strlen($data['login'])<3) $errors['loginlength'] = 'Р›РѕРіРёРЅ РґРѕР»Р¶РµРЅ СЃРѕСЃС‚РѕСЏС‚СЊ РЅРµ РјРµРЅРµРµ С‡РµРј РёР· 3-С… СЃРёРјРІРѕР»РѕРІ';
+			if (!preg_match('|^[a-zA-Z\s0-9]+$|',$data['login'])) $errors['login'] = 'Р›РѕРіРёРЅ РґРѕР»Р¶РµРЅ СЃРѕСЃС‚РѕСЏС‚СЊ РёР· Р±СѓРєРІ Р»Р°С‚РёРЅСЃРєРѕРіРѕ Р°Р»С„Р°РІРёС‚Р°, РїСЂРѕР±РµР»РѕРІ Рё С†РёС„СЂ';
+			elseif (!$this->isUniqueLogin($data['login'],$id)) $errors['loginunique'] = 'РџРѕР»СЊР·РѕРІР°С‚РµР»СЊ СЃ С‚Р°РєРёРј Р»РѕРіРёРЅРѕРј СѓР¶Рµ Р·Р°СЂРµРіРёСЃС‚СЂРёСЂРѕРІР°РЅ';
 		}
 		if ($data['pswd']!=''){
-			if (strlen($data['pswd'])<4) $errors['pswdlength'] = 'Пароль должен состоять не менее чем из 4-х символов';
-			if (!preg_match('|^[a-zA-Z_0-9]+$|',$data['pswd'])) $errors['pswd'] = 'Пароль должен состоять из букв латинского алфавита, знака подчеркивания и цифр';
+			if (strlen($data['pswd'])<4) $errors['pswdlength'] = 'РџР°СЂРѕР»СЊ РґРѕР»Р¶РµРЅ СЃРѕСЃС‚РѕСЏС‚СЊ РЅРµ РјРµРЅРµРµ С‡РµРј РёР· 4-С… СЃРёРјРІРѕР»РѕРІ';
+			if (!preg_match('|^[a-zA-Z_0-9]+$|',$data['pswd'])) $errors['pswd'] = 'РџР°СЂРѕР»СЊ РґРѕР»Р¶РµРЅ СЃРѕСЃС‚РѕСЏС‚СЊ РёР· Р±СѓРєРІ Р»Р°С‚РёРЅСЃРєРѕРіРѕ Р°Р»С„Р°РІРёС‚Р°, Р·РЅР°РєР° РїРѕРґС‡РµСЂРєРёРІР°РЅРёСЏ Рё С†РёС„СЂ';
 		}
-		/*if (!checkEmail($data['email'])) $errors['email'] = 'Указан некорректный email';*/
+		/*if (!checkEmail($data['email'])) $errors['email'] = 'РЈРєР°Р·Р°РЅ РЅРµРєРѕСЂСЂРµРєС‚РЅС‹Р№ email';*/
 		$data['type'] = $VisitorType->checkTypePresence($data['type']);
-		if ($data['type']<1) $errors['type'] = 'Не выбрана группа, определяющая права доступа';
+		if ($data['type']<1) $errors['type'] = 'РќРµ РІС‹Р±СЂР°РЅР° РіСЂСѓРїРїР°, РѕРїСЂРµРґРµР»СЏСЋС‰Р°СЏ РїСЂР°РІР° РґРѕСЃС‚СѓРїР°';
 		if (count($errors)==0){
 			msq("UPDATE `".$this->getSetting('table')."` SET `login`='".$data['login']."',`type`='".$data['type']."',`firstname`='".$data['firstname']."',`secondname`='".$data['secondname']."',`parentname`='".$data['parentname']."',`email`='".$data['email']."'".(($data['pswd']!='')?",`pswd`='".md5($data['pswd'])."'":"")." WHERE `id`='$id'");
 		}
 		return $errors;
 	}
-	function delete($id){ // Удаление пользователя
+	function delete($id){ // РЈРґР°Р»РµРЅРёРµ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ
 		global $Storage;
 		$errors = array();
 		$id = floor($id);
@@ -154,10 +154,10 @@ class SiteVisitor extends VirtualClass
 		$errors = array();
 		$id = $this->checkUserPresence($id);
 		$user = $this->getOne($id);
-		if ($id<1) $errors['userid'] = 'Такого пользователя не существует';
-		if (md5($oldpswd)!=$user['pswd']) $errors['oldpswd'] = 'Старый пароль неверен';
-		if (strlen($newpswd)<4) $errors['pswdlength'] = 'Пароль должен состоять не менее чем из 4-х символов';
-		if (!preg_match('|^[a-zA-Z_0-9]+$|',$newpswd)) $errors['pswd'] = 'Пароль должен состоять из букв латинского алфавита, знака подчеркивания и цифр';
+		if ($id<1) $errors['userid'] = 'РўР°РєРѕРіРѕ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ РЅРµ СЃСѓС‰РµСЃС‚РІСѓРµС‚';
+		if (md5($oldpswd)!=$user['pswd']) $errors['oldpswd'] = 'РЎС‚Р°СЂС‹Р№ РїР°СЂРѕР»СЊ РЅРµРІРµСЂРµРЅ';
+		if (strlen($newpswd)<4) $errors['pswdlength'] = 'РџР°СЂРѕР»СЊ РґРѕР»Р¶РµРЅ СЃРѕСЃС‚РѕСЏС‚СЊ РЅРµ РјРµРЅРµРµ С‡РµРј РёР· 4-С… СЃРёРјРІРѕР»РѕРІ';
+		if (!preg_match('|^[a-zA-Z_0-9]+$|',$newpswd)) $errors['pswd'] = 'РџР°СЂРѕР»СЊ РґРѕР»Р¶РµРЅ СЃРѕСЃС‚РѕСЏС‚СЊ РёР· Р±СѓРєРІ Р»Р°С‚РёРЅСЃРєРѕРіРѕ Р°Р»С„Р°РІРёС‚Р°, Р·РЅР°РєР° РїРѕРґС‡РµСЂРєРёРІР°РЅРёСЏ Рё С†РёС„СЂ';
 		if (count($errors)==0){
 			$user = $this->getCacheValue('user_'.$id);
 			$user['pswd'] = md5($oldpswd);
@@ -166,7 +166,7 @@ class SiteVisitor extends VirtualClass
 		}
 		return $errors;
 	}
-	function changeGroup($id,$newgroupid){ // Смена группы у пользователя
+	function changeGroup($id,$newgroupid){ // РЎРјРµРЅР° РіСЂСѓРїРїС‹ Сѓ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ
 		global $VisitorType;
 		$id = $this->checkUserPresence($id);
 		$newgroupid = $VisitorType->checkTypePresence($newgroupid);
@@ -189,7 +189,7 @@ class SiteVisitor extends VirtualClass
 			}
 		}
 	}
-	function getList($group = 0,$ordertype = 0){ // Получение списка пользователей
+	function getList($group = 0,$ordertype = 0){ // РџРѕР»СѓС‡РµРЅРёРµ СЃРїРёСЃРєР° РїРѕР»СЊР·РѕРІР°С‚РµР»РµР№
 		global $VisitorType;
 		$retval = array();
 		$ordertypes = array('`secondname` ASC,`firstname` ASC,`parentname` ASC','`secondname` DESC,`firstname` DESC,`parentname` DESC','`type` ASC','`type` DESC');
@@ -201,7 +201,7 @@ class SiteVisitor extends VirtualClass
 		while ($r = msr($q)) { $retval[] = $r['id']; $one = $this->getOne($r['id'],$r); }
 		return $retval;
 	}
-	function getOne($id = 0, $r = array()){ /* Получение информации о конкретном пользователе */
+	function getOne($id = 0, $r = array()){ /* РџРѕР»СѓС‡РµРЅРёРµ РёРЅС„РѕСЂРјР°С†РёРё Рѕ РєРѕРЅРєСЂРµС‚РЅРѕРј РїРѕР»СЊР·РѕРІР°С‚РµР»Рµ */
 		global $Storage;
 		$id = floor($id);
 		// $retval = $this->getCacheValue('user_'.$id);
@@ -221,7 +221,7 @@ class SiteVisitor extends VirtualClass
 		return $retval;
 	}
 
-	function getMany($ids= array()){ /* Получение информации о конкретном пользователе */
+	function getMany($ids= array()){ /* РџРѕР»СѓС‡РµРЅРёРµ РёРЅС„РѕСЂРјР°С†РёРё Рѕ РєРѕРЅРєСЂРµС‚РЅРѕРј РїРѕР»СЊР·РѕРІР°С‚РµР»Рµ */
 		global $Storage;
 
 		$where=array();
@@ -256,12 +256,12 @@ class SiteVisitor extends VirtualClass
 	}
 
 
-	function checkUserPresence($id){ // Проверка наличия пользователя по ID
+	function checkUserPresence($id){ // РџСЂРѕРІРµСЂРєР° РЅР°Р»РёС‡РёСЏ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ РїРѕ ID
 		$id = floor($id);
 		$list = $this->getList();
 		return (in_array($id,$list))?$id:0;
 	}
-	function isUniqueLogin($login,$exceptid = 0){ /* Проверка на уникальность логина, возвращает true если уникально */
+	function isUniqueLogin($login,$exceptid = 0){ /* РџСЂРѕРІРµСЂРєР° РЅР° СѓРЅРёРєР°Р»СЊРЅРѕСЃС‚СЊ Р»РѕРіРёРЅР°, РІРѕР·РІСЂР°С‰Р°РµС‚ true РµСЃР»Рё СѓРЅРёРєР°Р»СЊРЅРѕ */
 		$retval = true;
 		$login = addslashes($login);
 		$exceptid = floor($exceptid);

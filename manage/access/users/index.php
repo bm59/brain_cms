@@ -3,18 +3,18 @@ include $_SERVER['DOCUMENT_ROOT']."/inc/site_admin/include.php";
 $order = floor($_GET['order']);
 if (floor($_GET['switch_on'])>0)
 {	$SiteVisitor->switchOnOff($_GET['switch_on'],'on');
-	WriteLog($_GET['switch_on'], 'включение пользователя' );
+	WriteLog($_GET['switch_on'], 'РІРєР»СЋС‡РµРЅРёРµ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ' );
 }
 if (floor($_GET['switch_off'])>0)
 {	$SiteVisitor->switchOnOff($_GET['switch_off'],'off');
-	WriteLog($_GET['switch_off'], 'отключение пользователя');
+	WriteLog($_GET['switch_off'], 'РѕС‚РєР»СЋС‡РµРЅРёРµ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ');
 }
 
 if ($_GET['delete']>0)
 if (@in_array('delete',$group['new_settings'][$activeccid]) || $mode=='development')
 {
 	$SiteVisitor->delete($_GET['delete']);
-	WriteLog($_GET['delete'], 'удаление пользователя');
+	WriteLog($_GET['delete'], 'СѓРґР°Р»РµРЅРёРµ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ');
 
 	header("Location: ".configGet("AskUrl"));
 }
@@ -27,11 +27,11 @@ include $_SERVER['DOCUMENT_ROOT']."/inc/site_admin/meta.php";
 		$.expr[':'].contains = function( elem, i, match, array ) {
 		    return (elem.textContent || elem.innerText || jQuery.text( elem ) || "").toLowerCase().indexOf(match[3].toLowerCase()) >= 0;
 		}
-			 	
+
 		$('[name=search_group]').change(function()
 		{
 
-			
+
 				if ($(this).val()=='-1') $('.table-content td').show();
 				else
 				{
@@ -39,7 +39,7 @@ include $_SERVER['DOCUMENT_ROOT']."/inc/site_admin/meta.php";
 					 $(".table-content .group_name:contains('"+$(this).val()+"')").parents('tr').find('td').show();
 				}
 
-					
+
 
 		});
 		function search_name (s_text)
@@ -66,7 +66,7 @@ include $_SERVER['DOCUMENT_ROOT']."/inc/site_admin/meta.php";
 		$userslist = $SiteVisitor->getList(0,$order);
 		if (count($userslist)<1){
 			?>
-			<h2>Пользователи отсутствуют</h2>
+			<h2>РџРѕР»СЊР·РѕРІР°С‚РµР»Рё РѕС‚СЃСѓС‚СЃС‚РІСѓСЋС‚</h2>
 			<?
 		}
 		else{
@@ -76,7 +76,7 @@ include $_SERVER['DOCUMENT_ROOT']."/inc/site_admin/meta.php";
 			<tr>
 				<td>
 					<span class="input">
-						<input value="" maxlength="40" name="search_name" placeholder="Имя пользователя">
+						<input value="" maxlength="40" name="search_name" placeholder="РРјСЏ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ">
 					</span>
 				</td>
 				<td>
@@ -86,21 +86,21 @@ include $_SERVER['DOCUMENT_ROOT']."/inc/site_admin/meta.php";
 					while ($r = msr($q))
 					{
 				            $values[stripslashes(htmlspecialchars($r['name']))] = stripslashes(htmlspecialchars($r['name']));
-			
+
 				    }
 					?>
-		
+
 						<?print getSelectSinonim('search_group',$values,$_REQUEST['search_group']);?>
-	
+
 				</td>
 			</tr>
 			</table>
 		</div>
 		<table class="table-content stat tusers">
 			<tr>
-				<th class="t_nowrap">Пользователь<a href="<?=configGet("AskUrl").'?order=1'?>" title="Сортировать по убыванию" class="sort"><img src="/pics/arrows/down_sort_blue.gif" width="5" height="10" /></a><a href="<?=configGet("AskUrl")?>" title="Сортировать по возрастанию" class="sort"><img src="/pics/arrows/up_sort_blue.gif" width="5" height="10" /></a></th>
-				<th class="t_nowrap">Последний вход</th>
-				<th class="t_nowrap">Группа<a href="<?=configGet("AskUrl").'?order=3'?>" title="Сортировать по убыванию" class="sort"><img src="/pics/arrows/down_sort_blue.gif" width="5" height="10" /></a><a href="<?=configGet("AskUrl").'?order=2'?>" title="Сортировать по возрастанию" class="sort"><img src="/pics/arrows/up_sort_blue.gif" width="5" height="10" /></a></th>
+				<th class="t_nowrap">РџРѕР»СЊР·РѕРІР°С‚РµР»СЊ<a href="<?=configGet("AskUrl").'?order=1'?>" title="РЎРѕСЂС‚РёСЂРѕРІР°С‚СЊ РїРѕ СѓР±С‹РІР°РЅРёСЋ" class="sort"><img src="/pics/arrows/down_sort_blue.gif" width="5" height="10" /></a><a href="<?=configGet("AskUrl")?>" title="РЎРѕСЂС‚РёСЂРѕРІР°С‚СЊ РїРѕ РІРѕР·СЂР°СЃС‚Р°РЅРёСЋ" class="sort"><img src="/pics/arrows/up_sort_blue.gif" width="5" height="10" /></a></th>
+				<th class="t_nowrap">РџРѕСЃР»РµРґРЅРёР№ РІС…РѕРґ</th>
+				<th class="t_nowrap">Р“СЂСѓРїРїР°<a href="<?=configGet("AskUrl").'?order=3'?>" title="РЎРѕСЂС‚РёСЂРѕРІР°С‚СЊ РїРѕ СѓР±С‹РІР°РЅРёСЋ" class="sort"><img src="/pics/arrows/down_sort_blue.gif" width="5" height="10" /></a><a href="<?=configGet("AskUrl").'?order=2'?>" title="РЎРѕСЂС‚РёСЂРѕРІР°С‚СЊ РїРѕ РІРѕР·СЂР°СЃС‚Р°РЅРёСЋ" class="sort"><img src="/pics/arrows/up_sort_blue.gif" width="5" height="10" /></a></th>
 				<th class="t_32width"></th>
 				<th class="t_32width"></th>
 			</tr>
@@ -128,14 +128,14 @@ include $_SERVER['DOCUMENT_ROOT']."/inc/site_admin/meta.php";
 						if ((isset($user['settings']['noswitch']) || !@in_array('onoff',$group['new_settings'][$activeccid])) && $mode!='development'){
 							?>
 							<a class="button txtstyle disabled">
-								<span class="icon" style="background-image: url(/pics/editor/disabled.png)" title="Нельзя выключить" />
+								<span class="icon" style="background-image: url(/pics/editor/disabled.png)" title="РќРµР»СЊР·СЏ РІС‹РєР»СЋС‡РёС‚СЊ" />
 							</a>
 							<?
 						}
 						else{
 							?>
 							<a href="<?=configGet("AskUrl").'?switch_'.((isset($user['settings']['engage']))?'off':'on').'='.$user['id']?>" class="button txtstyle">
-								<span class="icon" style="background-image: url(/pics/editor/<?=(isset($user['settings']['engage']))?'on':'off'?>.png)" title="Включен" />
+								<span class="icon" style="background-image: url(/pics/editor/<?=(isset($user['settings']['engage']))?'on':'off'?>.png)" title="Р’РєР»СЋС‡РµРЅ" />
 							</a>
 							<?
 						}
@@ -146,14 +146,14 @@ include $_SERVER['DOCUMENT_ROOT']."/inc/site_admin/meta.php";
 						if ((isset($group['settings']['undeletable']) || !@in_array('delete',$group['new_settings'][$activeccid])) && $mode!='development'){
 							?>
 							<span class="button txtstyle disabled">
-								<input type="button" style="background-image: url(/pics/editor/delete-disabled.gif)" title="Невозможно удалить" />
+								<input type="button" style="background-image: url(/pics/editor/delete-disabled.gif)" title="РќРµРІРѕР·РјРѕР¶РЅРѕ СѓРґР°Р»РёС‚СЊ" />
 							</span>
 							<?
 						}
 						else{
 							?>
-							<a href="./?delete=<?=$user['id']?>" class="button txtstyle" onclick="if (confirm('Вы уверены, что хотите удалить этого пользователя?')) bkAjaxDeleteItem('users',<?=$user['id']?>,'item_<?=$user['id']?>'); return false;">
-								<input type="button" style="background-image: url(/pics/editor/delete.gif)" title="Удалить пользователя" />
+							<a href="./?delete=<?=$user['id']?>" class="button txtstyle" onclick="if (confirm('Р’С‹ СѓРІРµСЂРµРЅС‹, С‡С‚Рѕ С…РѕС‚РёС‚Рµ СѓРґР°Р»РёС‚СЊ СЌС‚РѕРіРѕ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ?')) bkAjaxDeleteItem('users',<?=$user['id']?>,'item_<?=$user['id']?>'); return false;">
+								<input type="button" style="background-image: url(/pics/editor/delete.gif)" title="РЈРґР°Р»РёС‚СЊ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ" />
 							</a>
 							<?
 						}
@@ -172,7 +172,7 @@ include $_SERVER['DOCUMENT_ROOT']."/inc/site_admin/meta.php";
 		?>
 		<span class="clear"></span>
 		<div class="place">
-			<a href="edit/" class="button big" style="float: right;">Новый пользователь</a>
+			<a href="edit/" class="button big" style="float: right;">РќРѕРІС‹Р№ РїРѕР»СЊР·РѕРІР°С‚РµР»СЊ</a>
 		</div>
 		<?}?>
 		<span class="clear"></span>

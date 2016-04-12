@@ -1,6 +1,6 @@
 <?
 /*
-Êëàññ íàñòğîåê áıêîôèñà
+ĞšĞ»Ğ°ÑÑ Ğ½Ğ°ÑÑ‚Ñ€Ğ¾ĞµĞº Ğ±ÑĞºĞ¾Ñ„Ğ¸ÑĞ°
 */
 class SiteSettings extends VirtualClass
 {
@@ -12,38 +12,38 @@ class SiteSettings extends VirtualClass
 			"settings"=>"TEXT"
 		));
 		$this->Settings['types'] = array(
-			'integer'=>'Öåëîå ÷èñëî',
-			'email'=>'Àäğåñ ıëåêòğîííîé ïî÷òû',
-			'string'=>'Ñòğîêà',
-			'text'=>'Òåêñò',
-			'int'=>'Äà/Íåò',
-			'image'=>'Êàğòèíêà'
+			'integer'=>'Ğ¦ĞµĞ»Ğ¾Ğµ Ñ‡Ğ¸ÑĞ»Ğ¾',
+			'email'=>'ĞĞ´Ñ€ĞµÑ ÑĞ»ĞµĞºÑ‚Ñ€Ğ¾Ğ½Ğ½Ğ¾Ğ¹ Ğ¿Ğ¾Ñ‡Ñ‚Ñ‹',
+			'string'=>'Ğ¡Ñ‚Ñ€Ğ¾ĞºĞ°',
+			'text'=>'Ğ¢ĞµĞºÑÑ‚',
+			'int'=>'Ğ”Ğ°/ĞĞµÑ‚',
+			'image'=>'ĞšĞ°Ñ€Ñ‚Ğ¸Ğ½ĞºĞ°'
 		);
 	}
-	function check($value,$settings = array()){ // Ïğîâåğêà íà äîïóñòèìîå çíà÷åíèå â çàâèñèìîñòè îò òèïà
+	function check($value,$settings = array()){ // ĞŸÑ€Ğ¾Ğ²ĞµÑ€ĞºĞ° Ğ½Ğ° Ğ´Ğ¾Ğ¿ÑƒÑÑ‚Ğ¸Ğ¼Ğ¾Ğµ Ğ·Ğ½Ğ°Ñ‡ĞµĞ½Ğ¸Ğµ Ğ² Ğ·Ğ°Ğ²Ğ¸ÑĞ¸Ğ¼Ğ¾ÑÑ‚Ğ¸ Ğ¾Ñ‚ Ñ‚Ğ¸Ğ¿Ğ°
 		$retval = array('error'=>'','value'=>trim($value));
 		switch ($settings['type']){
 			case 'integer':
 				$retval['value'] = floor($retval['value']);
-				if (isset($settings['notnull']) && ($retval['value']==0)) $retval['error'] = 'Íå ìîæåò èìåòü ïóñòîå çíà÷åíèå';
+				if (isset($settings['notnull']) && ($retval['value']==0)) $retval['error'] = 'ĞĞµ Ğ¼Ğ¾Ğ¶ĞµÑ‚ Ğ¸Ğ¼ĞµÑ‚ÑŒ Ğ¿ÑƒÑÑ‚Ğ¾Ğµ Ğ·Ğ½Ğ°Ñ‡ĞµĞ½Ğ¸Ğµ';
 			break;
 			case 'email':
 				$mail = array();
 				$emails = explode(',',$retval['value']);
 				foreach ($emails as $email){
 					if ($email = checkEmail($email)) $mail[] = $email;
-					else $retval['error'] = 'Îäèí èëè íåñêîëüêî àäğåñîâ óêàçàíû íåâåğíî';
+					else $retval['error'] = 'ĞĞ´Ğ¸Ğ½ Ğ¸Ğ»Ğ¸ Ğ½ĞµÑĞºĞ¾Ğ»ÑŒĞºĞ¾ Ğ°Ğ´Ñ€ĞµÑĞ¾Ğ² ÑƒĞºĞ°Ğ·Ğ°Ğ½Ñ‹ Ğ½ĞµĞ²ĞµÑ€Ğ½Ğ¾';
 				}
 				$retval['value'] = implode(',',$mail);
-				if (isset($settings['notnull']) && ($retval['value']=='')) $retval['error'] = 'Íå ìîæåò èìåòü ïóñòîå çíà÷åíèå';
+				if (isset($settings['notnull']) && ($retval['value']=='')) $retval['error'] = 'ĞĞµ Ğ¼Ğ¾Ğ¶ĞµÑ‚ Ğ¸Ğ¼ĞµÑ‚ÑŒ Ğ¿ÑƒÑÑ‚Ğ¾Ğµ Ğ·Ğ½Ğ°Ñ‡ĞµĞ½Ğ¸Ğµ';
 			break;
 			case 'string':
-				if (isset($settings['notnull']) && ($retval['value']=='')) $retval['error'] = 'Íå ìîæåò èìåòü ïóñòîå çíà÷åíèå';
+				if (isset($settings['notnull']) && ($retval['value']=='')) $retval['error'] = 'ĞĞµ Ğ¼Ğ¾Ğ¶ĞµÑ‚ Ğ¸Ğ¼ĞµÑ‚ÑŒ Ğ¿ÑƒÑÑ‚Ğ¾Ğµ Ğ·Ğ½Ğ°Ñ‡ĞµĞ½Ğ¸Ğµ';
 			break;
 		}
 		return $retval;
 	}
-	function update($id,$value, $prec=0){ // Ğåäàêòèğîâàíèå íàñòğîéêè
+	function update($id,$value, $prec=0){ // Ğ ĞµĞ´Ğ°ĞºÑ‚Ğ¸Ñ€Ğ¾Ğ²Ğ°Ğ½Ğ¸Ğµ Ğ½Ğ°ÑÑ‚Ñ€Ğ¾Ğ¹ĞºĞ¸
 		$error = '';
 		$set = $this->getOne($id);
 		$value = $this->check($value,$set['settings']);
@@ -55,16 +55,16 @@ class SiteSettings extends VirtualClass
 		}
 		return $error;
 	}
-	function add($name,$description,$value,$settings = array()){ // Äîáàâëåíèå íàñòğîéêè
+	function add($name,$description,$value,$settings = array()){ // Ğ”Ğ¾Ğ±Ğ°Ğ²Ğ»ĞµĞ½Ğ¸Ğµ Ğ½Ğ°ÑÑ‚Ñ€Ğ¾Ğ¹ĞºĞ¸
 		$errors = array();
 		if (!is_array($settings)) $settings = array();
 		$name = trim($name);
 
 		$type = ''; foreach ($this->getSetting('types') as $t=>$d) if ($settings['type']==$t) $type = $t;
-		if ($type=='') $errors[] = 'Óêàçàí íåêîğğåêòíûé òèï'; $settings['type'] = $type;
-		if (!preg_match('/[a-zA-Z_0-9]+/',$name)) $errors[] = 'Íàçâàíèå íàñòğîéêè äîëæíî ñîñòîÿòü èç áóêâ ëàòèíñêîãî àëôàâèòà è öèôğ';
-		if ($description=='') $errors[] = 'Íå óêàçàíî îïèñàíèå';
-		if (!$this->isUniqueName($name)) $errors[] = 'Íàñòğîéêà ñ òàêèì íàçâàíèåì óæå ñîçäàíà, èçìåíèòå íàçâàíèå';
+		if ($type=='') $errors[] = 'Ğ£ĞºĞ°Ğ·Ğ°Ğ½ Ğ½ĞµĞºĞ¾Ñ€Ñ€ĞµĞºÑ‚Ğ½Ñ‹Ğ¹ Ñ‚Ğ¸Ğ¿'; $settings['type'] = $type;
+		if (!preg_match('/[a-zA-Z_0-9]+/',$name)) $errors[] = 'ĞĞ°Ğ·Ğ²Ğ°Ğ½Ğ¸Ğµ Ğ½Ğ°ÑÑ‚Ñ€Ğ¾Ğ¹ĞºĞ¸ Ğ´Ğ¾Ğ»Ğ¶Ğ½Ğ¾ ÑĞ¾ÑÑ‚Ğ¾ÑÑ‚ÑŒ Ğ¸Ğ· Ğ±ÑƒĞºĞ² Ğ»Ğ°Ñ‚Ğ¸Ğ½ÑĞºĞ¾Ğ³Ğ¾ Ğ°Ğ»Ñ„Ğ°Ğ²Ğ¸Ñ‚Ğ° Ğ¸ Ñ†Ğ¸Ñ„Ñ€';
+		if ($description=='') $errors[] = 'ĞĞµ ÑƒĞºĞ°Ğ·Ğ°Ğ½Ğ¾ Ğ¾Ğ¿Ğ¸ÑĞ°Ğ½Ğ¸Ğµ';
+		if (!$this->isUniqueName($name)) $errors[] = 'ĞĞ°ÑÑ‚Ñ€Ğ¾Ğ¹ĞºĞ° Ñ Ñ‚Ğ°ĞºĞ¸Ğ¼ Ğ½Ğ°Ğ·Ğ²Ğ°Ğ½Ğ¸ĞµĞ¼ ÑƒĞ¶Ğµ ÑĞ¾Ğ·Ğ´Ğ°Ğ½Ğ°, Ğ¸Ğ·Ğ¼ĞµĞ½Ğ¸Ñ‚Ğµ Ğ½Ğ°Ğ·Ğ²Ğ°Ğ½Ğ¸Ğµ';
 		$check = $this->check($value,$settings);
 		if ($check['error']!='') $errors[] = $check['error'];
 		$settings = $this->implode($settings);
@@ -77,14 +77,14 @@ class SiteSettings extends VirtualClass
 		$errors = array();
 		$set = $this->getOne($id);
 		if (floor($set['id'])>0){
-			if (isset($set['settings']['undeletable'])) $errors[] = 'Íåâîçìîæíî óäàëèòü';
+			if (isset($set['settings']['undeletable'])) $errors[] = 'ĞĞµĞ²Ğ¾Ğ·Ğ¼Ğ¾Ğ¶Ğ½Ğ¾ ÑƒĞ´Ğ°Ğ»Ğ¸Ñ‚ÑŒ';
 			if (count($errors)==0){
 				msq("DELETE FROM `".$this->getSetting('table')."` WHERE `id`='".$set['id']."'");
 			}
 		}
 		return $errors;
 	}
-	function isUniqueName($name,$exceptid = 0){ /* Ïğîâåğêà íà óíèêàëüíîñòü íàçâàíèÿ, âîçâğàùàåò true åñëè óíèêàëüíî */
+	function isUniqueName($name,$exceptid = 0){ /* ĞŸÑ€Ğ¾Ğ²ĞµÑ€ĞºĞ° Ğ½Ğ° ÑƒĞ½Ğ¸ĞºĞ°Ğ»ÑŒĞ½Ğ¾ÑÑ‚ÑŒ Ğ½Ğ°Ğ·Ğ²Ğ°Ğ½Ğ¸Ñ, Ğ²Ğ¾Ğ·Ğ²Ñ€Ğ°Ñ‰Ğ°ĞµÑ‚ true ĞµÑĞ»Ğ¸ ÑƒĞ½Ğ¸ĞºĞ°Ğ»ÑŒĞ½Ğ¾ */
 		$retval = true;
 		$name = addslashes($name);
 		$exceptid = floor($exceptid);
@@ -92,7 +92,7 @@ class SiteSettings extends VirtualClass
 		while ($r = msr($q)) if ($r['id']!= $exceptid) $retval = false;
 		return $retval;
 	}
-	function getList(){ // Ïîëó÷åíèÿ ñïèñêà ID íàñòğîåê
+	function getList(){ // ĞŸĞ¾Ğ»ÑƒÑ‡ĞµĞ½Ğ¸Ñ ÑĞ¿Ğ¸ÑĞºĞ° ID Ğ½Ğ°ÑÑ‚Ñ€Ğ¾ĞµĞº
 		$retval = array();
 		$q = msq("SELECT * FROM `".$this->getSetting('table')."` ORDER BY `precedence`");
 		while ($r = msr($q)){ $retval[] = $r['id']; $one = $this->getOne($r['id'],$r); }
@@ -106,7 +106,7 @@ class SiteSettings extends VirtualClass
 		}
 		return $retval;
 	}
-	function getOne($id = 0, $r = array()){ /* Ïîëó÷åíèå èíôîğìàöèè î êîíêğåòíîé íàñòğîéêå */
+	function getOne($id = 0, $r = array()){ /* ĞŸĞ¾Ğ»ÑƒÑ‡ĞµĞ½Ğ¸Ğµ Ğ¸Ğ½Ñ„Ğ¾Ñ€Ğ¼Ğ°Ñ†Ğ¸Ğ¸ Ğ¾ ĞºĞ¾Ğ½ĞºÑ€ĞµÑ‚Ğ½Ğ¾Ğ¹ Ğ½Ğ°ÑÑ‚Ñ€Ğ¾Ğ¹ĞºĞµ */
 		$id = floor($id);
 		$retval = $this->getCacheValue('setting_'.$id);
 		if (floor($retval['id'])>0) return $retval;
@@ -122,7 +122,7 @@ class SiteSettings extends VirtualClass
 		}
 		return $retval;
 	}
-	function getOneVal($id = 0, $r = array()){ /* Ïîëó÷åíèå èíôîğìàöèè î êîíêğåòíîé íàñòğîéêå */
+	function getOneVal($id = 0, $r = array()){ /* ĞŸĞ¾Ğ»ÑƒÑ‡ĞµĞ½Ğ¸Ğµ Ğ¸Ğ½Ñ„Ğ¾Ñ€Ğ¼Ğ°Ñ†Ğ¸Ğ¸ Ğ¾ ĞºĞ¾Ğ½ĞºÑ€ĞµÑ‚Ğ½Ğ¾Ğ¹ Ğ½Ğ°ÑÑ‚Ñ€Ğ¾Ğ¹ĞºĞµ */
 		$id = floor($id);
 		$retval = $this->getCacheValue('setting_'.$id);
 		if (floor($retval['id'])>0) return $retval;

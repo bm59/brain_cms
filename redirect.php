@@ -4,51 +4,51 @@ include_once($_SERVER['DOCUMENT_ROOT']."/inc/site/init.php");
 include_once($_SERVER['DOCUMENT_ROOT']."/inc/ajax_securuty.php");
 
 
-mysql_query("SET NAMES cp1251"); // для mysql
-header("Content-type: text/html; charset=windows-1251");
+mysql_query("SET NAMES utf-8"); // РґР»СЏ mysql
+header("Content-type: text/html; charset=utf-8");
 
 if ($_REQUEST['banner_id']>0)
 {
 	$banner_section=msr(msq("SELECT * FROM `site_site_sections` WHERE `pattern`='PBanners'"));
 	$banner_Section = $SiteSections->get($banner_section['id']);
-	
+
 	$banner_iface=getiface($SiteSections->getPath($banner_Section['id']));
-	
+
 	$banner=$banner_iface->getPub($_GET['banner_id']);
-	
+
 	if ($_GET['banner_id']>0)
 	{
-	
+
 		if ($banner['id']>0 && $banner['href']!='')
 		{
 			$banner_iface->addStat($banner['id'], 'click');
-		    header("Location: ".iconv('windows-1251', 'utf-8', $banner['href'])."\n");
+		    header("Location: ".$banner['href']."\n");
 			die();
 	    }
 	    else
-	    die('Ошибка, обратитесь в службу поддержки сайта!');
+	    die('РћС€РёР±РєР°, РѕР±СЂР°С‚РёС‚РµСЃСЊ РІ СЃР»СѓР¶Р±Сѓ РїРѕРґРґРµСЂР¶РєРё СЃР°Р№С‚Р°!');
 	}
-	
+
 	if ($_POST['action']=='add_click' && $_POST['banner_id']>0)
 	{
-		
-		if (session_id()!=$_POST['session_id']) die('Ошибка!!!');
+
+		if (session_id()!=$_POST['session_id']) die('РћС€РёР±РєР°!!!');
 		$banner_iface->addStat($_POST['banner_id'], 'click');
-		
+
 	}
 }
 
 if ($_GET['adv_id'])
 {
 	$rk_item=$rkIface->getPub($_GET['adv_id']);
-	
+
 	if ($rk_item['id']>0)
 	{
 		$rkIface->addStat($rk_item['id'], 'click');
-			
+
 	}
-	else die('Ошибка, обратитесь в службу поддержки сайта!');
-	
+	else die('РћС€РёР±РєР°, РѕР±СЂР°С‚РёС‚РµСЃСЊ РІ СЃР»СѓР¶Р±Сѓ РїРѕРґРґРµСЂР¶РєРё СЃР°Р№С‚Р°!');
+
 	$href=$_GET['url']!='inner' ? $_GET['url'] : $rk_item['href'];
 	header("Location: ".$href."\n");
 

@@ -2,7 +2,7 @@
 class CDVideo extends VirtualType
 {
 	function init($settings){
-		$settings['descr']='Видео файл';
+		$settings['descr']='Р’РёРґРµРѕ С„Р°Р№Р»';
 		VirtualType::init($settings);
 	}
 	function drawEditor(){
@@ -24,7 +24,7 @@ class CDVideo extends VirtualType
 				}
 				function on<?=htmlspecialchars($this->getSetting('name'))?>StartLoading(){
 					var img = $('<?=htmlspecialchars($this->getSetting('name'))?>imagecontent');
-					img.innerHTML = '<div class="contenttxt"><br>Идет загрузка...</div>';
+					img.innerHTML = '<div class="contenttxt"><br>РРґРµС‚ Р·Р°РіСЂСѓР·РєР°...</div>';
 				}
 				function on<?=htmlspecialchars($this->getSetting('name'))?>FinishDeleting(){
 					var file = $('uploadfilehidden<?=htmlspecialchars($this->getSetting('name'))?>');
@@ -39,7 +39,7 @@ class CDVideo extends VirtualType
 					img.innerHTML = '';
 					if (uploadimageid>0){
 						file.value = uploadimageid;
-						img.innerHTML = '<div class="contenttxt"><a href="'+uploadimage+'">Ссылка на файл</a></div><div class="contenttxt"><a href="/site/video.php?file='+uploadimage+'" onclick="PopUp(\'/site/video.php?file='+uploadimage+'\',\'Video\',420,350); return false;">Просмотр видео</a></div>';
+						img.innerHTML = '<div class="contenttxt"><a href="'+uploadimage+'">РЎСЃС‹Р»РєР° РЅР° С„Р°Р№Р»</a></div><div class="contenttxt"><a href="/site/video.php?file='+uploadimage+'" onclick="PopUp(\'/site/video.php?file='+uploadimage+'\',\'Video\',420,350); return false;">РџСЂРѕСЃРјРѕС‚СЂ РІРёРґРµРѕ</a></div>';
 						showHideDeletingButton<?=htmlspecialchars($this->getSetting('name'))?>(1);
 
 					}
@@ -50,26 +50,26 @@ class CDVideo extends VirtualType
 				<label><?=htmlspecialchars($this->getSetting('description'))?><?=((isset($settings['important']))?' <span class="important">*</span>':'')?></label>
 				<input type="hidden" id="uploadfilehidden<?=htmlspecialchars($this->getSetting('name'))?>" name="<?=htmlspecialchars($this->getSetting('name'))?>" value="<?=$this->getSetting('value')?>">
 				<div class="button">
-					Загрузить файл
+					Р—Р°РіСЂСѓР·РёС‚СЊ С„Р°Р№Р»
 					<div class="fileselect">
 					<input type="file" name="<?=htmlspecialchars($this->getSetting('name'))?>2" id="<?=htmlspecialchars($this->getSetting('name'))?>2" onchange="uploadFileAjax(this,'<?=htmlspecialchars($this->getSetting('editformid'))?>','fileuploadframe','uploadfilehidden<?=htmlspecialchars($this->getSetting('name'))?>',<?=$st['id']?>,'<?=trim($this->getSetting('theme'))?>','<?=trim($this->getSetting('rubric'))?>',<?=floor($this->getSetting('uid'))?>,'on<?=htmlspecialchars($this->getSetting('name'))?>StartLoading();','on<?=htmlspecialchars($this->getSetting('name'))?>FinishLoading(uploadimage,uploadimageid,uploadimagewidth,uploadimageheight);','onready');"/>
 					</div>
 				</div>
 				<span id="<?=htmlspecialchars($this->getSetting('name'))?>uploadimagedeletebutton" class="button txtstyle" <?=(floor($this->getSetting('value'))<1)?'style="display:none;"':''?>>
-					<input type="button" onclick="uploadFileAjax(this,'<?=htmlspecialchars($this->getSetting('editformid'))?>','fileuploadframe','uploadfilehidden<?=htmlspecialchars($this->getSetting('name'))?>',<?=$st['id']?>,'<?=trim($this->getSetting('theme'))?>','<?=trim($this->getSetting('rubric'))?>',<?=floor($this->getSetting('uid'))?>,'on<?=htmlspecialchars($this->getSetting('name'))?>StartLoading();','on<?=htmlspecialchars($this->getSetting('name'))?>FinishDeleting();','anytime');return false;" style="background-image: url(/pics/editor/delete.gif)" title="Удалить ролик" />
+					<input type="button" onclick="uploadFileAjax(this,'<?=htmlspecialchars($this->getSetting('editformid'))?>','fileuploadframe','uploadfilehidden<?=htmlspecialchars($this->getSetting('name'))?>',<?=$st['id']?>,'<?=trim($this->getSetting('theme'))?>','<?=trim($this->getSetting('rubric'))?>',<?=floor($this->getSetting('uid'))?>,'on<?=htmlspecialchars($this->getSetting('name'))?>StartLoading();','on<?=htmlspecialchars($this->getSetting('name'))?>FinishDeleting();','anytime');return false;" style="background-image: url(/pics/editor/delete.gif)" title="РЈРґР°Р»РёС‚СЊ СЂРѕР»РёРє" />
 				</span>
 				<span class="clear"></span>
 				<?
-					$desc = 'Видеофайл в формате flv'.$this->getSetting($this->getSetting('name'));;
+					$desc = 'Р’РёРґРµРѕС„Р°Р№Р» РІ С„РѕСЂРјР°С‚Рµ flv'.$this->getSetting($this->getSetting('name'));;
 					$exts = upper(str_replace(',',', ',$st['settings']['exts']));
-					if ($exts!='') $desc.= ' формата '.$exts;
+					if ($exts!='') $desc.= ' С„РѕСЂРјР°С‚Р° '.$exts;
 				?>
 				<div class="contentdesc"><small><?=$desc?></small></div>
 				<div id="<?=htmlspecialchars($this->getSetting('name'))?>imagecontent" name="<?=htmlspecialchars($this->getSetting('name'))?>imagecontent">
 				<?
 				if (floor($videofile['id'])>0){
-				print '<div class="contenttxt"><a href="'.$videofile['path'].'">Ссылка на файл</a></div>';
-				print '<div class="contenttxt"><a href="/site/video.php?file='.$videofile['path'].'" onclick="PopUp(\'/site/video.php?file='.$videofile['path'].'\',\'Video\',420,350); return false;">Просмотр видео</a></div>';
+				print '<div class="contenttxt"><a href="'.$videofile['path'].'">РЎСЃС‹Р»РєР° РЅР° С„Р°Р№Р»</a></div>';
+				print '<div class="contenttxt"><a href="/site/video.php?file='.$videofile['path'].'" onclick="PopUp(\'/site/video.php?file='.$videofile['path'].'\',\'Video\',420,350); return false;">РџСЂРѕСЃРјРѕС‚СЂ РІРёРґРµРѕ</a></div>';
 				}
 				?>
 				</div>
@@ -82,7 +82,7 @@ class CDVideo extends VirtualType
 		$errors = array();
 		$settings = $this->getSetting('settings');
 		$newvalue = floor($_POST[$this->getSetting('name')]);
-		if ((isset($settings['important'])) && ($newvalue<1)) $errors[] = 'Заполните поле «'.$this->getSetting('description').'»';
+		if ((isset($settings['important'])) && ($newvalue<1)) $errors[] = 'Р—Р°РїРѕР»РЅРёС‚Рµ РїРѕР»Рµ В«'.$this->getSetting('description').'В»';
 		$this->setSetting('value',$newvalue);
 		return $errors;
 	}

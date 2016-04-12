@@ -1,28 +1,28 @@
 <?
-$source_descr='Ëîãè äåéñòâèé';
+$source_descr='Ð›Ð¾Ð³Ð¸ Ð´ÐµÐ¹ÑÑ‚Ð²Ð¸Ð¹';
 $source_name='PLog';
-/* Èìÿ êëàññà */
+/* Ð˜Ð¼Ñ ÐºÐ»Ð°ÑÑÐ° */
 class PLog extends VirtualPattern
 {
 	function init($settings){
 		global $CDDataSet,$Storage;
-		
-		/* Îïèñàíèå êëàññà */
-		$source_descr='Ëîãè äåéñòâèé';
-		
+
+		/* ÐžÐ¿Ð¸ÑÐ°Ð½Ð¸Ðµ ÐºÐ»Ð°ÑÑÐ° */
+		$source_descr='Ð›Ð¾Ð³Ð¸ Ð´ÐµÐ¹ÑÑ‚Ð²Ð¸Ð¹';
+
 		$source_name=substr(get_class(), 1, strlen(get_class()));
 		$class_name='CC'.$source_name;
 		$settings['name'] = get_class();
 		$settings['dataset'] = $CDDataSet->checkPresence(0, mb_strtolower($source_name));
-		
-		
-		
+
+
+
 		$SiteSettings = new SiteSettings;
 		$SiteSettings->init();
 
-		
-		$settings['imagestorage'] = $Storage->getStorage(0,array('path'=>'/site/images/','name'=>'Èçîáðàæåíèÿ ñàéòà (îáùåå)','exts'=>array('jpg','gif','jpeg', 'png'),'images'=>1));
-		$settings['filestorage'] = $Storage->getStorage(0,array('path'=>'/site/files/','name'=>'Ôàéëû ñàéòà (îáùåå)'));
+
+		$settings['imagestorage'] = $Storage->getStorage(0,array('path'=>'/site/images/','name'=>'Ð˜Ð·Ð¾Ð±Ñ€Ð°Ð¶ÐµÐ½Ð¸Ñ ÑÐ°Ð¹Ñ‚Ð° (Ð¾Ð±Ñ‰ÐµÐµ)','exts'=>array('jpg','gif','jpeg', 'png'),'images'=>1));
+		$settings['filestorage'] = $Storage->getStorage(0,array('path'=>'/site/files/','name'=>'Ð¤Ð°Ð¹Ð»Ñ‹ ÑÐ°Ð¹Ñ‚Ð° (Ð¾Ð±Ñ‰ÐµÐµ)'));
 		VirtualPattern::init($settings);
 		$this->setSetting('table',$this->createDataSetTable($this->getSetting('dataset'),$this->getSetting('section'),array('show'=>'INT(1)')));
 		$iface = new $class_name;

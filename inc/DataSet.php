@@ -1,6 +1,6 @@
 <?
 /*
-Êëàññ, îïèñûâàþùèé íàáîð äàííûõ
+ÐšÐ»Ð°ÑÑ, Ð¾Ð¿Ð¸ÑÑ‹Ð²Ð°ÑŽÑ‰Ð¸Ð¹ Ð½Ð°Ð±Ð¾Ñ€ Ð´Ð°Ð½Ð½Ñ‹Ñ…
 */
 class DataSet extends VirtualClass
 {
@@ -13,13 +13,13 @@ class DataSet extends VirtualClass
 		if (is_array($settings)){
 			foreach ($settings as $name=>$value) $this->setSetting($name,$value);
 		}
-		/* Äîáàâëåíèå íàáîðîâ */
+		/* Ð”Ð¾Ð±Ð°Ð²Ð»ÐµÐ½Ð¸Ðµ Ð½Ð°Ð±Ð¾Ñ€Ð¾Ð² */
 /* 		$this->add(array(
 				'name'=>'sheet1',
-				'description'=>'Ëèñò (1 êîëîíêà)',
+				'description'=>'Ð›Ð¸ÑÑ‚ (1 ÐºÐ¾Ð»Ð¾Ð½ÐºÐ°)',
 				'types'=>array(
 					array(
-						'description'=>'Òåêñò',
+						'description'=>'Ð¢ÐµÐºÑÑ‚',
 						'name'=>'text',
 						'type'=>'CDTextEditor',
 						'settings'=>array('important'=>'','texttype'=>'full')
@@ -32,7 +32,7 @@ class DataSet extends VirtualClass
 
 	function get($id, $section_id=0){
 		global $CDDataType;
-		
+
 		$retval = array();
 		if (!$section_id>0 && $_GET['section']>0) $section_id=$_GET['section'];
 		$id = floor($id);
@@ -55,23 +55,24 @@ class DataSet extends VirtualClass
 		$values['description'] = trim($values['description']);
 		if (strlen($values['description'])==0) return false;
 		$settings = $this->implode($values['settings']);
-		
+
 		$id=$this->checkPresence(0,$values['name']);
 		if ($id==0)
 		{
 			msq("INSERT INTO `".$this->getSetting('table')."` (`description`,`name`,`settings`) VALUES ('".addslashes($values['description'])."','".$values['name']."','$settings')");
 			$id = mslastid();
 		}
-		/* Åñòü ëè òèïû äàííûõ äëÿ id ðàçäåëà */
+		/* Ð•ÑÑ‚ÑŒ Ð»Ð¸ Ñ‚Ð¸Ð¿Ñ‹ Ð´Ð°Ð½Ð½Ñ‹Ñ… Ð´Ð»Ñ id Ñ€Ð°Ð·Ð´ÐµÐ»Ð° */
 		if ($this->checkDatatype($id,$values['name'],$section_id)==0)
 		{
-			
-			foreach ($values['types'] as $type) 
+
+			foreach ($values['types'] as $type)
 			$CDDataType->add(array('section_id'=>$section_id,'dataset'=>$id,'description'=>$type['description'],'name'=>$type['name'],'type'=>$type['type'],'settings'=>$type['settings']), '','', $section_id);
 		}
 	}
 	function checkPresence($id,$name = ''){
 		$id = floor($id);
+		
 		if (trim($name)!='') if ($r = msr(msq("SELECT * FROM `".$this->getSetting('table')."` WHERE `name`='".addslashes(trim($name))."'"))) return $r['id'];
 		if (msr(msq("SELECT * FROM `".$this->getSetting('table')."` WHERE `id`='$id'"))) return $id;
 		return 0;
@@ -83,7 +84,7 @@ class DataSet extends VirtualClass
 	}
 	function update_prec($id,$section_id){
 		$id = floor($id);
-		
+
 		if (!$id>0 || !$section_id>0) return false;
 		$q=msq("SELECT *, 1 as ord FROM `site_site_data_types` WHERE section_id=$section_id AND dataset=$id AND settings NOT LIKE '%|off|%'
 				UNION SELECT *, 2 as ord FROM `site_site_data_types` WHERE section_id=$section_id AND dataset=$id AND settings LIKE '%|off|%'  ORDER BY `ord`,`precedence`");
@@ -97,17 +98,17 @@ class DataSet extends VirtualClass
 	}
 	function checkDatatype($id,$name = '', $section_id){
 		$id = floor($id);
-	
+
 		$cnt=msr(msq("SELECT count(*) as cnt FROM `site_site_data_types` WHERE `dataset`='".$id."' and section_id=".$section_id));
-	
+
 		return floor($cnt['cnt']);
 	}
 	function delete($id,$section_id){
 		$id = floor($id);
-		
+
 		if ($section_id>0)
 		$cnt=msr(msq("DELETE FROM `site_site_data_types` WHERE `dataset`='".$id."' and section_id=".$section_id));
-	
+
 		return;
 	}
 }

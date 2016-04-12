@@ -1,42 +1,42 @@
 <?
 /*
-Класс, описывающий тип «Изображение»
+РљР»Р°СЃСЃ, РѕРїРёСЃС‹РІР°СЋС‰РёР№ С‚РёРї В«РР·РѕР±СЂР°Р¶РµРЅРёРµВ»
 */
 class CDImage extends VirtualType
 {
 	function init($settings){
-		$settings['descr']='Картинка';
+		$settings['descr']='РљР°СЂС‚РёРЅРєР°';
 		$settings['help']=array(
-				'auto_resize=true|auto_width=187|auto_height=120'=>'Автоматическая обрезка изображений',
-				'imgw=245|imgwtype=1|imgh=400|imghtype=1'=>'Проверка на размер изображений',
-				'comment=комментарий'=>'Комментарий',
-				'auto_mini=true|auto_mini_width=210|auto_mini_height=220'=>'Автоматическое создание миниатюр', 
-				'exts=jpg,gif,jpeg,png'=>'Расширения',
-				'editor_proport=auto'=>'Пропорция 3:4 или auto',
-				'editor_imgw=150|editor_imgh=200'=>'Мин. размер в редакторе',
-				'editor_minw=100|editor_minh=200'=>'Минимизировать к размеру',
-				'editor_min_more=1'=>'Минимизирует если область выделенная область больше',
-				'editor_as_min=1'=>'Сохранять изображение из редактора как миниатюру',
-		
+				'auto_resize=true|auto_width=187|auto_height=120'=>'РђРІС‚РѕРјР°С‚РёС‡РµСЃРєР°СЏ РѕР±СЂРµР·РєР° РёР·РѕР±СЂР°Р¶РµРЅРёР№',
+				'imgw=245|imgwtype=1|imgh=400|imghtype=1'=>'РџСЂРѕРІРµСЂРєР° РЅР° СЂР°Р·РјРµСЂ РёР·РѕР±СЂР°Р¶РµРЅРёР№',
+				'comment=РєРѕРјРјРµРЅС‚Р°СЂРёР№'=>'РљРѕРјРјРµРЅС‚Р°СЂРёР№',
+				'auto_mini=true|auto_mini_width=210|auto_mini_height=220'=>'РђРІС‚РѕРјР°С‚РёС‡РµСЃРєРѕРµ СЃРѕР·РґР°РЅРёРµ РјРёРЅРёР°С‚СЋСЂ',
+				'exts=jpg,gif,jpeg,png'=>'Р Р°СЃС€РёСЂРµРЅРёСЏ',
+				'editor_proport=auto'=>'РџСЂРѕРїРѕСЂС†РёСЏ 3:4 РёР»Рё auto',
+				'editor_imgw=150|editor_imgh=200'=>'РњРёРЅ. СЂР°Р·РјРµСЂ РІ СЂРµРґР°РєС‚РѕСЂРµ',
+				'editor_minw=100|editor_minh=200'=>'РњРёРЅРёРјРёР·РёСЂРѕРІР°С‚СЊ Рє СЂР°Р·РјРµСЂСѓ',
+				'editor_min_more=1'=>'РњРёРЅРёРјРёР·РёСЂСѓРµС‚ РµСЃР»Рё РѕР±Р»Р°СЃС‚СЊ РІС‹РґРµР»РµРЅРЅР°СЏ РѕР±Р»Р°СЃС‚СЊ Р±РѕР»СЊС€Рµ',
+				'editor_as_min=1'=>'РЎРѕС…СЂР°РЅСЏС‚СЊ РёР·РѕР±СЂР°Р¶РµРЅРёРµ РёР· СЂРµРґР°РєС‚РѕСЂР° РєР°Рє РјРёРЅРёР°С‚СЋСЂСѓ',
+
 		);
 		VirtualType::init($settings);
 	}
 	function drawEditor($divstyle = '',$span = true){
 		global $Storage, $VirtualContent;
-		
+
 		$settings = $this->getSetting('settings');
-		
+
 		if ($this->getSetting('use_str_settings'))
 		$str_settings=$VirtualContent->implode($settings);
-		
+
 		$st = $Storage->getStorage($this->getSetting($this->getSetting('name').'storage'));
 
 		if (!floor($st['id'])>0)
-		$st = $Storage->getStorage(0,array('path'=>'/site/images/','name'=>'Картинки','exts'=>array('jpg','gif','jpeg', 'png', 'swf')));
-		
+		$st = $Storage->getStorage(0,array('path'=>'/site/images/','name'=>'РљР°СЂС‚РёРЅРєРё','exts'=>array('jpg','gif','jpeg', 'png', 'swf')));
+
 		$f = 0;
 		if (floor($st['id'])>0){
-			
+
 			$image = $Storage->getFile($this->getSetting('value'));
 			$f = floor($image['id']);
 			$this->setSetting('value',$f);
@@ -64,12 +64,12 @@ class CDImage extends VirtualType
                     $('.link<?='_'.$this->getSetting('name')?>').attr('href', response.path);
                     $('#uploadfilehidden<?=htmlspecialchars($this->getSetting('name'))?>').val(response.id);
                     $('#loading').hide();
-                    
+
                     if (response.ext!='swf')
                     {
                     	$('#editor_container<?='_'.$this->getSetting('name')?>').fadeIn(0);
                     	$('.editor<?='_'.$this->getSetting('name')?>').attr('href', '/inc/datatypes/photo_editor/?file='+response.path+'&rubric=<?=$this->getSetting('rubric') ?>&section=<?=$_GET['section']?>&str_settings=<?=$str_settings?>');
-                    	status.html('<img <?=(($st['name']!='Баннеры') ? 'style="width: 170px"':'')?> class="contentimg" id="contentimg<?='_'.$this->getSetting('name')?>" src="'+response.path+'">');
+                    	status.html('<img <?=(($st['name']!='Р‘Р°РЅРЅРµСЂС‹') ? 'style="width: 170px"':'')?> class="contentimg" id="contentimg<?='_'.$this->getSetting('name')?>" src="'+response.path+'">');
                     }
                     else
                     {
@@ -89,7 +89,7 @@ class CDImage extends VirtualType
     });
     	function delete_file<?='_'.$this->getSetting('name')?> ()
         {
-       		if (!confirm('Вы уверены, что хотите удалить этот файл?')) return false;
+       		if (!confirm('Р’С‹ СѓРІРµСЂРµРЅС‹, С‡С‚Рѕ С…РѕС‚РёС‚Рµ СѓРґР°Р»РёС‚СЊ СЌС‚РѕС‚ С„Р°Р№Р»?')) return false;
 
 			    $.ajax({
 			        url: "/uploader_image.php",
@@ -118,17 +118,17 @@ class CDImage extends VirtualType
     		var interval = setInterval(function()
     		{
 
-    			
+
     			if ($.cookie('change_photo<?='_'.$_GET['section']?><?='_'.$this->getSetting('name')?>')=='1' && $.cookie('change_photo<?='_'.$_GET['section']?><?='_'.$this->getSetting('name')?>')!='null')
     			{
-    	            
-					/* alert('Есть изменения'); */
+
+					/* alert('Р•СЃС‚СЊ РёР·РјРµРЅРµРЅРёСЏ'); */
     	            $.cookie('change_photo<?='_'.$_GET['section']?><?='_'.$this->getSetting('name')?>', null, {path: '/'});
-    	            
+
     	            var src=$('#contentimg<?='_'.$this->getSetting('name')?>').attr("src").split("?")[0] + "?" + Math.random();
     	            $('#contentimg<?='_'.$this->getSetting('name')?>').attr('src','');
     	            $('#contentimg<?='_'.$this->getSetting('name')?>').attr('src',src);
-    	            
+
     	            clearInterval(interval);
     			}
 
@@ -148,16 +148,16 @@ class CDImage extends VirtualType
 				<input type="hidden" id="uploadfilehidden<?=htmlspecialchars($this->getSetting('name'))?>" name="<?=htmlspecialchars($this->getSetting('name'))?>" value="<?=$this->getSetting('value')?>">
                 <div class="place forimage">
 				<span id="upl_button<?='_'.$this->getSetting('name')?>" class="button">
-					Загрузить изображение
+					Р—Р°РіСЂСѓР·РёС‚СЊ РёР·РѕР±СЂР°Р¶РµРЅРёРµ
 				</span>
 				<img src="/pics/inputs/loading2.gif" id="loading" style="position: absolute; top: 0; left: 170px; display: none;">
 
 				<span class="button txtstyle" id="delete_container<?='_'.$this->getSetting('name')?>" <?=(floor($this->getSetting('value'))<1)?'style="display:none;"':''?>>
-					<input type="button" title="Удалить изображение" style="background-image: url(/pics/editor/delete.gif)" id="delete_button<?='_'.$this->getSetting('name')?>" onclick="delete_file<?='_'.$this->getSetting('name')?>(); return false">
+					<input type="button" title="РЈРґР°Р»РёС‚СЊ РёР·РѕР±СЂР°Р¶РµРЅРёРµ" style="background-image: url(/pics/editor/delete.gif)" id="delete_button<?='_'.$this->getSetting('name')?>" onclick="delete_file<?='_'.$this->getSetting('name')?>(); return false">
 				</span>
-				<span class="button txtstyle" id="link_container<?='_'.$this->getSetting('name')?>" <?=(floor($this->getSetting('value'))<1)?'style="display:none;"':''?>><a class="link<?='_'.$this->getSetting('name')?>" target="_blank" title="Ссылка на картинку" href="<?=$image['path'] ?>"><img alt="Ссылка на картинку" src="/pics/editor/link.png" style="margin-top: -4px;"></a></span>
+				<span class="button txtstyle" id="link_container<?='_'.$this->getSetting('name')?>" <?=(floor($this->getSetting('value'))<1)?'style="display:none;"':''?>><a class="link<?='_'.$this->getSetting('name')?>" target="_blank" title="РЎСЃС‹Р»РєР° РЅР° РєР°СЂС‚РёРЅРєСѓ" href="<?=$image['path'] ?>"><img alt="РЎСЃС‹Р»РєР° РЅР° РєР°СЂС‚РёРЅРєСѓ" src="/pics/editor/link.png" style="margin-top: -4px;"></a></span>
 				<?if ($image['ext']!='swf'){?>
-				<span class="button txtstyle" id="editor_container<?='_'.$this->getSetting('name')?>" <?=(floor($this->getSetting('value'))<1)?'style="display:none;"':''?>><a class="editor<?='_'.$this->getSetting('name')?>" target="_blank" title="Редактор фото" href="/inc/datatypes/photo_editor/?file=<?=$image['path'] ?>&rubric=<?=$this->getSetting('rubric') ?>&section=<?=$_GET['section'] ?>&str_settings=<?=urlencode($str_settings) ?>" onclick="wait_editor();"><img alt="Редактор фото" src="/pics/editor/photo_editor.png" style="margin-top: -4px;"></a></span>
+				<span class="button txtstyle" id="editor_container<?='_'.$this->getSetting('name')?>" <?=(floor($this->getSetting('value'))<1)?'style="display:none;"':''?>><a class="editor<?='_'.$this->getSetting('name')?>" target="_blank" title="Р РµРґР°РєС‚РѕСЂ С„РѕС‚Рѕ" href="/inc/datatypes/photo_editor/?file=<?=$image['path'] ?>&rubric=<?=$this->getSetting('rubric') ?>&section=<?=$_GET['section'] ?>&str_settings=<?=urlencode($str_settings) ?>" onclick="wait_editor();"><img alt="Р РµРґР°РєС‚РѕСЂ С„РѕС‚Рѕ" src="/pics/editor/photo_editor.png" style="margin-top: -4px;"></a></span>
 				<?}?>
 				</div>
                <span class="clear"></span>
@@ -168,19 +168,19 @@ class CDImage extends VirtualType
 				<?
 					$desc = '';
 					$exts = upper(str_replace(',',', ',$settings['exts']));
-					if ($exts!='') $desc.= ' формата '.$exts;
+					if ($exts!='') $desc.= ' С„РѕСЂРјР°С‚Р° '.$exts;
 					$wh = '';
 					if (floor($settings['imgw'])>0){
 						$imgw = floor($settings['imgw']);
-						if (floor($settings['imgwtype'])==1) $wh.= 'Ширина должна быть равна '.$imgw.'px';
-						if (floor($settings['imgwtype'])==2) $wh.= 'Ширина должна быть меньше или равна '.$imgw.'px';
-						if (floor($settings['imgwtype'])==3) $wh.= 'Ширина должна быть больше или равна '.$imgw.'px';
+						if (floor($settings['imgwtype'])==1) $wh.= 'РЁРёСЂРёРЅР° РґРѕР»Р¶РЅР° Р±С‹С‚СЊ СЂР°РІРЅР° '.$imgw.'px';
+						if (floor($settings['imgwtype'])==2) $wh.= 'РЁРёСЂРёРЅР° РґРѕР»Р¶РЅР° Р±С‹С‚СЊ РјРµРЅСЊС€Рµ РёР»Рё СЂР°РІРЅР° '.$imgw.'px';
+						if (floor($settings['imgwtype'])==3) $wh.= 'РЁРёСЂРёРЅР° РґРѕР»Р¶РЅР° Р±С‹С‚СЊ Р±РѕР»СЊС€Рµ РёР»Рё СЂР°РІРЅР° '.$imgw.'px';
 					}
 					if (floor($settings['imgh'])>0){
 						$imgh = floor($settings['imgh']);
-						if (floor($settings['imghtype'])==1) $wh.= (($wh=='')?'':', а ').'Высота должна быть равна '.$imgh.'px';
-						if (floor($settings['imghtype'])==2) $wh.= (($wh=='')?'':', а ').'Высота должна быть меньше или равна '.$imgh.'px';
-						if (floor($settings['imghtype'])==3) $wh.= (($wh=='')?'':', а ').'Высота должна быть больше или равна '.$imgh.'px';
+						if (floor($settings['imghtype'])==1) $wh.= (($wh=='')?'':', Р° ').'Р’С‹СЃРѕС‚Р° РґРѕР»Р¶РЅР° Р±С‹С‚СЊ СЂР°РІРЅР° '.$imgh.'px';
+						if (floor($settings['imghtype'])==2) $wh.= (($wh=='')?'':', Р° ').'Р’С‹СЃРѕС‚Р° РґРѕР»Р¶РЅР° Р±С‹С‚СЊ РјРµРЅСЊС€Рµ РёР»Рё СЂР°РІРЅР° '.$imgh.'px';
+						if (floor($settings['imghtype'])==3) $wh.= (($wh=='')?'':', Р° ').'Р’С‹СЃРѕС‚Р° РґРѕР»Р¶РЅР° Р±С‹С‚СЊ Р±РѕР»СЊС€Рµ РёР»Рё СЂР°РІРЅР° '.$imgh.'px';
 					}
 					if ($wh!='') $desc.=(($exts!='') ? '. ':'').$wh.'.';
 
@@ -189,10 +189,10 @@ class CDImage extends VirtualType
 				/*|auto_resize=true|auto_width=187|auto_height=120|*/
 				if ($settings['auto_resize'] && ($settings['auto_width']>0 || $settings['auto_height']>0))
 				{
-					$img_descr='<small>Рекомендуемый размер изображения:';
-					$img_descr.=(($settings['auto_width']>0) ? ' ширина '.$settings['auto_width'].'пикселей;' : '');
-					$img_descr.=(($settings['auto_height']>0) ? ' высота '.$settings['auto_height'].'пикселей;' : '');
-					print $img_descr.' Если размеры загружаемого изображения больше - его размеры будут автоматически изменены</small>';
+					$img_descr='<small>Р РµРєРѕРјРµРЅРґСѓРµРјС‹Р№ СЂР°Р·РјРµСЂ РёР·РѕР±СЂР°Р¶РµРЅРёСЏ:';
+					$img_descr.=(($settings['auto_width']>0) ? ' С€РёСЂРёРЅР° '.$settings['auto_width'].'РїРёРєСЃРµР»РµР№;' : '');
+					$img_descr.=(($settings['auto_height']>0) ? ' РІС‹СЃРѕС‚Р° '.$settings['auto_height'].'РїРёРєСЃРµР»РµР№;' : '');
+					print $img_descr.' Р•СЃР»Рё СЂР°Р·РјРµСЂС‹ Р·Р°РіСЂСѓР¶Р°РµРјРѕРіРѕ РёР·РѕР±СЂР°Р¶РµРЅРёСЏ Р±РѕР»СЊС€Рµ - РµРіРѕ СЂР°Р·РјРµСЂС‹ Р±СѓРґСѓС‚ Р°РІС‚РѕРјР°С‚РёС‡РµСЃРєРё РёР·РјРµРЅРµРЅС‹</small>';
 				}
 				?>
 
@@ -211,7 +211,7 @@ class CDImage extends VirtualType
 							print $inner;
 						}
 						else print '
-						<img class="contentimg" id="contentimg'.$this->getSetting('name').'" src="'.$image['path'].'" '.(($st['name']!='Баннеры') ? 'style="width: 170px"':'').'/>';
+						<img class="contentimg" id="contentimg'.$this->getSetting('name').'" src="'.$image['path'].'" '.(($st['name']!='Р‘Р°РЅРЅРµСЂС‹') ? 'style="width: 170px"':'').'/>';
 
 					}
 
@@ -229,23 +229,23 @@ class CDImage extends VirtualType
 		$errors = array();
 		$settings = $this->getSetting('settings');
 		$newvalue = floor($_POST[$this->getSetting('name')]);
-		if ((isset($settings['important'])) && ($newvalue<1)) $errors[] = 'Заполните поле «'.$this->getSetting('description').'»';
+		if ((isset($settings['important'])) && ($newvalue<1)) $errors[] = 'Р—Р°РїРѕР»РЅРёС‚Рµ РїРѕР»Рµ В«'.$this->getSetting('description').'В»';
 		$this->setSetting('value',$newvalue);
 		return $errors;
 	}
 	function postSave(){
 		$settings = $this->getSetting('settings');
 		global $Storage;
-		
+
 		if (floor($this->getSetting('uid'))>0){
-			
+
 			$st = $Storage->getStorage(floor($this->getSetting($this->getSetting('name').'storage')));
-			if (!$st['id']>0) $st = $Storage->getStorage(0,array('path'=>'/site/images/','name'=>'Изображения сайта (общее)','exts'=>array('jpg','gif','jpeg', 'png', 'swf')));
+			if (!$st['id']>0) $st = $Storage->getStorage(0,array('path'=>'/site/images/','name'=>'РР·РѕР±СЂР°Р¶РµРЅРёСЏ СЃР°Р№С‚Р° (РѕР±С‰РµРµ)','exts'=>array('jpg','gif','jpeg', 'png', 'swf')));
 			if (floor($st['id'])>0){
 				$f = $Storage->getFile($this->getSetting('value'));
 				if (floor($f['id'])>0){
 					if (substr($f['name'],0,5)=='temp_'){
-						
+
 						if ($Storage->renameFile($f['id'],$this->getSetting('theme'),$this->getSetting('rubric'),floor($this->getSetting('uid')))){
 							$nf = $Storage->getFile($f['id']);
 
@@ -257,12 +257,12 @@ class CDImage extends VirtualType
 			       						crop($mini_fname, $settings['auto_mini_width'],$settings['auto_mini_height']);
 			       						/*Crop($mini_fname, 210, 220);*/
 							}
-							
-							/* Сохранять данные из редактора в миниатюру */
+
+							/* РЎРѕС…СЂР°РЅСЏС‚СЊ РґР°РЅРЅС‹Рµ РёР· СЂРµРґР°РєС‚РѕСЂР° РІ РјРёРЅРёР°С‚СЋСЂСѓ */
 							if ($settings['editor_as_min'])
 							{
-								
-								
+
+
 								$mini_fname_old=str_replace('.'.$f['ext'], '_mini.'.$f['ext'], $f['path']);
 								$mini_fname=str_replace('.'.$nf['ext'], '_mini.'.$nf['ext'], $nf['path']);
 								rename($_SERVER['DOCUMENT_ROOT'].$mini_fname_old, $_SERVER['DOCUMENT_ROOT'].$mini_fname);
@@ -282,9 +282,9 @@ class CDImage extends VirtualType
 	function delete(){
 		global $Storage;
 		$st = $Storage->getStorage(floor($this->getSetting($this->getSetting('name').'storage')));
-		if (!$st['id']>0) $st = $Storage->getStorage(0,array('path'=>'/site/images/','name'=>'Изображения сайта (общее)','exts'=>array('jpg','gif','jpeg', 'png', 'swf')));
+		if (!$st['id']>0) $st = $Storage->getStorage(0,array('path'=>'/site/images/','name'=>'РР·РѕР±СЂР°Р¶РµРЅРёСЏ СЃР°Р№С‚Р° (РѕР±С‰РµРµ)','exts'=>array('jpg','gif','jpeg', 'png', 'swf')));
 		$flist = $Storage->getListByUID($st['id'],$this->getSetting('theme'),$this->getSetting('rubric'),floor($this->getSetting('uid')));
 		foreach ($flist as $f) $Storage->deleteFile($f['id']);
-	} 
+	}
 }
 ?>

@@ -2,10 +2,10 @@
 class CDText extends VirtualType
 {
 	function init($settings){
-		$settings['descr']='Òåêñòîâîå ïîëå';
+		$settings['descr']='Ð¢ÐµÐºÑÑ‚Ð¾Ð²Ð¾Ðµ Ð¿Ð¾Ð»Ðµ';
 		$settings['help']=array(
-				'ucfirst'=>'Äåëàåò ïåðâóþ áóêâó çàãëàâíîé',
-				'editable'=>'Ðåäàêòèðóåìûé'
+				'ucfirst'=>'Ð”ÐµÐ»Ð°ÐµÑ‚ Ð¿ÐµÑ€Ð²ÑƒÑŽ Ð±ÑƒÐºÐ²Ñƒ Ð·Ð°Ð³Ð»Ð°Ð²Ð½Ð¾Ð¹',
+				'editable'=>'Ð ÐµÐ´Ð°ÐºÑ‚Ð¸Ñ€ÑƒÐµÐ¼Ñ‹Ð¹'
 		);
 		$maxlength = (floor($this->getSetting('maxlength'))>0)?floor($this->getSetting('maxlength')):255;
 		$this->setSetting('maxlength',$maxlength);
@@ -59,7 +59,7 @@ class CDText extends VirtualType
 		$settings = $this->getSetting('settings');
 		$newvalue = htmlspecialchars(trim($_POST[$this->getSetting('name')]));
 		$newvalue = substr($newvalue,0,$this->getSetting('maxlength'));
-		if ((isset($settings['important'])) && ($newvalue=='')) $errors[] = 'Çàïîëíèòå ïîëå «'.$this->getSetting('description').'»';
+		if ((isset($settings['important'])) && ($newvalue=='')) $errors[] = 'Ð—Ð°Ð¿Ð¾Ð»Ð½Ð¸Ñ‚Ðµ Ð¿Ð¾Ð»Ðµ Â«'.$this->getSetting('description').'Â»';
 		$this->setSetting('value',$newvalue);
 		return $errors;
 	}

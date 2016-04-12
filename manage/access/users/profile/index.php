@@ -10,7 +10,7 @@ header("Location: /manage/control/contents/");
 $requestUserId = $_SESSION['visitorID'];
 $user = $SiteVisitor->getOne($_SESSION['visitorID']);
 $group = $VisitorType->getOne($user['type']);
-$requestUserId = floor($_GET['user']); /* Поставить седующие условие вместо этой строки, чтобы непривилигированные пользователи не могли заходить на страницу чужого профиля
+$requestUserId = floor($_GET['user']); /* РџРѕСЃС‚Р°РІРёС‚СЊ СЃРµРґСѓСЋС‰РёРµ СѓСЃР»РѕРІРёРµ РІРјРµСЃС‚Рѕ СЌС‚РѕР№ СЃС‚СЂРѕРєРё, С‡С‚РѕР±С‹ РЅРµРїСЂРёРІРёР»РёРіРёСЂРѕРІР°РЅРЅС‹Рµ РїРѕР»СЊР·РѕРІР°С‚РµР»Рё РЅРµ РјРѕРіР»Рё Р·Р°С…РѕРґРёС‚СЊ РЅР° СЃС‚СЂР°РЅРёС†Сѓ С‡СѓР¶РѕРіРѕ РїСЂРѕС„РёР»СЏ
 	if ((@in_array('610',$group['access'])) || (isset($group['settings']['superaccess']))) $requestUserId = floor($_GET['user']);
 */
 if (!$SiteVisitor->checkUserPresence($requestUserId)) $requestUserId = $_SESSION['visitorID'];
@@ -24,7 +24,7 @@ if (isset($_POST['profilepswd'])) $errors = $SiteVisitor->changePassword($_SESSI
 <?include $_SERVER['DOCUMENT_ROOT']."/inc/site_admin/header.php";?>
 	<div id="content" class="forms">
        	<div class="hr"></div>
-  		<h1><a href="/manage/">Панель управления</a> &rarr; Доступ &rarr; <a href="/manage/access/users/">Пользователи</a> &rarr; Профиль</h1>
+  		<h1><a href="/manage/">РџР°РЅРµР»СЊ СѓРїСЂР°РІР»РµРЅРёСЏ</a> &rarr; Р”РѕСЃС‚СѓРї &rarr; <a href="/manage/access/users/">РџРѕР»СЊР·РѕРІР°С‚РµР»Рё</a> &rarr; РџСЂРѕС„РёР»СЊ</h1>
         <br/>
 		<div class="pub user">
 			<div class="info">
@@ -33,14 +33,14 @@ if (isset($_POST['profilepswd'])) $errors = $SiteVisitor->changePassword($_SESSI
 			<h1><?=$requestUser['secondname'].' '.$requestUser['firstname'].' '.$requestUser['parentname']?></h1>
 			<h2><?=$requestUserGroup['name']?></h2>
 			<div class="userinfo">
-				<span><strong>Дата регистрации</strong><?=$requestUser['regdate']?></span>
-				<span><strong>Дата последнего входа</strong><?=date("d.m.Y H:i",$requestUser['settings']['lasttime'])?></span>
-				<span><strong>Электронная почта</strong><a href="mailto:<?=$requestUser['email']?>"><?=$requestUser['email']?></a></span>
+				<span><strong>Р”Р°С‚Р° СЂРµРіРёСЃС‚СЂР°С†РёРё</strong><?=$requestUser['regdate']?></span>
+				<span><strong>Р”Р°С‚Р° РїРѕСЃР»РµРґРЅРµРіРѕ РІС…РѕРґР°</strong><?=date("d.m.Y H:i",$requestUser['settings']['lasttime'])?></span>
+				<span><strong>Р­Р»РµРєС‚СЂРѕРЅРЅР°СЏ РїРѕС‡С‚Р°</strong><a href="mailto:<?=$requestUser['email']?>"><?=$requestUser['email']?></a></span>
 			</div>
 			<?
 			if ((@in_array('410',$group['access'])) || (isset($group['settings']['superaccess']))){
 				?>
-				<a href="/manage/access/users/edit/?edit=<?=$requestUser['id']?>" class="button">Редактировать</a>
+				<a href="/manage/access/users/edit/?edit=<?=$requestUser['id']?>" class="button">Р РµРґР°РєС‚РёСЂРѕРІР°С‚СЊ</a>
 				<?
 			}
 			?>
@@ -54,7 +54,7 @@ if (isset($_POST['profilepswd'])) $errors = $SiteVisitor->changePassword($_SESSI
 				<?
 				if (count($errors)>0){
 					print '
-					<p><strong>Смена пароля не выполнена по следующим причинам:</strong></p>
+					<p><strong>РЎРјРµРЅР° РїР°СЂРѕР»СЏ РЅРµ РІС‹РїРѕР»РЅРµРЅР° РїРѕ СЃР»РµРґСѓСЋС‰РёРј РїСЂРёС‡РёРЅР°Рј:</strong></p>
 					<ul class="errors">';
 						foreach ($errors as $v) print '
 						<li>'.$v.'</li>';
@@ -62,18 +62,18 @@ if (isset($_POST['profilepswd'])) $errors = $SiteVisitor->changePassword($_SESSI
 					</ul><div class="hr"><hr /></div>';
 				}
 				elseif (isset($_POST['profilepswd'])) print '
-					<p><strong>Смена пароля успешно выполнена</strong></p>';
+					<p><strong>РЎРјРµРЅР° РїР°СЂРѕР»СЏ СѓСЃРїРµС€РЅРѕ РІС‹РїРѕР»РЅРµРЅР°</strong></p>';
 				?>
 				<span class="clear"></span>
 				<form action="/manage/access/users/profile/" method="POST">
 					<div class="place" style="width: 200px; margin-right: 2%;">
-						<label>Старый пароль</label>
+						<label>РЎС‚Р°СЂС‹Р№ РїР°СЂРѕР»СЊ</label>
 						<span class="input">
 							<input type="password" name="oldpswd" maxlength="30" value=""/>
 						</span>
 					</div>
 					<div class="place" style="width: 200px; margin-right: 2%;">
-						<label>Новый пароль</label>
+						<label>РќРѕРІС‹Р№ РїР°СЂРѕР»СЊ</label>
 						<span class="input">
 							<input type="password" name="newpswd" maxlength="30" value=""/>
 						</span>
@@ -82,7 +82,7 @@ if (isset($_POST['profilepswd'])) $errors = $SiteVisitor->changePassword($_SESSI
 						<label>&nbsp;</label>
 						<span class="forbutton">
 							<span>
-								<input class="button big" type="submit" name="profilepswd" value="Сохранить"/>
+								<input class="button big" type="submit" name="profilepswd" value="РЎРѕС…СЂР°РЅРёС‚СЊ"/>
 							</span>
 						</span>
 					</div>
@@ -97,7 +97,7 @@ if (isset($_POST['profilepswd'])) $errors = $SiteVisitor->changePassword($_SESSI
 		if ((@in_array('610',$group['access'])) || (isset($group['settings']['superaccess']))){
 		?>
 		<div class="hr"><hr /></div>
-		<a href="/manage/access/users/" class="button">Перейти к списку пользователей</a>
+		<a href="/manage/access/users/" class="button">РџРµСЂРµР№С‚Рё Рє СЃРїРёСЃРєСѓ РїРѕР»СЊР·РѕРІР°С‚РµР»РµР№</a>
 		<?
 		}
 		?>

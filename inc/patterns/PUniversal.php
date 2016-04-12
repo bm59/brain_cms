@@ -1,51 +1,51 @@
 <?
-$source_descr='Óíèâåðñàëüíûé';
+$source_descr='Ð£Ð½Ð¸Ð²ÐµÑ€ÑÐ°Ð»ÑŒÐ½Ñ‹Ð¹';
 $source_name='PUniversal';
-/* Èìÿ êëàññà */
+/* Ð˜Ð¼Ñ ÐºÐ»Ð°ÑÑÐ° */
 class PUniversal extends VirtualPattern
 {
 	function init($settings){
 		global $CDDataSet,$Storage,$SiteSections;
-		
-		$descr='Óíèâåðñàëüíûé';
-		
+
+		$descr='Ð£Ð½Ð¸Ð²ÐµÑ€ÑÐ°Ð»ÑŒÐ½Ñ‹Ð¹';
+
 		if ($CDDataSet->checkDatatypes($settings['section'])==0)
 		$SiteSections->update_personal_settings($settings['section'], '|onoff|show_id|');
-		
+
 		$settings['name']=substr(get_class(), 1, strlen(get_class()));
 
 		$class_name='CC'.$settings['name'];
 		$settings['dataset'] = $CDDataSet->checkPresence(0, mb_strtolower($settings['name']));
-		
+
 		$CDDataSet->add
 		(
-		
+
 				array
 				(
 						'name'=>mb_strtolower($settings['name']),
 						'description'=>$descr,
 						'types'=>array
 						(
-								array('name'=>'name', 'description'=>'Íàèìåíîâàíèå', 'type'=>'CDText',  'settings'=>array('important'=>'', 'show_search'=>'', 'show_list'=>'')),
-								array('name'=>'description', 'description'=>'Îïèñàíèå', 'type'=>'CDText',  'settings'=>array('off'=>'')),
-								array('name'=>'image', 'description'=>'Èçîáðàæåíèå', 'type'=>'CDImage',   'settings'=>array('off'=>'', 'exts'=>'jpg,gif,jpeg,png')),
-								array('name'=>'show_count', 'description'=>'Ïîêàçîâ', 'type'=>'CDInteger','settings'=>array('off'=>'')),
-								array('name'=>'ptitle', 'description'=>'Title ñòðàíèöû', 'type'=>'CDText','settings'=>array('off'=>'')),
-								array('name'=>'pdescription', 'description'=>'Description ñòðàíèöû', 'type'=>'CDText', 'settings'=>array('off'=>'')),
-								array('name'=>'pseudolink', 'description'=>'Ïñåâîäîíèì ññûëêè', 'type'=>'CDText', 'settings'=>array('off'=>''))
+								array('name'=>'name', 'description'=>'ÐÐ°Ð¸Ð¼ÐµÐ½Ð¾Ð²Ð°Ð½Ð¸Ðµ', 'type'=>'CDText',  'settings'=>array('important'=>'', 'show_search'=>'', 'show_list'=>'')),
+								array('name'=>'description', 'description'=>'ÐžÐ¿Ð¸ÑÐ°Ð½Ð¸Ðµ', 'type'=>'CDText',  'settings'=>array('off'=>'')),
+								array('name'=>'image', 'description'=>'Ð˜Ð·Ð¾Ð±Ñ€Ð°Ð¶ÐµÐ½Ð¸Ðµ', 'type'=>'CDImage',   'settings'=>array('off'=>'', 'exts'=>'jpg,gif,jpeg,png')),
+								array('name'=>'show_count', 'description'=>'ÐŸÐ¾ÐºÐ°Ð·Ð¾Ð²', 'type'=>'CDInteger','settings'=>array('off'=>'')),
+								array('name'=>'ptitle', 'description'=>'Title ÑÑ‚Ñ€Ð°Ð½Ð¸Ñ†Ñ‹', 'type'=>'CDText','settings'=>array('off'=>'')),
+								array('name'=>'pdescription', 'description'=>'Description ÑÑ‚Ñ€Ð°Ð½Ð¸Ñ†Ñ‹', 'type'=>'CDText', 'settings'=>array('off'=>'')),
+								array('name'=>'pseudolink', 'description'=>'ÐŸÑÐµÐ²Ð¾Ð´Ð¾Ð½Ð¸Ð¼ ÑÑÑ‹Ð»ÐºÐ¸', 'type'=>'CDText', 'settings'=>array('off'=>''))
 						)
-		
+
 				),
 				$settings['section']
 		);
-		
-		
-		
-		/* Ïîäñêàçêà äëÿ ïîëÿ 
-		$this->setSetting('type_settings_%FIELD_NAME%',array('|imgw=200|imgh=200|'=>'Ìèíèìàëüíàÿ øèðèíà'));*/
-		
-		/* Ïîäñêàçêà ðàçäåëà äëÿ ðåäàêòîðà øàáëîíîâ
-		$help=array('show_vote_count'=>'Ïîêàçûâàòü ñêîëüêî ÷åëîâåê ïðîãîëîñîâàëè');
+
+
+
+		/* ÐŸÐ¾Ð´ÑÐºÐ°Ð·ÐºÐ° Ð´Ð»Ñ Ð¿Ð¾Ð»Ñ
+		$this->setSetting('type_settings_%FIELD_NAME%',array('|imgw=200|imgh=200|'=>'ÐœÐ¸Ð½Ð¸Ð¼Ð°Ð»ÑŒÐ½Ð°Ñ ÑˆÐ¸Ñ€Ð¸Ð½Ð°'));*/
+
+		/* ÐŸÐ¾Ð´ÑÐºÐ°Ð·ÐºÐ° Ñ€Ð°Ð·Ð´ÐµÐ»Ð° Ð´Ð»Ñ Ñ€ÐµÐ´Ð°ÐºÑ‚Ð¾Ñ€Ð° ÑˆÐ°Ð±Ð»Ð¾Ð½Ð¾Ð²
+		$help=array('show_vote_count'=>'ÐŸÐ¾ÐºÐ°Ð·Ñ‹Ð²Ð°Ñ‚ÑŒ ÑÐºÐ¾Ð»ÑŒÐºÐ¾ Ñ‡ÐµÐ»Ð¾Ð²ÐµÐº Ð¿Ñ€Ð¾Ð³Ð¾Ð»Ð¾ÑÐ¾Ð²Ð°Ð»Ð¸');
 		$this->setSetting('help', $help);*/
 
 		$SiteSettings = new SiteSettings;
@@ -55,10 +55,10 @@ class PUniversal extends VirtualPattern
 
 		$iface = new $class_name;
 		$this->setSetting('table',$this->createDataSetTable($this->getSetting('dataset'),$this->getSetting('section'),array('show'=>'INT(1)', 'precedence'=>'BIGINT(20)')));
-		
+
 		$iface->init(array('mode'=>$this->getSetting('mode'),'isservice'=>$this->getSetting('isservice'),'section'=>$this->getSetting('section'),'pattern'=>$this,'table'=>$this->getSetting('table'),'dataset'=>$this->getSetting('dataset')));
 		$this->setSetting('cclass',$iface);
-		
+
 		return $iface;
 	}
 

@@ -53,17 +53,17 @@ if (isset($_POST['addeditgroup'])){
 
 	if ($editid>0)
 	{		$errors = $VisitorType->edit($editid,$data['name'],$access_settings);
-		WriteLog($editid, 'редактирование группы', $data['name']);
+		WriteLog($editid, 'СЂРµРґР°РєС‚РёСЂРѕРІР°РЅРёРµ РіСЂСѓРїРїС‹', $data['name']);
 	}
 	else
 	{		$errors = $VisitorType->add($data['name'],$access_settings);
-		WriteLog(0, 'добавление группы', $data['name']);
+		WriteLog(0, 'РґРѕР±Р°РІР»РµРЅРёРµ РіСЂСѓРїРїС‹', $data['name']);
 	}
 
 
 	if (count($errors)==0) header("Location: ../");
 }
-$settings = ($editid>0)?array('title'=>'Редактирование группы пользователей','button'=>'Сохранить'):array('title'=>'Добавление группы пользователей','button'=>'Создать группу');
+$settings = ($editid>0)?array('title'=>'Р РµРґР°РєС‚РёСЂРѕРІР°РЅРёРµ РіСЂСѓРїРїС‹ РїРѕР»СЊР·РѕРІР°С‚РµР»РµР№','button'=>'РЎРѕС…СЂР°РЅРёС‚СЊ'):array('title'=>'Р”РѕР±Р°РІР»РµРЅРёРµ РіСЂСѓРїРїС‹ РїРѕР»СЊР·РѕРІР°С‚РµР»РµР№','button'=>'РЎРѕР·РґР°С‚СЊ РіСЂСѓРїРїСѓ');
 ?>
 <? include $_SERVER['DOCUMENT_ROOT']."/inc/site_admin/meta.php"; ?>
 <script type="text/javascript">
@@ -108,12 +108,12 @@ $settings = ($editid>0)?array('title'=>'Редактирование группы пользователей','bu
 	<? include $_SERVER['DOCUMENT_ROOT']."/inc/site_admin/header.php"; ?>
 	<div id="content" class="forms">
         <div class="hr"></div>
-  		<h1><a href="/manage/">Панель управления</a> &rarr; Доступ &rarr; <a href="/manage/access/groups/">Группы</a> &rarr; Редактирование</h1>
+  		<h1><a href="/manage/">РџР°РЅРµР»СЊ СѓРїСЂР°РІР»РµРЅРёСЏ</a> &rarr; Р”РѕСЃС‚СѓРї &rarr; <a href="/manage/access/groups/">Р“СЂСѓРїРїС‹</a> &rarr; Р РµРґР°РєС‚РёСЂРѕРІР°РЅРёРµ</h1>
         <br/>
 		<?
 		if (count($errors)>0){
 			print '
-			<p><strong>'.$settings['title'].' не выполнено по следующим причинам:</strong></p>
+			<p><strong>'.$settings['title'].' РЅРµ РІС‹РїРѕР»РЅРµРЅРѕ РїРѕ СЃР»РµРґСѓСЋС‰РёРј РїСЂРёС‡РёРЅР°Рј:</strong></p>
 			<ul class="errors">';
 				foreach ($errors as $v) print '
 				<li>'.$v.'</li>';
@@ -124,13 +124,13 @@ $settings = ($editid>0)?array('title'=>'Редактирование группы пользователей','bu
 		<form action="<?=$_SERVER['REQUEST_URI']?>" method="POST">
 			<input type="hidden" name="addeditgroup" value="<?=$editid?>">
 			<div class="place" style="width: 300px;">
-				<label>Название</label>
+				<label>РќР°Р·РІР°РЅРёРµ</label>
 				<span class="input">
 					<input name="name" <?=(isset($data['settings']['norename']))?'disabled="disabled"':''?> value="<?=$data['name']?>" />
 				</span>
 			</div>
 			<span class="clear"></span>
-			<h1>Разделы для доступа</h1>
+			<h1>Р Р°Р·РґРµР»С‹ РґР»СЏ РґРѕСЃС‚СѓРїР°</h1>
 			<div class="place" style="z-index: 10;">
 				<div class="forckecks foraccess">
 					<?
@@ -147,7 +147,7 @@ $settings = ($editid>0)?array('title'=>'Редактирование группы пользователей','bu
 			<span class="clear"></span>
 		</form>
 		<div class="hr"><hr /></div>
-			<a href="/manage/access/groups/" class="button">Перейти к списку групп</a>
+			<a href="/manage/access/groups/" class="button">РџРµСЂРµР№С‚Рё Рє СЃРїРёСЃРєСѓ РіСЂСѓРїРї</a>
 		<span class="clear"></span>
 	</div>
 	<?/*include $_SERVER['DOCUMENT_ROOT']."/inc/footer.php";*/?>

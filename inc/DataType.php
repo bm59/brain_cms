@@ -1,6 +1,6 @@
 <?
 /*
-Класс, описывающий тип данных
+РљР»Р°СЃСЃ, РѕРїРёСЃС‹РІР°СЋС‰РёР№ С‚РёРї РґР°РЅРЅС‹С…
 */
 class DataType extends VirtualClass
 {
@@ -51,24 +51,25 @@ class DataType extends VirtualClass
 
 	function add($values, $add_column=false, $table_array='', $section_id){
 		global $CDDataSet;
-
+		
 		$error='';
 		if (!preg_match("|^[a-z0-9_]+$|",$values['name']))
 		{
-			$_SESSION['global_alert'].='Ошибка в названии :'.$values['name'];
+			$_SESSION['global_alert'].='РћС€РёР±РєР° РІ РЅР°Р·РІР°РЅРёРё :'.$values['name'];
 			return false;
 		}
 		$values['description'] = trim($values['description']);
 		if (strlen($values['description'])==0)
 		{
-			$_SESSION['global_alert'].='Ошибка в описании :'.$values['description'];
+			$_SESSION['global_alert'].='РћС€РёР±РєР° РІ РѕРїРёСЃР°РЅРёРё :'.$values['description'];
 			return false;
 		}
-
-		$values['dataset'] = $CDDataSet->checkPresence($values['dataset'], '', $values['section_id']);
+		
+		$values['dataset'] = $CDDataSet->checkPresence($values['dataset'], '', $values['section_id']);		
+		
 		if ($values['dataset']==0)
 		{
-				$_SESSION['global_alert'].='Не найден dataset';
+				$_SESSION['global_alert'].='РќРµ РЅР°Р№РґРµРЅ dataset';
 				return false;
 		}
 
@@ -78,7 +79,7 @@ class DataType extends VirtualClass
 
 		if (msr(msq("SELECT * FROM `".$this->getSetting('table')."` WHERE `section_id`='".$section_id."' and `dataset`='".$values['dataset']."' AND `name`='".$values['name']."'")))
 		{
-			$_SESSION['global_alert'].='Поле с таким названием уже существует :'.$values['name'];
+			$_SESSION['global_alert'].='РџРѕР»Рµ СЃ С‚Р°РєРёРј РЅР°Р·РІР°РЅРёРµРј СѓР¶Рµ СЃСѓС‰РµСЃС‚РІСѓРµС‚ :'.$values['name'];
 			return false;
 		}
 		$precedence = msr(msq("SELECT COUNT(id) AS prec FROM `".$this->getSetting('table')."` WHERE `dataset`='".$values['dataset']."'"));
@@ -91,7 +92,7 @@ class DataType extends VirtualClass
 
 		if ($add_column) $this->add_column($values, $table_array);
 
-		/* Если при добавлении колонки не было ошибок */
+		/* Р•СЃР»Рё РїСЂРё РґРѕР±Р°РІР»РµРЅРёРё РєРѕР»РѕРЅРєРё РЅРµ Р±С‹Р»Рѕ РѕС€РёР±РѕРє */
 		if ($cur_error==mysql_error())
 		msq("INSERT INTO `".$this->getSetting('table')."` (`section_id`,`dataset`,`description`,`name`,`type`,`precedence`,`settings`,`setting_style_edit`,`setting_style_search`)
 		VALUES ('".$section_id."','".$values['dataset']."','".addslashes($values['description'])."','".$values['name']."','".$values['type']."','".$values['precedence']."','".$values['settings']."','".$values['setting_style_edit']."','".$values['setting_style_search']."')");
@@ -109,7 +110,7 @@ class DataType extends VirtualClass
 
 
 		switch ($type) {
-			case 'CDCHOICE':
+			case 'CDCHOICE': case 'CDSelect':
 				//print_r($tface);
 				$values=array('-1'=>'')+$tface->get_values($tface->Settings['settings']);
 
@@ -120,6 +121,17 @@ class DataType extends VirtualClass
 				</div>
 				<?
 				break;
+				case 'CDColorStatus': 
+					//print_r($tface);
+					$values=array('-1'=>'')+$tface->get_values($tface->Settings['settings']);
+				
+					if ($tface->Settings['settings']['type']=='multi'){?><input type="hidden" name="nouse_search_<?=$tface->getSetting('name')?>_type" value="<?=$type?>"><?}?>
+								<div class="place" style="z-index: 10;<?=$tface->Settings['setting_style_edit']['css']?>">
+									<label><?=htmlspecialchars($tface->getSetting('description'))?></label>
+									<?print getSelectSinonim_color('search_'.$tface->getSetting('name'),$values,$_REQUEST['search_'.$tface->getSetting('name')], $tface->Settings['settings'], 'search');?>
+								</div>
+								<?
+				break;
 			case 'CDDate':
 
 				?>
@@ -128,17 +140,17 @@ class DataType extends VirtualClass
 
 								$.datepicker.regional['ru'] =
 								{
-									closeText: 'Закрыть',
-									prevText: '&#x3c;Пред',
-									nextText: 'След&#x3e;',
-									currentText: 'Сегодня',
-									monthNames: ['Январь','Февраль','Март','Апрель','Май','Июнь',
-									'Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь'],
-									monthNamesShort: ['Янв','Фев','Мар','Апр','Май','Июн',
-									'Июл','Авг','Сен','Окт','Ноя','Дек'],
-									dayNames: ['воскресенье','понедельник','вторник','среда','четверг','пятница','суббота'],
-									dayNamesShort: ['вск','пнд','втр','срд','чтв','птн','сбт'],
-									dayNamesMin: ['Вс','Пн','Вт','Ср','Чт','Пт','Сб'],
+									closeText: 'Р—Р°РєСЂС‹С‚СЊ',
+									prevText: '&#x3c;РџСЂРµРґ',
+									nextText: 'РЎР»РµРґ&#x3e;',
+									currentText: 'РЎРµРіРѕРґРЅСЏ',
+									monthNames: ['РЇРЅРІР°СЂСЊ','Р¤РµРІСЂР°Р»СЊ','РњР°СЂС‚','РђРїСЂРµР»СЊ','РњР°Р№','РСЋРЅСЊ',
+									'РСЋР»СЊ','РђРІРіСѓСЃС‚','РЎРµРЅС‚СЏР±СЂСЊ','РћРєС‚СЏР±СЂСЊ','РќРѕСЏР±СЂСЊ','Р”РµРєР°Р±СЂСЊ'],
+									monthNamesShort: ['РЇРЅРІ','Р¤РµРІ','РњР°СЂ','РђРїСЂ','РњР°Р№','РСЋРЅ',
+									'РСЋР»','РђРІРі','РЎРµРЅ','РћРєС‚','РќРѕСЏ','Р”РµРє'],
+									dayNames: ['РІРѕСЃРєСЂРµСЃРµРЅСЊРµ','РїРѕРЅРµРґРµР»СЊРЅРёРє','РІС‚РѕСЂРЅРёРє','СЃСЂРµРґР°','С‡РµС‚РІРµСЂРі','РїСЏС‚РЅРёС†Р°','СЃСѓР±Р±РѕС‚Р°'],
+									dayNamesShort: ['РІСЃРє','РїРЅРґ','РІС‚СЂ','СЃСЂРґ','С‡С‚РІ','РїС‚РЅ','СЃР±С‚'],
+									dayNamesMin: ['Р’СЃ','РџРЅ','Р’С‚','РЎСЂ','Р§С‚','РџС‚','РЎР±'],
 									dateFormat: 'dd.mm.yy',
 									firstDay: 1,
 									isRTL: false
@@ -162,11 +174,11 @@ class DataType extends VirtualClass
 							});
 							</script>
 		<div style="z-index: 11; width: 158px;" id="date_calendar" class="place">
-			<label>Дата c</label>
+			<label>Р”Р°С‚Р° c</label>
 			<div><input type="text" name="search_<?=$tface->getSetting('name')?>_from" value="<?=$_POST['search_'.$tface->getSetting('name').'_from']?>" style="width: 100px; float: left;"></div>
 		</div>
 		<div style="z-index: 11; width: 158px;" id="date_calendar" class="place">
-			<label>Дата по</label>
+			<label>Р”Р°С‚Р° РїРѕ</label>
 			<div><input type="text" name="search_<?=$tface->getSetting('name')?>_to" value="<?=$_POST['search_'.$tface->getSetting('name').'_to']?>" style="width: 100px; float: left;"></div>
 		</div>
 				<?
@@ -212,12 +224,12 @@ class DataType extends VirtualClass
 					{
 						$CDSelect=new CDSelect;
 						$values=$CDSelect->get_values($settings);
-						
+
 						?>
 						<script>
 						$(function() {
 							$('[name=<?=htmlspecialchars($tface->getSetting('name')).'_'.$pub['id']?>]').on('change', function() {
-	
+
 			   						$.ajax({
 				   			            type: "POST",
 				   			            url: "/inc/site_admin/pattern/ajax_class.php",
@@ -236,35 +248,76 @@ class DataType extends VirtualClass
 					else
 					print stripcslashes($val);
 			break;
+			case 'CDColorStatus':
+
+					$CDColorStatus=new CDColorStatus;
+					$values=$CDColorStatus->get_values($settings);
+					?>
+									<script>
+									$(function() {
+
+										function color_select()
+										{
+											var color=$("[name=<?=$tface->getSetting('name').'_'.$pub['id'] ?>] option:selected").attr('data-color');
+
+											if (color!='')
+											{
+												$("[name=<?=$tface->getSetting('name').'_'.$pub['id'] ?>]").css('background', color);
+											}
+										}
+										
+										$('[name=<?=htmlspecialchars($tface->getSetting('name')).'_'.$pub['id']?>]').on('change', function() {
+			
+											color_select();
+					   							$.ajax({
+							   			            type: "POST",
+							   			            url: "/inc/site_admin/pattern/ajax_class.php",
+							   			            data: "action=edit_field&field_name=<?=$tface->getSetting('name')?>&id=<?=$pub['id']?>&section_id=<?=$_GET['section']?>&value="+$(this).val()+"&session_id="+session_id,
+							   			            dataType: 'json',
+							   			            success: function(data){
+							   			            	elem.children('img').attr('src', '/pics/editor/'+data.signal);
+							   			            }
+							   			        });
+
+							   			        
+										});
+										color_select();
+	
+									});
+									</script>
+									<?
+									print getSelectSinonim_color($tface->getSetting('name').'_'.$pub['id'],$values,stripslashes($val), $settings);
+								
+						break;
 			case 'CDCHOICE':
 				if (isset($settings['editable']))
 				{
 					if ($settings['type']=='') $settings['type']='radio';
-					
+
 					$CDCHOICE=new CDCHOICE;
-					?>	
+					?>
 					  <script>
 					  $(function() {
 					    $( "#<?=$tface->getSetting('name').'_'.$pub['id']?>" ).buttonset();
 
 					    $('#<?=$tface->getSetting('name').'_'.$pub['id']?>').change(function() {
-							
+
 					    	var val='';
-					    	
+
 							<?
 							if ($settings['type']=='radio')
 							{
 								?>
 								val=$("#<?=$tface->getSetting('name').'_'.$pub['id']?> [type=radio]:checked").val();
 								<?
-							} 
-							else 
+							}
+							else
 							{
 								?>
 							    $("#<?=$tface->getSetting('name').'_'.$pub['id']?> [type=checkbox]:checked").each(function() {
 							    	val+=(val=='' ? ',':'')+$(this).val()+',';
 								});
-								
+
 								<?
 							}
 							?>
@@ -279,8 +332,8 @@ class DataType extends VirtualClass
 		   			        });
 					    });
 					  });
-					  </script>		
-					
+					  </script>
+
 					<div id="<?=$tface->getSetting('name').'_'.$pub['id']?>" class="radio_ui">
 				    <?
 				    $i=0;
@@ -289,13 +342,13 @@ class DataType extends VirtualClass
 				    {
 				    	$i++;
 				    	if ($k=='') $k=$v;
-				
+
 				    	$selected='';
-				
+
 				    	if ($k==$val || stripos($val, ','.$k.',')!==false)  $selected='checked="checked"';
-				
+
 				    	if ($settings['type']=='') $settings['type']='radio';
-				    	
+
 				    	if ($settings['type']=='radio')
 				    	{?>
 				    	<input type="radio" id="radio<?=$i?>_<?=$tface->getSetting('name').'_'.$pub['id']?>" value="<?=$k?>" name="<?=$tface->getSetting('name').'_'.$pub['id']?>" <?=$selected?>><label for="radio<?=$i?>_<?=$tface->getSetting('name').'_'.$pub['id']?>"><?=$v?></label>
@@ -307,15 +360,15 @@ class DataType extends VirtualClass
 				       	<input type="checkbox" id="check<?=$i?>_<?=$tface->getSetting('name').'_'.$pub['id']?>" value="<?=$k?>" name="<?=$tface->getSetting('name').'_'.$pub['id']?>[]" <?=$selected?>><label for="check<?=$i?>_<?=$tface->getSetting('name').'_'.$pub['id']?>"><?=$v?></label>
 				       	<?
 				    	}
-				
-				
+
+
 				    }
 				    ?>
 					</div>
 					<?
 				}
 				else print stripcslashes($val);
-					
+
 			break;
 			default:
 				if (isset($settings['editable']))
@@ -390,7 +443,7 @@ class DataType extends VirtualClass
 		$error='';
 		if (!$id>0) return;
 
-		/* Проверяем есть ли изменения */
+		/* РџСЂРѕРІРµСЂСЏРµРј РµСЃС‚СЊ Р»Рё РёР·РјРµРЅРµРЅРёСЏ */
 		$cur_data=msr(msq("SELECT * FROM `".$this->getSetting('table')."` WHERE `id`=$id and section_id=".$section_id));
 
 		$changes=false;
@@ -403,7 +456,7 @@ class DataType extends VirtualClass
 			}
 		}
 
-		/* Если изменили название поля, меняем его в таблице */
+		/* Р•СЃР»Рё РёР·РјРµРЅРёР»Рё РЅР°Р·РІР°РЅРёРµ РїРѕР»СЏ, РјРµРЅСЏРµРј РµРіРѕ РІ С‚Р°Р±Р»РёС†Рµ */
 		if ($changes)
 		{
 			$update='';
@@ -416,7 +469,7 @@ class DataType extends VirtualClass
 		}
 
 
-		/* Если изменили тип колонки или описание*/
+		/* Р•СЃР»Рё РёР·РјРµРЅРёР»Рё С‚РёРї РєРѕР»РѕРЅРєРё РёР»Рё РѕРїРёСЃР°РЅРёРµ*/
  		if (isset($table_columns[$cur_data['name']]) && isset($values['name']) && $cur_data['name']!=$values['name'])
 		{
 
@@ -429,7 +482,7 @@ class DataType extends VirtualClass
 				$changes=true;
 			}
 		}
-		/* Если был изменены настройки колонки */
+		/* Р•СЃР»Рё Р±С‹Р» РёР·РјРµРЅРµРЅС‹ РЅР°СЃС‚СЂРѕР№РєРё РєРѕР»РѕРЅРєРё */
  		if ($table_columns[$cur_data['name']]['Type']!=$table_type_options)
 		{
 			foreach ($table_array as $tab)

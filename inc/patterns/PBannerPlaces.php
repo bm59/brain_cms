@@ -1,49 +1,49 @@
 <?
-$source_descr='Áàííåðû - ìåñòà';
+$source_descr='Ð‘Ð°Ð½Ð½ÐµÑ€Ñ‹ - Ð¼ÐµÑÑ‚Ð°';
 $source_name='PBannerPlaces';
-/* Èìÿ êëàññà */
+/* Ð˜Ð¼Ñ ÐºÐ»Ð°ÑÑÐ° */
 class PBannerPlaces extends VirtualPattern
 {
 	function init($settings){
 		global $CDDataSet,$Storage,$SiteSections;
-		
-		$descr='Óíèâåðñàëüíûé';
-		
+
+		$descr='Ð£Ð½Ð¸Ð²ÐµÑ€ÑÐ°Ð»ÑŒÐ½Ñ‹Ð¹';
+
 		if ($CDDataSet->checkDatatypes($settings['section'])==0)
 		$SiteSections->update_personal_settings($settings['section'], '|onoff|show_id|');
-		
+
 		$settings['name']=substr(get_class(), 1, strlen(get_class()));
 
 		$class_name='CC'.$settings['name'];
 		$settings['dataset'] = $CDDataSet->checkPresence(0, mb_strtolower($settings['name']));
-		
+
 		$CDDataSet->add
 		(
-		
+
 				array
 				(
 						'name'=>mb_strtolower($settings['name']),
 						'description'=>$descr,
 						'types'=>array
 						(
-								array('name'=>'name', 'description'=>'Íàèìåíîâàíèå', 'type'=>'CDText', 'settings'=>array('important'=>'', 'show_search'=>'', 'show_list'=>'')),
-								array('name'=>'description', 'description'=>'Îïèñàíèå', 'type'=>'CDText', 'settings'=>array()),
-								array('name'=>'image', 'description'=>'Èçîáðàæåíèå', 'type'=>'CDImage', 'settings'=>array('exts'=>'jpg,gif,jpeg,png')),
-								array('name'=>'settings', 'description'=>'Íàñòðîéêè', 'type'=>'CDTextArea', 'settings'=>array())
+								array('name'=>'name', 'description'=>'ÐÐ°Ð¸Ð¼ÐµÐ½Ð¾Ð²Ð°Ð½Ð¸Ðµ', 'type'=>'CDText', 'settings'=>array('important'=>'', 'show_search'=>'', 'show_list'=>'')),
+								array('name'=>'description', 'description'=>'ÐžÐ¿Ð¸ÑÐ°Ð½Ð¸Ðµ', 'type'=>'CDText', 'settings'=>array()),
+								array('name'=>'image', 'description'=>'Ð˜Ð·Ð¾Ð±Ñ€Ð°Ð¶ÐµÐ½Ð¸Ðµ', 'type'=>'CDImage', 'settings'=>array('exts'=>'jpg,gif,jpeg,png')),
+								array('name'=>'settings', 'description'=>'ÐÐ°ÑÑ‚Ñ€Ð¾Ð¹ÐºÐ¸', 'type'=>'CDTextArea', 'settings'=>array())
 						)
-		
+
 				),
 				$settings['section']
 		);
-		
-		$this->setSetting('type_settings_settings', 
+
+		$this->setSetting('type_settings_settings',
 			array(
-				'|imgw=200|imgh=200|'=>'Ìèíèìàëüíàÿ øèðèíà', 
-				'|imgwtype=3|imghtype=3|'=>'1-ðàâíà; 2-ìåíüøå èëè ðàâíà; 3-áîëüøå èëè ðàâíà',
-				'|editor_proport=auto|'=>'Ïðîïîðöèÿ 3:4 èëè auto',
-				'|editor_imgh=200|editor_imgw=150|'=>'Ìèí. ðàçìåð â ðåäàêòîðå',
-				'|editor_minh=200|editor_minw=100|'=>'Ìèíèìèçèðîâàòü ê ðàçìåðó',
-				'|editor_min_more=1|'=>'Ìèíèìèçèðóåò åñëè îáëàñòü âûäåëåííàÿ îáëàñòü áîëüøå'
+				'|imgw=200|imgh=200|'=>'ÐœÐ¸Ð½Ð¸Ð¼Ð°Ð»ÑŒÐ½Ð°Ñ ÑˆÐ¸Ñ€Ð¸Ð½Ð°',
+				'|imgwtype=3|imghtype=3|'=>'1-Ñ€Ð°Ð²Ð½Ð°; 2-Ð¼ÐµÐ½ÑŒÑˆÐµ Ð¸Ð»Ð¸ Ñ€Ð°Ð²Ð½Ð°; 3-Ð±Ð¾Ð»ÑŒÑˆÐµ Ð¸Ð»Ð¸ Ñ€Ð°Ð²Ð½Ð°',
+				'|editor_proport=auto|'=>'ÐŸÑ€Ð¾Ð¿Ð¾Ñ€Ñ†Ð¸Ñ 3:4 Ð¸Ð»Ð¸ auto',
+				'|editor_imgh=200|editor_imgw=150|'=>'ÐœÐ¸Ð½. Ñ€Ð°Ð·Ð¼ÐµÑ€ Ð² Ñ€ÐµÐ´Ð°ÐºÑ‚Ð¾Ñ€Ðµ',
+				'|editor_minh=200|editor_minw=100|'=>'ÐœÐ¸Ð½Ð¸Ð¼Ð¸Ð·Ð¸Ñ€Ð¾Ð²Ð°Ñ‚ÑŒ Ðº Ñ€Ð°Ð·Ð¼ÐµÑ€Ñƒ',
+				'|editor_min_more=1|'=>'ÐœÐ¸Ð½Ð¸Ð¼Ð¸Ð·Ð¸Ñ€ÑƒÐµÑ‚ ÐµÑÐ»Ð¸ Ð¾Ð±Ð»Ð°ÑÑ‚ÑŒ Ð²Ñ‹Ð´ÐµÐ»ÐµÐ½Ð½Ð°Ñ Ð¾Ð±Ð»Ð°ÑÑ‚ÑŒ Ð±Ð¾Ð»ÑŒÑˆÐµ'
 			)
 		);
 
@@ -51,13 +51,13 @@ class PBannerPlaces extends VirtualPattern
 		$SiteSettings->init();
 
 		VirtualPattern::init($settings);
-		
+
 		$iface = new $class_name;
 		$this->setSetting('table',$this->createDataSetTable($this->getSetting('dataset'),$this->getSetting('section'),array('show'=>'INT(1)', 'precedence'=>'BIGINT(20)')));
-		
+
 		$iface->init(array('mode'=>$this->getSetting('mode'),'isservice'=>$this->getSetting('isservice'),'section'=>$this->getSetting('section'),'pattern'=>$this,'table'=>$this->getSetting('table'),'dataset'=>$this->getSetting('dataset')));
 		$this->setSetting('cclass',$iface);
-		
+
 		return $iface;
 	}
 

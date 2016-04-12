@@ -1,21 +1,21 @@
 <?
 /*
-Êëàññ, îïèñûâàşùèé ñòğóêòóğó áıêîôèñà äëÿ ïîñòğîåíèÿ ìåíş, îïğåäåëåíèÿ äîñòóïà è ò.ï.
+ĞšĞ»Ğ°ÑÑ, Ğ¾Ğ¿Ğ¸ÑÑ‹Ğ²Ğ°ÑÑ‰Ğ¸Ğ¹ ÑÑ‚Ñ€ÑƒĞºÑ‚ÑƒÑ€Ñƒ Ğ±ÑĞºĞ¾Ñ„Ğ¸ÑĞ° Ğ´Ğ»Ñ Ğ¿Ğ¾ÑÑ‚Ñ€Ğ¾ĞµĞ½Ğ¸Ñ Ğ¼ĞµĞ½Ñ, Ğ¾Ğ¿Ñ€ĞµĞ´ĞµĞ»ĞµĞ½Ğ¸Ñ Ğ´Ğ¾ÑÑ‚ÑƒĞ¿Ğ° Ğ¸ Ñ‚.Ğ¿.
 */
 class Content extends VirtualClass
 {
 	function init(){
 		$this->Settings['structure'] = array(
 			  "0"=>array("path"=>'manage',"childs"=>array("100","200")),
-              "100"=>array("name"=>'Óïğàâëåíèå ñàéòîì',"path"=>'control',"childs"=>array("110","120")),
-              	"110"=>array("name"=>'Íàñòğîéêè',"path"=>'settings',"childs"=>array()),
-              	"120"=>array("name"=>'Êîíòåíò',"path"=>'contents',"childs"=>array()),
-              "200"=>array("name"=>'Óïğàâëåíèå ïîëüçîâàòåëÿìè',"path"=>'access',"childs"=>array("210","220")),
-              	"210"=>array("name"=>'Ïîëüçîâàòåëè',"path"=>'users',"childs"=>array()),
-              	"220"=>array("name"=>'Ãğóïïû',"path"=>'groups',"childs"=>array())
+              "100"=>array("name"=>'Ğ£Ğ¿Ñ€Ğ°Ğ²Ğ»ĞµĞ½Ğ¸Ğµ ÑĞ°Ğ¹Ñ‚Ğ¾Ğ¼',"path"=>'control',"childs"=>array("110","120")),
+              	"110"=>array("name"=>'ĞĞ°ÑÑ‚Ñ€Ğ¾Ğ¹ĞºĞ¸',"path"=>'settings',"childs"=>array()),
+              	"120"=>array("name"=>'ĞšĞ¾Ğ½Ñ‚ĞµĞ½Ñ‚',"path"=>'contents',"childs"=>array()),
+              "200"=>array("name"=>'Ğ£Ğ¿Ñ€Ğ°Ğ²Ğ»ĞµĞ½Ğ¸Ğµ Ğ¿Ğ¾Ğ»ÑŒĞ·Ğ¾Ğ²Ğ°Ñ‚ĞµĞ»ÑĞ¼Ğ¸',"path"=>'access',"childs"=>array("210","220")),
+              	"210"=>array("name"=>'ĞŸĞ¾Ğ»ÑŒĞ·Ğ¾Ğ²Ğ°Ñ‚ĞµĞ»Ğ¸',"path"=>'users',"childs"=>array()),
+              	"220"=>array("name"=>'Ğ“Ñ€ÑƒĞ¿Ğ¿Ñ‹',"path"=>'groups',"childs"=>array())
 		);
 	}
-	function getList($id = 0){ /* Ïîëó÷åíèå ñïèñêà ğàçäåëîâ */
+	function getList($id = 0){ /* ĞŸĞ¾Ğ»ÑƒÑ‡ĞµĞ½Ğ¸Ğµ ÑĞ¿Ğ¸ÑĞºĞ° Ñ€Ğ°Ğ·Ğ´ĞµĞ»Ğ¾Ğ² */
 		$id = floor($id);
 		$retval = array();
 		$childs = $this->Settings['structure'][$id]['childs'];
@@ -26,7 +26,7 @@ class Content extends VirtualClass
 		}
 		return $retval;
 	}
-	function getOne($id){ /* Ïîëó÷åíèå èíôîğìàöèè î êîíêğåòíîì ğàçäåëå */
+	function getOne($id){ /* ĞŸĞ¾Ğ»ÑƒÑ‡ĞµĞ½Ğ¸Ğµ Ğ¸Ğ½Ñ„Ğ¾Ñ€Ğ¼Ğ°Ñ†Ğ¸Ğ¸ Ğ¾ ĞºĞ¾Ğ½ĞºÑ€ĞµÑ‚Ğ½Ğ¾Ğ¼ Ñ€Ğ°Ğ·Ğ´ĞµĞ»Ğµ */
 		$id = floor($id);
 		$retval = false;
 		if (is_array($this->Settings['structure'][$id])) $retval = $this->Settings['structure'][$id];

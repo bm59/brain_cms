@@ -39,17 +39,17 @@ $baddata = array("/UNION/i",
 		"/<(.*?)meta(.*?)>/si",
 		"/<(.*?)applet(.*?)>/si",
 		"/<(.*?)body(.*?)>/si"
-		
-		
+
+
 );
 if(!isset($_REQUEST)) return;
 foreach($_REQUEST as $params => $inputdata){
 	foreach($baddata as $badkey => $badvalue){
 		if(is_string($inputdata) && preg_match($badvalue, $inputdata))
-		{ 
-			$badcount=1; 
+		{
+			$badcount=1;
 			/* exit('ERROR: '.$params.'='.$inputdata."|".$badvalue); */
-			exit('ERROR: BADDATA'); 
+			exit('ERROR: BADDATA');
 		}
 	}
 }
@@ -57,7 +57,7 @@ foreach($_REQUEST as $params => $inputdata){
 
 
 $array = array( "\x27", "\x22", "\x60", "\t",'\n','\r', '\\', "'",
-"¬","#",";","~","[","]","{","}","=","+",")","(",
+"Â¬","#",";","~","[","]","{","}","=","+",")","(",
 "*","&","^","%","$","<",">","?","!",".pl", '"' );
 
 $_GET = str_replace($array, '', $_GET);

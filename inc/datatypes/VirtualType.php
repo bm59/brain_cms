@@ -1,6 +1,6 @@
 <?
 /*
-Áàçîâûé êëàññ òèïà äàííûõ
+Ð‘Ð°Ð·Ð¾Ð²Ñ‹Ð¹ ÐºÐ»Ð°ÑÑ Ñ‚Ð¸Ð¿Ð° Ð´Ð°Ð½Ð½Ñ‹Ñ…
 */
 class VirtualType
 {
@@ -12,7 +12,7 @@ class VirtualType
 		}
 		if (trim($this->getSetting('editformid'))=='') $this->setSetting('editformid','editform');
 	}
-	function getSetting($name){ return $this->Settings[$name]; } // Ïîëó÷åíèå çíà÷åíèÿ, õðàíÿùåãîñÿ â $Settings
+	function getSetting($name){ return $this->Settings[$name]; } // ÐŸÐ¾Ð»ÑƒÑ‡ÐµÐ½Ð¸Ðµ Ð·Ð½Ð°Ñ‡ÐµÐ½Ð¸Ñ, Ñ…Ñ€Ð°Ð½ÑÑ‰ÐµÐ³Ð¾ÑÑ Ð² $Settings
 	function setSetting($name,$value){ $this->Settings[$name] = $value; }
 }
 ?>

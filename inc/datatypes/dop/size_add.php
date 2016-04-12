@@ -21,7 +21,7 @@
                               	var cell_template='<tr>\n'+
                               	'<td class="dragHandle">&nbsp;</td>\n'+
                               	'<td style="width:25%">\n'+
-                              		 	'<label>Размер</label>\n'+
+                              		 	'<label>Р Р°Р·РјРµСЂ</label>\n'+
                             				'<span class="input">\n'+
 								'<span class="bl"></span>\n'+
 								'<span class="bc"><input type="text" value="" maxlength="255" name="size_val'+tmp_id+'"></span>\n'+
@@ -29,7 +29,7 @@
 							'</span>\n'+
                               	'</td>\n'+
                               	'<td style="width:20%">\n'+
-                              		  	    '<label>Цена</label>\n'+
+                              		  	    '<label>Р¦РµРЅР°</label>\n'+
                             				'<span class="input">\n'+
 								'<span class="bl"></span>\n'+
 								'<span class="bc"><input type="text" value="" maxlength="255" name="size_price'+tmp_id+'"></span>\n'+
@@ -37,7 +37,7 @@
 							'</span>\n'+
                               	'</td>\n'+
                               	'<td>\n'+
-                           				'<label>Описание</label>\n'+
+                           				'<label>РћРїРёСЃР°РЅРёРµ</label>\n'+
                             				'<span class="input">\n'+
 								'<span class="bl"></span>\n'+
 								'<span class="bc"><input type="text" value="" maxlength="255" name="size_descr'+tmp_id+'"></span>\n'+
@@ -45,11 +45,11 @@
 							'</span>\n'+
                            	'</td>\n'+
                               	'<td style="width:4%; padding-top: 15px;">\n'+
-                               				'<a onclick="if (confirm(\'Удалить строку\')) $(this).parents(\'TR\').remove(); return false;" class="button txtstyle" href="#">\n'+
+                               				'<a onclick="if (confirm(\'РЈРґР°Р»РёС‚СЊ СЃС‚СЂРѕРєСѓ\')) $(this).parents(\'TR\').remove(); return false;" class="button txtstyle" href="#">\n'+
                                                   '<span class="bl"></span>\n'+
                                                   '<span class="bc"></span>\n'+
                                                   '<span class="br"></span>\n'+
-                                                  '<input type="button" title="Удалить строку" style="background-image: url(/pics/editor/delete.gif)">\n'+
+                                                  '<input type="button" title="РЈРґР°Р»РёС‚СЊ СЃС‚СЂРѕРєСѓ" style="background-image: url(/pics/editor/delete.gif)">\n'+
                                                   '</a>\n'+
                            	'</td>\n'+
                               '</tr>';
@@ -87,16 +87,16 @@
 });
 </script>
                                <div style="padding: 10px 0 20px 20px; margin: 10px 5px; border: 1px dashed #CCC;">
-                               <H2>Размеры:</H2>
+                               <H2>Р Р°Р·РјРµСЂС‹:</H2>
 		                          	<span>
 		                                <a class="button txtstyle" href="#" onclick="add_size(); return false;">
 		                                      <span class="bl"></span>
 		                                      <span class="bc"></span>
 		                                      <span class="br"></span>
-		                                      <input type="button" title="Добавить" style="background-image: url(/pics/editor/plus.gif)">
+		                                      <input type="button" title="Р”РѕР±Р°РІРёС‚СЊ" style="background-image: url(/pics/editor/plus.gif)">
 		           						</a>
 	           						</span>
-	           						<span style="line-height: 30px;padding-left: 5px;"><a href="#" onclick="add_size(); return false;">Добавить размер</a></span>
+	           						<span style="line-height: 30px;padding-left: 5px;"><a href="#" onclick="add_size(); return false;">Р”РѕР±Р°РІРёС‚СЊ СЂР°Р·РјРµСЂ</a></span>
 
            						    <table style="width: 100%;" id="size_table">
            						    <?
@@ -127,7 +127,7 @@
 												<tr id="tr_<?=$p?>">
 												<td class="dragHandle">&nbsp;</td>
 	                                			<td style="width:20%">
-	                                				<label>Размер</label>
+	                                				<label>Р Р°Р·РјРµСЂ</label>
 	                                 				<span class="input">
 														<span class="bl"></span>
 														<span class="bc"><input type="text" value="<?=$v?>" maxlength="255" name="size_val<?=$p?>"></span>
@@ -135,7 +135,7 @@
 													</span>
 	                                			</td>
 	                                			<td style="width:20%">
-	                                				<label>Цена</label>
+	                                				<label>Р¦РµРЅР°</label>
 	                                 				<span class="input">
 														<span class="bl"></span>
 														<span class="bc"><input type="text" value="<?=$_POST['size_price'.$p]?>" maxlength="255" name="size_price<?=$p?>"></span>
@@ -143,7 +143,7 @@
 													</span>
 	                                			</td>
 	                                			<td>
-	                                				<label>Описание</label>
+	                                				<label>РћРїРёСЃР°РЅРёРµ</label>
 	                                 				<span class="input">
 														<span class="bl"></span>
 														<span class="bc"><input type="text" value="<?=$_POST['size_descr'.$p]?>" maxlength="255" name="size_descr<?=$p?>"></span>
@@ -151,11 +151,11 @@
 													</span>
 	                                			</td>
 	                                			<td style="width:4%;padding-top: 15px;">
-                                     				<a onclick="if (confirm('Удалить строку')) $(this).parents('TR').remove(); return false;" class="button txtstyle" href="#">
+                                     				<a onclick="if (confirm('РЈРґР°Р»РёС‚СЊ СЃС‚СЂРѕРєСѓ')) $(this).parents('TR').remove(); return false;" class="button txtstyle" href="#">
                                                         <span class="bl"></span>
                                                         <span class="bc"></span>
                                                         <span class="br"></span>
-                                                        <input type="button" title="Удалить строку" style="background-image: url(/pics/editor/delete.gif)">
+                                                        <input type="button" title="РЈРґР°Р»РёС‚СЊ СЃС‚СЂРѕРєСѓ" style="background-image: url(/pics/editor/delete.gif)">
                                                         </a>
 	                                			</td>
 											<?

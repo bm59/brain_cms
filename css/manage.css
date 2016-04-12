@@ -25,6 +25,12 @@ H3 {margin: 10px 0px; font-size: 16px; line-height: 18px; font-weight: lighter; 
 .air.h5  {height: 5px;}
 .air.h10 {height: 10px;}
 
+/*Цветной селект*/
+.colorselect {color: #FFFFFF!important; font-weight: bold; min-width: 120px; padding: 0 0 0 10px!important;}
+.colorselect option {padding: 10px}
+.colorselect.search {color: #000000!important; font-weight: normal; }
+.colorselect.search option option {color: #FFFFFF!important;}
+
 
 /*Сортировка*/
 .template .sort {width: 14px; height: 8px; background: url("/pics/inputs/sort.png"); display:  inline-block; vertical-align: middle; margin: 0 4px;}

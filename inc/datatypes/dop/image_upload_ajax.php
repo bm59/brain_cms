@@ -15,9 +15,9 @@ if (isset($_POST['file_delete']))
 
 
  	$filename = $_SERVER['DOCUMENT_ROOT'].$_POST['file_delete'];
-	if ( !(@unlink($filename)) ) echo('Ошибка удаления файла');
+	if ( !(@unlink($filename)) ) echo('РћС€РёР±РєР° СѓРґР°Р»РµРЅРёСЏ С„Р°Р№Р»Р°');
 	else
-    echo('true#%#Файл удален');
+    echo('true#%#Р¤Р°Р№Р» СѓРґР°Р»РµРЅ');
 	die();
 }
 else*/
@@ -25,15 +25,15 @@ else*/
 
 $ext = substr($_FILES['upl_file']['name'], 1 + strrpos($_FILES['upl_file']['name'], "."));
 $ext = strtolower($ext);
-$valid_ext = array('jpg', 'png'); // допустимые расширения
+$valid_ext = array('jpg', 'png'); // РґРѕРїСѓСЃС‚РёРјС‹Рµ СЂР°СЃС€РёСЂРµРЅРёСЏ
 if(in_array($ext, $valid_ext)){
 
-    $ttt = time(); // переименовываем файлик
+    $ttt = time(); // РїРµСЂРµРёРјРµРЅРѕРІС‹РІР°РµРј С„Р°Р№Р»РёРє
 
     $filename = $ttt.'_temp.'.$ext;
     $path_file = $_SERVER['DOCUMENT_ROOT'].$path.$filename;
     if(!copy($_FILES['upl_file']['tmp_name'], $path_file)){
-        echo 'Файл не загружен. Повторите попытку';
+        echo 'Р¤Р°Р№Р» РЅРµ Р·Р°РіСЂСѓР¶РµРЅ. РџРѕРІС‚РѕСЂРёС‚Рµ РїРѕРїС‹С‚РєСѓ';
     }
     else
     {
@@ -44,7 +44,7 @@ if(in_array($ext, $valid_ext)){
 
     }
 }else{
-    echo 'Недопустимый формат файла.'.$ext;
+    echo 'РќРµРґРѕРїСѓСЃС‚РёРјС‹Р№ С„РѕСЂРјР°С‚ С„Р°Р№Р»Р°.'.$ext;
 }
 
 }

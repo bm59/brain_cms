@@ -34,13 +34,13 @@
         },
         items: {
 
-             "save": {name: "Сохранить", icon: "save"},
-             "sep1": "---------",
-             "hide_off": {name: "Скрыть отключенные", icon: "hide_off"},
-             "show_off": {name: "Показать отключенные", icon: "show_off"},
-             "sep2": "---------",
-             "section_go": {name: "Перейти в раздел", icon: "section_go"},
-             "section_add": {name: "Добавить в раздел", icon: "section_add"},
+            "save": {name: "РЎРѕС…СЂР°РЅРёС‚СЊ", icon: "save"},
+            "sep1": "---------",
+            "hide_off": {name: "РЎРєСЂС‹С‚СЊ РѕС‚РєР»СЋС‡РµРЅРЅС‹Рµ", icon: "hide_off"},
+            "show_off": {name: "РџРѕРєР°Р·Р°С‚СЊ РѕС‚РєР»СЋС‡РµРЅРЅС‹Рµ", icon: "show_off"},
+            "sep2": "---------",
+            "section_go": {name: "РџРµСЂРµР№С‚Рё РІ СЂР°Р·РґРµР»", icon: "section_go"},
+            "section_add": {name: "Р”РѕР±Р°РІРёС‚СЊ РІ СЂР°Р·РґРµР»", icon: "section_add"},
         }
     });
 
@@ -54,7 +54,7 @@
         });
       });
 
-	/* Изменение селекта тип данных */
+	/* пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ */
     $(document).on('change','select', function() {
 
      	cur_id=$(this).attr('name');
@@ -65,7 +65,7 @@
         return false;
     });
 
-    /* Чекбоксы в общих настройках раздела */
+    /* пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ */
     $(document).on('change',".dt_settings input[type='checkbox']", function() {
 
 		var inp_str=$(this).parents('.dt_settings').find('.setting_text').val();
@@ -82,7 +82,7 @@
         return false;
     });
 
-    /* Чекбоксы в настройках колонки */
+    /* пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ */
      $(document).on('change',".section_settings input[type='checkbox']", function() {
 
 		var inp_str=$(this).parents('.section_settings').find('.setting_text').val();
@@ -99,7 +99,7 @@
         return false;
     });
 
-     /* Клик на подсказке */
+     /* пїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ */
      $(document).on('click',".help a", function() {
 
     	var inp_str=$(this).parents('.dt_settings').find('.setting_text').val();
@@ -136,7 +136,7 @@
         return false;
     });
 
-     /* Подсказки в основных настройках раздела */
+     /* пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ */
      $(document).on('click',".settings_main a", function() {
 
     	var inp_str=$('.section_settings .setting_text').val();
@@ -150,7 +150,7 @@
         return false;
     });
 
-     /* Подсказки в стилях Edit Search */
+     /* пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ Edit Search */
      $(document).on('click',".style_help a", function() {
 
      	var inp_str=$('[name='+$(this).attr('data-field')+']').val();
@@ -164,7 +164,7 @@
         return false;
     });
 
-     /* Иконка - показать настройки */
+     /* пїЅпїЅпїЅпїЅпїЅпїЅ - пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ */
     $(document).on('click',".connectedSortable .show_settings", function() {
 
 
@@ -183,7 +183,7 @@
         return false;
     });
 
-    /* Включение\отключение колонок */
+    /* пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ\пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ */
     $(document).on('click',".connectedSortable .on_off", function() {
 
 		cur_val=$('[name='+$(this).attr('data-inp')+']');
@@ -208,7 +208,7 @@
     });
 
 
-     /* Добавление шаблона */
+     /* пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ */
 
     $('#sortable2 .drag_icon img').attr('src','/pics/editor/upload.png');
 

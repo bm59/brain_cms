@@ -2,44 +2,44 @@
 include "$DOCUMENT_ROOT/inc/site_admin/include.php";
 
 session_start();
-header("Content-type: text/html; charset=windows-1251");
+header("Content-type: text/html; charset=uft-8");
 
 		$item_array=array();
 		$comment='';
-		
-		$f=fopen($_FILES['upl_file']['tmp_name'], 'r') or die("Íåâîçìîæíî îòêðûòü ôàéë!");
+
+		$f=fopen($_FILES['upl_file']['tmp_name'], 'r') or die("ÐÐµÐ²Ð¾Ð·Ð¼Ð¾Ð¶Ð½Ð¾ Ð¾Ñ‚ÐºÑ€Ñ‹Ñ‚ÑŒ Ñ„Ð°Ð¹Ð»!");
 		while(!feof($f))
 		{
 			$text = fgets($f,999);
-			
+
 			if (trim($text)!='') $item_array[]=trim($text);
-		
+
 		}
 		fclose($f);
-		
-		
+
+
 		$double_count=0;
 		$add_count=0;
 		if (count($item_array)>0)
 		{
 			$SiteSettings = new SiteSettings;
 			$SiteSettings->init();
-			
+
 			$Section = $SiteSections->get($_POST['section_id']);
-			
+
 			$Section['id'] = floor($Section['id']);
 			if ($Section['id']>0)
 			{
 				$Pattern = new $Section['pattern'];
 				$Iface = $Pattern->init(array('section'=>$Section['id']));
 			}
-			
+
 			if ($Section['id']>0)
 			foreach ($item_array as $item)
 			{
 				$store_item=msr(msq("SELECT * FROM `".$Iface->getSetting('table')."` WHERE `name`='".$item."'"));
-				if ($store_item['id']>0) 
-				$double_count++; 
+				if ($store_item['id']>0)
+				$double_count++;
 				else
 				{
 					msq("INSERT INTO `".$Iface->getSetting('table')."` (`show`,`name`) VALUES ('1','".$item."')");
@@ -47,7 +47,7 @@ header("Content-type: text/html; charset=windows-1251");
 				}
 			}
 		}
-		
-		$comment='Âñåãî çàïèñåé: '.count($item_array).'; äîáàâëåíî: '.floor($add_count).'; äóáëåé: '.floor($double_count);
-		print json_encode(array('result'=>'ok','count'=>count($item_array), 'double_count'=>floor($double_count), 'comment'=>iconv('windows-1251', 'UTF-8',$comment)));
+
+		$comment='Ð’ÑÐµÐ³Ð¾ Ð·Ð°Ð¿Ð¸ÑÐµÐ¹: '.count($item_array).'; Ð´Ð¾Ð±Ð°Ð²Ð»ÐµÐ½Ð¾: '.floor($add_count).'; Ð´ÑƒÐ±Ð»ÐµÐ¹: '.floor($double_count);
+		print json_encode(array('result'=>'ok','count'=>count($item_array), 'double_count'=>floor($double_count), 'comment'=>$comment));
 ?>

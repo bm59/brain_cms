@@ -24,7 +24,7 @@
 
 <div class="clear"></div>
 <div class="content" style="padding: 20px 30px;">
-<div class="mininav"><a href="/">Главная</a><img src="/pics/arrows/arrow_nav.png"><?=$nav_text?></div>
+<div class="mininav"><a href="/">Р“Р»Р°РІРЅР°СЏ</a><img src="/pics/arrows/arrow_nav.png"><?=$nav_text?></div>
 <H1><?=$headerh1?></H1>
 <?
 	$sheet = $Iface->get();

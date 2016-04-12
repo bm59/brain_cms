@@ -1,6 +1,6 @@
 <?
 /*
-Структура сайта, разделы и сервисы
+РЎС‚СЂСѓРєС‚СѓСЂР° СЃР°Р№С‚Р°, СЂР°Р·РґРµР»С‹ Рё СЃРµСЂРІРёСЃС‹
 */
 class SiteSections extends VirtualClass
 {
@@ -50,7 +50,7 @@ class SiteSections extends VirtualClass
         		if ($id>0 && $this->implode($cur['settings_personal'])!=$val)
         		print $this->implode($cur['settings_personal']);
         	}
-        	
+
         }
         function setPrecedence($id,$prec){
                 $id = floor($id);
@@ -58,7 +58,7 @@ class SiteSections extends VirtualClass
                 msq("UPDATE `".$this->getSetting('table')."` SET `precedence`='$prec' WHERE `id`='".$section['id']."'");
         }
         function update_personal_settings($id,$set){
-        
+
         	$id = floor($id);
 			if (!$id>0) return;
         	msq("UPDATE `".$this->getSetting('table')."` SET `settings_personal`='$set' WHERE `id`='".$id."'");
@@ -69,10 +69,10 @@ class SiteSections extends VirtualClass
                 $id = floor($id);
                 $section = $this->get($id);
                 $parent=$this->get($parent_id);
-                /*устанавливаем порядок переносимому элементу*/
+                /*СѓСЃС‚Р°РЅР°РІР»РёРІР°РµРј РїРѕСЂСЏРґРѕРє РїРµСЂРµРЅРѕСЃРёРјРѕРјСѓ СЌР»РµРјРµРЅС‚Сѓ*/
                 msq("UPDATE `".$this->getSetting('table')."` SET `precedence`='".floor($parent['precedence'])."', `parent`=".floor($parent['parent'])." WHERE `id`='".$section['id']."'");
 
-                /*опускаем всех на 1 порядок ниже*/
+                /*РѕРїСѓСЃРєР°РµРј РІСЃРµС… РЅР° 1 РїРѕСЂСЏРґРѕРє РЅРёР¶Рµ*/
                 $parent_sub=msq("SELECT * FROM `".$this->getSetting('table')."` WHERE `parent`=".floor($parent['parent'])." and `precedence`>=".floor($parent['precedence'])." ORDER BY `precedence` ASC");
                 while ($ps=msr($parent_sub))
                 if ($ps['id']!=$section['id'])
@@ -109,16 +109,15 @@ class SiteSections extends VirtualClass
                         }
                 }
         }
-        function add($values){
+        function add($values, $parent=-1){
                 $errors = array();
-                $name = htmlspecialchars(trim($values['name'])); if ($name=='') $errors[] = 'Не указано название';
-                $path = lower(trim($values['path'])); if (!preg_match('|^[a-z_0-9]+$|',$path)) $errors[] = 'Путь должен состоять из символов латинского алфавита, цифр и символа подчекивания «_»';
+                $name = htmlspecialchars(trim($values['name'])); if ($name=='') $errors[] = 'РќРµ СѓРєР°Р·Р°РЅРѕ РЅР°Р·РІР°РЅРёРµ';
+                $path = lower(trim($values['path'])); if (!preg_match('|^[a-z_0-9]+$|',$path)) $errors[] = 'РџСѓС‚СЊ РґРѕР»Р¶РµРЅ СЃРѕСЃС‚РѕСЏС‚СЊ РёР· СЃРёРјРІРѕР»РѕРІ Р»Р°С‚РёРЅСЃРєРѕРіРѕ Р°Р»С„Р°РІРёС‚Р°, С†РёС„СЂ Рё СЃРёРјРІРѕР»Р° РїРѕРґС‡РµРєРёРІР°РЅРёСЏ В«_В»';
                 $pattern = '';
                 foreach (configGet('registeredPatterns') as $v) if ($v['name']==$values['pattern']) $pattern = $v['name'];
-                if ($pattern=='') $errors[] = 'Не указан тип раздела';
-                $parent = -1;
+                if ($pattern=='') $errors[] = 'РќРµ СѓРєР°Р·Р°РЅ С‚РёРї СЂР°Р·РґРµР»Р°';
                 $precedence = 0;
-                $isservice = floor($values['isservice']); if ($isservice>1) $errors[] = 'Не указано расположение (раздел или сервис)';
+                $isservice = floor($values['isservice']); if ($isservice>1) $errors[] = 'РќРµ СѓРєР°Р·Р°РЅРѕ СЂР°СЃРїРѕР»РѕР¶РµРЅРёРµ (СЂР°Р·РґРµР» РёР»Рё СЃРµСЂРІРёСЃ)';
                 $keywords = htmlspecialchars(trim($values['keywords']));
                 $title = htmlspecialchars(trim($values['title']));
                 $description = htmlspecialchars(trim($values['description']));
@@ -130,14 +129,15 @@ class SiteSections extends VirtualClass
 
                 $settings = $values['settings']; if (!is_array($settings)) $settings = array();
                 $settings_personal = $values['settings_personal']; if (!is_array($settings_personal)) $settings_personal = array();
-                
+				
                 if ($isservice>0){
                         $parent = 0;
                         $settings['noeditsettings'] = '';
                         $settings['undeletable'] = '';
                 }
                 $settings = $this->implode($settings);
-                $settings_personal = $this->implode($settings);
+                $settings_personal = $this->implode($settings_personal);
+                
                 if (count($errors)==0){
                         msq("INSERT INTO `".$this->getSetting('table')."` (`name`,`path`,`pattern`,`parent`,`precedence`,`isservice`,`keywords`,`title`,`description`,`visible`,`settings`,`tags`, `settings_personal`) VALUES ('$name','$path','$pattern','$parent','$precedence','$isservice','$keywords','$title','$description','$visible','$settings','$tags', '$settings_personal')");
                 }
@@ -145,14 +145,14 @@ class SiteSections extends VirtualClass
         }
         function edit($values){
                 $errors = array();
-                $name = htmlspecialchars(trim($values['name'])); if ($name=='') $errors[] = 'Не указано название';
-                $path = lower(trim($values['path'])); if (!preg_match('|^[a-z_0-9]+$|',$path)) $errors[] = 'Путь должен состоять из символов латинского алфавита, цифр и символа подчекивания «_»';
-                $isservice = floor($values['isservice']); if ($isservice>1) $errors[] = 'Не указано расположение (раздел или сервис)';
+                $name = htmlspecialchars(trim($values['name'])); if ($name=='') $errors[] = 'РќРµ СѓРєР°Р·Р°РЅРѕ РЅР°Р·РІР°РЅРёРµ';
+                $path = lower(trim($values['path'])); if (!preg_match('|^[a-z_0-9]+$|',$path)) $errors[] = 'РџСѓС‚СЊ РґРѕР»Р¶РµРЅ СЃРѕСЃС‚РѕСЏС‚СЊ РёР· СЃРёРјРІРѕР»РѕРІ Р»Р°С‚РёРЅСЃРєРѕРіРѕ Р°Р»С„Р°РІРёС‚Р°, С†РёС„СЂ Рё СЃРёРјРІРѕР»Р° РїРѕРґС‡РµРєРёРІР°РЅРёСЏ В«_В»';
+                $isservice = floor($values['isservice']); if ($isservice>1) $errors[] = 'РќРµ СѓРєР°Р·Р°РЅРѕ СЂР°СЃРїРѕР»РѕР¶РµРЅРёРµ (СЂР°Р·РґРµР» РёР»Рё СЃРµСЂРІРёСЃ)';
                 $keywords = htmlspecialchars(trim($values['keywords']));
                 $title = htmlspecialchars(trim($values['title']));
                 $tags = htmlspecialchars(trim($values['tags']));
                 $header = htmlspecialchars(trim($values['header']));
-                
+
                 $visible = $values['visible'];
                 if($visible == "on")
                 $visible = 1;else
@@ -320,16 +320,16 @@ class SiteSections extends VirtualClass
 		                        $counter++;
 		                        foreach (configGet('registeredPatterns') as $v) if ($v['name']==$section['pattern']) $pattern = $v['description'];
 		                        $anchorcode = '';
-		                        if (($mode=='development') || ($section['parent']==-1)){ // если в тестовом режиме
+		                        if (($mode=='development') || ($section['parent']==-1)){ // РµСЃР»Рё РІ С‚РµСЃС‚РѕРІРѕРј СЂРµР¶РёРјРµ
 		                                $anchorcode = '<img id="'.$section['id'].'|'.$section['parent'].'" class="anchordrop" data-parent="'.$section['parent'].'" src="/pics/editor/anchor.gif" width="18" height="18" />';
 		                        }
-		                        elseif ((!isset($section['settings']['undrop'])) && (!isset($section['settings']['nodestination']))){ // таких вроде нет
+		                        elseif ((!isset($section['settings']['undrop'])) && (!isset($section['settings']['nodestination']))){ // С‚Р°РєРёС… РІСЂРѕРґРµ РЅРµС‚
 		                                $anchorcode = '<img id="'.$section['id'].'" class="anchordrop" data-parent="'.$section['parent'].'" src="/pics/editor/anchor.gif" width="18" height="18" alt="construct"/>';
 		                        }
-		                        elseif (!isset($section['settings']['undrop'])){ // созданные админом
+		                        elseif (!isset($section['settings']['undrop'])){ // СЃРѕР·РґР°РЅРЅС‹Рµ Р°РґРјРёРЅРѕРј
 		                                $anchorcode = '<img id="'.$section['id'].'|'.$section['parent'].'" class="anchordrop" data-parent="'.$section['parent'].'" src="/pics/editor/anchor.gif" width="18" height="18" />';
 		                        }
-		                        elseif (!isset($section['settings']['nodestination'])){ // конструкторные разделы
+		                        elseif (!isset($section['settings']['nodestination'])){ // РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂРЅС‹Рµ СЂР°Р·РґРµР»С‹
 		                                $anchorcode = '<img id="'.$section['id'].'" class="anchordrop" src="/pics/editor/anchor.gif" width="18" height="18" alt="construct"/>';
 		                        }
 
@@ -373,33 +373,33 @@ class SiteSections extends VirtualClass
 		                                if (isset($section['settings']['noeditsettings']) || $mode!='development' || $section['id']<=7 || $section['pattern']=='PSheet1' || $section['pattern']=='PFolder'){
 		                                        ?>
 		                                        <span class="button txtstyle disabled">
-		                                        	<input type="button" style="background-image: url(/pics/editor/pattern-disabled.png)" title="Настройки шаблона недоступны" onclick="return false;" />
+		                                        	<input type="button" style="background-image: url(/pics/editor/pattern-disabled.png)" title="РќР°СЃС‚СЂРѕР№РєРё С€Р°Р±Р»РѕРЅР° РЅРµРґРѕСЃС‚СѓРїРЅС‹" onclick="return false;" />
 		                                        </span>
 		                                        <?
 		                                }
 		                                else{
 		                                        ?>
 		                                        <span class="button txtstyle">
-		                                        	<a href="./?section=<?=$section['id']?>&type_edit=pattern" title="Настройки шаблона"><img src="/pics/editor/pattern.png" alt="Настройки шаблона"></a>
+		                                        	<a href="./?section=<?=$section['id']?>&type_edit=pattern" title="РќР°СЃС‚СЂРѕР№РєРё С€Р°Р±Р»РѕРЅР°"><img src="/pics/editor/pattern.png" alt="РќР°СЃС‚СЂРѕР№РєРё С€Р°Р±Р»РѕРЅР°"></a>
 		                                        </span>
 		                                        <?
 		                                }
-		                                ?>		                                
+		                                ?>
 		                                </td>
-		                                
+
 		                                <td class="t_minwidth min">
 		                                <?
 		                                if (isset($section['settings']['noeditsettings']) || $mode!='development'){
 		                                        ?>
 		                                        <span class="button txtstyle disabled">
-		                                        	<input type="button" style="background-image: url(/pics/editor/settings-disabled.png)" title="Настройки недоступны" onclick="return false;" />
+		                                        	<input type="button" style="background-image: url(/pics/editor/settings-disabled.png)" title="РќР°СЃС‚СЂРѕР№РєРё РЅРµРґРѕСЃС‚СѓРїРЅС‹" onclick="return false;" />
 		                                        </span>
 		                                        <?
 		                                }
 		                                else{
 		                                        ?>
 		                                        <span class="button txtstyle">
-		                                        	<a href="./?edit=<?=$section['id']?>" title="Настройки"><img src="/pics/editor/settings.png" alt="Настройки"></a>
+		                                        	<a href="./?edit=<?=$section['id']?>" title="РќР°СЃС‚СЂРѕР№РєРё"><img src="/pics/editor/settings.png" alt="РќР°СЃС‚СЂРѕР№РєРё"></a>
 		                                        </span>
 		                                        <?
 		                                }
@@ -410,14 +410,14 @@ class SiteSections extends VirtualClass
 		                                if ((isset($section['settings']['undeletable'])) && ($mode!='development')){
 		                                        ?>
 		                                        <span class="button txtstyle disabled">
-		                                        	<input type="button" style="background-image: url(/pics/editor/delete-disabled.gif)" title="Невозможно удалить" onclick="return false;" />
+		                                        	<input type="button" style="background-image: url(/pics/editor/delete-disabled.gif)" title="РќРµРІРѕР·РјРѕР¶РЅРѕ СѓРґР°Р»РёС‚СЊ" onclick="return false;" />
 		                                        </span>
 		                                        <?
 		                                }
 		                                else{
 		                                        ?>
 		                                        <span class="button txtstyle">
-		                                        	<a href="./?delete=<?=$section['id']?>" onclick="if (!confirm('Удалить запись')) return false;" title="Удалить"><img src="/pics/editor/delete.gif" alt="Удалить"></a>
+		                                        	<a href="./?delete=<?=$section['id']?>" onclick="if (!confirm('РЈРґР°Р»РёС‚СЊ Р·Р°РїРёСЃСЊ')) return false;" title="РЈРґР°Р»РёС‚СЊ"><img src="/pics/editor/delete.gif" alt="РЈРґР°Р»РёС‚СЊ"></a>
 		                                        </span>
 		                                <?
 		                                }

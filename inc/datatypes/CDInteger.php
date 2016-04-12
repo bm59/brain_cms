@@ -2,7 +2,7 @@
 class CDINTEGER extends VirtualType
 {
 	function init($settings){
-		$settings['descr']='Öåëîå ÷èñëî';
+		$settings['descr']='Ð¦ÐµÐ»Ð¾Ðµ Ñ‡Ð¸ÑÐ»Ð¾';
 		$maxlength = (floor($this->getSetting('maxlength'))>0)?floor($this->getSetting('maxlength')):255;
 		$this->setSetting('maxlength',$maxlength);
 		VirtualType::init($settings);
@@ -39,8 +39,8 @@ class CDINTEGER extends VirtualType
 		if ($newvalue!='' && $newvalue>-1)
 		$newvalue = floatval(str_replace(',', '.', $newvalue));
 
-		if ((isset($settings['important'])) && (!is_float($newvalue))) $errors[] = 'Çàïîëíèòå ïîëå «'.$this->getSetting('description').'»';
-		if ((isset($settings['important'])) && ($newvalue==='')) $errors[] = 'Çàïîëíèòå ïîëå «'.$this->getSetting('description').'»';
+		if ((isset($settings['important'])) && (!is_float($newvalue))) $errors[] = 'Ð—Ð°Ð¿Ð¾Ð»Ð½Ð¸Ñ‚Ðµ Ð¿Ð¾Ð»Ðµ Â«'.$this->getSetting('description').'Â»';
+		if ((isset($settings['important'])) && ($newvalue==='')) $errors[] = 'Ð—Ð°Ð¿Ð¾Ð»Ð½Ð¸Ñ‚Ðµ Ð¿Ð¾Ð»Ðµ Â«'.$this->getSetting('description').'Â»';
 		if ($newvalue!='0')
 		$this->setSetting('value',$newvalue);
 		return $errors;

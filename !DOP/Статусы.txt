@@ -1,0 +1,66 @@
+.status_container .status {text-decoration: none; display: block; background-color: #999999; color: #FFFFFF; white-space:nowrap; padding: 3px 10px;}
+.status_container .status.select {padding: 3px 20px 3px 10px; background-image: url("/pics/down.png"); background-position: right 5px top 10px; background-repeat: no-repeat;}
+.status_container .status:hover {color: #FFFFFF;}
+.status_container .status.red 	{background-color: #CC0000}
+.status_container .status.green 	{background-color: #009933}
+.status_container .status.grey 	{background-color: #666666}
+.status_container .status.blue 	{background-color: #0033CC}
+
+.status_container .status_values {display: none;}
+.status_container .status_values .active {display: none;} 
+
+
+
+  <script>
+                                        $(function() {
+                                        	 $(".status_container .status.select").click(function() {
+                                        		 $(this).parents('.status_container').find('.status_values').show();
+											});
+
+                                        	$(".status_container .status_values a").click(function() {
+                                        		$(this).parents('.status_container').find('a').removeClass('active');
+                                        		
+                                        		$(this).parents('.status_container').find('.status_values').hide();
+	
+                                        		$(this).parents('.status_container').find('.status.select').html($(this).html());
+                                        		$(this).parents('.status_container').find('.status.select').attr('class', 'status select '+$(this).attr('class'));
+
+                                        		$(this).addClass('active');
+                                        		
+											});
+
+  											
+										});
+                                        </script>
+
+
+<?
+                                                        	$statuses=array
+                                                        	(
+                                                        		'1'=>array('name'=>'Погашен', 'class'=>'green'), 
+                                                        		'0'=>array('name'=>'Не погашен', 'class'=>'red'),
+                                                        		'2'=>array('name'=>'Не обработан', 'class'=>'grey'),
+                                                        		'3'=>array('name'=>'Бронь', 'class'=>'blue'),
+                                                        	);
+                                                        	
+                                                        	$status=$statuses[$pub['repay']];
+                                                        	
+                                                        	?>
+                                                        	<div class="status_container">
+	                                                        	<a class="status select <?=$status['class'] ?>" href="#" onclick="return false;"><?=$status['name'] ?></a>
+	                                                        	<?
+	                                                        		if (is_array($statuses) && count($statuses)>1)
+	                                                        		{	
+		                                                        		?>
+		                                                        		<div class="status_values">
+		                                                        		<?
+	                                                        			foreach ($statuses as $k=>$st) 
+	                                                        			{
+		                                                        			?><a data-id="<?=$k ?>" class="status <?=$st['class'] ?> <?=$st['name']==$status['name'] ? 'active':'' ?>" href="#" onclick="return false;"><?=$st['name'] ?></a><?	
+		                                                        		}
+		                                                        		?>
+		                                                        		</div>
+		                                                        		<?
+	                                                        		}
+	                                                        	?>
+                                                        	</div>

@@ -6,30 +6,30 @@ class CCTest extends VirtualContent
 	function init($settings){
         		global $SiteSections;
                 VirtualContent::init($settings);
-                
+
                 $section = $SiteSections->get($this->getSetting('section'));
                 $this->Settings['settings_personal']=$section['settings_personal'];
-                
+
                 $SiteSettings = new SiteSettings;
                 $SiteSettings->init();
                 $this->Settings['onpage'] = $this->Settings['settings_personal']['on_page']>0 ? $section['settings_personal']['on_page'] : 20;
-        		
-                
-                
-                $this->like_array=array();/* Где нет в названии "name", но нужен поиск по like*/
-                $this->not_like_array=array();/* Где есть в названии "name", но не нужен поиск по like*/
-                $this->no_auto=array(); /*Не обрабатывать переменные, ручная обработка*/
-                
-                /*заменить на пустое в названиях переменны при поиске*/
+
+
+
+                $this->like_array=array();/* Р“РґРµ РЅРµС‚ РІ РЅР°Р·РІР°РЅРёРё "name", РЅРѕ РЅСѓР¶РµРЅ РїРѕРёСЃРє РїРѕ like*/
+                $this->not_like_array=array();/* Р“РґРµ РµСЃС‚СЊ РІ РЅР°Р·РІР°РЅРёРё "name", РЅРѕ РЅРµ РЅСѓР¶РµРЅ РїРѕРёСЃРє РїРѕ like*/
+                $this->no_auto=array(); /*РќРµ РѕР±СЂР°Р±Р°С‚С‹РІР°С‚СЊ РїРµСЂРµРјРµРЅРЅС‹Рµ, СЂСѓС‡РЅР°СЏ РѕР±СЂР°Р±РѕС‚РєР°*/
+
+                /*Р·Р°РјРµРЅРёС‚СЊ РЅР° РїСѓСЃС‚РѕРµ РІ РЅР°Р·РІР°РЅРёСЏС… РїРµСЂРµРјРµРЅРЅС‹ РїСЂРё РїРѕРёСЃРєРµ*/
                 $this->field_tr=array('search_'=>'','_from'=>'','_to'=>'');
-                
-                /*подмена названий*/
+
+                /*РїРѕРґРјРµРЅР° РЅР°Р·РІР°РЅРёР№*/
                 $this->field_change=array();
-                
-                
+
+
  				$this->getSearch();
 
-        
+
    }
 
 

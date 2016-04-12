@@ -2,7 +2,7 @@
 
 session_start();
 if(session_id() != $_POST['sid']) die('Access_denied');
-header("Content-type: text/html; charset=windows-1251");
+header("Content-type: text/html; charset=uft-8");
 
 
 function get_filesize($file)

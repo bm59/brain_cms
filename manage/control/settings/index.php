@@ -9,12 +9,12 @@ if (isset($_POST['setadd'])){
 	$adderrors = $iface->add($data['name'],$data['description'],$data['value'],array('type'=>$data['type']));
 	if (count($adderrors)==0)
 	{		$data = array();
-		WriteLog(0, 'добавление настройки', $_POST['name'].'|'.$_POST['description']);
+		WriteLog(0, 'РґРѕР±Р°РІР»РµРЅРёРµ РЅР°СЃС‚СЂРѕР№РєРё', $_POST['name'].'|'.$_POST['description']);
 	}
 }
 if (isset($_GET['setdel'])){
 	 $iface->delete($_GET['setdel']);
-	 WriteLog($_GET['setdel'], 'удаление настройки');
+	 WriteLog($_GET['setdel'], 'СѓРґР°Р»РµРЅРёРµ РЅР°СЃС‚СЂРѕР№РєРё');
 }
 
 $list = $iface->getList();
@@ -25,7 +25,7 @@ if (isset($_POST['setupdate'])){	$i=0;
 			$i++;
 			if (isset($_POST[$set['name'].'_value'])) $err = $iface->update($set['id'],$_POST[$set['name'].'_value'],$i);
 			if ($err!='') $updateerrors[] = $err;
-			if ($err=='' && $set['value']!=$_POST[$set['name'].'_value']) WriteLog($set['id'], 'редактирование настройки', $set['name'].'|'.$set['value'].'|'.$_POST[$set['name'].'_value']);
+			if ($err=='' && $set['value']!=$_POST[$set['name'].'_value']) WriteLog($set['id'], 'СЂРµРґР°РєС‚РёСЂРѕРІР°РЅРёРµ РЅР°СЃС‚СЂРѕР№РєРё', $set['name'].'|'.$set['value'].'|'.$_POST[$set['name'].'_value']);
 	    }
 	}
 }
@@ -39,7 +39,7 @@ $list = $iface->getList();
 		<?
 		if (count($updateerrors)>0){
 			print '
-			<p><strong>Не все настройки обновлены:</strong></p>
+			<p><strong>РќРµ РІСЃРµ РЅР°СЃС‚СЂРѕР№РєРё РѕР±РЅРѕРІР»РµРЅС‹:</strong></p>
 			<ul class="errors">';
 				foreach ($updateerrors as $v) print '
 				<li>'.$v.'</li>';
@@ -77,7 +77,7 @@ function selectText(elem) {
 					<?
 					if ($set['settings']['type']=='int')
 					{
-                        $values = array('0'=>'Нет', '1'=>'Да');
+                        $values = array('0'=>'РќРµС‚', '1'=>'Р”Р°');
                         print getSelectSinonim($set['name'].'_value',$values,$set['value']);
 					}
                     elseif ($set['settings']['type']=='text')
@@ -106,7 +106,7 @@ function selectText(elem) {
                 $('#file').html('');
                 if(response.result==="ok"){
                     $('#delete_container<?='_'.$set['name']?>').fadeIn(0);
-                    status.html('<a  href="'+response.path+'" target="_blank">ссылка на изображение</a>');
+                    status.html('<a  href="'+response.path+'" target="_blank">СЃСЃС‹Р»РєР° РЅР° РёР·РѕР±СЂР°Р¶РµРЅРёРµ</a>');
                     $('#uploadfilehidden<?=htmlspecialchars($set['name'])?>').val(response.id);
                 }else{
                     $('#loading').fadeOut(0);
@@ -121,7 +121,7 @@ function selectText(elem) {
     });
     	function delete_file<?='_'.$set['name']?> ()
         {
-       		if (!confirm('Вы уверены, что хотите удалить этот файл?')) return false;
+       		if (!confirm('Р’С‹ СѓРІРµСЂРµРЅС‹, С‡С‚Рѕ С…РѕС‚РёС‚Рµ СѓРґР°Р»РёС‚СЊ СЌС‚РѕС‚ С„Р°Р№Р»?')) return false;
 
 			    $.ajax({
 			        url: "/uploader_image.php",
@@ -148,7 +148,7 @@ function selectText(elem) {
                     <div class="settings_image">
 					<div class="place forimage">
 					<span class="button" id="upl_button<?='_'.$set['name']?>" style="display:block; float: left;">
-						Загрузить изображение
+						Р—Р°РіСЂСѓР·РёС‚СЊ РёР·РѕР±СЂР°Р¶РµРЅРёРµ
 					</span>
 					<?
 					$image='';
@@ -161,9 +161,9 @@ function selectText(elem) {
                     <input type="hidden" id="uploadfilehidden<?=$set['name']?>" name="<?=$set['name']?>_value" value="<?=stripslashes(htmlspecialchars($set['value']))?>">
 
 					<span style="display:<?=$image['path']!='' ? 'block':'none'?>; float: left;padding: 12px 0 0 0 " id="delete_container<?='_'.$set['name']?>" class="button txtstyle">
-						<input type="button" onclick="delete_file<?='_'.$set['name']?>(); return false" id="delete_button_image" style="background-image: url(/pics/editor/delete.gif)" title="Удалить изображение">
+						<input type="button" onclick="delete_file<?='_'.$set['name']?>(); return false" id="delete_button_image" style="background-image: url(/pics/editor/delete.gif)" title="РЈРґР°Р»РёС‚СЊ РёР·РѕР±СЂР°Р¶РµРЅРёРµ">
 					</span>
-					<div class="contentdesc<?='_'.$set['name']?>" style="float: left; padding: 10px 0 0 20px;"><?=$image['path']!='' ? '<a  href="'.$image['path'].'" target="_blank">ссылка на изображение</a>':''?></div>
+					<div class="contentdesc<?='_'.$set['name']?>" style="float: left; padding: 10px 0 0 20px;"><?=$image['path']!='' ? '<a  href="'.$image['path'].'" target="_blank">СЃСЃС‹Р»РєР° РЅР° РёР·РѕР±СЂР°Р¶РµРЅРёРµ</a>':''?></div>
 					</div>
 					<div class="clear"></div>
 					</div>
@@ -184,14 +184,14 @@ function selectText(elem) {
 					if ((isset($set['settings']['undeletable']) || !@in_array('delete',$group['new_settings'][$activeccid])) && $mode!='development'){
 						?>
 						<span class="button txtstyle disabled">
-							<input type="button" style="background-image: url(/pics/editor/delete-disabled.gif)" title="Невозможно удалить" onclick="return false;" />
+							<input type="button" style="background-image: url(/pics/editor/delete-disabled.gif)" title="РќРµРІРѕР·РјРѕР¶РЅРѕ СѓРґР°Р»РёС‚СЊ" onclick="return false;" />
 						</span>
 						<?
 					}
 					else{
 						?>
-						<a class="button txtstyle" href="#" onclick="if (confirm('Вы уверены, что хотите удалить эту настройку?')) Gotopage('<?=$_SERVER['PHP_SELF'].'?setdel='.$set['id']?>'); return false;" >
-							<input type="button" style="background-image: url(/pics/editor/delete.gif)" title="Удалить настройку" />
+						<a class="button txtstyle" href="#" onclick="if (confirm('Р’С‹ СѓРІРµСЂРµРЅС‹, С‡С‚Рѕ С…РѕС‚РёС‚Рµ СѓРґР°Р»РёС‚СЊ СЌС‚Сѓ РЅР°СЃС‚СЂРѕР№РєСѓ?')) Gotopage('<?=$_SERVER['PHP_SELF'].'?setdel='.$set['id']?>'); return false;" >
+							<input type="button" style="background-image: url(/pics/editor/delete.gif)" title="РЈРґР°Р»РёС‚СЊ РЅР°СЃС‚СЂРѕР№РєСѓ" />
 						</a>
 						<?
 					}
@@ -208,7 +208,7 @@ function selectText(elem) {
 			?>
 			<div class="place">
 				<span style="float: right;">
-					<input class="button big" type="submit" name="setupdate" value="Сохранить" />
+					<input class="button big" type="submit" name="setupdate" value="РЎРѕС…СЂР°РЅРёС‚СЊ" />
 				</span>
 			</div>
 			<?}?>
@@ -221,7 +221,7 @@ function selectText(elem) {
 		<?
 		if (count($adderrors)>0){
 			print '
-			<p><strong>Добавление настройки не выполнено по следующим причинам:</strong></p>
+			<p><strong>Р”РѕР±Р°РІР»РµРЅРёРµ РЅР°СЃС‚СЂРѕР№РєРё РЅРµ РІС‹РїРѕР»РЅРµРЅРѕ РїРѕ СЃР»РµРґСѓСЋС‰РёРј РїСЂРёС‡РёРЅР°Рј:</strong></p>
 			<ul class="errors">';
 				foreach ($adderrors as $v) print '
 				<li>'.$v.'</li>';
@@ -237,7 +237,7 @@ function selectText(elem) {
 		<?include_once($_SERVER['DOCUMENT_ROOT']."/inc/site_admin/nav.php");?>
 			<div class="place">
 				<table style="width: 100%; table-layout: fixed;"><tr><td>
-				<label>Описание</label>
+				<label>РћРїРёСЃР°РЅРёРµ</label>
 				<span class="input">
 					<input name="description" maxlength="250" value="<?=htmlspecialchars($data['description'])?>" />
 				</span>
@@ -247,17 +247,17 @@ function selectText(elem) {
 			<div class="place">
 				<table style="width: 100%; table-layout: fixed;"><tr><td>
 				<tr><td>
-				<label>Название</label>
+				<label>РќР°Р·РІР°РЅРёРµ</label>
 				<span class="input">
 					<input name="name" maxlength="20" value="<?=htmlspecialchars($data['name'])?>" />
 				</span>
 				</td><td>
-				<label>Значение</label>
+				<label>Р—РЅР°С‡РµРЅРёРµ</label>
 				<span class="input">
 					<input name="value" value="<?=stripslashes(htmlspecialchars($data['value']))?>" />
 				</span>
 				</td><td>
-				<label>Тип</label>
+				<label>РўРёРї</label>
 				<?
 				$values = array();
 				foreach ($iface->getSetting('types') as $k=>$v) $values[$k] = $v;
@@ -268,7 +268,7 @@ function selectText(elem) {
 			<span class="clear"></span>
 			<div class="place">
 				<span style="float: right;">
-					<input class="button big" type="submit" name="setadd" value="Добавить" />
+					<input class="button big" type="submit" name="setadd" value="Р”РѕР±Р°РІРёС‚СЊ" />
 				</span>
 			</div>
 		</form>

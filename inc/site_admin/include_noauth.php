@@ -1,5 +1,5 @@
 <?
-/* Ïîäêëþ÷åíèå âñåõ íåîáõîäèìûõ ìîäóëåé */
+/* ÐŸÐ¾Ð´ÐºÐ»ÑŽÑ‡ÐµÐ½Ð¸Ðµ Ð²ÑÐµÑ… Ð½ÐµÐ¾Ð±Ñ…Ð¾Ð´Ð¸Ð¼Ñ‹Ñ… Ð¼Ð¾Ð´ÑƒÐ»ÐµÐ¹ */
 include_once($_SERVER['DOCUMENT_ROOT']."/inc/configuration.php");
 
 include_once($_SERVER['DOCUMENT_ROOT']."/config/site.php");

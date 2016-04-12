@@ -4,7 +4,7 @@ include $_SERVER['DOCUMENT_ROOT']."/inc/site_admin/include.php";
 if ($_GET['delete']>0)
 if (@in_array('delete',$group['new_settings'][$activeccid]) || $mode=='development')
 {	$VisitorType->delete($_GET['delete']);
-	WriteLog($_GET['delete'], 'удаление группы');
+	WriteLog($_GET['delete'], 'СѓРґР°Р»РµРЅРёРµ РіСЂСѓРїРїС‹');
 	header("Location: ".configGet("AskUrl"));
 }
 include $_SERVER['DOCUMENT_ROOT']."/inc/site_admin/meta.php";
@@ -16,15 +16,15 @@ include $_SERVER['DOCUMENT_ROOT']."/inc/site_admin/meta.php";
 		$groupslist = $VisitorType->getList();
 		if (count($groupslist)<1){
 			?>
-			<h2>Группы пользователей отсутствуют</h2>
+			<h2>Р“СЂСѓРїРїС‹ РїРѕР»СЊР·РѕРІР°С‚РµР»РµР№ РѕС‚СЃСѓС‚СЃС‚РІСѓСЋС‚</h2>
 			<?
 		}
 		else{
 		?>
 		<table class="table-content stat tusers">
 			<tr>
-				<th class="t_nowrap">Название</th>
-				<th class="t_nowrap t_center">Количество пользователей</th>
+				<th class="t_nowrap">РќР°Р·РІР°РЅРёРµ</th>
+				<th class="t_nowrap t_center">РљРѕР»РёС‡РµСЃС‚РІРѕ РїРѕР»СЊР·РѕРІР°С‚РµР»РµР№</th>
 				<th class="t_32width"></th>
 			</tr>
 			<?
@@ -43,14 +43,14 @@ include $_SERVER['DOCUMENT_ROOT']."/inc/site_admin/meta.php";
 						if ((isset($group['settings']['undeletable']) || !@in_array('delete',$group['new_settings'][$activeccid])) && $mode!='development'){
 							?>
 							<span class="button txtstyle disabled">
-								<input type="button" style="background-image: url(/pics/editor/delete-disabled.gif)" title="Невозможно удалить" />
+								<input type="button" style="background-image: url(/pics/editor/delete-disabled.gif)" title="РќРµРІРѕР·РјРѕР¶РЅРѕ СѓРґР°Р»РёС‚СЊ" />
 							</span>
 							<?
 						}
 						else{
 							?>
-							<a href="./?delete=<?=$group['id']?>" class="button txtstyle" onclick="if (!confirm('Вы уверены, что хотите удалить эту группу?')) return false;">
-								<input type="button" style="background-image: url(/pics/editor/delete.gif)" title="Удалить" />
+							<a href="./?delete=<?=$group['id']?>" class="button txtstyle" onclick="if (!confirm('Р’С‹ СѓРІРµСЂРµРЅС‹, С‡С‚Рѕ С…РѕС‚РёС‚Рµ СѓРґР°Р»РёС‚СЊ СЌС‚Сѓ РіСЂСѓРїРїСѓ?')) return false;">
+								<input type="button" style="background-image: url(/pics/editor/delete.gif)" title="РЈРґР°Р»РёС‚СЊ" />
 							</a>
 							<?
 						}
@@ -69,7 +69,7 @@ include $_SERVER['DOCUMENT_ROOT']."/inc/site_admin/meta.php";
 		?>
 		<span class="clear"></span>
 		<div class="place">
-			<a href="edit/" class="button big" style="float: right">Новая группа</a>
+			<a href="edit/" class="button big" style="float: right">РќРѕРІР°СЏ РіСЂСѓРїРїР°</a>
 		</div>
 		<?}?>
 		<span class="clear"></span>

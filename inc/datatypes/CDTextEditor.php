@@ -2,17 +2,17 @@
 class CDTextEditor extends VirtualType
 {
 	function init($settings){
-		$settings['descr']='Текстовый редактор';
+		$settings['descr']='РўРµРєСЃС‚РѕРІС‹Р№ СЂРµРґР°РєС‚РѕСЂ';
 		$settings['help']=array(
-				'texttype=full'=>'Расширенный редактор'
+				'texttype=full'=>'Р Р°СЃС€РёСЂРµРЅРЅС‹Р№ СЂРµРґР°РєС‚РѕСЂ'
 		);
 		VirtualType::init($settings);
 	}
-	
+
 	function drawEditor(){
 		global $multiple_editor;
 		$settings = $this->getSetting('settings');
-		
+
 		?>
 		<div class="place">
 		<div class="input">
@@ -37,7 +37,7 @@ class CDTextEditor extends VirtualType
 			selector: "textarea.tiny#<?=htmlspecialchars($this->getSetting('name'))?>",
 //				        setup: function(editor) {
 //	        editor.addButton('mybutton', {
-//	            text: 'Архив изображений',
+//	            text: 'РђСЂС…РёРІ РёР·РѕР±СЂР°Р¶РµРЅРёР№',
 //	            icon: false,
 //	            onclick: function() {
 //	                    $('body').append('<p>This is the text in new element.<p>');
@@ -66,9 +66,9 @@ class CDTextEditor extends VirtualType
 			            {title: 'div', block: 'div'},
 			            {title: 'pre', block: 'pre'}
 			        ]},
-			        {title: 'Стилизованная таблица', selector: 'table', classes: 'table-content'},
-			        {title: 'Абзац с отступом', block: 'p', styles: {'text-indent': '20px'}},
-			        {title: 'Галарея фото', block: 'div', classes: 'photogallery'}
+			        {title: 'РЎС‚РёР»РёР·РѕРІР°РЅРЅР°СЏ С‚Р°Р±Р»РёС†Р°', selector: 'table', classes: 'table-content'},
+			        {title: 'РђР±Р·Р°С† СЃ РѕС‚СЃС‚СѓРїРѕРј', block: 'p', styles: {'text-indent': '20px'}},
+			        {title: 'Р“Р°Р»Р°СЂРµСЏ С„РѕС‚Рѕ', block: 'div', classes: 'photogallery'}
 
 			    ],
 
@@ -142,7 +142,7 @@ class CDTextEditor extends VirtualType
 		$errors = array();
 		$settings = $this->getSetting('settings');
 		$newvalue = trim($_POST[$this->getSetting('name')]);
-		if ((isset($settings['important'])) && ($newvalue=='')) $errors[] = 'Заполните поле «'.$this->getSetting('description').'»';
+		if ((isset($settings['important'])) && ($newvalue=='')) $errors[] = 'Р—Р°РїРѕР»РЅРёС‚Рµ РїРѕР»Рµ В«'.$this->getSetting('description').'В»';
 		$this->setSetting('value',stripslashes($newvalue));
 		return $errors;
 	}

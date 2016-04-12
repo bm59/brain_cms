@@ -25,7 +25,7 @@
 
 
 <div class="content_container">
-<div class="mininav"><a href="/">Главная</a><img src="/pics/arrows/arrow_nav.png"><?=$nav_text?></div>
+<div class="mininav"><a href="/">Р“Р»Р°РІРЅР°СЏ</a><img src="/pics/arrows/arrow_nav.png"><?=$nav_text?></div>
 <H1><?=$headerh1?></H1>
 <?
 	$sheet = $Iface->get();
@@ -40,7 +40,7 @@
 							<div class="clear"></div>
                               <script src="//api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
     <script type="text/javascript">
-        // Как только будет загружен API и готов DOM, выполняем инициализацию
+        // РљР°Рє С‚РѕР»СЊРєРѕ Р±СѓРґРµС‚ Р·Р°РіСЂСѓР¶РµРЅ API Рё РіРѕС‚РѕРІ DOM, РІС‹РїРѕР»РЅСЏРµРј РёРЅРёС†РёР°Р»РёР·Р°С†РёСЋ
         ymaps.ready(init);
 
         function init () {
@@ -55,21 +55,21 @@
 			myGeocoder.then(
 			    function (res)
 			    {
-		            // Выбираем первый результат геокодирования.
+		            // Р’С‹Р±РёСЂР°РµРј РїРµСЂРІС‹Р№ СЂРµР·СѓР»СЊС‚Р°С‚ РіРµРѕРєРѕРґРёСЂРѕРІР°РЅРёСЏ.
 		            var firstGeoObject = res.geoObjects.get(0),
-		                // Координаты геообъекта.
+		                // РљРѕРѕСЂРґРёРЅР°С‚С‹ РіРµРѕРѕР±СЉРµРєС‚Р°.
 		                coords = firstGeoObject.geometry.getCoordinates(),
-		                // Область видимости геообъекта.
+		                // РћР±Р»Р°СЃС‚СЊ РІРёРґРёРјРѕСЃС‚Рё РіРµРѕРѕР±СЉРµРєС‚Р°.
 		                bounds = firstGeoObject.properties.get('boundedBy');
 
-		            // Добавляем первый найденный геообъект на карту.
+		            // Р”РѕР±Р°РІР»СЏРµРј РїРµСЂРІС‹Р№ РЅР°Р№РґРµРЅРЅС‹Р№ РіРµРѕРѕР±СЉРµРєС‚ РЅР° РєР°СЂС‚Сѓ.
 		            myMap.geoObjects.add(firstGeoObject);
 		                      myMap.zoomRange.get(coords).then(function (range) {
        myMap.setCenter(coords, 15);
     });
-		            // Масштабируем карту на область видимости геообъекта.
+		            // РњР°СЃС€С‚Р°Р±РёСЂСѓРµРј РєР°СЂС‚Сѓ РЅР° РѕР±Р»Р°СЃС‚СЊ РІРёРґРёРјРѕСЃС‚Рё РіРµРѕРѕР±СЉРµРєС‚Р°.
 		            //myMap.setBounds(bounds, {
-		            //    checkZoomRange: true // проверяем наличие тайлов на данном масштабе.
+		            //    checkZoomRange: true // РїСЂРѕРІРµСЂСЏРµРј РЅР°Р»РёС‡РёРµ С‚Р°Р№Р»РѕРІ РЅР° РґР°РЅРЅРѕРј РјР°СЃС€С‚Р°Р±Рµ.
 		            //});
 			    }
 			);

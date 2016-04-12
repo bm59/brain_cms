@@ -16,14 +16,14 @@ class CCBlogs extends VirtualContent
 
 
 
-                $this->like_array=array();/* Где нет в названии "name", но нужен поиск по like*/
-                $this->not_like_array=array();/* Где есть в названии "name", но не нужен поиск по like*/
-                $this->no_auto=array(); /*Не обрабатывать переменные, ручная обработка*/
+                $this->like_array=array();/* Р“РґРµ РЅРµС‚ РІ РЅР°Р·РІР°РЅРёРё "name", РЅРѕ РЅСѓР¶РµРЅ РїРѕРёСЃРє РїРѕ like*/
+                $this->not_like_array=array();/* Р“РґРµ РµСЃС‚СЊ РІ РЅР°Р·РІР°РЅРёРё "name", РЅРѕ РЅРµ РЅСѓР¶РµРЅ РїРѕРёСЃРє РїРѕ like*/
+                $this->no_auto=array(); /*РќРµ РѕР±СЂР°Р±Р°С‚С‹РІР°С‚СЊ РїРµСЂРµРјРµРЅРЅС‹Рµ, СЂСѓС‡РЅР°СЏ РѕР±СЂР°Р±РѕС‚РєР°*/
 
-                /*заменить на пустое в названиях переменны при поиске*/
+                /*Р·Р°РјРµРЅРёС‚СЊ РЅР° РїСѓСЃС‚РѕРµ РІ РЅР°Р·РІР°РЅРёСЏС… РїРµСЂРµРјРµРЅРЅС‹ РїСЂРё РїРѕРёСЃРєРµ*/
                 $this->field_tr=array('search_'=>'','_from'=>'','_to'=>'');
 
-                /*подмена названий*/
+                /*РїРѕРґРјРµРЅР° РЅР°Р·РІР°РЅРёР№*/
                 $this->field_change=array();
 
 
@@ -93,13 +93,13 @@ class CCBlogs extends VirtualContent
    					<?
    					$search_fields_cnt=0;
    					?>
-   					<!-- Влючен\Отключен -->
+   					<!-- Р’Р»СЋС‡РµРЅ\РћС‚РєР»СЋС‡РµРЅ -->
    					<?if (isset($this->Settings['settings_personal']['onoff'])){?>
    					<div class="place" style="z-index: 10; width: 10%;">
-   						<label>Включен</label>
+   						<label>Р’РєР»СЋС‡РµРЅ</label>
    						<?
    						if (!isset($this->search_show)) $this->search_show='-1';
-   						$vals=array('-1'=>'','0'=>'Отключен', '1'=>'Включен');
+   						$vals=array('-1'=>'','0'=>'РћС‚РєР»СЋС‡РµРЅ', '1'=>'Р’РєР»СЋС‡РµРЅ');
    						print getSelectSinonim('search_show',$vals,$_POST['search_show'],true);
 
    						$search_fields_cnt++;
@@ -107,7 +107,7 @@ class CCBlogs extends VirtualContent
    					</div>
    					<?}?>
 
-   					<!-- Поля для поиска -->
+   					<!-- РџРѕР»СЏ РґР»СЏ РїРѕРёСЃРєР° -->
    					<?
    					$search_fields=array();
    					foreach ($dataset['types'] as $dt)
@@ -130,7 +130,7 @@ class CCBlogs extends VirtualContent
    						<label>&nbsp;</label>
    						<span class="forbutton">
    							<span>
-   								<input class="button" type="submit" value="Найти" >
+   								<input class="button" type="submit" value="РќР°Р№С‚Рё" >
    							</span>
    						</span>
    					</div>
@@ -145,21 +145,21 @@ class CCBlogs extends VirtualContent
    		                        $list = $this->getList($_GET['page'], array(), '', $searchnumgood, $searchtextgood);
    		                        if (count($list)==0){
    		                                ?>
-   		                                <p>Отсутствуют записи, удовлетворяющие заданным условиям</p>
+   		                                <p>РћС‚СЃСѓС‚СЃС‚РІСѓСЋС‚ Р·Р°РїРёСЃРё, СѓРґРѕРІР»РµС‚РІРѕСЂСЏСЋС‰РёРµ Р·Р°РґР°РЅРЅС‹Рј СѓСЃР»РѕРІРёСЏРј</p>
    		                                <span class="clear"></span>
    		                                <div class="place">
-   		                                	<a href="./?section=<?=$section['id']?>&pub=new" class="button big" style="float: right;">Добавить</a>
+   		                                	<a href="./?section=<?=$section['id']?>&pub=new" class="button big" style="float: right;">Р”РѕР±Р°РІРёС‚СЊ</a>
    		                                </div>
    		                                <?
    		                        }
    		                        else{
-   		                         print 'Всего записей: '.$this->getSetting('count');
+   		                         print 'Р’СЃРµРіРѕ Р·Р°РїРёСЃРµР№: '.$this->getSetting('count');
    		                         $Storage = new Storage;
    		                         $Storage ->init();
    		                                ?>
    		                                <form id="showsave" class="showsave" name="showsave" action="./?section=<?=$section['id']?><?=($this->getSetting('page')>1)?'&page='.$this->getSetting('page'):''?>" method="POST">
    		                                        <?
-   		                                        /* Поля отображаемые в таблице */
+   		                                        /* РџРѕР»СЏ РѕС‚РѕР±СЂР°Р¶Р°РµРјС‹Рµ РІ С‚Р°Р±Р»РёС†Рµ */
    		                                        $show_fields=array();
 
    		                                        foreach ($dataset['types'] as $dt)
@@ -201,9 +201,9 @@ class CCBlogs extends VirtualContent
    		<?
    		$table_th=array();
 
-   		if (isset($this->Settings['settings_personal']['onoff'])) 		$table_th[]=array('name'=>'show', 'description'=>'Вкл', 'class'=>'t_minwidth t_center');
-   		if (isset($this->Settings['settings_personal']['show_id']))		$table_th[]=array('name'=>'id', 'description'=>'№', 'class'=>'t_minwidth  t_center');
-   		if (isset($this->Settings['settings_personal']['precedence']))	$table_th[]=array('name'=>'precedence', 'description'=>'Порядок', 'class'=>'t_32width');
+   		if (isset($this->Settings['settings_personal']['onoff'])) 		$table_th[]=array('name'=>'show', 'description'=>'Р’РєР»', 'class'=>'t_minwidth t_center');
+   		if (isset($this->Settings['settings_personal']['show_id']))		$table_th[]=array('name'=>'id', 'description'=>'в„–', 'class'=>'t_minwidth  t_center');
+   		if (isset($this->Settings['settings_personal']['precedence']))	$table_th[]=array('name'=>'precedence', 'description'=>'РџРѕСЂСЏРґРѕРє', 'class'=>'t_32width');
 
    		foreach($show_fields as $sf){
    			$set=$dataset['types'][$sf]['face']->Settings;
@@ -212,9 +212,9 @@ class CCBlogs extends VirtualContent
 
 
 
-   		$table_th[]=array('name'=>'bloger_name', 'description'=>'Блогер', 'class'=>'t_minwidth');
+   		$table_th[]=array('name'=>'bloger_name', 'description'=>'Р‘Р»РѕРіРµСЂ', 'class'=>'t_minwidth');
 
-   		/* Редактирование и удаление */
+   		/* Р РµРґР°РєС‚РёСЂРѕРІР°РЅРёРµ Рё СѓРґР°Р»РµРЅРёРµ */
    		$table_th[]=array('name'=>'', 'description'=>'', 'class'=>'t_minwidth');
    		$table_th[]=array('name'=>'', 'description'=>'', 'class'=>'t_minwidth');
 
@@ -249,7 +249,7 @@ class CCBlogs extends VirtualContent
    		?>
    		</tr>
    		<?
-   		/* Поля ктр. дублируют ссылку на редактирование */
+   		/* РџРѕР»СЏ РєС‚СЂ. РґСѓР±Р»РёСЂСѓСЋС‚ СЃСЃС‹Р»РєСѓ РЅР° СЂРµРґР°РєС‚РёСЂРѕРІР°РЅРёРµ */
    		$editlink_double=array('name');
    		$blogers=getSprValuesOrder('/sitecontent/blogs/bloggers/',' ORDER by `name`');
 
@@ -258,22 +258,22 @@ class CCBlogs extends VirtualContent
    			?>
    		<tr>
 
-   			<!-- Вкл. Откл -->
+   			<!-- Р’РєР». РћС‚РєР» -->
    			<?if (isset($this->Settings['settings_personal']['onoff'])){?>
    				<td class="t_minwidth  t_center">
    					<a href="#" onclick="return false;" class="onoff" data-id="<?=$pub['id']?>">
-   						<img id="onoff_<?=$pub['id']?>" src="/pics/editor/<?=$pub['show']==0 ? 'off.png' : 'on.png'?>" title="<?=$pub['show']==0 ? 'Отключена' : 'Включена'?>" style="display: inline;">
+   						<img id="onoff_<?=$pub['id']?>" src="/pics/editor/<?=$pub['show']==0 ? 'off.png' : 'on.png'?>" title="<?=$pub['show']==0 ? 'РћС‚РєР»СЋС‡РµРЅР°' : 'Р’РєР»СЋС‡РµРЅР°'?>" style="display: inline;">
    					</a>
    				</td>
    			<?}?>
 
 
-   			<!-- ID, порядок -->
+   			<!-- ID, РїРѕСЂСЏРґРѕРє -->
    			<?if (isset($this->Settings['settings_personal']['show_id'])){?>		<td class="t_minwidth  t_center"><?=$pub['id'] ?></td><?}?>
    			<?if (isset($this->Settings['settings_personal']['precedence'])){?>		<td class="t_32width  t_center"><input type="text" name="prec_<?=$pub['id']?>" value="<?=floor($pub['precedence'])?>"/></td><?}?>
 
 
-   			<!-- Видимые поля -->
+   			<!-- Р’РёРґРёРјС‹Рµ РїРѕР»СЏ -->
    			<?
    			$custom_settings=array();
 
@@ -292,7 +292,7 @@ class CCBlogs extends VirtualContent
    				if (isset($set['settings']['val'])) $pub[$sf]=$set['settings']['val'];
 
    				$href=array();
-   				if (in_array($sf,$editlink_double)) $href=array('<a href="/manage/control/contents/?section='.$section['id'].'&pub='.$pub['id'].'" title="Редактировать">', '</a>');
+   				if (in_array($sf,$editlink_double)) $href=array('<a href="/manage/control/contents/?section='.$section['id'].'&pub='.$pub['id'].'" title="Р РµРґР°РєС‚РёСЂРѕРІР°С‚СЊ">', '</a>');
    				?>
    				<td <?=$set['settings']['list_class']!='' ? 'class="'.$set['settings']['list_class'].'"' : ''?>>
    					<?=$href[0]?><?=$CDDataType->get_view_field($dataset['types'][$sf],$pub[$sf]);?><?=$href[1]?>
@@ -300,13 +300,13 @@ class CCBlogs extends VirtualContent
    			<?}?>
 
 
-   			<!-- Редактировать, Удалить -->
+   			<!-- Р РµРґР°РєС‚РёСЂРѕРІР°С‚СЊ, РЈРґР°Р»РёС‚СЊ -->
    			<td class="t_minwidth">
-   				<a class="button txtstyle" href="/manage/control/contents/?section=<?=$section['id']?>&pub=<?=$pub['id']?>" title="Редактировать"><img src="/pics/editor/prefs.gif" alt="Редактировать"></a>
+   				<a class="button txtstyle" href="/manage/control/contents/?section=<?=$section['id']?>&pub=<?=$pub['id']?>" title="Р РµРґР°РєС‚РёСЂРѕРІР°С‚СЊ"><img src="/pics/editor/prefs.gif" alt="Р РµРґР°РєС‚РёСЂРѕРІР°С‚СЊ"></a>
    			</td>
    			<td class="t_minwidth">
-   				<a href="./?section=<?=$section['id']?>&delete=<?=$pub['id']?>" class="button txtstyle" onclick="if (!confirm('Удалить запись')) return false;">
-   				<input type="button" style="background-image: url(/pics/editor/delete.gif)" title="Удалить запись"/>
+   				<a href="./?section=<?=$section['id']?>&delete=<?=$pub['id']?>" class="button txtstyle" onclick="if (!confirm('РЈРґР°Р»РёС‚СЊ Р·Р°РїРёСЃСЊ')) return false;">
+   				<input type="button" style="background-image: url(/pics/editor/delete.gif)" title="РЈРґР°Р»РёС‚СЊ Р·Р°РїРёСЃСЊ"/>
    				</a>
    			</td>
    		</tr>
@@ -316,10 +316,10 @@ class CCBlogs extends VirtualContent
    		                                        <div class="place">
    		                                        <?if (isset($this->Settings['settings_personal']['precedence'])){?>
    		                                                <span>
-   		                                                	<input class="button big" type="submit" name="showsave" value="Сохранить порядок" />
+   		                                                	<input class="button big" type="submit" name="showsave" value="РЎРѕС…СЂР°РЅРёС‚СЊ РїРѕСЂСЏРґРѕРє" />
    		                                                </span>
    		                                        <?} ?>
-   		                                                <a href="./?section=<?=$section['id']?>&pub=new" class="button big" style="float: right;">Добавить</a>
+   		                                                <a href="./?section=<?=$section['id']?>&pub=new" class="button big" style="float: right;">Р”РѕР±Р°РІРёС‚СЊ</a>
    		                                        </div>
    		                                        <span class="clear"></span>
    		                                </form>
@@ -339,7 +339,7 @@ class CCBlogs extends VirtualContent
    													if ($_REQUEST['sort']!='') $href .='&sort='.$_REQUEST['sort'];
    													if ($_REQUEST['sort_type']!='') $href .='&sort_type='.$_REQUEST['sort_type'];
 
-   													if ($_GET['page']>$dif/2+1) print '<a href="'.$href.'">В начало</a>';
+   													if ($_GET['page']>$dif/2+1) print '<a href="'.$href.'">Р’ РЅР°С‡Р°Р»Рѕ</a>';
 
    													for ($i=1; $i<=$pagescount; $i++)
    													{
@@ -362,8 +362,8 @@ class CCBlogs extends VirtualContent
    					        							if ($inner!='') print $block[0].$inner.$block[1];
    													}
 
-   													if ($_GET['page']!=$pagescount && $pagescount>1) print '<a href="'.$href."&page=".($_GET['page']+1).'">Следующая</a>';
-   				        							if ($_GET['page']<$pagescount && $pagescount>$dif) print '<a href="'.$href."&page=".($_GET['page']+1).'">Последняя</a>';
+   													if ($_GET['page']!=$pagescount && $pagescount>1) print '<a href="'.$href."&page=".($_GET['page']+1).'">РЎР»РµРґСѓСЋС‰Р°СЏ</a>';
+   				        							if ($_GET['page']<$pagescount && $pagescount>$dif) print '<a href="'.$href."&page=".($_GET['page']+1).'">РџРѕСЃР»РµРґРЅСЏСЏ</a>';
    													?>
    												</div>
    		                                	<?
@@ -389,7 +389,7 @@ class CCBlogs extends VirtualContent
 
    	}
 
-   	if ($_POST['bloger_id']<=0) $errors[]='Заполните поле «Блогер»';
+   	if ($_POST['bloger_id']<=0) $errors[]='Р—Р°РїРѕР»РЅРёС‚Рµ РїРѕР»Рµ В«Р‘Р»РѕРіРµСЂВ»';
 
    	if (count($errors)==0){
    		$update = '';
@@ -417,7 +417,7 @@ class CCBlogs extends VirtualContent
    		if ($rub_ids!='') $update.=', `rubrics`="'.$rub_ids.'"';
    		msq("UPDATE `".$this->getSetting('table')."` SET ".$update." WHERE `id`='".$pub['id']."'");
 
-   		WriteLog($pub['id'], (($_GET['pub']=='new') ? 'добавление':'редактирование').' записи', '','','',$this->getSetting('section'));
+   		WriteLog($pub['id'], (($_GET['pub']=='new') ? 'РґРѕР±Р°РІР»РµРЅРёРµ':'СЂРµРґР°РєС‚РёСЂРѕРІР°РЅРёРµ').' Р·Р°РїРёСЃРё', '','','',$this->getSetting('section'));
    	}
 
    	$this->setSetting('dataface',$dataset);
@@ -435,7 +435,7 @@ class CCBlogs extends VirtualContent
    		                        if (!is_array($saveerrors)) $saveerrors = array();
    		                        if (count($saveerrors)>0){
    		                                print '
-   		                                <p><strong>Сохранение не выполнено по следующим причинам:</strong></p>
+   		                                <p><strong>РЎРѕС…СЂР°РЅРµРЅРёРµ РЅРµ РІС‹РїРѕР»РЅРµРЅРѕ РїРѕ СЃР»РµРґСѓСЋС‰РёРј РїСЂРёС‡РёРЅР°Рј:</strong></p>
    		                                <ul class="errors">';
    		                                        foreach ($saveerrors as $v) print '
    		                                        <li>'.$v.'</li>';
@@ -445,7 +445,7 @@ class CCBlogs extends VirtualContent
    		                        }
    		                        ?>
    		                        <?include_once($_SERVER['DOCUMENT_ROOT']."/inc/site_admin/nav.php");?>
-   		                        <p class="impfields">Поля, отмеченные знаком «<span class="important">*</span>», обязательные для заполнения.</p>
+   		                        <p class="impfields">РџРѕР»СЏ, РѕС‚РјРµС‡РµРЅРЅС‹Рµ Р·РЅР°РєРѕРј В«<span class="important">*</span>В», РѕР±СЏР·Р°С‚РµР»СЊРЅС‹Рµ РґР»СЏ Р·Р°РїРѕР»РЅРµРЅРёСЏ.</p>
    		                        <form id="editform" name="editform" action="<?=$_SERVER['REQUEST_URI']?>" method="POST" enctype="multipart/form-data">
    		                                <input type="hidden" name="editformpost" value="1">
    		                                <?
@@ -468,7 +468,7 @@ class CCBlogs extends VirtualContent
    		                                			$val=((isset($_POST['bloger_id'])) ? $_POST['bloger_id'] : $pub['bloger_id']);
    		                                			?>
    		                                		<div class="place" style="width:48%; margin-right:2%;">
-   		                                			<label>Блогер <span class="important">*</span></label>
+   		                                			<label>Р‘Р»РѕРіРµСЂ <span class="important">*</span></label>
    		                                			<?print getSelectSinonim('bloger_id',$blogers,$val);?>
    		                                		</div>
    		                                		<?
@@ -489,7 +489,7 @@ class CCBlogs extends VirtualContent
    		                        </table>
    		                        <div class="place">
    		                                <span style="float: right;">
-   		                                	<input class="button big" type="submit" name="editform" value="<?=($pub['id']>0)?'Сохранить изменения':'Добавить'?>"/>
+   		                                	<input class="button big" type="submit" name="editform" value="<?=($pub['id']>0)?'РЎРѕС…СЂР°РЅРёС‚СЊ РёР·РјРµРЅРµРЅРёСЏ':'Р”РѕР±Р°РІРёС‚СЊ'?>"/>
    		                                </span>
    		                        </div>
 

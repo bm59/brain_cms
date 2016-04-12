@@ -1,42 +1,42 @@
 <?
-$source_descr='Íîâîñòè';
+$source_descr='ÐÐ¾Ð²Ð¾ÑÑ‚Ð¸';
 $source_name='PNews';
-/* Èìÿ êëàññà */
+/* Ð˜Ð¼Ñ ÐºÐ»Ð°ÑÑÐ° */
 class PNews extends VirtualPattern
 {
 	function init($settings){
 		global $CDDataSet,$Storage,$SiteSections;
-		
-		$descr='Íîâîñòè';
-		
+
+		$descr='ÐÐ¾Ð²Ð¾ÑÑ‚Ð¸';
+
 		if ($CDDataSet->checkDatatypes($settings['section'])==0)
 		$SiteSections->update_personal_settings($settings['section'], '|onoff|show_id|');
-		
+
 		$settings['name']=substr(get_class(), 1, strlen(get_class()));
 
 		$class_name='CC'.$settings['name'];
 		$settings['dataset'] = $CDDataSet->checkPresence(0, mb_strtolower($settings['name']));
-		
+
 		$CDDataSet->add
 		(
-		
+
 				array
 				(
 						'name'=>mb_strtolower($settings['name']),
 						'description'=>$descr,
 						'types'=>array
 						(
-								array('description'=>'Äàòà', 'name'=>'date', 'type'=>'CDDate',  'settings'=>array('show_search'=>'', 'show_list'=>'')),
-								array('name'=>'name', 'description'=>'Íàèìåíîâàíèå', 'type'=>'CDText',  'settings'=>array('important'=>'', 'show_search'=>'', 'show_list'=>'')),
-								array('description'=>'Òåêñò', 'name'=>'text', 'type'=>'CDTextEditor', 'settings'=>'|texttype=full|'),
-								array('name'=>'image', 'description'=>'Èçîáðàæåíèå', 'type'=>'CDImage',   'settings'=>array('exts'=>'jpg,gif,jpeg,png')),
-								array('name'=>'tag_id', 'description'=>'Òåãè', 'type'=>'CDChoice',   'settings'=>'|source=#source_type=spr#spr_path=%SOURCE_PATH%#spr_field=name#spr_usl=WHERE `show`=1#spr_order=ORDER BY `name`#name_only=0|type=multi|off|'),
-								array('name'=>'ptitle', 'description'=>'Title ñòðàíèöû', 'type'=>'CDText','settings'=>array()),
-								array('name'=>'pdescription', 'description'=>'Description ñòðàíèöû', 'type'=>'CDText', 'settings'=>array()),
-								array('name'=>'pseudolink', 'description'=>'Ïñåâîäîíèì ññûëêè', 'type'=>'CDText', 'settings'=>array()),
-								array('name'=>'show_count', 'description'=>'Ïîêàçîâ', 'type'=>'CDInteger','settings'=>array('off'=>''))
+								array('description'=>'Ð”Ð°Ñ‚Ð°', 'name'=>'date', 'type'=>'CDDate',  'settings'=>array('show_search'=>'', 'show_list'=>'')),
+								array('name'=>'name', 'description'=>'ÐÐ°Ð¸Ð¼ÐµÐ½Ð¾Ð²Ð°Ð½Ð¸Ðµ', 'type'=>'CDText',  'settings'=>array('important'=>'', 'show_search'=>'', 'show_list'=>'')),
+								array('description'=>'Ð¢ÐµÐºÑÑ‚', 'name'=>'text', 'type'=>'CDTextEditor', 'settings'=>'|texttype=full|'),
+								array('name'=>'image', 'description'=>'Ð˜Ð·Ð¾Ð±Ñ€Ð°Ð¶ÐµÐ½Ð¸Ðµ', 'type'=>'CDImage',   'settings'=>array('exts'=>'jpg,gif,jpeg,png')),
+								array('name'=>'tag_id', 'description'=>'Ð¢ÐµÐ³Ð¸', 'type'=>'CDChoice',   'settings'=>'|source=#source_type=spr#spr_path=%SOURCE_PATH%#spr_field=name#spr_usl=WHERE `show`=1#spr_order=ORDER BY `name`#name_only=0|type=multi|off|'),
+								array('name'=>'ptitle', 'description'=>'Title ÑÑ‚Ñ€Ð°Ð½Ð¸Ñ†Ñ‹', 'type'=>'CDText','settings'=>array()),
+								array('name'=>'pdescription', 'description'=>'Description ÑÑ‚Ñ€Ð°Ð½Ð¸Ñ†Ñ‹', 'type'=>'CDText', 'settings'=>array()),
+								array('name'=>'pseudolink', 'description'=>'ÐŸÑÐµÐ²Ð¾Ð´Ð¾Ð½Ð¸Ð¼ ÑÑÑ‹Ð»ÐºÐ¸', 'type'=>'CDText', 'settings'=>array()),
+								array('name'=>'show_count', 'description'=>'ÐŸÐ¾ÐºÐ°Ð·Ð¾Ð²', 'type'=>'CDInteger','settings'=>array('off'=>''))
 						)
-		
+
 				),
 				$settings['section']
 		);
@@ -48,10 +48,10 @@ class PNews extends VirtualPattern
 
 		$iface = new $class_name;
 		$this->setSetting('table',$this->createDataSetTable($this->getSetting('dataset'),$this->getSetting('section'),array('show'=>'INT(1)', 'precedence'=>'BIGINT(20)')));
-		
+
 		$iface->init(array('mode'=>$this->getSetting('mode'),'isservice'=>$this->getSetting('isservice'),'section'=>$this->getSetting('section'),'pattern'=>$this,'table'=>$this->getSetting('table'),'dataset'=>$this->getSetting('dataset'),'imagestorage'=>$this->getSetting('imagestorage'),'smallimagestorage'=>$this->getSetting('smallimagestorage')));
 		$this->setSetting('cclass',$iface);
-		
+
 		return $iface;
 	}
 

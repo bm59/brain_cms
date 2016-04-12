@@ -1,23 +1,23 @@
 <?
 	$add_error=array();
-	
-	/*Íàñòðîéêè ïîëÿ ÷åêáîêñû*/
-	$dt_settings_checkbox=array('important'=>'Îáÿçàòåëüíî äëÿ çàïîëíåíèÿ', 'nospan'=>'Nospan (div clear)', 'show_search'=>'Âûâîäèòü â ïîèñêå ðàçäåëà', 'show_list'=>'Âûâîäèòü â òàáëèöå ñïèñêà');
-	
-	/*Íàñòðîéêè ïåðñîíàëüíûå ðàçäåëà*/
-	$sec_settings_checkbox=array('onoff'=>'Âêë\Îòêë çàïèñåé', 'precedence'=>'Ïîðÿäîê çàïèñåé', 'show_id'=>'Ïîêàçûâàòü id', 'no_paging'=>'Áåç ïåéäæèíãà', 'reklama'=>'Ñ êîììåð÷åñêèì ðàçìåùåíèåì');
-	
-	/*Äàííûå øàáëîíà*/
+
+	/*ÐÐ°ÑÑ‚Ñ€Ð¾Ð¹ÐºÐ¸ Ð¿Ð¾Ð»Ñ Ñ‡ÐµÐºÐ±Ð¾ÐºÑÑ‹*/
+	$dt_settings_checkbox=array('important'=>'ÐžÐ±ÑÐ·Ð°Ñ‚ÐµÐ»ÑŒÐ½Ð¾ Ð´Ð»Ñ Ð·Ð°Ð¿Ð¾Ð»Ð½ÐµÐ½Ð¸Ñ', 'nospan'=>'Nospan (div clear)', 'show_search'=>'Ð’Ñ‹Ð²Ð¾Ð´Ð¸Ñ‚ÑŒ Ð² Ð¿Ð¾Ð¸ÑÐºÐµ Ñ€Ð°Ð·Ð´ÐµÐ»Ð°', 'show_list'=>'Ð’Ñ‹Ð²Ð¾Ð´Ð¸Ñ‚ÑŒ Ð² Ñ‚Ð°Ð±Ð»Ð¸Ñ†Ðµ ÑÐ¿Ð¸ÑÐºÐ°');
+
+	/*ÐÐ°ÑÑ‚Ñ€Ð¾Ð¹ÐºÐ¸ Ð¿ÐµÑ€ÑÐ¾Ð½Ð°Ð»ÑŒÐ½Ñ‹Ðµ Ñ€Ð°Ð·Ð´ÐµÐ»Ð°*/
+	$sec_settings_checkbox=array('onoff'=>'Ð’ÐºÐ»\ÐžÑ‚ÐºÐ» Ð·Ð°Ð¿Ð¸ÑÐµÐ¹', 'precedence'=>'ÐŸÐ¾Ñ€ÑÐ´Ð¾Ðº Ð·Ð°Ð¿Ð¸ÑÐµÐ¹', 'show_id'=>'ÐŸÐ¾ÐºÐ°Ð·Ñ‹Ð²Ð°Ñ‚ÑŒ id', 'no_paging'=>'Ð‘ÐµÐ· Ð¿ÐµÐ¹Ð´Ð¶Ð¸Ð½Ð³Ð°', 'reklama'=>'Ð¡ ÐºÐ¾Ð¼Ð¼ÐµÑ€Ñ‡ÐµÑÐºÐ¸Ð¼ Ñ€Ð°Ð·Ð¼ÐµÑ‰ÐµÐ½Ð¸ÐµÐ¼');
+
+	/*Ð”Ð°Ð½Ð½Ñ‹Ðµ ÑˆÐ°Ð±Ð»Ð¾Ð½Ð°*/
 	$SectionPattern = new $section['pattern'];
 	$Iface = $SectionPattern->init(array('section'=>$section['id'],'mode'=>$delepmentmode,'isservice'=>0));
 	$all_types=$CDDataType->getSetting('all_types');
-	
+
 	$help=$SectionPattern->getSetting('help');
-	
-	/*Äàííûå êîëîíîê*/
+
+	/*Ð”Ð°Ð½Ð½Ñ‹Ðµ ÐºÐ¾Ð»Ð¾Ð½Ð¾Ðº*/
 	$columns=$CDDataType->get_column_info($SectionPattern->getSetting('table'),$section['id']);
-	
-	/*Ïîëó÷àåì âñå òèïû äàííûõ*/
+
+	/*ÐŸÐ¾Ð»ÑƒÑ‡Ð°ÐµÐ¼ Ð²ÑÐµ Ñ‚Ð¸Ð¿Ñ‹ Ð´Ð°Ð½Ð½Ñ‹Ñ…*/
 	$type_array=array(''=>'');
 	foreach ($all_types as $at)
 	{
@@ -25,13 +25,13 @@
 		$type->init(array());
 		$type_array[$at]['description']=$type->getSetting('descr');
 		$type_array[$at]['default_type']=$SectionPattern->get_default_type(array('type'=>$at));
-	
+
 	}
 	asort($type_array);
-	
-	
+
+
 	$dataset=$CDDataSet->get($SectionPattern->getSetting('dataset'), $section['id']);
 
-		
+
 
 ?>

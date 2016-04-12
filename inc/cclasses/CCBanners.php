@@ -16,14 +16,14 @@ class CCBanners extends VirtualContent
 
 
 
-                $this->like_array=array('search_href');/* Где нет в названии "name", но нужен поиск по like - search_href*/
-                $this->not_like_array=array();/* Где есть в названии "name", но не нужен поиск по like*/
-                $this->no_auto=array(); /*Не обрабатывать переменные, ручная обработка*/
+                $this->like_array=array('search_href');/* Р“РґРµ РЅРµС‚ РІ РЅР°Р·РІР°РЅРёРё "name", РЅРѕ РЅСѓР¶РµРЅ РїРѕРёСЃРє РїРѕ like - search_href*/
+                $this->not_like_array=array();/* Р“РґРµ РµСЃС‚СЊ РІ РЅР°Р·РІР°РЅРёРё "name", РЅРѕ РЅРµ РЅСѓР¶РµРЅ РїРѕРёСЃРє РїРѕ like*/
+                $this->no_auto=array(); /*РќРµ РѕР±СЂР°Р±Р°С‚С‹РІР°С‚СЊ РїРµСЂРµРјРµРЅРЅС‹Рµ, СЂСѓС‡РЅР°СЏ РѕР±СЂР°Р±РѕС‚РєР°*/
 
-                /*заменить на пустое в названиях переменны при поиске*/
+                /*Р·Р°РјРµРЅРёС‚СЊ РЅР° РїСѓСЃС‚РѕРµ РІ РЅР°Р·РІР°РЅРёСЏС… РїРµСЂРµРјРµРЅРЅС‹ РїСЂРё РїРѕРёСЃРєРµ*/
                 $this->field_tr=array('search_'=>'','_from'=>'','_to'=>'');
 
-                /*подмена названий*/
+                /*РїРѕРґРјРµРЅР° РЅР°Р·РІР°РЅРёР№*/
                 $this->field_change=array();
 
 
@@ -43,7 +43,7 @@ class CCBanners extends VirtualContent
 
    	$count = msq($q);
    	$count = @mysql_num_rows($count);
-   	
+
 
    	$q = msq($q." ".$order_by);
 
@@ -82,7 +82,7 @@ class CCBanners extends VirtualContent
 		   		case 'swf':
 		   			$style='';
 		   			$place=$this->getPlace($banner['place_id']);
-		   			
+
 		   			if ($place['settings']['imgw']!='') $style.='width: '.$place['settings']['imgw'].'px;';
 		   			if ($place['settings']['imgh']!='') $style.='height: '.$place['settings']['imgh'].'px;';
 		   			if ($banner['border']==1) $style.='border: 1px solid #CCCCCC;';
@@ -93,7 +93,7 @@ class CCBanners extends VirtualContent
 		   			$href_code='<a width="'.(($place['settings']['imgw']>0) ? $place['settings']['imgw'].'px' : '100%').'" height="'.(($place['settings']['imgh']>0) ? $place['settings']['imgh'].'px' : '100%').'" class="overlay" href="/redirect.php?banner_id='.$banner['id'].'" id="'.$banner['id'].'"></a>';
 
 		   			echo '<div '.$style.' id="'.$banner['id'].'" class="banner'.(($banner['inner_href']==1) ? ' inner_href':'').'">
-		   					'.$href_code.'	
+		   					'.$href_code.'
 		   					<object height="100%" width="100%">
 									<param name="movie" value="'.$image['path'].'">
 									<param name="allowScriptAccess" value="sameDomain" />
@@ -103,7 +103,7 @@ class CCBanners extends VirtualContent
 									<param name="wmode" value="transparent"/>
       							<embed src="'.$image['path'].'" width="'.(($place['settings']['imgw']>0) ? $place['settings']['imgw'] : '100%').'" height="'.(($place['settings']['imgh']>0) ? $place['settings']['imgh'].'px' : '100%').'" quality="high" bgcolor="#999999" align="middle" allowScriptAccess="sameDomain" allowFullScreen="false" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer"   quality="high" bgcolor="#999999" wmode="transparent"></embed>
     					  	</object>
-      							
+
       					  </div>';
 		   			break;
 
@@ -200,7 +200,7 @@ class CCBanners extends VirtualContent
    		                        if (!is_array($saveerrors)) $saveerrors = array();
    		                        if (count($saveerrors)>0){
    		                                print '
-   		                                <p><strong>Сохранение не выполнено по следующим причинам:</strong></p>
+   		                                <p><strong>РЎРѕС…СЂР°РЅРµРЅРёРµ РЅРµ РІС‹РїРѕР»РЅРµРЅРѕ РїРѕ СЃР»РµРґСѓСЋС‰РёРј РїСЂРёС‡РёРЅР°Рј:</strong></p>
    		                                <ul class="errors">';
    		                                        foreach ($saveerrors as $v) print '
    		                                        <li>'.$v.'</li>';
@@ -209,7 +209,7 @@ class CCBanners extends VirtualContent
    		                                <div class="hr"><hr /></div>';
    		                        }
    		                        ?>
-   		                        <p class="impfields">Поля, отмеченные знаком «<span class="important">*</span>», обязательные для заполнения.</p>
+   		                        <p class="impfields">РџРѕР»СЏ, РѕС‚РјРµС‡РµРЅРЅС‹Рµ Р·РЅР°РєРѕРј В«<span class="important">*</span>В», РѕР±СЏР·Р°С‚РµР»СЊРЅС‹Рµ РґР»СЏ Р·Р°РїРѕР»РЅРµРЅРёСЏ.</p>
    		                        <form id="editform" name="editform" action="<?=$_SERVER['REQUEST_URI']?>" method="POST" enctype="multipart/form-data">
    		                                <h2><?=$place['name'] ?></h2>
    		                                <input type="hidden" name="editformpost" value="1">
@@ -244,7 +244,7 @@ class CCBanners extends VirtualContent
    		                                        $tface->drawEditor($stylearray[$tface->getSetting('name')],((in_array($tface->getSetting('name'),$nospans))?false:true));
 
 
-   		    									/* Подсказки у поля в паттерне: $this->setSetting('type_settings_settings', array('min_w|'=>'Минимальная ширина')); */
+   		    									/* РџРѕРґСЃРєР°Р·РєРё Сѓ РїРѕР»СЏ РІ РїР°С‚С‚РµСЂРЅРµ: $this->setSetting('type_settings_settings', array('min_w|'=>'РњРёРЅРёРјР°Р»СЊРЅР°СЏ С€РёСЂРёРЅР°')); */
    		    									if (count($init_pattern->Settings['type_settings_'.$dt['name']])>0)
    		    									{
    		    										foreach ($init_pattern->Settings['type_settings_'.$dt['name']] as $k=>$v)
@@ -261,7 +261,7 @@ class CCBanners extends VirtualContent
    		                        </table>
    		                        <div class="place">
    		                                <span style="float: right;">
-   		                                	<input class="button big" type="submit" name="editform" value="<?=($pub['id']>0)?'Сохранить изменения':'Добавить'?>"/>
+   		                                	<input class="button big" type="submit" name="editform" value="<?=($pub['id']>0)?'РЎРѕС…СЂР°РЅРёС‚СЊ РёР·РјРµРЅРµРЅРёСЏ':'Р”РѕР±Р°РІРёС‚СЊ'?>"/>
    		                                </span>
    		                        </div>
 
@@ -313,7 +313,7 @@ class CCBanners extends VirtualContent
    		                        	{
    		                        		?>
    		                        		<div class="hr"><hr/></div>
-   		                        		<h2>Статистика</h2>
+   		                        		<h2>РЎС‚Р°С‚РёСЃС‚РёРєР°</h2>
 
 				<script type="text/javascript">
 							$(function(){
@@ -335,18 +335,18 @@ class CCBanners extends VirtualContent
 							<form id="statistic" name="statistic" method="POST" enctype="multipart/form-data">
 								<input type="hidden" name="search_stat" value="1">
 								<div class="place" id="stat_start_calendar" style="width: 158px;">
-									<label>Дата с</label>
+									<label>Р”Р°С‚Р° СЃ</label>
 									<div><input  id="stat_start" name="stat_start" type="text" style="width: 100px; float: left;" value="<?=$default_date_start ?>"/></div>
 								</div>
 								<div class="place" id="stat_end_calendar" style="width: 158px;">
-									<label>Дата по</label>
+									<label>Р”Р°С‚Р° РїРѕ</label>
 									<div><input  id="stat_end" name="stat_end" type="text" style="width: 100px; float: left;" value="<?=$default_date_end ?>"/></div>
 								</div>
 								<div style="width: 200px;margin-left: 2%;" class="place">
 			   						<label>&nbsp;</label>
 			   						<span class="forbutton">
 			   							<span>
-			   								<input type="submit" value="Показать за выбранный период" class="button">
+			   								<input type="submit" value="РџРѕРєР°Р·Р°С‚СЊ Р·Р° РІС‹Р±СЂР°РЅРЅС‹Р№ РїРµСЂРёРѕРґ" class="button">
 			   							</span>
 			   						</span>
 			   					</div>
@@ -354,7 +354,7 @@ class CCBanners extends VirtualContent
 			   						<label>&nbsp;</label>
 			   						<span class="forbutton">
 			   							<span>
-			   								<input type="submit" value="Выгрузить в xls" class="button" name="export">
+			   								<input type="submit" value="Р’С‹РіСЂСѓР·РёС‚СЊ РІ xls" class="button" name="export">
 			   							</span>
 			   						</span>
 			   					</div>
@@ -362,10 +362,10 @@ class CCBanners extends VirtualContent
 
    		                        		<table class="table-content stat">
    		                        		<tr>
-   		                        			<th class="t_center">Дата</th>
-   		                        			<th>Показов</th>
-   		                        			<th>Кликов</th>
-   		                        			<th>Уникальных посетителей</th>
+   		                        			<th class="t_center">Р”Р°С‚Р°</th>
+   		                        			<th>РџРѕРєР°Р·РѕРІ</th>
+   		                        			<th>РљР»РёРєРѕРІ</th>
+   		                        			<th>РЈРЅРёРєР°Р»СЊРЅС‹С… РїРѕСЃРµС‚РёС‚РµР»РµР№</th>
    		                        		</tr>
    		                        		<?
    		                        		$stat=msq("SELECT * FROM `".$this->getSetting('table_stat')."` WHERE `banner_id`=".$pub['id'].$usl." ORDER BY `date` DESC ".(($_POST['search_stat']=='')? ' LIMIT 0, 200':''));
@@ -409,7 +409,7 @@ class CCBanners extends VirtualContent
    	$dataset = $this->getSetting('dataface');
 
    	$section = $SiteSections->get($this->getSetting('section'));
-   	
+
 
    	if (isset($_POST['showsave'])){
    		foreach ($_POST as $k=>$v){
@@ -428,13 +428,13 @@ class CCBanners extends VirtualContent
    					<?
    					$search_fields_cnt=0;
    					?>
-   					<!-- Влючен\Отключен -->
+   					<!-- Р’Р»СЋС‡РµРЅ\РћС‚РєР»СЋС‡РµРЅ -->
    					<?if (isset($this->Settings['settings_personal']['onoff'])){?>
    					<div class="place" style="z-index: 10; width: 10%;">
-   						<label>Включен</label>
+   						<label>Р’РєР»СЋС‡РµРЅ</label>
    						<?
    						if (!isset($this->search_show)) $this->search_show='-1';
-   						$vals=array('-1'=>'','0'=>'Отключен', '1'=>'Включен');
+   						$vals=array('-1'=>'','0'=>'РћС‚РєР»СЋС‡РµРЅ', '1'=>'Р’РєР»СЋС‡РµРЅ');
    						print getSelectSinonim('search_show',$vals,$_POST['search_show'],true);
 
    						$search_fields_cnt++;
@@ -442,7 +442,7 @@ class CCBanners extends VirtualContent
    					</div>
    					<?}?>
 
-   					<!-- Поля для поиска -->
+   					<!-- РџРѕР»СЏ РґР»СЏ РїРѕРёСЃРєР° -->
    					<?
    					$search_fields=array();
    					if (count($dataset['types'])>0)
@@ -463,19 +463,19 @@ class CCBanners extends VirtualContent
    					{
    					?>
    					<div class="place" style="z-index: 10; width: 10%;">
-   						<label>Место</label>
+   						<label>РњРµСЃС‚Рѕ</label>
    						<?
-   						if (!isset($this->search_show)) 
+   						if (!isset($this->search_show))
    						$this->search_show='-1';
-   						
-   						
+
+
    						$placelist=getSprValuesEx('/products/'.$section['path'].'/places/', '', false);
-   						
-   						
+
+
    						$places=array('-1'=>'');
    						foreach ($placelist as $li)
    						$places[$li['id']]=$li['name'];
-   						
+
    						print getSelectSinonim('search_place_id',$places,$_POST['search_place_id'],true);
 
    						$search_fields_cnt++;
@@ -485,7 +485,7 @@ class CCBanners extends VirtualContent
    						<label>&nbsp;</label>
    						<span class="forbutton">
    							<span>
-   								<input class="button" type="submit" value="Найти" >
+   								<input class="button" type="submit" value="РќР°Р№С‚Рё" >
    							</span>
    						</span>
    					</div>
@@ -500,21 +500,21 @@ class CCBanners extends VirtualContent
    		                        $list = $this->getList($_GET['page']);
    		                        if (count($list)==0){
    		                                ?>
-   		                                <p>Отсутствуют записи, удовлетворяющие заданным условиям</p>
+   		                                <p>РћС‚СЃСѓС‚СЃС‚РІСѓСЋС‚ Р·Р°РїРёСЃРё, СѓРґРѕРІР»РµС‚РІРѕСЂСЏСЋС‰РёРµ Р·Р°РґР°РЅРЅС‹Рј СѓСЃР»РѕРІРёСЏРј</p>
    		                                <span class="clear"></span>
    		                                <div class="place">
-   		                                	<a href="./?section=<?=$section['id']?>&pub=new" class="button big" style="float: right;">Добавить</a>
+   		                                	<a href="./?section=<?=$section['id']?>&pub=new" class="button big" style="float: right;">Р”РѕР±Р°РІРёС‚СЊ</a>
    		                                </div>
    		                                <?
    		                        }
    		                        else{
-   		                         print 'Всего записей: '.$this->getSetting('count');
+   		                         print 'Р’СЃРµРіРѕ Р·Р°РїРёСЃРµР№: '.$this->getSetting('count');
    		                         $Storage = new Storage;
    		                         $Storage ->init();
    		                                ?>
    		                                <form id="showsave" class="showsave" name="showsave" action="./?section=<?=$section['id']?><?=($this->getSetting('page')>1)?'&page='.$this->getSetting('page'):''?>" method="POST">
    		                                        <?
-   		                                        /* Поля отображаемые в таблице */
+   		                                        /* РџРѕР»СЏ РѕС‚РѕР±СЂР°Р¶Р°РµРјС‹Рµ РІ С‚Р°Р±Р»РёС†Рµ */
    		                                        $show_fields=array();
 
    		                                        foreach ($dataset['types'] as $dt)
@@ -555,9 +555,9 @@ class CCBanners extends VirtualContent
    		<?
    		$table_th=array();
 
-   		if (isset($this->Settings['settings_personal']['onoff'])) 		$table_th[]=array('name'=>'show', 'description'=>'Вкл', 'class'=>'t_minwidth t_center');
-   		if (isset($this->Settings['settings_personal']['show_id']))		$table_th[]=array('name'=>'id', 'description'=>'№', 'class'=>'t_minwidth  t_center');
-   		if (isset($this->Settings['settings_personal']['precedence']))	$table_th[]=array('name'=>'precedence', 'description'=>'Порядок', 'class'=>'t_32width');
+   		if (isset($this->Settings['settings_personal']['onoff'])) 		$table_th[]=array('name'=>'show', 'description'=>'Р’РєР»', 'class'=>'t_minwidth t_center');
+   		if (isset($this->Settings['settings_personal']['show_id']))		$table_th[]=array('name'=>'id', 'description'=>'в„–', 'class'=>'t_minwidth  t_center');
+   		if (isset($this->Settings['settings_personal']['precedence']))	$table_th[]=array('name'=>'precedence', 'description'=>'РџРѕСЂСЏРґРѕРє', 'class'=>'t_32width');
 
 
 
@@ -568,7 +568,7 @@ class CCBanners extends VirtualContent
 
 
 
-   		/* Редактирование и удаление */
+   		/* Р РµРґР°РєС‚РёСЂРѕРІР°РЅРёРµ Рё СѓРґР°Р»РµРЅРёРµ */
    		$table_th[]=array('name'=>'', 'description'=>'', 'class'=>'t_minwidth');
    		$table_th[]=array('name'=>'', 'description'=>'', 'class'=>'t_minwidth');
    		$table_th[]=array('name'=>'', 'description'=>'', 'class'=>'t_minwidth');
@@ -603,37 +603,37 @@ class CCBanners extends VirtualContent
    		?>
    		</tr>
    		<?
-   		/* Поля ктр. дублируют ссылку на редактирование */
+   		/* РџРѕР»СЏ РєС‚СЂ. РґСѓР±Р»РёСЂСѓСЋС‚ СЃСЃС‹Р»РєСѓ РЅР° СЂРµРґР°РєС‚РёСЂРѕРІР°РЅРёРµ */
    		$editlink_double=array('name');
-		
+
    		foreach ($list as $pub)
    		{
    			?>
    		<tr>
 
-   			<!-- Вкл. Откл -->
+   			<!-- Р’РєР». РћС‚РєР» -->
    			<?if (isset($this->Settings['settings_personal']['onoff'])){?>
    				<td class="t_minwidth  t_center">
    					<a href="#" onclick="return false;" class="onoff" data-id="<?=$pub['id']?>">
-   						<img id="onoff_<?=$pub['id']?>" src="/pics/editor/<?=$pub['show']==0 ? 'off.png' : 'on.png'?>" title="<?=$pub['show']==0 ? 'Отключена' : 'Включена'?>" style="display: inline;">
+   						<img id="onoff_<?=$pub['id']?>" src="/pics/editor/<?=$pub['show']==0 ? 'off.png' : 'on.png'?>" title="<?=$pub['show']==0 ? 'РћС‚РєР»СЋС‡РµРЅР°' : 'Р’РєР»СЋС‡РµРЅР°'?>" style="display: inline;">
    					</a>
    				</td>
    			<?}?>
 
 
-   			<!-- ID, порядок -->
+   			<!-- ID, РїРѕСЂСЏРґРѕРє -->
    			<?if (isset($this->Settings['settings_personal']['show_id'])){?>		<td class="t_minwidth  t_center"><?=$pub['id'] ?></td><?}?>
    			<?if (isset($this->Settings['settings_personal']['precedence'])){?>		<td class="t_32width  t_center"><input type="text" name="prec_<?=$pub['id']?>" value="<?=floor($pub['precedence'])?>"/></td><?}?>
 
 
-   			<!-- Видимые поля -->
+   			<!-- Р’РёРґРёРјС‹Рµ РїРѕР»СЏ -->
    			<?
    			foreach($show_fields as $sf)
    			{
    				$set=$dataset['types'][$sf]['face']->Settings;
 
    				$href=array();
-   				if (in_array($sf,$editlink_double)) $href=array('<a href="/manage/control/contents/?section='.$section['id'].'&pub='.$pub['id'].'" title="Редактировать">', '</a>');
+   				if (in_array($sf,$editlink_double)) $href=array('<a href="/manage/control/contents/?section='.$section['id'].'&pub='.$pub['id'].'" title="Р РµРґР°РєС‚РёСЂРѕРІР°С‚СЊ">', '</a>');
    				?>
    				<td <?=$set['settings']['list_class']!='' ? 'class="'.$set['settings']['list_class'].'"' : ''?>>
    					<?=$href[0]?><?=$CDDataType->get_view_field($dataset['types'][$sf],$pub[$sf]);?><?=$href[1]?>
@@ -641,18 +641,18 @@ class CCBanners extends VirtualContent
    			<?}?>
 
 
-   			<!-- Редактировать, Удалить -->
+   			<!-- Р РµРґР°РєС‚РёСЂРѕРІР°С‚СЊ, РЈРґР°Р»РёС‚СЊ -->
    			<td class="t_minwidth">
    			<?
    			print $placelist[$pub['place_id']]['name'];
    			?>
    			</td>
    			<td class="t_minwidth">
-   				<a class="button txtstyle" href="/manage/control/contents/?section=<?=$section['id']?>&pub=<?=$pub['id']?>" title="Редактировать"><img src="/pics/editor/prefs.gif" alt="Редактировать"></a>
+   				<a class="button txtstyle" href="/manage/control/contents/?section=<?=$section['id']?>&pub=<?=$pub['id']?>" title="Р РµРґР°РєС‚РёСЂРѕРІР°С‚СЊ"><img src="/pics/editor/prefs.gif" alt="Р РµРґР°РєС‚РёСЂРѕРІР°С‚СЊ"></a>
    			</td>
    			<td class="t_minwidth">
-   				<a href="./?section=<?=$section['id']?>&delete=<?=$pub['id']?>" class="button txtstyle" onclick="if (!confirm('Удалить запись')) return false;">
-   				<input type="button" style="background-image: url(/pics/editor/delete.gif)" title="Удалить запись"/>
+   				<a href="./?section=<?=$section['id']?>&delete=<?=$pub['id']?>" class="button txtstyle" onclick="if (!confirm('РЈРґР°Р»РёС‚СЊ Р·Р°РїРёСЃСЊ')) return false;">
+   				<input type="button" style="background-image: url(/pics/editor/delete.gif)" title="РЈРґР°Р»РёС‚СЊ Р·Р°РїРёСЃСЊ"/>
    				</a>
    			</td>
    		</tr>
@@ -662,10 +662,10 @@ class CCBanners extends VirtualContent
    		                                        <div class="place">
    		                                        <?if (isset($this->Settings['settings_personal']['precedence'])){?>
    		                                                <span>
-   		                                                	<input class="button big" type="submit" name="showsave" value="Сохранить порядок" />
+   		                                                	<input class="button big" type="submit" name="showsave" value="РЎРѕС…СЂР°РЅРёС‚СЊ РїРѕСЂСЏРґРѕРє" />
    		                                                </span>
    		                                        <?} ?>
-   		                                                <a href="./?section=<?=$section['id']?>&pub=new" class="button big" style="float: right;">Добавить</a>
+   		                                                <a href="./?section=<?=$section['id']?>&pub=new" class="button big" style="float: right;">Р”РѕР±Р°РІРёС‚СЊ</a>
    		                                        </div>
    		                                        <span class="clear"></span>
    		                                </form>
@@ -685,7 +685,7 @@ class CCBanners extends VirtualContent
    													if ($_REQUEST['sort']!='') $href .='&sort='.$_REQUEST['sort'];
    													if ($_REQUEST['sort_type']!='') $href .='&sort_type='.$_REQUEST['sort_type'];
 
-   													if ($_GET['page']>$dif/2+1) print '<a href="'.$href.'">В начало</a>';
+   													if ($_GET['page']>$dif/2+1) print '<a href="'.$href.'">Р’ РЅР°С‡Р°Р»Рѕ</a>';
 
    													for ($i=1; $i<=$pagescount; $i++)
    													{
@@ -708,8 +708,8 @@ class CCBanners extends VirtualContent
    					        							if ($inner!='') print $block[0].$inner.$block[1];
    													}
 
-   													if ($_GET['page']!=$pagescount && $pagescount>1) print '<a href="'.$href."&page=".($_GET['page']+1).'">Следующая</a>';
-   				        							if ($_GET['page']<$pagescount && $pagescount>$dif) print '<a href="'.$href."&page=".($_GET['page']+1).'">Последняя</a>';
+   													if ($_GET['page']!=$pagescount && $pagescount>1) print '<a href="'.$href."&page=".($_GET['page']+1).'">РЎР»РµРґСѓСЋС‰Р°СЏ</a>';
+   				        							if ($_GET['page']<$pagescount && $pagescount>$dif) print '<a href="'.$href."&page=".($_GET['page']+1).'">РџРѕСЃР»РµРґРЅСЏСЏ</a>';
    													?>
    												</div>
    		                                	<?
@@ -743,12 +743,12 @@ class CCBanners extends VirtualContent
    		$sectionPlace = $SiteSections->get($SiteSections->getIdByPath('/products/'.$section['path'].'/places/'));
 
    		if (!$sectionPlace['id']>0)
-   		$error='<h2>Необходимо создать подраздел "places" с описанием мест для баннеров</h2>';
+   		$error='<h2>РќРµРѕР±С…РѕРґРёРјРѕ СЃРѕР·РґР°С‚СЊ РїРѕРґСЂР°Р·РґРµР» "places" СЃ РѕРїРёСЃР°РЅРёРµРј РјРµСЃС‚ РґР»СЏ Р±Р°РЅРЅРµСЂРѕРІ</h2>';
 
    	?>
    	 <div id="content" class="forms">
    	 	 <?include_once($_SERVER['DOCUMENT_ROOT']."/inc/site_admin/nav.php");?>
-   	 	 <h2>Выберите место для размещения баннера</h2>
+   	 	 <h2>Р’С‹Р±РµСЂРёС‚Рµ РјРµСЃС‚Рѕ РґР»СЏ СЂР°Р·РјРµС‰РµРЅРёСЏ Р±Р°РЅРЅРµСЂР°</h2>
    	 	 <?
    	 		if ($error!='') print $error;
    	 		else
@@ -759,7 +759,7 @@ class CCBanners extends VirtualContent
    	 				$list=$IfacePlace->getList(-1);
 
    	 				if (count($list)==0)
-   	 				print '<h2>Необходимо добавить в подраздел "places" описание мест для баннеров</h2>';
+   	 				print '<h2>РќРµРѕР±С…РѕРґРёРјРѕ РґРѕР±Р°РІРёС‚СЊ РІ РїРѕРґСЂР°Р·РґРµР» "places" РѕРїРёСЃР°РЅРёРµ РјРµСЃС‚ РґР»СЏ Р±Р°РЅРЅРµСЂРѕРІ</h2>';
    	 				else {
 
    	 				$places=array('-1'=>'');
@@ -783,14 +783,14 @@ class CCBanners extends VirtualContent
 					});
    	 				</script>
 		   	 		<div class="place">
-						<label>Место для размещения <span class="important">*</span></label>
+						<label>РњРµСЃС‚Рѕ РґР»СЏ СЂР°Р·РјРµС‰РµРЅРёСЏ <span class="important">*</span></label>
 						<?
 						print getSelectSinonim('place_id',$places,'');
 						?>
 					</div>
 					<span class="clear"></span>
 					<div class="place" id="next" style="display: none;">
-						<a class="button big" style="float: right;" href="">Продолжить</a>
+						<a class="button big" style="float: right;" href="">РџСЂРѕРґРѕР»Р¶РёС‚СЊ</a>
 					</div>
    	 				<?
    	 				}
@@ -847,7 +847,7 @@ class CCBanners extends VirtualContent
 	}
    function save(){
    	$errors = array();
-   	
+
    	$dataset = $this->getSetting('dataface');
    	foreach ($dataset['types'] as $k=>$dt){
 
@@ -861,9 +861,9 @@ class CCBanners extends VirtualContent
 
    	}
 
-   	if (!$_POST['place_id']>0) $errors[]='Не выбрано место для баннера';
-   	if ($_POST['date_start']==$_POST['date_end']) $errors[]='Дата начала и окончания размещения совпадают';
-    if ($_POST['code']=='' && $_POST['href']=='' && $_POST['inner_href']!='on') $errors[]='Не заполнено поле ссылка';
+   	if (!$_POST['place_id']>0) $errors[]='РќРµ РІС‹Р±СЂР°РЅРѕ РјРµСЃС‚Рѕ РґР»СЏ Р±Р°РЅРЅРµСЂР°';
+   	if ($_POST['date_start']==$_POST['date_end']) $errors[]='Р”Р°С‚Р° РЅР°С‡Р°Р»Р° Рё РѕРєРѕРЅС‡Р°РЅРёСЏ СЂР°Р·РјРµС‰РµРЅРёСЏ СЃРѕРІРїР°РґР°СЋС‚';
+    if ($_POST['code']=='' && $_POST['href']=='' && $_POST['inner_href']!='on') $errors[]='РќРµ Р·Р°РїРѕР»РЅРµРЅРѕ РїРѕР»Рµ СЃСЃС‹Р»РєР°';
 
 
    	if (count($errors)==0){
@@ -886,12 +886,12 @@ class CCBanners extends VirtualContent
    			$dataset['types'][$k]['face'] = $tface;
    		}
 
-		
+
    		msq("UPDATE `".$this->getSetting('table')."` SET ".$update.", `place_id`='".$_POST['place_id']."' WHERE `id`='".$pub['id']."'");
    		msq("UPDATE `".$this->getSetting('table')."` SET `banner_precedence`=0 WHERE `banner_precedence` is NULL");
 
 
-   		WriteLog($pub['id'], (($_GET['pub']=='new') ? 'добавление':'редактирование').' записи', '','','',$this->getSetting('section'));
+   		WriteLog($pub['id'], (($_GET['pub']=='new') ? 'РґРѕР±Р°РІР»РµРЅРёРµ':'СЂРµРґР°РєС‚РёСЂРѕРІР°РЅРёРµ').' Р·Р°РїРёСЃРё', '','','',$this->getSetting('section'));
    	}
 
    	$this->setSetting('dataface',$dataset);

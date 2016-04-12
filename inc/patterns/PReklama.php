@@ -1,67 +1,67 @@
 <?
-$source_descr='Ðåêëàìà';
+$source_descr='Ð ÐµÐºÐ»Ð°Ð¼Ð°';
 $source_name='PReklama';
-/* Èìÿ êëàññà */
+/* Ð˜Ð¼Ñ ÐºÐ»Ð°ÑÑÐ° */
 class PReklama extends VirtualPattern
 {
 	function init($settings){
 		global $CDDataSet,$Storage,$SiteSections;
-		
-		$descr='Ðåêëàìà';
-		
+
+		$descr='Ð ÐµÐºÐ»Ð°Ð¼Ð°';
+
 		if ($CDDataSet->checkDatatypes($settings['section'])==0)
 		$SiteSections->update_personal_settings($settings['section'], '|onoff|show_id|');
-		
+
 		$settings['name']=substr(get_class(), 1, strlen(get_class()));
 
 		$class_name='CC'.$settings['name'];
 		$settings['dataset'] = $CDDataSet->checkPresence(0, mb_strtolower($settings['name']));
-		
+
 		$CDDataSet->add
 		(
-		
+
 				array
 				(
 						'name'=>mb_strtolower($settings['name']),
 						'description'=>$descr,
 						'types'=>array
 						(
-							array('name'=>'name', 'description'=>'Êëèåíò', 'type'=>'CDText',  'settings'=>array('important'=>'', 'show_search'=>'', 'show_list'=>'', 'show_list'=>'')),
-							array('name'=>'date_start', 'description'=>'Äàòà íà÷àëà', 'type'=>'CDDate',  'settings'=>array('nodefault'=>'','changemonth'=>'','changeyear'=>'','numberofmonths'=>'3','important'=>'', 'show_list'=>'', 'list_class'=>'t_minwidth')),
-							array('name'=>'date_end', 'description'=>'Äàòà îêîí÷àíèÿ', 'type'=>'CDDate',  'settings'=>array('nodefault'=>'','changemonth'=>'','changeyear'=>'','numberofmonths'=>'3','important'=>'', 'show_list'=>'', 'list_class'=>'t_minwidth')),
-							array('name'=>'precedence', 'description'=>'Ïðèîðèòåò', 'type'=>'CDSpinner',  'settings'=>array('show_list'=>'', 'default'=>'0', 'list_class'=>'t_minwidth')),
-							array('name'=>'href', 'description'=>'Ññûëêà', 'type'=>'CDText',  'settings'=>array('show_search'=>'', 'show_list'=>'', 'list_class'=>'t_minwidth')),
-							array('name'=>'section_id', 'description'=>'Ðàçäåë', 'type'=>'CDInteger',  'settings'=>array('important'=>'', 'show_list'=>'', 'list_class'=>'t_minwidth')),
-							array('name'=>'item_id', 'description'=>'Çàïèñü', 'type'=>'CDInteger', 'settings'=>array('important'=>'', 'show_list'=>'', 'list_class'=>'t_minwidth')),
+							array('name'=>'name', 'description'=>'ÐšÐ»Ð¸ÐµÐ½Ñ‚', 'type'=>'CDText',  'settings'=>array('important'=>'', 'show_search'=>'', 'show_list'=>'', 'show_list'=>'')),
+							array('name'=>'date_start', 'description'=>'Ð”Ð°Ñ‚Ð° Ð½Ð°Ñ‡Ð°Ð»Ð°', 'type'=>'CDDate',  'settings'=>array('nodefault'=>'','changemonth'=>'','changeyear'=>'','numberofmonths'=>'3','important'=>'', 'show_list'=>'', 'list_class'=>'t_minwidth')),
+							array('name'=>'date_end', 'description'=>'Ð”Ð°Ñ‚Ð° Ð¾ÐºÐ¾Ð½Ñ‡Ð°Ð½Ð¸Ñ', 'type'=>'CDDate',  'settings'=>array('nodefault'=>'','changemonth'=>'','changeyear'=>'','numberofmonths'=>'3','important'=>'', 'show_list'=>'', 'list_class'=>'t_minwidth')),
+							array('name'=>'precedence', 'description'=>'ÐŸÑ€Ð¸Ð¾Ñ€Ð¸Ñ‚ÐµÑ‚', 'type'=>'CDSpinner',  'settings'=>array('show_list'=>'', 'default'=>'0', 'list_class'=>'t_minwidth')),
+							array('name'=>'href', 'description'=>'Ð¡ÑÑ‹Ð»ÐºÐ°', 'type'=>'CDText',  'settings'=>array('show_search'=>'', 'show_list'=>'', 'list_class'=>'t_minwidth')),
+							array('name'=>'section_id', 'description'=>'Ð Ð°Ð·Ð´ÐµÐ»', 'type'=>'CDInteger',  'settings'=>array('important'=>'', 'show_list'=>'', 'list_class'=>'t_minwidth')),
+							array('name'=>'item_id', 'description'=>'Ð—Ð°Ð¿Ð¸ÑÑŒ', 'type'=>'CDInteger', 'settings'=>array('important'=>'', 'show_list'=>'', 'list_class'=>'t_minwidth')),
 						)
-		
+
 				),
 				$settings['section']
 		);
 
 		$SiteSettings = new SiteSettings;
 		$SiteSettings->init();
-		
-		$settings['imagestorage'] = $Storage->getStorage(0,array('path'=>'/site/banners/','name'=>'Áàííåðû','exts'=>array('swf','jpg','gif','jpeg', 'png'),'images'=>1));
+
+		$settings['imagestorage'] = $Storage->getStorage(0,array('path'=>'/site/banners/','name'=>'Ð‘Ð°Ð½Ð½ÐµÑ€Ñ‹','exts'=>array('swf','jpg','gif','jpeg', 'png'),'images'=>1));
 
 		VirtualPattern::init($settings);
 
 		$iface = new $class_name;
-		
+
 		$help=array(
-			/* 'show_vote_count'=>'Ïîêàçûâàòü ñêîëüêî ÷åëîâåê ïðîãîëîñîâàëè' */
+			/* 'show_vote_count'=>'ÐŸÐ¾ÐºÐ°Ð·Ñ‹Ð²Ð°Ñ‚ÑŒ ÑÐºÐ¾Ð»ÑŒÐºÐ¾ Ñ‡ÐµÐ»Ð¾Ð²ÐµÐº Ð¿Ñ€Ð¾Ð³Ð¾Ð»Ð¾ÑÐ¾Ð²Ð°Ð»Ð¸' */
 		);
-		
+
 		$this->setSetting('help', $help);
-		
-		
-				
+
+
+
 		$this->setSetting('table',$this->createDataSetTable($this->getSetting('dataset'),$this->getSetting('section'),array('show'=>'INT(1)', 'precedence'=>'BIGINT(20)', 'place_id'=>'BIGINT(20) DEFAULT 0')));
 		$this->setSetting('table_stat',mstable(ConfigGet('pr_name').'_site','reklama','stat',array('item_id'=>'BIGINT(20)', 'date'=>'DATE', 'show'=>'BIGINT(20) DEFAULT 0', 'click'=>'BIGINT(20) DEFAULT 0', 'unique'=>'BIGINT(20) DEFAULT 0')));
-		
+
 		$iface->init(array('mode'=>$this->getSetting('mode'),'isservice'=>$this->getSetting('isservice'),'section'=>$this->getSetting('section'),'pattern'=>$this,'table'=>$this->getSetting('table'),'table_stat'=>$this->getSetting('table_stat'),'dataset'=>$this->getSetting('dataset'),'imagestorage'=>$this->getSetting('imagestorage')));
 		$this->setSetting('cclass',$iface);
-		
+
 		return $iface;
 	}
 

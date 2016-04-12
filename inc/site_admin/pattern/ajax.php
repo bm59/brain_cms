@@ -27,13 +27,13 @@ $section = $SiteSections->get($_REQUEST['section_id']);
 
 
 include $_SERVER['DOCUMENT_ROOT']."/inc/site_admin/pattern/var.php";
-include $_SERVER['DOCUMENT_ROOT']."/inc/site_admin/pattern/functions.php"; 
+include $_SERVER['DOCUMENT_ROOT']."/inc/site_admin/pattern/functions.php";
 
-mysql_query("SET NAMES cp1251"); // äëÿ mysql
-header("Content-type: text/html; charset=windows-1251");
+mysql_query("SET NAMES uft8"); // Ð´Ð»Ñ mysql
+header("Content-type: text/html; charset=uft-8");
 
 if ($_REQUEST['action']=='add_empty')
 {
 	print_dt(array('id'=>'new'.$_REQUEST['new_count']));
-} 
+}
 ?>

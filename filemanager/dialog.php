@@ -98,8 +98,6 @@ if(!isset($_SESSION['sort_by'])) $_SESSION['sort_by']='';
 if(isset($_GET["sort_by"])) $sort_by=$_SESSION['sort_by']=fix_filename($_GET["sort_by"],$transliteration);
 else $sort_by=$_SESSION['sort_by'];
 
-if ($sort_by=='') $sort_by='date';
-
 if(!isset($_SESSION['descending'])) $_SESSION['descending']=false;
 if(isset($_GET["descending"])) $descending=$_SESSION['descending']=fix_filename($_GET["descending"],$transliteration)==="true";
 else $descending=$_SESSION['descending'];
@@ -245,7 +243,7 @@ $get_params = http_build_query(array(
 	   });
 	    }
 	</script>
-	<script type="text/javascript" src="js/include.js"></script>
+	<script type="text/javascript" src="js/include.min.js"></script>
     </head>
     <body>
 	<input type="hidden" id="popup" value="<?php echo $popup; ?>" />
@@ -333,14 +331,26 @@ elseif($_GET['type']==0 && $_GET['field_id']=='') $apply = 'apply_none';
 elseif($_GET['type']==3) $apply = 'apply_video';
 else $apply = 'apply';
 
-
-//$files = scandir($current_path.$subfolder.$subdir);
-$files = array();
-foreach (scandir($current_path.$subfolder.$subdir) as $file) $files[$file] = filemtime("$dir/$file");
-asort($files);
-$files = array_keys($files);
-
+$files = scandir($current_path.$subfolder.$subdir,1);
 $n_files=count($files);
+
+
+/*$dir = $current_path.$subfolder.$subdir;
+$list = scandir( $dir );
+foreach( $list as $name )
+{
+    $time[$name] =  filemtime( $dir."/".$name );
+}
+arsort( $time );
+
+foreach( $time as $key => $value )
+{
+    if ( $key != "." and $key != ".." )
+    {
+        $files[]=$value;
+    }
+}*/
+
 
 //php sorting
 $sorted=array();
@@ -362,6 +372,11 @@ foreach($files as $k=>$file){
 	$sorted[$k]=array('file'=>$file,'date'=>$date,'size'=>$size,'extension'=>$file_ext);
     }
 }
+
+usort($sorted, function ($a, $b) {
+    return strcmp($b['date'], $a['date']);
+});
+
 
 function filenameSort($x, $y) {
     return $x['file'] <  $y['file'];
@@ -442,7 +457,7 @@ $files=array_merge(array($prev_folder),array($current_folder),$sorted);
 			    <input id="select-type-5" name="radio-sort" type="radio" data-item="ff-item-type-5" class="hide"  />
 			    <label id="ff-item-type-5" title="<?php echo lang_Music; ?>" for="select-type-5" class="tip btn ff-label-type-5"><i class="icon-music"></i></label>
 			    <?php } ?>
-			    <input accesskey="f" type="text" class="filter-input" id="filter-input" name="filter" placeholder="<?php echo fix_strtolower(lang_Text_filter); ?>..." value="<?php echo $filter; ?>"/><?php if($n_files>$file_number_limit_js){ ?><label id="filter" class="btn"><i class="icon-play"></i></label><?php } ?>
+			    <input accesskey="f" type="text" class="filter-input" id="filter-input" name="filter" placeholder="<?php echo lang_Text_filter; ?>..." value="<?php echo $filter; ?>"/><?php if($n_files>$file_number_limit_js){ ?><label id="filter" class="btn"><i class="icon-play"></i></label><?php } ?>
 
 			    <input id="select-type-all" name="radio-sort" type="radio" data-item="ff-item-type-all" class="hide"  />
 			     <label id="ff-item-type-all" title="<?php echo lang_All; ?>" <?php if($_GET['type']==1 || $_GET['type']==3){ ?>style="visibility: hidden;" <?php } ?> data-item="ff-item-type-all" for="select-type-all" style="margin-rigth:0px;" class="tip btn btn-inverse ff-label-type-all"><i class="icon-align-justify icon-white"></i></label>

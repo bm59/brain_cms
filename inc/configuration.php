@@ -1,10 +1,10 @@
 <?
-/*Ãëîáàëüíûå íàñòðîéêè ñàéòà*/
+/*Ð“Ð»Ð¾Ð±Ð°Ð»ÑŒÐ½Ñ‹Ðµ Ð½Ð°ÑÑ‚Ñ€Ð¾Ð¹ÐºÐ¸ ÑÐ°Ð¹Ñ‚Ð°*/
 $GlobalConfiguration = array();
 function configSet($param,$value){ global $GlobalConfiguration; $GlobalConfiguration[$param] = $value; }
 function configGet($param){ global $GlobalConfiguration; return $GlobalConfiguration[$param]; }
 
-/*Ïåðåìåííûå ñåññèè*/
+/*ÐŸÐµÑ€ÐµÐ¼ÐµÐ½Ð½Ñ‹Ðµ ÑÐµÑÑÐ¸Ð¸*/
 session_start();
 
 

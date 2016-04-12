@@ -1,7 +1,7 @@
 <?
 /*
-Класс хранилища данных (изображения и файлы)
-В каждом хранилище можно устанавливать ограничение на типы и размеры загружаемых файлов
+РљР»Р°СЃСЃ С…СЂР°РЅРёР»РёС‰Р° РґР°РЅРЅС‹С… (РёР·РѕР±СЂР°Р¶РµРЅРёСЏ Рё С„Р°Р№Р»С‹)
+Р’ РєР°Р¶РґРѕРј С…СЂР°РЅРёР»РёС‰Рµ РјРѕР¶РЅРѕ СѓСЃС‚Р°РЅР°РІР»РёРІР°С‚СЊ РѕРіСЂР°РЅРёС‡РµРЅРёРµ РЅР° С‚РёРїС‹ Рё СЂР°Р·РјРµСЂС‹ Р·Р°РіСЂСѓР¶Р°РµРјС‹С… С„Р°Р№Р»РѕРІ
 */
 class Storage extends VirtualClass
 {
@@ -19,8 +19,8 @@ class Storage extends VirtualClass
 			"uid"=>"BIGINT(20)",
 			"settings"=>"TEXT"
 		));
-		$this->Settings['maxfilesize'] = 10*1024; // Максимальный размер загружаемых файлов по умолчанию (в Кб)
-		$this->Settings['imgsizestypes'] = array("0"=>"Не имеет значения","1"=>"Равно","2"=>"Меньше или равно"); // Типы ограничений на размеры изображения
+		$this->Settings['maxfilesize'] = 10*1024; // РњР°РєСЃРёРјР°Р»СЊРЅС‹Р№ СЂР°Р·РјРµСЂ Р·Р°РіСЂСѓР¶Р°РµРјС‹С… С„Р°Р№Р»РѕРІ РїРѕ СѓРјРѕР»С‡Р°РЅРёСЋ (РІ РљР±)
+		$this->Settings['imgsizestypes'] = array("0"=>"РќРµ РёРјРµРµС‚ Р·РЅР°С‡РµРЅРёСЏ","1"=>"Р Р°РІРЅРѕ","2"=>"РњРµРЅСЊС€Рµ РёР»Рё СЂР°РІРЅРѕ"); // РўРёРїС‹ РѕРіСЂР°РЅРёС‡РµРЅРёР№ РЅР° СЂР°Р·РјРµСЂС‹ РёР·РѕР±СЂР°Р¶РµРЅРёСЏ
 
 		$this->getAllStrorages();
 	}
@@ -54,65 +54,65 @@ class Storage extends VirtualClass
 		global $CDDataSet;
 		$retval = array('errors'=>array());
 		$storageobj = $this->getStorage($stid);
-		if (floor($storageobj['id'])<1) $retval['errors'][] = 'Не удается открыть хранилище файлов';
+		if (floor($storageobj['id'])<1) $retval['errors'][] = 'РќРµ СѓРґР°РµС‚СЃСЏ РѕС‚РєСЂС‹С‚СЊ С…СЂР°РЅРёР»РёС‰Рµ С„Р°Р№Р»РѕРІ';
 		$theme = trim($theme);
 
 		$rubric = trim($rubric);
 		if (!preg_match("|^[a-zA-Z_0-9]+$|",$rubric)) $rubric = '';
 		$uid = floor($uid);
 		$ext = lower(trim(preg_replace("/.*?\./","",basename($file['name']))));
-		if (($ext=='') || (floor($file['size'])==0)) $retval['errors'][] = 'Не удается загрузить файл на сервер';
+		if (($ext=='') || (floor($file['size'])==0)) $retval['errors'][] = 'РќРµ СѓРґР°РµС‚СЃСЏ Р·Р°РіСЂСѓР·РёС‚СЊ С„Р°Р№Р» РЅР° СЃРµСЂРІРµСЂ';
 		$filename = lower("temp_".getUniqueStr(10).".".$ext);
-		if (floor($file['size']/1024)>$storageobj['settings']['maxsize']) $retval['errors'][] = 'Размер загружаемого файла ('.getFileSizeString($file['size']).') больше максимально допустимого ('.getFileSizeString($storageobj['settings']['maxsize']*1024).')';
+		if (floor($file['size']/1024)>$storageobj['settings']['maxsize']) $retval['errors'][] = 'Р Р°Р·РјРµСЂ Р·Р°РіСЂСѓР¶Р°РµРјРѕРіРѕ С„Р°Р№Р»Р° ('.getFileSizeString($file['size']).') Р±РѕР»СЊС€Рµ РјР°РєСЃРёРјР°Р»СЊРЅРѕ РґРѕРїСѓСЃС‚РёРјРѕРіРѕ ('.getFileSizeString($storageobj['settings']['maxsize']*1024).')';
 		$imgsize = @getimagesize($file['tmp_name']);
 		$exts = array();
-		
 
-        /*Проверяем ограничения на размер изображения*/
+
+        /*РџСЂРѕРІРµСЂСЏРµРј РѕРіСЂР°РЅРёС‡РµРЅРёСЏ РЅР° СЂР°Р·РјРµСЂ РёР·РѕР±СЂР°Р¶РµРЅРёСЏ*/
 		$section_id=preg_replace('|^([a-z]+)\_([0-9]+)$|','\\2',$theme);
         $dataset_name=preg_replace('|^([a-z]+)\_([0-9]+)$|','\\1',$theme);
 		{			$data_set=msr(msq("SELECT * FROM `site_site_data_sets` WHERE `name`='".$dataset_name."'"));
 			$data_type=msr(msq("SELECT * FROM `site_site_data_types` WHERE `dataset`=".$data_set['id']." and `section_id`=$section_id and `name`='".$rubric."'"));
 
 			if ($str_settings!='') $data_type['settings']=$str_settings;
-			
+
 			if ($data_type['settings']!='')
 			{				$mysql_settings=$this->explode($data_type['settings']);
 			}
-			
+
 
 			if ($mysql_settings['imgw']!='') $storageobj['settings']['imgw']=$mysql_settings['imgw'];
             if ($mysql_settings['imgwtype']!='') $storageobj['settings']['imgwtype']=$mysql_settings['imgwtype'];
             if ($mysql_settings['imgh']!='') $storageobj['settings']['imgh']=$mysql_settings['imgh'];
             if ($mysql_settings['imghtype']!='') $storageobj['settings']['imghtype']=$mysql_settings['imghtype'];
 
-            /*При автоматической обрезке, исходное изображение не должно быть меньшего размера*/
+            /*РџСЂРё Р°РІС‚РѕРјР°С‚РёС‡РµСЃРєРѕР№ РѕР±СЂРµР·РєРµ, РёСЃС…РѕРґРЅРѕРµ РёР·РѕР±СЂР°Р¶РµРЅРёРµ РЅРµ РґРѕР»Р¶РЅРѕ Р±С‹С‚СЊ РјРµРЅСЊС€РµРіРѕ СЂР°Р·РјРµСЂР°*/
             if ($mysql_settings['auto_resize']=='true')
-            {            	if ($imgsize[0]<$mysql_settings['auto_width'])  $retval['errors'][] = 'Ширина загружаемого изображения '.floor($imgsize[0]).'px, а должна быть больше или равна '.$mysql_settings['auto_width'].'px';
-                if ($imgsize[1]<$mysql_settings['auto_height'])  $retval['errors'][] = 'Высота загружаемого изображения '.floor($imgsize[1]).'px, а должна быть больше или равна '.$mysql_settings['auto_height'].'px';
+            {            	if ($imgsize[0]<$mysql_settings['auto_width'])  $retval['errors'][] = 'РЁРёСЂРёРЅР° Р·Р°РіСЂСѓР¶Р°РµРјРѕРіРѕ РёР·РѕР±СЂР°Р¶РµРЅРёСЏ '.floor($imgsize[0]).'px, Р° РґРѕР»Р¶РЅР° Р±С‹С‚СЊ Р±РѕР»СЊС€Рµ РёР»Рё СЂР°РІРЅР° '.$mysql_settings['auto_width'].'px';
+                if ($imgsize[1]<$mysql_settings['auto_height'])  $retval['errors'][] = 'Р’С‹СЃРѕС‚Р° Р·Р°РіСЂСѓР¶Р°РµРјРѕРіРѕ РёР·РѕР±СЂР°Р¶РµРЅРёСЏ '.floor($imgsize[1]).'px, Р° РґРѕР»Р¶РЅР° Р±С‹С‚СЊ Р±РѕР»СЊС€Рµ РёР»Рё СЂР°РІРЅР° '.$mysql_settings['auto_height'].'px';
             }
 
 		}
-		
-		
+
+
 		foreach(explode(',',$mysql_settings['exts']) as $v) if (trim($v)!='') $exts[] = lower(trim($v));
-		
-		if (count($exts)>0) if (!in_array($ext,$exts)) $retval['errors'][] = 'Допустимые расширения файла: '.implode(', ',$exts);
-		if (isset($storageobj['settings']['images'])) if (!$imgsize) $retval['errors'][] = 'Файл не является корректным изображением';
-		
+
+		if (count($exts)>0) if (!in_array($ext,$exts)) $retval['errors'][] = 'Р”РѕРїСѓСЃС‚РёРјС‹Рµ СЂР°СЃС€РёСЂРµРЅРёСЏ С„Р°Р№Р»Р°: '.implode(', ',$exts);
+		if (isset($storageobj['settings']['images'])) if (!$imgsize) $retval['errors'][] = 'Р¤Р°Р№Р» РЅРµ СЏРІР»СЏРµС‚СЃСЏ РєРѕСЂСЂРµРєС‚РЅС‹Рј РёР·РѕР±СЂР°Р¶РµРЅРёРµРј';
+
 
 		if ($ext!='swf'){
 			if (floor($storageobj['settings']['imgw'])>0){
 				$imgw = floor($storageobj['settings']['imgw']);
-				if (floor($storageobj['settings']['imgwtype'])==1) if (floor($imgsize[0])!=$imgw) $retval['errors'][] = 'Ширина загружаемого изображения '.floor($imgsize[0]).'px, а должна быть равной '.$imgw.'px';
-				if (floor($storageobj['settings']['imgwtype'])==2) if (floor($imgsize[0])>$imgw) $retval['errors'][] = 'Ширина загружаемого изображения '.floor($imgsize[0]).'px, а должна быть меньше или равна '.$imgw.'px';
-				if (floor($storageobj['settings']['imgwtype'])==3) if (floor($imgsize[0])<$imgw) $retval['errors'][] = 'Ширина загружаемого изображения '.floor($imgsize[0]).'px, а должна быть больше или равна '.$imgw.'px';
+				if (floor($storageobj['settings']['imgwtype'])==1) if (floor($imgsize[0])!=$imgw) $retval['errors'][] = 'РЁРёСЂРёРЅР° Р·Р°РіСЂСѓР¶Р°РµРјРѕРіРѕ РёР·РѕР±СЂР°Р¶РµРЅРёСЏ '.floor($imgsize[0]).'px, Р° РґРѕР»Р¶РЅР° Р±С‹С‚СЊ СЂР°РІРЅРѕР№ '.$imgw.'px';
+				if (floor($storageobj['settings']['imgwtype'])==2) if (floor($imgsize[0])>$imgw) $retval['errors'][] = 'РЁРёСЂРёРЅР° Р·Р°РіСЂСѓР¶Р°РµРјРѕРіРѕ РёР·РѕР±СЂР°Р¶РµРЅРёСЏ '.floor($imgsize[0]).'px, Р° РґРѕР»Р¶РЅР° Р±С‹С‚СЊ РјРµРЅСЊС€Рµ РёР»Рё СЂР°РІРЅР° '.$imgw.'px';
+				if (floor($storageobj['settings']['imgwtype'])==3) if (floor($imgsize[0])<$imgw) $retval['errors'][] = 'РЁРёСЂРёРЅР° Р·Р°РіСЂСѓР¶Р°РµРјРѕРіРѕ РёР·РѕР±СЂР°Р¶РµРЅРёСЏ '.floor($imgsize[0]).'px, Р° РґРѕР»Р¶РЅР° Р±С‹С‚СЊ Р±РѕР»СЊС€Рµ РёР»Рё СЂР°РІРЅР° '.$imgw.'px';
 			}
 			if (floor($storageobj['settings']['imgh'])>0){
 				$imgh = floor($storageobj['settings']['imgh']);
-				if (floor($storageobj['settings']['imghtype'])==1) if (floor($imgsize[1])!=$imgh) $retval['errors'][] = 'Высота загружаемого изображения '.floor($imgsize[1]).'px, а должна быть равной '.$imgh.'px';
-				if (floor($storageobj['settings']['imghtype'])==2) if (floor($imgsize[1])>$imgh) $retval['errors'][] = 'Высота загружаемого изображения '.floor($imgsize[1]).'px, а должна быть меньше или равна '.$imgh.'px';
-			    if (floor($storageobj['settings']['imghtype'])==3) if (floor($imgsize[1])<$imgh) $retval['errors'][] = 'Высота загружаемого изображения '.floor($imgsize[1]).'px, а должна быть больше или равна '.$imgh.'px';
+				if (floor($storageobj['settings']['imghtype'])==1) if (floor($imgsize[1])!=$imgh) $retval['errors'][] = 'Р’С‹СЃРѕС‚Р° Р·Р°РіСЂСѓР¶Р°РµРјРѕРіРѕ РёР·РѕР±СЂР°Р¶РµРЅРёСЏ '.floor($imgsize[1]).'px, Р° РґРѕР»Р¶РЅР° Р±С‹С‚СЊ СЂР°РІРЅРѕР№ '.$imgh.'px';
+				if (floor($storageobj['settings']['imghtype'])==2) if (floor($imgsize[1])>$imgh) $retval['errors'][] = 'Р’С‹СЃРѕС‚Р° Р·Р°РіСЂСѓР¶Р°РµРјРѕРіРѕ РёР·РѕР±СЂР°Р¶РµРЅРёСЏ '.floor($imgsize[1]).'px, Р° РґРѕР»Р¶РЅР° Р±С‹С‚СЊ РјРµРЅСЊС€Рµ РёР»Рё СЂР°РІРЅР° '.$imgh.'px';
+			    if (floor($storageobj['settings']['imghtype'])==3) if (floor($imgsize[1])<$imgh) $retval['errors'][] = 'Р’С‹СЃРѕС‚Р° Р·Р°РіСЂСѓР¶Р°РµРјРѕРіРѕ РёР·РѕР±СЂР°Р¶РµРЅРёСЏ '.floor($imgsize[1]).'px, Р° РґРѕР»Р¶РЅР° Р±С‹С‚СЊ Р±РѕР»СЊС€Рµ РёР»Рё СЂР°РІРЅР° '.$imgh.'px';
 			}
 		}
 		if (count($retval['errors'])==0){
@@ -120,7 +120,7 @@ class Storage extends VirtualClass
 				msq("INSERT INTO `".$this->getSetting('files')."` (`stid`,`name`,`theme`,`rubric`,`uid`,`date`) VALUES ('".$storageobj['id']."','$filename','$theme','$rubric','$uid', NOW())");
 
 
-				/*Обрезка изображений*/
+				/*РћР±СЂРµР·РєР° РёР·РѕР±СЂР°Р¶РµРЅРёР№*/
 
 				if ($mysql_settings['auto_resize']==true)
 				{							if ($mysql_settings['auto_width']>0 && $mysql_settings['auto_height']>0)
@@ -148,7 +148,7 @@ class Storage extends VirtualClass
 				elseif ($ext=='swf') $retval['height'] = '100%';
 				else $retval['height'] = floor($imgsize[1]);
 			}
-			else $retval['errors'][] = 'Не удается скопировать файл в хранилище, возможно установлен запрет на запись';
+			else $retval['errors'][] = 'РќРµ СѓРґР°РµС‚СЃСЏ СЃРєРѕРїРёСЂРѕРІР°С‚СЊ С„Р°Р№Р» РІ С…СЂР°РЅРёР»РёС‰Рµ, РІРѕР·РјРѕР¶РЅРѕ СѓСЃС‚Р°РЅРѕРІР»РµРЅ Р·Р°РїСЂРµС‚ РЅР° Р·Р°РїРёСЃСЊ';
 		}
 		return $retval;
 	}
@@ -159,14 +159,14 @@ class Storage extends VirtualClass
 
 
 	    $types = array("", "gif", "jpeg", "png");
-		$ext = $types[$type]; // Зная "числовой" тип изображения, узнаём название типа
+		$ext = $types[$type]; // Р—РЅР°СЏ "С‡РёСЃР»РѕРІРѕР№" С‚РёРї РёР·РѕР±СЂР°Р¶РµРЅРёСЏ, СѓР·РЅР°С‘Рј РЅР°Р·РІР°РЅРёРµ С‚РёРїР°
 
 	    if ($ext) {
-	      $func = 'imagecreatefrom'.$ext; // Получаем название функции, соответствующую типу, для создания изображения
+	      $func = 'imagecreatefrom'.$ext; // РџРѕР»СѓС‡Р°РµРј РЅР°Р·РІР°РЅРёРµ С„СѓРЅРєС†РёРё, СЃРѕРѕС‚РІРµС‚СЃС‚РІСѓСЋС‰СѓСЋ С‚РёРїСѓ, РґР»СЏ СЃРѕР·РґР°РЅРёСЏ РёР·РѕР±СЂР°Р¶РµРЅРёСЏ
 	      $save_func='image'.$ext;
-	      $img_i = $func($image); // Создаём дескриптор для работы с исходным изображением
+	      $img_i = $func($image); // РЎРѕР·РґР°С‘Рј РґРµСЃРєСЂРёРїС‚РѕСЂ РґР»СЏ СЂР°Р±РѕС‚С‹ СЃ РёСЃС…РѕРґРЅС‹Рј РёР·РѕР±СЂР°Р¶РµРЅРёРµРј
 	    } else {
-	      echo 'Некорректное изображение'; // Выводим ошибку, если формат изображения недопустимый
+	      echo 'РќРµРєРѕСЂСЂРµРєС‚РЅРѕРµ РёР·РѕР±СЂР°Р¶РµРЅРёРµ'; // Р’С‹РІРѕРґРёРј РѕС€РёР±РєСѓ, РµСЃР»Рё С„РѕСЂРјР°С‚ РёР·РѕР±СЂР°Р¶РµРЅРёСЏ РЅРµРґРѕРїСѓСЃС‚РёРјС‹Р№
 	      return false;
 	    }
 
@@ -177,7 +177,7 @@ class Storage extends VirtualClass
 	    if ($srcsize[0]<=$maxWidth && $srcsize[1]<=$maxHeight) return true;
 
 
-	    /*Если пропорция по X больше*/
+	    /*Р•СЃР»Рё РїСЂРѕРїРѕСЂС†РёСЏ РїРѕ X Р±РѕР»СЊС€Рµ*/
 	    if (($srcsize[0]/$maxWidth) > ($srcsize[1]/$maxHeight))
 	    {
 	    	$dest_y = $maxHeight;
@@ -207,14 +207,14 @@ class Storage extends VirtualClass
 
 
 	    $types = array("", "gif", "jpeg", "png");
-		$ext = $types[$type]; // Зная "числовой" тип изображения, узнаём название типа
+		$ext = $types[$type]; // Р—РЅР°СЏ "С‡РёСЃР»РѕРІРѕР№" С‚РёРї РёР·РѕР±СЂР°Р¶РµРЅРёСЏ, СѓР·РЅР°С‘Рј РЅР°Р·РІР°РЅРёРµ С‚РёРїР°
 
 	    if ($ext) {
-	      $func = 'imagecreatefrom'.$ext; // Получаем название функции, соответствующую типу, для создания изображения
+	      $func = 'imagecreatefrom'.$ext; // РџРѕР»СѓС‡Р°РµРј РЅР°Р·РІР°РЅРёРµ С„СѓРЅРєС†РёРё, СЃРѕРѕС‚РІРµС‚СЃС‚РІСѓСЋС‰СѓСЋ С‚РёРїСѓ, РґР»СЏ СЃРѕР·РґР°РЅРёСЏ РёР·РѕР±СЂР°Р¶РµРЅРёСЏ
 	      $save_func='image'.$ext;
-	      $img_i = $func($image); // Создаём дескриптор для работы с исходным изображением
+	      $img_i = $func($image); // РЎРѕР·РґР°С‘Рј РґРµСЃРєСЂРёРїС‚РѕСЂ РґР»СЏ СЂР°Р±РѕС‚С‹ СЃ РёСЃС…РѕРґРЅС‹Рј РёР·РѕР±СЂР°Р¶РµРЅРёРµРј
 	    } else {
-	      echo 'Некорректное изображение'; // Выводим ошибку, если формат изображения недопустимый
+	      echo 'РќРµРєРѕСЂСЂРµРєС‚РЅРѕРµ РёР·РѕР±СЂР°Р¶РµРЅРёРµ'; // Р’С‹РІРѕРґРёРј РѕС€РёР±РєСѓ, РµСЃР»Рё С„РѕСЂРјР°С‚ РёР·РѕР±СЂР°Р¶РµРЅРёСЏ РЅРµРґРѕРїСѓСЃС‚РёРјС‹Р№
 	      return false;
 	    }
 
@@ -222,7 +222,7 @@ class Storage extends VirtualClass
 	    $srcimg = $func($src);
 	    $srcsize = getimagesize($src);
 
-        /*Если обрезка по высоте*/
+        /*Р•СЃР»Рё РѕР±СЂРµР·РєР° РїРѕ РІС‹СЃРѕС‚Рµ*/
         if ($srcsize[1]>$maxHeight)
         {
         	$y_pos=($srcsize[1]-$maxHeight)/2;
@@ -233,7 +233,7 @@ class Storage extends VirtualClass
         	$srcsize[0]=($srcsize[0]-$x_pos*2);
         }
 
-	    /*Копируем центр обрезанного изображения*/
+	    /*РљРѕРїРёСЂСѓРµРј С†РµРЅС‚СЂ РѕР±СЂРµР·Р°РЅРЅРѕРіРѕ РёР·РѕР±СЂР°Р¶РµРЅРёСЏ*/
 	    $thumbimg = imagecreatetruecolor($maxWidth, $maxHeight);
 	    imageAlphaBlending($thumbimg, false);
 		imageSaveAlpha($thumbimg,true);
@@ -265,7 +265,7 @@ class Storage extends VirtualClass
 
 				if (!file_exists($retval['fullpath'] ))
 				$retval['path'] = '';
-				
+
 				$this->setCacheValue('storage_file_'.$id, $retval) ;
 			}
 
@@ -295,31 +295,31 @@ class Storage extends VirtualClass
 	}
 	function delete_tmp_files() {
 		$res =msq("SELECT * FROM `site_storages_files` WHERE `name` like '%temp_%' and datediff( now( ) , `date`  )>1");
-	
+
 		while($row = msr($res)) {
 			$this->deleteFile($row['id']);
 			msq("DELETE FROM `site_storages_files` WHERE id=".$row['id']);
 		}
-	
-	
+
+
 	}
 
-	function getStorage($id,$create = array()){ // Добавляет новое хранилище, либо возвращает уже созданное
+	function getStorage($id,$create = array()){ // Р”РѕР±Р°РІР»СЏРµС‚ РЅРѕРІРѕРµ С…СЂР°РЅРёР»РёС‰Рµ, Р»РёР±Рѕ РІРѕР·РІСЂР°С‰Р°РµС‚ СѓР¶Рµ СЃРѕР·РґР°РЅРЅРѕРµ
 		$imgsizestypes = $this->getSetting('imgsizestypes');
 		$id = floor($id);
 
 		$path = '/storage/';
 		if(!empty($id)) {
-            if ($retval = $this->getCacheValue('storage_'.$id)) return $retval; // Если нашли в кэше
+            if ($retval = $this->getCacheValue('storage_'.$id)) return $retval; // Р•СЃР»Рё РЅР°С€Р»Рё РІ РєСЌС€Рµ
 		} else {
             $path=$path.trim($create['path'],"/")."/";
-            if ($retval = $this->getCacheValue('storage_'.md5($path))) return $retval; // Если нашли в кэше
+            if ($retval = $this->getCacheValue('storage_'.md5($path))) return $retval; // Р•СЃР»Рё РЅР°С€Р»Рё РІ РєСЌС€Рµ
 
 		}
 		$retval = array();
 		$id = $this->checkPresence($id);
 		$checkedid = ($id>0)?$id:0;
-		if ($checkedid==0){ // Если не обнаружили по ID
+		if ($checkedid==0){ // Р•СЃР»Рё РЅРµ РѕР±РЅР°СЂСѓР¶РёР»Рё РїРѕ ID
 			$errors = array();
 			if (!is_array($create)) $create = array();
 			$path = '/storage/';
@@ -327,10 +327,10 @@ class Storage extends VirtualClass
                 if ((trim($v)!='') && (preg_match('|[a-z_0-9]+|',$v))) $path.= $v.'/';
 
 			if ($r = msr(msq("SELECT * FROM `".$this->getSetting('table')."` WHERE `path`='$path'"))) $checkedid = $r['id'];
-			if ($checkedid==0){ // Если не обнаружили по требуемому пути
-				if ($path=='/storage/') $errors['path'] = 'Неверный путь';
+			if ($checkedid==0){ // Р•СЃР»Рё РЅРµ РѕР±РЅР°СЂСѓР¶РёР»Рё РїРѕ С‚СЂРµР±СѓРµРјРѕРјСѓ РїСѓС‚Рё
+				if ($path=='/storage/') $errors['path'] = 'РќРµРІРµСЂРЅС‹Р№ РїСѓС‚СЊ';
 				$create['name'] = htmlspecialchars(trim($create['name']));
-				if (count($errors)==0){ // Создание хранилища
+				if (count($errors)==0){ // РЎРѕР·РґР°РЅРёРµ С…СЂР°РЅРёР»РёС‰Р°
 					$settings = array();
 					if ($create['images']==1) $settings['images'] = '';
 					$settings['maxsize'] = (floor($create['size'])>0)?floor($create['size']):$this->getSetting('maxfilesize');
@@ -372,7 +372,7 @@ class Storage extends VirtualClass
 		}
 		return $retval;
 	}
-	function checkPresence($id){ // Провека на существование по ID
+	function checkPresence($id){ // РџСЂРѕРІРµРєР° РЅР° СЃСѓС‰РµСЃС‚РІРѕРІР°РЅРёРµ РїРѕ ID
 		$id = floor($id);
 		if (msr(msq("SELECT * FROM `".$this->getSetting('table')."` WHERE `id`='$id'"))) return $id;
 		return 0;

@@ -2,14 +2,14 @@
 class CDSPINNER extends VirtualType
 {
 	function init($settings){
-		$settings['descr']='Ñïèííåð (öåëîå)';
+		$settings['descr']='Ð¡Ð¿Ð¸Ð½Ð½ÐµÑ€ (Ñ†ÐµÐ»Ð¾Ðµ)';
 		$settings['help']=array(
-				'default=1'=>'Çíà÷åíèå ïî óìîë÷àíèþ',
-				'min=1'=>'Ìèíèìàëüíîå çíà÷åíèå',
-				'max=10'=>'Ìàêñèìàëüíîå çíà÷åíèå',
-				'comment=êîììåíòàðèé'=>'Êîììåíòàðèé',
-				'format=rub'=>'Ôîðìàò çíà÷åíèÿ',
-		
+				'default=1'=>'Ð—Ð½Ð°Ñ‡ÐµÐ½Ð¸Ðµ Ð¿Ð¾ ÑƒÐ¼Ð¾Ð»Ñ‡Ð°Ð½Ð¸ÑŽ',
+				'min=1'=>'ÐœÐ¸Ð½Ð¸Ð¼Ð°Ð»ÑŒÐ½Ð¾Ðµ Ð·Ð½Ð°Ñ‡ÐµÐ½Ð¸Ðµ',
+				'max=10'=>'ÐœÐ°ÐºÑÐ¸Ð¼Ð°Ð»ÑŒÐ½Ð¾Ðµ Ð·Ð½Ð°Ñ‡ÐµÐ½Ð¸Ðµ',
+				'comment=ÐºÐ¾Ð¼Ð¼ÐµÐ½Ñ‚Ð°Ñ€Ð¸Ð¹'=>'ÐšÐ¾Ð¼Ð¼ÐµÐ½Ñ‚Ð°Ñ€Ð¸Ð¹',
+				'format=rub'=>'Ð¤Ð¾Ñ€Ð¼Ð°Ñ‚ Ð·Ð½Ð°Ñ‡ÐµÐ½Ð¸Ñ',
+
 		);
 		$maxlength = (floor($this->getSetting('maxlength'))>0)?floor($this->getSetting('maxlength')):255;
 		$this->setSetting('maxlength',$maxlength);
@@ -17,11 +17,11 @@ class CDSPINNER extends VirtualType
 	}
 	function drawEditor($divstyle = '',$span = true){
 		$settings = $this->getSetting('settings');
-		
+
 		?>
 		  <script>
 		  $(function() {
-			
+
 		    var spinner = $( "input[name='<?=htmlspecialchars($this->getSetting('name'))?>']" ).spinner({
 			min:  <?=(($settings['min']!='') ? $settings['min']:'0')?>,
 			numberFormat: "C",
@@ -34,7 +34,7 @@ class CDSPINNER extends VirtualType
 
 			});
 			$( "input[name='<?=htmlspecialchars($this->getSetting('name'))?>']" ).spinner( "option", "culture", "<?=$settings['format'] ?>" );
-			<? }?>	
+			<? }?>
 		  });
 		  </script>
 		<?
@@ -56,15 +56,15 @@ class CDSPINNER extends VirtualType
 		$errors = array();
 
 		$settings = $this->getSetting('settings');
-		
+
 		$newvalue=preg_replace('/[^0-9]/', '', $_POST[$this->getSetting('name')]);
 
 		if ($newvalue!='' && $newvalue>-1)
 		$newvalue = floatval($newvalue);
 
 
-		if ((isset($settings['important'])) && (!is_float($newvalue))) $errors[] = 'Çàïîëíèòå ïîëå «'.$this->getSetting('description').'»';
-		if ((isset($settings['important'])) && ($newvalue==='')) $errors[] = 'Çàïîëíèòå ïîëå «'.$this->getSetting('description').'»';
+		if ((isset($settings['important'])) && (!is_float($newvalue))) $errors[] = 'Ð—Ð°Ð¿Ð¾Ð»Ð½Ð¸Ñ‚Ðµ Ð¿Ð¾Ð»Ðµ Â«'.$this->getSetting('description').'Â»';
+		if ((isset($settings['important'])) && ($newvalue==='')) $errors[] = 'Ð—Ð°Ð¿Ð¾Ð»Ð½Ð¸Ñ‚Ðµ Ð¿Ð¾Ð»Ðµ Â«'.$this->getSetting('description').'Â»';
 		//if ($newvalue!='0')
 		$this->setSetting('value',$newvalue);
 		return $errors;

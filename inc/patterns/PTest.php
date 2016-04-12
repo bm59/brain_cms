@@ -1,40 +1,40 @@
 <?
-$source_descr='Òåñòîâûé ðàçäåë';
+$source_descr='Ð¢ÐµÑÑ‚Ð¾Ð²Ñ‹Ð¹ Ñ€Ð°Ð·Ð´ÐµÐ»';
 $source_name='PTest';
-/* Èìÿ êëàññà */
+/* Ð˜Ð¼Ñ ÐºÐ»Ð°ÑÑÐ° */
 class PTest extends VirtualPattern
 {
 	function init($settings){
 		global $CDDataSet,$Storage,$SiteSections;
-		
-		$descr='Òåñòîâûé ðàçäåë';
-		
+
+		$descr='Ð¢ÐµÑÑ‚Ð¾Ð²Ñ‹Ð¹ Ñ€Ð°Ð·Ð´ÐµÐ»';
+
 		if ($CDDataSet->checkDatatypes($settings['section'])==0)
 		$SiteSections->update_personal_settings($settings['section'], '|onoff|show_id|default_order=ORDER BY `name`|');
-		
+
 		$settings['name']=substr(get_class(), 1, strlen(get_class()));
 
 		$class_name='CC'.$settings['name'];
 		$settings['dataset'] = $CDDataSet->checkPresence(0, mb_strtolower($settings['name']));
-		
+
 		$CDDataSet->add
 		(
-		
+
 				array
 				(
 						'name'=>mb_strtolower($settings['name']),
 						'description'=>$descr,
 						'types'=>array
 						(
-								array('name'=>'name', 'type'=>'CDText', 'description'=>'Íàèìåíîâàíèå', 'settings'=>array()),
-								array('name'=>'enabled', 'type'=>'CDBoolean', 'description'=>'Ïîêàçûâàòü', 'settings'=>array('default'=>1)),
-								array('name'=>'spinner', 'type'=>'CDSpinner', 'description'=>'Ñ÷åò÷èê', 'settings'=>array('default'=>5)),
-								array('name'=>'slider', 'type'=>'CDSlider', 'description'=>'Ñëàéäåð', 'settings'=>array('min'=>1, 'max'=>5, 'default'=>3)),
-								array('name'=>'choice', 'type'=>'CDChoice', 'description'=>'Âûáîð', 'settings'=>array('type'=>'radio')),
-								array('name'=>'choice_milti', 'type'=>'CDChoice', 'description'=>'Ìíîæ. âûáîð', 'settings'=>array('type'=>'multi', 'values'=>'1#ïåðâûé, 2#âòîðîé, 3#òðåòèé, 4#÷åòâåðòûé, 5#ïÿòûé', 'comment'=>'âûáåðèòå îäíî èëè íåñêîëüêî çíà÷åíèé')),
-								array('name'=>'choice_milti2', 'type'=>'CDChoice', 'description'=>'Ìíîæ. âûáîð - âíåøíèé ìàññèâ', 'settings'=>array('type'=>'multi')),
+								array('name'=>'name', 'type'=>'CDText', 'description'=>'ÐÐ°Ð¸Ð¼ÐµÐ½Ð¾Ð²Ð°Ð½Ð¸Ðµ', 'settings'=>array()),
+								array('name'=>'enabled', 'type'=>'CDBoolean', 'description'=>'ÐŸÐ¾ÐºÐ°Ð·Ñ‹Ð²Ð°Ñ‚ÑŒ', 'settings'=>array('default'=>1)),
+								array('name'=>'spinner', 'type'=>'CDSpinner', 'description'=>'Ð¡Ñ‡ÐµÑ‚Ñ‡Ð¸Ðº', 'settings'=>array('default'=>5)),
+								array('name'=>'slider', 'type'=>'CDSlider', 'description'=>'Ð¡Ð»Ð°Ð¹Ð´ÐµÑ€', 'settings'=>array('min'=>1, 'max'=>5, 'default'=>3)),
+								array('name'=>'choice', 'type'=>'CDChoice', 'description'=>'Ð’Ñ‹Ð±Ð¾Ñ€', 'settings'=>array('type'=>'radio')),
+								array('name'=>'choice_milti', 'type'=>'CDChoice', 'description'=>'ÐœÐ½Ð¾Ð¶. Ð²Ñ‹Ð±Ð¾Ñ€', 'settings'=>array('type'=>'multi', 'values'=>'1#Ð¿ÐµÑ€Ð²Ñ‹Ð¹, 2#Ð²Ñ‚Ð¾Ñ€Ð¾Ð¹, 3#Ñ‚Ñ€ÐµÑ‚Ð¸Ð¹, 4#Ñ‡ÐµÑ‚Ð²ÐµÑ€Ñ‚Ñ‹Ð¹, 5#Ð¿ÑÑ‚Ñ‹Ð¹', 'comment'=>'Ð²Ñ‹Ð±ÐµÑ€Ð¸Ñ‚Ðµ Ð¾Ð´Ð½Ð¾ Ð¸Ð»Ð¸ Ð½ÐµÑÐºÐ¾Ð»ÑŒÐºÐ¾ Ð·Ð½Ð°Ñ‡ÐµÐ½Ð¸Ð¹')),
+								array('name'=>'choice_milti2', 'type'=>'CDChoice', 'description'=>'ÐœÐ½Ð¾Ð¶. Ð²Ñ‹Ð±Ð¾Ñ€ - Ð²Ð½ÐµÑˆÐ½Ð¸Ð¹ Ð¼Ð°ÑÑÐ¸Ð²', 'settings'=>array('type'=>'multi')),
 						)
-		
+
 				),
 				$settings['section']
 		);
@@ -46,10 +46,10 @@ class PTest extends VirtualPattern
 
 		$iface = new $class_name;
 		$this->setSetting('table',$this->createDataSetTable($this->getSetting('dataset'),$this->getSetting('section'),array('show'=>'INT(1)', 'precedence'=>'BIGINT(20)')));
-		
+
 		$iface->init(array('mode'=>$this->getSetting('mode'),'isservice'=>$this->getSetting('isservice'),'section'=>$this->getSetting('section'),'pattern'=>$this,'table'=>$this->getSetting('table'),'dataset'=>$this->getSetting('dataset')));
 		$this->setSetting('cclass',$iface);
-		
+
 		return $iface;
 	}
 

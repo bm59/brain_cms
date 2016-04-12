@@ -1,5 +1,5 @@
 <?
-function echo404Error(){ // Вывод 404 ошибки
+function echo404Error(){ // Р’С‹РІРѕРґ 404 РѕС€РёР±РєРё
 $settings= new SiteSettings;
 $settings->init();
 $sitetitle=($settings->getOne($settings->getIdByName('sitetitle')));
@@ -9,23 +9,23 @@ $sitekey=($settings->getOne($settings->getIdByName('sitekey')));
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html>
 	<head>
-		<meta http-equiv="content-type" content="text/html;charset=windows-1251" />
+		<meta http-equiv="content-type" content="text/html;charset=utf-8" />
 		<meta http-equiv="content-language" content="ru" />
 		<link rel="icon" href="/favicon.ico" type="image/x-icon" />
 		<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
 		<link rel="stylesheet" type="text/css" href="/css/content.css" media="all" />
 		<link rel="stylesheet" type="text/css" href="/css/main.css" media="all" />
-		<title>Страница не найдена. Ошибка 404</title>
+		<title>РЎС‚СЂР°РЅРёС†Р° РЅРµ РЅР°Р№РґРµРЅР°. РћС€РёР±РєР° 404</title>
 	</head>
 <body id="error404">
 <div id="content" >
 <div class="errlogo"><img src="/pics/logo.jpg" alt=""  /></div>
 
 	<div class="errtxt">
-		<h1>Страница не найдена!</h1>
-		<p>Страницы, на которую вы хотите попасть, у нас нет.<br />Возможно, вы ошиблись, набирая адрес, либо данная страница была удалена.</p>
-			<div>Перейти на <a href="/">главную страницу</a></div>
-			<div>Вернуться к <a href="javascript:history.go(-1)">предыдущей странице</a></div>
+		<h1>РЎС‚СЂР°РЅРёС†Р° РЅРµ РЅР°Р№РґРµРЅР°!</h1>
+		<p>РЎС‚СЂР°РЅРёС†С‹, РЅР° РєРѕС‚РѕСЂСѓСЋ РІС‹ С…РѕС‚РёС‚Рµ РїРѕРїР°СЃС‚СЊ, Сѓ РЅР°СЃ РЅРµС‚.<br />Р’РѕР·РјРѕР¶РЅРѕ, РІС‹ РѕС€РёР±Р»РёСЃСЊ, РЅР°Р±РёСЂР°СЏ Р°РґСЂРµСЃ, Р»РёР±Рѕ РґР°РЅРЅР°СЏ СЃС‚СЂР°РЅРёС†Р° Р±С‹Р»Р° СѓРґР°Р»РµРЅР°.</p>
+			<div>РџРµСЂРµР№С‚Рё РЅР° <a href="/">РіР»Р°РІРЅСѓСЋ СЃС‚СЂР°РЅРёС†Сѓ</a></div>
+			<div>Р’РµСЂРЅСѓС‚СЊСЃСЏ Рє <a href="javascript:history.go(-1)">РїСЂРµРґС‹РґСѓС‰РµР№ СЃС‚СЂР°РЅРёС†Рµ</a></div>
 	</div>
 </div>
 </body>
@@ -33,7 +33,7 @@ $sitekey=($settings->getOne($settings->getIdByName('sitekey')));
         <?
         die();
 }
-/*function getSelectSinonim($name,$values = array(),$selected = '|nokey|',$always = false){ // Возвращает код для вставки «заменителя SELECT»
+/*function getSelectSinonim($name,$values = array(),$selected = '|nokey|',$always = false){ // Р’РѕР·РІСЂР°С‰Р°РµС‚ РєРѕРґ РґР»СЏ РІСЃС‚Р°РІРєРё В«Р·Р°РјРµРЅРёС‚РµР»СЏ SELECTВ»
         if (count($values)==0) return '';
         //if ((count($values)==1) && (!$always)) foreach ($values as $k=>$v) return '<input type="hidden" name="'.$name.'" value="'.$k.'">';
         $firstval = '|nodata|';
@@ -51,8 +51,8 @@ $sitekey=($settings->getOne($settings->getIdByName('sitekey')));
 
 if (!function_exists('toLower')) {
 	function toLower($content) {
-$content = strtr($content, "АБВГДЕЁЖЗИЙКЛМНОРПСТУФХЦЧШЩЪЬЫЭЮЯ",
-"абвгдеёжзийклмнорпстуфхцчшщъьыэюя");
+$content = strtr($content, "РђР‘Р’Р“Р”Р•РЃР–Р—РР™РљР›РњРќРћР РџРЎРўРЈР¤РҐР¦Р§РЁР©РЄР¬Р«Р­Р®РЇ",
+"Р°Р±РІРіРґРµС‘Р¶Р·РёР№РєР»РјРЅРѕСЂРїСЃС‚СѓС„С…С†С‡С€С‰СЉСЊС‹СЌСЋСЏ");
 return strtolower($content);
 }
 
@@ -90,7 +90,20 @@ function getSelectSinonim($name,$values = array(),$selected = '')
 
 		return $retval;
 }
-function getSelectSinonimSimple($name,$values = array(),$selected = '|nokey|',$titles = array(),$width = ''){ // Возвращает код для вставки «заменителя SELECT»
+function getSelectSinonim_color($name,$values = array(),$selected = '', $settings=array(), $select_type='')
+{
+	if (count($values)==0) return '';
+
+	$retval ='<div class="input"><select name="'.$name.'" class="colorselect'.($select_type!='' ? ' '.$select_type:'').'" '.($settings['noselect'] ? 'disabled' :'').'>';
+	foreach ($values as $k=>$v){
+		$retval.= '
+            <option '.($v['color']!='' ? 'data-color="'.$v['color'].'" style="background: '.$v['color'].'"' :'').'  value="'.$v['id'].'" '.($v['id']==$selected || ($v['id']==$settings['default'] && floor($selected)<=0 && $select_type!='search') ? 'selected="selected"':'').'>'.$v['name'].'</option>';
+	}
+	$retval.= '</select></div>';
+
+	return $retval;
+}
+function getSelectSinonimSimple($name,$values = array(),$selected = '|nokey|',$titles = array(),$width = ''){ // Р’РѕР·РІСЂР°С‰Р°РµС‚ РєРѕРґ РґР»СЏ РІСЃС‚Р°РІРєРё В«Р·Р°РјРµРЅРёС‚РµР»СЏ SELECTВ»
 		if (count($values)==0) return '';
         /*if (count($values)==1) foreach ($values as $k=>$v) return '<input type="hidden" name="'.$name.'" value="'.$k.'">';*/
         $firstval = '|nodata|';
@@ -112,7 +125,7 @@ function getSelectSinonimSimple($name,$values = array(),$selected = '|nokey|',$t
 
 		return $retval;
 }
-function getSelectSinonimTree($name,$values = array(),$selected = '|nokey|',$always = false){ // Возвращает код для вставки «заменителя SELECT»
+function getSelectSinonimTree($name,$values = array(),$selected = '|nokey|',$always = false){ // Р’РѕР·РІСЂР°С‰Р°РµС‚ РєРѕРґ РґР»СЏ РІСЃС‚Р°РІРєРё В«Р·Р°РјРµРЅРёС‚РµР»СЏ SELECTВ»
         if (count($values)==0) return '';
         $firstval = '|nodata|';
         $firstshowval = '';
@@ -129,8 +142,8 @@ function getSelectSinonimTree($name,$values = array(),$selected = '|nokey|',$alw
 
 if (!function_exists('toLower')) {
 	function toLower($content) {
-$content = strtr($content, "АБВГДЕЁЖЗИЙКЛМНОРПСТУФХЦЧШЩЪЬЫЭЮЯ",
-"абвгдеёжзийклмнорпстуфхцчшщъьыэюя");
+$content = strtr($content, "РђР‘Р’Р“Р”Р•РЃР–Р—РР™РљР›РњРќРћР РџРЎРўРЈР¤РҐР¦Р§РЁР©РЄР¬Р«Р­Р®РЇ",
+"Р°Р±РІРіРґРµС‘Р¶Р·РёР№РєР»РјРЅРѕСЂРїСЃС‚СѓС„С…С†С‡С€С‰СЉСЊС‹СЌСЋСЏ");
 return strtolower($content);
 }
 

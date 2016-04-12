@@ -1,6 +1,6 @@
 <?
 /*
-Øàáëîí çàêëàäêè
+Ð¨Ð°Ð±Ð»Ð¾Ð½ Ð·Ð°ÐºÐ»Ð°Ð´ÐºÐ¸
 */
 class PFolder extends VirtualPattern
 {
@@ -21,6 +21,6 @@ class PFolder extends VirtualPattern
 
 $registeredPatterns = configGet('registeredPatterns');
 if (!is_array($registeredPatterns)) $registeredPatterns = array();
-$registeredPatterns[] = array('name'=>'PFolder','description'=>'Çàêëàäêà','useradd'=>1);
+$registeredPatterns[] = array('name'=>'PFolder','description'=>'Ð—Ð°ÐºÐ»Ð°Ð´ÐºÐ°','useradd'=>1);
 configSet('registeredPatterns',$registeredPatterns);
 ?>

@@ -3,28 +3,29 @@ include "$DOCUMENT_ROOT/inc/site_admin/include.php";
 
 session_start();
 /*if(session_id() != $_POST['sid']) die('Access_denied');*/
-header("Content-type: text/html; charset=windows-1251");
+header("Content-type: text/html; charset=utf-8");
 
 if ($_POST['action']=='delete')
 { 	if ($_POST['old_id']>0) $Storage->deleteFile($_POST['old_id']);
- 	echo('true#%#Ôàéë óäàëåí');
+ 	echo('true#%#Ð¤Ð°Ð¹Ð» ÑƒÐ´Ð°Ð»ÐµÐ½');
 }
 else
 {
 
 	if ($_POST['old_id']>0) $Storage->deleteFile($_POST['old_id']);
 	$uploadfile = $Storage->uploadFile($_POST['stid'],$_POST['theme'],$_POST['rubric'],$_POST['uid'],$_FILES['upl_file'], $_POST['str_settings']);
-	
+
 	$errors = '';
-	foreach ($uploadfile['errors'] as $v) $errors.= '— '.$v.';
+	foreach ($uploadfile['errors'] as $v) $errors.= 'â€” '.$v.';
 	';
-	if ($errors) $errors = 'Îøèáêè ïðè çàãðóçêå ôàéëà:
+	if ($errors) $errors = 'ÐžÑˆÐ¸Ð±ÐºÐ¸ Ð¿Ñ€Ð¸ Ð·Ð°Ð³Ñ€ÑƒÐ·ÐºÐµ Ñ„Ð°Ð¹Ð»Ð°:
 	'.$errors;
+
 
 	if ($uploadfile['path']!='')
 	print json_encode(array('result'=>'ok', 'ext'=>$uploadfile['ext'], 'path'=>$uploadfile['path'], 'filesize'=>get_filesize($path_file), 'id'=>$uploadfile['id']));
 	else
-	print json_encode(array('error'=>iconv("WINDOWS-1251","UTF-8",$errors)));
+	print json_encode(array('error'=>$errors));
 
 }
 ?>

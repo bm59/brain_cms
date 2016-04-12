@@ -2,32 +2,32 @@
 class CDCHOICE extends VirtualType
 {
 	function init($settings){
-		$settings['descr']='Âûáîð (çàêëàäêè)';
+		$settings['descr']='Ð’Ñ‹Ð±Ð¾Ñ€ (Ð·Ð°ÐºÐ»Ð°Ð´ÐºÐ¸)';
 		$settings['help']=array(
-				'type=multi'=>'Ìíîæåñòâåííûé âûáîð',
-				'values=ïåðâûé, âòîðîé, òðåòèé'=>'Çíà÷åíèÿ áåç id',
-				'values=2#ïåðâûé, 3#âòîðîé, 4#òðåòèé'=>'Çíà÷åíèÿ ñ id',
-				'comment=êîììåíòàðèé'=>'Êîììåíòàðèé',
-				'editable'=>'Ðåäàêòèðóåìûé',
-				'source=#source_type=table#table_name=%SOURCE_TABLE%#table_field=name#table_usl=WHERE `show`=1#table_order=ORDER BY `name`#name_only=0'=>'Èñòî÷íèê òàáëèöà',
-				'source=#source_type=spr#spr_path=%SOURCE_PATH%#spr_field=name#spr_usl=WHERE `show`=1#spr_order=ORDER BY `name`#name_only=0'=>'Èñòî÷íèê ñïðàâî÷íèê'
+				'type=multi'=>'ÐœÐ½Ð¾Ð¶ÐµÑÑ‚Ð²ÐµÐ½Ð½Ñ‹Ð¹ Ð²Ñ‹Ð±Ð¾Ñ€',
+				'values=Ð¿ÐµÑ€Ð²Ñ‹Ð¹, Ð²Ñ‚Ð¾Ñ€Ð¾Ð¹, Ñ‚Ñ€ÐµÑ‚Ð¸Ð¹'=>'Ð—Ð½Ð°Ñ‡ÐµÐ½Ð¸Ñ Ð±ÐµÐ· id',
+				'values=2#Ð¿ÐµÑ€Ð²Ñ‹Ð¹, 3#Ð²Ñ‚Ð¾Ñ€Ð¾Ð¹, 4#Ñ‚Ñ€ÐµÑ‚Ð¸Ð¹'=>'Ð—Ð½Ð°Ñ‡ÐµÐ½Ð¸Ñ Ñ id',
+				'comment=ÐºÐ¾Ð¼Ð¼ÐµÐ½Ñ‚Ð°Ñ€Ð¸Ð¹'=>'ÐšÐ¾Ð¼Ð¼ÐµÐ½Ñ‚Ð°Ñ€Ð¸Ð¹',
+				'editable'=>'Ð ÐµÐ´Ð°ÐºÑ‚Ð¸Ñ€ÑƒÐµÐ¼Ñ‹Ð¹',
+				'source=#source_type=table#table_name=%SOURCE_TABLE%#table_field=name#table_usl=WHERE `show`=1#table_order=ORDER BY `name`#name_only=0'=>'Ð˜ÑÑ‚Ð¾Ñ‡Ð½Ð¸Ðº Ñ‚Ð°Ð±Ð»Ð¸Ñ†Ð°',
+				'source=#source_type=spr#spr_path=%SOURCE_PATH%#spr_field=name#spr_usl=WHERE `show`=1#spr_order=ORDER BY `name`#name_only=0'=>'Ð˜ÑÑ‚Ð¾Ñ‡Ð½Ð¸Ðº ÑÐ¿Ñ€Ð°Ð²Ð¾Ñ‡Ð½Ð¸Ðº'
 		);
 
 		VirtualType::init($settings);
 	}
 	function get_values($settings) {
 		global $SiteSections;
-	
-		/*Âíåøíèé ìàññèâ*/
+
+		/*Ð’Ð½ÐµÑˆÐ½Ð¸Ð¹ Ð¼Ð°ÑÑÐ¸Ð²*/
 		if (is_array($this->getSetting('values')))
 		{
 			$settings['values']=$this->getSetting('values');
 			return $settings['values'];
 		}
-		 
-		 
-		 
-		/*Ìàññèâ èç íàñòðîåê òèïà*/
+
+
+
+		/*ÐœÐ°ÑÑÐ¸Ð² Ð¸Ð· Ð½Ð°ÑÑ‚Ñ€Ð¾ÐµÐº Ñ‚Ð¸Ð¿Ð°*/
 		else if ($settings['values']!='')
 		{
 			$arr=array();
@@ -35,22 +35,22 @@ class CDCHOICE extends VirtualType
 			foreach ($val as $v)
 			{
 				$v=trim($v);
-				
+
 				if (stripos($v,'#')!==false)
 				{
 					$val=explode('#',$v);
 					$k=trim($val[0]);
 					$v=trim($val[1]);
-	
+
 					$arr[$k]=trim($v);
 				}
 				else
 				$arr[$v]=trim($v);
 			}
 			$settings['values']=$arr;
-	
+
 		}
-		 
+
 		if ($settings['source']!='')
 		{
 			$source=array();
@@ -60,7 +60,7 @@ class CDCHOICE extends VirtualType
 				if ($cur_set[0]!='')
 					$source[$cur_set[0]]=str_replace($cur_set[0].'=', '', $set);
 			}
-	
+
 			$arr=array();
 			switch ($source['source_type']) {
 				case "table":
@@ -72,13 +72,13 @@ class CDCHOICE extends VirtualType
 						else
 							$arr[$r['id']]=trim($r[$source['table_field']]);
 					}
-						
+
 					break;
 				case "spr":
 					$SiteSections= new SiteSections;
 					$SiteSections->init();
 					$Section = $SiteSections->get($SiteSections->getIdByPath($source['spr_path']));
-	
+
 					if ($Section['id']>0)
 					{
 						$Pattern = new $Section['pattern'];
@@ -91,21 +91,21 @@ class CDCHOICE extends VirtualType
 								$arr[$r[$source['spr_field']]] =$r[$source['spr_field']];
 							else
 								$arr[$r['id']] =$r[$source['spr_field']];
-	
+
 					}
-	
+
 					break;
-	
+
 			}
-				
+
 			$settings['values']=$arr;
-	
+
 		}
-		 
+
 		if (!is_array($settings['values'])) $settings['values']=array();
 		$this->setSetting('values', $settings['values']);
 		return $settings['values'];
-	
+
 	}
 	function drawEditor($divstyle = '',$span = true){
 		global $SiteSections;
@@ -137,7 +137,7 @@ class CDCHOICE extends VirtualType
     	if ($k==$this->getSetting('value') || stripos($this->getSetting('value'), ','.$k.',')!==false)  $selected='checked="checked"';
 
     	if ($settings['type']=='') $settings['type']='radio';
-    	
+
     	if ($settings['type']=='radio')
     	{?>
     	<input type="radio" id="radio<?=$i?>_<?=$this->getSetting('name')?>" value="<?=$k?>" name="<?=$this->getSetting('name')?>" <?=$selected?>><label for="radio<?=$i?>_<?=$this->getSetting('name')?>"><?=$v?></label>
@@ -175,7 +175,7 @@ class CDCHOICE extends VirtualType
         else
 		$newvalue = htmlspecialchars(trim($_POST[$this->getSetting('name')]));
 
-		if ((isset($settings['important'])) && ($newvalue==='')) $errors[] = 'Çàïîëíèòå ïîëå «'.$this->getSetting('description').'»';
+		if ((isset($settings['important'])) && ($newvalue==='')) $errors[] = 'Ð—Ð°Ð¿Ð¾Ð»Ð½Ð¸Ñ‚Ðµ Ð¿Ð¾Ð»Ðµ Â«'.$this->getSetting('description').'Â»';
 		if ($newvalue!='0')
 		$this->setSetting('value',$newvalue);
 		return $errors;

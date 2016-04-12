@@ -1,49 +1,49 @@
 <?
-function upper($str){ // Просто strtoupper не на всех серверах корректно работает :)
-	$lower = "abcdefghijklmnopqrstuvwxyzабвгдеёжзийклмнопрстуфхцчшщъыьэюя";
-	$upper = "ABCDEFGHIJKLMNOPQRSTUVWXYZАБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ";
+function upper($str){ // РџСЂРѕСЃС‚Рѕ strtoupper РЅРµ РЅР° РІСЃРµС… СЃРµСЂРІРµСЂР°С… РєРѕСЂСЂРµРєС‚РЅРѕ СЂР°Р±РѕС‚Р°РµС‚ :)
+	$lower = "abcdefghijklmnopqrstuvwxyzР°Р±РІРіРґРµС‘Р¶Р·РёР№РєР»РјРЅРѕРїСЂСЃС‚СѓС„С…С†С‡С€С‰СЉС‹СЊСЌСЋСЏ";
+	$upper = "ABCDEFGHIJKLMNOPQRSTUVWXYZРђР‘Р’Р“Р”Р•РЃР–Р—РР™РљР›РњРќРћРџР РЎРўРЈР¤РҐР¦Р§РЁР©РЄР«Р¬Р­Р®РЇ";
 	$lowerlen = strlen($lower);
 	for ($i=0; $i<$lowerlen; $i++) $str = str_replace(substr($lower,$i,1),substr($upper,$i,1),$str);
 	return $str;
 }
-function lower($str){ // Просто strtolower не на всех серверах корректно работает :)
-	$lower = "abcdefghijklmnopqrstuvwxyzабвгдеёжзийклмнопрстуфхцчшщъыьэюя";
-	$upper = "ABCDEFGHIJKLMNOPQRSTUVWXYZАБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ";
+function lower($str){ // РџСЂРѕСЃС‚Рѕ strtolower РЅРµ РЅР° РІСЃРµС… СЃРµСЂРІРµСЂР°С… РєРѕСЂСЂРµРєС‚РЅРѕ СЂР°Р±РѕС‚Р°РµС‚ :)
+	$lower = "abcdefghijklmnopqrstuvwxyzР°Р±РІРіРґРµС‘Р¶Р·РёР№РєР»РјРЅРѕРїСЂСЃС‚СѓС„С…С†С‡С€С‰СЉС‹СЊСЌСЋСЏ";
+	$upper = "ABCDEFGHIJKLMNOPQRSTUVWXYZРђР‘Р’Р“Р”Р•РЃР–Р—РР™РљР›РњРќРћРџР РЎРўРЈР¤РҐР¦Р§РЁР©РЄР«Р¬Р­Р®РЇ";
 	$upperlen = strlen($upper);
 	for ($i=0; $i<$upperlen; $i++) $str = str_replace(substr($upper,$i,1),substr($lower,$i,1),$str);
 	return $str;
 }
 
-/* Функции получения названия месяца */
-function getMonthRusNameUpper($num){ $months = array("","Январь","Февраль","Март","Апрель","Май","Июнь","Июль","Август","Сентябрь","Октябрь","Ноябрь","Декабрь"); return $months[floor($num)]; }
-function getMonthRusNameLower($num){ $months = array("","январь","февраль","март","апрель","май","июнь","июль","август","сентябрь","октябрь","ноябрь","декабрь"); return $months[floor($num)]; }
-function getMonthRusNameLowerRP($num){ $months = array("","января","февраля","марта","апреля","мая","июня","июля","августа","сентября","октября","ноября","декабря"); return $months[floor($num)]; }
-function getMonthRusNameUpperRP($num){ $months = array("","Января","Февраля","Марта","Апреля","Мая","Июня","Июля","Августа","Сентября","Октября","Ноября","Декабря"); return $months[floor($num)]; }
+/* Р¤СѓРЅРєС†РёРё РїРѕР»СѓС‡РµРЅРёСЏ РЅР°Р·РІР°РЅРёСЏ РјРµСЃСЏС†Р° */
+function getMonthRusNameUpper($num){ $months = array("","РЇРЅРІР°СЂСЊ","Р¤РµРІСЂР°Р»СЊ","РњР°СЂС‚","РђРїСЂРµР»СЊ","РњР°Р№","РСЋРЅСЊ","РСЋР»СЊ","РђРІРіСѓСЃС‚","РЎРµРЅС‚СЏР±СЂСЊ","РћРєС‚СЏР±СЂСЊ","РќРѕСЏР±СЂСЊ","Р”РµРєР°Р±СЂСЊ"); return $months[floor($num)]; }
+function getMonthRusNameLower($num){ $months = array("","СЏРЅРІР°СЂСЊ","С„РµРІСЂР°Р»СЊ","РјР°СЂС‚","Р°РїСЂРµР»СЊ","РјР°Р№","РёСЋРЅСЊ","РёСЋР»СЊ","Р°РІРіСѓСЃС‚","СЃРµРЅС‚СЏР±СЂСЊ","РѕРєС‚СЏР±СЂСЊ","РЅРѕСЏР±СЂСЊ","РґРµРєР°Р±СЂСЊ"); return $months[floor($num)]; }
+function getMonthRusNameLowerRP($num){ $months = array("","СЏРЅРІР°СЂСЏ","С„РµРІСЂР°Р»СЏ","РјР°СЂС‚Р°","Р°РїСЂРµР»СЏ","РјР°СЏ","РёСЋРЅСЏ","РёСЋР»СЏ","Р°РІРіСѓСЃС‚Р°","СЃРµРЅС‚СЏР±СЂСЏ","РѕРєС‚СЏР±СЂСЏ","РЅРѕСЏР±СЂСЏ","РґРµРєР°Р±СЂСЏ"); return $months[floor($num)]; }
+function getMonthRusNameUpperRP($num){ $months = array("","РЇРЅРІР°СЂСЏ","Р¤РµРІСЂР°Р»СЏ","РњР°СЂС‚Р°","РђРїСЂРµР»СЏ","РњР°СЏ","РСЋРЅСЏ","РСЋР»СЏ","РђРІРіСѓСЃС‚Р°","РЎРµРЅС‚СЏР±СЂСЏ","РћРєС‚СЏР±СЂСЏ","РќРѕСЏР±СЂСЏ","Р”РµРєР°Р±СЂСЏ"); return $months[floor($num)]; }
 
-function pregtrim($str){ return preg_replace("/[^\x20-\xFF]/","",@strval($str)); } // Функция удаления опасных сиволов
-function checkUrl($url){ // Проверка корректности url, возвращает корректный URL или FALSE
+function pregtrim($str){ return preg_replace("/[^\x20-\xFF]/","",@strval($str)); } // Р¤СѓРЅРєС†РёСЏ СѓРґР°Р»РµРЅРёСЏ РѕРїР°СЃРЅС‹С… СЃРёРІРѕР»РѕРІ
+function checkUrl($url){ // РџСЂРѕРІРµСЂРєР° РєРѕСЂСЂРµРєС‚РЅРѕСЃС‚Рё url, РІРѕР·РІСЂР°С‰Р°РµС‚ РєРѕСЂСЂРµРєС‚РЅС‹Р№ URL РёР»Рё FALSE
 	$url = trim(pregtrim($url));
-	if (strlen($url)==0) return false; // если пустой url
+	if (strlen($url)==0) return false; // РµСЃР»Рё РїСѓСЃС‚РѕР№ url
 /*	if (!preg_match("~^(?:(?:https?://|ftp://|telnet://|mailto:)(?:[a-z0-9_-]{1,32}".
 					"(?::[a-z0-9_-]{1,32})?@)?)?(?:(?:[a-z0-9-]{1,128}\.)+(?:com|net|".
 					"org|mil|edu|arpa|gov|biz|info|aero|inc|name|[a-z]{2})|(?!0)(?:(?".
 					"!0[^.]|255)[0-9]{1,3}\.){3}(?!0|255)[0-9]{1,3})(?:/[a-z0-9.,_@%&".
 					"?+=\~/-]*)?(?:#[^ '\"&<>]*)?$~i",$url,$ok))
-	return false; // если url некорректен*/
-	if (!strstr($url,"://") && !strstr($url,"mailto:")) $url = "http://".$url; // если не указан протокол — добавляем http://
-	$url = preg_replace("~^[a-z]+~ie","strtolower('\\0')",$url); // заменяем протокол на нижний регистр: hTtP -> http
+	return false; // РµСЃР»Рё url РЅРµРєРѕСЂСЂРµРєС‚РµРЅ*/
+	if (!strstr($url,"://") && !strstr($url,"mailto:")) $url = "http://".$url; // РµСЃР»Рё РЅРµ СѓРєР°Р·Р°РЅ РїСЂРѕС‚РѕРєРѕР» вЂ” РґРѕР±Р°РІР»СЏРµРј http://
+	$url = preg_replace("~^[a-z]+~ie","strtolower('\\0')",$url); // Р·Р°РјРµРЅСЏРµРј РїСЂРѕС‚РѕРєРѕР» РЅР° РЅРёР¶РЅРёР№ СЂРµРіРёСЃС‚СЂ: hTtP -> http
 	return $url;
 }
-function checkEmail($mail){ // Проверка корректности email, возвращает корректный E-mail или FALSE
+function checkEmail($mail){ // РџСЂРѕРІРµСЂРєР° РєРѕСЂСЂРµРєС‚РЅРѕСЃС‚Рё email, РІРѕР·РІСЂР°С‰Р°РµС‚ РєРѕСЂСЂРµРєС‚РЅС‹Р№ E-mail РёР»Рё FALSE
    $mail = trim(pregtrim($mail));
-   if (strlen($mail)==0) return false; // если пустой email
-   if (!preg_match("/^[a-z0-9\._-]{1,20}@(([a-z0-9-]+\.)+(com|net|org|mil|".
+   if (strlen($mail)==0) return false; // РµСЃР»Рё РїСѓСЃС‚РѕР№ email
+   if (!preg_match("/^[a-z0-9\._-]{1,50}@(([a-z0-9-]+\.)+(com|net|org|mil|".
    "edu|gov|arpa|info|biz|inc|name|[a-z]{2})|[0-9]{1,3}\.[0-9]{1,3}\.[0-".
    "9]{1,3}\.[0-9]{1,3})$/is",$mail))
-   return false; // если email некорректен
+   return false; // РµСЃР»Рё email РЅРµРєРѕСЂСЂРµРєС‚РµРЅ
    return $mail;
 }
-function checkValidDate($date){ // Проверка корректности даты, возвращает true или false
+function checkValidDate($date){ // РџСЂРѕРІРµСЂРєР° РєРѕСЂСЂРµРєС‚РЅРѕСЃС‚Рё РґР°С‚С‹, РІРѕР·РІСЂР°С‰Р°РµС‚ true РёР»Рё false
 	$date = explode('.',$date);
 	$d = floor($date[0]);
 	$m = floor($date[1]);
@@ -53,7 +53,7 @@ function checkValidDate($date){ // Проверка корректности даты, возвращает true и
 	if (($d<1) || ($d>getMonthDaysCount($m,$y))) return false;
 	return true;
 }
-function getMonthDaysCount($m,$y){ // Возвращает кол-во дней в месяце
+function getMonthDaysCount($m,$y){ // Р’РѕР·РІСЂР°С‰Р°РµС‚ РєРѕР»-РІРѕ РґРЅРµР№ РІ РјРµСЃСЏС†Рµ
 	$m = floor($m)-1; if ($m<0) return 31;
 	$y = floor($y);
 	$VVMonths = array(31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31);
@@ -64,7 +64,7 @@ function getMonthDaysCount($m,$y){ // Возвращает кол-во дней в месяце
 	}
 	else return $VVMonths[$m];
 }
-function getUniqueStr($length = 0){ // Возвращает случайный набор символов заданной длины
+function getUniqueStr($length = 0){ // Р’РѕР·РІСЂР°С‰Р°РµС‚ СЃР»СѓС‡Р°Р№РЅС‹Р№ РЅР°Р±РѕСЂ СЃРёРјРІРѕР»РѕРІ Р·Р°РґР°РЅРЅРѕР№ РґР»РёРЅС‹
 	$retval = '';
 	$length = floor($length);
 	if ($length<1) return '';
@@ -72,7 +72,7 @@ function getUniqueStr($length = 0){ // Возвращает случайный набор символов задан
 	for ($i=0; $i<$length; $i++) $retval.= substr($symbols,rand(1,strlen($symbols)),1);
 	return $retval;
 }
-function defaultEmail($email,$text,$theme,$fromemail = ''){ // Отправление электронного письма
+function defaultEmail($email,$text,$theme,$fromemail = ''){ // РћС‚РїСЂР°РІР»РµРЅРёРµ СЌР»РµРєС‚СЂРѕРЅРЅРѕРіРѕ РїРёСЃСЊРјР°
 	$email = checkEmail($email);
 	if (!$email) $email = configGet("SiteDefaultToEmail");
 	$fromemail = checkEmail($email);
@@ -85,7 +85,7 @@ function defaultEmail($email,$text,$theme,$fromemail = ''){ // Отправление элект
 	$body = '
 		<html>
 		<head>
-			<meta http-equiv="content-type" content="text/html; charset=windows-1251">
+			<meta http-equiv="content-type" content="text/html; charset=uft-8">
 			<style>
 				body { font-family: tahoma, verdana, helvetica, sans-serif; font-size: 12px; line-height: 1.3; color: #555; }
 				h3 { font: bold 15px Arial, sans-serif; color: #004195; margin: 1.3em 0 }
@@ -101,13 +101,13 @@ function defaultEmail($email,$text,$theme,$fromemail = ''){ // Отправление элект
 }
 function sendsmtp ($to, $message,  $subject, $from)
     {
-    	    $address = 'smtp.beget.ru'; // адрес smtp-сервера
-    		$port    = 2525;          // порт (стандартный smtp - 25)
+    	    $address = 'smtp.beget.ru'; // Р°РґСЂРµСЃ smtp-СЃРµСЂРІРµСЂР°
+    		$port    = 2525;          // РїРѕСЂС‚ (СЃС‚Р°РЅРґР°СЂС‚РЅС‹Р№ smtp - 25)
 
-    		$login   = 'sender@nadosushi.ru';    // логин к ящику
-    		$pwd     = '1qazxsw';    // пароль к ящику
+    		$login   = 'sender@nadosushi.ru';    // Р»РѕРіРёРЅ Рє СЏС‰РёРєСѓ
+    		$pwd     = '1qazxsw';    // РїР°СЂРѕР»СЊ Рє СЏС‰РёРєСѓ
 
-    		/*$subject=iconv('windows-1251', 'utf-8', $subject);*/
+
     	$message = '
 		<html>
 		<head>
@@ -119,13 +119,13 @@ function sendsmtp ($to, $message,  $subject, $from)
 
 	    	try {
 
-	        // Создаем сокет
+	        // РЎРѕР·РґР°РµРј СЃРѕРєРµС‚
 	        $socket = socket_create(AF_INET, SOCK_STREAM, SOL_TCP);
 	        if ($socket < 0) {
 	            throw new Exception('socket_create() failed: '.socket_strerror(socket_last_error())."\n");
 	        }
 
-	        // Соединяем сокет к серверу
+	        // РЎРѕРµРґРёРЅСЏРµРј СЃРѕРєРµС‚ Рє СЃРµСЂРІРµСЂСѓ
 	        /*echo 'Connect to \''.$address.':'.$port.'\' ... ';*/
 	        $result = socket_connect($socket, $address, $port);
 	        if ($result === false) {
@@ -134,61 +134,61 @@ function sendsmtp ($to, $message,  $subject, $from)
 	            /*echo "OK\n";*/
 	        }
 
-	        // Читаем информацию о сервере
+	        // Р§РёС‚Р°РµРј РёРЅС„РѕСЂРјР°С†РёСЋ Рѕ СЃРµСЂРІРµСЂРµ
 	        read_smtp_answer($socket);
 
-	        // Приветствуем сервер
+	        // РџСЂРёРІРµС‚СЃС‚РІСѓРµРј СЃРµСЂРІРµСЂ
 	        write_smtp_response($socket, 'EHLO '.$login);
-	        read_smtp_answer($socket); // ответ сервера
+	        read_smtp_answer($socket); // РѕС‚РІРµС‚ СЃРµСЂРІРµСЂР°
 
 	        /*echo 'Authentication ... ';*/
 
-	        // Делаем запрос авторизации
+	        // Р”РµР»Р°РµРј Р·Р°РїСЂРѕСЃ Р°РІС‚РѕСЂРёР·Р°С†РёРё
 	        write_smtp_response($socket, 'AUTH LOGIN');
-	        read_smtp_answer($socket); // ответ сервера
+	        read_smtp_answer($socket); // РѕС‚РІРµС‚ СЃРµСЂРІРµСЂР°
 
-	        // Отравляем логин
+	        // РћС‚СЂР°РІР»СЏРµРј Р»РѕРіРёРЅ
 	        write_smtp_response($socket, base64_encode($login));
-	        read_smtp_answer($socket); // ответ сервера
+	        read_smtp_answer($socket); // РѕС‚РІРµС‚ СЃРµСЂРІРµСЂР°
 
-	        // Отравляем пароль
+	        // РћС‚СЂР°РІР»СЏРµРј РїР°СЂРѕР»СЊ
 	        write_smtp_response($socket, base64_encode($pwd));
-	        read_smtp_answer($socket); // ответ сервера
+	        read_smtp_answer($socket); // РѕС‚РІРµС‚ СЃРµСЂРІРµСЂР°
 
 	        /*echo "OK\n";
 	        echo "Check sender address ... ";*/
 
-	        // Задаем адрес отправителя
+	        // Р—Р°РґР°РµРј Р°РґСЂРµСЃ РѕС‚РїСЂР°РІРёС‚РµР»СЏ
 	        write_smtp_response($socket, 'MAIL FROM:<'.$from.'>');
-	        read_smtp_answer($socket); // ответ сервера
+	        read_smtp_answer($socket); // РѕС‚РІРµС‚ СЃРµСЂРІРµСЂР°
 
 	        /*echo "OK\n";
 	        echo "Check recipient address ... ";*/
 
-	        // Задаем адрес получателя
+	        // Р—Р°РґР°РµРј Р°РґСЂРµСЃ РїРѕР»СѓС‡Р°С‚РµР»СЏ
 	        write_smtp_response($socket, 'RCPT TO:<'.$to.'>');
-	        read_smtp_answer($socket); // ответ сервера
+	        read_smtp_answer($socket); // РѕС‚РІРµС‚ СЃРµСЂРІРµСЂР°
 
 	        /*echo "OK\n";
 	        echo "Send message text ... ";*/
 
-	        // Готовим сервер к приему данных
+	        // Р“РѕС‚РѕРІРёРј СЃРµСЂРІРµСЂ Рє РїСЂРёРµРјСѓ РґР°РЅРЅС‹С…
 	        write_smtp_response($socket, 'DATA');
-	        read_smtp_answer($socket); // ответ сервера
+	        read_smtp_answer($socket); // РѕС‚РІРµС‚ СЃРµСЂРІРµСЂР°
 
-	        // Отправляем данные
+	        // РћС‚РїСЂР°РІР»СЏРµРј РґР°РЅРЅС‹Рµ
             $headers  = "Content-Type: text/html; charset=windows-1251\r\n";
-	        $headers .= "To: $to\r\n"; // добавляем заголовок сообщения "адрес получателя"
-	        $headers .= "Subject: $subject\r\n"; // заголовок "тема сообщения"
+	        $headers .= "To: $to\r\n"; // РґРѕР±Р°РІР»СЏРµРј Р·Р°РіРѕР»РѕРІРѕРє СЃРѕРѕР±С‰РµРЅРёСЏ "Р°РґСЂРµСЃ РїРѕР»СѓС‡Р°С‚РµР»СЏ"
+	        $headers .= "Subject: $subject\r\n"; // Р·Р°РіРѕР»РѕРІРѕРє "С‚РµРјР° СЃРѕРѕР±С‰РµРЅРёСЏ"
 	        write_smtp_response($socket, $headers.$message."\r\n.");
-	        read_smtp_answer($socket); // ответ сервера
+	        read_smtp_answer($socket); // РѕС‚РІРµС‚ СЃРµСЂРІРµСЂР°
 
 	       /* echo "OK\n";
 	        echo 'Close connection ... ';*/
 
-	        // Отсоединяемся от сервера
+	        // РћС‚СЃРѕРµРґРёРЅСЏРµРјСЃСЏ РѕС‚ СЃРµСЂРІРµСЂР°
 	        write_smtp_response($socket, 'QUIT');
-	        read_smtp_answer($socket); // ответ сервера
+	        read_smtp_answer($socket); // РѕС‚РІРµС‚ СЃРµСЂРІРµСЂР°
 
 	        /*echo "OK\n";*/
 
@@ -203,7 +203,7 @@ function sendsmtp ($to, $message,  $subject, $from)
 
 
     }
-    // Функция для чтения ответа сервера. Выбрасывает исключение в случае ошибки
+    // Р¤СѓРЅРєС†РёСЏ РґР»СЏ С‡С‚РµРЅРёСЏ РѕС‚РІРµС‚Р° СЃРµСЂРІРµСЂР°. Р’С‹Р±СЂР°СЃС‹РІР°РµС‚ РёСЃРєР»СЋС‡РµРЅРёРµ РІ СЃР»СѓС‡Р°Рµ РѕС€РёР±РєРё
     function read_smtp_answer($socket) {
         $read = socket_read($socket, 1024);
 
@@ -216,14 +216,14 @@ function sendsmtp ($to, $message,  $subject, $from)
         }
     }
 
-    // Функция для отправки запроса серверу
+    // Р¤СѓРЅРєС†РёСЏ РґР»СЏ РѕС‚РїСЂР°РІРєРё Р·Р°РїСЂРѕСЃР° СЃРµСЂРІРµСЂСѓ
     function write_smtp_response($socket, $msg) {
         $msg = $msg."\r\n";
         socket_write($socket, $msg, strlen($msg));
     }
-function getFileSizeString($size){ // Возвращает тектовое описание размера (size - в байтах)
+function getFileSizeString($size){ // Р’РѕР·РІСЂР°С‰Р°РµС‚ С‚РµРєС‚РѕРІРѕРµ РѕРїРёСЃР°РЅРёРµ СЂР°Р·РјРµСЂР° (size - РІ Р±Р°Р№С‚Р°С…)
 	$size = floor($size);
-	$names = array('б','Кб','Мб','Гб');
+	$names = array('Р±','РљР±','РњР±','Р“Р±');
 	$end = '';
 	foreach ($names as $v) if ($end=='') { if ($size>800) $size = $size/1024; else $end = $v; }
 	$size = round($size,1);
@@ -253,21 +253,21 @@ function get_url_text($str)
     $str=html_entity_decode($str);
 
     $tr = array(
-        "А"=>"a","Б"=>"b","В"=>"v","Г"=>"g",
-        "Д"=>"d","Е"=>"e","Ё"=>"e", "Ж"=>"j","З"=>"z","И"=>"i",
-        "Й"=>"y","К"=>"k","Л"=>"l","М"=>"m","Н"=>"n",
-        "О"=>"o","П"=>"p","Р"=>"r","С"=>"s","Т"=>"t",
-        "У"=>"u","Ф"=>"f","Х"=>"h","Ц"=>"c","Ч"=>"ch",
-        "Ш"=>"sh","Щ"=>"sch","Ъ"=>"","Ы"=>"yi","Ь"=>"",
-        "Э"=>"e","Ю"=>"yu","Я"=>"ya","а"=>"a","б"=>"b",
-        "в"=>"v","г"=>"g","д"=>"d","е"=>"e","ё"=>"e", "ж"=>"j",
-        "з"=>"z","и"=>"i","й"=>"y","к"=>"k","л"=>"l",
-        "м"=>"m","н"=>"n","о"=>"o","п"=>"p","р"=>"r",
-        "с"=>"s","т"=>"t","у"=>"u","ф"=>"f","х"=>"h",
-        "ц"=>"c","ч"=>"ch","ш"=>"sh","щ"=>"sch","ъ"=>"y",
-        "ы"=>"yi","ь"=>"","э"=>"e","ю"=>"yu","я"=>"ya",
-        "!"=>'',":"=>''," - "=>'_'," -"=>'_',"- "=>'_'," - "=>'_',"-"=>'_'," "=> "_", "."=> "", '\\"'=>'', "\\'"=>'', "«"=>'', "»"=>'', "("=>'', ")"=>'', ","=>'', "+"=>'', "\""=>'',
-        "/"=>'_', "№"=>'', "#"=>'', "@"=>'', "&"=>'', "%"=>'', "~"=>'',
+        "Рђ"=>"a","Р‘"=>"b","Р’"=>"v","Р“"=>"g",
+        "Р”"=>"d","Р•"=>"e","РЃ"=>"e", "Р–"=>"j","Р—"=>"z","Р"=>"i",
+        "Р™"=>"y","Рљ"=>"k","Р›"=>"l","Рњ"=>"m","Рќ"=>"n",
+        "Рћ"=>"o","Рџ"=>"p","Р "=>"r","РЎ"=>"s","Рў"=>"t",
+        "РЈ"=>"u","Р¤"=>"f","РҐ"=>"h","Р¦"=>"c","Р§"=>"ch",
+        "РЁ"=>"sh","Р©"=>"sch","РЄ"=>"","Р«"=>"yi","Р¬"=>"",
+        "Р­"=>"e","Р®"=>"yu","РЇ"=>"ya","Р°"=>"a","Р±"=>"b",
+        "РІ"=>"v","Рі"=>"g","Рґ"=>"d","Рµ"=>"e","С‘"=>"e", "Р¶"=>"j",
+        "Р·"=>"z","Рё"=>"i","Р№"=>"y","Рє"=>"k","Р»"=>"l",
+        "Рј"=>"m","РЅ"=>"n","Рѕ"=>"o","Рї"=>"p","СЂ"=>"r",
+        "СЃ"=>"s","С‚"=>"t","Сѓ"=>"u","С„"=>"f","С…"=>"h",
+        "С†"=>"c","С‡"=>"ch","С€"=>"sh","С‰"=>"sch","СЉ"=>"y",
+        "С‹"=>"yi","СЊ"=>"","СЌ"=>"e","СЋ"=>"yu","СЏ"=>"ya",
+        "!"=>'',":"=>''," - "=>'_'," -"=>'_',"- "=>'_'," - "=>'_',"-"=>'_'," "=> "_", "."=> "", '\\"'=>'', "\\'"=>'', "В«"=>'', "В»"=>'', "("=>'', ")"=>'', ","=>'', "+"=>'', "\""=>'',
+        "/"=>'_', "в„–"=>'', "#"=>'', "@"=>'', "&"=>'', "%"=>'', "~"=>'',
         "A"=>"a", "B"=>"b", "C"=>"c", "D"=>"d", "E"=>"e", "F"=>"f", "G"=>"g", "H"=>"h", "I"=>"i", "J"=>"j", "K"=>"k", "L"=>"l", "M"=>"m", "N"=>"n",
         "O"=>"o", "P"=>"p", "Q"=>"q", "R"=>"r", "S"=>"s", "T"=>"t", "U"=>"u", "V"=>"v", "W"=>"w", "X"=>"x", "Y"=>"y", "Z"=>"z"
     );
@@ -387,7 +387,7 @@ function detectlanguage($sub_text)
 
 	$_langs = array(
 	'en'=>array('a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'),
-	'ru'=>array('а','б','в','г','д','е','ё','ж','з','и','й','к','л','м','н','о','п','р','с','т','у','ф','х','ц','ч','ш','щ','ъ','ы','ь','э','ю','я')
+	'ru'=>array('Р°','Р±','РІ','Рі','Рґ','Рµ','С‘','Р¶','Р·','Рё','Р№','Рє','Р»','Рј','РЅ','Рѕ','Рї','СЂ','СЃ','С‚','Сѓ','С„','С…','С†','С‡','С€','С‰','СЉ','С‹','СЊ','СЌ','СЋ','СЏ')
 	);
 
 
@@ -443,43 +443,43 @@ function get_text($path)
 }
 function get_filesize($file)
 {
-    // идем файл
-    if(!file_exists($file)) return "Файл  не найден: ".$file;
-   // теперь определяем размер файла в несколько шагов
+    // РёРґРµРј С„Р°Р№Р»
+    if(!file_exists($file)) return "Р¤Р°Р№Р»  РЅРµ РЅР°Р№РґРµРЅ: ".$file;
+   // С‚РµРїРµСЂСЊ РѕРїСЂРµРґРµР»СЏРµРј СЂР°Р·РјРµСЂ С„Р°Р№Р»Р° РІ РЅРµСЃРєРѕР»СЊРєРѕ С€Р°РіРѕРІ
   $filesize = filesize($file);
-   // Если размер больше 1 Кб
+   // Р•СЃР»Рё СЂР°Р·РјРµСЂ Р±РѕР»СЊС€Рµ 1 РљР±
    if($filesize > 1024)
    {
        $filesize = ($filesize/1024);
-       // Если размер файла больше Килобайта
-       // то лучше отобразить его в Мегабайтах. Пересчитываем в Мб
+       // Р•СЃР»Рё СЂР°Р·РјРµСЂ С„Р°Р№Р»Р° Р±РѕР»СЊС€Рµ РљРёР»РѕР±Р°Р№С‚Р°
+       // С‚Рѕ Р»СѓС‡С€Рµ РѕС‚РѕР±СЂР°Р·РёС‚СЊ РµРіРѕ РІ РњРµРіР°Р±Р°Р№С‚Р°С…. РџРµСЂРµСЃС‡РёС‚С‹РІР°РµРј РІ РњР±
        if($filesize > 1024)
        {
             $filesize = ($filesize/1024);
-           // А уж если файл больше 1 Мегабайта, то проверяем
-           // Не больше ли он 1 Гигабайта
+           // Рђ СѓР¶ РµСЃР»Рё С„Р°Р№Р» Р±РѕР»СЊС€Рµ 1 РњРµРіР°Р±Р°Р№С‚Р°, С‚Рѕ РїСЂРѕРІРµСЂСЏРµРј
+           // РќРµ Р±РѕР»СЊС€Рµ Р»Рё РѕРЅ 1 Р“РёРіР°Р±Р°Р№С‚Р°
            if($filesize > 1024)
            {
                $filesize = ($filesize/1024);
                $filesize = round($filesize, 1);
-               return $filesize." ГБ";
+               return $filesize." Р“Р‘";
            }
            else
            {
                $filesize = round($filesize, 1);
-               return $filesize." MБ";
+               return $filesize." MР‘";
            }
        }
        else
        {
            $filesize = round($filesize, 1);
-           return $filesize." Кб";
+           return $filesize." РљР±";
        }
    }
    else
    {
        $filesize = round($filesize, 1);
-       return $filesize." байт";
+       return $filesize." Р±Р°Р№С‚";
    }
 }
 function clear_array_empty($array)
@@ -522,10 +522,10 @@ function get_insert_sql($data, $table)
 function get_array_sql($q)
 {
 	$return=array();
-	
+
 	while ($r=msr($q))
 	$return[]=$r;
-	
+
 	return $return;
 
 }
@@ -536,14 +536,14 @@ function get_array_sql($q)
 
 
 	    $types = array("", "gif", "jpeg", "png");
-		$ext = $types[$type]; // Зная "числовой" тип изображения, узнаём название типа
+		$ext = $types[$type]; // Р—РЅР°СЏ "С‡РёСЃР»РѕРІРѕР№" С‚РёРї РёР·РѕР±СЂР°Р¶РµРЅРёСЏ, СѓР·РЅР°С‘Рј РЅР°Р·РІР°РЅРёРµ С‚РёРїР°
 
 	    if ($ext) {
-	      $func = 'imagecreatefrom'.$ext; // Получаем название функции, соответствующую типу, для создания изображения
+	      $func = 'imagecreatefrom'.$ext; // РџРѕР»СѓС‡Р°РµРј РЅР°Р·РІР°РЅРёРµ С„СѓРЅРєС†РёРё, СЃРѕРѕС‚РІРµС‚СЃС‚РІСѓСЋС‰СѓСЋ С‚РёРїСѓ, РґР»СЏ СЃРѕР·РґР°РЅРёСЏ РёР·РѕР±СЂР°Р¶РµРЅРёСЏ
 	      $save_func='image'.$ext;
-	      $img_i = $func($image); // Создаём дескриптор для работы с исходным изображением
+	      $img_i = $func($image); // РЎРѕР·РґР°С‘Рј РґРµСЃРєСЂРёРїС‚РѕСЂ РґР»СЏ СЂР°Р±РѕС‚С‹ СЃ РёСЃС…РѕРґРЅС‹Рј РёР·РѕР±СЂР°Р¶РµРЅРёРµРј
 	    } else {
-	      echo 'Некорректное изображение'; // Выводим ошибку, если формат изображения недопустимый
+	      echo 'РќРµРєРѕСЂСЂРµРєС‚РЅРѕРµ РёР·РѕР±СЂР°Р¶РµРЅРёРµ'; // Р’С‹РІРѕРґРёРј РѕС€РёР±РєСѓ, РµСЃР»Рё С„РѕСЂРјР°С‚ РёР·РѕР±СЂР°Р¶РµРЅРёСЏ РЅРµРґРѕРїСѓСЃС‚РёРјС‹Р№
 	      return false;
 	    }
 
@@ -552,18 +552,18 @@ function get_array_sql($q)
 	    $srcsize = getimagesize($src);
 
 	    if ($srcsize[0]<=$maxWidth && $srcsize[1]<=$maxHeight) return true;
-	    
-	    
-	    /* Если задан максимум только одной из сторон */
+
+
+	    /* Р•СЃР»Рё Р·Р°РґР°РЅ РјР°РєСЃРёРјСѓРј С‚РѕР»СЊРєРѕ РѕРґРЅРѕР№ РёР· СЃС‚РѕСЂРѕРЅ */
 	    if ($maxWidth>0 && $maxHeight>0)
 	    {
-	    	 
+
 	    	$dest_y = $maxHeight;
 	    	$dest_x = $maxWidth;
 	    }
-	    else 
+	    else
 	    {
-	    	/*Если пропорция по X больше*/
+	    	/*Р•СЃР»Рё РїСЂРѕРїРѕСЂС†РёСЏ РїРѕ X Р±РѕР»СЊС€Рµ*/
 	    	if (($srcsize[0]/$maxWidth) > ($srcsize[1]/$maxHeight))
 	    	{
 	    		$dest_y = $maxHeight;
@@ -575,33 +575,33 @@ function get_array_sql($q)
 	    		$dest_y = ($maxWidth / $srcsize[0]) * $srcsize[1];
 	    	}
 	    }
-	    
+
 
 	    $thumbimg = imagecreatetruecolor($dest_x, $dest_y);
 	    imageAlphaBlending($thumbimg, false);
 		imageSaveAlpha($thumbimg,true);
 	    imagecopyresampled($thumbimg,$srcimg,0,0,0,0,$dest_x,$dest_y, $srcsize[0], $srcsize[1]);
 	    $resultimg= $save_func($thumbimg,$src);
-	    
+
 
     }
     function  image_block_position ($path, $res_width, $res_height)
     {
     	$size = getimagesize ($_SERVER['DOCUMENT_ROOT'].$path);
-    	
+
     	$width_dif=$size[0]-$res_width;
     	$height_dif=$size[1]-$res_height;
-    	
-    	
+
+
     	if ($width_dif>$height_dif)
     	{
     		$procent=$height_dif/$size[1]*100;
-    			
+
     		$new_size=$size[0]-($size[0]/100*$procent);
-    			
+
     		$margin=floor(($new_size-$res_width)/2);
-    			
-    			
+
+
     		$style="max-height: ".$res_height."px;".($margin>0 ? "margin-left: -".$margin."px":"");
     	}
     	elseif ($width_dif<$height_dif)
@@ -609,10 +609,10 @@ function get_array_sql($q)
     		$procent=$width_dif/$size[0]*100;
     		$new_size=$size[1]-($size[1]/100*$procent);
     		$margin=floor(($new_size-$res_height)/2);
-    			
+
     		$style="max-width: ".$res_width."px;".($margin>0 ? "margin-top: -".$margin."px":"");
-    	}	
-    	
+    	}
+
     	return '<img src="'.$path.'" alt="" style="'.$style.'"/>';
     }
     function ResizeFrameMaxSide($src=null,$maxWidth=null,$maxHeight=null) {
@@ -622,14 +622,14 @@ function get_array_sql($q)
 
 
 	    $types = array("", "gif", "jpeg", "png");
-		$ext = $types[$type]; // Зная "числовой" тип изображения, узнаём название типа
+		$ext = $types[$type]; // Р—РЅР°СЏ "С‡РёСЃР»РѕРІРѕР№" С‚РёРї РёР·РѕР±СЂР°Р¶РµРЅРёСЏ, СѓР·РЅР°С‘Рј РЅР°Р·РІР°РЅРёРµ С‚РёРїР°
 
 	    if ($ext) {
-	      $func = 'imagecreatefrom'.$ext; // Получаем название функции, соответствующую типу, для создания изображения
+	      $func = 'imagecreatefrom'.$ext; // РџРѕР»СѓС‡Р°РµРј РЅР°Р·РІР°РЅРёРµ С„СѓРЅРєС†РёРё, СЃРѕРѕС‚РІРµС‚СЃС‚РІСѓСЋС‰СѓСЋ С‚РёРїСѓ, РґР»СЏ СЃРѕР·РґР°РЅРёСЏ РёР·РѕР±СЂР°Р¶РµРЅРёСЏ
 	      $save_func='image'.$ext;
-	      $img_i = $func($image); // Создаём дескриптор для работы с исходным изображением
+	      $img_i = $func($image); // РЎРѕР·РґР°С‘Рј РґРµСЃРєСЂРёРїС‚РѕСЂ РґР»СЏ СЂР°Р±РѕС‚С‹ СЃ РёСЃС…РѕРґРЅС‹Рј РёР·РѕР±СЂР°Р¶РµРЅРёРµРј
 	    } else {
-	      echo 'Некорректное изображение'; // Выводим ошибку, если формат изображения недопустимый
+	      echo 'РќРµРєРѕСЂСЂРµРєС‚РЅРѕРµ РёР·РѕР±СЂР°Р¶РµРЅРёРµ'; // Р’С‹РІРѕРґРёРј РѕС€РёР±РєСѓ, РµСЃР»Рё С„РѕСЂРјР°С‚ РёР·РѕР±СЂР°Р¶РµРЅРёСЏ РЅРµРґРѕРїСѓСЃС‚РёРјС‹Р№
 	      return false;
 	    }
 
@@ -641,7 +641,7 @@ function get_array_sql($q)
 	    if ($srcsize[0]<=$maxWidth && $srcsize[1]<=$maxHeight) return true;
 
 
-	    /*Если пропорция по X больше*/
+	    /*Р•СЃР»Рё РїСЂРѕРїРѕСЂС†РёСЏ РїРѕ X Р±РѕР»СЊС€Рµ*/
 	    if (($srcsize[0]/$maxWidth) < ($srcsize[1]/$maxHeight))
 	    {
 	    	$dest_y = $maxHeight;
@@ -665,27 +665,27 @@ function get_array_sql($q)
 
     }
 /*     function crop($src=null,$maxWidth=null,$maxHeight=null) {
-    
-    
+
+
     	list($w_i, $h_i, $type) = getimagesize($src);
-    
-    
+
+
     	$types = array("", "gif", "jpeg", "png");
-    	$ext = $types[$type]; // Зная "числовой" тип изображения, узнаём название типа
-    
+    	$ext = $types[$type]; // Р—РЅР°СЏ "С‡РёСЃР»РѕРІРѕР№" С‚РёРї РёР·РѕР±СЂР°Р¶РµРЅРёСЏ, СѓР·РЅР°С‘Рј РЅР°Р·РІР°РЅРёРµ С‚РёРїР°
+
     	if ($ext) {
-    		$func = 'imagecreatefrom'.$ext; // Получаем название функции, соответствующую типу, для создания изображения
+    		$func = 'imagecreatefrom'.$ext; // РџРѕР»СѓС‡Р°РµРј РЅР°Р·РІР°РЅРёРµ С„СѓРЅРєС†РёРё, СЃРѕРѕС‚РІРµС‚СЃС‚РІСѓСЋС‰СѓСЋ С‚РёРїСѓ, РґР»СЏ СЃРѕР·РґР°РЅРёСЏ РёР·РѕР±СЂР°Р¶РµРЅРёСЏ
     		$save_func='image'.$ext;
-    		$img_i = $func($image); // Создаём дескриптор для работы с исходным изображением
+    		$img_i = $func($image); // РЎРѕР·РґР°С‘Рј РґРµСЃРєСЂРёРїС‚РѕСЂ РґР»СЏ СЂР°Р±РѕС‚С‹ СЃ РёСЃС…РѕРґРЅС‹Рј РёР·РѕР±СЂР°Р¶РµРЅРёРµРј
     	} else {
-    		echo 'Некорректное изображение'; // Выводим ошибку, если формат изображения недопустимый
+    		echo 'РќРµРєРѕСЂСЂРµРєС‚РЅРѕРµ РёР·РѕР±СЂР°Р¶РµРЅРёРµ'; // Р’С‹РІРѕРґРёРј РѕС€РёР±РєСѓ, РµСЃР»Рё С„РѕСЂРјР°С‚ РёР·РѕР±СЂР°Р¶РµРЅРёСЏ РЅРµРґРѕРїСѓСЃС‚РёРјС‹Р№
     		return false;
     	}
-    
-    
+
+
     	$srcimg = $func($src);
     	$srcsize = getimagesize($src);
-    
+
     	if (($srcsize[0]/$maxWidth) < ($srcsize[1]/$maxHeight))
     	{
     		$y_pos=($srcsize[1]-$maxHeight)/2;
@@ -696,11 +696,11 @@ function get_array_sql($q)
     		$x_pos=($srcsize[0]-$maxWidth)/2;
     		$srcsize[0]=($srcsize[0]-$x_pos*2);
     	}
-    
+
     	$thumbimg = imagecreatetruecolor($maxWidth, $maxHeight);
     	imagecopyresampled($thumbimg,$srcimg,0,0,floor($x_pos),floor($y_pos),$maxWidth,$maxHeight, $srcsize[0], $srcsize[1]);
     	$thumbimg = $save_func($thumbimg,$src);
-    
+
     } */
     function crop($src=null,$maxWidth=null,$maxHeight=null) {
 
@@ -709,40 +709,40 @@ function get_array_sql($q)
 
 
 	    $types = array("", "gif", "jpeg", "png");
-		$ext = $types[$type]; // Зная "числовой" тип изображения, узнаём название типа
+		$ext = $types[$type]; // Р—РЅР°СЏ "С‡РёСЃР»РѕРІРѕР№" С‚РёРї РёР·РѕР±СЂР°Р¶РµРЅРёСЏ, СѓР·РЅР°С‘Рј РЅР°Р·РІР°РЅРёРµ С‚РёРїР°
 
 	    if ($ext) {
-	      $func = 'imagecreatefrom'.$ext; // Получаем название функции, соответствующую типу, для создания изображения
+	      $func = 'imagecreatefrom'.$ext; // РџРѕР»СѓС‡Р°РµРј РЅР°Р·РІР°РЅРёРµ С„СѓРЅРєС†РёРё, СЃРѕРѕС‚РІРµС‚СЃС‚РІСѓСЋС‰СѓСЋ С‚РёРїСѓ, РґР»СЏ СЃРѕР·РґР°РЅРёСЏ РёР·РѕР±СЂР°Р¶РµРЅРёСЏ
 	      $save_func='image'.$ext;
-	      $img_i = $func($image); // Создаём дескриптор для работы с исходным изображением
+	      $img_i = $func($image); // РЎРѕР·РґР°С‘Рј РґРµСЃРєСЂРёРїС‚РѕСЂ РґР»СЏ СЂР°Р±РѕС‚С‹ СЃ РёСЃС…РѕРґРЅС‹Рј РёР·РѕР±СЂР°Р¶РµРЅРёРµРј
 	    } else {
-	      echo 'Некорректное изображение'; // Выводим ошибку, если формат изображения недопустимый
+	      echo 'РќРµРєРѕСЂСЂРµРєС‚РЅРѕРµ РёР·РѕР±СЂР°Р¶РµРЅРёРµ'; // Р’С‹РІРѕРґРёРј РѕС€РёР±РєСѓ, РµСЃР»Рё С„РѕСЂРјР°С‚ РёР·РѕР±СЂР°Р¶РµРЅРёСЏ РЅРµРґРѕРїСѓСЃС‚РёРјС‹Р№
 	      return false;
 	    }
 
 
 	    $srcimg = $func($src);
 	    $srcsize = getimagesize($src);
-	    
+
 	    $width_dif=$srcsize[0]-$maxWidth;
 	    $height_dif=$srcsize[1]-$maxHeight;
-	    
-	     
+
+
 	    $change_width=$srcsize[0]/$maxWidth;
 	    $change_height=$srcsize[1]/$maxHeight;
-	    
-	    
-	    /*Копируем центр обрезанного изображения*/
-	    $thumbimg = imagecreatetruecolor($maxWidth, $maxHeight);
-	    
 
-        /*Если обрезка по высоте*/
+
+	    /*РљРѕРїРёСЂСѓРµРј С†РµРЅС‚СЂ РѕР±СЂРµР·Р°РЅРЅРѕРіРѕ РёР·РѕР±СЂР°Р¶РµРЅРёСЏ*/
+	    $thumbimg = imagecreatetruecolor($maxWidth, $maxHeight);
+
+
+        /*Р•СЃР»Рё РѕР±СЂРµР·РєР° РїРѕ РІС‹СЃРѕС‚Рµ*/
         if ($change_width<$change_height)
         {
         	$y_pos=($srcsize[1]-($maxHeight*$change_width)) / 2;
         	imagecopyresampled($thumbimg,$srcimg,0,0,floor($x_pos),floor($y_pos),$maxWidth,$maxHeight, $srcsize[0], $srcsize[1]-$y_pos*2);
         }
-        else 
+        else
         {
         	$x_pos=($srcsize[0]-($maxWidth*$change_height)) / 2;
         	imagecopyresampled($thumbimg,$srcimg,0,0,floor($x_pos),floor($y_pos),$maxWidth,$maxHeight, $srcsize[0]-$x_pos*2, $srcsize[1]);
@@ -752,48 +752,48 @@ function get_array_sql($q)
 
     }
     function crop_editor($image, $x_o, $y_o, $w_o, $h_o, $settings) {
-    
-    
+
+
     	if (($x_o < 0) || ($y_o < 0) || ($w_o < 0) || ($h_o < 0)) {
-    		echo "Некорректные входные параметры";
+    		echo "РќРµРєРѕСЂСЂРµРєС‚РЅС‹Рµ РІС…РѕРґРЅС‹Рµ РїР°СЂР°РјРµС‚СЂС‹";
     		return false;
     	}
-    	list($w_i, $h_i, $type) = getimagesize($image); // Получаем размеры и тип изображения (число)
-    	$types = array("", "gif", "jpeg", "png"); // Массив с типами изображений
-    	$ext = $types[$type]; // Зная "числовой" тип изображения, узнаём название типа
+    	list($w_i, $h_i, $type) = getimagesize($image); // РџРѕР»СѓС‡Р°РµРј СЂР°Р·РјРµСЂС‹ Рё С‚РёРї РёР·РѕР±СЂР°Р¶РµРЅРёСЏ (С‡РёСЃР»Рѕ)
+    	$types = array("", "gif", "jpeg", "png"); // РњР°СЃСЃРёРІ СЃ С‚РёРїР°РјРё РёР·РѕР±СЂР°Р¶РµРЅРёР№
+    	$ext = $types[$type]; // Р—РЅР°СЏ "С‡РёСЃР»РѕРІРѕР№" С‚РёРї РёР·РѕР±СЂР°Р¶РµРЅРёСЏ, СѓР·РЅР°С‘Рј РЅР°Р·РІР°РЅРёРµ С‚РёРїР°
     	if ($ext) {
-    		$func = 'imagecreatefrom'.$ext; // Получаем название функции, соответствующую типу, для создания изображения
-    		$img_i = $func($image); // Создаём дескриптор для работы с исходным изображением
+    		$func = 'imagecreatefrom'.$ext; // РџРѕР»СѓС‡Р°РµРј РЅР°Р·РІР°РЅРёРµ С„СѓРЅРєС†РёРё, СЃРѕРѕС‚РІРµС‚СЃС‚РІСѓСЋС‰СѓСЋ С‚РёРїСѓ, РґР»СЏ СЃРѕР·РґР°РЅРёСЏ РёР·РѕР±СЂР°Р¶РµРЅРёСЏ
+    		$img_i = $func($image); // РЎРѕР·РґР°С‘Рј РґРµСЃРєСЂРёРїС‚РѕСЂ РґР»СЏ СЂР°Р±РѕС‚С‹ СЃ РёСЃС…РѕРґРЅС‹Рј РёР·РѕР±СЂР°Р¶РµРЅРёРµРј
     	} else {
-    		echo 'Некорректное изображение'; // Выводим ошибку, если формат изображения недопустимый
+    		echo 'РќРµРєРѕСЂСЂРµРєС‚РЅРѕРµ РёР·РѕР±СЂР°Р¶РµРЅРёРµ'; // Р’С‹РІРѕРґРёРј РѕС€РёР±РєСѓ, РµСЃР»Рё С„РѕСЂРјР°С‚ РёР·РѕР±СЂР°Р¶РµРЅРёСЏ РЅРµРґРѕРїСѓСЃС‚РёРјС‹Р№
     		return false;
     	}
-    	if ($x_o + $w_o > $w_i) $w_o = $w_i - $x_o; // Если ширина выходного изображения больше исходного (с учётом x_o), то уменьшаем её
-    	if ($y_o + $h_o > $h_i) $h_o = $h_i - $y_o; // Если высота выходного изображения больше исходного (с учётом y_o), то уменьшаем её
-    	$img_o = imagecreatetruecolor($w_o, $h_o); // Создаём дескриптор для выходного изображения
+    	if ($x_o + $w_o > $w_i) $w_o = $w_i - $x_o; // Р•СЃР»Рё С€РёСЂРёРЅР° РІС‹С…РѕРґРЅРѕРіРѕ РёР·РѕР±СЂР°Р¶РµРЅРёСЏ Р±РѕР»СЊС€Рµ РёСЃС…РѕРґРЅРѕРіРѕ (СЃ СѓС‡С‘С‚РѕРј x_o), С‚Рѕ СѓРјРµРЅСЊС€Р°РµРј РµС‘
+    	if ($y_o + $h_o > $h_i) $h_o = $h_i - $y_o; // Р•СЃР»Рё РІС‹СЃРѕС‚Р° РІС‹С…РѕРґРЅРѕРіРѕ РёР·РѕР±СЂР°Р¶РµРЅРёСЏ Р±РѕР»СЊС€Рµ РёСЃС…РѕРґРЅРѕРіРѕ (СЃ СѓС‡С‘С‚РѕРј y_o), С‚Рѕ СѓРјРµРЅСЊС€Р°РµРј РµС‘
+    	$img_o = imagecreatetruecolor($w_o, $h_o); // РЎРѕР·РґР°С‘Рј РґРµСЃРєСЂРёРїС‚РѕСЂ РґР»СЏ РІС‹С…РѕРґРЅРѕРіРѕ РёР·РѕР±СЂР°Р¶РµРЅРёСЏ
     	imageAlphaBlending($img_o, false);
     	imageSaveAlpha($img_o,true);
-    	imagecopy($img_o, $img_i, 0, 0, $x_o, $y_o, $w_o, $h_o); // Переносим часть изображения из исходного в выходное
-    	$func = 'image'.$ext; // Получаем функция для сохранения результата
-    
-    	
+    	imagecopy($img_o, $img_i, 0, 0, $x_o, $y_o, $w_o, $h_o); // РџРµСЂРµРЅРѕСЃРёРј С‡Р°СЃС‚СЊ РёР·РѕР±СЂР°Р¶РµРЅРёСЏ РёР· РёСЃС…РѕРґРЅРѕРіРѕ РІ РІС‹С…РѕРґРЅРѕРµ
+    	$func = 'image'.$ext; // РџРѕР»СѓС‡Р°РµРј С„СѓРЅРєС†РёСЏ РґР»СЏ СЃРѕС…СЂР°РЅРµРЅРёСЏ СЂРµР·СѓР»СЊС‚Р°С‚Р°
+
+
     	if ($settings['editor_as_min'])
     	$image=str_replace('.','_mini.',$image);
-    	
-    	$new_i=$func($img_o, $image);  // Сохраняем изображение
-    	
-    	
-    	/* Если надо уменьшить до размеров */
+
+    	$new_i=$func($img_o, $image);  // РЎРѕС…СЂР°РЅСЏРµРј РёР·РѕР±СЂР°Р¶РµРЅРёРµ
+
+
+    	/* Р•СЃР»Рё РЅР°РґРѕ СѓРјРµРЅСЊС€РёС‚СЊ РґРѕ СЂР°Р·РјРµСЂРѕРІ */
     	if ($settings['editor_minw']>0 && $settings['editor_minh']>0)
     	{
     		if (!$settings['editor_min_more'] || ($settings['editor_minw']<$x_o + $w_o || $settings['editor_minh']<$y_o + $h_o))
-    		
-    		ResizeFrame($image, $settings['editor_minw'], $settings['editor_minh']);  
+
+    		ResizeFrame($image, $settings['editor_minw'], $settings['editor_minh']);
     	}
-    	
+
     	return basename($image);
-    
-    
+
+
     }
     function setting($name)
 	{
@@ -804,7 +804,7 @@ function get_array_sql($q)
 	function alert_mysql($comment='')
 	{
 		if (mysql_error()!='')
-		$_SESSION['global_alert'].=(($_SESSION['global_alert']!='') ? '<br/>':'').'<i><span style="color: #CC0000">Ошибка SQL:'.$comment.'</span></i> '.mysql_error();
+		$_SESSION['global_alert'].=(($_SESSION['global_alert']!='') ? '<br/>':'').'<i><span style="color: #CC0000">РћС€РёР±РєР° SQL:'.$comment.'</span></i> '.mysql_error();
 	}
 	function WriteLog($item_id, $descr, $comment, $user_id='', $changes='', $section_id=0)
 	{
@@ -816,54 +816,54 @@ function get_array_sql($q)
 
 
  			msq("INSERT INTO `".ConfigGet('pr_name')."_log` (`date`,`item_id`,`descr`,`comment`, `user_id`, `changes`, `user_name`, `ip`, `section_id`) VALUES ( NOW(), $item_id, '".$descr."', '".$comment."',  '".$user['id']."', '".$changes."', '".$user_name."', '".$_SERVER['REMOTE_ADDR']."', '".$section_id."')");
- 			
+
 	    }
 	}
 	function deleteTempFiles($path=''){
-		
-		
+
+
 		$d = dir($_SERVER['DOCUMENT_ROOT'].$path);
 		while (($e = $d->read()) !== false)
 		if (!is_dir("$dirname/$e") && stripos($e, 'temp_')!==false)
 		{
 			@unlink($_SERVER['DOCUMENT_ROOT'].$path.$e);
 		}
-		
+
 	}
 	function print_tag ($ids, $tag_array, $url)
 	{
 		if ($ids=='') return false;
-		
+
 		$return='';
-		
+
 		$ids=explode(',', $ids);
-		
+
 		$ids=clear_array_empty($ids);
-		
+
 		foreach ($ids as $id)
 		{
 			if (isset($tag_array[$id]))
 			$return.=($return=='' ? '':'<div>,&nbsp;</div>').'<a href="'.$url.'?tag='.$id.'">'.$tag_array[$id]['name'].'</a>';
 		}
-		
-		return '<div class="tags"><div class="tag_header">ТЭГИ:&nbsp;&nbsp;&nbsp;</div>'.$return.'</div>';
+
+		return '<div class="tags"><div class="tag_header">РўР­Р“Р:&nbsp;&nbsp;&nbsp;</div>'.$return.'</div>';
 	}
 	function getTableById($section_id)
 	{
 		global $CDDataSet,$SiteSections;
 		$SiteSections= new SiteSections;
 		$SiteSections->init();
-	
+
 		$Section = $SiteSections->get($section_id);
 		$Section['id'] = floor($Section['id']);
-	
+
 		if ($Section['id']>0)
 		{
 			$Pattern = new $Section['pattern'];
 			$Iface = $Pattern->init(array('section'=>$Section['id']));
 		}
-	
+
 		return $Iface->getSetting('table');
-	
+
 	}
 ?>

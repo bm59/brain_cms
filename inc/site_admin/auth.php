@@ -1,41 +1,42 @@
 <?
 $aut_mode = 'alladmin';
 
-// Ïðîâåðêà íà ñîõðàíåííûé â cookies ïàðîëü
+// ÐŸÑ€Ð¾Ð²ÐµÑ€ÐºÐ° Ð½Ð° ÑÐ¾Ñ…Ñ€Ð°Ð½ÐµÐ½Ð½Ñ‹Ð¹ Ð² cookies Ð¿Ð°Ñ€Ð¾Ð»ÑŒ
 if (floor($_SESSION['visitorID'])==0){
 	$enter = explode('|',cookieGet('enter'));
 	if ($user = $SiteVisitor->auth($SiteVisitor->getIdByLoginAndPswd($enter[0],'',$enter[1]))){
-		/* Ïðîäëÿåì cookies */
+		/* ÐŸÑ€Ð¾Ð´Ð»ÑÐµÐ¼ cookies */
 		cookieSet('enter',$user['login'].'|'.$user['pswd'],30);
-		WriteLog($user['id'], 'óñïåøíàÿ àâòîðèçàöèÿ ïî êóêàì', '');
+		WriteLog($user['id'], 'ÑƒÑÐ¿ÐµÑˆÐ½Ð°Ñ Ð°Ð²Ñ‚Ð¾Ñ€Ð¸Ð·Ð°Ñ†Ð¸Ñ Ð¿Ð¾ ÐºÑƒÐºÐ°Ð¼', '');
 	}
 }
 
-// Ïðè ââîäå â ôîðìå ëîãèíà è ïàðîëÿ
+// ÐŸÑ€Ð¸ Ð²Ð²Ð¾Ð´Ðµ Ð² Ñ„Ð¾Ñ€Ð¼Ðµ Ð»Ð¾Ð³Ð¸Ð½Ð° Ð¸ Ð¿Ð°Ñ€Ð¾Ð»Ñ
 if (isset($_POST['enter'])){
 	if ($user = $SiteVisitor->auth($SiteVisitor->getIdByLoginAndPswd($_POST['login'],$_POST['password'])))
 	{
 		if ($_POST['saveme']=='on') cookieSet('enter',$user['login'].'|'.$user['pswd'],30);
-		WriteLog($user['id'], 'óñïåøíàÿ àâòîðèçàöèÿ', '');
+		WriteLog($user['id'], 'ÑƒÑÐ¿ÐµÑˆÐ½Ð°Ñ Ð°Ð²Ñ‚Ð¾Ñ€Ð¸Ð·Ð°Ñ†Ð¸Ñ', '');
 
 		msq("DELETE FROM `".ConfigGet('pr_name')."_log` WHERE datediff( now( ) , `date` ) >180");
 	}
-	else WriteLog($user['id'], 'îøèáêà àâòîðèçàöèè', $_POST['login'].'|'.$_POST['password']);
+	else WriteLog($user['id'], 'Ð¾ÑˆÐ¸Ð±ÐºÐ° Ð°Ð²Ñ‚Ð¾Ñ€Ð¸Ð·Ð°Ñ†Ð¸Ð¸', $_POST['login'].'|'.$_POST['password']);
 }
 
 if (!$SiteVisitor->isAuth() && $_SESSION['visitorID']>0) $user = $SiteVisitor->auth($_SESSION['visitorID']);
 
 
 
-// Ïðîâåðêà äîñòóïà ê ñòðàíèöå
+// ÐŸÑ€Ð¾Ð²ÐµÑ€ÐºÐ° Ð´Ð¾ÑÑ‚ÑƒÐ¿Ð° Ðº ÑÑ‚Ñ€Ð°Ð½Ð¸Ñ†Ðµ
 $redirect = '';
 $exceptions = array(
 	'/uploader.php',
 	'/uploader_image.php',
 	'/uploader_txt.php',
 	'/inc/datatypes/photo_editor/index.php',
-	'/ajax.php'
-); // Ñòðàíèöû, äëÿ êîòîðûõ âñåãäà îòêðûò äîñòóï
+	'/ajax.php',
+	'/manage/excel_import/index.php'
+); // Ð¡Ñ‚Ñ€Ð°Ð½Ð¸Ñ†Ñ‹, Ð´Ð»Ñ ÐºÐ¾Ñ‚Ð¾Ñ€Ñ‹Ñ… Ð²ÑÐµÐ³Ð´Ð° Ð¾Ñ‚ÐºÑ€Ñ‹Ñ‚ Ð´Ð¾ÑÑ‚ÑƒÐ¿
 if (!$SiteVisitor->isAuth()) $redirect='/manage/';
 else{
 	/*$exceptions[] = '/profile/index.php';*/
@@ -47,22 +48,22 @@ else{
 		$sec=$SiteSections->get($_GET['section']);
 	}
 	else
-    $cid = $Content->getIdByPath(configGet("AskUrl")); // Êîä çàïðàøèâàåìîé ñòðàíèöû
+    $cid = $Content->getIdByPath(configGet("AskUrl")); // ÐšÐ¾Ð´ Ð·Ð°Ð¿Ñ€Ð°ÑˆÐ¸Ð²Ð°ÐµÐ¼Ð¾Ð¹ ÑÑ‚Ñ€Ð°Ð½Ð¸Ñ†Ñ‹
 
     if ($_GET['section']>0)
     $sec=$SiteSections->get($_GET['section']);
 
 	$askcontent = $Content->getOne($cid);
 
-    $user = $SiteVisitor->getOne($_SESSION['visitorID']); // Äàííûå ïîëüçîâàòåëÿ
-	$group = $VisitorType->getOne($user['type']); // Äàííûå ãðóïïû
+    $user = $SiteVisitor->getOne($_SESSION['visitorID']); // Ð”Ð°Ð½Ð½Ñ‹Ðµ Ð¿Ð¾Ð»ÑŒÐ·Ð¾Ð²Ð°Ñ‚ÐµÐ»Ñ
+	$group = $VisitorType->getOne($user['type']); // Ð”Ð°Ð½Ð½Ñ‹Ðµ Ð³Ñ€ÑƒÐ¿Ð¿Ñ‹
 
 
 	if ($user['login']=='admin') {$delepmentmode = 'development';  $mode = 'development';}
 
 
 	$accessgranted = $VisitorType->isAccessGranted($group['id'],$cid);
-	
+
     $accessgranted_settings=@in_array('view', $group['new_settings'][$cid]);
 
 
@@ -82,7 +83,7 @@ if (preg_match('|\/load\/|',$_SERVER['PHP_SELF'])) $redirect = '';
 
 if ($_GET["userexit"]=='exit')
 {
-	WriteLog($user['id'], 'âûõîä èç êàáèíåòà', '');
+	WriteLog($user['id'], 'Ð²Ñ‹Ñ…Ð¾Ð´ Ð¸Ð· ÐºÐ°Ð±Ð¸Ð½ÐµÑ‚Ð°', '');
 	$SiteVisitor->unAuth();
 }
 

@@ -1,12 +1,12 @@
 <?
 
-$place=$place_iface->getPub(1);/* Áàííåð âåðõíèé */
+$place=$place_iface->getPub(1);/* Ð‘Ð°Ð½Ð½ÐµÑ€ Ð²ÐµÑ€Ñ…Ð½Ð¸Ð¹ */
 
 
 $list=$banner_iface->getBanners($place['id']);
 
 foreach ($list as $b)
 {
-	$banner_iface->printBanner($b['id']);		
+	$banner_iface->printBanner($b['id']);
 }
 ?>

@@ -1,11 +1,11 @@
 <?include_once($_SERVER['DOCUMENT_ROOT']."/inc/site/include.php");?>
 <?include_once($_SERVER['DOCUMENT_ROOT']."/inc/ajax_securuty.php");?>
 <?
-mysql_query("SET NAMES cp1251"); // äëÿ mysql
-header("Content-type: text/html; charset=windows-1251");
+mysql_query("SET NAMES utf8"); // Ð´Ð»Ñ mysql
+header("Content-type: text/html; charset=utf-8");
 
 
-if (session_id()!=$_POST['session_id']) die('Îøèáêà!!!');
+if (session_id()!=$_POST['session_id']) die('ÐžÑˆÐ¸Ð±ÐºÐ°!!!');
 
 
 
@@ -13,36 +13,36 @@ if ($_POST['action']=='send_vote' && $_POST['answer_id']>0 && $_POST['vote_id']>
 {
 	$voting_iface=getiface('/sitecontent/voting/');
 	$voting_Section = $SiteSections->get($SiteSections->getIdByPath('/sitecontent/voting/'));
-	
+
 	$voting=$voting_iface->get();
 	$answer=$voting_iface->getAnswer($_POST['answer_id']);
 	if ($voting['id']>0 && $answer['id']>0)
 	{
 		$_SERVER['time_page']=$_POST['pt'];
 		$_SERVER['page']=$_POST['page'];
-		
-		
+
+
 		$add_vote=$voting_iface->addVote($answer['id'], $voting['id'], $_SERVER);
-		if ($add_vote==false) $alert='Îøèáêà. Ñ âàøåãî êîìïüþòåðà èëè IP àäðåñà óæå ãîëîñîâàëè';
-		
-		/* Åñëè óæå ãîëîñîâàëè èëè äîáàâèëè ãîëîñ óñòàíàâëèâàåì êóêó */
+		if ($add_vote==false) $alert='ÐžÑˆÐ¸Ð±ÐºÐ°. Ð¡ Ð²Ð°ÑˆÐµÐ³Ð¾ ÐºÐ¾Ð¼Ð¿ÑŒÑŽÑ‚ÐµÑ€Ð° Ð¸Ð»Ð¸ IP Ð°Ð´Ñ€ÐµÑÐ° ÑƒÐ¶Ðµ Ð³Ð¾Ð»Ð¾ÑÐ¾Ð²Ð°Ð»Ð¸';
+
+		/* Ð•ÑÐ»Ð¸ ÑƒÐ¶Ðµ Ð³Ð¾Ð»Ð¾ÑÐ¾Ð²Ð°Ð»Ð¸ Ð¸Ð»Ð¸ Ð´Ð¾Ð±Ð°Ð²Ð¸Ð»Ð¸ Ð³Ð¾Ð»Ð¾Ñ ÑƒÑÑ‚Ð°Ð½Ð°Ð²Ð»Ð¸Ð²Ð°ÐµÐ¼ ÐºÑƒÐºÑƒ */
 		if ($add_vote==false) $add_vote=1;
 		cookieSet('vid'.$_POST['vote_id'], $add_vote, 30);
-		
+
 		$show_total=$voting_Section['settings_personal']['show_vote_count'];
-			
+
 		$vote=str_replace('"', '\'', $voting_iface->getTotalHtml($voting['id'], $show_total));
 			print
 			'{
-				"result": '.json_encode(iconv('windows-1251', 'UTF-8',$vote)).',
+				"result": '.json_encode($vote).',
 				"alert": "'.$alert.'",
 				"ok": "ok"';
 				$ok=true;
-		
-			
+
+
 	}
-	
-		
+
+
 }
 
 if ($ok)

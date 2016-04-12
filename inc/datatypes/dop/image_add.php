@@ -9,14 +9,14 @@
             var cell_template='<tr id="tr_'+tmp_id+'">\n'+
                            '<td class="dragHandle">&nbsp;</td>\n'+
                            '<td style="width:15%">\n'+
-                              		 	'<div>Выберите картинку:</div>\n'+
+                              		 	'<div>Р’С‹Р±РµСЂРёС‚Рµ РєР°СЂС‚РёРЅРєСѓ:</div>\n'+
                               		 	'<div id="upl_button_photo_'+tmp_id+'" class="finger_button">\n'+
                               		 	'<img src="/pics/add_photo.png" style="height: 45px;">\n'+
                               		 	'</div>\n'+
 							'</span>\n'+
                            '</td>\n'+
                            '<td style="width:20%">\n'+
-                           				'<label>Название</label>\n'+
+                           				'<label>РќР°Р·РІР°РЅРёРµ</label>\n'+
                             				'<span class="input">\n'+
 								'<span class="bl"></span>\n'+
 								'<span class="bc"><input type="text" value="" maxlength="255" name="image_name'+tmp_id+'"></span>\n'+
@@ -24,7 +24,7 @@
 							'</span>\n'+
                            	'</td>\n'+
                             '<td>\n'+
-                           				'<label>Описание</label>\n'+
+                           				'<label>РћРїРёСЃР°РЅРёРµ</label>\n'+
                             				'<span class="input">\n'+
 								'<span class="bl"></span>\n'+
 								'<span class="bc"><input type="text" value="" maxlength="255" name="image_descr'+tmp_id+'"></span>\n'+
@@ -32,11 +32,11 @@
 							'</span>\n'+
                            	'</td>\n'+
                               	'<td style="width:4%; padding-top: 15px;">\n'+
-                               				'<a onclick="if (confirm(\'Удалить строку\')) $(this).parents(\'TR\').remove(); return false;" class="button txtstyle" href="#">\n'+
+                               				'<a onclick="if (confirm(\'РЈРґР°Р»РёС‚СЊ СЃС‚СЂРѕРєСѓ\')) $(this).parents(\'TR\').remove(); return false;" class="button txtstyle" href="#">\n'+
                                                   '<span class="bl"></span>\n'+
                                                   '<span class="bc"></span>\n'+
                                                   '<span class="br"></span>\n'+
-                                                  '<input type="button" title="Удалить строку" style="background-image: url(/pics/editor/delete.gif)">\n'+
+                                                  '<input type="button" title="РЈРґР°Р»РёС‚СЊ СЃС‚СЂРѕРєСѓ" style="background-image: url(/pics/editor/delete.gif)">\n'+
                                                   '</a>\n'+
                            	'</td>\n'+
                               '</tr>';
@@ -68,7 +68,7 @@
 								                this.setData({sid : '<?=session_id()?>', num: tmp_id});
 
 								                if (! (ext && /^(jpg|png|jpeg)$/.test(ext))){
-								                    alert('Допустимые форматы: jpg, png');
+								                    alert('Р”РѕРїСѓСЃС‚РёРјС‹Рµ С„РѕСЂРјР°С‚С‹: jpg, png');
 								                    return false;
 								                }
 								                $(btnUploadPhoto).children('IMG').attr('src', '/pics/loading.gif');
@@ -112,16 +112,16 @@
 
 
                                <div style="padding: 10px 0 20px 20px; margin: 10px 5px; border: 1px dashed #CCC;">
-                               <H2>Цвета:</H2>
+                               <H2>Р¦РІРµС‚Р°:</H2>
 		                          	<span>
 		                                <a class="button txtstyle" href="#" onclick="add_image(); return false;">
 		                                      <span class="bl"></span>
 		                                      <span class="bc"></span>
 		                                      <span class="br"></span>
-		                                      <input type="button" title="Добавить" style="background-image: url(/pics/editor/plus.gif)">
+		                                      <input type="button" title="Р”РѕР±Р°РІРёС‚СЊ" style="background-image: url(/pics/editor/plus.gif)">
 		           						</a>
 	           						</span>
-	           						<span style="line-height: 30px;padding-left: 5px;"><a href="#" onclick="add_image(); return false;">Добавить цвет</a></span>
+	           						<span style="line-height: 30px;padding-left: 5px;"><a href="#" onclick="add_image(); return false;">Р”РѕР±Р°РІРёС‚СЊ С†РІРµС‚</a></span>
 
            						    <table style="width: 100%;" id="image_table">
            						    <?
@@ -156,7 +156,7 @@
         												<input type="hidden"  value="/storage/image_ajax/<?=$_POST['image_file'.$p]?>" name="image_file<?=$p?>"/>
 	                                			</td>
 	                                			<td style="width:20%">
-	                                				<label>Название<?=$p?></label>
+	                                				<label>РќР°Р·РІР°РЅРёРµ<?=$p?></label>
 	                                 				<span class="input">
 														<span class="bl"></span>
 														<span class="bc"><input type="text" value="<?=$_POST['image_name'.$p]?>" maxlength="255" name="image_name<?=$p?>"></span>
@@ -164,7 +164,7 @@
 													</span>
 	                                			</td>
 	                                			<td>
-	                                				<label>Описание</label>
+	                                				<label>РћРїРёСЃР°РЅРёРµ</label>
 	                                 				<span class="input">
 														<span class="bl"></span>
 														<span class="bc"><input type="text" value="<?=$_POST['image_descr'.$p]?>" maxlength="255" name="image_descr<?=$p?>"></span>
@@ -172,11 +172,11 @@
 													</span>
 	                                			</td>
 	                                			<td style="width:4%;padding-top: 15px;">
-                                     				<a onclick="if (confirm('Удалить строку')) $(this).parents('TR').remove(); return false;" class="button txtstyle" href="#">
+                                     				<a onclick="if (confirm('РЈРґР°Р»РёС‚СЊ СЃС‚СЂРѕРєСѓ')) $(this).parents('TR').remove(); return false;" class="button txtstyle" href="#">
                                                         <span class="bl"></span>
                                                         <span class="bc"></span>
                                                         <span class="br"></span>
-                                                        <input type="button" title="Удалить строку" style="background-image: url(/pics/editor/delete.gif)">
+                                                        <input type="button" title="РЈРґР°Р»РёС‚СЊ СЃС‚СЂРѕРєСѓ" style="background-image: url(/pics/editor/delete.gif)">
                                                         </a>
 	                                			</td>
 											<?

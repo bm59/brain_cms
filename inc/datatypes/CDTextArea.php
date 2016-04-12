@@ -2,7 +2,7 @@
 class CDTextArea extends VirtualType
 {
 	function init($settings){
-		$settings['descr']='Òåêñòîâûé áëîê';
+		$settings['descr']='Ð¢ÐµÐºÑÑ‚Ð¾Ð²Ñ‹Ð¹ Ð±Ð»Ð¾Ðº';
 		$maxlength = (floor($this->getSetting('maxlength'))>0)?floor($this->getSetting('maxlength')):0;
 		$this->setSetting('maxlength',$maxlength);
 		VirtualType::init($settings);
@@ -24,7 +24,7 @@ class CDTextArea extends VirtualType
 		$settings = $this->getSetting('settings');
 		$newvalue = trim($_POST[$this->getSetting('name')]);
 		if ($this->getSetting('maxlength')>0) $newvalue = substr($newvalue,0,$this->getSetting('maxlength'));
-		if ((isset($settings['important'])) && ($newvalue=='')) $errors[] = 'Çàïîëíèòå ïîëå «'.$this->getSetting('description').'»';
+		if ((isset($settings['important'])) && ($newvalue=='')) $errors[] = 'Ð—Ð°Ð¿Ð¾Ð»Ð½Ð¸Ñ‚Ðµ Ð¿Ð¾Ð»Ðµ Â«'.$this->getSetting('description').'Â»';
 		$this->setSetting('value',$newvalue);
 		return $errors;
 	}

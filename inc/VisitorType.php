@@ -1,6 +1,6 @@
 <?
 /*
-Êëàññ, îïèñûâàþùèé òèï (ãðóïïó) ïîñåòèòåëÿ ñàéòà è ïðàâà äîñòóïà
+ÐšÐ»Ð°ÑÑ, Ð¾Ð¿Ð¸ÑÑ‹Ð²Ð°ÑŽÑ‰Ð¸Ð¹ Ñ‚Ð¸Ð¿ (Ð³Ñ€ÑƒÐ¿Ð¿Ñƒ) Ð¿Ð¾ÑÐµÑ‚Ð¸Ñ‚ÐµÐ»Ñ ÑÐ°Ð¹Ñ‚Ð° Ð¸ Ð¿Ñ€Ð°Ð²Ð° Ð´Ð¾ÑÑ‚ÑƒÐ¿Ð°
 */
 class VisitorType extends VirtualClass
 {
@@ -10,8 +10,8 @@ class VisitorType extends VirtualClass
 			"access"=>"TEXT",
 			"settings"=>"TEXT"
 		));
-		$this->Settings['adminsId'] = 1; // ID àäìèíèñòðàòîðñêîé ãðóïïû, ïî èäåå íå äîëæíî ìåíÿòüñÿ íèêîãäà, íî íà âñÿêèé óñòàíàâëèâàåì çäåñü (ID áðàòü èç áàçû)
-		$this->Settings['guestsId'] = 2; // ID ãðóïïû «Ãîñòè»(áðàòü èç áàçû)
+		$this->Settings['adminsId'] = 1; // ID Ð°Ð´Ð¼Ð¸Ð½Ð¸ÑÑ‚Ñ€Ð°Ñ‚Ð¾Ñ€ÑÐºÐ¾Ð¹ Ð³Ñ€ÑƒÐ¿Ð¿Ñ‹, Ð¿Ð¾ Ð¸Ð´ÐµÐµ Ð½Ðµ Ð´Ð¾Ð»Ð¶Ð½Ð¾ Ð¼ÐµÐ½ÑÑ‚ÑŒÑÑ Ð½Ð¸ÐºÐ¾Ð³Ð´Ð°, Ð½Ð¾ Ð½Ð° Ð²ÑÑÐºÐ¸Ð¹ ÑƒÑÑ‚Ð°Ð½Ð°Ð²Ð»Ð¸Ð²Ð°ÐµÐ¼ Ð·Ð´ÐµÑÑŒ (ID Ð±Ñ€Ð°Ñ‚ÑŒ Ð¸Ð· Ð±Ð°Ð·Ñ‹)
+		$this->Settings['guestsId'] = 2; // ID Ð³Ñ€ÑƒÐ¿Ð¿Ñ‹ Â«Ð“Ð¾ÑÑ‚Ð¸Â»(Ð±Ñ€Ð°Ñ‚ÑŒ Ð¸Ð· Ð±Ð°Ð·Ñ‹)
 	}
 	function getRedirectContent($id,$cid){
 		global $Content;
@@ -47,8 +47,8 @@ class VisitorType extends VirtualClass
 		$retval = false;
 		$group = $this->getOne($id);
 		if (floor($group['id'])>0){
-			if (isset($group['settings']['superaccess'])) $retval = true; // Åñëè äëÿ ãðóïïû îòêðûò ïîëíûé äîñòóï
-			if (in_array($cid,$group['access'])) $retval = true; // Åñëè ñòðàíèöà íàõîäèòñÿ â ñïèñêå äîñòóïà ãðóïïû
+			if (isset($group['settings']['superaccess'])) $retval = true; // Ð•ÑÐ»Ð¸ Ð´Ð»Ñ Ð³Ñ€ÑƒÐ¿Ð¿Ñ‹ Ð¾Ñ‚ÐºÑ€Ñ‹Ñ‚ Ð¿Ð¾Ð»Ð½Ñ‹Ð¹ Ð´Ð¾ÑÑ‚ÑƒÐ¿
+			if (in_array($cid,$group['access'])) $retval = true; // Ð•ÑÐ»Ð¸ ÑÑ‚Ñ€Ð°Ð½Ð¸Ñ†Ð° Ð½Ð°Ñ…Ð¾Ð´Ð¸Ñ‚ÑÑ Ð² ÑÐ¿Ð¸ÑÐºÐµ Ð´Ð¾ÑÑ‚ÑƒÐ¿Ð° Ð³Ñ€ÑƒÐ¿Ð¿Ñ‹
 		}
 		return $retval;
 
@@ -72,11 +72,11 @@ class VisitorType extends VirtualClass
 
 
 	}
-	function add($name = '',$access=''){ /* Äîáàâëåíèå íîâîé ãðóïïû */
+	function add($name = '',$access=''){ /* Ð”Ð¾Ð±Ð°Ð²Ð»ÐµÐ½Ð¸Ðµ Ð½Ð¾Ð²Ð¾Ð¹ Ð³Ñ€ÑƒÐ¿Ð¿Ñ‹ */
 		$errors = array();
 		$name = trim($name);
-		if ($name=='') $errors['name'] = 'Íå óêàçàíî íàçâàíèå ãðóïïû';
-		if (!$this->isUniqueName($name)) $errors['name'] = 'Ãðóïïà ñ òàêèì íàçâàíèåì óæå ñóùåñòâóåò';
+		if ($name=='') $errors['name'] = 'ÐÐµ ÑƒÐºÐ°Ð·Ð°Ð½Ð¾ Ð½Ð°Ð·Ð²Ð°Ð½Ð¸Ðµ Ð³Ñ€ÑƒÐ¿Ð¿Ñ‹';
+		if (!$this->isUniqueName($name)) $errors['name'] = 'Ð“Ñ€ÑƒÐ¿Ð¿Ð° Ñ Ñ‚Ð°ÐºÐ¸Ð¼ Ð½Ð°Ð·Ð²Ð°Ð½Ð¸ÐµÐ¼ ÑƒÐ¶Ðµ ÑÑƒÑ‰ÐµÑÑ‚Ð²ÑƒÐµÑ‚';
 		if (count($errors)==0){
 			$name = addslashes($name);
 			$accessstr = '';
@@ -84,16 +84,16 @@ class VisitorType extends VirtualClass
 		}
 		return $errors;
 	}
-	function edit($id,$name = '',$access = ''){ /* Ðåäàêòèðîâàíèå ãðóïïû */
+	function edit($id,$name = '',$access = ''){ /* Ð ÐµÐ´Ð°ÐºÑ‚Ð¸Ñ€Ð¾Ð²Ð°Ð½Ð¸Ðµ Ð³Ñ€ÑƒÐ¿Ð¿Ñ‹ */
 		$id = floor($id);
 		$data = $this->getOne($id);
-		if (count($data)==0) $errors['id'] = 'Ðåäàêòèðóåìîé ãðóïïû íå ñóùåñòâóåò';
-		if (isset($data['settings']['noedit'])) $errors['edit'] = 'Ýòó ãðóïïó ðåäàêòèðîâàòü íåëüçÿ';
+		if (count($data)==0) $errors['id'] = 'Ð ÐµÐ´Ð°ÐºÑ‚Ð¸Ñ€ÑƒÐµÐ¼Ð¾Ð¹ Ð³Ñ€ÑƒÐ¿Ð¿Ñ‹ Ð½Ðµ ÑÑƒÑ‰ÐµÑÑ‚Ð²ÑƒÐµÑ‚';
+		if (isset($data['settings']['noedit'])) $errors['edit'] = 'Ð­Ñ‚Ñƒ Ð³Ñ€ÑƒÐ¿Ð¿Ñƒ Ñ€ÐµÐ´Ð°ÐºÑ‚Ð¸Ñ€Ð¾Ð²Ð°Ñ‚ÑŒ Ð½ÐµÐ»ÑŒÐ·Ñ';
 		if (isset($data['settings']['norename'])) $name = $data['name'];
 		$errors = array();
 		$name = trim($name);
-		if ($name=='') $errors['name'] = 'Íå óêàçàíî íàçâàíèå ãðóïïû';
-		if (!$this->isUniqueName($name,$id)) $errors['name'] = 'Ãðóïïà ñ òàêèì íàçâàíèåì óæå ñóùåñòâóåò';
+		if ($name=='') $errors['name'] = 'ÐÐµ ÑƒÐºÐ°Ð·Ð°Ð½Ð¾ Ð½Ð°Ð·Ð²Ð°Ð½Ð¸Ðµ Ð³Ñ€ÑƒÐ¿Ð¿Ñ‹';
+		if (!$this->isUniqueName($name,$id)) $errors['name'] = 'Ð“Ñ€ÑƒÐ¿Ð¿Ð° Ñ Ñ‚Ð°ÐºÐ¸Ð¼ Ð½Ð°Ð·Ð²Ð°Ð½Ð¸ÐµÐ¼ ÑƒÐ¶Ðµ ÑÑƒÑ‰ÐµÑÑ‚Ð²ÑƒÐµÑ‚';
 		if (count($errors)==0){
 			$name = addslashes($name);
 			msq("UPDATE `".$this->getSetting('table')."` SET `name`='$name', `access`='$access' WHERE `id`='$id'");
@@ -118,7 +118,7 @@ class VisitorType extends VirtualClass
 		}
 		return $errors;
 	}
-	function getList(){ /* Ïîëó÷åíèå ñïèñêà ãðóïï */
+	function getList(){ /* ÐŸÐ¾Ð»ÑƒÑ‡ÐµÐ½Ð¸Ðµ ÑÐ¿Ð¸ÑÐºÐ° Ð³Ñ€ÑƒÐ¿Ð¿ */
 		$retval = $this->getCacheValue('groupsList');
 		if (is_array($retval)) return $retval;
 		$retval = array();
@@ -127,13 +127,13 @@ class VisitorType extends VirtualClass
 		$this->setCacheValue('groupsList',$retval);
 		return $retval;
 	}
-	function getOne($id = 0, $r = array()){ /* Ïîëó÷åíèå èíôîðìàöèè î êîíêðåòíîé ãðóïïå */
+	function getOne($id = 0, $r = array()){ /* ÐŸÐ¾Ð»ÑƒÑ‡ÐµÐ½Ð¸Ðµ Ð¸Ð½Ñ„Ð¾Ñ€Ð¼Ð°Ñ†Ð¸Ð¸ Ð¾ ÐºÐ¾Ð½ÐºÑ€ÐµÑ‚Ð½Ð¾Ð¹ Ð³Ñ€ÑƒÐ¿Ð¿Ðµ */
 		global $SiteVisitor;
 		$retval = array();
-		
+
 		$id = floor($id);
 		if (floor($retval['id'])>0) return $retval;
-		
+
 		if (count($r)==0){
 			$r = msr(msq("SELECT * FROM `".$this->getSetting('table')."` WHERE `id`='".$id."'"));
 			if (!is_array($r)) $r = array();
@@ -157,10 +157,10 @@ class VisitorType extends VirtualClass
 			}
 			/*==foreach ($accessstr as $v) if (floor($v)>0) $access[] = floor($v);*/
 			$settings = $this->explode($r['settings']);
-			
+
 			if (!is_array($settings)) $settings=array();
 			if (!is_array($new_settings)) $new_settings=array();
-			
+
 			$retval = array('id'=>$r['id'],'name'=>$r['name'],'access'=>$access,'settings'=>$settings, 'new_settings'=>$new_settings);
 		}
 		$count = msr(msq("SELECT COUNT(id) AS cnt FROM `".$SiteVisitor->getSetting('table')."` WHERE `type`='".$id."'"));
@@ -168,12 +168,12 @@ class VisitorType extends VirtualClass
 		$this->setCacheValue('group_'.$id,$retval);
 		return $retval;
 	}
-	function checkTypePresence($id){ /* Ïðîâåðêà íàëè÷èÿ ãðóïïû ïî ID */
+	function checkTypePresence($id){ /* ÐŸÑ€Ð¾Ð²ÐµÑ€ÐºÐ° Ð½Ð°Ð»Ð¸Ñ‡Ð¸Ñ Ð³Ñ€ÑƒÐ¿Ð¿Ñ‹ Ð¿Ð¾ ID */
 		$id = floor($id);
 		$list = $this->getList();
 		return (in_array($id,$list))?$id:0;
 	}
-	function isUniqueName($name,$exceptid = 0){ /* Ïðîâåðêà íà óíèêàëüíîñòü íàçâàíèÿ, âîçâðàùàåò true åñëè óíèêàëüíî */
+	function isUniqueName($name,$exceptid = 0){ /* ÐŸÑ€Ð¾Ð²ÐµÑ€ÐºÐ° Ð½Ð° ÑƒÐ½Ð¸ÐºÐ°Ð»ÑŒÐ½Ð¾ÑÑ‚ÑŒ Ð½Ð°Ð·Ð²Ð°Ð½Ð¸Ñ, Ð²Ð¾Ð·Ð²Ñ€Ð°Ñ‰Ð°ÐµÑ‚ true ÐµÑÐ»Ð¸ ÑƒÐ½Ð¸ÐºÐ°Ð»ÑŒÐ½Ð¾ */
 		$retval = true;
 		$name = addslashes($name);
 		$exceptid = floor($exceptid);
@@ -181,7 +181,7 @@ class VisitorType extends VirtualClass
 		while ($r = msr($q)) if ($r['id']!= $exceptid) $retval = false;
 		return $retval;
 	}
-	function drawAccessCallback($id = 0,$level = -1,$checked = array()){ /* Ïîñòðîåíèå html (ðàçäåëû äëÿ äîñòóïà) äëÿ ôîðì ðåäàêòèðîâàíèÿ è äîáàâëåíèÿ ãðóïïû */
+	function drawAccessCallback($id = 0,$level = -1,$checked = array()){ /* ÐŸÐ¾ÑÑ‚Ñ€Ð¾ÐµÐ½Ð¸Ðµ html (Ñ€Ð°Ð·Ð´ÐµÐ»Ñ‹ Ð´Ð»Ñ Ð´Ð¾ÑÑ‚ÑƒÐ¿Ð°) Ð´Ð»Ñ Ñ„Ð¾Ñ€Ð¼ Ñ€ÐµÐ´Ð°ÐºÑ‚Ð¸Ñ€Ð¾Ð²Ð°Ð½Ð¸Ñ Ð¸ Ð´Ð¾Ð±Ð°Ð²Ð»ÐµÐ½Ð¸Ñ Ð³Ñ€ÑƒÐ¿Ð¿Ñ‹ */
         global $SiteSections,$new_settings;
         if ($level=='')  $level=0;
         $sec_list=$SiteSections->getList($id,0,-1);
@@ -204,7 +204,7 @@ class VisitorType extends VirtualClass
         	print '<label><input id="section_'.$sl['id'].'" name="section_'.$sl['id'].'" type="checkbox"'.$check.' '.(($_POST['section_'.$sl['id']]=='on' || array_key_exists($sl['id'],$new_settings)) ? ' checked="checked"':'').'/>'.$sl['name'].'</label>';
 
 
-        	/*Ïîëó÷àåì íàñòðîéêè äîñòóïíûõ äåéñòâèé*/
+        	/*ÐŸÐ¾Ð»ÑƒÑ‡Ð°ÐµÐ¼ Ð½Ð°ÑÑ‚Ñ€Ð¾Ð¹ÐºÐ¸ Ð´Ð¾ÑÑ‚ÑƒÐ¿Ð½Ñ‹Ñ… Ð´ÐµÐ¹ÑÑ‚Ð²Ð¸Ð¹*/
         	if ($id>0)
         	{
 
@@ -215,7 +215,7 @@ class VisitorType extends VirtualClass
 	        		$section_settings='view,add,edit,delete';
 
 	        		$actions=explode(',',$section_settings);
-	        		$action_comments=array('view'=>'ïðîñìîòð', 'add'=>'äîáàâëåíèå', 'edit'=>'ðåäàêòèðîâàíèå', 'delete'=>'óäàëåíèå', 'onoff'=>'âêë\îòêë');
+	        		$action_comments=array('view'=>'Ð¿Ñ€Ð¾ÑÐ¼Ð¾Ñ‚Ñ€', 'add'=>'Ð´Ð¾Ð±Ð°Ð²Ð»ÐµÐ½Ð¸Ðµ', 'edit'=>'Ñ€ÐµÐ´Ð°ÐºÑ‚Ð¸Ñ€Ð¾Ð²Ð°Ð½Ð¸Ðµ', 'delete'=>'ÑƒÐ´Ð°Ð»ÐµÐ½Ð¸Ðµ', 'onoff'=>'Ð²ÐºÐ»\Ð¾Ñ‚ÐºÐ»');
 	        		?>
 	        			<div class="actions">
 	        			<?
@@ -223,7 +223,7 @@ class VisitorType extends VirtualClass
 	        			if ($act!='')
 	        			{	        				if ($action_comments[$act]=='')
 	        				$action_comments[$act]=$act;
-	        				
+
 	        				?><div><label><input type="checkbox" id="action_<?=$sl['id'].'_'.$act?>" name="action_<?=$sl['id'].'_'.$act?>" <?=(($_POST['action_'.$sl['id'].'_'.$act]=='on' || @in_array($act,$new_settings[$sl['id']])) ? ' checked="checked"':'')?>><?=$action_comments[$act]?></label></div><?
 	        			}
 	        			?>

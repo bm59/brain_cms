@@ -1,6 +1,6 @@
 <?
 /*
-Базовый класс шаблонов разделов
+Р‘Р°Р·РѕРІС‹Р№ РєР»Р°СЃСЃ С€Р°Р±Р»РѕРЅРѕРІ СЂР°Р·РґРµР»РѕРІ
 */
 
 class VirtualPattern
@@ -56,10 +56,13 @@ class VirtualPattern
 			case 'CDSlider':
 				$ttype = 'VARCHAR(255)';
 				break;
+			case 'CDColorStatus':
+					$ttype = 'BIGINT(20)';
+				break;
 			case 'CDGallery':
 				$ttype = 'VARCHAR(1000)';
 				break;
-		}	
+		}
 		return $ttype;
 	}
 	function createDataSetTable($datasetid,$uid = 0,$tablefields = array()){
@@ -78,9 +81,9 @@ class VirtualPattern
 		}
 		return '';
 	}
-	function getSetting($name){ return $this->Settings[$name]; } // Получение значения, хранящегося в $Settings
+	function getSetting($name){ return $this->Settings[$name]; } // РџРѕР»СѓС‡РµРЅРёРµ Р·РЅР°С‡РµРЅРёСЏ, С…СЂР°РЅСЏС‰РµРіРѕСЃСЏ РІ $Settings
 	function setSetting($name,$value){ $this->Settings[$name] = $value; }
-	function implode($settings = array()){ // Формирует строку вида |name|name=value|name|name|...
+	function implode($settings = array()){ // Р¤РѕСЂРјРёСЂСѓРµС‚ СЃС‚СЂРѕРєСѓ РІРёРґР° |name|name=value|name|name|...
 		if (!is_array($settings)) $settings = array();
 		$retval = '|';
 		$doubles = array();
@@ -96,7 +99,7 @@ class VirtualPattern
 		if ($retval=='|') $retval = '';
 		return $retval;
 	}
-	function explode($settings = ''){ // Формирует массив из строки вида |name|name=value|name|name|...
+	function explode($settings = ''){ // Р¤РѕСЂРјРёСЂСѓРµС‚ РјР°СЃСЃРёРІ РёР· СЃС‚СЂРѕРєРё РІРёРґР° |name|name=value|name|name|...
 		$settings = explode('|',trim($settings));
 		$retval = array();
 		foreach ($settings as $v){

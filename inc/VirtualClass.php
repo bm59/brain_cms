@@ -1,17 +1,17 @@
 <?
 /*
-Базовый класс
+Р‘Р°Р·РѕРІС‹Р№ РєР»Р°СЃСЃ
 */
 class VirtualClass
 {
-	var $Settings = array(); /* Настройки класса */
-	var $Cache = array(); /* Кэш класса, чтобы избавиться от лишних запросов к базе */
-	
-	function getCacheValue($name){ if (isset($this->Cache[$name])) return $this->Cache[$name]; return false; } /* Получение значения из кеша */
-	function setCacheValue($name,$value){ $this->Cache[$name] = $value; } /* Занесение значения в кеш */
-	function getSetting($name){ return $this->Settings[$name]; } // Получение значения, хранящегося в $Settings
+	var $Settings = array(); /* РќР°СЃС‚СЂРѕР№РєРё РєР»Р°СЃСЃР° */
+	var $Cache = array(); /* РљСЌС€ РєР»Р°СЃСЃР°, С‡С‚РѕР±С‹ РёР·Р±Р°РІРёС‚СЊСЃСЏ РѕС‚ Р»РёС€РЅРёС… Р·Р°РїСЂРѕСЃРѕРІ Рє Р±Р°Р·Рµ */
+
+	function getCacheValue($name){ if (isset($this->Cache[$name])) return $this->Cache[$name]; return false; } /* РџРѕР»СѓС‡РµРЅРёРµ Р·РЅР°С‡РµРЅРёСЏ РёР· РєРµС€Р° */
+	function setCacheValue($name,$value){ $this->Cache[$name] = $value; } /* Р—Р°РЅРµСЃРµРЅРёРµ Р·РЅР°С‡РµРЅРёСЏ РІ РєРµС€ */
+	function getSetting($name){ return $this->Settings[$name]; } // РџРѕР»СѓС‡РµРЅРёРµ Р·РЅР°С‡РµРЅРёСЏ, С…СЂР°РЅСЏС‰РµРіРѕСЃСЏ РІ $Settings
 	function setSetting($name,$value){ $this->Settings[$name] = $value; }
-	function implode($settings = array()){ // Формирует строку вида |name|name=value|name|name|...
+	function implode($settings = array()){ // Р¤РѕСЂРјРёСЂСѓРµС‚ СЃС‚СЂРѕРєСѓ РІРёРґР° |name|name=value|name|name|...
 		if (!is_array($settings)) $settings = array();
 		$retval = '|';
 		$doubles = array();
@@ -27,7 +27,7 @@ class VirtualClass
 		if ($retval=='|') $retval = '';
 		return $retval;
 	}
-	function explode($settings = ''){ // Формирует массив из строки вида |name|name=value|name|name|...
+	function explode($settings = ''){ // Р¤РѕСЂРјРёСЂСѓРµС‚ РјР°СЃСЃРёРІ РёР· СЃС‚СЂРѕРєРё РІРёРґР° |name|name=value|name|name|...
 		$settings = explode('|',trim($settings));
 		$retval = array();
 

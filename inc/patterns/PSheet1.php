@@ -1,6 +1,6 @@
 <?
 /*
-Øàáëîí îáû÷íîé ñòðàíèöû (Ëèñò)
+Ð¨Ð°Ð±Ð»Ð¾Ð½ Ð¾Ð±Ñ‹Ñ‡Ð½Ð¾Ð¹ ÑÑ‚Ñ€Ð°Ð½Ð¸Ñ†Ñ‹ (Ð›Ð¸ÑÑ‚)
 */
 class PSheet1 extends VirtualPattern
 {
@@ -13,18 +13,18 @@ class PSheet1 extends VirtualPattern
 				array
 				(
 						'name'=>'sheet1',
-						'description'=>'Ëèñò (1 êîëîíêà)',
+						'description'=>'Ð›Ð¸ÑÑ‚ (1 ÐºÐ¾Ð»Ð¾Ð½ÐºÐ°)',
 						'types'=>array
 						(
-								array('name'=>'text', 'description'=>'Òåêñò', 'type'=>'CDTextEditor',  'settings'=>array('texttype'=>'full')),
+								array('name'=>'text', 'description'=>'Ð¢ÐµÐºÑÑ‚', 'type'=>'CDTextEditor',  'settings'=>array('texttype'=>'full')),
 						)
-		
+
 				),
 				$settings['section']
 		);
-		
-		$settings['imagestorage'] = $Storage->getStorage(0,array('path'=>'/site/images/','name'=>'Èçîáðàæåíèÿ ñàéòà (îáùåå)','exts'=>array('jpg','gif','jpeg'),'images'=>1));
-		$settings['filestorage'] = $Storage->getStorage(0,array('path'=>'/site/files/','name'=>'Ôàéëû ñàéòà (îáùåå)'));
+
+		$settings['imagestorage'] = $Storage->getStorage(0,array('path'=>'/site/images/','name'=>'Ð˜Ð·Ð¾Ð±Ñ€Ð°Ð¶ÐµÐ½Ð¸Ñ ÑÐ°Ð¹Ñ‚Ð° (Ð¾Ð±Ñ‰ÐµÐµ)','exts'=>array('jpg','gif','jpeg'),'images'=>1));
+		$settings['filestorage'] = $Storage->getStorage(0,array('path'=>'/site/files/','name'=>'Ð¤Ð°Ð¹Ð»Ñ‹ ÑÐ°Ð¹Ñ‚Ð° (Ð¾Ð±Ñ‰ÐµÐµ)'));
 		VirtualPattern::init($settings);
 		$this->setSetting('table',$this->createDataSetTable($this->getSetting('dataset'),0,array('section_id'=>'BIGINT(20)')));
 		$iface = new CCSheet;
@@ -46,6 +46,6 @@ class PSheet1 extends VirtualPattern
 
 $registeredPatterns = configGet('registeredPatterns');
 if (!is_array($registeredPatterns)) $registeredPatterns = array();
-$registeredPatterns[] = array('name'=>'PSheet1','description'=>'Ñòðàíèöà ñ 1 êîëîíêîé','useradd'=>1);
+$registeredPatterns[] = array('name'=>'PSheet1','description'=>'Ð¡Ñ‚Ñ€Ð°Ð½Ð¸Ñ†Ð° Ñ 1 ÐºÐ¾Ð»Ð¾Ð½ÐºÐ¾Ð¹','useradd'=>1);
 configSet('registeredPatterns',$registeredPatterns);
 ?>

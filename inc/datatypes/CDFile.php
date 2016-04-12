@@ -2,10 +2,10 @@
 class CDFile extends VirtualType
 {
 	function init($settings){
-		$settings['descr']='Файл';
+		$settings['descr']='Р¤Р°Р№Р»';
 		$settings['help']=array(
-				'exts=jpg,gif,jpeg,png,swf'=>'Расширения'
-		
+				'exts=jpg,gif,jpeg,png,swf'=>'Р Р°СЃС€РёСЂРµРЅРёСЏ'
+
 		);
 		VirtualType::init($settings);
 
@@ -15,10 +15,10 @@ class CDFile extends VirtualType
 
 		global $Storage;
 		$st = $Storage->getStorage(floor($this->getSetting($this->getSetting('name').'_filestorage')));
-		
+
 		if (!floor($st['id'])>0)
-		$st = $Storage->getStorage(0,array('path'=>'/site/files/','name'=>'Файлы сайта (общее)'));
-		
+		$st = $Storage->getStorage(0,array('path'=>'/site/files/','name'=>'Р¤Р°Р№Р»С‹ СЃР°Р№С‚Р° (РѕР±С‰РµРµ)'));
+
 		$f = 0;
 		if (floor($st['id'])>0){
 			$exts = upper(str_replace(',',', ',$settings['exts']));
@@ -43,7 +43,7 @@ class CDFile extends VirtualType
             onSubmit: function(file, ext){
                 <?if ($exts!=''){?>
                 if (! (ext && /^(<?=strtolower(str_replace(', ', '|', $exts))?>)$/.test(ext))){
-                    error.html('<nobr>Допустимые форматы: <?=strtolower($exts)?></nobr>');
+                    error.html('<nobr>Р”РѕРїСѓСЃС‚РёРјС‹Рµ С„РѕСЂРјР°С‚С‹: <?=strtolower($exts)?></nobr>');
                     return false;
                 }
                 <?}?>
@@ -76,13 +76,13 @@ class CDFile extends VirtualType
 
              	<span class="clear"></span>
 				<?
-					if ($exts!='') $desc.= ' Файл в формате '.$exts;
+					if ($exts!='') $desc.= ' Р¤Р°Р№Р» РІ С„РѕСЂРјР°С‚Рµ '.$exts;
 				?>
 				<div class="contentdesc"><small><?=$desc?></small></div>
 
 			<div class="clear"></div>
 			<div id="add_file" style="float: left;">
-			        <a id="upl_button" class="button">загрузить файл</a>
+			        <a id="upl_button" class="button">Р·Р°РіСЂСѓР·РёС‚СЊ С„Р°Р№Р»</a>
 			        <div class="clear"></div>
 			        <img id="loading" src="/pics/inputs/loading2.gif" height="28" style="display: none;" />
 			         <div id="upl_error"></div>
@@ -102,7 +102,7 @@ class CDFile extends VirtualType
 		$errors = array();
 		$settings = $this->getSetting('settings');
 		$newvalue = $_POST[$this->getSetting('name')];
-		if ((isset($settings['important'])) && (!$newvalue!='')) $errors[] = 'Заполните поле «'.$this->getSetting('description').'»';
+		if ((isset($settings['important'])) && (!$newvalue!='')) $errors[] = 'Р—Р°РїРѕР»РЅРёС‚Рµ РїРѕР»Рµ В«'.$this->getSetting('description').'В»';
 		$this->setSetting('value',$newvalue);
 		return $errors;
 	}

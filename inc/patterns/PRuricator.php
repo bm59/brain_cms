@@ -1,39 +1,39 @@
 <?
-$source_descr='Ðóáðèêàòîð';
+$source_descr='Ð ÑƒÐ±Ñ€Ð¸ÐºÐ°Ñ‚Ð¾Ñ€';
 $source_name='PRubricator';
-/* Èìÿ êëàññà */
+/* Ð˜Ð¼Ñ ÐºÐ»Ð°ÑÑÐ° */
 class PRubricator extends VirtualPattern
 {
 	function init($settings){
 		global $CDDataSet,$Storage,$SiteSections;
-		
-		$descr='Ðóáðèêàòîð';
-		
+
+		$descr='Ð ÑƒÐ±Ñ€Ð¸ÐºÐ°Ñ‚Ð¾Ñ€';
+
 		if ($CDDataSet->checkDatatypes($settings['section'])==0)
 		$SiteSections->update_personal_settings($settings['section'], '|onoff|show_id|');
-		
+
 		$settings['name']=substr(get_class(), 1, strlen(get_class()));
 
 		$class_name='CC'.$settings['name'];
 		$settings['dataset'] = $CDDataSet->checkPresence(0, mb_strtolower($settings['name']));
-		
+
 		$CDDataSet->add
 		(
-		
+
 				array
 				(
 						'name'=>mb_strtolower($settings['name']),
 						'description'=>$descr,
 						'types'=>array
 						(
-								array('name'=>'name', 'description'=>'Íàèìåíîâàíèå', 'type'=>'CDText',  'settings'=>array('important'=>'', 'show_search'=>'', 'show_list'=>'')),
-								array('name'=>'description', 'description'=>'Îïèñàíèå', 'type'=>'CDText',  'settings'=>array('off'=>'')),
-								array('name'=>'image', 'description'=>'Èçîáðàæåíèå', 'type'=>'CDImage',   'settings'=>array('off'=>'', 'exts'=>'jpg,gif,jpeg,png')),
-								array('name'=>'ptitle', 'description'=>'Title ñòðàíèöû', 'type'=>'CDText','settings'=>array('off'=>'')),
-								array('name'=>'pdescription', 'description'=>'Description ñòðàíèöû', 'type'=>'CDText', 'settings'=>array('off'=>'')),
-								array('name'=>'pseudolink', 'description'=>'Ïñåâîäîíèì ññûëêè', 'type'=>'CDText', 'settings'=>array('off'=>''))
+								array('name'=>'name', 'description'=>'ÐÐ°Ð¸Ð¼ÐµÐ½Ð¾Ð²Ð°Ð½Ð¸Ðµ', 'type'=>'CDText',  'settings'=>array('important'=>'', 'show_search'=>'', 'show_list'=>'')),
+								array('name'=>'description', 'description'=>'ÐžÐ¿Ð¸ÑÐ°Ð½Ð¸Ðµ', 'type'=>'CDText',  'settings'=>array('off'=>'')),
+								array('name'=>'image', 'description'=>'Ð˜Ð·Ð¾Ð±Ñ€Ð°Ð¶ÐµÐ½Ð¸Ðµ', 'type'=>'CDImage',   'settings'=>array('off'=>'', 'exts'=>'jpg,gif,jpeg,png')),
+								array('name'=>'ptitle', 'description'=>'Title ÑÑ‚Ñ€Ð°Ð½Ð¸Ñ†Ñ‹', 'type'=>'CDText','settings'=>array('off'=>'')),
+								array('name'=>'pdescription', 'description'=>'Description ÑÑ‚Ñ€Ð°Ð½Ð¸Ñ†Ñ‹', 'type'=>'CDText', 'settings'=>array('off'=>'')),
+								array('name'=>'pseudolink', 'description'=>'ÐŸÑÐµÐ²Ð¾Ð´Ð¾Ð½Ð¸Ð¼ ÑÑÑ‹Ð»ÐºÐ¸', 'type'=>'CDText', 'settings'=>array('off'=>''))
 						)
-		
+
 				),
 				$settings['section']
 		);
@@ -45,10 +45,10 @@ class PRubricator extends VirtualPattern
 
 		$iface = new $class_name;
 		$this->setSetting('table',$this->createDataSetTable($this->getSetting('dataset'),$this->getSetting('section'),array('show'=>'INT(1)', 'precedence'=>'BIGINT(20)', 'parent_id'=>'BIGINT(20)')));
-		
+
 		$iface->init(array('mode'=>$this->getSetting('mode'),'isservice'=>$this->getSetting('isservice'),'section'=>$this->getSetting('section'),'pattern'=>$this,'table'=>$this->getSetting('table'),'dataset'=>$this->getSetting('dataset')));
 		$this->setSetting('cclass',$iface);
-		
+
 		return $iface;
 	}
 

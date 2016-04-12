@@ -17,16 +17,16 @@
         ?>
         <div class="profile">
 	        <div class="autor">
-	                Здравствуйте, <?=$user['secondname'].' '.$user['firstname'].' '.$user['parentname']?>
+	                Р—РґСЂР°РІСЃС‚РІСѓР№С‚Рµ, <?=$user['secondname'].' '.$user['firstname'].' '.$user['parentname']?>
 	                <div>
 	                        <?
 	                        if (floor(configGet('profileID'))!=$_SESSION['visitorID']){
 	                        ?>
-	                        <a href="/manage/access/users/profile/" class="button"><img src="/pics/editor/profile.png">Профиль</a>
+	                        <a href="/manage/access/users/profile/" class="button"><img src="/pics/editor/profile.png">РџСЂРѕС„РёР»СЊ</a>
 	                        <?
 	                        }
 	                        ?>
-	                        <a href="/manage/?userexit=exit" class="button"><img src="/pics/editor/exit.png">Выйти из системы</a>
+	                        <a href="/manage/?userexit=exit" class="button"><img src="/pics/editor/exit.png">Р’С‹Р№С‚Рё РёР· СЃРёСЃС‚РµРјС‹</a>
 	                </div>
 	        </div>
         </div>
@@ -53,11 +53,11 @@
 
 
 
-			// возвращает товар обратно на свое место после перетаскивания
+			// РІРѕР·РІСЂР°С‰Р°РµС‚ С‚РѕРІР°СЂ РѕР±СЂР°С‚РЅРѕ РЅР° СЃРІРѕРµ РјРµСЃС‚Рѕ РїРѕСЃР»Рµ РїРµСЂРµС‚Р°СЃРєРёРІР°РЅРёСЏ
 			revert:true,
 
-			// как только начинается перетаскивание мы делаем прозрачными остальные объекты
-			// добавляем класс CSS
+			// РєР°Рє С‚РѕР»СЊРєРѕ РЅР°С‡РёРЅР°РµС‚СЃСЏ РїРµСЂРµС‚Р°СЃРєРёРІР°РЅРёРµ РјС‹ РґРµР»Р°РµРј РїСЂРѕР·СЂР°С‡РЅС‹РјРё РѕСЃС‚Р°Р»СЊРЅС‹Рµ РѕР±СЉРµРєС‚С‹
+			// РґРѕР±Р°РІР»СЏРµРј РєР»Р°СЃСЃ CSS
 			drag:function () {
 				if (ctrlMode)
 				$(this).addClass("active_prec");
@@ -67,7 +67,7 @@
 
 			},
 
-			// удаляем CSS класс после перетаскивания
+			// СѓРґР°Р»СЏРµРј CSS РєР»Р°СЃСЃ РїРѕСЃР»Рµ РїРµСЂРµС‚Р°СЃРєРёРІР°РЅРёСЏ
 			stop:function () {
 				//$(this).removeClass("active").closest("#product").removeClass("active");
 				$(this).removeClass("active");
@@ -79,10 +79,10 @@
         // $ Ui Droppable
 		$(".anchordrop").droppable({
 
-			// CSS класс для корзины, срабатывает в момент начала перетаскивания товара
+			// CSS РєР»Р°СЃСЃ РґР»СЏ РєРѕСЂР·РёРЅС‹, СЃСЂР°Р±Р°С‚С‹РІР°РµС‚ РІ РјРѕРјРµРЅС‚ РЅР°С‡Р°Р»Р° РїРµСЂРµС‚Р°СЃРєРёРІР°РЅРёСЏ С‚РѕРІР°СЂР°
 			activeClass:"dropactive",
 
-			// CSS класс для корзины при появлении товара в области корзины
+			// CSS РєР»Р°СЃСЃ РґР»СЏ РєРѕСЂР·РёРЅС‹ РїСЂРё РїРѕСЏРІР»РµРЅРёРё С‚РѕРІР°СЂР° РІ РѕР±Р»Р°СЃС‚Рё РєРѕСЂР·РёРЅС‹
 			hoverClass:"drophover",
 
 			tolerance:"touch",
@@ -102,7 +102,7 @@
                 {
 		                if (ctrlMode)
 		                {
-		                	if (confirm('Поменять местами разделы?'))
+		                	if (confirm('РџРѕРјРµРЅСЏС‚СЊ РјРµСЃС‚Р°РјРё СЂР°Р·РґРµР»С‹?'))
 		                	{
 		                		window.location.href = './?drop='+parseInt(ui.draggable.attr('id'))+'&destination='+parseInt($(this).attr('id'))+'&change_prec=true';
 		                   	 	ui.draggable.hide('slow');
@@ -110,7 +110,7 @@
 		                }
 		                if (altMode)
 		                {
-		                	if (confirm('Разместить раздел над текущим?'))
+		                	if (confirm('Р Р°Р·РјРµСЃС‚РёС‚СЊ СЂР°Р·РґРµР» РЅР°Рґ С‚РµРєСѓС‰РёРј?'))
 		                	{
 		                		window.location.href = './?drop='+parseInt(ui.draggable.attr('id'))+'&destination='+parseInt($(this).attr('id'))+'&change_prec_above=true';
 		                   	 	ui.draggable.hide('slow');
@@ -118,7 +118,7 @@
 		                }
 		                else
 		                {
-		                	if (confirm('Перенести раздел?'))
+		                	if (confirm('РџРµСЂРµРЅРµСЃС‚Рё СЂР°Р·РґРµР»?'))
 		                	{		                		window.location.href = './?drop='+parseInt(ui.draggable.attr('id'))+'&destination='+parseInt($(this).attr('id'));
 		                    	ui.draggable.hide('slow');
 		               		}

@@ -28,10 +28,10 @@ if ($voting['id']>0 && count($voting['answers'])>0)
 			            	$('.voting .content').html(data.result);
 			            	if (data.alert!='') alert(data.alert);
 					   }
-			        });	
+			        });
 				}
 			});
-			
+
 		});
 	</script>
 	<div class="voting">
@@ -54,7 +54,7 @@ if ($voting['id']>0 && count($voting['answers'])>0)
 						{
 							?>
 							<div><a onclick="return hs.expand(this)" class="highslide" href="<?=$image['path'] ?>"><img src="<?=$image['path'] ?>" style="max-width: 80px; padding: 5px 0 10px 0;"/></a></div>
-							<?	
+							<?
 						}
 						?>
 					</div><?
@@ -62,17 +62,17 @@ if ($voting['id']>0 && count($voting['answers'])>0)
 				?>
 				</div>
 				<div class="clear"></div>
-				<a class="button">Голосовать</a>
+				<a class="button">Р“РѕР»РѕСЃРѕРІР°С‚СЊ</a>
 				<div class="air p20"></div>
 			<?
-			} 
-			else 
+			}
+			else
 			{
 				?>
 				<div class="vote_result">
 				<?
 				$show_total=$voting_Section['settings_personal']['show_vote_count'];
-				
+
 				$voting_result=$voting_iface->getTotalHtml($voting['id'], $show_total);
 				print $voting_result;
 				?>

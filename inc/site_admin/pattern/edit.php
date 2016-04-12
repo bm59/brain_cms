@@ -1,119 +1,119 @@
-<? 
+<?
 	include $_SERVER['DOCUMENT_ROOT']."/inc/site_admin/pattern/var.php";
 	include $_SERVER['DOCUMENT_ROOT']."/inc/site_admin/pattern/functions.php";
 
 	$i=0;
-	
 
-	
-	
-	/*Удаление типа данных*/
+
+
+
+	/*РЈРґР°Р»РµРЅРёРµ С‚РёРїР° РґР°РЅРЅС‹С…*/
 	if ($_GET['delete']>0)
 	{
 		$CDDataType->delete($_GET['delete'], $SectionPattern->getSetting('table'));
 	}
 
-	
-	/*Сохранение и добавление*/
+
+	/*РЎРѕС…СЂР°РЅРµРЅРёРµ Рё РґРѕР±Р°РІР»РµРЅРёРµ*/
 	$save_fields=array('name','description','type','settings','setting_style_edit','setting_style_search');
-	
-	
+
+
 if (floor($_POST['action'])==1)
 {
 	$SiteSections->update_personal_settings($section['id'], $_POST['settings_section']);
 
-	
-	/* Применяем настройки только к текущему разделу или ко всем в шаблоне */
+
+	/* РџСЂРёРјРµРЅСЏРµРј РЅР°СЃС‚СЂРѕР№РєРё С‚РѕР»СЊРєРѕ Рє С‚РµРєСѓС‰РµРјСѓ СЂР°Р·РґРµР»Сѓ РёР»Рё РєРѕ РІСЃРµРј РІ С€Р°Р±Р»РѕРЅРµ */
 /* 	if ($_POST['apply_all']=='on')
 	{
 		$ret=$CDDataType->get_dataset_tables($SectionPattern->getSetting('name'));
 		$table_array=$ret['tables'];
 		$sections_array=$ret['ids'];
 	} */
-	
+
 	$table_array[]=$SectionPattern->getsetting('table');
 	$sections_array[]=$section['id'];
-	
 
-	
+
+
 	/* print_r($table_array); */
 
-	
+
 		foreach($_POST as $k=>$v){
 		if (preg_match('|^id\_[a-z_A-Z_0-9]+$|',$k))
 		{
 			$update=array();
-			
+
 			$id=preg_replace('|^id\_([a-z_A-Z_0-9]+)$|','\\1',$k);
-						 
-			
+
+
 			$update['precedence']=$i;
 			$table_type_options=$_POST['table_type_'.$id];
-			
+
 			foreach ($save_fields as $sf)
 			{
 				if (isset($_POST[$sf.'_'.$id])) $update[$sf]=$_POST[$sf.'_'.$id];
 			}
-			
-			
 
 
-			
-			
-			/* Проверяем на ошибки */
+
+
+
+
+			/* РџСЂРѕРІРµСЂСЏРµРј РЅР° РѕС€РёР±РєРё */
 			$errors=array();
-			if (!$dataset['id']>0) 						$errors[]='Не передан dataset id';
-			if ($update['name']=='') 					$errors[]='Не задано имя колонки';
-			if ($update['description']=='') 			$errors[]='Не задано описание колонки';
-			if ($update['type']=='') 					$errors[]='Не задан тип колонки';
-			if ($table_type_options=='') 				$errors[]='Не задано свойство колонки';
-			
+			if (!$dataset['id']>0) 						$errors[]='РќРµ РїРµСЂРµРґР°РЅ dataset id';
+			if ($update['name']=='') 					$errors[]='РќРµ Р·Р°РґР°РЅРѕ РёРјСЏ РєРѕР»РѕРЅРєРё';
+			if ($update['description']=='') 			$errors[]='РќРµ Р·Р°РґР°РЅРѕ РѕРїРёСЃР°РЅРёРµ РєРѕР»РѕРЅРєРё';
+			if ($update['type']=='') 					$errors[]='РќРµ Р·Р°РґР°РЅ С‚РёРї РєРѕР»РѕРЅРєРё';
+			if ($table_type_options=='') 				$errors[]='РќРµ Р·Р°РґР°РЅРѕ СЃРІРѕР№СЃС‚РІРѕ РєРѕР»РѕРЅРєРё';
+
 			if (count($errors)) $error_ids[]=$id;
-			
-			for ($j = 0; $j < count($errors); $j++) $_SESSION['global_alert'].='<i><span style="color: #CC0000">Ошибка:</span></i> '.$errors[$i].' | '.$id.'<br/>';
+
+			for ($j = 0; $j < count($errors); $j++) $_SESSION['global_alert'].='<i><span style="color: #CC0000">РћС€РёР±РєР°:</span></i> '.$errors[$i].' | '.$id.'<br/>';
 
 			if (count($errors)==0)
 			{
 				if (stripos($id, 'new')===false)
 				{
 				 	$result=$CDDataType->update(
-						$id, 
-						$update, 
+						$id,
+						$update,
 						$columns,
-						$table_type_options, 
+						$table_type_options,
 						$table_array,
 						$section['id']);
-						
+
 						if ($result!='' && $result!=true)			$error_ids[]=$id;
 						elseif ($result==true)						$ok_ids[]=$id;
-						
+
 				}
 				else
 				{
 						$update['dataset']=$dataset['id'];
 						$update['table_type']=$_POST['table_type_'.$id];
 						$result=$CDDataType->add($update, true, $table_array, $section['id']);
-						if ($result===false) 
+						if ($result===false)
 						{
-							$error_ids[]=$id; 
+							$error_ids[]=$id;
 						}
-						elseif($result>0) {$ok_ids[]=$result;} 
+						elseif($result>0) {$ok_ids[]=$result;}
 				}
 			}
-			
+
 			$i++;
 		}
 	}
-	
+
 	$CDDataSet->update_prec($dataset['id'], $section['id']);
-}	
-	/*Обновляем данные*/
+}
+	/*РћР±РЅРѕРІР»СЏРµРј РґР°РЅРЅС‹Рµ*/
 	$columns=$CDDataType->get_column_info($SectionPattern->getSetting('table'));
 	/* print_r($columns); */
 	$dataset=$CDDataSet->get($SectionPattern->getSetting('dataset'));
 
-	
-	/* Если были ошибки при добавлении, добавляем колонку к полям данных с ошибкой */
+
+	/* Р•СЃР»Рё Р±С‹Р»Рё РѕС€РёР±РєРё РїСЂРё РґРѕР±Р°РІР»РµРЅРёРё, РґРѕР±Р°РІР»СЏРµРј РєРѕР»РѕРЅРєСѓ Рє РїРѕР»СЏРј РґР°РЅРЅС‹С… СЃ РѕС€РёР±РєРѕР№ */
 	foreach ($dataset['types'] as $tp)
 	{
 		$store_ids[]=$tp['id'];
@@ -130,7 +130,7 @@ if (floor($_POST['action'])==1)
 			}
 		}
 	}
-	
+
 ?>
 <script src="/inc/site_admin/pattern/main.js" type="text/javascript"></script>
 <div id="content">
@@ -138,27 +138,27 @@ if (floor($_POST['action'])==1)
 <?
 if ($_SESSION['global_alert']) print '<div class="alert"><div>'.$_SESSION['global_alert'].'</div></div>';
 ?>
-	<h2>Настройки шаблона:</h2>
-		<div>id: <?=$SectionPattern->getSetting('dataset')?></div>	
-		<div>Название: <?=$dataset['name']?></div>	
-		<div>Описание: <?=$dataset['description']?></div>		
-		<div>Таблица: <?=$SectionPattern->getSetting('table');?></div>
+	<h2>РќР°СЃС‚СЂРѕР№РєРё С€Р°Р±Р»РѕРЅР°:</h2>
+		<div>id: <?=$SectionPattern->getSetting('dataset')?></div>
+		<div>РќР°Р·РІР°РЅРёРµ: <?=$dataset['name']?></div>
+		<div>РћРїРёСЃР°РЅРёРµ: <?=$dataset['description']?></div>
+		<div>РўР°Р±Р»РёС†Р°: <?=$SectionPattern->getSetting('table');?></div>
 		<div>Patern: <?=$SectionPattern->getSetting('name'); ?></div>
 		<div>Class: <?=get_class($SectionPattern->getSetting('cclass')); ?></div>
 	<div class="clear"></div>
-	
-	
-	
+
+
+
 <div class="hr"></div>
-<h2>Шаблон:</h2> 
-	
-		<!-- Настройки раздела -->
-		<label class="settings_main">Настройки раздела (разделитель |):&nbsp;&nbsp;&nbsp;| <a href="#"><span><a href="#">on_page=5</a></span>&nbsp;|&nbsp;<span><a href="#">default_order=ORDER BY `id`</a></span>
+<h2>РЁР°Р±Р»РѕРЅ:</h2>
+
+		<!-- РќР°СЃС‚СЂРѕР№РєРё СЂР°Р·РґРµР»Р° -->
+		<label class="settings_main">РќР°СЃС‚СЂРѕР№РєРё СЂР°Р·РґРµР»Р° (СЂР°Р·РґРµР»РёС‚РµР»СЊ |):&nbsp;&nbsp;&nbsp;| <a href="#"><span><a href="#">on_page=5</a></span>&nbsp;|&nbsp;<span><a href="#">default_order=ORDER BY `id`</a></span>
 		<?
 		foreach ($help as $k=>$v)
 		print '&nbsp;|&nbsp;<span><a href="#">'.$k.'</a> - '.$v.'</span>';
 		?>
-		
+
 		</label>
 	<div class="clear"></div><br/>
 
@@ -170,7 +170,7 @@ $section = $SiteSections->get($section['id']);
 $str_settings=$section['settings_personal_str'];
 foreach($sec_settings_checkbox as $k=>$v)
 {
-	/* Включена ли настройка */
+	/* Р’РєР»СЋС‡РµРЅР° Р»Рё РЅР°СЃС‚СЂРѕР№РєР° */
 	$set_on=false;
 	if (stripos($str_settings, "|$k|")!==false) $set_on=true;
 
@@ -190,12 +190,12 @@ foreach($sec_settings_checkbox as $k=>$v)
 <input type="hidden" name="action" value="1">
 	<table class="table-content stat pattern">
 	<tbody id="sortable" class="connectedSortable">
-	<? 
+	<?
 	$dataset=$CDDataSet->get($SectionPattern->getSetting('dataset'), $section['id']);
 	/* $dataset['types']=array_merge ($dataset['types'],$add_error);  */
-	
-	
-	$dt_names=array();/* Поля ктр. есть не используем в шаблонах добавления */
+
+
+	$dt_names=array();/* РџРѕР»СЏ РєС‚СЂ. РµСЃС‚СЊ РЅРµ РёСЃРїРѕР»СЊР·СѓРµРј РІ С€Р°Р±Р»РѕРЅР°С… РґРѕР±Р°РІР»РµРЅРёСЏ */
 	foreach ($dataset['types'] as $ds)
 	{
 		$dt_names[]=$ds['name'];
@@ -209,16 +209,16 @@ foreach($sec_settings_checkbox as $k=>$v)
 	</table>
 		<div class="place">
 		 	<span style="float: left;">
-		        <input class="button big" onclick="add_empty(<?=$_GET['section'] ?>); return false;" type="submit" name="save_form" value="Добавить поле"/>
+		        <input class="button big" onclick="add_empty(<?=$_GET['section'] ?>); return false;" type="submit" name="save_form" value="Р”РѕР±Р°РІРёС‚СЊ РїРѕР»Рµ"/>
 		    </span>
 		    <span style="float: right;">
 <!-- 		    	<div class="stat">
-		    		<input id="apply_all" name="apply_all" type="checkbox"><label for="apply_all">Применить ко всем разделам шаблона</label>
+		    		<input id="apply_all" name="apply_all" type="checkbox"><label for="apply_all">РџСЂРёРјРµРЅРёС‚СЊ РєРѕ РІСЃРµРј СЂР°Р·РґРµР»Р°Рј С€Р°Р±Р»РѕРЅР°</label>
 		    	</div> -->
-		        <input class="button big" type="submit" name="save_form" value="Сохранить изменения"/>
+		        <input class="button big" type="submit" name="save_form" value="РЎРѕС…СЂР°РЅРёС‚СЊ РёР·РјРµРЅРµРЅРёСЏ"/>
 		    </span>
-		</div>	
-	                   
+		</div>
+
 </form>
 <?include_once($_SERVER['DOCUMENT_ROOT']."/inc/site_admin/pattern/add_pattern.php");?>
 </div>

@@ -11,13 +11,13 @@ class CCLog extends VirtualContent
                 $this->Settings['onpage'] = $SiteSettings->getOne($SiteSettings->getIdByName('pub_page_count')); $this->Settings['onpage'] = (floor($this->Settings['onpage']['value'])>0)?floor($this->Settings['onpage']['value']):20;
                 $MySqlConnect = new MySqlConnect;
 
-                $like_array=array('search_descr','search_comment','search_changes', 'search_user_name');/* Где нет в названии "name", но нужен поиск по like*/
-                $not_like_array=array();/* Где есть в названии "name", но не нужен поиск по like*/
-                $no_auto=array(); /*Не обрабатывать переменные, ручная обработка*/
+                $like_array=array('search_descr','search_comment','search_changes', 'search_user_name');/* Р“РґРµ РЅРµС‚ РІ РЅР°Р·РІР°РЅРёРё "name", РЅРѕ РЅСѓР¶РµРЅ РїРѕРёСЃРє РїРѕ like*/
+                $not_like_array=array();/* Р“РґРµ РµСЃС‚СЊ РІ РЅР°Р·РІР°РЅРёРё "name", РЅРѕ РЅРµ РЅСѓР¶РµРЅ РїРѕРёСЃРє РїРѕ like*/
+                $no_auto=array(); /*РќРµ РѕР±СЂР°Р±Р°С‚С‹РІР°С‚СЊ РїРµСЂРµРјРµРЅРЅС‹Рµ, СЂСѓС‡РЅР°СЏ РѕР±СЂР°Р±РѕС‚РєР°*/
 
-                /*заменить на пустое в названиях переменны при поиске*/
+                /*Р·Р°РјРµРЅРёС‚СЊ РЅР° РїСѓСЃС‚РѕРµ РІ РЅР°Р·РІР°РЅРёСЏС… РїРµСЂРµРјРµРЅРЅС‹ РїСЂРё РїРѕРёСЃРєРµ*/
                 $field_tr=array('search_'=>'','_from'=>'','_to'=>'');
-                /*подмена названий*/
+                /*РїРѕРґРјРµРЅР° РЅР°Р·РІР°РЅРёР№*/
                 $field_change=array(/*'date'=>'time', 'anketa_name'=>'t3.`name`', 'name'=>'t2.`name`'*/);
 
                 foreach ($_REQUEST as $k=>$v)
@@ -206,7 +206,7 @@ class CCLog extends VirtualContent
                         if (!is_array($saveerrors)) $saveerrors = array();
                         if (count($saveerrors)>0){
                                 print '
-                                <p><strong>Сохранение не выполнено по следующим причинам:</strong></p>
+                                <p><strong>РЎРѕС…СЂР°РЅРµРЅРёРµ РЅРµ РІС‹РїРѕР»РЅРµРЅРѕ РїРѕ СЃР»РµРґСѓСЋС‰РёРј РїСЂРёС‡РёРЅР°Рј:</strong></p>
                                 <ul class="errors">';
                                         foreach ($saveerrors as $v) print '
                                         <li>'.$v.'</li>';
@@ -215,7 +215,7 @@ class CCLog extends VirtualContent
                                 <div class="hr"><hr /></div>';
                         }
                         ?>
-                        <p class="impfields">Поля, отмеченные знаком «<span class="important">*</span>», обязательные для заполнения.</p>
+                        <p class="impfields">РџРѕР»СЏ, РѕС‚РјРµС‡РµРЅРЅС‹Рµ Р·РЅР°РєРѕРј В«<span class="important">*</span>В», РѕР±СЏР·Р°С‚РµР»СЊРЅС‹Рµ РґР»СЏ Р·Р°РїРѕР»РЅРµРЅРёСЏ.</p>
                         <form id="editform" name="editform" action="<?=$_SERVER['REQUEST_URI']?>" method="POST" enctype="multipart/form-data">
                                 <input type="hidden" name="editformpost" value="1">
                                 <?
@@ -251,17 +251,17 @@ class CCLog extends VirtualContent
 
                         		$.datepicker.regional['ru'] =
 								{
-									closeText: 'Закрыть',
-									prevText: '&#x3c;Пред',
-									nextText: 'След&#x3e;',
-									currentText: 'Сегодня',
-									monthNames: ['Январь','Февраль','Март','Апрель','Май','Июнь',
-									'Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь'],
-									monthNamesShort: ['Янв','Фев','Мар','Апр','Май','Июн',
-									'Июл','Авг','Сен','Окт','Ноя','Дек'],
-									dayNames: ['воскресенье','понедельник','вторник','среда','четверг','пятница','суббота'],
-									dayNamesShort: ['вск','пнд','втр','срд','чтв','птн','сбт'],
-									dayNamesMin: ['Вс','Пн','Вт','Ср','Чт','Пт','Сб'],
+									closeText: 'Р—Р°РєСЂС‹С‚СЊ',
+									prevText: '&#x3c;РџСЂРµРґ',
+									nextText: 'РЎР»РµРґ&#x3e;',
+									currentText: 'РЎРµРіРѕРґРЅСЏ',
+									monthNames: ['РЇРЅРІР°СЂСЊ','Р¤РµРІСЂР°Р»СЊ','РњР°СЂС‚','РђРїСЂРµР»СЊ','РњР°Р№','РСЋРЅСЊ',
+									'РСЋР»СЊ','РђРІРіСѓСЃС‚','РЎРµРЅС‚СЏР±СЂСЊ','РћРєС‚СЏР±СЂСЊ','РќРѕСЏР±СЂСЊ','Р”РµРєР°Р±СЂСЊ'],
+									monthNamesShort: ['РЇРЅРІ','Р¤РµРІ','РњР°СЂ','РђРїСЂ','РњР°Р№','РСЋРЅ',
+									'РСЋР»','РђРІРі','РЎРµРЅ','РћРєС‚','РќРѕСЏ','Р”РµРє'],
+									dayNames: ['РІРѕСЃРєСЂРµСЃРµРЅСЊРµ','РїРѕРЅРµРґРµР»СЊРЅРёРє','РІС‚РѕСЂРЅРёРє','СЃСЂРµРґР°','С‡РµС‚РІРµСЂРі','РїСЏС‚РЅРёС†Р°','СЃСѓР±Р±РѕС‚Р°'],
+									dayNamesShort: ['РІСЃРє','РїРЅРґ','РІС‚СЂ','СЃСЂРґ','С‡С‚РІ','РїС‚РЅ','СЃР±С‚'],
+									dayNamesMin: ['Р’СЃ','РџРЅ','Р’С‚','РЎСЂ','Р§С‚','РџС‚','РЎР±'],
 									dateFormat: 'dd.mm.yy',
 									firstDay: 1,
 									isRTL: false
@@ -298,7 +298,7 @@ class CCLog extends VirtualContent
                         <?include_once($_SERVER['DOCUMENT_ROOT']."/inc/site_admin/nav.php");?>
                         <form id="searchform" name="searchform" action="./?section=<?=$section['id']?>" method="POST">
 							<div class="place" style="z-index: 10; width: 10%;">
-								<label>id записи</label>
+								<label>id Р·Р°РїРёСЃРё</label>
 								<span class="input">
 									<input type="text" name="search_item_id" maxlength="100" value="<?=$this->search_item_id?>"/>
 								</span>
@@ -316,37 +316,37 @@ class CCLog extends VirtualContent
 								</span>
 							</div>
 							<div class="place" style="z-index: 10; width: 10%;">
-								<label>действие</label>
+								<label>РґРµР№СЃС‚РІРёРµ</label>
 								<span class="input">
 									<input type="text" name="search_descr" maxlength="100" value="<?=$this->search_descr?>"/>
 								</span>
 							</div>
 							<div class="place" style="z-index: 10; width: 10%;">
-								<label>комментарий</label>
+								<label>РєРѕРјРјРµРЅС‚Р°СЂРёР№</label>
 								<span class="input">
 									<input type="text" name="search_comment" maxlength="100" value="<?=$this->search_comment?>"/>
 								</span>
 							</div>
 							<div class="place" style="z-index: 10; width: 10%;">
-								<label>Изменения</label>
+								<label>РР·РјРµРЅРµРЅРёСЏ</label>
 								<span class="input">
 									<input type="text" name="search_changes" maxlength="100" value="<?=$this->search_changes?>"/>
 								</span>
 							</div>
 							<div class="place" style="z-index: 10; width: 165px;">
-								<label>Дата с</label>
+								<label>Р”Р°С‚Р° СЃ</label>
 								<div><input id="from" name="search_date_from" type="text" style="width: 100px; float: left;" value="<?=htmlspecialchars($this->search_date_from)?>"/></div>
 							</div>
 
 							<div class="place" style="z-index: 10; width: 165px; margin-right: 2%;">
-								<label>Дата по</label>
+								<label>Р”Р°С‚Р° РїРѕ</label>
 								<div><input id="to" name="search_date_to" type="text" style="width: 100px; float: left;" value="<?=htmlspecialchars($this->search_date_to)?>"/></div>
 							</div>
 							<div class="place" style="width: 8%">
 								<label>&nbsp;</label>
 								<span class="forbutton">
 								<span>
-									<input class="button" type="submit" value="Найти" >
+									<input class="button" type="submit" value="РќР°Р№С‚Рё" >
 								</span>
 								</span>
 							</div>
@@ -361,7 +361,7 @@ class CCLog extends VirtualContent
                         $list = $this->getList('',$_GET['page']);
                         if (count($list)==0){
                                 ?>
-                                <p>Отсутствуют записи, удовлетворяющие заданным условиям</p>
+                                <p>РћС‚СЃСѓС‚СЃС‚РІСѓСЋС‚ Р·Р°РїРёСЃРё, СѓРґРѕРІР»РµС‚РІРѕСЂСЏСЋС‰РёРµ Р·Р°РґР°РЅРЅС‹Рј СѓСЃР»РѕРІРёСЏРј</p>
                                 <span class="clear"></span>
                                 <?
                         }
@@ -377,13 +377,13 @@ class CCLog extends VirtualContent
                                         <table class="table-content stat">
                                                 <tr>
                                                         <th class="t_32width">id</th>
-                                                        <th class="t_32width">дата</th>
-                                                        <th class="t_minwidth">id записи</th>
-                                                        <th class="t_minwidth">id раздела</th>
+                                                        <th class="t_32width">РґР°С‚Р°</th>
+                                                        <th class="t_minwidth">id Р·Р°РїРёСЃРё</th>
+                                                        <th class="t_minwidth">id СЂР°Р·РґРµР»Р°</th>
                                                         <th class="t_minwidth">user id</th>
                                                         <th class="t_minwidth">user name</th>
-                                                        <th>действие</th>
-                                                        <th>комментарий</th>
+                                                        <th>РґРµР№СЃС‚РІРёРµ</th>
+                                                        <th>РєРѕРјРјРµРЅС‚Р°СЂРёР№</th>
                                                         <th>ip</th>
                                                 </tr>
                                         <?

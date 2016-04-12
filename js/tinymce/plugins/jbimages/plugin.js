@@ -15,12 +15,12 @@ tinymce.PluginManager.add('jbimages', function(editor, url) {
 
 	function jbBox() {
 		editor.windowManager.open({
-			title: 'Загрузить изображение',
+			title: 'Р—Р°РіСЂСѓР·РёС‚СЊ РёР·РѕР±СЂР°Р¶РµРЅРёРµ',
 			file : url + '/dialog-v4.htm',
 			width : 350,
 			height: 135,
 			buttons: [{
-				text: 'вставить',
+				text: 'РІСЃС‚Р°РІРёС‚СЊ',
 				classes:'widget btn primary first abs-layout-item',
 				disabled : true,
 				onclick: 'close'
@@ -34,15 +34,15 @@ tinymce.PluginManager.add('jbimages', function(editor, url) {
 
 	// Add a button that opens a window
 	editor.addButton('jbimages', {
-		tooltip: 'Загрузить изображение',
+		tooltip: 'Р—Р°РіСЂСѓР·РёС‚СЊ РёР·РѕР±СЂР°Р¶РµРЅРёРµ',
 		icon : 'image',
-		text: 'изображение',
+		text: 'РёР·РѕР±СЂР°Р¶РµРЅРёРµ',
 		onclick: jbBox
 	});
 
 	// Adds a menu item to the tools menu
 	editor.addMenuItem('jbimages', {
-		text: 'Загрузить изображение',
+		text: 'Р—Р°РіСЂСѓР·РёС‚СЊ РёР·РѕР±СЂР°Р¶РµРЅРёРµ',
 		icon : 'image',
 		context: 'insert',
 		onclick: jbBox

@@ -1,6 +1,6 @@
 <?
 /*
-Функционал Листа
+Р¤СѓРЅРєС†РёРѕРЅР°Р» Р›РёСЃС‚Р°
 */
 class CCSheet extends VirtualContent
 {
@@ -75,7 +75,7 @@ class CCSheet extends VirtualContent
 			if (!is_array($saveerrors)) $saveerrors = array();
 			if (count($saveerrors)>0){
 				print '
-				<p><strong>Сохранение не выполнено по следующим причинам:</strong></p>
+				<p><strong>РЎРѕС…СЂР°РЅРµРЅРёРµ РЅРµ РІС‹РїРѕР»РЅРµРЅРѕ РїРѕ СЃР»РµРґСѓСЋС‰РёРј РїСЂРёС‡РёРЅР°Рј:</strong></p>
 				<ul class="errors">';
 					foreach ($saveerrors as $v) print '
 					<li>'.$v.'</li>';
@@ -84,7 +84,7 @@ class CCSheet extends VirtualContent
 				<div class="hr"><hr /></div>';
 			}
 			?>
-			<p class="impfields">Поля, отмеченные знаком «<span class="important">*</span>», обязательные для заполнения.</p>
+			<p class="impfields">РџРѕР»СЏ, РѕС‚РјРµС‡РµРЅРЅС‹Рµ Р·РЅР°РєРѕРј В«<span class="important">*</span>В», РѕР±СЏР·Р°С‚РµР»СЊРЅС‹Рµ РґР»СЏ Р·Р°РїРѕР»РЅРµРЅРёСЏ.</p>
 			<form id="editform" name="editform" action="<?=$_SERVER['REQUEST_URI']?>" method="POST" enctype="multipart/form-data">
 				<input type="hidden" name="editformpost" value="1">
 				<?
@@ -96,7 +96,7 @@ class CCSheet extends VirtualContent
 			?>
 			<div class="place">
 				<span style="float: right;">
-					<input class="button big" type="submit" name="editform" value="Сохранить"/>
+					<input class="button big" type="submit" name="editform" value="РЎРѕС…СЂР°РЅРёС‚СЊ"/>
 				</span>
 			</div>
 			<span class="clear"></span>

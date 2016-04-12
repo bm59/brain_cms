@@ -1,15 +1,15 @@
-$(function() {
+$( document ).ready(function() {
 
-	var interval = setInterval(function()
+/*	var interval = setInterval(function()
     {
+*/
 
-
-		var jcarousel = $('.jcarousel');
+		var jcarousel = $('.slider .jcarousel');
 
         jcarousel.jcarousel({
                 wrap: 'circular'
             });
-       
+        
         jcarousel.hover(
         		function(){
         			jcarousel.jcarouselAutoscroll('stop');
@@ -18,13 +18,17 @@ $(function() {
         	    	}
         );
         
+        $('.slider .jcarousel-control-prev').click(function() {jcarousel.jcarouselAutoscroll('stop');});
+        $('.slider .jcarousel-control-next').click(function() {jcarousel.jcarouselAutoscroll('stop');});
+        
+        
        jcarousel.jcarouselAutoscroll({
-            interval: 3500,
+            interval: 4800,
             target: '+=1',
             autostart: true
         });
 
-        $('.jcarousel-control-prev')
+        $('.slider .jcarousel-control-prev')
             .on('jcarouselcontrol:active', function() {
                 $(this).removeClass('inactive');
             })
@@ -35,7 +39,7 @@ $(function() {
                 target: '-=1'
             });
 
-        $('.jcarousel-control-next')
+        $('.slider .jcarousel-control-next')
             .on('jcarouselcontrol:active', function() {
                 $(this).removeClass('inactive');
             })
@@ -46,7 +50,7 @@ $(function() {
                 target: '+=1'
             });
 
-  					$('.jcarousel-pagination')
+  					$('.slider .jcarousel-pagination')
                     .on('jcarouselpagination:active', 'a', function() {
                         $(this).addClass('active');
                     })
@@ -62,8 +66,8 @@ $(function() {
                         }
                     });
 
-       clearInterval(interval);
+/*       clearInterval(interval);
 
-    }, 1000);
+    }, 1000);*/
 
 });

@@ -4,12 +4,14 @@ $SiteSections->init();
 
 /*$ss = $SiteSections->get($SiteSections->getIdByPath(configGet("AskUrl")));*/
 ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
-<html>
+<!DOCTYPE html>
 <head>
-<meta http-equiv="content-type" content="text/html;charset=windows-1251" />
-<meta http-equiv="content-language" content="ru" />
-<meta name="title" content="Панель управления <?=' - '.ConfigGet('pr_doptit')?>" />
+<meta charset="utf-8">
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta http-equiv="Content-Language" content="ru">
+
+<meta name="title" content="РџР°РЅРµР»СЊ СѓРїСЂР°РІР»РµРЅРёСЏ <?=' - '.ConfigGet('pr_doptit')?>" />
 <link rel="icon" href="/favico_manage.ico" type="image/x-icon" />
 <link rel="shortcut icon" href="/favico_manage.ico" type="image/x-icon" />
 
@@ -41,13 +43,13 @@ $SiteSections->init();
 	jQuery(function() {jQuery("#toTop").scrollToTop();});
  	$(document).ready(function(){
 		 $( ".button.disabled" ).click(function()
-		 {		 	/*alert('Кнопка недоступна');*/
+		 {		 	/*alert('РљРЅРѕРїРєР° РЅРµРґРѕСЃС‚СѓРїРЅР°');*/
 		 	return false;
 		 });
 	});
 </script>
 <?include_once($_SERVER['DOCUMENT_ROOT']."/inc/site_admin/access.php");?>
-<title>Панель управления <?=' - '.ConfigGet('pr_doptit')?></title>
+<title>РџР°РЅРµР»СЊ СѓРїСЂР°РІР»РµРЅРёСЏ <?=' - '.ConfigGet('pr_doptit')?></title>
 </head>
 <body>
 <div id="zbody">
