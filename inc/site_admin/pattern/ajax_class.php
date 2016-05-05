@@ -48,7 +48,46 @@
 
 		 		if ($tab!='')
 				msq("UPDATE `$tab` SET `".$_POST['field_name']."`='".htmlspecialchars( $_POST['value'])."' WHERE id='".$_POST['id']."' LIMIT 1");
-
+				
+				if (isset($_POST['print_ok']))
+				{
+					print
+					'{
+					   "ok": "ok"';
+					$ok=true;
+				}
+		 }
+		 
+		 if ($_POST['action']=='edit_field_apnd' && $_POST['section_id']>0 && $_POST['id']>0 && isset($_POST['value']) && $_POST['field_name']!='')
+		 {
+		 	$tab=getTableById($_POST['section_id']);
+		 	 
+		 
+		 	if ($tab!='')
+		 	{
+		 		
+		 		$cur_val=msr(msq("SELECT `".$_POST['field_name']."` as val FROM `$tab` WHERE id='".$_POST['id']."' LIMIT 1"));
+		 		
+		 		
+		 		
+		 		if ($_POST['add_date']=='true')
+		 		{
+		 			$now=msr(msq("SELECT TIMESTAMPADD(HOUR,2,NOW()) as now"));
+		 			$_POST['value'].='#'.$MySqlObject->dateTimeFromDB($now['now']);
+		 		}
+		 		
+		 		$new_val=$cur_val['val'].($cur_val['val']!='' ? '|':'').$_POST['value'];
+		 		
+		 		msq("UPDATE `$tab` SET `".$_POST['field_name']."`='".htmlspecialchars($new_val)."' WHERE id='".$_POST['id']."' LIMIT 1");
+		 
+		 		if (isset($_POST['print_ok']))
+		 		{
+		 			print
+		 			'{
+					   "ok": "ok"';
+		 			$ok=true;
+		 		}
+		 	}
 		 }
 
 		 if ($ok)

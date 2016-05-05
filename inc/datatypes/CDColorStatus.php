@@ -15,6 +15,41 @@ class CDColorStatus extends VirtualType
 	function get_values($settings) {
 		global $SiteSections;
 	
+		/*Внешний массив*/
+		if (is_array($this->getSetting('values')))
+		{
+			$settings['values']=$this->getSetting('values');
+			return $settings['values'];
+		}
+
+
+
+		/*Массив из настроек типа*/
+		elseif ($settings['values']!='')
+		{
+			$arr=array();
+			$val=explode(',', $settings['values']);
+			foreach ($val as $v)
+			{
+				$v=trim($v);
+
+				if (stripos($v,'#')!==false)
+				{
+					
+					$val=explode('#',$v);
+
+					$add['id']=$val[0];
+					$add['name']=$val[1];
+					$add['color']='#'.$val[2];
+					
+					$arr[$val[0]]=$add;
+				}
+				else
+				$arr[$v]=trim($v);
+			}
+			$settings['values']=$arr;
+		}
+		
 		if ($settings['source']!='')
 		{
 			$source=array();

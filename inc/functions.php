@@ -353,6 +353,32 @@ function getSprValuesOrder($sprnam,$order,$id=0,$add_empty=true)
     return $retval;
 
 }
+function getTableValuesOrder($sprnam, $order='', $key_field='')
+{
+	global $CDDataSet,$SiteSections;
+	$SiteSections= new SiteSections;
+	$SiteSections->init();
+	$Section = $SiteSections->get($SiteSections->getIdByPath($sprnam));
+	
+	if ($order=='') $order=' ORDER BY `id`';
+	if ($key_field=='') $key_field='id';
+	
+	if ($Section['id']>0)
+	{
+		$Section['id'] = floor($Section['id']);
+		$Pattern = new $Section['pattern'];
+		$Iface = $Pattern->init(array('section'=>$Section['id']));
+		if ($add_empty) $retval[-1]='&nbsp';
+		$q = msq("SELECT * FROM `".$Iface ->getSetting('table')."` ".$order);
+		while ($r = msr($q))
+		{
+			$retval[$r[$key_field]] = $r;
+
+		}
+	}
+	return $retval;
+
+}
 function getSprValuesShow($sprnam,$order,$id=0,$add_empty=true)
 {
 	global $CDDataSet,$SiteSections;

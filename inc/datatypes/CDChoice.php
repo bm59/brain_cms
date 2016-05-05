@@ -1,5 +1,5 @@
 <?
-class CDCHOICE extends VirtualType
+class CDChoice extends VirtualType
 {
 	function init($settings){
 		$settings['descr']='Выбор (закладки)';

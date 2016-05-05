@@ -88,11 +88,8 @@ class Storage extends VirtualClass
 
             /*При автоматической обрезке, исходное изображение не должно быть меньшего размера*/
             if ($mysql_settings['auto_resize']=='true')
-            {            	if ($mysql_settings['auto_resize_if_more']!='true')
-            	{
-            		if ($imgsize[0]<$mysql_settings['auto_width'])  $retval['errors'][] = 'Ширина загружаемого изображения '.floor($imgsize[0]).'px, а должна быть больше или равна '.$mysql_settings['auto_width'].'px';
-                	if ($imgsize[1]<$mysql_settings['auto_height'])  $retval['errors'][] = 'Высота загружаемого изображения '.floor($imgsize[1]).'px, а должна быть больше или равна '.$mysql_settings['auto_height'].'px';
-            	}
+            {            	if ($imgsize[0]<$mysql_settings['auto_width'])  $retval['errors'][] = 'Ширина загружаемого изображения '.floor($imgsize[0]).'px, а должна быть больше или равна '.$mysql_settings['auto_width'].'px';
+                if ($imgsize[1]<$mysql_settings['auto_height'])  $retval['errors'][] = 'Высота загружаемого изображения '.floor($imgsize[1]).'px, а должна быть больше или равна '.$mysql_settings['auto_height'].'px';
             }
 
 		}
@@ -126,12 +123,7 @@ class Storage extends VirtualClass
 				/*Обрезка изображений*/
 
 				if ($mysql_settings['auto_resize']==true)
-				{							
-							if (
-									(($mysql_settings['auto_width']>0 || $mysql_settings['auto_height']>0) && $mysql_settings['auto_resize_if_more']!='true') 
-									||
-									(($imgsize[0]>$mysql_settings['auto_width'] || $imgsize[1]>$mysql_settings['auto_height']) && $mysql_settings['auto_resize_if_more']=='true')
-							)
+				{							if ($mysql_settings['auto_width']>0 && $mysql_settings['auto_height']>0)
 							{
 								$this->ResizeFrame($storageobj['fullpath'].$filename, $mysql_settings['auto_width'],$mysql_settings['auto_height']);
 								$this->Crop($storageobj['fullpath'].$filename, $mysql_settings['auto_width'],$mysql_settings['auto_height']);
@@ -181,31 +173,15 @@ class Storage extends VirtualClass
 
 	    $srcimg = $func($src);
 	    $srcsize = getimagesize($src);
-	    
-/*      print 'srcsize0='.$srcsize[0].'<br/>';
-	    print 'srcsize1='.$srcsize[1].'<br/>';
-	    print 'maxWidth='.$maxWidth.'<br/>';
-	    print 'maxHeight='.$maxHeight.'<br/>';  */
-	    
-	   	if ($srcsize[0]<=$maxWidth && $srcsize[1]<=$maxHeight) return true;
+
+	    if ($srcsize[0]<=$maxWidth && $srcsize[1]<=$maxHeight) return true;
 
 
 	    /*Если пропорция по X больше*/
 	    if (($srcsize[0]/$maxWidth) > ($srcsize[1]/$maxHeight))
 	    {
-	    	
-	    	/*Если задана только 1 сторона*/
-	    	if (!$maxHeight>0 && $srcsize[0]>$maxWidth)
-	    	$maxHeight = round(($maxWidth / $srcsize[0]) * $srcsize[1]);
-	    	
-	    	
 	    	$dest_y = $maxHeight;
 	    	$dest_x = ($maxHeight / $srcsize[1]) * $srcsize[0];
-	    	
-	    	/* print 'Больше пропорция X';
-	    	print 'dest_y='.$dest_y.'<br/>';
-	    	print 'dest_x='.$dest_x.'<br/>'; */
-	    	
 	    	$thumbimg = imagecreatetruecolor($dest_x, $dest_y);
 	    	imageAlphaBlending($thumbimg, false);
 			imageSaveAlpha($thumbimg,true);
@@ -214,18 +190,8 @@ class Storage extends VirtualClass
 	    }
 	    else
 	    {
-	    	/* print 'Больше пропорция Y'; */
-	    	
-	    	/*Если задана только 1 сторона*/
-	    	if (!$maxWidth>0 && $srcsize[1]>$maxHeight)
-	    	$maxWidth = round(($maxHeight / $srcsize[1]) * $srcsize[0]); 
-	    	
 	    	$dest_x = $maxWidth;
 	    	$dest_y = ($maxWidth / $srcsize[0]) * $srcsize[1];
-	    	
-	    	/* print 'dest_y='.$dest_y.'<br/>';
-	    	print 'dest_x='.$dest_x.'<br/>'; */
-	    	
 	    	$thumbimg = imagecreatetruecolor($dest_x, $dest_y);
      		imageAlphaBlending($thumbimg, false);
 			imageSaveAlpha($thumbimg,true);

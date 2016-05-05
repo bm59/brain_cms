@@ -203,7 +203,7 @@ class CDTextEditor extends VirtualType
 		}*/
 	}
 	function getValue(){ return $this->getSetting('value'); }
-	function getUpdateSQL(){ return "`".$this->getSetting('name')."`='".addslashes($this->getSetting('value'))."'"; }
+	function getUpdateSQL(){ return "`".$this->getSetting('name')."`='".addslashes(str_replace('&nbsp;', ' ',$this->getSetting('value')))."'"; }
 	function delete(){
 		global $Storage;
 		$st = $Storage->getStorage(floor($this->getSetting('filestorage')));

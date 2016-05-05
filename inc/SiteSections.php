@@ -235,6 +235,12 @@ class SiteSections extends VirtualClass
                 }
                 return $current_id;
         }
+        function getByPattern($pattern_name){
+    			$section=msr(msq("SELECT * FROM `".$this->getSetting('table')."` WHERE `pattern`='$pattern_name'"));
+    			
+    			if ($section['id']>0)
+    			return $this->get($section['id']);
+        }
         function getPath($id){
                 $parents = $this->getParentsList($id);
                 $retval = '';

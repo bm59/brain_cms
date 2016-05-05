@@ -97,7 +97,7 @@ function getSelectSinonim_color($name,$values = array(),$selected = '', $setting
 	$retval ='<div class="input"><select name="'.$name.'" class="colorselect'.($select_type!='' ? ' '.$select_type:'').'" '.($settings['noselect'] ? 'disabled' :'').'>';
 	foreach ($values as $k=>$v){
 		$retval.= '
-            <option '.($v['color']!='' ? 'data-color="'.$v['color'].'" style="background: '.$v['color'].'"' :'').'  value="'.$v['id'].'" '.($v['id']==$selected || ($v['id']==$settings['default'] && floor($selected)<=0 && $select_type!='search') ? 'selected="selected"':'').'>'.$v['name'].'</option>';
+            <option '.($v['color']!='' ? 'data-color="'.$v['color'].'" style="'.($select_type=='search' ? 'color: #FFFFFF;':'').'background: '.$v['color'].'"' :'').'  value="'.$v['id'].'" '.($v['id']==$selected || ($v['id']==$settings['default'] && floor($selected)<=0 && $select_type!='search') ? 'selected="selected"':'').'>'.$v['name'].'</option>';
 	}
 	$retval.= '</select></div>';
 

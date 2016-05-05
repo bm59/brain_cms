@@ -110,7 +110,7 @@ class DataType extends VirtualClass
 
 
 		switch ($type) {
-			case 'CDCHOICE': case 'CDSelect':
+			case 'CDChoice': case 'CDSelect':
 				//print_r($tface);
 				$values=array('-1'=>'')+$tface->get_values($tface->Settings['settings']);
 
@@ -218,6 +218,11 @@ class DataType extends VirtualClass
 				if (strlen($val)>300)
 				$val=htmlspecialchars_decode(trim(mb_substr($val, 0, 300 )).'...');
 				print $val;
+			break;
+			case 'CDChoice':
+						$CDChoice=new CDChoice;
+						$values=$CDChoice->get_values($settings);
+						print $values[$val];
 			break;
 			case 'CDSelect':
 					if (isset($settings['editable']))

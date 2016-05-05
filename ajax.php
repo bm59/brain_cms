@@ -7,9 +7,46 @@ header("Content-type: text/html; charset=utf-8");
 
 if (session_id()!=$_POST['session_id']) die('Ошибка!!!');
 
+$section_basket=$SiteSections->getByPattern('PBasket');
+$basket=getIface($SiteSections->getPath($section_basket['id']));
 
 
-if ($_POST['action']=='send_vote' && $_POST['answer_id']>0 && $_POST['vote_id']>0 && $_POST['pt']>0 && $_POST['pt']<date('U'))
+if ($_POST['action']=='basket_add' && $_POST['tmp_order_id']>0 && $_POST['good_id']>0)
+{
+	
+	$return=$basket->addGood($_POST['tmp_order_id'], $_POST['good_id'], $_POST['kol'], $_POST['price_field']);
+	
+	
+	if (is_array($return) && $return['error']!='') print json_encode(array('error'=>$return['error']));
+	else print json_encode(array('ok'=>'ok'));
+}
+
+if ($_POST['action']=='basket_comment' && $_POST['tmp_order_id']>0)
+{
+	$return=$basket->GetTotalBasketComment($_POST['tmp_order_id']);
+	print json_encode(array('comment'=>$return));
+	
+}
+
+if ($_POST['action']=='basket_update_summ' && $_POST['tmp_order_id']>0 && $_POST['good_id']>0)
+{
+	$return=$basket->GetGoodBasket($_POST['tmp_order_id'], $_POST['good_id']);
+
+	print json_encode(array('summ'=>$return['summ']));
+
+}
+
+if ($_POST['action']=='get_discount' && $_POST['discount_id']>0)
+{
+	$section_discount=$SiteSections->get($SiteSections->getIdByPath('/sitecontent/basket/discount/'));
+	$discount_iface=getIface($SiteSections->getPath($section_discount['id']));
+	
+	$discount=$discount_iface->getPub($_POST['discount_id']);
+	print json_encode(array('discount'=>$discount['procent']));
+
+}
+
+/* if ($_POST['action']=='send_vote' && $_POST['answer_id']>0 && $_POST['vote_id']>0 && $_POST['pt']>0 && $_POST['pt']<date('U'))
 {
 	$voting_iface=getiface('/sitecontent/voting/');
 	$voting_Section = $SiteSections->get($SiteSections->getIdByPath('/sitecontent/voting/'));
@@ -25,7 +62,6 @@ if ($_POST['action']=='send_vote' && $_POST['answer_id']>0 && $_POST['vote_id']>
 		$add_vote=$voting_iface->addVote($answer['id'], $voting['id'], $_SERVER);
 		if ($add_vote==false) $alert='Ошибка. С вашего компьютера или IP адреса уже голосовали';
 
-		/* Если уже голосовали или добавили голос устанавливаем куку */
 		if ($add_vote==false) $add_vote=1;
 		cookieSet('vid'.$_POST['vote_id'], $add_vote, 30);
 
@@ -43,12 +79,8 @@ if ($_POST['action']=='send_vote' && $_POST['answer_id']>0 && $_POST['vote_id']>
 	}
 
 
-}
+} */
 
-if ($ok)
-{
-	print '
-				}';
-}
+
 
 ?>

@@ -1,0 +1,164 @@
+/*»нпуты*/
+
+.form INPUT {border: none; background: none;}
+.form .input {display: block; margin-right: 10px;}
+.form .input input, .form input[type="text"],.form  input[type="password"],.form textarea,.form select,.hasDatepicker {
+    border: 2px solid #DCDCDC;
+    box-shadow: 1px 1px 3px 1px rgba(200, 200, 200, 0.2) inset;
+    color: #000;
+    font-size: 14px;
+    outline: medium none;
+    padding: 10px;
+    transition: all 100ms cubic-bezier(0.42, 0, 0.58, 1) 0s;
+    margin: 10px 0;
+    width: 100%;
+    box-sizing: border-box;
+    background-color: #ffffff;
+}
+.form textarea {font-size: 16px;}
+
+.form .input select {padding: 9px 10px;}
+.form .input input:focus, .form input[type="text"]:focus,.form input[type="password"]:focus,.form textarea:focus,.form select:focus {
+    background-color: rgba(255, 255, 255, 0.5);
+    border: 2px solid #3366CC;
+    transition: all 100ms cubic-bezier(0.42, 0, 0.58, 1) 0s;
+    outline: none;
+}
+.form input::-moz-focus-inner,
+.form input[type="reset"]::-moz-focus-inner,
+.form input[type="select"]::-moz-focus-inner,
+.form input[type="button"]::-moz-focus-inner,
+.form input[type="submit"]::-moz-focus-inner,
+.form input[type="submit"]::-moz-focus-inner,
+.form input[type="file"] > input[type="button"]::-moz-focus-inner {/* */
+border: none;
+}
+.form select {
+    color: #474747 !important;
+}
+
+
+
+/*ќформление заказа*/
+.order TABLE {border-collapse: collapse;width: 100%; font-size: 22px;}
+.order TABLE TH {border: 1px solid #848484; padding: 20px 10px; background-color: #767676; color: #FFFFFF; text-align: center; font-weight: normal; font-size: 20px;}
+.order TABLE TD.right {text-align: right;font-weight:bold;}
+.order TABLE TD.goodname {text-align: left; font-weight:bold; color: #333333; font-size: 20px;}
+.order TABLE TD.goodname div {font-size: 18px; padding-top: 5px; font-weight: normal;}
+.order TABLE TD {vertical-align: middle; border: 1px solid #CCCCCC; padding: 10px 15px; text-align: center;}
+.order .close {-webkit-transition:background 0.2s ease;-moz-transition:background 0.2s ease;  -o-transition:background 0.2s ease;transition: background 0.2s ease; height: 38px; width: 38px; margin: 5px;}
+.order .close a {margin: 4px; display: block; height: 30px; width: 30px; background: url(/pics/delete_nb.png) 0 0 no-repeat; }
+.order .close:hover a {background-position: 0 -30px;}
+
+.address_table td {border: none!important; padding: 10px 15px 10px 0!important;}
+.address_table td label { display: inline-block;
+    text-align: left !important;
+    font-size: 16px;
+    width: 100%;}
+
+.kol_buttons {padding: 10px 10px 10px 40px; position: relative;}
+.kol_buttons div {float: left;}
+.kol_buttons .btn {background: #767676 none repeat scroll 0 0; padding:0!important; line-height: 35px; font-family: Tahoma!important; font-size: 30px!important; width: 40px; height: 40px;} 
+.kol_buttons input {font-size: 20px!important;text-align: center; height: 40px; width: 70px!important; float: left; margin: 0!important;}
+.kol_buttons .preloader {display: none; height: 35px; left: 100px; position: absolute; width: 35px; top: 12px;}
+
+
+
+/* нопки*/
+.btn 
+{
+	outline: none;
+	border: none;
+	font-size: 15px;
+	color: #FFFFFF !important; 
+	background-image: none;
+	text-decoration: none;
+    text-shadow: none;
+	cursor: pointer;
+	display: inline-block;
+	box-shadow: none;
+	font-style: normal;
+	text-shadow: none;
+	vertical-align: middle;
+    text-align: center;	
+    margin: 0;
+    background: #3366CC;
+	transition:all 0.3s ease;
+	-moz-user-select: -moz-none;
+	-o-user-select: none;
+	-khtml-user-select: none;
+	-webkit-user-select: none;
+	user-select: none;
+
+}
+.btn:hover {background: #3399FF; !important; color: #FFFFFF !important; }
+.btn img {display: inline-block; vertical-align: middle; padding-left: 10px;}
+
+.btn.big {padding: 15px 25px; font-size: 18px;}
+.btn.med {padding: 11px 25px; font-size: 18px;}
+.btn.pay {font-size: 20px;}
+
+.styled ul.radio-group li {
+    position: relative;
+    list-style: none;
+    padding: 10px;
+}
+
+.styled input[type="radio"] {
+  opacity: 0;
+  position: absolute;
+}
+
+.styled input[type="radio"] + label
+{
+cursor: pointer;
+padding-top: 4px;
+font-size: 18px;
+padding-right: 15px;
+line-height: 35px;
+
+}
+.styled input[type="radio"] + label > span {
+  position: relative;
+  border-radius: 20px;
+  width: 20px;
+  height: 20px;
+  background-color: #FFFFFF;
+  border: 2px solid #bcbcbc;
+  margin: -2px 3px 0 0;
+  display: inline-block;
+  vertical-align: middle;
+}
+.styled input[type="radio"] + label:hover > span {
+  border: 2px solid #1F2D37;
+
+}
+
+.styled input[type="radio"]:checked + label > span span {
+   display: inline-block;
+    width: 10px;
+    height: 10px;
+    position: absolute;
+    left: 5px;
+    top: 5px;
+    border-radius: 4px;
+    border: none;
+    background: #1F2D37;
+}
+
+.styled input[type="radio"]:checked + label > span {
+  border: 2px solid #1F2D37;
+
+}
+
+
+
+
+/*ѕанель вида и сортировки*/
+.view_panel .view_type div {float: left; padding-right: 10px; line-height: 28px; color: #666666}
+.view_panel .view_type a {background-color: #E7E7E7; float: left; display: block; padding: 4px 5px; border: 1px solid #CCCCCC; margin: 0 2px;}
+.view_panel .view_type a img {display: inline-block; vertical-align: middle; line-height: 16px; margin-top: -2px;}
+.view_panel .view_type a.active {border: 1px solid #3366CC; background-color: #FFFFFF;}
+
+.view_panel .sort_type {float: right;}
+.view_panel .sort_type div {float: left; padding-right: 10px; line-height: 28px; color: #666666}

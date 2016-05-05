@@ -17,16 +17,20 @@ $SiteSections->init();
 
 <link rel="stylesheet" href="/css/manage.css" type="text/css" media="screen" />
 <link rel="stylesheet" href="/js/jquery-ui-1.10.4.custom/css/blitzer/jquery-ui-1.10.4.custom.css" type="text/css" media="screen" />
-<link rel="stylesheet" type="text/css" href="/css/inputs/multiple-select.css" media="all" />
 <link rel="stylesheet" type="text/css" href="/css/inputs/checkbox.css" media="all" />
 <!--//<link rel="stylesheet" type="text/css" href="/css/tablednd.css" media="all" />//-->
 <link rel="stylesheet" type="text/css" href="/css/highslide.css" />
 <link href="/css/inputs/jquery.contextMenu.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" type="text/css" href="/css/jquery.multiselect.css" media="all" />
 
 <script src="/js/manage.js" type="text/javascript"></script>
+<script src="/js/imag.js" type="text/javascript"></script>
+
+
 
 <script src="/js/jquery.js" type="text/javascript"></script>
 <script src="/js/jquery-ui-1.10.4.custom/js/jquery-ui-1.10.4.custom.min.js" type="text/javascript"></script>
+<script src="/js/jquery.multiselect.js" type="text/javascript"></script>
 <script src="/js/spinner_default.js" type="text/javascript"></script>
 <script src="/js/spinner_rub.js" type="text/javascript"></script>
 <script src="/js/ajaxupload.3.5.js" type="text/javascript"></script>

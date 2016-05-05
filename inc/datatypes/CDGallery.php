@@ -4,7 +4,7 @@ class CDGallery extends VirtualType
 	function init($settings){
 		$settings['descr']='Картинки (галерея)';
 		$settings['help']=array(
-				'auto_resize=true|auto_width=187|auto_height=120'=>'Автоматическая обрезка изображений',
+				'auto_resize=true|auto_resize_if_more=true|auto_width=187|auto_height=120|'=>'Автоматическая обрезка изображений',
 				'imgw=245|imgwtype=1|imgh=400|imghtype=1'=>'Проверка на размер изображений',
 				'comment=комментарий'=>'Комментарий',
 				'auto_mini=true|auto_mini_width=210|auto_mini_height=220'=>'Автоматическое создание миниатюр',
@@ -42,7 +42,7 @@ class CDGallery extends VirtualType
             data: {},
             onSubmit: function(file, ext){
             	$('#loading').show();
-                this.setData({sid : '<?=session_id()?>', theme: '<?=trim($settings['theme'])?>', rubric: '<?=trim($settings['rubric'])?>', stid: '<?=$st['id']?>', uid: <?=floor($settings['uid'])?>});
+                this.setData({sid : '<?=session_id()?>', theme: '<?=trim($this->getSetting('theme'))?>', rubric: '<?=trim($this->getSetting('rubric'))?>', stid: '<?=$st['id']?>', uid: <?=floor($settings['uid'])?>});
             },
             onComplete: function(file, response){
                 $('#file').html('');

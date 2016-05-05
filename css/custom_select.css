@@ -1,0 +1,65 @@
+/*	=	Select */
+.slct {
+	display: block;
+	border-radius: 2px;
+	border: 1px solid #CCCCCC;
+	background-color: #F6F6f6;
+	width: 130px;
+	padding: 0 15px 2px 15px;
+	color: #444;
+	overflow: hidden;
+	white-space:nowrap;
+	text-overflow: ellipsis;
+	-o-text-overflow: ellipsis;	
+	//background: rgba(0, 0, 0, 0) url("/pics/inputs/select.gif");
+	//background-position: 135px 15px;
+	//background-repeat: no-repeat;
+
+	font-size: 15px;
+}
+.slct.active {
+	border-radius: 2px 2px 0 0;
+	border-bottom: none;
+}
+.select .drop {
+	margin: 0;
+	padding: 0;
+	width: 160px;
+	border: 1px solid #cecece;
+	border-top: none;
+	display: none;
+	position: absolute;
+	background: #fff;
+	z-index: 999;
+}
+.select .drop li {
+	list-style: none;
+	border-top: 1px dotted #e8e8e8;
+	cursor: pointer;
+	display: block;
+	color: #444;
+	padding: 4px 15px 4px 5px;
+	background-position: 10px -119px;
+}
+.select .drop li:hover {
+	background-color: #e8e8e8;
+	color: #222;
+}
+.select .drop li a {padding-left: 10px; text-decoration: none;}
+.select .drop li a.active {text-decoration: underline;}
+.select .sort {
+	background: rgba(0, 0, 0, 0) url("/pics/inputs/sort.png") no-repeat scroll 0 0px;
+	display: inline-block;
+	width: 16px; 
+	height: 8px;
+	padding-right: 5px;
+
+}
+.select .sort.down {
+	background: rgba(0, 0, 0, 0) url("/pics/inputs/sort.png") no-repeat scroll 0 -8px;
+	display: inline-block;
+	width: 16px; 
+	height: 8px;
+	padding-right: 5px;
+
+}

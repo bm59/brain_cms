@@ -1,0 +1,4 @@
+“аблица с товарами - не создаетс€ автоматически, ее надо прив€зать в паттерне 
+
+'table_goods'=>'site_site_universal_universal_12',
+'table_categs'=>'site_site_universal_universal_13',

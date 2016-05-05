@@ -1,5 +1,0 @@
-1) Добавить в настройки сайта callback_email
-2) Скопировать папку callback
-3) Подключить callback.php
-
-<a rel="leanModal" name="signup" href="#signup">заказать звонок</a>
