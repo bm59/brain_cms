@@ -6,9 +6,17 @@ $( document ).ready(function() {
 
 		var jcarousel = $('.slider .jcarousel');
 
-        jcarousel.jcarousel({
-                wrap: 'circular'
-            });
+        jcarousel.jcarousel(
+        		{
+        			animation: {
+        	            duration: 0 // make changing image immediately
+        	        },
+        	        wrap: 'circular'
+        	        }
+        		);
+        jcarousel.on('jcarousel:animate', function (event, carousel) {
+            $(carousel._element.context).find('li').hide().fadeIn(500);
+        });
         
         jcarousel.hover(
         		function(){

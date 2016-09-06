@@ -68,6 +68,14 @@ function mstable($module,$theme,$block,$fields){ // Создает таблиц�
 	}
 	return $tabname;
 }
+function create_table($tabname,$fields){ // Создает таблицу в БД, или возвращает название уже созданной таблицы
+	if (!msq("DESCRIBE `".$tabname."`")){
+		$query = "";
+		foreach($fields as $k=>$v) $query.= ", `$k` $v ";
+		msq("CREATE TABLE `".$tabname."` (id BIGINT auto_increment PRIMARY KEY ".$query.")");
+	}
+	return $tabname;
+}
 function mslastid() { global $MySqlObject; return $MySqlObject->lastInsertId(); }
 function msdtodb($date) { global $MySqlObject; return $MySqlObject->dateToDB($date); }
 function msdfromdb($date) { global $MySqlObject; return $MySqlObject->dateFromDBDot($date); }
@@ -76,4 +84,6 @@ function msdtfromdb($date) { global $MySqlObject; return $MySqlObject->dateTimeF
 
 $MySqlObject = new MySqlConnect; /* Создание и инициализация объекта */
 $MySqlObject->connect();
+
+msq("SET TIME_ZONE='+5:00'");
 ?>

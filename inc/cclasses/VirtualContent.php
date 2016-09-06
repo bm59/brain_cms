@@ -89,6 +89,61 @@ class VirtualContent
 			</script>
 			<?
 	}
+	function createSubSection ($sub_path='', $sub_name='', $add_fields=array(), $add_values=array(), 
+			$settings_personal, $parent_path='', $section_pattern='PUniversal')
+	{
+		global $CDDataSet, $SiteSections, $DataType;
+	
+		if ($parent_path!='')
+		$parent = $SiteSections->get($SiteSections->getIdByPath($parent_path));
+		else
+		$parent = $SiteSections->get($this->getSetting('section'));
+				 
+				 
+				$parent_path = $SiteSections->getPath($this->getSetting('section'));
+				 
+				$sub_section = $SiteSections->get($SiteSections->getIdByPath($parent_path.$sub_path.'/'));
+				 
+				if (!$sub_section['id']>0)
+				{
+					if (!$parent_id>0) $parent_id=$this->getSetting('section');
+	
+					$SiteSections->add(array(
+							'name'=>$sub_name,
+							'path'=>$sub_path,
+							'pattern'=>$section_pattern,
+							'settings_personal'=>array($settings_personal)
+	
+					), $parent['id']);
+	
+					$sub_section = $SiteSections->get($SiteSections->getIdByPath($parent_path.$sub_path.'/'));
+						
+					$dt=new DataType;
+					$dt->init();
+						
+					/* Добавляем поля в раздел */
+					foreach ($add_fields as $add)
+					{
+						$add['section_id']=$sub_section['id'];
+						$dt->add($add, true, '', $sub_section['id']);
+					}
+	
+						
+					/* Вставляем начальные данные в таблицу */
+					if ($sub_section['id']>0 && count($add_values)>0)
+					{
+						$Pattern = new $sub_section['pattern'];
+						$Iface = $Pattern->init(array('section'=>$sub_section['id']));
+						foreach ($add_values as $add)
+						{
+							$this->insertNotDouble($add, $Iface->getSetting('table'));
+						}
+					}
+					 
+				}
+	
+				 
+	}
 	function drawPubsList($param=''){
 		global $SiteSections, $CDDataSet, $CDDataType;
 

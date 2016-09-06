@@ -1,6 +1,6 @@
 
 .ui-multiselect input[type="checkbox"] {position:relative!important; left:0!important;}
-button.ui-multiselect {width: 1090px!important} 
+button.ui-multiselect {width: 1090px} 
 
 .ui-multiselect { padding: 10px; text-align:left;}
 .ui-multiselect span.ui-icon { float:right }
@@ -17,7 +17,7 @@ button.ui-multiselect {width: 1090px!important}
 
 .ui-multiselect-checkboxes .level_0 label {font-weight: bold!important;}
 .ui-multiselect-checkboxes li.level_1 {margin-left: 20px;}
-
+.ui-multiselect-checkboxes li.level_2 {margin-left: 40px;}
 .ui-multiselect-menu { display:none; padding:3px; position:absolute; z-index:10000; text-align: left }
 .ui-multiselect-checkboxes { position:relative /* fixes bug in IE6/7 */; overflow-y:scroll }
 .ui-multiselect-checkboxes label { cursor:default; display:block; border:1px solid transparent; padding:3px 1px }

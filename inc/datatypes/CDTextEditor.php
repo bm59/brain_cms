@@ -131,7 +131,7 @@ class CDTextEditor extends VirtualType
 		<?
 		}
 		?>
-			<div><textarea class="tiny" id="<?=htmlspecialchars($this->getSetting('name'))?>" name="<?=htmlspecialchars($this->getSetting('name'))?>"><?=htmlspecialchars($this->getSetting('value'))?></textarea></div>
+			<div><textarea class="tiny" id="<?=htmlspecialchars($this->getSetting('name'))?>" name="<?=htmlspecialchars($this->getSetting('name'))?>"><?=htmlspecialchars_decode($this->getSetting('value'))?></textarea></div>
 		</div>
 		</div>
 		<input type="hidden" name="<?=htmlspecialchars($this->getSetting('name'))?>_htmlview" id="<?=htmlspecialchars($this->getSetting('name'))?>_htmlview" value="">
@@ -202,8 +202,8 @@ class CDTextEditor extends VirtualType
 			}
 		}*/
 	}
-	function getValue(){ return $this->getSetting('value'); }
-	function getUpdateSQL(){ return "`".$this->getSetting('name')."`='".addslashes(str_replace('&nbsp;', ' ',$this->getSetting('value')))."'"; }
+	function getValue(){ return htmlspecialchars_decode($this->getSetting('value')); }
+	function getUpdateSQL(){ return "`".$this->getSetting('name')."`='".addslashes(str_replace('&nbsp;', ' ', htmlspecialchars($this->getSetting('value'))))."'"; }
 	function delete(){
 		global $Storage;
 		$st = $Storage->getStorage(floor($this->getSetting('filestorage')));

@@ -23,8 +23,7 @@ class CDSPINNER extends VirtualType
 		  $(function() {
 
 		    var spinner = $( "input[name='<?=htmlspecialchars($this->getSetting('name'))?>']" ).spinner({
-			min:  <?=(($settings['min']!='') ? $settings['min']:'0')?>,
-			numberFormat: "C",
+			<?=(($settings['min']!='') ? 'min: '.$settings['min'].',' :'')?>
 		    <?=(($settings['max']!='') ? ' max: '.$settings['max']:'')?>
 			  });
 
@@ -57,10 +56,12 @@ class CDSPINNER extends VirtualType
 
 		$settings = $this->getSetting('settings');
 
-		$newvalue=preg_replace('/[^0-9]/', '', $_POST[$this->getSetting('name')]);
+		$newvalue=$_POST[$this->getSetting('name')];
 
-		if ($newvalue!='' && $newvalue>-1)
-		$newvalue = floatval($newvalue);
+	/* 	$newvalue=preg_replace('/[^0-9]/', '', $_POST[$this->getSetting('name')]);
+	
+	 	if ($newvalue!='' && $newvalue>-1)
+		$newvalue = floatval($newvalue); */
 
 
 		if ((isset($settings['important'])) && (!is_float($newvalue))) $errors[] = 'Заполните поле «'.$this->getSetting('description').'»';

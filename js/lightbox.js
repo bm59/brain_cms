@@ -13,18 +13,18 @@
 
   var LightboxOptions = (function() {
     function LightboxOptions() {
-      this.fadeDuration                = 500; //время открытия картинки мс
-      this.fitImagesInViewport         = true; //подгонка под размер экрана true/false
-      this.resizeDuration              = 700; //время разворачивания картинки мс
-      this.positionFromTop             = 50; //отступ окна lightBox сверху экрана
-      this.showImageNumberLabel        = true; //вывод номера картинки true/false
+      this.fadeDuration                = 500; //РІСЂРµРјСЏ РѕС‚РєСЂС‹С‚РёСЏ РєР°СЂС‚РёРЅРєРё РјСЃ
+      this.fitImagesInViewport         = true; //РїРѕРґРіРѕРЅРєР° РїРѕРґ СЂР°Р·РјРµСЂ СЌРєСЂР°РЅР° true/false
+      this.resizeDuration              = 700; //РІСЂРµРјСЏ СЂР°Р·РІРѕСЂР°С‡РёРІР°РЅРёСЏ РєР°СЂС‚РёРЅРєРё РјСЃ
+      this.positionFromTop             = 50; //РѕС‚СЃС‚СѓРї РѕРєРЅР° lightBox СЃРІРµСЂС…Сѓ СЌРєСЂР°РЅР°
+      this.showImageNumberLabel        = true; //РІС‹РІРѕРґ РЅРѕРјРµСЂР° РєР°СЂС‚РёРЅРєРё true/false
       this.alwaysShowNavOnTouchDevices = false;
       this.wrapAround                  = false;
     }
 
     // Change to localize to non-english language
     LightboxOptions.prototype.albumLabel = function(curImageNum, albumSize) {
-      return "Изображение " + curImageNum + " из " + albumSize;
+      return "РР·РѕР±СЂР°Р¶РµРЅРёРµ " + curImageNum + " РёР· " + albumSize;
     };
 
     return LightboxOptions;

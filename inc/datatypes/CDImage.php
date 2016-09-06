@@ -122,11 +122,11 @@ class CDImage extends VirtualType
     			if ($.cookie('change_photo<?='_'.$_GET['section']?><?='_'.$this->getSetting('name')?>')=='1' && $.cookie('change_photo<?='_'.$_GET['section']?><?='_'.$this->getSetting('name')?>')!='null')
     			{
 
-					/* alert('Есть изменения'); */
+					// alert('Есть изменения');
     	            $.cookie('change_photo<?='_'.$_GET['section']?><?='_'.$this->getSetting('name')?>', null, {path: '/'});
 
     	            var src=$('#contentimg<?='_'.$this->getSetting('name')?>').attr("src").split("?")[0] + "?" + Math.random();
-    	            $('#contentimg<?='_'.$this->getSetting('name')?>').attr('src','');
+     	            $('#contentimg<?='_'.$this->getSetting('name')?>').attr('src','');
     	            $('#contentimg<?='_'.$this->getSetting('name')?>').attr('src',src);
 
     	            clearInterval(interval);
@@ -211,7 +211,7 @@ class CDImage extends VirtualType
 							print $inner;
 						}
 						else print '
-						<img class="contentimg" id="contentimg'.$this->getSetting('name').'" src="'.$image['path'].'" '.(($st['name']!='Баннеры') ? 'style="width: 170px"':'').'/>';
+						<img class="contentimg" id="contentimg_'.$this->getSetting('name').'" src="'.$image['path'].'" '.(($st['name']!='Баннеры') ? 'style="width: 170px"':'').'/>';
 
 					}
 

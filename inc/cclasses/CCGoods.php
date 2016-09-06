@@ -31,6 +31,55 @@ class CCGoods extends VirtualContent
 
 
    }
+   function getSearch(){
+   	global $MySqlObject;
+   
+   	foreach ($_REQUEST as $k=>$v)
+   		if (stripos($k,'search')!==false && $v!='' && $v!='-1')
+   			if (!in_array($k,$this->no_auto))
+   				if (strpos($k, 'nouse_')===false)
+   				{
+   					$this->$k=$v;
+   
+   					$mysql_k=strtr($k,$this->field_tr);
+   					$mysql_k=strtr($mysql_k,$this->field_change);
+   
+   					$this->urlstr.='&'.$k.'='.$v;
+   
+   					if (!in_array($mysql_k,$this->field_change)) $mysql_k='`'.$mysql_k.'`';
+   
+   					if ($this->sqlstr =='') $sql_pref=' WHERE ';  /*!!!Заменить на WHERE если нет других условий*/
+   					else $sql_pref=' and ';
+   
+   
+   					if ($_REQUEST['nouse_'.$k.'_type']=='CDCHOICE')
+   						$this->sqlstr.=$sql_pref.$mysql_k." like '%,".$v.",%'";
+   						elseif ((stripos($k,'name')!==false || in_array($k,$this->like_array)) and !in_array($k,$this->not_like_array))
+   						$this->sqlstr.=$sql_pref.$mysql_k." like '%".$v."%'";
+   						elseif (stripos($k, '_from') && $v!='')
+   						$this->sqlstr.=$sql_pref.$mysql_k.">='".$MySqlObject->dateToDB($v)."'";
+   						elseif (stripos($k, '_to') && $v!='')
+   						$this->sqlstr.=$sql_pref.$mysql_k."<='".$MySqlObject->dateToDB($v)."'";
+   						else $this->sqlstr.=$sql_pref.$mysql_k."='".$v."'";
+   
+   				}
+   			
+   			if (is_array($_POST['categs']))
+   			{
+   				$cat_usl='';
+   				if ($this->sqlstr =='') $sql_pref=' WHERE ';  /*!!!Заменить на WHERE если нет других условий*/
+   				else $sql_pref=' and ';
+   				
+   				foreach ($_POST['categs'] as $cat) {
+   					$cat_usl.=(($cat_usl!='') ? ' or ':'')."(`categs` like '%,".$cat.",%')";
+   				}
+   				
+   				$cat_usl='('.$cat_usl.')';
+   				
+   				$this->sqlstr.=$sql_pref.$cat_usl;
+
+   			}
+   }
    function drawAddEdit(){
    	global $CDDataSet,$SiteSections, $multiple_editor;
    	$section = $SiteSections->get($this->getSetting('section'));
@@ -67,27 +116,104 @@ class CCGoods extends VirtualContent
    		                        ?>
    		                        <p class="impfields">Поля, отмеченные знаком «<span class="important">*</span>», обязательные для заполнения.</p>
    		                        <form id="editform" name="editform" action="<?=$_SERVER['REQUEST_URI']?>" method="POST" enctype="multipart/form-data">
-   		                                <input type="hidden" name="editformpost" value="1">
+	   		                        <div class="place">
+	   		                                <span style="float: right;">
+	   		                                	<input class="button big" type="submit" name="editform" value="<?=($pub['id']>0)?'Сохранить изменения':'Добавить'?>"/>
+	   		                                </span>
+	   		                        </div>
+	   		                        <input type="hidden" name="editformpost" value="1">
    		                                
    		                   <?
+   		                   
+   		                   if (isset($pub['is_size']))
+   		                   {             	
+   		                   		$this->createSubSection(
+   		                   			'size_template',
+   		                   			'Шаблоны размеров',
+   		                   			array
+   		                   			(
+   		                   				array('dataset'=>$CDDataSet->GetIdByName('rubricator'), 'name'=>'name', 'description'=>'Наименование', 'type'=>'CDText', 'settings'=>'|show_search|show_list|important|', 'table_type'=>'VARCHAR(255)'),
+   		                   				array('dataset'=>$CDDataSet->GetIdByName('rubricator'), 'name'=>'description', 'description'=>'Описание', 'type'=>'CDText', 'settings'=>'|show_search|show_list|important|', 'table_type'=>'VARCHAR(255)'),
+   		                   			),
+   		                   			array
+   		                   			(
+   		                   					array('name'=>'Европа', 'parent_id'=>0, 'show'=>1),
+   		                   						array('name'=>'XXS', 'description'=>'40 российский размер', 'parent_id'=>1, 'show'=>1),
+   		                   						array('name'=>'XS', 'description'=>'42 российский размер', 'parent_id'=>1, 'show'=>1),
+   		                   						array('name'=>'S', 'description'=>'44 российский размер', 'parent_id'=>1, 'show'=>1),
+   		                   						array('name'=>'M', 'description'=>'46 российский размер', 'parent_id'=>1, 'show'=>1),
+   		                   						array('name'=>'L', 'description'=>'48 российский размер', 'parent_id'=>1, 'show'=>1),
+   		                   						array('name'=>'XL', 'description'=>'50 российский размер', 'parent_id'=>1, 'show'=>1),
+   		                   						array('name'=>'XXL', 'description'=>'52 российский размер', 'parent_id'=>1, 'show'=>1),
+   		                   						array('name'=>'XXXL', 'description'=>'54 российский размер', 'parent_id'=>1, 'show'=>1),
+   		                   					
+   		                   			),
+   		                   			'|onoff|show_id|default_order=ORDER BY `id` ASC|',
+   		                   			'',
+   		                   			'PRubricator'
+   		                   			);
+   		                   }
+   		                   
+   		                   if (isset($pub['is_color']))
+   		                   {
+   		                   	$this->createSubSection(
+   		                   			'color_template',
+   		                   			'Шаблоны цветов',
+   		                   			array
+   		                   			(
+   		                   					array('dataset'=>$CDDataSet->GetIdByName('rubricator'), 'name'=>'name', 'description'=>'Наименование', 'type'=>'CDText', 'settings'=>'|show_search|show_list|important|', 'table_type'=>'VARCHAR(255)'),
+   		                   					array('dataset'=>$CDDataSet->GetIdByName('rubricator'), 'name'=>'color_image', 'description'=>'Изображение', 'type'=>'CDImage', 'settings'=>'|show_search|show_list|important|', 'table_type'=>'BIGINT(20)'),
+   		                   					array('dataset'=>$CDDataSet->GetIdByName('rubricator'), 'name'=>'color_code', 'description'=>'Код цвета (#ff0000)', 'type'=>'CDText', 'settings'=>'|show_search|show_list|important|', 'table_type'=>'VARCHAR(255)'),
+   		                   			),
+   		                   			array
+   		                   			(
+   		                   					array('name'=>'Базовые цвета', 'parent_id'=>0, 'show'=>1),
+   		                   					array('name'=>'Белый', 'color_code'=>'#FFFFFF', 'parent_id'=>1, 'show'=>1),
+   		                   					array('name'=>'Черный', 'color_code'=>'#000000', 'parent_id'=>1, 'show'=>1),
+   		                   					array('name'=>'Красный', 'color_code'=>'#FF0000', 'parent_id'=>1, 'show'=>1),
+   		                   					array('name'=>'Синий', 'color_code'=>'#00008B', 'parent_id'=>1, 'show'=>1),
+   		                   					array('name'=>'Зеленый', 'color_code'=>'#008000', 'parent_id'=>1, 'show'=>1),
+   		                   					array('name'=>'Желтый', 'color_code'=>'#FFFF00', 'parent_id'=>1, 'show'=>1)
+   		                   					 
+   		                   			),
+   		                   			'|onoff|show_id|default_order=ORDER BY `id` ASC|',
+   		                   			'',
+   		                   			'PRubricator'
+   		                   			);
+   		                   }
+   		                   $categ_section=$SiteSections->getIdByPath($SiteSections->getPath($section['id']).'categs/');
+   		                   if (!$categ_section['id']>0)
+   		                   print '<h2>Необходимо добавить дочерний раздел "categs" с категориями товаров</h2>';
+   		                   else 
+   		                   $categ_iface=getIface($SiteSections->getPath($section['id']).'categs/');
+   		                   		
+
    		                   $values=array();
-   		                   $parents=msq("SELECT * FROM `site_site_rubricator_rubricator_25` WHERE `show`=1 and `parent_id`=0 ORDER BY `precedence`");
+   		                   $parents=msq("SELECT * FROM `".$categ_iface->getSetting('table')."` WHERE `show`=1 and `parent_id`=0 ORDER BY `precedence`");
    		                   while($r=msr($parents))
    		                   {
    		                   		$values[]=array('level'=>0, 'id'=>$r['id'], 'name'=>$r['name']);
-   		                   		$childs=msq("SELECT * FROM `site_site_rubricator_rubricator_25` WHERE `show`=1 and `parent_id`=".$r['id']." ORDER BY `precedence`");
+   		                   		$childs=msq("SELECT * FROM `".$categ_iface->getSetting('table')."` WHERE `show`=1 and `parent_id`=".$r['id']." ORDER BY `precedence`");
    		                   		while($ch=msr($childs))
    		                   		{
    		                   			$values[]=array('level'=>1, 'id'=>$ch['id'], 'name'=>$ch['name'], 'parent'=>$ch['parent_id']);
+   		                   			
+   		                   			$childs2=msq("SELECT * FROM `".$categ_iface->getSetting('table')."` WHERE `show`=1 and `parent_id`=".$ch['id']." ORDER BY `precedence`");
+   		                   			
+   		                   			while($ch2=msr($childs2))
+   		                   			{
+   		                   				$values[]=array('level'=>2, 'id'=>$ch2['id'], 'name'=>$ch2['name'], 'parent'=>$ch2['parent_id']);
+   		                   			}
    		                   		}
    		                   }
    		                   
    		                   ?>
    		<div class="place" style="z-index: 9999; width:100%; margin-right: 1%;">
-						<label>Разделы</label>
+						<label>Раздел</label>
 						<select multiple="multiple" id="categs" name="categs[]">
 					        <?
-
+						 	if (!is_array($cur_sections)) $cur_sections=array();
+						 		
 					        foreach ($values as $val)
 					        {
 					        	?><option <?=strpos($pub['categs'],','.$val['id'].',')!==false ? 'selected' :''?> class="<?=(isset($val['level']) ? 'level_'.$val['level'] :'') ?><?=($val['level']>0 ? ' parent_'.$val['parent'].' himself_parent_'.$val['id'] : ' himself_parent_'.$val['id']) ?>" value="<?=$val['id']?>" <?=((in_array($k, $cur_sections)) ? 'checked="checked"':'')?>><?=$val['name']?></option><?
@@ -106,32 +232,32 @@ class CCGoods extends VirtualContent
 	                    		});	
 
 	                    		$(".ui-multiselect-menu input").click(function() {
-	                    			var text = $(this).parents('li').attr('class');
+	                    			 var text = $(this).parents('li').attr('class');
 	                    			 var regex = /parent\_(\d+)/gi;
 		                    		 match = regex.exec(text);
 		                    		 if (match[0]!='')
 		                    		 {
 
-			                    		if ($(this).parents('UL').find('.'+match[0]+' input:checked').length>0)
-		                    			{
-			                    			//$(this).parents('UL').find('.himself_'+match[0]+' input').attr("aria-selected", "false");
-			                    			//$(this).parents('UL').find('.himself_'+match[0]+' input').attr('checked','');
-		                    				//$(this).parents('UL').find('.himself_'+match[0]+' input').trigger('click');
-			                    			//$(this).parents('UL').find('.himself_'+match[0]+' input').attr("aria-selected", "true");
+				                    		if ($(this).parents('UL').find('.'+match[0]+' input:checked').length>0)
+			                    			{
+				                    			if(!$(this).parents('UL').find('.himself_'+match[0]+' input').prop('checked'))
+				                    			$(this).parents('UL').find('.himself_'+match[0]+' input').trigger('click');
+			                    			}
+				                    		else if ($(this).find('li').length==0)
+				                    		{
+					                    		//
+				                    		}
+				                    		else
+				                    		{
+				                    			if($(this).parents('UL').find('.himself_'+match[0]+' input').prop('checked'))
+					                    		$(this).parents('UL').find('.himself_'+match[0]+' input').trigger('click');		
+				                    		}
 
-			                    			if(!$(this).parents('UL').find('.himself_'+match[0]+' input').prop('checked'))
-			                    			$(this).parents('UL').find('.himself_'+match[0]+' input').trigger('click');
-		                    			}
-			                    		else
-			                    		{
-			                    			if($(this).parents('UL').find('.himself_'+match[0]+' input').prop('checked'))
-				                    		$(this).parents('UL').find('.himself_'+match[0]+' input').trigger('click');		
-			                    		}
+				                    		//$("#categs").multiselect('close');
+				                    		
 
-			                    		//$("#categs").multiselect("refresh"); 
 			                    	}
 								});
-
 
 	               				
 						 });
@@ -167,8 +293,19 @@ class CCGoods extends VirtualContent
    
    		    										?><div class="clear"></div><?
    		    									}
+   		    									
+   		    									if ($dt['name']=='is_size')
+   		    									{
+   		    										$_SESSION['template_action']='size_edit';
+   		    										include($_SERVER['DOCUMENT_ROOT']."/inc/imag/TSize.php");
+   		    									}
    
-   
+   		    									if ($dt['name']=='is_color')
+   		    									{
+   		    										$_SESSION['template_action']='color_edit';
+   		    										include($_SERVER['DOCUMENT_ROOT']."/inc/imag/TColor.php");
+   		    									}
+   		    									
    		                                }
    
    
@@ -230,6 +367,56 @@ class CCGoods extends VirtualContent
    		
    		
    	}
+   	function GetCategPath($pub){
+   		global $SiteSections;
+   		
+   		$section = $SiteSections->get($this->getSetting('section'));
+   		
+   		$categ_section=$SiteSections->getIdByPath($SiteSections->getPath($section['id']).'categs/');
+   		if (!$categ_section['id']>0)
+   		print '<h2>Необходимо добавить дочерний раздел "categs" с категориями товаров</h2>';
+   		else 
+   		$categ_iface=getIface($SiteSections->getPath($section['id']).'categs/');
+   		 
+   		$categs=clear_array_empty(explode(',', $pub['categs']));
+
+   		if (count($categs)==1)
+   		{
+   			$main=msr(msq("SELECT * FROM `".$categ_iface->getSetting('table')."` WHERE `parent_id`=0 and `show`=1 and `id`=".$categs[0]." LIMIT 1"));
+   			
+   			$return['nav']='<a href="/catalog/'.$main['pseudolink'].'/">'.$main['name'].'</a>';
+   			$return['title']=' - '.$main['name'];
+   			
+   			return $return;
+   		}
+   		else 
+   		{
+   			$return='';
+   			$main=msr(msq("SELECT * FROM `".$categ_iface->getSetting('table')."` WHERE `parent_id`=0 and `show`=1 and `id` in (".implode(",", $categs).") LIMIT 1"));
+   			
+   			if ($main['id']>0)
+   			$return['nav'].='<a href="/catalog/'.$main['pseudolink'].'/">'.$main['name'].'</a>';
+   			
+   			
+   			foreach ($categs as $cat)
+   			if ($cat!=$main['id']);
+   			{
+   				$sub=msr(msq("SELECT * FROM `".$categ_iface->getSetting('table')."` WHERE `show`=1 and `id`=".$cat));
+   				
+   				if ($sub['id']>0)
+   				{
+   					$return['nav'].='<img src="/pics/arrows/arrow_nav.png"><a href="/catalog/'.$sub['pseudolink'].'/">'.$sub['name'].'</a>';
+   					$return['title'].=' - '.$sub['name'];
+   				}
+   			}
+   			
+   			if ($main['id']>0)
+   			$return['title'].=' - '.$main['name'];
+   			
+   			return $return;
+   		}	 
+   			 
+   	}
    	function PrintGood($pub, $view_type='')
    	{
    		global $Storage, $categs, $basket_items, $comments;
@@ -243,93 +430,105 @@ class CCGoods extends VirtualContent
    		if ($images[0]>0)
    		$image=$Storage->getFile($images[0]);
    		
+   		$pub['price']=number_format($pub['price'] , 0, ' ', ' ');
+   		
+   		$sklad_iface=getIface('/sitecontent/sklad/');
+   		
+   		$price=$pub['price'].'<img src="/pics/rouble.png"/>';
+   		
+   		if ($pub['kol']>0)
+   		$price='<img src="/pics/basket.png"> '.$pub['kol'].'<span> шт.</span>';
+   		
+
    		switch ($view_type) {
    			case 'tile_big':
+   				
    				?>
-   		   		<li id="<?=$pub['id'] ?>">
-   		   			<?if ($pub['is_hit']==1){?><div class="good_alert hit" title="Хит продаж">Хит</div><? }?>
-   		   			<?if ($pub['is_action']==1){?><div class="good_alert action" title="Акция">Акция</div><? }?>
-   		   			<?if ($pub['is_new']==1){?><div class="good_alert new" title="Акция">Новинка</div><? }?>
-   		   			<div class="main_image"><a href="/main/katalog-produkczii/<?=$categs[$pub['main_categ']]['pseudolink'] ?>/item/<?=$pub['id'] ?>/"><img src="<?=$image['path'] ?>" alt=""/></a></div>
-   		   			<div class="name"><a href="/main/katalog-produkczii/<?=$categs[$pub['main_categ']]['pseudolink'] ?>/item/<?=$pub['id'] ?>/"><?=$pub['name'] ?></a></div>
-   		   			<div class="buy">
-   		   				<div class="price"><?=$pub['price'] ?><small>&nbsp;руб</small></div>
-   		   				<div>
-   		   					<a class="mybtn <?=$pub['kol']>0 ? 'active' :'' ?>"><?=$pub['kol']>0 ? '<img src="/pics/basket_mini.png" alt=""/>&nbsp;:&nbsp;'.$pub['kol'] :'купить' ?></a>
-   							<a style="display: <?=$pub['kol']>0 ? 'block' :'none' ?>" class="basket_clear" title="Удалить из корзины">&nbsp;</a>
-   		   				</div>
-   		   			</div>
-   		   			<div class="clear"></div>
-   		   			<div class="anons"><?=$pub['anons'] ?></div>
-   		   			<div class="icons">
-   		   				<?
-   		   				$this->PrintIcon($pub, 'icon_weight');
-   		   				$this->PrintIcon($pub, 'icon_radius');
-   		   				$this->PrintIcon($pub, 'icon_age');
-   		   				$this->PrintIcon($pub, 'icon_maxweight');
-   		   				$this->PrintIcon($pub, 'icon_height');
-   		   				?>
-   		   			</div>
-   		   			<input type="hidden" name="good_kol" value="<?=floor($pub['kol']) ?>">
-		   		   	<?
-		   			if ($pub['comment_text']!='') {?>
-		   			<div class="comment" <?=$pub['comment_color']!='' ? 'style="color:'.$pub['comment_color'].'"':'' ?>><?=$pub['comment_text'] ?></div>
-		   			<?} ?>
-   		   			<div class="clear"></div>
-   		   			
-   		   		</li>
+   		   		   		<li id="<?=$pub['id'] ?>" <?=$pub['kol']>0 ? 'class="added"' :'' ?>>
+							<div class="brd">
+								<div class="name"><a href="/goods/<?=$pub['id'] ?>/"><?=$pub['name'] ?></a></div>
+   				   				<div class="img"><a href="/goods/<?=$pub['id'] ?>/"><img src="<?=$image['path'] ?>" alt=""/></a></div>
+   				   				<div class="price"><?=$pub['price'] ?><img src="/pics/rouble.png"/></div>
+   				   				<?if ($pub['hit']==1) {?><div class="hit big"></div><?} ?>
+   				   			</div>
+   				   			
+   				   			
+
+   				   		</li>
    		   		<?	
    			break;
    			case 'list':
    				?>
-   			   		   		<li id="<?=$pub['id'] ?>">
-   			   		   			<?if ($pub['is_hit']==1){?><div class="good_alert hit" title="Хит продаж">Хит</div><? }?>
-   			   		   			<?if ($pub['is_action']==1){?><div class="good_alert action" title="Акция">Акция</div><? }?>
-   			   		   			<?if ($pub['is_new']==1){?><div class="good_alert new" title="Акция">Новинка</div><? }?>
-   			   		   			<div class="main_image"><a href="/main/katalog-produkczii/<?=$categs[$pub['main_categ']]['pseudolink'] ?>/item/<?=$pub['id'] ?>/"><img src="<?=$image['path'] ?>" alt=""/></a></div>
-   			   		   			<div class="descr">
-   			   		   				<div class="name"><a href="/main/katalog-produkczii/<?=$categs[$pub['main_categ']]['pseudolink'] ?>/item/<?=$pub['id'] ?>/"><?=$pub['name'] ?></a></div>
-   			   		   				<div class="clear"></div>
-   			   		   				<div class="anons"><?=$pub['anons'] ?></div>
-   			   		   				<div class="icons">
-   			   		   				<?
-   			   		   				$this->PrintIcon($pub, 'icon_weight');
-   			   		   				$this->PrintIcon($pub, 'icon_radius');
-   			   		   				$this->PrintIcon($pub, 'icon_age');
-   			   		   				$this->PrintIcon($pub, 'icon_maxweight');
-   			   		   				$this->PrintIcon($pub, 'icon_height');
-   			   		   				?>
-   			   		   				</div>
-   			   		   			</div>
-   			   		   			<div class="buy">
-   			   		   				<div class="price"><?=$pub['price'] ?><small>&nbsp;руб</small></div>
-   			   		   				<div class="clear"></div>
-   			   		   				<div>
-   			   		   					<a class="mybtn <?=$pub['kol']>0 ? 'active' :'' ?>"><?=$pub['kol']>0 ? '<img src="/pics/basket_mini.png" alt=""/>&nbsp;:&nbsp;'.$pub['kol'] :'купить' ?></a>
-   			   							<a style="display: <?=$pub['kol']>0 ? 'block' :'none' ?>" class="basket_clear" title="Удалить из корзины">&nbsp;</a>
-   			   		   				</div>
-   			   		   				<div class="clear"></div>
-   			   		   				<?
-	   					   			if ($pub['comment_text']!='') {?>
-	   					   			<div class="comment" <?=$pub['comment_color']!='' ? 'style="color:'.$pub['comment_color'].'"':'' ?>><?=$pub['comment_text'] ?></div>
-	   					   			<?} ?>
-   			   		   			</div>
-   			   		   			<div class="clear"></div>
-   			   		   			
-   			   		   			
-   			   		   			<input type="hidden" name="good_kol" value="<?=floor($pub['kol']) ?>">
-   					   		   	
-   			   		   			<div class="clear"></div>
-   			   		   			
-   			   		   		</li>
+   			   		  <li id="<?=$pub['id'] ?>" <?=$pub['kol']>0 ? 'class="added"' :'' ?>>
+							<div class="brd">
+   				   				<div class="img"><a href="/goods/<?=$pub['id'] ?>/"><img src="<?=$image['path'] ?>" alt=""/></a></div>
+   				   				
+   				   				<div class="info">
+	   				   				<div class="name"><a href="/goods/<?=$pub['id'] ?>/"><?=$pub['name'] ?></a></div>
+	   				   				<?if ($pub['anons']!='') {?><div class="anons"><?=$pub['anons'] ?></div><?} ?>
+	   				   				<div class="price <?=$pub['kol']>0 ? 'active':'' ?>"><?=$pub['price'] ?><img src="/pics/rouble.png"/></div>
+	   				   				<?if ($pub['hit']==1) {?><div class="hit"></div><?} ?>
+	   				   			</div>
+	   				   			<div class="clear"></div>
+   				   			</div>
+   				   			
+   				   			
+
+   				   		</li>
    			   		   		<?	
    			break;
+   			case 'tile': default:
+   				?>
+   			   				   		<li id="<?=$pub['id'] ?>" <?=$pub['kol']>0 ? 'class="added"' :'' ?>>
+   										<div class="brd">
+   			   				   				<div class="img"><a href="/goods/<?=$pub['id'] ?>/"><img src="<?=$image['path'] ?>" alt=""/></a></div>
+   			   				   				<div class="price"><?=$price ?></div>
+   			   				   				<?if ($pub['hit']==1) {?><div class="hit"></div><?} ?>
+   			   				   			</div>
+   			   				   			
+   			   				   			<div class="name"><a href="/goods/<?=$pub['id'] ?>/"><?=$pub['name'] ?></a></div>
    			
+   			   				   		</li>
+   			   				   		<?	
+   			   				
+   			break;
    			case 'item_page':
    				?>
+							<script>
+							$(function() {
+							
+								$(".img_prev a").click(function() {
+									$(".img_prev a").removeClass('active');
+									$(this).addClass('active');
+									$('.main_image img').attr('src', $(this).find('img').attr('src'));
+									$('.main_image a').attr('href', $(this).find('img').attr('src'));
+							
+									var data_id=$(this).attr('data-id');
+									$('.img_prev a').each(function() {
+										if ($(this).attr('data-id')==data_id)
+										$(this).attr('rel','');
+										else $(this).attr('rel','lightbox[1]');
+							
+									});
+									
+									return false;
+								});
+							
+								
+							
+							
+							});
+							</script>
+   				   			
    				   			<ul class="item"><li id="<?=$pub['id'] ?>">
    				   			<div class="good_left">
-   				   				<div class="main_image"><a rel="lightbox[1]" href="<?=$image['path'] ?>"><img src="<?=$image['path'] ?>" alt=""/></a></div>
+   				   				<div class="main_image">
+   				   					
+   				   					<a rel="lightbox[1]" href="<?=$image['path'] ?>">
+   				   						<?if ($pub['hit']==1) {?><div class="hit big"></div><?} ?>
+   				   						<img src="<?=$image['path'] ?>" alt=""/>
+   				   					</a>
+   				   				</div>
    				   				<?
    				   				
    				   				$img_arr=clear_array_empty(explode('|', $pub['gallery']));
@@ -347,106 +546,173 @@ class CCGoods extends VirtualContent
    				   					?></div><?
    				   				}
    				   				?>
-   				   				<?if ($pub['is_hit']==1){?><div class="good_alert hit" title="Хит продаж">Хит</div><? }?>
-   					   			<?if ($pub['is_action']==1){?><div class="good_alert action" title="Акция">Акция</div><? }?>
-   					   			<?if ($pub['is_new']==1){?><div class="good_alert new" title="Акция">Новинка</div><? }?>
    					   			<br/><div style="padding-top:20px; float: left; width: 100%;"></div><br/>
-   					   			<div class="hr" style="margin: 10px 0;"></div>
-   					   			<?
-   					   			$cnt=0;
-   					   			if ($pub['buywith_ids']!='')
-   					   			{
-   					   				$buywith_ids=clear_array_empty(explode(',', $pub['buywith_ids']));
-   					   				if (count($buywith_ids)>0)
-   					   				{
-   					   					?>
-   					   					<script src="/js/jquery.jcarousel.js" language="JavaScript" type="text/javascript"></script>
-   					   					<script src="/js/jcarousel_similar.js" language="JavaScript" type="text/javascript"></script>
-   					   					<h2>Сопуствующие товары:</h2>
-   											<div class="similar_container">
-   												<div class="slider_similar">
-   														<!-- Wrapper -->
-   														<div class="wrapper">
-   														    <!-- Carousel -->
-   														    <div class="jcarousel">
-   														        <ul>
-   												   					<?
-   												   					foreach ($buywith_ids as $bi)
-   												   					{
-   												   						$cnt++;
-   												   						
-   												   						$good=$this->getPub(trim($bi));
-   												   						$img_arr=clear_array_empty(explode('|', $good['gallery']));
-   												   						$image=$Storage->getFile($img_arr[0]);
-   												   						
-   												   						$good['main_categ']=$this->SetMainCateg($good); 
-   												   						?>
-   												   						<li>	
-   												   							<a href="/main/katalog-produkczii/<?=$categs[$good['main_categ']]['pseudolink'] ?>/item/<?=$good['id'] ?>/"><img src="<?=$image['path'] ?>" alt=""/></a>
-   												   							<div><a href="/main/katalog-produkczii/<?=$categs[$good['main_categ']]['pseudolink'] ?>/item/<?=$good['id'] ?>/"><?=$good['name'] ?></a></div>
-   												   						</li>
-   												   						<?
-   												   					}
-   												   					
-   												   					?>
-   												   				 </ul> 
-   							    							</div>
-   													<?if ($cnt>2) {?>
-   												    <a href="#" class="jcarousel-control-prev-similar"></a>
-   												    <a href="#" class="jcarousel-control-next-similar"></a>
-   												    <?} ?>
-   							                
-   												</div>
-   										</div>
-   									</div>
-   									<div class="hr" style="margin: 10px 0;"></div><?
-   							   				}
-   					   			}
-   					   			?>
-   					   			
-   					   			
-   					   			<br/><div style="float: left;">
-   									<!-- Put this script tag to the <head> of your page -->
-   									<script type="text/javascript" src="//vk.com/js/api/openapi.js?121"></script>
-   									
-   									<script type="text/javascript">
-   									  VK.init({apiId: 5439759, onlyWidgets: true});
-   									</script>
-   									
-   									<!-- Put this div tag to the place, where the Comments block will be -->
-   									<div id="vk_comments"></div>
-   									<script type="text/javascript">
-   									VK.Widgets.Comments("vk_comments", {limit: 10, width: "400", attach: "*"});
-   									</script>
-   					   			</div>
+
    				   			</div>
    							<div class="good_right">
    					   			
    					   			
    					   			<h1><?=$pub['name'] ?></h1>
    					   			<div class="buy">
-   					   				<div class="price"><?=$pub['price'] ?><small>&nbsp;руб</small></div>
-   					   				<div>
-   					   					<a class="mybtn <?=$pub['kol']>0 ? 'active' :'' ?>"><?=$pub['kol']>0 ? '<img src="/pics/basket_mini.png" alt=""/>&nbsp;:&nbsp;'.$pub['kol'] :'купить' ?></a>
-   				   						<a style="display: <?=$pub['kol']>0 ? 'block' :'none' ?>" class="basket_clear" title="Удалить из корзины">&nbsp;</a>
+   					   				<div class="price"><?=$pub['price'] ?><img src="/pics/rouble_big.png"/></div>
+   					   				<div class="add">
+   					   					<a class="mybtn main <?=$pub['kol']>0 ? 'active' :'' ?>"><?=$pub['kol']>0 ? 'в корзине: '.$pub['kol'] :'в корзину ' ?></a>
+   				   						<a style="display: <?=$pub['kol']>0 ? 'block' :'none' ?>" class="mybtn basket_clear" title="Удалить из корзины"><img src="/pics/clear.png"/></a>
+   				   						
+   				   						<a style="display: <?=$pub['kol']>0 ? 'block' :'none' ?>" href="/basket/" class="mybtn basket_go" title="Перейти в корзину"><img src="/pics/basket_go.png"/></a>
    					   				</div>
    					   			</div>
-   					   				<?
-   						   			if ($pub['comment_text']!='') {?>
-   						   			<div class="comment" <?=$pub['comment_color']!='' ? 'style="color:'.$pub['comment_color'].'"':'' ?>><?=$pub['comment_text'] ?></div>
-   						   			<?} ?>
-   					   			<div class="text styled"><?=$pub['text']?></div>
-   					   			<div class="icons">
-   					   				<?
-   					   				$this->PrintIcon($pub, 'icon_weight');
-   					   				$this->PrintIcon($pub, 'icon_radius');
-   					   				$this->PrintIcon($pub, 'icon_age');
-   					   				$this->PrintIcon($pub, 'icon_maxweight');
-   					   				$this->PrintIcon($pub, 'icon_height');
-   					   				?>
+   					   			
+   					   			<div class="params">
+   					   			<?
+   					   				if ($pub['is_color']==1)
+   					   				{
+   					   					$colors=msq("SELECT * FROM `site_site_goods_color` WHERE `good_id`=".$pub['id']." and `kol`>0 ORDER BY `precedence`");
+   					   					if (mysql_num_rows($colors)>0)
+   					   					{
+	   					   					?>
+			   					   			<script type="text/javascript">
+			   					   				$(function() {
+				   					   				
+													$(".colors a").click(function() 
+													{
+
+														if ($(this).hasClass("active"))
+														{
+															$(this).removeClass("active");
+															$('.size a').show();
+														}
+														else 
+														{
+															$(this).parent().find("a").removeClass("active");
+															$(this).addClass("active");
+
+															
+			   					   							<?if ($sklad_iface && $pub['is_color']){ ?>
+															$.ajax({
+														           type: "POST",
+														           url: "/inc/cclasses/CCSklad.php",
+														           data: "action=ajax_getparamskol&good_id=<?=$pub['id'] ?>&inp_name=color&inp_val="+$(this).data('id')+"&out_name=size",
+														           dataType: 'json',
+														           success: function(data){
+															          var ids=data.ids.split(',');
+
+															          $('.sizes a').hide();
+
+															          for (index = 0; index < ids.length; ++index) {
+															        	  $('.sizes [data-id='+ids[index]+']').show();
+															          }
+														           }
+														   });
+														   <?} ?>
+														}
+														
+														
+													});	
+												});
+			   					   				</script>
+	   					   					<div class="colors">
+	   					   						<div class="title">Цвет:</div>
+		   					   					<?
+	   					   						while ($col=msr($colors))
+		   					   					{
+		   					   						$img='';
+		   					   						$style='';
+		   					   						
+		   					   						$class='';
+		   					   						if ($basket_items[$pub['id']]['color_id']==$col['id']) $class='class="active"';
+		   					   							
+		   					   						
+		   					   						if ($col['color_code']!='') $style='style="background-color: '.$col['color_code'].'"';	
+		   					   						
+		   					   						if ($col['color_image']>0)
+		   					   						{
+		   					   							$img=$image=$Storage->getFile($col['color_image']);
+		   					   							$img='<img src="'.$img['path'].'">';
+		   					   						}
+		   					   						
+		   					   						?><a <?=$class ?> onclick="return false;" href="#" data-id="<?=$col['id'] ?>" title="<?=$col['name'] ?>" <?=$style ?>><?=$img ?></a><?
+		   					   					}
+		   					   					?>
+	   					   					</div>
+	   					   					<?
+   					   					}
+   					   				}
+
+   		   					   		if ($pub['is_size']==1)
+   					   				{
+   					   					
+   					   					$sizes=msq("SELECT * FROM `site_site_goods_size` WHERE `good_id`=".$pub['id']." and `kol`>0 ORDER BY `precedence`");
+   					   					
+   					   					if (mysql_num_rows($sizes)>0)
+   					   					{
+	   					   						
+		   					   				?>
+			   					   				<script type="text/javascript">
+			   					   				$(function() {
+													$(".sizes a").click(function() 
+													{
+
+														if ($(this).hasClass("active"))
+														{
+															$(this).removeClass("active");
+															$('.colors a').show();
+														}
+														else 
+														{
+															$(this).parent().find("a").removeClass("active");
+															$(this).addClass("active");
+
+															
+			   					   							<?if ($sklad_iface && $pub['is_color']){ ?>
+															$.ajax({
+														           type: "POST",
+														           url: "/inc/cclasses/CCSklad.php",
+														           data: "action=ajax_getparamskol&good_id=<?=$pub['id'] ?>&inp_name=size&inp_val="+$(this).data('id')+"&out_name=color",
+														           dataType: 'json',
+														           success: function(data){
+															          var ids=data.ids.split(',');
+
+															          $('.colors a').hide();
+
+															          for (index = 0; index < ids.length; ++index) {
+															        	  $('.colors [data-id='+ids[index]+']').show();
+															          }
+														           }
+														   });
+														   <?} ?>
+														}
+														
+														
+													});	
+												});
+			   					   				</script>
+	   					   					
+	   					   					<div class="sizes">
+	   					   						<div class="title">Размер:</div>
+		   					   					<?
+	   					   						while ($sz=msr($sizes))
+		   					   					{
+		   					   						$class='';
+		   					   						if ($basket_items[$pub['id']]['size_id']==$sz['id']) $class='class="active"';
+		   					   						
+		   					   						?><a <?=$class ?> href="#" data-id="<?=$sz['id'] ?>" onclick="return false;" title="<?=$sz['name'] ?><?=$sz['comment']!='' ? ' ('.$sz['comment'].')' :''?>"><?=$sz['name'] ?></a><?
+		   					   					}
+		   					   					?>
+	   					   					</div>
+	   					   					<?
+   					   					}
+   					   				}   					   				   					   				
+   								
+   					   			?>
    					   			</div>
-   					   			<div class="text" style="padding-top: 20px;"><?=$pub['video']?></div>
-   					   			<input type="hidden" name="good_kol" value="<?=floor($pub['kol']) ?>">
+   					   				<?
+   					   				if ($pub['anons']!='') $text=$pub['anons'];
+   					   				if ($pub['text']!='') $text=$pub['text'];
+   					   				
+   						   			if ($text!='') {?><div class="text styled"><div class="title">Описание:</div><?=$text ?></div><?} ?>
+  
+  								<input type="hidden" name="good_kol" value="<?=floor($pub['kol']) ?>">
    					   			<div class="clear"></div>
    				   			</div>
    				   			<div class="clear"></div>
@@ -454,32 +720,7 @@ class CCGoods extends VirtualContent
    				
    				   			   		<?	
    			break;
-   			case 'tile': default:
-   				?>
-   				   		<li id="<?=$pub['id'] ?>">
-   				   			<?if ($pub['is_hit']==1){?><div class="good_alert hit" title="Хит продаж">Хит</div><? }?>
-   				   			<?if ($pub['is_action']==1){?><div class="good_alert action" title="Акция">Акция</div><? }?>
-   				   			<?if ($pub['is_new']==1){?><div class="good_alert new" title="Акция">Новинка</div><? }?>
-   				   			<div class="main_image"><a href="/main/katalog-produkczii/<?=$categs[$pub['main_categ']]['pseudolink'] ?>/item/<?=$pub['id'] ?>/"><img src="<?=$image['path'] ?>" alt=""/></a></div>
-   				   			<div class="name"><a href="/main/katalog-produkczii/<?=$categs[$pub['main_categ']]['pseudolink'] ?>/item/<?=$pub['id'] ?>/"><?=$pub['name'] ?></a></div>
-   				   			<div class="buy">
-   				   				<div class="price"><?=$pub['price'] ?><small>&nbsp;руб</small></div>
-   				   				<div>
-   				   					<a class="mybtn <?=$pub['kol']>0 ? 'active' :'' ?>"><?=$pub['kol']>0 ? '<img src="/pics/basket_mini.png" alt=""/>&nbsp;:&nbsp;'.$pub['kol'] :'купить' ?></a>
-   				   					<a style="display: <?=$pub['kol']>0 ? 'block' :'none' ?>" class="basket_clear" title="Удалить из корзины">&nbsp;</a>
-   				   				</div>
-   				   			</div>
-   				   			<input type="hidden" name="good_kol" value="<?=floor($pub['kol']) ?>">
-   				   			<?
-   				   			if ($pub['comment_text']!='') {?>
-   				   			<div class="comment" <?=$pub['comment_color']!='' ? 'style="color:'.$pub['comment_color'].'"':'' ?>><?=$pub['comment_text'] ?></div>
-   				   			<?} ?>
-   				   			<div class="clear"></div>
-   				   			
-   				   		</li>
-   				   		<?	
-   				
-   			break;
+
    		}
    		
    	}
@@ -491,6 +732,9 @@ class CCGoods extends VirtualContent
    		$dataset = $this->getSetting('dataface');
    	
    		$section = $SiteSections->get($this->getSetting('section'));
+   		
+   		$sklad_section=$SiteSections->getByPattern('PSklad');
+
    	
    		if (isset($_POST['showsave'])){
    			foreach ($_POST as $k=>$v){
@@ -502,12 +746,94 @@ class CCGoods extends VirtualContent
    			$this->updatePrecedence();
    		}
    		
-   		$all_categs=getSprValues('/sitecontent/goods/categories/');
+   		$all_categs=getSprValues('/sitecontent/goods/categs/');
+   		
+   		$categ_section=$SiteSections->getIdByPath($SiteSections->getPath($section['id']).'categs/');
+   		if (!$categ_section['id']>0)
+   		print '<h2>Необходимо добавить дочерний раздел "categs" с категориями товаров</h2>';
+   		else
+   		$categ_iface=getIface($SiteSections->getPath($section['id']).'categs/');
+   				
+   		$values=array();
+   		$parents=msq("SELECT * FROM `".$categ_iface->getSetting('table')."` WHERE `show`=1 and `parent_id`=0 ORDER BY `precedence`");
+   		while($r=msr($parents))
+   		{
+   			$values[]=array('level'=>0, 'id'=>$r['id'], 'name'=>$r['name']);
+   			$childs=msq("SELECT * FROM `".$categ_iface->getSetting('table')."` WHERE `show`=1 and `parent_id`=".$r['id']." ORDER BY `precedence`");
+   			while($ch=msr($childs))
+   			{
+   				$values[]=array('level'=>1, 'id'=>$ch['id'], 'name'=>$ch['name'], 'parent'=>$ch['parent_id']);
+   				 
+   				$childs2=msq("SELECT * FROM `".$categ_iface->getSetting('table')."` WHERE `show`=1 and `parent_id`=".$ch['id']." ORDER BY `precedence`");
+   				 
+   				while($ch2=msr($childs2))
+   				{
+   					$values[]=array('level'=>2, 'id'=>$ch2['id'], 'name'=>$ch2['name'], 'parent'=>$ch2['parent_id']);
+   				}
+   			}
+   		}
    		?>
    			    	<div id="content" class="forms">
    			    	<?include_once($_SERVER['DOCUMENT_ROOT']."/inc/site_admin/nav.php");?>
    			        <form name="searchform" action="" method="POST">
    			        	<input type="hidden" name="searchaction">
+		   			    
+		   			    <div class="place" style="z-index: 9999; width:100%; margin-right: 1%;">
+								<label>Раздел</label>
+								<select multiple="multiple" id="categs" name="categs[]">
+							        <?
+								 	if (!is_array($cur_sections)) $cur_sections=array();
+								 		
+							        foreach ($values as $val)
+							        {
+							        	?><option <?=in_array($val['id'], $_POST['categs']) ? 'selected' :''?> class="<?=(isset($val['level']) ? 'level_'.$val['level'] :'') ?><?=($val['level']>0 ? ' parent_'.$val['parent'].' himself_parent_'.$val['id'] : ' himself_parent_'.$val['id']) ?>" value="<?=$val['id']?>" <?=((in_array($k, $cur_sections)) ? 'checked="checked"':'')?>><?=$val['name']?></option><?
+							        }
+							        ?>
+							    </select>
+			                    <script type="text/javascript">
+			                     $(function() 
+			    	             {
+		
+			                    	 $("#categs").multiselect({
+			                    		   selectedText: "# из # выбрано",
+			                    		   noneSelectedText: "Выберите раздел!",
+			                    		   checkAllText: "Выбрать все", 
+			                    		   uncheckAllText: "Очистить"
+			                    		});	
+		
+			                    		$(".ui-multiselect-menu input").click(function() {
+			                    			 var text = $(this).parents('li').attr('class');
+			                    			 var regex = /parent\_(\d+)/gi;
+				                    		 match = regex.exec(text);
+				                    		 if (match[0]!='')
+				                    		 {
+		
+						                    		if ($(this).parents('UL').find('.'+match[0]+' input:checked').length>0)
+					                    			{
+						                    			if(!$(this).parents('UL').find('.himself_'+match[0]+' input').prop('checked'))
+						                    			$(this).parents('UL').find('.himself_'+match[0]+' input').trigger('click');
+					                    			}
+						                    		else if ($(this).find('li').length==0)
+						                    		{
+							                    		//
+						                    		}
+						                    		else
+						                    		{
+						                    			if($(this).parents('UL').find('.himself_'+match[0]+' input').prop('checked'))
+							                    		$(this).parents('UL').find('.himself_'+match[0]+' input').trigger('click');		
+						                    		}
+		
+						                    		//$("#categs").multiselect('close');
+						                    		
+		
+					                    	}
+										});
+		
+			               				
+								 });
+								</script>
+						</span>
+					</div>
    						<?
    						$search_fields_cnt=0;
    						?>
@@ -575,8 +901,13 @@ class CCGoods extends VirtualContent
    			                         $Storage = new Storage;
    			                         $Storage ->init();
    			                                ?>
+											<div class="place">
+   			                                	<a href="./?section=<?=$section['id']?>&pub=new" class="button big" style="float: right;">Добавить</a>
+   			                                </div>
    			                                <form id="showsave" class="showsave" name="showsave" action="./?section=<?=$section['id']?><?=($this->getSetting('page')>1)?'&page='.$this->getSetting('page'):''?>" method="POST">
-   			                                        <?
+   			                                      
+
+			   		                          <?
    			                                        /* Поля отображаемые в таблице */
    			                                        $show_fields=array();
    	
@@ -631,8 +962,9 @@ class CCGoods extends VirtualContent
    				$table_th[]=array('name'=>$set['name'], 'description'=>$set['description'], 'class'=>$set['settings']['list_class']);
    			}
    	
-   	
-   	
+   			if ($sklad_section['id']>0)
+   			$table_th[]=array('name'=>'', 'description'=>'Кол-во', 'class'=>'t_minwidth');
+   			
    			/* Редактирование и удаление */
    			$table_th[]=array('name'=>'', 'description'=>'', 'class'=>'t_minwidth');
    			$table_th[]=array('name'=>'', 'description'=>'', 'class'=>'t_minwidth');
@@ -704,6 +1036,15 @@ class CCGoods extends VirtualContent
    						<?=$href[0]?><?=$CDDataType->get_view_field($dataset['types'][$sf],$pub[$sf], $pub);?><?=$href[1]?>
    					</td>
    				<?}?>
+   				
+   				<?if ($sklad_section['id']>0){ ?>
+   				<td>
+   					<?=floor($pub['kol']) ?>
+   					<?
+   					if ($pub['is_size']==1 || $pub['is_color']==1) $this->printParamsKol(array('size', 'color'), $pub);
+   					?>
+   				</td>
+   				<?} ?>
    	
    	
    				<!-- Редактировать, Удалить -->
@@ -782,7 +1123,86 @@ class CCGoods extends VirtualContent
    			                </div>
    			  			</div>
    			                <?
-   			}
+   }
+   			
+   	function printParamsKol ($params, $pub)
+   	{
+   		global $SiteSections;
+   		$sklad_section=$SiteSections->getByPattern('PSklad');
+   		if ($sklad_section['id']>0)
+   		{
+   			$this->sklad_iface=getIface($SiteSections->getPath($sklad_section['id']));
+   		}
+   		
+   		$basket_section=$SiteSections->getByPattern('PBasket');
+   		if (!$basket_section['id']>0)
+   		print '<h2>Не найден раздел с заказами</h2>';
+   				
+   		if ($basket_section['id']>0)
+   		$this->basket_iface=getIface($SiteSections->getPath($basket_section['id']));
+   		
+   		if ($sklad_section['id']>0 && $basket_section['id']>0)
+   		{
+	   		$is_params=array();
+	   		$wheres=array();
+	   		$captions=array();
+	   		foreach ($params as $par)
+	   		{
+	   			if ($pub['is_'.$par]==1) $is_params[]=$par.'_id';
+	   		}
+	   		
+	
+	   		
+	   		if (count($is_params)>0)
+	   		{
+	   			/* Наборы параметров из склада */
+	   			$store=msq("SELECT sum(kol), good_id, ".implode(',', $is_params)." FROM `".$this->sklad_iface->getSetting('table')."` WHERE `good_id`=".$pub['id']." GROUP BY ".implode(',', $is_params));
+	   			
+	   			while ($st=msr($store))
+	   			{
+	   				$cur='';
+	   				$cap='';
+	   				
+	   				foreach ($is_params as $isp)
+	   				{
+	   					$caption=msr(msq("SELECT * FROM `site_site_goods_".str_replace('_id', '', $isp)."` WHERE `id`=".$st[$isp]));
+	   					
+	   					$cur.=" and `".$isp."`='".$st[$isp]."'";
+	   					$cap.=(($cap!='') ? '; ':'').$caption['name'];
+	   				}
+	
+	   				$wheres[]= $cur;
+	   				$captions[]= $cap;
+	   			} 
+	   			
+	   			$i=0;
+	   			foreach ($wheres as $wh)
+	   			{
+	   				$all_sklad=msr(msq("SELECT sum(kol) as sum_kol FROM `".$this->sklad_iface->getSetting('table')."` WHERE good_id=".$pub['id'].$wh));
+	   				
+	   				$q="SELECT sum(goods.kol) as sum_kol FROM `".$this->basket_iface->getSetting('table')."` basket, `site_site_order_goods` goods WHERE goods.order_id=basket.id and `status_id`<>4 and `good_id`=".$pub['id'].$wh;
+	   				/* print $q; */
+	   				
+	   				$all_sale=msr(msq($q));
+	   				$total=$all_sklad['sum_kol']-floor($all_sale['sum_kol']);
+	   				
+	   				print '<div class="left"><nobr>['.$captions[$i].']: '.($all_sklad['sum_kol']-floor($all_sale['sum_kol'])).'</nobr></div>';
+	   				$i++;
+	   				
+	   			}
+	   			/* print_r($captions); */
+	   		}
+   		}
+   		
+/*    		$params=msq("SELECT * FROM `site_site_goods_".$parnam."` WHERE `good_id`=".$pub['id']." ORDER BY `precedence`");
+   		while ($par=msr($params))
+   		if ($par['kol']>0)
+   		{
+   			$return.='<div>'.$par['name'].': '.$par['kol'].'</div>';
+   		}
+   		if	($return!='')
+   		print '<div style="margin-top: 5px; text-align: left; padding: 5px 3px; border: 1px solid #CCCCCC">'.$return.'</div>'; */
+   	}
    	function save(){
    		$errors = array();
    		$dataset = $this->getSetting('dataface');
@@ -799,7 +1219,6 @@ class CCGoods extends VirtualContent
    		}
    		if (!count($_POST['categs'])>0) $errors[]='Заполните поле «Раздел»';
    		
-
    		if (count($errors)==0){
    			$update = '';
    			$pub = $this->getPub($_GET['pub']); $pub['id'] = floor($pub['id']);
@@ -829,7 +1248,16 @@ class CCGoods extends VirtualContent
    			$cat_txt=", `categs`='$cat_txt'";
    	
    			msq("UPDATE `".$this->getSetting('table')."` SET ".$update.$cat_txt." WHERE `id`='".$pub['id']."'");
-   	
+   			
+   			$_SESSION['template_action']='size_save';
+   			$_SESSION['template_pub']=$pub;
+   			include($_SERVER['DOCUMENT_ROOT']."/inc/imag/TSize.php");
+   			
+   			$_SESSION['template_action']='color_save';
+   			$_SESSION['template_pub']=$pub;
+   			include($_SERVER['DOCUMENT_ROOT']."/inc/imag/TColor.php");
+   			
+   			
    			WriteLog($pub['id'], (($_GET['pub']=='new') ? 'добавление':'редактирование').' записи', '','','',$this->getSetting('section'));
    		}
    	

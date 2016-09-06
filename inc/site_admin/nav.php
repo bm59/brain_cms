@@ -9,7 +9,6 @@ if (configGet("AskUrl")!='/'){
         	$s_id=(($_GET['section']>0) ? $_GET['section'] : $_GET['edit']);
         	$activeccid=$s_id;
         }
-
         $plist = $SiteSections->getParentsList($activeccid);
         print '<H1><a href="/manage/">Панель управления</a>';
         foreach ($plist as $p){

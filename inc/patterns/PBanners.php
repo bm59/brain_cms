@@ -10,7 +10,7 @@ class PBanners extends VirtualPattern
 		$descr='Баннеры';
 
 		if ($CDDataSet->checkDatatypes($settings['section'])==0)
-		$SiteSections->update_personal_settings($settings['section'], '|onoff|show_id|');
+		$SiteSections->update_personal_settings($settings['section'], '|onoff|show_id|precedence|');
 
 		$settings['name']=substr(get_class(), 1, strlen(get_class()));
 

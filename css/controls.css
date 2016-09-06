@@ -20,7 +20,7 @@
 .form .input select {padding: 9px 10px;}
 .form .input input:focus, .form input[type="text"]:focus,.form input[type="password"]:focus,.form textarea:focus,.form select:focus {
     background-color: rgba(255, 255, 255, 0.5);
-    border: 2px solid #3366CC;
+    border: 2px solid #000000;
     transition: all 100ms cubic-bezier(0.42, 0, 0.58, 1) 0s;
     outline: none;
 }
@@ -41,7 +41,7 @@ border: none;
 
 /*ќформление заказа*/
 .order TABLE {border-collapse: collapse;width: 100%; font-size: 22px;}
-.order TABLE TH {border: 1px solid #848484; padding: 20px 10px; background-color: #767676; color: #FFFFFF; text-align: center; font-weight: normal; font-size: 20px;}
+.order TABLE TH {border: 1px solid #848484; padding: 18px 10px; background-color: #1F1E1D; color: #FFFFFF; text-align: center; font-weight: normal; font-size: 16px;}
 .order TABLE TD.right {text-align: right;font-weight:bold;}
 .order TABLE TD.goodname {text-align: left; font-weight:bold; color: #333333; font-size: 20px;}
 .order TABLE TD.goodname div {font-size: 18px; padding-top: 5px; font-weight: normal;}
@@ -49,6 +49,7 @@ border: none;
 .order .close {-webkit-transition:background 0.2s ease;-moz-transition:background 0.2s ease;  -o-transition:background 0.2s ease;transition: background 0.2s ease; height: 38px; width: 38px; margin: 5px;}
 .order .close a {margin: 4px; display: block; height: 30px; width: 30px; background: url(/pics/delete_nb.png) 0 0 no-repeat; }
 .order .close:hover a {background-position: 0 -30px;}
+.order TABLE .comment {font-size: 16px; padding-top: 10px; color: #666666; line-height: 20px;}
 
 .address_table td {border: none!important; padding: 10px 15px 10px 0!important;}
 .address_table td label { display: inline-block;
@@ -58,7 +59,7 @@ border: none;
 
 .kol_buttons {padding: 10px 10px 10px 40px; position: relative;}
 .kol_buttons div {float: left;}
-.kol_buttons .btn {background: #767676 none repeat scroll 0 0; padding:0!important; line-height: 35px; font-family: Tahoma!important; font-size: 30px!important; width: 40px; height: 40px;} 
+.kol_buttons .btn {background: #1F1E1D none repeat scroll 0 0; padding:0!important; line-height: 35px; font-family: Tahoma!important; font-size: 30px!important; width: 40px; height: 40px;} 
 .kol_buttons input {font-size: 20px!important;text-align: center; height: 40px; width: 70px!important; float: left; margin: 0!important;}
 .kol_buttons .preloader {display: none; height: 35px; left: 100px; position: absolute; width: 35px; top: 12px;}
 
@@ -82,7 +83,7 @@ border: none;
 	vertical-align: middle;
     text-align: center;	
     margin: 0;
-    background: #3366CC;
+    background: #E31E24;
 	transition:all 0.3s ease;
 	-moz-user-select: -moz-none;
 	-o-user-select: none;
@@ -91,7 +92,7 @@ border: none;
 	user-select: none;
 
 }
-.btn:hover {background: #3399FF; !important; color: #FFFFFF !important; }
+.btn:hover {background: #DE1A10; !important; color: #FFFFFF !important; }
 .btn img {display: inline-block; vertical-align: middle; padding-left: 10px;}
 
 .btn.big {padding: 15px 25px; font-size: 18px;}

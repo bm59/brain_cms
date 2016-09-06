@@ -7,7 +7,7 @@
       width: 17px;
       height: 17px;
     }
-    .styled .checkbox + label {cursor: pointer;}
+    .styled .checkbox + label {cursor: pointer; overflow: visible!important; background: none!important;}
 
     /* Далее идет оформление чекбокса в современных браузерах, а также IE9 и выше.
     Благодаря тому, что старые браузеры не поддерживают селекторы :not и :checked,

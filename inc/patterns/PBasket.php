@@ -15,6 +15,7 @@ class PBasket extends VirtualPattern
 		$settings['name']=substr(get_class(), 1, strlen(get_class()));
 
 		$class_name='CC'.$settings['name'];
+		
 		$settings['dataset'] = $CDDataSet->checkPresence(0, mb_strtolower($settings['name']));
 
 				$CDDataSet->add
@@ -27,9 +28,9 @@ class PBasket extends VirtualPattern
 						'types'=>array
 						(
 								array('name'=>'status_id', 'description'=>'Статус', 'type'=>'CDColorStatus',  'settings'=>array('default'=>1, 'source'=>'#source_type=spr#spr_path=/sitecontent/basket/status/#spr_field=name#spr_usl=WHERE `show`=1#spr_order=ORDER BY `id`', 'show_list'=>'', 'list_style'=>'width: 150px')),
-								array('name'=>'name', 'description'=>'ФИО', 'type'=>'CDText',  'settings'=>array('important'=>'', 'show_search'=>'', 'show_list'=>'')),
-								array('name'=>'phone', 'description'=>'Телефон', 'type'=>'CDText',  'settings'=>array('important'=>'', 'show_search'=>'', 'show_list'=>'')),
-								array('name'=>'address', 'description'=>'Адрес', 'type'=>'CDText',  'settings'=>array('show_search'=>'', 'show_list'=>'')),
+								array('name'=>'name', 'description'=>'ФИО', 'type'=>'CDText',  'settings'=>array('important'=>'', 'show_search'=>'')),
+								array('name'=>'phone', 'description'=>'Телефон', 'type'=>'CDText',  'settings'=>array('important'=>'', 'show_search'=>'')),
+								array('name'=>'address', 'description'=>'Адрес', 'type'=>'CDText',  'settings'=>array('show_search'=>'')),
 								array('name'=>'discount_id', 'description'=>'Скидка', 'type'=>'CDSelect',  'settings'=>array('source'=>'#source_type=spr#spr_path=/sitecontent/basket/discount/#spr_field=name#spr_usl=WHERE `show`=1#spr_order=ORDER BY `id`')),
 								array('name'=>'paytype_id', 'description'=>'Способ оплаты', 'type'=>'CDSelect',  'settings'=>array('source'=>'#source_type=spr#spr_path=/sitecontent/basket/paytype/#spr_field=name#spr_usl=WHERE `show`=1#spr_order=ORDER BY `id`')),
 								array('name'=>'delivery_id', 'description'=>'Способ доставки', 'type'=>'CDSelect',  'settings'=>array('off'=>'')),
@@ -65,14 +66,13 @@ class PBasket extends VirtualPattern
 		$this->setSetting('table_order_tmp_goods',mstable(ConfigGet('pr_name').'_site','order','tmp_goods',array('tmp_order_id'=>'BIGINT(20)', 'good_id'=>'BIGINT(20)', 'kol'=>'BIGINT(20)', 'price'=>'BIGINT(20)', 'summ'=>'BIGINT(20)')));
 		$this->setSetting('table_order_goods',mstable(ConfigGet('pr_name').'_site','order','goods',array('order_id'=>'BIGINT(20)', 'good_id'=>'BIGINT(20)', 'kol'=>'BIGINT(20)', 'price'=>'BIGINT(20)', 'summ'=>'BIGINT(20)')));
 		
-		$this->setSetting('table',$this->createDataSetTable($this->getSetting('dataset'),$this->getSetting('section'),array('show'=>'INT(1)', 'precedence'=>'BIGINT(20)')));
+		$this->setSetting('table',$this->createDataSetTable($this->getSetting('dataset'),$this->getSetting('section'),array('show'=>'INT(1)', 'paid'=>'INT(1) DEFAULT 0', 'accept'=>'INT(1) DEFAULT 0', 'source_id'=>'INT(1) DEFAULT 0', 'pay_type'=>'INT(1) DEFAULT 0', 'pay_date'=>'DATETIME', 'date'=>'DATETIME', 'date_accept'=>'DATETIME', 'precedence'=>'BIGINT(20)')));
 
+		
+		
+		
 		$iface->init(array('mode'=>$this->getSetting('mode'),'isservice'=>$this->getSetting('isservice'),'section'=>$this->getSetting('section'),'pattern'=>$this,
-				'table'=>$this->getSetting('table'), 
-/* !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! */	
-				'table_goods'=>'site_site_universal_universal_12',
-				'table_categs'=>'site_site_universal_universal_13',
-/* !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! */				
+				'table'=>$this->getSetting('table'), 			
 				'table_order_tmp'=>$this->getSetting('table_order_tmp'),
 				'table_order_tmp_goods'=>$this->getSetting('table_order_tmp_goods'),
 				'table_order_goods'=>$this->getSetting('table_order_goods'),

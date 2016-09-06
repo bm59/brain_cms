@@ -743,7 +743,7 @@ class CCBanners extends VirtualContent
    		$sectionPlace = $SiteSections->get($SiteSections->getIdByPath('/products/'.$section['path'].'/places/'));
 
    		if (!$sectionPlace['id']>0)
-   		$error='<h2>Необходимо создать подраздел "places" с описанием мест для баннеров</h2>';
+   		$error='<h2>Необходимо создать подраздел "places" с описанием мест для баннеров. Разделы должны быть в закладке /products/ на первом уровне</h2>';
 
    	?>
    	 <div id="content" class="forms">

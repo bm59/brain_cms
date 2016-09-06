@@ -33,7 +33,7 @@
 
 /*װאיכû*/
 a[title*="file"]				    {background: url('/pics/file/file.png') no-repeat; line-height: 20px; padding: 4px 0 8px 35px; display: block;}
-a[title*="file"][href$=".doc"|]   	{background: url('/pics/file/doc.png') no-repeat; line-height: 20px; padding: 4px 0 8px 35px; display: block;}
+a[title*="file"][href$=".doc"]   	{background: url('/pics/file/doc.png') no-repeat; line-height: 20px; padding: 4px 0 8px 35px; display: block;}
 a[title*="file"][href$=".docx"]  	{background: url('/pics/file/doc.png') no-repeat; line-height: 20px; padding: 4px 0 8px 35px; display: block;}
 a[title*="file"][href$=".xls"]   	{background: url('/pics/file/xls.png') no-repeat; line-height: 20px; padding: 4px 0 8px 35px; display: block;}
 a[title*="file"][href$=".xlsx"]   	{background: url('/pics/file/xls.png') no-repeat; line-height: 20px; padding: 4px 0 8px 35px; display: block;}

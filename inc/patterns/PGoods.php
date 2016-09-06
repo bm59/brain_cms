@@ -6,7 +6,6 @@ class PGoods extends VirtualPattern
 {
 	function init($settings){
 		global $CDDataSet,$Storage,$SiteSections;
-
 		$descr='Товары';
 
 		if ($CDDataSet->checkDatatypes($settings['section'])==0)
@@ -27,6 +26,14 @@ class PGoods extends VirtualPattern
 						'types'=>array
 						(
 								array('name'=>'name', 'description'=>'Наименование', 'type'=>'CDText',  'settings'=>array('important'=>'', 'show_search'=>'', 'show_list'=>'')),
+								array('name'=>'price', 'description'=>'Цена', 'type'=>'CDSpinner',  'settings'=>array( 'show_search'=>'', 'important'=>'', 'show_list'=>'')),
+								array('name'=>'gallery', 'description'=>'Галерея изображений', 'type'=>'CDGallery',  'settings'=>array()),
+								array('name'=>'is_size', 'description'=>'Размерный ряд', 'type'=>'CDBoolean',  'settings'=>array()),
+								array('name'=>'is_color', 'description'=>'Цветовая гамма', 'type'=>'CDBoolean',  'settings'=>array()),
+								
+								array('name'=>'new', 'description'=>'Новинка', 'type'=>'CDBoolean',  'settings'=>array('off'=>'', 'editable'=>'', 'list_class'=>'t_minwidth')),
+								array('name'=>'hit', 'description'=>'Хит продаж', 'type'=>'CDBoolean',  'settings'=>array('off'=>'', 'editable'=>'', 'list_class'=>'t_minwidth')),
+								
 								array('name'=>'description', 'description'=>'Описание', 'type'=>'CDText',  'settings'=>array('off'=>'')),
 								array('name'=>'image', 'description'=>'Изображение', 'type'=>'CDImage',   'settings'=>array('off'=>'', 'exts'=>'jpg,gif,jpeg,png')),
 								array('name'=>'show_count', 'description'=>'Показов', 'type'=>'CDInteger','settings'=>array('off'=>'')),
@@ -54,7 +61,7 @@ class PGoods extends VirtualPattern
 		VirtualPattern::init($settings);
 
 		$iface = new $class_name;
-		$this->setSetting('table',$this->createDataSetTable($this->getSetting('dataset'),$this->getSetting('section'),array('show'=>'INT(1)', 'precedence'=>'BIGINT(20)')));
+		$this->setSetting('table',$this->createDataSetTable($this->getSetting('dataset'),$this->getSetting('section'),array('show'=>'INT(1)', 'precedence'=>'BIGINT(20)', 'clear_price'=>'BIGINT(20)', 'popular'=>'BIGINT(20)', 'kol'=>'BIGINT(20)', 'size_id'=>'BIGINT(20)', 'color_id'=>'BIGINT(20)', 'categs'=>'VARCHAR(250)')));
 
 		$iface->init(array('mode'=>$this->getSetting('mode'),'isservice'=>$this->getSetting('isservice'),'section'=>$this->getSetting('section'),'pattern'=>$this,'table'=>$this->getSetting('table'),'dataset'=>$this->getSetting('dataset')));
 		$this->setSetting('cclass',$iface);

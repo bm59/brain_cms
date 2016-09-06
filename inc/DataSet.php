@@ -77,6 +77,10 @@ class DataSet extends VirtualClass
 		if (msr(msq("SELECT * FROM `".$this->getSetting('table')."` WHERE `id`='$id'"))) return $id;
 		return 0;
 	}
+	function GetIdByName($name=''){
+		$item=msr(msq("SELECT * FROM `".$this->getSetting('table')."` WHERE `name`='$name'"));
+		return $item['id']; 
+	}
 	function checkDatatypes($section_id){
 		$id = floor($id);
 		$cnt=msr(msq("SELECT count(*) as `cnt` FROM `site_site_data_types` WHERE `section_id`='$section_id'"));

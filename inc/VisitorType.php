@@ -42,6 +42,7 @@ class VisitorType extends VirtualClass
 		return $retval;
 	}
 	function isAccessGranted($id,$cid){
+		global $mode;
 		$id = floor($id);
 		$cid = floor($cid);
 		$retval = false;
@@ -50,6 +51,10 @@ class VisitorType extends VirtualClass
 			if (isset($group['settings']['superaccess'])) $retval = true; // Если для группы открыт полный доступ
 			if (in_array($cid,$group['access'])) $retval = true; // Если страница находится в списке доступа группы
 		}
+		
+		if ($mode=='development')  $retval = true;
+		
+		
 		return $retval;
 
 	}

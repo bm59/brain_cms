@@ -14,7 +14,7 @@ class CCSheet extends VirtualContent
 		$r = msr(msq("SELECT * FROM `".$this->getSetting('table')."` WHERE `section_id`='".$this->getSetting('section')."'"));
 		$dataset = $CDDataSet->get($this->getSetting('dataset'), $this->getSetting('section'));
 		foreach ($dataset['types'] as $k=>$dt){
-			$retval[$dt['name']] = $r[$dt['name']];
+			$retval[$dt['name']] = htmlspecialchars_decode($r[$dt['name']]);
 		}
 		return $retval;
 	}

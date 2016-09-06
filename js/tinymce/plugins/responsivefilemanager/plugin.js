@@ -34,7 +34,7 @@ tinymce.PluginManager.add('responsivefilemanager', function(editor) {
     
 	editor.addButton('responsivefilemanager', {
 		icon: 'browse',
-		tooltip: 'Insert file',
+		tooltip: 'Вставить файл',
 		shortcut: 'Ctrl+E',
                 onclick:openmanager
 	});
@@ -43,7 +43,7 @@ tinymce.PluginManager.add('responsivefilemanager', function(editor) {
 
 	editor.addMenuItem('responsivefilemanager', {
 		icon: 'browse',
-		text: 'Insert file',
+		text: 'Вставить файл',
 		shortcut: 'Ctrl+E',
 		onclick: openmanager,
 		context: 'insert'

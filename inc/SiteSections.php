@@ -57,6 +57,12 @@ class SiteSections extends VirtualClass
                 $section = $this->get($id);
                 msq("UPDATE `".$this->getSetting('table')."` SET `precedence`='$prec' WHERE `id`='".$section['id']."'");
         }
+        function update_settings($id, $settings_str=''){
+        	$id = floor($id);
+        
+        	if ($id>0)
+        	msq("UPDATE `".$this->getSetting('table')."` SET `settings`='$settings_str' WHERE id=".$id." LIMIT 1");
+        }
         function update_personal_settings($id,$set){
 
         	$id = floor($id);

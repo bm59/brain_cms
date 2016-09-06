@@ -220,7 +220,11 @@ class SiteVisitor extends VirtualClass
 		// $this->setCacheValue('user_'.$id,$retval);
 		return $retval;
 	}
-
+	function getFIO ($id){
+		$user=$this->getOne($id);
+		
+		return $user['firstname'].' '.$user['secondname'];
+	}
 	function getMany($ids= array()){ /* Получение информации о конкретном пользователе */
 		global $Storage;
 

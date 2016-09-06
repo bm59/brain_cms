@@ -21,9 +21,9 @@ include_once($_SERVER['DOCUMENT_ROOT']."/inc/patterns/VirtualPattern.php");
 include_once($_SERVER['DOCUMENT_ROOT']."/inc/cclasses/VirtualContent.php");
 include_once($_SERVER['DOCUMENT_ROOT']."/inc/SiteSettings.php");
 include_once($_SERVER['DOCUMENT_ROOT']."/inc/SiteSections.php");
+include_once($_SERVER['DOCUMENT_ROOT']."/inc/cclasses/CCBasket.php");
 
 include_once($_SERVER['DOCUMENT_ROOT']."/inc/site/init.php");
-
 
 
 configSet("pr_doptit", setting('pr_doptit'));

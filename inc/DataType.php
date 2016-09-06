@@ -253,6 +253,40 @@ class DataType extends VirtualClass
 					else
 					print stripcslashes($val);
 			break;
+			case 'CDBoolean':
+				if (isset($settings['editable']))
+				{
+					$CDSelect=new CDSelect;
+					$values=$CDSelect->get_values($settings);
+			
+					?>
+							<script>
+							$(document).ready(function() {
+								   $('input[name="<?=$tface->getSetting('name').'_'.$pub['id']?>"]').change(function() {
+
+
+										var val=$(this).val()=='on' ? 1:0;
+									   $.ajax({
+					   			            type: "POST",
+					   			            url: "/inc/site_admin/pattern/ajax_class.php",
+					   			            data: "action=edit_field&field_name=<?=$tface->getSetting('name')?>&id=<?=$pub['id']?>&section_id=<?=$_GET['section']?>&value="+val+"&session_id="+session_id,
+					   			            dataType: 'json',
+					   			            success: function(data){
+					   			            	elem.children('img').attr('src', '/pics/editor/'+data.signal);
+					   			            }
+					   			        });
+								    });
+							});
+							</script>
+	
+							<div class="styled">
+								<input type="checkbox" name="<?=$tface->getSetting('name').'_'.$pub['id']?>" id="<?=$tface->getSetting('name').'_'.$pub['id']?>" class="checkbox" <?=(($val || ($val=='' && $settings['default']==1)) ? 'checked="checked"':'')?>>
+								<label for="<?=$tface->getSetting('name').'_'.$pub['id']?>"></label>
+							</div>
+				
+						<?
+				}
+			break;
 			case 'CDColorStatus':
 
 					$CDColorStatus=new CDColorStatus;

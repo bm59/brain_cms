@@ -1,4 +1,5 @@
 Добавить адреса в настройку: callback_email
+Создать раздел: CCCallBack
 
 <?include_once($_SERVER['DOCUMENT_ROOT']."/inc/site/callback.php");?>
 <a rel="leanModal" name="signup" href="#signup" onclick="show_modal_my('#popup_callback'); $('#phone').focus(); return false;">заказать звонок</a>

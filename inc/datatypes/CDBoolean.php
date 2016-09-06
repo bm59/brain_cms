@@ -1,8 +1,11 @@
 <?
-class CDBOOLEAN extends VirtualType
+class CDBoolean extends VirtualType
 {
 	function init($settings){
 		$settings['descr']='Да\Нет';
+		$settings['help']=array(
+				'editable'=>'Редактируемый'
+		);
 		$maxlength = (floor($this->getSetting('maxlength'))>0)?floor($this->getSetting('maxlength')):255;
 		$this->setSetting('maxlength',$maxlength);
 		VirtualType::init($settings);

@@ -23,10 +23,9 @@
 	color: #494949;
 	position: relative;
 
-}
+}result
 
-
-.popup .popup_header {font-size: 30px; color: #494949;}
+.popup .popup_header {font-size: 26px; color: #494949;}
 
 .popup .popup_close {-webkit-transition:background 0.2s ease;-moz-transition:background 0.2s ease;  -o-transition:background 0.2s ease;transition: background 0.2s ease; position: absolute; right:15px; top:15px; height: 38px; width: 38px; margin: 5px;}
 .popup .popup_close a {margin: 4px; display: block; height: 30px; width: 30px; background: url(/pics/delete.png) 0 0 no-repeat; }
@@ -42,4 +41,4 @@
 /*border-radius: 4px; -moz-border-radius: 4px; -webkit-border-radius: 4px;*/}
 .popup .txt-fld input.good_input { background: #DEF5E1 url(/pics/i/good.png) 206px center no-repeat; }
 .popup .txt-fld input.client_tel { background: #FDE0E0; }
-.popup .result { font-weight: bold; padding: 10px 0;}
+.popup .result { font-weight: bold; padding: 10px 0; font-size: 16px;}

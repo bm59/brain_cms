@@ -1,5 +1,4 @@
 <?include_once($_SERVER['DOCUMENT_ROOT']."/inc/site/include.php");?>
-<?include_once($_SERVER['DOCUMENT_ROOT']."/inc/ajax_securuty.php");?>
 <?
 mysql_query("SET NAMES utf8"); // для mysql
 header("Content-type: text/html; charset=utf-8");
@@ -14,7 +13,7 @@ $basket=getIface($SiteSections->getPath($section_basket['id']));
 if ($_POST['action']=='basket_add' && $_POST['tmp_order_id']>0 && $_POST['good_id']>0)
 {
 	
-	$return=$basket->addGood($_POST['tmp_order_id'], $_POST['good_id'], $_POST['kol'], $_POST['price_field']);
+	$return=$basket->addGood($_POST['tmp_order_id'], $_POST['good_id'], $_POST['kol'], $_POST['price_field'], $_POST['size_id'], $_POST['color_id']);
 	
 	
 	if (is_array($return) && $return['error']!='') print json_encode(array('error'=>$return['error']));

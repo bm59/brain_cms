@@ -2,8 +2,8 @@
 HTML {height: 100%;}
 BODY
 {
-	font-family: Tahoma, sans-serif !important;
-	font-size: 12px;
+	font-family: 'PFDinDisplayPro-Regular', Tahoma, sans-serif !important;
+	font-size: 16px;
 	line-height: 18px;
 	margin: 0;
 	padding: 0;
@@ -12,37 +12,31 @@ BODY
 	height: 100%;
 	min-height: 100%;
 	position: relative;
-    background-color: #FFF;
+	color: #4A4A4A;
 }
 
-A, A:visited, A:hover {color:#000; outline: none;}
-A:hover {color:#990000;}
-A IMG {border: none;}
-H1 {font-size: 22px; color: #000; padding: 10px 0; line-height: 22px;}
-H2 {font-size: 18px; color: #000; padding: 10px 0; line-height: 18px;}
-H3 {font-size: 16px; color: #000; padding: 10px 0; line-height: 16px;}
+a, a:visited, a:hover {color:#000; outline: none; transition: color 0.05s ease-in 0s;}
+a IMG {border: none;}
+h1 {font-family: 'PFDinDisplayPro-Medium', Tahoma, sans-serif !important; font-size: 28px; color: #735093; padding: 10px 0; line-height: 28px;}
+h2 {font-family: 'PFDinDisplayPro-Medium', Tahoma, sans-serif !important; font-size: 28px; color: #735093; padding: 10px 0; line-height: 28px;}
+h3 {font-size: 16px; color: #000; padding: 10px 0; line-height: 16px;}
+.hgreen {color: #00BEA8;}
 
-P {padding: 10px 0px;}
+
+p {padding: 10px 0px;}
 .overlay {width: 100%; height: 100%; display: block; z-index: 10;position: absolute; background-color: rgba(204, 204, 204, 0);}
-TABLE TH {vertical-align: top;}
-TABLE TD {vertical-align: top;}
+table th {vertical-align: top;}
+table td {vertical-align: top;}
 
 .hr {border-top: 1px solid #D8D8D8; height: 1px; margin: 30px 0; clear: both;}
 .hr hr {display:none;}
 * html .hr {overflow: hidden;}
 
-
-/*Контейнеры*/
-.container {
-	width: 1000px; margin: 0px auto 30px; position: relative; padding: 10px 20px;
-	background-color: #FFF;
-	-webkit-box-shadow: 0px 0px 5px 0px rgba(50, 50, 50, 0.5);
-	-moz-box-shadow:    0px 0px 5px 0px rgba(50, 50, 50, 0.5);
-	box-shadow:         0px 0px 5px 0px rgba(50, 50, 50, 0.5);
-}
+/*РљРѕРЅС‚РµР№РЅРµСЂ*/
+.container {box-sizing: border-box; width: 1220px; margin: 0px auto 30px; position: relative; padding: 10px 20px;background-color: #FFFFFF;}
 
 
-/*Футер*/
+/*Р¤СѓС‚РµСЂ*/
 .footer {height: 55px; background-color: #000000; position: absolute; bottom: 0; width: 100%; -webkit-box-shadow: 0px 0px 5px 0px rgba(50, 50, 50, 0.3);
 -moz-box-shadow:    0px 0px 5px 0px rgba(50, 50, 50, 0.3);
 box-shadow:         0px 0px 5px 0px rgba(50, 50, 50, 0.3); left: 0;
@@ -64,7 +58,7 @@ box-shadow:         0px 0px 5px 0px rgba(50, 50, 50, 0.3); left: 0;
 .social a.yt 	{background-position: -111px 0px;}
 
 
-/*Инпуты*/
+/*РРЅС‚РїСѓС‚С‹*/
 input[type="text"],input[type="password"],textarea {
     border: 2px solid rgba(220, 220, 220, 1);
     box-shadow: 1px 1px 3px 1px rgba(200, 200, 200, 0.2) inset;
@@ -84,7 +78,7 @@ input[type="text"]:focus,input[type="password"]:focus,textarea:focus {
 }
 
 
-/*Кнопка*/
+/*РљРЅРѕРїРєРё*/
 .mybtn {
 background: none repeat scroll 0 0 #990000;
 color: #FFFFFE;
@@ -99,7 +93,7 @@ border:1px solid #999999;
 
 
 
-/*Хлебные крошки*/
+/*РҐР»РµР±. РєСЂРѕС€РєРё*/
 .mininav {padding: 11px 0 0 0; height: 30px; color: #666666; line-height: 15px;}
 .mininav a {display: block; float: left; color: #666666}
 .mininav a:hover {text-decoration: underline;}
@@ -108,7 +102,7 @@ border:1px solid #999999;
 .mininav DIV {float: left; padding-top: 1px;}
 
 
-/*Таблица*/
+/*РўР°Р±Р»РёС†С‹*/
 .table-content {width: 100%; border-left: 2px solid #FFF !important; border-right: 2px solid #FFF !important; font-size: 12px; line-height: 18px; border-collapse: collapse;}
 .table-content CAPTION {text-align: left; color: #000; padding-bottom: 5px; font-size: 11px; line-height: 15px; font-family: 'PFHandbookPro-Regular', Helvetica, arial, sans-serif !important;}
 .table-content TH {text-align: center; font-size: 14px; color: #333333; padding: 15px 10px; background-color: #666666; color: #FFFFFF; border: 1px solid #D8D8D8; border-top: none;}
@@ -123,7 +117,7 @@ border:1px solid #999999;
 .even {background:#f7f7f7;}
 .odd {}
 
-/*Вверх*/
+/*РќР°РІРµСЂС…*/
 #toTop {
  position:fixed;
  z-index:9999;
@@ -141,7 +135,7 @@ border:1px solid #999999;
 }
 #toTop:hover {opacity: 1;}
 
-/*Списки*/
+/*РЎРїРёСЃРєРё*/
 .styled UL {list-style: none;margin:0;}
 .styled UL, OL {margin: 0px;}
 .styled UL LI {position: relative; padding: 2px 0;}
@@ -149,31 +143,4 @@ border:1px solid #999999;
 .styled UL LI {padding-top: 5px; line-height: 28px; background: url(/pics/ul.png) 0px 8px no-repeat;  padding-left: 30px; margin-left: 0px;}
 .styled OL UL, OL OL, UL UL, UL OL {margin: 0px 0px 0px 40px;}
 .styled LI a.active {text-decoration: none; font-weight: bold;}
-
-
-/*Галерея фото в редакторе страницы*/
-/*.photogallery {border: 1px dashed #CCCCCC; padding: 10px;} - рамка для редактора tiny*/
-/* Фото */
-.photo_row {
-	display: inline-block;
-    height: 180px;
-    padding: 3px;
-    margin: 5px;
-    width: 130px;
-    border: 1px solid #CCCCCC;
-    -webkit-box-shadow: 1px 1px 3px 0px rgba(50, 50, 50, 0.5);
-	-moz-box-shadow:    1px 1px 3px 0px rgba(50, 50, 50, 0.5);
-	box-shadow:         1px 1px 3px 0px rgba(50, 50, 50, 0.5);
-}
-.photo_row a {
-    background: none repeat scroll 0 0 #f1f1f1;
-    display: block;
-    height: 100%;
-    line-height: 100%;
-    overflow: hidden;
-    text-align: center;
-    width: 100%; 
-    position: relative;
-}
-.photo_row img {vertical-align: middle; border: 0 none; position: absolute; left:0; top:0;}
 

@@ -1,24 +1,19 @@
 /*	=	Select */
 .slct {
 	display: block;
-	border-radius: 2px;
 	border: 1px solid #CCCCCC;
 	background-color: #F6F6f6;
 	width: 130px;
-	padding: 0 15px 2px 15px;
+	padding: 6px 15px 8px 15px;
 	color: #444;
 	overflow: hidden;
 	white-space:nowrap;
 	text-overflow: ellipsis;
 	-o-text-overflow: ellipsis;	
-	//background: rgba(0, 0, 0, 0) url("/pics/inputs/select.gif");
-	//background-position: 135px 15px;
-	//background-repeat: no-repeat;
-
-	font-size: 15px;
+	margin-top: -8px;
+	font-size: 14px;
 }
 .slct.active {
-	border-radius: 2px 2px 0 0;
 	border-bottom: none;
 }
 .select .drop {
@@ -38,7 +33,7 @@
 	cursor: pointer;
 	display: block;
 	color: #444;
-	padding: 4px 15px 4px 5px;
+	padding: 8px 15px 8px 5px;
 	background-position: 10px -119px;
 }
 .select .drop li:hover {
@@ -48,7 +43,7 @@
 .select .drop li a {padding-left: 10px; text-decoration: none;}
 .select .drop li a.active {text-decoration: underline;}
 .select .sort {
-	background: rgba(0, 0, 0, 0) url("/pics/inputs/sort.png") no-repeat scroll 0 0px;
+	background: rgba(0, 0, 0, 0) url("/pics/inputs/sort2.png") no-repeat scroll 0 0px;
 	display: inline-block;
 	width: 16px; 
 	height: 8px;
@@ -56,7 +51,7 @@
 
 }
 .select .sort.down {
-	background: rgba(0, 0, 0, 0) url("/pics/inputs/sort.png") no-repeat scroll 0 -8px;
+	background: rgba(0, 0, 0, 0) url("/pics/inputs/sort2.png") no-repeat scroll 0 -8px;
 	display: inline-block;
 	width: 16px; 
 	height: 8px;

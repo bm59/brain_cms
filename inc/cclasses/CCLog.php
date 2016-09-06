@@ -396,7 +396,14 @@ class CCLog extends VirtualContent
                                                         <td class="t_32width">
                                                         	<a target="blank" href="/manage/control/contents/?section=<?=$pub['section_id'] ?>&pub=<?=$pub['item_id']?>"><?=$pub['item_id']?></a>
                                                         </td>
-                                                        <td class="t_32width"><?=$pub['section_id']?></td>
+                                                        <td class="t_32width">
+                                                        <?
+                                                        	$cur_section=$SiteSections->get($pub['section_id']);
+                                                        ?>
+                                                        <div><a target="_blank" href="/manage/control/contents/?section=<?=$pub['section_id'] ?>"><?=$cur_section['name']?></a></div>
+
+                                                        
+                                                        </td>
                                                         <td class="t_32width"><?=$pub['user_id']?></td>
                                                         <td class="t_32width">
                                                         	<div><?=$pub['user_name']?></div>

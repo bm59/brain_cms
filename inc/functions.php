@@ -460,6 +460,32 @@ function getIface($path)
 	return $Iface;
 
 }
+function dateDiffComment ($dt1, $dt2, $skobki=true){
+	$return='';
+
+	$t1=strtotime($dt1);
+	$t2=strtotime($dt2);
+	
+	$dif=abs(round(($t2-$t1)/60));
+	
+	if ($dif<60) $comment='мин';
+	
+	if ($dif>60 && $dif<1440)
+	{
+		$dif=round($dif/60, 1);
+		$comment='час';
+	}
+	
+	if ($dif>1440)
+	{
+		$dif=round($dif/1440, 1);
+		$comment='дней';
+	}
+	$return=$dif.' '.$comment;
+	if ($skobki) $return='<nobr>['.$return.']</nobr>';
+	
+	return $return;
+}
 function get_text($path)
 {
     $Iface=getIface($path);

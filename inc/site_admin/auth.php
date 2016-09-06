@@ -35,8 +35,26 @@ $exceptions = array(
 	'/uploader_txt.php',
 	'/inc/datatypes/photo_editor/index.php',
 	'/ajax.php',
-	'/manage/excel_import/index.php'
+	'/manage/excel_import/index.php',
 ); // Страницы, для которых всегда открыт доступ
+
+if ($dir = @opendir($_SERVER['DOCUMENT_ROOT']."/inc/imag/")){
+	while ($file = readdir($dir)){
+		if ($file && $file!=".." && $file!="."){
+			if (preg_match('|.*\.php$|',$file)) $exceptions[]="/inc/imag/".$file;
+		}
+	}
+	closedir($dir);
+}
+if ($dir = @opendir($_SERVER['DOCUMENT_ROOT']."/inc/cclasses/")){
+	while ($file = readdir($dir)){
+		if ($file && $file!=".." && $file!="."){
+			if (preg_match('|.*\.php$|',$file)) $exceptions[]="/inc/cclasses/".$file;
+		}
+	}
+	closedir($dir);
+}
+
 if (!$SiteVisitor->isAuth()) $redirect='/manage/';
 else{
 	/*$exceptions[] = '/profile/index.php';*/
