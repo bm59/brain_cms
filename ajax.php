@@ -10,6 +10,40 @@ $section_basket=$SiteSections->getByPattern('PBasket');
 $basket=getIface($SiteSections->getPath($section_basket['id']));
 
 
+if ($_POST['action']=='get_price_search')
+{
+	
+	if ($_POST['param']!='')
+	{
+		$sql='';
+		$params=explode('|', $_POST['param']);
+		foreach ($params as $par)
+		{
+			$from_to=explode(',', $par);
+			
+			if ($from_to[0]>=0 && $from_to[1]>0)
+			$sql.=($sql=='' ? '':' or ')."(`price`>='".$from_to[0]."' and `price`<='".$from_to[1]."')";
+		}
+	}
+	
+	if ($_POST['cat_id']>0)
+	{
+		if ($sql!='') $sql='('.$sql.')';
+		$sql.=($sql!='' ? ' and ':'')."`categs` like '%,".$_POST['cat_id'].",%'";
+	}
+		
+	if ($sql!='') $sql='WHERE '.$sql;	
+	
+	$good_iface=getIface('/sitecontent/goods/');
+	
+	$list=$good_iface->getList(1, $sql);
+	foreach ($list as $r)
+	{
+		$good_iface->PrintGood($r);
+	}
+
+}
+
 if ($_POST['action']=='basket_add' && $_POST['tmp_order_id']>0 && $_POST['good_id']>0)
 {
 	

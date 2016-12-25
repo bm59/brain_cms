@@ -4,6 +4,8 @@ include $_SERVER['DOCUMENT_ROOT']."/inc/site_admin/include.php";
 if (!$activeccid>0)
 $activeccid=$Content->getIdByPath(configGet("AskUrl"));
 
+if (!$activeccid>0) $activeccid=$SiteSections->getIdByPath('/access/users/');
+
 if (!@in_array('edit',$group['new_settings'][$activeccid]) && $mode!='development' && $_GET['user']>0)
 header("Location: /manage/control/contents/");
 

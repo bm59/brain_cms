@@ -118,7 +118,7 @@ class SiteSections extends VirtualClass
         function add($values, $parent=-1){
                 $errors = array();
                 $name = htmlspecialchars(trim($values['name'])); if ($name=='') $errors[] = 'Не указано название';
-                $path = lower(trim($values['path'])); if (!preg_match('|^[a-z_0-9]+$|',$path)) $errors[] = 'Путь должен состоять из символов латинского алфавита, цифр и символа подчекивания «_»';
+                $path = lower(trim($values['path'])); if (!preg_match('|^[a-z_\-0-9]+$|',$path)) $errors[] = 'Путь должен состоять из символов латинского алфавита, цифр и символа подчекивания «_» и тире «-»';
                 $pattern = '';
                 foreach (configGet('registeredPatterns') as $v) if ($v['name']==$values['pattern']) $pattern = $v['name'];
                 if ($pattern=='') $errors[] = 'Не указан тип раздела';
@@ -152,7 +152,7 @@ class SiteSections extends VirtualClass
         function edit($values){
                 $errors = array();
                 $name = htmlspecialchars(trim($values['name'])); if ($name=='') $errors[] = 'Не указано название';
-                $path = lower(trim($values['path'])); if (!preg_match('|^[a-z_0-9]+$|',$path)) $errors[] = 'Путь должен состоять из символов латинского алфавита, цифр и символа подчекивания «_»';
+                $path = lower(trim($values['path'])); if (!preg_match('|^[a-z_\-0-9]+$|',$path)) $errors[] = 'Путь должен состоять из символов латинского алфавита, цифр и символа подчекивания «_» и тире «-»';
                 $isservice = floor($values['isservice']); if ($isservice>1) $errors[] = 'Не указано расположение (раздел или сервис)';
                 $keywords = htmlspecialchars(trim($values['keywords']));
                 $title = htmlspecialchars(trim($values['title']));

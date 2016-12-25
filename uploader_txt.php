@@ -1,5 +1,5 @@
 <?php
-include "$DOCUMENT_ROOT/inc/site_admin/include.php";
+include $_SERVER['DOCUMENT_ROOT']."/inc/site_admin/include.php";
 
 session_start();
 header("Content-type: text/html; charset=uft-8");

@@ -12,7 +12,7 @@ class CDDate extends VirtualType
 		);
 		VirtualType::init($settings);
 	}
-	function drawEditor($divstyle = ''){
+	function drawEditor($divstyle = '',$span = true){
 		$settings = $this->getSetting('settings');
 
 		if (preg_match("|^[0-9]{4}\-[0-9]{2}\-[0-9]{2}|",$this->getSetting('value')))
@@ -59,9 +59,9 @@ class CDDate extends VirtualType
 			<label><?=htmlspecialchars($this->getSetting('description'))?><?=((isset($settings['important']))?' <span class="important">*</span>':'')?></label>
 			<div><input  id="<?=htmlspecialchars($this->getSetting('name'))?>" name="<?=htmlspecialchars($this->getSetting('name'))?>" type="text" style="width: 100px; float: left;" value="<?=htmlspecialchars($this->getSetting('value'))?>"/></div>
 		</div>
-
-		<span class="clear"></span>
 		<?
+		if ($span) print '
+			<span class="clear"></span>';
 	}
 	function preSave(){
 		$errors = array();

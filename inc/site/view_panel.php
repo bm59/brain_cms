@@ -1,17 +1,14 @@
- <script type="text/javascript">
- $(function() {
-		function scroll_to(name) {
-			var elem=$(name);
-	      	destination = elem.offset().top;
-	        $("html, body").animate({scrollTop:destination},"slow")
-		}
+<?
+if (isset($_GET['view_type'])) 		$_SESSION['view_type']=$_GET['view_type'];
+if ($_SESSION['view_type']=='') 	$_SESSION['view_type']='tile';
 
-		<?if (isset($_GET['view_type']) || isset($_GET['sort_type'])) {?>
-		scroll_to('.catalog');
-		<?} ?>
-});
- </script>		
-			
+$view_array=array
+(
+		'tile'=>array('name'=>'Плитка', 'pic'=>'/pics/view/tile.png', 'default'=>true, 'limit'=>20),
+		'tile_big'=>array('name'=>'Крупная плитка', 'default'=>false, 'limit'=>10),
+		'list'=>array('name'=>'Список', 'default'=>false, 'limit'=>10)
+);
+?>			
 			<div class="view_type">
 				<div>Вид:</div>
 				<?

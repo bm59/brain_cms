@@ -252,11 +252,17 @@ class CCSklad extends VirtualContent
    						?>
    					</div>
    					<?}?>
-   					
+   					<div style="z-index: 10;width: 10%" class="place">
+		        		<label>ID товара</label>
+						<span class="input">
+							<input type="text" value="<?=$_POST['search_good_id'] ?>" name="search_good_id">
+						</span>
+					</div>
+					
    					<div style="z-index: 10;width: 27%" class="place">
 		        		<label>Наименование или часть</label>
 						<span class="input">
-							<input type="text" value="<?=$_POST['search_name'] ?>" maxlength="20" name="search_name">
+							<input type="text" value="<?=$_POST['search_name'] ?>" name="search_name">
 						</span>
 					</div>
    							<script type="text/javascript">
@@ -397,14 +403,16 @@ class CCSklad extends VirtualContent
    		<tr class="template">
    		<?
    		$table_th=array();
-   
+
    		if (isset($this->Settings['settings_personal']['onoff'])) 		$table_th[]=array('name'=>'show', 'description'=>'Вкл', 'class'=>'t_minwidth t_center');
    		if (isset($this->Settings['settings_personal']['show_id']))		$table_th[]=array('name'=>'id', 'description'=>'№', 'class'=>'t_minwidth  t_center');
    		if (isset($this->Settings['settings_personal']['precedence']))	$table_th[]=array('name'=>'precedence', 'description'=>'Порядок', 'class'=>'t_32width');
    
+   		$table_th[]=array('name'=>'', 'description'=>'#товара', 'class'=>'');
    		$table_th[]=array('name'=>'name', 'description'=>'Дата', 'class'=>'t_32width');
    		$table_th[]=array('name'=>'name', 'description'=>'Товар', 'class'=>'');
    		
+   	
    		
    		foreach($show_fields as $sf){
    			$set=$dataset['types'][$sf]['face']->Settings;
@@ -455,7 +463,7 @@ class CCSklad extends VirtualContent
    		{
    			?>
    		<tr>
-   
+   			<td><?=$pub['good_id'] ?></td>
    			<!-- Вкл. Откл -->
    			<?if (isset($this->Settings['settings_personal']['onoff'])){?>
    				<td class="t_minwidth  t_center">
@@ -467,6 +475,7 @@ class CCSklad extends VirtualContent
    
    
    			<!-- ID, порядок -->
+   			
    			<?if (isset($this->Settings['settings_personal']['show_id'])){?>		<td class="t_minwidth  t_center"><?=$pub['id'] ?></td><?}?>
    			<?if (isset($this->Settings['settings_personal']['precedence'])){?>		<td class="t_32width  t_center"><input type="text" name="prec_<?=$pub['id']?>" value="<?=floor($pub['precedence'])?>"/></td><?}?>
    
@@ -497,6 +506,7 @@ class CCSklad extends VirtualContent
 				   			}
 				   			?>
 			   			</td>
+			   			
    			
    			<!-- Видимые поля -->
    			<?
@@ -686,7 +696,7 @@ class CCSklad extends VirtualContent
    			$this->init();
    			$this->getFreeParamsKol();	
    		}
-   		if ($_POST['action']=='ajax_save')
+   		elseif ($_POST['action']=='ajax_save')
    		{
    			$this->ajax_save();
    		}
@@ -800,6 +810,7 @@ class CCSklad extends VirtualContent
     		$all_sale=msr(msq($q));
     		$total=$all_sklad['sum_kol']-floor($all_sale['sum_kol']);
     		
+    		if ($good['kol']!=floor($total) || $good['popular']!=$all_sale['sum_kol'])
     		msq("UPDATE `".$this->goods_iface->getSetting('table')."` SET `kol`='".floor($total)."', `popular`='".floor($all_sale['sum_kol'])."' WHERE `id`=".$good['id']);
     		
     		
@@ -821,6 +832,8 @@ class CCSklad extends VirtualContent
    			$all_sale=msr(msq($q));
    			$total=$all_sklad['sum_kol']-floor($all_sale['sum_kol']);
    			
+   			
+   			if ($par['kol']!=floor($total))
    			msq("UPDATE `site_site_goods_".$par_name."` SET `kol`='".floor($total)."' WHERE `id`=".$par['id']);
    			
    		}

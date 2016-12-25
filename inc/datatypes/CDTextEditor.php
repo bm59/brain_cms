@@ -52,7 +52,7 @@ class CDTextEditor extends VirtualType
 			    content_css: "/css/default.css?<?=rand();?>",
 			    fontsize_formats: "10pt 11pt 12pt 13pt 14pt 15pt 16pt 18pt 20pt 22pt 24pt 26pt",
 			    theme_advanced_blockformats:"p,h1,h2,h3",
-			    extended_valid_elements : "nobr[*]",
+			    extended_valid_elements : "a[href|onclick|target|rel|title|class|style],nobr[*]",
 
 			    style_formats: [
 			        {title: 'Headers', items: [

@@ -1,0 +1,1 @@
+$dir = PHP_SAPI=="cli" ? $_SERVER['DOCUMENT_ROOT'] =  realpath(dirname(__FILE__).'/../'):$_SERVER['DOCUMENT_ROOT'];

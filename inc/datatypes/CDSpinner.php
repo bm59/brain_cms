@@ -57,15 +57,15 @@ class CDSPINNER extends VirtualType
 		$settings = $this->getSetting('settings');
 
 		$newvalue=$_POST[$this->getSetting('name')];
+		$newvalue = floatval($newvalue);
 
 	/* 	$newvalue=preg_replace('/[^0-9]/', '', $_POST[$this->getSetting('name')]);
 	
 	 	if ($newvalue!='' && $newvalue>-1)
 		$newvalue = floatval($newvalue); */
 
-
-		if ((isset($settings['important'])) && (!is_float($newvalue))) $errors[] = 'Заполните поле «'.$this->getSetting('description').'»';
-		if ((isset($settings['important'])) && ($newvalue==='')) $errors[] = 'Заполните поле «'.$this->getSetting('description').'»';
+		if (isset($settings['important']) && !is_float($newvalue) && !is_int($newvalue)) $errors[] = '!!!!Заполните поле «'.$this->getSetting('description').'»';
+		if (isset($settings['important']) && ($newvalue==='')) $errors[] = 'Заполните поле «'.$this->getSetting('description').'»';
 		//if ($newvalue!='0')
 		$this->setSetting('value',$newvalue);
 		return $errors;

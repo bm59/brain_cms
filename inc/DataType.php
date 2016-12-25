@@ -188,7 +188,7 @@ class DataType extends VirtualClass
 	        		<div class="place" style="z-index: 10;<?=$tface->Settings['setting_style_edit']['css']?>">
 		        		<label><?=$tface->Settings['description'] ?></label>
 						<span class="input">
-							<input type="text" name="search_<?=$tface->getSetting('name')?>" maxlength="20" value="<?=$_REQUEST['search_'.$tface->getSetting('name')]?>"/>
+							<input type="text" name="search_<?=$tface->getSetting('name')?>" value="<?=$_REQUEST['search_'.$tface->getSetting('name')]?>"/>
 						</span>
 					</div>
 	        		<?

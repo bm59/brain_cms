@@ -60,7 +60,7 @@ else{
 	/*$exceptions[] = '/profile/index.php';*/
 	if ($_GET['section']>0)
 	{
-		$cid = $Content->getIdByPath($SiteSections->getPath($_GET['section']));
+		$cid = $_GET['section'];
 
 		if ($aut_mode=='alladmin')
 		$sec=$SiteSections->get($_GET['section']);

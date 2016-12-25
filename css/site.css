@@ -1,8 +1,45 @@
+@font-face {
+  font-family: 'ProximaNovaCond-Light';
+  src: url('/fonts/ProximaNovaCond-Light.eot?#iefix') format('embedded-opentype'),  url('/fonts/ProximaNovaCond-Light.otf')  format('opentype'),
+	     url('/fonts/ProximaNovaCond-Light.woff') format('woff'), url('/fonts/ProximaNovaCond-Light.ttf')  format('truetype'), url('/fonts/ProximaNovaCond-Light.svg#ProximaNovaCond-Light') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'ProximaNovaExCn-RegularIt';
+  src: url('/fonts/ProximaNovaExCn-RegularIt.eot?#iefix') format('embedded-opentype'),  url('/fonts/ProximaNovaExCn-RegularIt.otf')  format('opentype'),
+	     url('/fonts/ProximaNovaExCn-RegularIt.woff') format('woff'), url('/fonts/ProximaNovaExCn-RegularIt.ttf')  format('truetype'), url('/fonts/ProximaNovaExCn-RegularIt.svg#ProximaNovaExCn-RegularIt') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+@font-face {
+  font-family: 'ProximaNovaCond-LightIt';
+  src: url('/fonts/ProximaNovaCond-LightIt.eot?#iefix') format('embedded-opentype'),  url('/fonts/ProximaNovaCond-LightIt.otf')  format('opentype'),
+	     url('/fonts/ProximaNovaCond-LightIt.woff') format('woff'), url('/fonts/ProximaNovaCond-LightIt.ttf')  format('truetype'), url('/fonts/ProximaNovaCond-LightIt.svg#ProximaNovaCond-LightIt') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+    font-family: 'bebas_neue_regularregular';
+    src: url('/fonts/bebasneue_regular.eot');
+    src: url('/fonts/bebasneue_regular.eot?#iefix') format('embedded-opentype'),
+         url('/fonts/bebasneue_regular.woff') format('woff'),
+         url('/fonts/bebasneue_regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+
 * {margin: 0px; padding: 0px;}
 HTML {height: 100%;}
 BODY
 {
-	font-family: 'PFDinDisplayPro-Regular', Tahoma, sans-serif !important;
+	font-family: 'ProximaNovaCond-Light', Tahoma, sans-serif !important;
 	font-size: 16px;
 	line-height: 18px;
 	margin: 0;
@@ -12,43 +49,356 @@ BODY
 	height: 100%;
 	min-height: 100%;
 	position: relative;
-	color: #4A4A4A;
+    background-color: #FFF;
 }
 
-a, a:visited, a:hover {color:#000; outline: none; transition: color 0.05s ease-in 0s;}
-a IMG {border: none;}
-h1 {font-family: 'PFDinDisplayPro-Medium', Tahoma, sans-serif !important; font-size: 28px; color: #735093; padding: 10px 0; line-height: 28px;}
-h2 {font-family: 'PFDinDisplayPro-Medium', Tahoma, sans-serif !important; font-size: 28px; color: #735093; padding: 10px 0; line-height: 28px;}
-h3 {font-size: 16px; color: #000; padding: 10px 0; line-height: 16px;}
-.hgreen {color: #00BEA8;}
+A, A:visited, A:hover {color:#000; outline: none;}
+A:hover {color:#bc3a00!important;}
+A IMG {border: none;}
+H1 {font-size: 24px; color: #000; padding: 10px 0 5px; line-height: 24px;}
+H2 {font-size: 22px; color: #000; padding: 10px 0 5px; line-height: 22px;}
+H3 {font-size: 16px; color: #000; padding: 10px 0 5px; line-height: 16px;}
 
-
-p {padding: 10px 0px;}
+P {padding: 10px 0px;}
 .overlay {width: 100%; height: 100%; display: block; z-index: 10;position: absolute; background-color: rgba(204, 204, 204, 0);}
-table th {vertical-align: top;}
-table td {vertical-align: top;}
+TABLE TH {vertical-align: top;}
+TABLE TD {vertical-align: top;}
 
-.hr {border-top: 1px solid #D8D8D8; height: 1px; margin: 30px 0; clear: both;}
+.hr {border-top: 1px solid #D8D8D8; height: 1px; margin: 20px 0; clear: both;}
 .hr hr {display:none;}
 * html .hr {overflow: hidden;}
 
-/*РљРѕРЅС‚РµР№РЅРµСЂ*/
-.container {box-sizing: border-box; width: 1220px; margin: 0px auto 30px; position: relative; padding: 10px 20px;background-color: #FFFFFF;}
+.old_price img {opacity: 0.5}
+
+.main_content {padding-bottom: 100px; padding-top: 20px;}
+
+.header_social {position: absolute; top: 125px; left: 925px;}
+.header_social div {float: left; padding-right: 8px}
+.header_social img {height: 30px;}
 
 
-/*Р¤СѓС‚РµСЂ*/
-.footer {height: 55px; background-color: #000000; position: absolute; bottom: 0; width: 100%; -webkit-box-shadow: 0px 0px 5px 0px rgba(50, 50, 50, 0.3);
+.good_menu {width: 250px; float: left;}
+.good_menu > div a {color:#FFFFFF!important; font-size: 20px; margin: 5px 0; padding: 20px 15px 20px 30px; display: block; background-color: #a43300}
+.good_menu a:hover {background-color: #E14500; text-decoration: none;}
+.good_menu .active a {background-color: #009933; text-decoration: none;}
+
+.good_menu .sub_categs {border: 1px solid #CCCCCC}
+.good_menu .sub_categs li {list-style: none; background-color: #FFFFFF!important;}
+.good_menu .sub_categs li a {color:#000000!important; font-size: 18px; margin: 5px 0; padding: 10px 15px 10px 30px; display: block; background-color: #FFFFFF!important;}
+.good_menu .sub_categs li.active a {font-weight: bold; text-decoration: none;}
+.good_menu a img {display: inline-block; line-height: 30px; vertical-align: middle;}
+
+.good_menu h2 {height: 33px; font-size: 26px;}
+
+.good_content {margin-left: 250px; padding-left: 20px;}
+.good_content h2 {margin-left: 10px; font-size: 26px; color: #333333; padding: 10px 0 5px; line-height: 26px; width: 100%;}
+.good_content.item_page {margin:0!important; padding: 0 !important;}
+
+/*Чекбокс*/
+.styled input[type="checkbox"] + label {
+    background: url(/pics/inputs/checkbox_big.png) 0 0 no-repeat;
+    padding-left: 30px; 
+    height: 23px;
+    display: block;
+    float: left;
+    padding-right: 20px;
+    font-size: 22px;
+    line-height: 25px;
+}
+.styled input[type="checkbox"]:checked + label {
+    background-position: 0 -23px;
+}
+
+.styled input[type="checkbox"] {
+    left: -9999px;
+    position: absolute;
+}
+.styled INPUT {
+    background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
+    border: medium none;
+}
+
+
+
+.goods .name {color: #000;
+    font-size: 18px;
+    line-height: 18px;
+    padding: 10px 0 5px;
+    top: 180px;
+    left: 15px;
+   }
+.goods li {list-style: none; background: none!important; padding: 0; 
+width: 230px; height: 320px; 
+text-align: left;
+margin: 4px; border: 1px solid #CCCCCC; float: left;
+padding: 10px!important;
+position: relative;
+box-sizing: border-box;
+}
+.goods li:hover {border: 1px solid #000000!important;}
+
+
+.goods {width: 100%; float: left; text-align: center}
+.goods .img {text-align: center; line-height: 210px;} 
+.goods .img img {max-width: 100%; max-height: 210px; vertical-align: middle}
+.buy {position: absolute; top: 270px; width: 100%; padding-right: 10px; box-sizing: border-box;}
+.buy div { float: left;}
+.buy .price {width: 40%; padding: 10px 0; font-size: 22px; color: #CC0000; font-weight: bold;}
+.buy .price small {color: #666666; font-weight: normal;}
+.buy .basket_actions {width: 60%; padding-right: 10px; box-sizing: border-box;}
+.buy .basket_clear {float: right; display: inline-block;
+cursor: pointer;
+margin: 10px 4px 4px 4px; height: 20px; width: 20px; background: url(/pics/basket_clear.png) 0 0 no-repeat;}
+.buy .basket_clear.big {margin-right: 10px;
+    margin-top: 17px; height: 30px; width: 30px; background: url(/pics/basket_clear_big.png) 0 0 no-repeat;}
+
+.buy .mybtn {float: right; display: inline-block;}
+.adit {padding-top: 10px;}
+.adit div {width: 50%; float: left;}
+ul.goods .comment {position: absolute; bottom: 10px; left:15px;}
+
+.good_alert {position: absolute; top:0px; left: 0px; padding: 15px; color: #FFFFFF; opacity: 0.8}
+.good_alert.hit {background-color: #3366CC;}
+.good_alert.action {background-color: #CC0000;}
+.good_alert.new {background-color: #9900CC;} 
+
+/*Крупная плитка*/
+.goods.tile_big li {list-style: none; background: none!important; padding: 0; 
+width: 470px; height: 580px; 
+margin: 4px; border: 1px solid #CCCCCC; float: left;
+padding: 10px 15px;
+position: relative;
+}
+.goods.tile_big .name a {font-size: 35px;}
+.goods.tile_big .img {line-height: 450px;} 
+.goods.tile_big .img img { max-height: 450px;}
+.goods.tile_big .main_image img {height: 550px!important;}
+.goods.tile_big .anons, .goods.categ .name {padding: 10px 0; }
+.goods.tile_big .anons {color: #666666}
+.goods.tile_big .buy {text-align: left; top: 530px;}
+.goods.tile_big .buy .price {font-size: 32px; position: relative;}
+.goods.tile_big .buy .basket_clear {right: -34px!important; top: 11px!important;}
+.goods.tile_big .mybtn {float: right; display: inline-block; }
+.goods.tile_big .comment {position: absolute; top: 10px; right:20px; font-size: 20px; left: auto; bottom: auto;} 
+.goods.tile_big .icons {position: absolute; top: 450px; left: 15px;}
+.goods.tile_big .icons > div {padding: 0 20px!important;}
+
+/*Список*/
+.goods.list li {list-style: none; background: none!important; padding: 0; 
+width: 100%; height: 250px; 
+margin: 4px; border: 1px solid #CCCCCC; float: left;
+position: relative;
+}
+.goods.list .brd {float: left}
+.goods.list .img {text-align: center; line-height: 210px;} 
+.goods.list .img img {max-width: 230px; max-height: 100%; vertical-align: middle}
+.goods.list .name {margin-left: 20px;}
+.goods.list .name a {font-size: 35px;}
+.goods.list .descr {float: left; width: 400px; text-align: left;}
+.goods.list .anons, .goods.categ .name {padding: 10px 0;}
+.goods.list .anons {color: #666666}
+.goods.list .name {font-size: 22px; font-size: 22px; left: 240px; position: absolute; top: 10px;}
+.goods.list .icons > div {float: left; padding: 0 14px; text-align: center;}
+.goods.list .buy {width: auto; text-align: center; left: 260px; position: absolute; top: 50px;}
+.goods.list .buy div {width: auto;}
+.goods.list .buy .price {font-size: 32px; margin-right: 30px;}
+.goods.list .buy .old_price {color: #CC0000}
+.goods.list .buy .old_price {font-size: 32px; position: relative; top: auto; padding-top: 20px;}
+.goods.list .buy .old_price img {  
+	height: 27px;
+    margin: 0 auto;
+    width: 100px;
+    left: 50px; 
+    top: 15px;
+ }
+.goods.list .buy .basket_clear {right: 14px!important; top: 11px!important;}
+.goods.list .mybtn {display: inline-block; }
+.goods.list .comment {font-size: 18px; position: relative; bottom: auto; top: auto; left: auto; padding-top: 20px;}
+
+.good_left {width: 400px; float: left; position: relative;}
+.good_right {margin-left: 400px; padding-left: 30px;}
+.good_right h1 {font-size: 35px;}
+.good_right .buy {width: 500px; position: relative; top: auto;}
+.good_right .text {float: left; font-size: 18px; padding-top: 20px;}
+.good_right .icons {float: left; padding-top: 30px;}
+.good_right .buy {padding: 10px 0 20px 0;}
+.good_right .buy .price {font-size: 50px;
+    padding-top: 20px;
+    position: relative;
+    width: 250px;}
+.good_right .buy .price img {margin-left: 5px;}
+.good_right .buy .old_price {color: #CC0000}
+.good_right .buy .old_price {font-size: 32px; position: absolute; top: 15px; left: 120px;}
+.good_right .buy .old_price img {  
+	height: 27px;
+    margin: 0 auto;
+    width: 100px;
+    left: 0px; 
+    top: -5px;
+ }
+.good_right .buy .basket_clear {left: 340px!important;}
+.good_right .comment {color: #009933; float: left; width: 100%; font-size: 20px;}
+.item li {list-style: none;}
+.good_left .icons > div {padding: 0 15px;}
+
+.img_prev {padding-top: 10px;}
+.img_prev img {display: block; float: left; margin: 0 0 10px 10px; max-height: 50px; border: 1px solid #F2F2F2; }
+.img_prev .active img {border: 1px solid #000000;} 
+.good_left .main_image img {width: 400px; cursor:url(/pics/zoom_in.png), auto;}
+
+/*Кнопка*/
+.mybtn {
+background: none repeat scroll 0 0 #009933;
+color: #FFFFFE;
+cursor: pointer;
+font-size: 16px;
+height: 30px;
+text-align: center;
+text-decoration: none;
+line-height: 28px;
+width: 100px;
+display: block;
+margin-top: 7px;
+}
+.mybtn:hover {color: #FFFFFF!important; background: none repeat scroll 0 0 #02BC40;}
+.mybtn.active{background-color: #CC0000; width: 80px;}
+.mybtn img {display: inline-block; vertical-align: middle; line-height: 30px;}
+
+
+.mybtn.big {
+font-size: 22px;
+height: 50px;
+line-height: 45px;
+padding: 0 20px;
+}
+
+.category {    
+	border: 1px solid #ccd4d6;
+   
+    margin: 10px 0;
+  
+}
+.category .descr {padding: 10px 0 15px 0; text-align: center; width: 320px; float: left;}
+.category .goods {margin-left: 320px; border-left: 1px solid #CCD4D6; margin-right: 1px; }
+.category .image img {height: 210px;}
+.category .name {text-align: left; padding-left: 30px; font-size: 35px; font-weight: bold; line-height: 35px;}
+.category .diam_info {text-align: left; padding: 5px 0 0 30px; font-size: 18px; line-height: 18px;} 
+
+
+
+/*Хидер*/
+.line {height: 5px; background-color: #BC3A00}
+.header {padding-top: 10px;}
+.header a {color: #BC3A00;}
+.header .contacts {position: absolute; top: 27px; right: 0px; text-align: right; font-size: 18px; line-height: 20px; color: #363336;}
+.header .contacts .phone {text-align: center; color: #363336; font-size: 38px; line-height: 40px; }
+.header .contacts .phone .tel {color: #bc3a00; font-family: 'ProximaNovaCond-LightIt', Tahoma, sans-serif !important;;}
+.header .contacts .address {padding-top: 3px; text-align: center;}
+.header .logo img {width: 150px;}
+
+.header .fav img {display: inline-block; margin: -2px 3px 0 0; vertical-align: middle;}
+.header .call_order img {display: inline-block; margin: 2px 3px 0 0; vertical-align: middle;}
+.header .fav, .header .call_order {margin-bottom: 5px;}
+.header .header_main {color: #BC3A00; position: absolute; top: 30px; left: 180px; text-align: right; font-size: 45px; line-height: 45px; font-weight: bold;}
+.header .header_comment {color: #888888; position: absolute; top: 80px; left: 180px; text-align: right; font-size: 20px; line-height: 20px;}
+
+.header .paytypes {left: 170px; position: absolute; top: 75px; color: #888888; font-size: 18px;} 
+.header .paytypes div {float: left; margin-right: 15px;}
+.header .paytypes .description { line-height: 30px; margin: 0; text-align: left; width: 100%;}
+.header .paytypes img:hover {opacity: 0.8;}
+
+/*Главное меню*/
+.main_menu {
+	margin-top: 20px;
+	background-color: #A43300;
+    box-shadow: 0 1px 2px 0 rgba(50, 50, 50, 0.5);
+    height: 59px;
+    width: 100%;
+    font-family: 'bebas_neue_regularregular', Tahoma, sans-serif !important;;
+    font-size: 20px;
+}
+.main_menu li {list-style: none; height: 100%;}
+.main_menu > li {margin: 0; float: left; padding: 0; display: block; position: relative; } 
+.main_menu a {
+	text-decoration: none;
+	padding: 2px 24px; 
+	float: left; 
+	line-height: 55px; 
+	color: #FFFFFF;
+}
+.main_menu a:hover {
+	color: #FFFFFF!important; 
+	text-decoration: underline;
+}
+.main_menu .home .icon { 
+	background: rgba(0, 0, 0, 0) url("/pics/home.png") no-repeat scroll 0 0;
+    height: 29px;
+    margin-top: 15px;
+    width: 31px;
+}
+.main_menu li.item:hover {background-color: #E14500;}
+
+.main_menu li.basket {float: right; font-family: 'ProximaNovaCond-Light', Tahoma, sans-serif !important; font-size: 18px; color: #FFFFFF; }
+.main_menu li.basket div {float: left; color: #FFFFFF;}
+.main_menu li.basket.info a {padding: 2px 5px;}
+.main_menu li.basket div.comment {line-height: 55px; padding: 2px 15px 0 0;}
+.main_menu li.basket img {display: block; float: left; padding-top: 10px;}
+
+.main_menu li.basket.btn {background-color: #009933; color: #FFFFFF!important;}
+.main_menu li.basket.btn:hover a {background-color: #EF5D28; color: #FFFFFF!important; text-decoration: underline!important;}
+
+/*Меню 2*/
+.small_menu_container {left:0; padding: 5px 0; opacity: 0.95;background-color: #FFFFFF; z-index: 999; width: 100%; position: fixed; border-bottom: 1px solid #dadada; height: 60px;}
+.small_menu { background-color: #F1F1F1;   font-size: 17px; top: 90px; font-size: 15px;}
+.small_menu div {float: left;}
+.small_menu a { text-decoration: none; padding: 5px 10px; }
+.small_menu a:hover, .main_menu a.active {color: #FFFFFF; text-decoration: underline;}
+.small_menu .basket img {display: inline-block; vertical-align: middle; margin-top: -5px;}
+.small_menu .phone {position: absolute; right: 0; font-size: 22px; padding: 5px 0 0 10px; font-family: 'ProximaNovaCond-LightIt', Tahoma, sans-serif !important;}
+.small_menu .phone .tel {color: #bc3a00;}
+.small_menu .call {position: absolute; right: 0; top: 30px;}
+.small_menu .call a {text-decoration: underline}
+.small_menu .comment {line-height: 45px;}
+.small_menu .basket_small {padding: 5px 0 0 20px; width: 600px; text-align: center;}
+.small_menu .btn {padding-left: 10px;}
+.small_menu .name {font-size: 22px; padding: 18px 0 0 10px; color: #a43300;}
+
+.small_menu .button a {background-color: #CC0000;
+    color: #ffffff;
+    display: inline-block;
+    line-height: 27px;
+    padding: 5px 15px;
+    margin-left: 15px;
+}
+.small_menu .button a:hover {color: #FFFFFF!important; background-color: #CF5225; text-decoration: none;} 
+
+
+
+/*Контейнеры*/
+.container {
+	width: 1230px; 
+	margin: 0px auto; 
+	position: relative; 
+	background-color: #FFF;
+}
+.content_container {padding-bottom: 80px;}
+
+/*Футер*/
+.footer {height: 55px; background-color: #6f2525; position: absolute; bottom: 0; width: 100%; -webkit-box-shadow: 0px 0px 5px 0px rgba(50, 50, 50, 0.3);
 -moz-box-shadow:    0px 0px 5px 0px rgba(50, 50, 50, 0.3);
 box-shadow:         0px 0px 5px 0px rgba(50, 50, 50, 0.3); left: 0;
 }
 .footer .container {background-color: inherit!important;}
 
-.footer_menu {padding: 8px 0 0 300px; font-size: 16px;}
-.footer_menu a {color: #FFFFFF!important; display: block; float: left; margin-right: 20px; padding-top: 10px; text-decoration: none;}
+.footer_menu {padding: 8px 0 0 380px; font-size: 16px;}
+.footer_menu a {color: #FFFFFF!important; display: block; float: left; margin-right: 40px; padding-top: 10px; text-decoration: none;}
 .footer_menu a:hover {text-decoration: underline;}
 
 
-.footer .dev {position: absolute; top: 12px; right:50px;}
+.footer .dev {position: absolute; top: 12px; right: 0px;}
+
+.footer .footer_logo {position: absolute; top: 7px; left:10px;}
+.footer .footer_logo img {height: 40px}
 
 .social {position: absolute; top: 12px; left:50px;} 
 .social a {background: url(/pics/social.png) no-repeat; display: inline-block; position: relative; text-indent: -9999px; width: 37px; height: 36px;}
@@ -57,8 +407,7 @@ box-shadow:         0px 0px 5px 0px rgba(50, 50, 50, 0.3); left: 0;
 .social a.twi 	{background-position: -76px 0px;}
 .social a.yt 	{background-position: -111px 0px;}
 
-
-/*РРЅС‚РїСѓС‚С‹*/
+/*Инпуты*/
 input[type="text"],input[type="password"],textarea {
     border: 2px solid rgba(220, 220, 220, 1);
     box-shadow: 1px 1px 3px 1px rgba(200, 200, 200, 0.2) inset;
@@ -78,35 +427,28 @@ input[type="text"]:focus,input[type="password"]:focus,textarea:focus {
 }
 
 
-/*РљРЅРѕРїРєРё*/
-.mybtn {
-background: none repeat scroll 0 0 #990000;
-color: #FFFFFE;
-cursor: pointer;
-font-size: 18px;
-height: 45px;
-text-align: center;
-text-decoration: none;
-width: 150px;
-border:1px solid #999999;
-}
 
 
-
-/*РҐР»РµР±. РєСЂРѕС€РєРё*/
-.mininav {padding: 11px 0 0 0; height: 30px; color: #666666; line-height: 15px;}
+/*Хлебные крошки*/
+.mininav {padding: 20px 0 10px 10px; height: 30px; color: #666666; line-height: 15px;}
 .mininav a {display: block; float: left; color: #666666}
 .mininav a:hover {text-decoration: underline;}
 /*.mininav IMG {display: inline; padding: 0 10px; padding-right: 6px; vertical-align: middle;}*/
 .mininav IMG {display: block; float: left; padding: 2px 8px 0; margin-top: -5px;}
 .mininav DIV {float: left; padding-top: 1px;}
 
+/*Пейджинг*/
+.paging {padding: 10px 0; margin: 20px 20px 10px 5px; text-align: left;}
+.paging SPAN {border: 1px solid #d1d1d1; padding:7px 15px; font-weight: bold; background-color: #009933; margin-right: 5px; color: #FFFFFF;}
+.paging a {border: 1px solid #d1d1d1; color: #FFFFFF; padding:7px 15px; margin-right: 5px; background-color: #666666; text-decoration: none;}
+.paging a:hover {background-color: #009933; color: #FFFFFF!important;}
 
-/*РўР°Р±Р»РёС†С‹*/
+
+/*Таблица*/
 .table-content {width: 100%; border-left: 2px solid #FFF !important; border-right: 2px solid #FFF !important; font-size: 12px; line-height: 18px; border-collapse: collapse;}
-.table-content CAPTION {text-align: left; color: #000; padding-bottom: 5px; font-size: 11px; line-height: 15px; font-family: 'PFHandbookPro-Regular', Helvetica, arial, sans-serif !important;}
+.table-content CAPTION {text-align: left; color: #000; padding-bottom: 5px; font-size: 11px; line-height: 15px; font-family: 'PFHandbookPro-Regular', Tahoma, sans-serif !important;;}
 .table-content TH {text-align: center; font-size: 14px; color: #333333; padding: 15px 10px; background-color: #666666; color: #FFFFFF; border: 1px solid #D8D8D8; border-top: none;}
-.table-content TD {padding: 10px; border-bottom: 1px solid #D8D8D8;border: 1px solid #D8D8D8;}
+.table-content TD {vertical-align: middle; padding: 10px; border-bottom: 1px solid #D8D8D8;border: 1px solid #D8D8D8;}
 .table-content TD.th {color: #0CA2B8; background-color: #EAFBFF; font-weight: bold; }
 .table-content P {margin: 0px !important;}
 .table-content H1 {margin: 0px !important;}
@@ -117,7 +459,8 @@ border:1px solid #999999;
 .even {background:#f7f7f7;}
 .odd {}
 
-/*РќР°РІРµСЂС…*/
+
+/*Вверх*/
 #toTop {
  position:fixed;
  z-index:9999;
@@ -135,7 +478,9 @@ border:1px solid #999999;
 }
 #toTop:hover {opacity: 1;}
 
-/*РЎРїРёСЃРєРё*/
+
+
+/*Списки*/
 .styled UL {list-style: none;margin:0;}
 .styled UL, OL {margin: 0px;}
 .styled UL LI {position: relative; padding: 2px 0;}
@@ -143,4 +488,30 @@ border:1px solid #999999;
 .styled UL LI {padding-top: 5px; line-height: 28px; background: url(/pics/ul.png) 0px 8px no-repeat;  padding-left: 30px; margin-left: 0px;}
 .styled OL UL, OL OL, UL UL, UL OL {margin: 0px 0px 0px 40px;}
 .styled LI a.active {text-decoration: none; font-weight: bold;}
+
+/*Галерея фото в редакторе страницы*/
+/*.photogallery {border: 1px dashed #CCCCCC; padding: 10px;} - рамка для редактора tiny*/
+/* Фото */
+.photo_row {
+	display: inline-block;
+    height: 180px;
+    padding: 3px;
+    margin: 5px;
+    width: 130px;
+    border: 1px solid #CCCCCC;
+    -webkit-box-shadow: 1px 1px 3px 0px rgba(50, 50, 50, 0.5);
+	-moz-box-shadow:    1px 1px 3px 0px rgba(50, 50, 50, 0.5);
+	box-shadow:         1px 1px 3px 0px rgba(50, 50, 50, 0.5);
+}
+.photo_row a {
+    background: none repeat scroll 0 0 #f1f1f1;
+    display: block;
+    height: 100%;
+    line-height: 100%;
+    overflow: hidden;
+    text-align: center;
+    width: 100%; 
+    position: relative;
+}
+.photo_row img {vertical-align: middle; border: 0 none; position: absolute; left:0; top:0;}
 

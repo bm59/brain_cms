@@ -1,11 +1,7 @@
-<?
-$section_slider=$SiteSections->getByPattern('PSlider');
-if ($section_slider['id']>0){
-?>
 <link rel="stylesheet" type="text/css" href="/css/jcarousel.basic.css"  media="all" />
 <script type="text/javascript" src="/js/jquery.jcarousel.js"></script>
 <script type="text/javascript" src="/js/jcarousel_basic.js"></script>
-<div class="clear"></div>
+
 <div class="slider">
 		<!-- Wrapper -->
 		<div class="wrapper">
@@ -13,6 +9,7 @@ if ($section_slider['id']>0){
 		    <div class="jcarousel">
 		        <ul>
 				<?
+				$section_slider=$SiteSections->getByPattern('PSlider');
 				$slider=getIface($SiteSections->getPath($section_slider['id']));
 				
 				$sliders=$slider->getList(0, ' WHERE `show`=1', 'ORDER BY `precedence`');
@@ -25,21 +22,21 @@ if ($section_slider['id']>0){
 		            
 		            ?>
 		           <li>
-		            	<?=$lnk[0]?><img src="<?=$image['path']?>" alt="<?=$sl['name'] ?>"/><?=$lnk[1]?>
+		           		<div class="bg-container1">
+		            		<?=$lnk[0]?><img src="<?=$image['path']?>" alt="<?=$sl['name'] ?>"/><?=$lnk[1]?>
+		            	</div>
 		           </li>
 		          <?
 		        }
 		        ?>
 		        </ul>
 		    </div>
-		
-		    <!-- Pagination -->
-		    <div class="jcarousel-pagination">
-		        <!-- Pagination items will be generated in here -->
-		    </div>
-		    <a href="#" class="jcarousel-control-prev"><div class="container"><span class="bg"></span><span class="arrow"></span></div></a>
-		    <a href="#" class="jcarousel-control-next"><div class="container"><span class="bg"></span><span class="arrow"></span></div></a>
-		                
+
+			  <!-- Pagination -->
+			  <div class="jcarousel-pagination"></div> 
+			 
+			  <a href="#" class="jcarousel-control-prev"></a>
+			  <a href="#" class="jcarousel-control-next"></a> 
+			         
 		</div>
 </div>
-<?} ?>

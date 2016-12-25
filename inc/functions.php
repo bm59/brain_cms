@@ -918,4 +918,33 @@ function get_array_sql($q)
 		return $Iface->getSetting('table');
 
 	}
+	function  WatermarkImage($src)
+	{
+	
+		$watermark = imagecreatefrompng($_SERVER['DOCUMENT_ROOT'].'/pics/watermark.png');
+	
+		$watermark_width = imagesx($watermark);
+		$watermark_height = imagesy($watermark);
+	
+	
+		list($w_i, $h_i, $type) = getimagesize($src);
+		$types = array("", "gif", "jpeg", "png"); // Массив с типами изображений
+		$ext = $types[$type]; // Зная "числовой" тип изображения, узнаём название типа
+		$func = 'imagecreatefrom'.$ext; // Получаем название функции, соответствующую типу, для создания изображения
+	
+		$image = $func($src);
+	
+	
+		$size = getimagesize($src);
+		 
+	
+		$dest_x = ($size[0] - $watermark_width)/2;
+		$dest_y = ($size[1] - $watermark_height)/2;
+		imagealphablending($watermark, true);
+		imagecopy($image, $watermark, $dest_x, $dest_y, 0, 0, $watermark_width, $watermark_height);
+		 
+		$func = 'image'.$ext;
+		$func($image,$src, 100);
+	
+	}
 ?>

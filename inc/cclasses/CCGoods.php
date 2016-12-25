@@ -64,6 +64,9 @@ class CCGoods extends VirtualContent
    
    				}
    			
+   			if (!isset($_POST['searchaction']) && $_GET['categs']!='') $_POST['categs']=explode(',', $_GET['categs']);
+   			
+   					
    			if (is_array($_POST['categs']))
    			{
    				$cat_usl='';
@@ -207,12 +210,24 @@ class CCGoods extends VirtualContent
    		                   		}
    		                   }
    		                   
+   		                   if (count($_POST['categs'])>0)
+   		                   {
+	   		                   	$pub['categs']='';
+	   		                   	foreach ($_POST['categs'] as $cat)
+	   		                   	$pub['categs'].=($pub['categs']!='' ? ',':'').$cat;
+	   		                   	
+	   		                   	$pub['categs']=','.$pub['categs'].',';
+   		                   }
+   		                   
    		                   ?>
    		<div class="place" style="z-index: 9999; width:100%; margin-right: 1%;">
 						<label>Раздел</label>
 						<select multiple="multiple" id="categs" name="categs[]">
 					        <?
 						 	if (!is_array($cur_sections)) $cur_sections=array();
+						 	
+						 	
+
 						 		
 					        foreach ($values as $val)
 					        {
@@ -434,60 +449,29 @@ class CCGoods extends VirtualContent
    		
    		$sklad_iface=getIface('/sitecontent/sklad/');
    		
-   		$price=$pub['price'].'<img src="/pics/rouble.png"/>';
    		
    		if ($pub['kol']>0)
    		$price='<img src="/pics/basket.png"> '.$pub['kol'].'<span> шт.</span>';
-   		
-
    		switch ($view_type) {
-   			case 'tile_big':
-   				
-   				?>
-   		   		   		<li id="<?=$pub['id'] ?>" <?=$pub['kol']>0 ? 'class="added"' :'' ?>>
-							<div class="brd">
-								<div class="name"><a href="/goods/<?=$pub['id'] ?>/"><?=$pub['name'] ?></a></div>
-   				   				<div class="img"><a href="/goods/<?=$pub['id'] ?>/"><img src="<?=$image['path'] ?>" alt=""/></a></div>
-   				   				<div class="price"><?=$pub['price'] ?><img src="/pics/rouble.png"/></div>
-   				   				<?if ($pub['hit']==1) {?><div class="hit big"></div><?} ?>
-   				   			</div>
-   				   			
-   				   			
-
-   				   		</li>
-   		   		<?	
-   			break;
-   			case 'list':
-   				?>
-   			   		  <li id="<?=$pub['id'] ?>" <?=$pub['kol']>0 ? 'class="added"' :'' ?>>
-							<div class="brd">
-   				   				<div class="img"><a href="/goods/<?=$pub['id'] ?>/"><img src="<?=$image['path'] ?>" alt=""/></a></div>
-   				   				
-   				   				<div class="info">
-	   				   				<div class="name"><a href="/goods/<?=$pub['id'] ?>/"><?=$pub['name'] ?></a></div>
-	   				   				<?if ($pub['anons']!='') {?><div class="anons"><?=$pub['anons'] ?></div><?} ?>
-	   				   				<div class="price <?=$pub['kol']>0 ? 'active':'' ?>"><?=$pub['price'] ?><img src="/pics/rouble.png"/></div>
-	   				   				<?if ($pub['hit']==1) {?><div class="hit"></div><?} ?>
-	   				   			</div>
-	   				   			<div class="clear"></div>
-   				   			</div>
-   				   			
-   				   			
-
-   				   		</li>
-   			   		   		<?	
-   			break;
    			case 'tile': default:
    				?>
    			   				   		<li id="<?=$pub['id'] ?>" <?=$pub['kol']>0 ? 'class="added"' :'' ?>>
    										<div class="brd">
    			   				   				<div class="img"><a href="/goods/<?=$pub['id'] ?>/"><img src="<?=$image['path'] ?>" alt=""/></a></div>
-   			   				   				<div class="price"><?=$price ?></div>
    			   				   				<?if ($pub['hit']==1) {?><div class="hit"></div><?} ?>
    			   				   			</div>
    			   				   			
    			   				   			<div class="name"><a href="/goods/<?=$pub['id'] ?>/"><?=$pub['name'] ?></a></div>
-   			
+   										<div class="buy">
+   											<input name="good_kol" type="hidden" value="<?=floor($pub['kol']) ?>">
+   											
+   											<div class="price"><?=$pub['price'] ?><small> руб.</small></div>
+   											
+					   						<div class="basket_actions">
+					   		   					<a style="display: <?=$pub['kol']>0 ? 'block' :'none' ?>" class="basket_clear" title="Удалить из корзины">&nbsp;</a>
+					   		   					<a class="mybtn<?=$pub['kol']>0 ? ' active' :'' ?>"><?=$pub['kol']>0 ? '<img src="/pics/basket_mini.png" alt=""/>&nbsp;:&nbsp;'.$pub['kol'] :'купить' ?></a>
+					   		   				</div>
+   										</div>
    			   				   		</li>
    			   				   		<?	
    			   				
@@ -554,12 +538,14 @@ class CCGoods extends VirtualContent
    					   			
    					   			<h1><?=$pub['name'] ?></h1>
    					   			<div class="buy">
+   					   				<input name="good_kol" type="hidden" value="<?=floor($pub['kol']) ?>">
+   					   				
    					   				<div class="price"><?=$pub['price'] ?><img src="/pics/rouble_big.png"/></div>
    					   				<div class="add">
-   					   					<a class="mybtn main <?=$pub['kol']>0 ? 'active' :'' ?>"><?=$pub['kol']>0 ? 'в корзине: '.$pub['kol'] :'в корзину ' ?></a>
-   				   						<a style="display: <?=$pub['kol']>0 ? 'block' :'none' ?>" class="mybtn basket_clear" title="Удалить из корзины"><img src="/pics/clear.png"/></a>
+   					   					<a class="mybtn big <?=$pub['kol']>0 ? 'active' :'' ?>"><?=$pub['kol']>0 ? '<img src="/pics/basket_mini.png" alt="">: '.$pub['kol'] :'в корзину ' ?></a>
+   				   						<a style="display: <?=$pub['kol']>0 ? 'block' :'none' ?>" class="basket_clear big" title="Удалить из корзины"></a>
    				   						
-   				   						<a style="display: <?=$pub['kol']>0 ? 'block' :'none' ?>" href="/basket/" class="mybtn basket_go" title="Перейти в корзину"><img src="/pics/basket_go.png"/></a>
+   				   						<!--  <a style="display: <?=$pub['kol']>0 ? 'block' :'none' ?>" href="/basket/" class="mybtn basket_go" title="Перейти в корзину"><img src="/pics/basket_go.png"/></a>-->
    					   				</div>
    					   			</div>
    					   			
@@ -710,7 +696,7 @@ class CCGoods extends VirtualContent
    					   				if ($pub['anons']!='') $text=$pub['anons'];
    					   				if ($pub['text']!='') $text=$pub['text'];
    					   				
-   						   			if ($text!='') {?><div class="text styled"><div class="title">Описание:</div><?=$text ?></div><?} ?>
+   						   			if ($text!='') {?><div class="text styled" style="float: none;"><br/><br/><div class="title">Описание:</div><?=$text ?></div><?} ?>
   
   								<input type="hidden" name="good_kol" value="<?=floor($pub['kol']) ?>">
    					   			<div class="clear"></div>
@@ -780,10 +766,14 @@ class CCGoods extends VirtualContent
 		   			    
 		   			    <div class="place" style="z-index: 9999; width:100%; margin-right: 1%;">
 								<label>Раздел</label>
+								<?
+								if (!is_array($cur_sections)) $cur_sections=array();
+								if (!isset($_POST['searchaction'])) $_POST['categs']='';
+								
+								if (!isset($_POST['searchaction']) && $_GET['categs']!='') $_POST['categs']=explode(',', $_GET['categs']);
+								?>
 								<select multiple="multiple" id="categs" name="categs[]">
 							        <?
-								 	if (!is_array($cur_sections)) $cur_sections=array();
-								 		
 							        foreach ($values as $val)
 							        {
 							        	?><option <?=in_array($val['id'], $_POST['categs']) ? 'selected' :''?> class="<?=(isset($val['level']) ? 'level_'.$val['level'] :'') ?><?=($val['level']>0 ? ' parent_'.$val['parent'].' himself_parent_'.$val['id'] : ' himself_parent_'.$val['id']) ?>" value="<?=$val['id']?>" <?=((in_array($k, $cur_sections)) ? 'checked="checked"':'')?>><?=$val['name']?></option><?
@@ -800,35 +790,7 @@ class CCGoods extends VirtualContent
 			                    		   checkAllText: "Выбрать все", 
 			                    		   uncheckAllText: "Очистить"
 			                    		});	
-		
-			                    		$(".ui-multiselect-menu input").click(function() {
-			                    			 var text = $(this).parents('li').attr('class');
-			                    			 var regex = /parent\_(\d+)/gi;
-				                    		 match = regex.exec(text);
-				                    		 if (match[0]!='')
-				                    		 {
-		
-						                    		if ($(this).parents('UL').find('.'+match[0]+' input:checked').length>0)
-					                    			{
-						                    			if(!$(this).parents('UL').find('.himself_'+match[0]+' input').prop('checked'))
-						                    			$(this).parents('UL').find('.himself_'+match[0]+' input').trigger('click');
-					                    			}
-						                    		else if ($(this).find('li').length==0)
-						                    		{
-							                    		//
-						                    		}
-						                    		else
-						                    		{
-						                    			if($(this).parents('UL').find('.himself_'+match[0]+' input').prop('checked'))
-							                    		$(this).parents('UL').find('.himself_'+match[0]+' input').trigger('click');		
-						                    		}
-		
-						                    		//$("#categs").multiselect('close');
-						                    		
-		
-					                    	}
-										});
-		
+				
 			               				
 								 });
 								</script>
@@ -1074,7 +1036,12 @@ class CCGoods extends VirtualContent
    			                                <?
    			                                $pagescount=$this->getSetting('pagescount');
    			                                if(!$_GET['page']>0) $_GET['page']=1;
-   	
+   			                                
+   			                                
+   			                                if (is_array($_POST['categs'])) $this->urlstr.='&categs='.implode(',', $_POST['categs']);
+   			                               
+   			                                
+   			                                
    			                                if ($pagescount>1 && $_GET['id']==''){
    			                                	?>
    													<div class="hr"><hr/></div>
@@ -1218,7 +1185,7 @@ class CCGoods extends VirtualContent
    	
    		}
    		if (!count($_POST['categs'])>0) $errors[]='Заполните поле «Раздел»';
-   		
+
    		if (count($errors)==0){
    			$update = '';
    			$pub = $this->getPub($_GET['pub']); $pub['id'] = floor($pub['id']);

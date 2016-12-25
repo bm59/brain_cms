@@ -4,6 +4,8 @@ include $_SERVER['DOCUMENT_ROOT']."/inc/site_admin/include.php";
 if (!$activeccid>0)
 $activeccid=$Content->getIdByPath(configGet("AskUrl"));
 
+if (!$activeccid>0) $activeccid=$SiteSections->getIdByPath('/access/users/');
+
 if (!@in_array('edit',$group['new_settings'][$activeccid]) && $mode!='development' && $_GET['user']>0)
 header("Location: /manage/control/contents/");
 
@@ -38,7 +40,7 @@ if (isset($_POST['profilepswd'])) $errors = $SiteVisitor->changePassword($_SESSI
 				<span><strong>Электронная почта</strong><a href="mailto:<?=$requestUser['email']?>"><?=$requestUser['email']?></a></span>
 			</div>
 			<?
-			if ((@in_array('410',$group['access'])) || (isset($group['settings']['superaccess']))){
+			if (in_array('edit',$group['new_settings'][$activeccid]) || $mode=='development'){
 				?>
 				<a href="/manage/access/users/edit/?edit=<?=$requestUser['id']?>" class="button">Редактировать</a>
 				<?
@@ -47,7 +49,7 @@ if (isset($_POST['profilepswd'])) $errors = $SiteVisitor->changePassword($_SESSI
 		</div>
 		<?
 		if ($_SESSION['visitorID']==configGet('profileID')){
-			if ((!@in_array('611',$group['access'])) && (!isset($group['settings']['superaccess']))){
+			if (in_array('edit',$group['new_settings'][$activeccid]) || $mode=='development'){
 				?>
 				<div class="hr"><hr /></div>
 				<span class="clear"></span>
@@ -94,7 +96,7 @@ if (isset($_POST['profilepswd'])) $errors = $SiteVisitor->changePassword($_SESSI
 		?>
 		<span class="clear"></span>
 		<?
-		if ((@in_array('610',$group['access'])) || (isset($group['settings']['superaccess']))){
+		if (in_array('edit',$group['new_settings'][$activeccid]) || $mode=='development') {
 		?>
 		<div class="hr"><hr /></div>
 		<a href="/manage/access/users/" class="button">Перейти к списку пользователей</a>

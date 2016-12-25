@@ -355,7 +355,7 @@ class VirtualContent
 				$href=array();
 				if (in_array($sf,$editlink_double) && !isset($set['settings']['editable'])) $href=array('<a href="/manage/control/contents/?section='.$section['id'].'&pub='.$pub['id'].'" title="Редактировать">', '</a>');
 				?>
-				<td <?=$set['settings']['list_class']!='' ? 'class="'.$set['settings']['list_class'].'"' : ''?> <?=$set['settings']['list_style']!='' ? 'style="'.$set['settings']['list_style'].'"' : ''?>>
+				<td <?=$set['settings']['list_class']!='' ? 'class="'.$set['settings']['list_class'].'"' : ''?> <?=$dataset['types'][$sf]['setting_style_search']['css']!='' ? 'style="'.$dataset['types'][$sf]['setting_style_search']['css'].'"' : ''?>>
 					<?=$href[0]?><?=$CDDataType->get_view_field($dataset['types'][$sf],$pub[$sf], $pub);?><?=$href[1]?>
 				</td>
 			<?}?>
@@ -711,16 +711,16 @@ class VirtualContent
 
 		if (@array_key_exists('ptitle',$pub))
 		{
-			$q = msq("SELECT * FROM `".$this->getSetting('table')."` WHERE 	`ptitle`='' or `ptitle` is NULL");
+			$q = msq("SELECT * FROM `".$this->getSetting('table')."` WHERE (`ptitle`='' or `ptitle` is NULL) and  `$field`<>''");
 			while ($r = msr($q))
 			{
 				msq("UPDATE `".$this->getSetting('table')."` SET `ptitle`='".$r[$field].$dop_title."' WHERE id=".$r['id']);
 			}
 		}
-
+		
 		if (@array_key_exists('pdescription',$pub))
 		{
-			$q = msq("SELECT * FROM `".$this->getSetting('table')."` WHERE 	`pdescription`='' or `pdescription` is NULL");
+			$q = msq("SELECT * FROM `".$this->getSetting('table')."` WHERE 	(`pdescription`='' or `pdescription` is NULL) and `$field`<>''");
 			while ($r = msr($q))
 			{
 				msq("UPDATE `".$this->getSetting('table')."` SET `pdescription`='".$r[$field].$dop_title."' WHERE id=".$r['id']);

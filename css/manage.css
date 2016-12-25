@@ -25,14 +25,17 @@ H3 {margin: 10px 0px; font-size: 16px; line-height: 18px; font-weight: lighter; 
 .air.h5  {height: 5px;}
 .air.h10 {height: 10px;}
 
-/*Цветной селект*/
+
+.xml_import #upl_error {margin: 5px;}
+
+/*Р¦РІРµС‚РЅРѕР№ СЃРµР»РµРєС‚*/
 .colorselect {color: #FFFFFF!important; font-weight: bold; min-width: 120px; padding: 0 0 0 10px!important;}
 .colorselect option {padding: 10px}
 .colorselect.search {color: #000000!important; font-weight: normal; }
 .colorselect.search option option {color: #FFFFFF!important;}
 
 
-/*Сортировка*/
+/*РЎРѕСЂС‚РёСЂРѕРІРєР°*/
 .template .sort {width: 14px; height: 8px; background: url("/pics/inputs/sort.png"); display:  inline-block; vertical-align: middle; margin: 0 4px;}
 .template .sort.down {background-position: 0 -8px}
 .template .sort.up {background-position: 0 0;}
@@ -40,7 +43,7 @@ H3 {margin: 10px 0px; font-size: 16px; line-height: 18px; font-weight: lighter; 
 .template .sort.down.active {background-position: 0 -24px;}
 .template .sort.active {border: none;}
 
-/*Шаблон разделов*/
+/*РЁР°Р±Р»РѕРЅ СЂР°Р·РґРµР»РѕРІ*/
 .pattern .tab_alert TD {background: rgba(0, 0, 0, 0) -moz-linear-gradient(center top , #FFCCCC, #FF9999) repeat scroll 0 0 !important;} 
 .pattern .tab_ok TD {background: rgba(0, 0, 0, 0) -moz-linear-gradient(center top , #CCFFFF, #BDFFDE) repeat scroll 0 0 !important;} 
 .pattern LABEL {text-align: left; font-size: 11px;}
@@ -61,7 +64,7 @@ H3 {margin: 10px 0px; font-size: 16px; line-height: 18px; font-weight: lighter; 
 .alert DIV {padding: 10px 15px; background-color: #FFFFFF; position: relative}
 .answers .button {text-shadow: none!important;}
 
-/*Кнопки, инпуты*/
+/*РљРЅРѕРїРєРё, РёРЅРїСѓС‚С‹*/
 INPUT {border: none; background: none;}
 .input {display: block; margin-right: 10px;}
 .input input, input[type="text"],input[type="password"],textarea,select,.hasDatepicker {
@@ -162,7 +165,7 @@ input[disabled="disabled"]  {background-color: #E1E1E1;}
 FORM LABEL {position: relative; overflow: hidden; display: block; margin: 0px 6px 0px 4px;}
 
 
-/*Список*/
+/*РЎРїРёСЃРѕРє*/
 UL {list-style: none;margin:0;padding:0;}
 UL, OL {margin: 10px 0px 10px 0px;}
 UL LI {padding-left: 15px; background: url(/pics/inputs/ul.gif) 0px 7px no-repeat; position: relative;}
@@ -247,17 +250,17 @@ OL UL, OL OL, UL UL, UL OL {margin: 0px 0px 0px 40px;}
 
 #margin {width: 92%; margin: auto;}
 
-/*Шапка*/
+/*РЁР°РїРєР°*/
 .header{margin-top:20px;}
 .logo{float:left; width:450px;}
 .descr{margin-left:450px;padding-top:35px}
 
 
-/*поля ввода*/
+/*РїРѕР»СЏ РІРІРѕРґР°*/
 .input {margin-right: 10px;}
 .input .bc DIV, .suggestSelect {position: relative; background: transparent url(/pics/inputs/select.gif) right center no-repeat; white-space: nowrap; overflow: hidden; cursor: pointer;}
 
-/*текстовое поле*/
+/*С‚РµРєСЃС‚РѕРІРѕРµ РїРѕР»Рµ*/
 .ta DIV {position: relative; top: 5px; height: 285px; width: 100%; padding: 10px 0px;}
 .ta TEXTAREA {position: absolute; left: 0px; width: 100%; margin: 0px; font-size: 13px; line-height: 18px; background-color: transparent; height: 285px; width: 100%;}
 .ta.medium DIV {height: 70px;}
@@ -281,13 +284,13 @@ FORM LABEL {position: relative; overflow: hidden; display: block; margin: 0px 6p
 HTML:root .items LABEL INPUT {left: 0px; top: 2px;}
 HTML:first-child .items LABEL INPUT {left: 0px; top: 1px;}
 * HTML .items LABEL INPUT {left: -24px;}
-/*редактор*/
+/*СЂРµРґР°РєС‚РѕСЂ*/
 .editor {position: relative; height: 32px;}
-/*выбор файла*/
+/*РІС‹Р±РѕСЂ С„Р°Р№Р»Р°*/
 .fileselect {position: absolute; right: 0px; height: 32px; overflow: hidden; margin-left: -450px;}
 .big .fileselect {height: 40px;}
 .fileselect INPUT {height: 50px; padding: 5px; position: relative; float: right; -moz-opacity: 0; filter: alpha(opacity: 0); opacity: 0; font-size: 199px;}
-/*разное*/
+/*СЂР°Р·РЅРѕРµ*/
 .important {position: relative; top: 3px; font-size: 18px; line-height: 10px; font-weight: bold; color: #9037CF;}
 .forms .showsave {margin-top: 0px !important; z-index: 1;}
 .impfields {margin-bottom: 0px !important;}
@@ -295,14 +298,14 @@ HTML:first-child .items LABEL INPUT {left: 0px; top: 1px;}
 .tags_items {margin:20px 0px 0px !important;}
 .tags_items A {border-bottom:1px dashed #0CA2B8; text-decoration:none; cursor:pointer;}
 
-/*выбор логотипа*/
+/*РІС‹Р±РѕСЂ Р»РѕРіРѕС‚РёРїР°*/
 .selectlogo {position: relative; float: left; padding: 3px 40px 3px 25px; height: 29px; margin: 25px 25px 0px 0px !important; border: 1px solid #D8D8D8; width: 171px;}
 .selectlogo INPUT.box {position: absolute; top: 12px; left: 5px;}
 .selectlogo .txtstyle {position: absolute; top: 2px; right: 2px; width: 32px; height: 32px;}
 
 
 
-/*форма авторизации*/
+/*С„РѕСЂРјР° Р°РІС‚РѕСЂРёР·Р°С†РёРё*/
 #login .mybtn {width: 167px;}
 #login {background-color: #FFF; color: #000000; text-align: center;}
 /*#login #zbody {border: none;}*/
@@ -318,7 +321,7 @@ HTML:first-child .items LABEL INPUT {left: 0px; top: 1px;}
 #loginform .button:hover .bc {color: #FFF !important;}
 #loginform .formmargin {margin: -20px 46px 0px 46px;}
 
-/*шапка*/
+/*С€Р°РїРєР°*/
 #header {height: 100px; font-size: 13px; line-height: 18px; margin: 0px;}
 #header .logor {margin: 35px 0 0 50px; float: left; width: 220px;}
 #header .adcounter {border-style: solid; border-color: #D8D8D8; border-width: 0px 1px; float: left; height: 70px; overflow: hidden; margin: 15px 0px; padding: 0px 30px; text-align: center;}
@@ -332,7 +335,7 @@ HTML:first-child .items LABEL INPUT {left: 0px; top: 1px;}
 
 
 
-/*разметка*/
+/*СЂР°Р·РјРµС‚РєР°*/
 #content {margin: 0px 50px;}
 
 
@@ -384,7 +387,7 @@ HTML:first-child .place .forckecks LABEL INPUT {left: 0px; top: 1px;}
 
 #sortable LI {background: none; padding: 0; margin: 10px 0}
 
-/*пользователи, синхронизация, статистика*/
+/*РїРѕР»СЊР·РѕРІР°С‚РµР»Рё, СЃРёРЅС…СЂРѕРЅРёР·Р°С†РёСЏ, СЃС‚Р°С‚РёСЃС‚РёРєР°*/
 .stat TD.edit {width: 32px;}
 .stat TD.avatar {width: 78px; padding: 5px;}
 .stat TD.avatar DIV {height: 78px; width: 78px; background: url(/pics/inputs/autor.gif) left top no-repeat; border: 1px solid #FFF;}
@@ -416,11 +419,11 @@ HTML:first-child .place .forckecks LABEL INPUT {left: 0px; top: 1px;}
 *HTML .stat .t_32width {width: 34px;}
 *HTML .stat .t_32width_big {width: 68px;}
 .stat .t_minwidth IMG {display: inline !important;}
-/*сортировка*/
+/*СЃРѕСЂС‚РёСЂРѕРІРєР°*/
 .sort {margin-left: 5px;}
 .sort IMG {display: inline;}
 
-/*Пейджинг*/
+/*РџРµР№РґР¶РёРЅРі*/
 #paging {padding: 10px 0;}
 #paging SPAN {padding:7px 12px; color: #FFFFFF; font-weight: bold; background-color: #00796b; margin-right: 5px;}
 #paging a {padding:7px 12px; margin-right: 5px; color: #FFFFFF; background-color: #00bba6; text-decoration: none;}
@@ -443,7 +446,7 @@ A.dashed {text-decoration: none; border-bottom: 1px dashed #0CA2B8;}
 .withcheck {padding-left: 20px; background: url(/pics/editor/submit.gif) left center no-repeat;}
 .table-description TD {padding: 2px 5px 2px;}
 
-/*Список разделов*/
+/*РЎРїРёСЃРѕРє СЂР°Р·РґРµР»РѕРІ*/
 .listing H4 {font-size: 12px; line-height: 18px; font-weight: lighter; color: #000; clear: both;}
 .listing H4 STRONG {position: relative; float: left; display: block; width: 45px; color: #000; font-weight: normal;}
 .listing h4 IMG {position: absolute; top: -2px; right: 5px; cursor: pointer; padding: 1px; border: 2px solid #FFF}
@@ -505,6 +508,7 @@ A.dashed {text-decoration: none; border-bottom: 1px dashed #0CA2B8;}
 
 
 .hr {border-top: 1px solid #D8D8D8; height: 1px; margin: 30px 0; clear: both;}
+.hr.p10 {border-top: 1px solid #D8D8D8; height: 1px; margin: 10px 0; clear: both;}
 .headerhr {border-top: 1px solid #D8D8D8; height: 1px; margin: 15px 60px 30px 60px; clear: both;}
 .hr hr {display:none;}
 * html .hr {overflow: hidden;}

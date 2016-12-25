@@ -1,13 +1,19 @@
 <?
+include_once($_SERVER['DOCUMENT_ROOT']."/inc/site/include.php");
+include_once($_SERVER['DOCUMENT_ROOT']."/inc/idna_convert.class.php");
 
+$section_callback=$SiteSections->getByPattern('PCallBack');
+
+if (!$section_callback['id']>0)
+print '<div style="background: #FFFFFF; padding: 20px; border: 1px solid #000000; position:fixed; top:0 ; left:0;">Необходимо добавить раздел "Обратные звонки"</h2></div>';
+
+if (setting('callback_email')=='')
+print '<div style="background: #FFFFFF; padding: 20px; border: 1px solid #000000; position:fixed; top:0 ; left:0;">Необходимо добавить email для "Обратные звонки"</h2></div>';
+	
+	
 if ($_POST['action']=='callback' && $_POST['phone']!='')
 {	
-	include_once($_SERVER['DOCUMENT_ROOT']."/inc/site/include.php");
-	include_once($_SERVER['DOCUMENT_ROOT']."/inc/ajax_securuty.php");
-	include_once($_SERVER['DOCUMENT_ROOT']."/inc/idna_convert.class.php");
-	
-	$section_callback=$SiteSections->getByPattern('PCallBack');
-	
+
 	if ($section_callback['id']>0)
 	{
 		$callback_iface=getIface($SiteSections->getPath($section_callback['id']));
@@ -34,6 +40,7 @@ if ($_POST['action']=='callback' && $_POST['phone']!='')
 		}
 
 	} 
+	
 	print '{"ok": "ok"}';
 }
 else{

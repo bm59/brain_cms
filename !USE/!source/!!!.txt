@@ -1,4 +1,0 @@
-1. Установить права 777 на папку storage и dump\dumper
-2. Поменять pr_name
-3. Замену в slq производить в `site_ на `псеводним_
-4. заголовок H3 можно добавить в файлик \js\tiny_mce\themes\advanced\editor_template.js

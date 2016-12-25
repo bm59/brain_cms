@@ -146,7 +146,6 @@ class SiteVisitor extends VirtualClass
 		if (count($errors)==0){
 			$Storage->deleteFile($data['picture']['id']);
 			msq("DELETE FROM `".$this->getSetting('table')."` WHERE `id`='$id'");
-			print "DELETE FROM `".$this->getSetting('table')."` WHERE `id`='$id'";
 		}
 		return $errors;
 	}

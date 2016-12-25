@@ -142,14 +142,17 @@ class CCBasket extends VirtualContent
    				'address_floor'=>'Этаж',
    				'comment'=>'Комментарий'
    		);
-   		
+
+   		if (is_array($rus_calls))
    		$rus_calls=array_merge($rus_calls_base, $rus_calls);
+   		else $rus_calls=$rus_calls_base;
    		
    		$idn = new idna_convert(array('idn_version'=>2008));
    	
    		$order=$this->GetSaveOrder($id);
+
    		foreach ($order as $k=>$v)
-   		if (isset($rus_calls[$k]))
+   		if (isset($rus_calls[$k]) && $v!='')
    		{
    			$msg.='<div>'.$rus_calls[$k].'='.stripcslashes($v).'</div>';
    		}
@@ -181,6 +184,7 @@ class CCBasket extends VirtualContent
    		
    		if ($order['paid']==1)
    		$msg.='<h2 style="color: #CC0033">[Заказ оплачен]</h2>';
+   		
    		
    		
    		$msg.='</table><br/><br/>Для просмотра заказа <a href="http://'.$_SERVER['HTTP_HOST'].'/manage/control/contents/?section='.$this->getSetting('section').'" target="_blank">Перейдите по ссылке</a>';
@@ -256,7 +260,7 @@ class CCBasket extends VirtualContent
    		$return=$this->GetTotalBasket($tmp_order_id);
    
    		if ($return['summ']>0) 
-   		return number_format($return['summ'], 0, '.', ' ').' <img src="/pics/rouble.png"/>';
+   		return number_format($return['summ'], 0, '.', ' ').'<small> р.</small>'.' ('.$return['cnt'].' <small>шт</small>)';
    }
    function GetAllBasketItem ($tmp_order_id){
    		
@@ -349,6 +353,7 @@ class CCBasket extends VirtualContent
    		
    		$cur_kol=msr(msq("SELECT * FROM `".$this->getSetting('table_order_tmp_goods')."` WHERE `tmp_order_id`='$tmp_order_id' and `good_id`='$good_id'".$usl));
    		
+   		
    		if ($this->sklad_iface && floor($kol)>0)
    		{
 
@@ -365,7 +370,7 @@ class CCBasket extends VirtualContent
    		
    		if ($error!='') return array('error'=>$error);
    		
-   		
+
    		$summ=0;
    		if ($kol>0) $summ=$kol*$good['price'];
    		
@@ -379,8 +384,8 @@ class CCBasket extends VirtualContent
   		else
   		{
   			msq("INSERT INTO `".$this->getSetting('table_order_tmp_goods')."` 
-  			(`tmp_order_id`, `good_id`, `kol`, `price`, `summ`, `size_id`, `color_id`) 
-  			VALUES ('$tmp_order_id', '$good_id', '$kol', '".$good['price']."', '$summ', '".floor($size_id)."', '".floor($color_id)."')");
+  			(`tmp_order_id`, `good_id`, `kol`, `price`, `summ` ".($size_id>0 ? ",`size_id`":'').($color_id>0 ? ",`color_id`":'').") 
+  			VALUES ('$tmp_order_id', '$good_id', '$kol', '".$good['price']."', '$summ'".($size_id>0 ? ",'".floor($size_id)."'":"").($color_id>0 ? ",'".floor($color_id)."'":'').")");
   		}
   		
    }
@@ -1489,7 +1494,7 @@ class CCBasket extends VirtualContent
 	   		   							<tr>
 	   		   								<td>
 	   		   									<?if ($categ_info!='') {?><div><small>[<?=$categ_info ?>]</small></div><?} ?>
-	   		   									<div><strong><?=$good_info['name'] ?></strong></div>
+	   		   									<div><strong><a href="/manage/control/contents/?section=<?=$this->goods_iface->getSetting('section') ?>&pub=<?=$good_info['id'] ?>" target="_blank"><?=$good_info['name'] ?></a></strong></div>
 	   		   									<?=$this->getTypeComment($g) ?>
 	   		   								</td>
 	   		   								<td><nobr><?=$g['kol'] ?> шт.</nobr></td>
@@ -1894,7 +1899,7 @@ class CCBasket extends VirtualContent
    	
    	
 
-   	/* Статусы заказа */
+   	/* Статусы заказа*/
        $this->createSubSection(
    			'status', 
    			'Статусы заказа',
@@ -1911,7 +1916,7 @@ class CCBasket extends VirtualContent
    				array('name'=>'Отменен', 'color'=>'#CC0000', 'show'=>1),
    			),
    			'|onoff|show_id|default_order=ORDER BY `id` ASC|'
-   	);  
+   	);   
    	
    	/* Способы оплаты */
     	$this->createSubSection(
@@ -1929,7 +1934,7 @@ class CCBasket extends VirtualContent
    			'|onoff|show_id|default_order=ORDER BY `id` ASC|'
    	); 
    
-   	/* Способы доставки */
+   	/* Способы доставки
     	$this->createSubSection(
    			'paytype',
    			'Способы доставки',
@@ -1943,7 +1948,7 @@ class CCBasket extends VirtualContent
    					array('name'=>'Доставка транспортной компанией', 'show'=>1)
    			),
    			'|onoff|show_id|default_order=ORDER BY `id` ASC|'
-   	); 
+   	);  */
    	
    	/* Скидки */
     	$this->createSubSection(

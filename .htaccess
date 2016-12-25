@@ -3,6 +3,10 @@ RewriteBase /
 RewriteRule ^.htaccess$ - [F]
 
 
-#RewriteRule ^(about|oplata|dostavka)\/$ /sheet.php?%{QUERY_STRING} [L]
+RewriteRule ^(about|delivery|oplata|opt)\/$ /sheet.php?%{QUERY_STRING} [L]
+
+RewriteRule ^catalog\/([a-z_A-Z_0-9\-]+)(/)?$  /catalog/index.php?cat_id=$1&%{QUERY_STRING} [L]
+RewriteRule ^catalog\/([a-z_A-Z_0-9\-]+)/([[a-z_A-Z_0-9\-]+)/?$  /catalog/index.php?id=$1&cat_id=$2&%{QUERY_STRING} [L]
+RewriteRule ^goods\/([a-z_A-Z_0-9\-]+)(/)?$  /catalog/index.php?item_id=$1&%{QUERY_STRING} [L]
 #RewriteRule ^catalog\/([a-z_A-Z_0-9\-]+)(/)?$  /catalog/index.php?id=$1&%{QUERY_STRING} [L]
 #RewriteRule ^catalog\/([a-z_A-Z_0-9\-]+)/([[a-z_A-Z_0-9\-]+)/?$  /catalog/index.php?id=$1&child=$2&%{QUERY_STRING} [L]

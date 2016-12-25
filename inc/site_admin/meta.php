@@ -12,8 +12,8 @@ $SiteSections->init();
 <meta http-equiv="Content-Language" content="ru">
 
 <meta name="title" content="Панель управления <?=' - '.ConfigGet('pr_doptit')?>" />
-<link rel="icon" href="/favico_manage.ico" type="image/x-icon" />
-<link rel="shortcut icon" href="/favico_manage.ico" type="image/x-icon" />
+<link rel="icon" href="/favicon.ico" type="image/x-icon" />
+<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
 
 <link rel="stylesheet" href="/css/manage.css" type="text/css" media="screen" />
 <link rel="stylesheet" href="/js/jquery-ui-1.10.4.custom/css/blitzer/jquery-ui-1.10.4.custom.css" type="text/css" media="screen" />

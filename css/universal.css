@@ -29,7 +29,10 @@
 .air.p40 {height: 40px;}
 .air.p50 {height: 50px;}
 .air.p60 {height: 60px;}
-
+.air.p70 {height: 70px;}
+.air.p80 {height: 80px;}
+.air.p80 {height: 90px;}
+.air.p100 {height: 100px;}
 
 /*װאיכû*/
 a[title*="file"]				    {background: url('/pics/file/file.png') no-repeat; line-height: 20px; padding: 4px 0 8px 35px; display: block;}

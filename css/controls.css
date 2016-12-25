@@ -1,4 +1,4 @@
-/*Инпуты*/
+/*РРЅРїСѓС‚С‹*/
 
 .form INPUT {border: none; background: none;}
 .form .input {display: block; margin-right: 10px;}
@@ -39,7 +39,7 @@ border: none;
 
 
 
-/*Оформление заказа*/
+/*РћС„РѕСЂРјР»РµРЅРёРµ Р·Р°РєР°Р·Р°*/
 .order TABLE {border-collapse: collapse;width: 100%; font-size: 22px;}
 .order TABLE TH {border: 1px solid #848484; padding: 18px 10px; background-color: #1F1E1D; color: #FFFFFF; text-align: center; font-weight: normal; font-size: 16px;}
 .order TABLE TD.right {text-align: right;font-weight:bold;}
@@ -50,6 +50,8 @@ border: none;
 .order .close a {margin: 4px; display: block; height: 30px; width: 30px; background: url(/pics/delete_nb.png) 0 0 no-repeat; }
 .order .close:hover a {background-position: 0 -30px;}
 .order TABLE .comment {font-size: 16px; padding-top: 10px; color: #666666; line-height: 20px;}
+.order TABLE a:hover {color: #E41A0E;}
+
 
 .address_table td {border: none!important; padding: 10px 15px 10px 0!important;}
 .address_table td label { display: inline-block;
@@ -65,7 +67,7 @@ border: none;
 
 
 
-/*Кнопки*/
+/*РљРЅРѕРїРєРё*/
 .btn 
 {
 	outline: none;
@@ -83,7 +85,7 @@ border: none;
 	vertical-align: middle;
     text-align: center;	
     margin: 0;
-    background: #E31E24;
+    background: #DE1A10;
 	transition:all 0.3s ease;
 	-moz-user-select: -moz-none;
 	-o-user-select: none;
@@ -92,11 +94,12 @@ border: none;
 	user-select: none;
 
 }
-.btn:hover {background: #DE1A10; !important; color: #FFFFFF !important; }
+.btn:hover {background: #F31B10; !important; color: #FFFFFF !important; }
 .btn img {display: inline-block; vertical-align: middle; padding-left: 10px;}
 
 .btn.big {padding: 15px 25px; font-size: 18px;}
 .btn.med {padding: 11px 25px; font-size: 18px;}
+.btn.small {padding: 6px 12px; font-size: 14px;}
 .btn.pay {font-size: 20px;}
 
 .styled ul.radio-group li {
@@ -155,7 +158,7 @@ line-height: 35px;
 
 
 
-/*Панель вида и сортировки*/
+/*РџР°РЅРµР»СЊ РІРёРґР° Рё СЃРѕСЂС‚РёСЂРѕРІРєРё*/
 .view_panel .view_type div {float: left; padding-right: 10px; line-height: 28px; color: #666666}
 .view_panel .view_type a {background-color: #E7E7E7; float: left; display: block; padding: 4px 5px; border: 1px solid #CCCCCC; margin: 0 2px;}
 .view_panel .view_type a img {display: inline-block; vertical-align: middle; line-height: 16px; margin-top: -2px;}

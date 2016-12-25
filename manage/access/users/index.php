@@ -10,6 +10,8 @@ if (floor($_GET['switch_off'])>0)
 	WriteLog($_GET['switch_off'], 'отключение пользователя');
 }
 
+if (!$activeccid>0) $activeccid=$SiteSections->getIdByPath('/access/users/');
+
 if ($_GET['delete']>0)
 if (@in_array('delete',$group['new_settings'][$activeccid]) || $mode=='development')
 {

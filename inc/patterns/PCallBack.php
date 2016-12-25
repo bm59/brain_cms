@@ -26,7 +26,7 @@ class PCallBack extends VirtualPattern
 						'description'=>$descr,
 						'types'=>array
 						(
-								array('description'=>'Статус', 'name'=>'status_id', 'type'=>'CDColorStatus',  'settings'=>array('default'=>1, 'source'=>'#values=1#не принят#666666, 2#в обработке#CC9900, 3#завершен#009933, 4#отменен#CC0000', 'show_list'=>'', 'list_style'=>'width: 200px', 'show_search'=>'')),
+								array('description'=>'Статус', 'name'=>'status_id', 'type'=>'CDColorStatus',  'settings'=>array('default'=>1, 'values'=>'1#не принят#666666, 2#в обработке#CC9900, 3#завершен#009933, 4#отменен#CC0000', 'show_list'=>'', 'list_style'=>'width: 200px', 'show_search'=>'')),
 								array('description'=>'Телефон', 'name'=>'phone', 'type'=>'CDText',  'settings'=>array('show_search'=>'', 'show_list'=>'')),
 								array('description'=>'Комментарий', 'name'=>'comment', 'type'=>'CDText',  'settings'=>array('show_search'=>'', 'show_list'=>'')),
 								array('description'=>'Заметка', 'name'=>'note', 'type'=>'CDText',  'settings'=>array('show_search'=>''))
